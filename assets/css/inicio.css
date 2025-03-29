@@ -130,10 +130,8 @@ nav.category-menu {
     display: flex;
     z-index: 1000;
     gap: 0.4em;  /* Espacio entre los elementos flex */
-    margin-top: -4.23em;!;!e;!em;!em,;!em;!e;!;
-    
-    !em;!e;!;
-    height: 1.1em;
+    margin-top: -4.23em;
+    height: 2.3em;
 }
 
 nav.category-menu a {
@@ -141,6 +139,7 @@ nav.category-menu a {
     cursor: pointer;
     background: #fff;
     padding: 8px 12px;
+    height: 1.3em;
 }
 
 .more-btn {
