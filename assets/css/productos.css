@@ -1,0 +1,164 @@
+@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+
+body {
+    font-family: 'Gilroy', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-size: 1em;
+}
+
+header {
+    background-color: #fff;
+    color: #02a22a;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 0 0.4em 0 #00000073;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 1em;
+}
+
+nav ul li a {
+    color: #02a22a;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    display: block;
+    font-weight: 700;
+}
+
+#producto-detalle {
+    padding: 2em;
+    color: #02a22a;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: #ddd;
+    width: 66em;
+    position: absolute;
+    margin-left: 25em;
+    margin-top: 10em;
+    border-radius: 0.3em;
+}
+
+.producto-detalle img {
+    width: 100%;
+    max-width: 297px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+    position: absolute;
+    margin-top: 4em;
+    margin-left: -33em;
+}
+
+.producto-info {
+    max-width: 500px;
+    margin-left: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.producto-info h3 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+
+.producto-info p {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
+.precio {
+    font-weight: 700;
+    font-size: 1.5em;
+    color: #02a22a;
+}
+
+.agregar-carrito {
+    border: 2px solid #02a22a;
+    background-color: #fff;
+    padding: 0.8em;
+    color: #02a22a;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+    width: 50%;
+    margin-top: 1.5em;
+    font-family: 'Gilroy';
+    font-size: 1.2em;
+}
+
+.agregar-carrito:hover {
+    background-color: #02a22a;
+    color: #ddd;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #fff;
+    color: #02a22a;
+    margin-top: 2em;
+    line-height: 0;
+    box-shadow: 0 0 0.4em 0 #00000073;
+    position: relative;
+    bottom: -43.84em;
+    font-weight: 700;
+}
+
+footer p {
+    margin: 0.5em 0;
+    line-height: 0.6em;
+}
+
+/* Media Queries */
+@media (max-width: 75em) {
+    #producto-detalle {
+        flex-direction: column;
+        margin-left: 4em;
+        width: 46em;
+    }
+}
+
+@media (max-width: 56.25em) {
+    #producto-detalle {
+        flex-direction: column;
+        width: 35em;
+        margin-left: 2em;!em;!e;!;
+    }
+}
+
+@media (max-width: 37.5em) {
+    #producto-detalle {
+        padding: 1em;
+    }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #02a22a;
+    border-radius: 6px;
+}

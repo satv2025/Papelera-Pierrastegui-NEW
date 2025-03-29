@@ -1,0 +1,220 @@
+@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+
+body {
+    font-family: 'Gilroy', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-size: 1em;
+    line-height: 1.7;
+    color: #02a22a;
+}
+
+header {
+    background-color: #fff;
+    color: #02a22a;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 0 0.4em 0 #00000073;
+    font-size: 1em !important;!i;!;!;!;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5em;
+}
+
+nav ul li {
+    margin: 0 1.5em;
+}
+
+nav ul li a {
+    color: #02a22a;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+nav ul li a:hover {
+    color: #fff; /* Cambio de color al pasar el mouse */
+    background-color: #02a22a; /* Fondo oscuro al pasar el mouse */
+    border-radius: 5px; /* Bordes redondeados para el hover */
+     /* Aumentamos el padding para un efecto más notorio */
+}
+
+#medio-pago-articulo {
+    max-width: 900px;
+    margin: 4em auto;
+    padding: 2.5em 3em;
+    background: #ddd; /* Fondo del contenedor del artículo */
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.articulo-header {
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.articulo-header h2 {
+    font-size: 2.5em;
+    color: #02a22a;
+    margin-bottom: 0.5em;
+}
+
+.subtitulo {
+    font-size: 1.2em;
+    color: #02a22a;
+    font-weight: 400;
+    margin-bottom: 1.5em;
+}
+
+.contenido-articulo {
+    font-size: 1.1em;
+    margin-bottom: 2em;
+}
+
+.contenido-articulo p {
+    margin-bottom: 1.8em;
+    font-weight: 400;
+}
+
+.flecha {
+    transform: rotate(90deg); /* Rota la flecha 90 grados */
+    transform-origin: center center; /* Rota la flecha 90 grados hacia abajo */
+    width: 0em;
+    margin-left: 27em;
+    margin-top: -4.9em;
+    bottom: -2em;
+    position: relative;
+}
+
+.enlace-pago a {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #02a22a;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+    width: 6em;
+    left: 40.4%;
+    position: relative;
+}
+
+.enlace-pago a:hover {
+    color: #fff;
+}
+
+.enlace-pago img {
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+}
+
+.contacto-info {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1.5em;
+}
+
+.contacto-info li {
+    font-size: 1.2em;
+    margin-bottom: 1.2em;
+    line-height: 0.2em;
+}
+
+.contacto-info a {
+    color: #02a22a;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.contacto-info a:hover {
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #fff;
+    color: #02a22a;
+    margin-top: 2em;
+    line-height: 0;
+    box-shadow: 0 0 0.4em 0 #00000073;
+}
+
+footer p {
+}
+
+@media (max-width: 75em) {
+    #medio-pago-articulo {
+        padding: 2em;
+    }
+    
+    .contacto-info a {
+        color: #02a22a;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.3s ease;
+    }
+}
+
+@media (max-width: 56.25em) {
+    #medio-pago-articulo {
+        padding: 1.5em;
+    }
+
+    .contacto-info a {
+    color: #02a22a;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+.contacto-info a {
+    color: #02a22a;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s ease;
+    margin-bottom: -5em;
+    line-height: 1.3em;
+}
+}
+
+@media (max-width: 37.5em) {
+    #medio-pago-articulo {
+        padding: 1.2em;
+        width: 95%;
+    }
+
+    .contacto-info a {
+        color: #02a22a;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.3s ease;
+        line-height: 2;
+        margin-bottom: -36em;
+    }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 10px;
+}

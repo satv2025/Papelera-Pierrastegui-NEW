@@ -1,0 +1,162 @@
+@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+
+body {
+    font-family: 'Gilroy';
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+header {
+    background-color: #c5c0a5;
+    color: #02a22a;
+    padding: 1em;
+    text-align: center;
+    box-shadow: 0 0 0.4em 0 #00000073;
+}
+
+.form-container {
+    background-color: #ddd;
+    width: 100%;
+    max-width: 400px;
+    margin: 2em;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: absolute;
+    left: 38%;
+} 
+
+/* Ajustar tamaño de las imágenes de los íconos */
+.toggle-password {
+    width: 28px; /* Ajusta el tamaño deseado */
+    height: auto; /* Mantener la proporción de la imagen */
+    cursor: pointer; /* Asegura que se vea como un ícono clickeable */
+    margin-left: -3em;
+    color: #02a22a;
+    margin-top: 0.1em;!;!e;!em;!e;!;
+}
+
+
+p {
+    color: #02a22a;
+}
+
+.form-container h2 {
+    color: #02a22a;
+    margin-bottom: 1.5em;
+}
+
+input {
+    font-family: 'Gilroy';
+    color: #02a22a;
+    font-weight: 700;
+}
+
+input::placeholder {
+    color: #02a22a;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+    width: 100%;
+    padding: 1em;
+    margin: 0.8em 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+input::placeholder {}
+
+button {
+    border: none;
+    background-color: #02a22a;
+    color: #fff;
+    padding: 1em;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    margin-top: 1em;
+    font-family: 'Gilroy';
+}
+
+button:hover {
+    background: #034914;
+}
+
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #c5c0a5;
+    color: #02a22a;
+    margin-top: auto;
+    box-shadow: 0 0 0.4em 0 #00000073;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Enlaces */
+a {
+    text-decoration: none;
+    color: #02a22a;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #034914;
+}
+
+/* Media Queries para diseño responsivo */
+@media (max-width: 56.25em) { /* 900px */
+    .form-container {
+        padding: 1.5em;
+    }
+}
+
+@media (max-width: 37.5em) { /* 600px */
+    .form-container {
+        padding: 1.2em;
+    }
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #02a22a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 6px;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 2.5em; /* Espacio para el icono */
+}
+
+.password-container span {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 1.2em;
+}

@@ -1,0 +1,658 @@
+@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+
+/* ================================
+   BASE Y RESET
+================================ */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #fff;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 1em;
+  overflow-x: hidden;
+  background-image: url(https://img.freepik.com/foto-gratis/muro-hormigon-texturizado_53876-89536.jpg);
+  background-size: contain;
+}
+
+button.carrito {
+    font-size: 1.5em;
+    background-color: #fff !important;!i;!;
+    color: #02a22a !important;!i;!;
+    cursor: pointer;
+    border-radius: 50%;
+    font-family: 'FontAwesome'; /* Para usar FontAwesome */
+    padding-top: 0.52em;
+    padding-bottom: 0.52em;
+    padding-left: 0.48em;
+    padding-right: 0.5em;
+    z-index: 3000;
+    margin-top: -9.5em;
+    position: absolute;
+    text-align: center; /* Asegura que el ícono se centre dentro del botón */
+    line-height: 1; /* Alineación vertical */
+    border: none; /* Removemos el borde original */
+    margin-left: 68em;
+    font-size: 1em;
+}
+
+button.carrito::after {
+    content: ""; /* Pseudo-elemento vacío */
+    position: absolute;
+    top: -3px; /* Desplazamos el borde hacia afuera */
+    left: -3px; /* Desplazamos el borde hacia afuera */
+    right: -3px; /* Desplazamos el borde hacia afuera */
+    bottom: -3px; /* Desplazamos el borde hacia afuera */
+    border-radius: 50%; /* Borde redondeado */
+    border: 3px solid #02a22a; /* El borde extra */
+    z-index: 1000; /* Colocamos el borde detrás del ícono */
+}
+
+button.carrito:hover {
+    background-color: #02a22a !important;!i;!;
+    color: #fff !important;!i;!; /* Cambiar color cuando el ratón pasa sobre el botón */
+}
+
+
+button.carrito i {
+    font-size: 1.5em;
+}
+
+/* Estilo para el contenedor del menú desplegable */
+.dropdown-menuc {
+    position: absolute;
+    display: none; /* Inicialmente oculto */
+    top: 27px; /* Distancia desde el botón */
+    right: 19.4em; /* Alineación a la derecha */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width: 200px; /* Ancho del menú */
+    z-index: 2000; /* Para asegurarse de que el menú esté por encima de otros elementos */
+    !;!e;!em;!e;!;
+    border: 2px solid #02a22a;
+    z.i: 1;
+    margin-top: -1.5em;
+}
+
+/* Estilo de los elementos del menú */
+.dropdown-menuc ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.dropdown-menuc ul li {
+    border-bottom: 1px solid #f0f0f0; /* Línea de separación entre los elementos */
+}
+
+.dropdown-menuc ul li:last-child {
+    border-bottom: none; /* Sin línea de separación en el último elemento */
+}
+
+.dropdown-menuc ul li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #02a22a;
+    font-weight: bold;
+}
+
+.dropdown-menuc ul li a:hover {
+    background-color: #02a22a; /* Color de fondo al pasar el ratón */
+    color: #fff;
+}
+
+/* Mostrar el menú cuando el botón se presiona */
+button.carrito:focus + .dropdown-menuc, 
+button.carrito:active + .dropdown-menuc {
+    display: block;
+}
+
+.menu-container {
+}
+
+nav.category-menu {
+    z-index: 2000;
+    position: relative;
+    color: #02a22a;
+    left: 28em;
+    width: 56em;
+    font-weight: 600;
+    display: flex;
+    z-index: 1000;
+    gap: 0.4em;  /* Espacio entre los elementos flex */
+    margin-top: -4.23em;!;!e;!em;!em,;!em;!e;!;
+    
+    !em;!e;!;
+    height: 1.1em;
+}
+
+nav.category-menu a {
+    !em;!e;!;
+    cursor: pointer;
+    background: #fff;
+    padding: 8px 12px;
+    height: 1.3em;
+}
+
+.more-btn {
+    position: absolute;!;!e;!em;!e;!;
+    z-index: 1000;
+}
+
+.dropdown-content-more {
+    display: none;
+    margin-top: 3em;
+    margin-left: -1em;
+}
+
+/* Estilo base */
+.dropdown-content-more a {
+    display: block;
+    padding: 10px;
+    background-color: white;
+    color: #02a22a;  /* Color del texto */
+    text-decoration: none;
+}
+
+/* Efecto hover */
+.dropdown-content-more a:hover {
+    background-color: #02a22a;  /* Fondo en hover */
+    color: white;  /* Color del texto en hover */
+}
+
+nav.category-menu a:hover {
+    color: #fff;
+    background: #02a22a;
+}
+
+/* ================================
+   ENLACES
+================================ */
+a.logotext1,
+a.logotext1:visited {
+  text-decoration: none;
+  color: #02a22a;
+}
+
+.logotext1 {
+    position: relative;
+    top: -6em;!;!e;!em;!e;!;
+    left: -38em;
+}
+a.logotext1:hover {
+  color: #034914;
+}
+a.logotext1:focus {
+  outline: none;
+}
+
+/* ================================
+   HEADERBOX (Navegación fija, fondo negro)
+================================ */
+.headerbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 0.8em 1.5em;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 1.8em;
+  margin-top: -3em;
+}
+
+.headerbox ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.headerbox li {
+  margin-right: 15px;
+}
+
+.headerbox a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.headerbox a:hover {
+  color: #02a22a;
+}
+
+/* ================================
+   HEADER (Zona superior: logo, nombre y buscador)
+================================ */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5em 0;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-top: 3em; /* Espacio para la barra negra fija */
+  position: relative;
+  height: 3em;
+}
+
+/* Logo */
+.logo1 {
+  width: 6em;
+  height: auto;
+  margin-bottom: 0.5em;
+  margin-left: 27em;
+  !;!e;!em;!e;!;
+  position: relative;
+  top: -6.3em;
+}
+
+/* Nombre del sitio */
+a.logotext1 {
+  text-align: center;
+  color: #02a22a;
+  font-size: 0.8em !important;!i;!;
+  font-weight: 700;
+  text-decoration: none;
+  line-height: 1.2em;
+  z-index: 999;
+  position: absolute;
+  top: 0.56em;!em;!e;!;
+  left: 13em;
+}
+
+.search-container {
+  position: relative;
+  width: 33em;
+  margin-top: -3.3em;
+  left: 44em;
+  top: -8.1em;
+}
+
+#buscador {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid #02a22a;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: 700;
+  color: #02a22a;
+}
+
+#buscador:focus {
+  outline: none;
+  border: 2px solid #02a22a;
+}
+#buscador::placeholder {
+  color: #02a22a;
+}
+
+#search-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.search-icon {
+  color: #02a22a;
+  width: 20px;
+  height: 1.67em;
+  margin-right: -4.2em;!;!e;!em;!e;!;
+  margin-left;:;
+  margin-left;: 1;
+  margin-left;: 1e;
+  margin-left;: 1;
+  border: 2px solid #02a22a;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  padding-left: 0.7em;
+  padding-right: 0.7em;
+  margin-top: 0.3em;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+}
+
+svg:hover {color: #fff;background: #02a22a;}
+
+
+/* ================================
+   AUTH BUTTONS
+================================ */
+#auth-buttons {
+  color: #02a22a;
+  background: #fff;
+  position: relative;
+  margin: -2.8em auto 0 auto;
+  width: max-content;
+  top: 0.96em;
+  left: 15em;
+}
+.logreg {
+  background: #fff;
+  color: #02a22a;
+  border: none;
+  padding: 0.2em 2em;
+  font-family: 'Gilroy';
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 0.3em;
+  display: block;
+  width: 11em;
+  margin: -9.7em auto 0;
+  position: relative;
+  !;!e;!em;!e;!;
+  z-index: 2000;
+}
+.logreg:hover {
+  background: #02a22a;
+  color: #fff;
+  cursor: pointer;
+}
+.reg {
+  margin-top: -1.65em !important;!i;!;
+  margin-left: 23.4em;
+  height: 1.63em;
+}
+
+/* ================================
+   NAVIGACIÓN
+================================ */
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+nav ul li {
+  margin: 0 1em;
+  position: relative;
+  color: #02a22a;
+}
+nav ul li a {
+  color: #02a22a;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  display: block;
+  font-weight: 700;
+}
+.nav-menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 1em 0;
+  position: absolute;
+  width: 100%;
+  top: 60px;
+  left: 0;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* ================================
+   CATÁLOGO Y PRODUCTOS
+================================ */
+#catalogo {
+  padding: 2em;
+  color: #02a22a;
+}
+
+/* Contenedor de productos (mobile-first: 2 columnas) */
+.productos {
+  display: grid;
+  grid-gap: 1em;
+  margin: 1em;
+  grid-template-columns: repeat(2, 1fr);
+  !em;!e;!;
+  position: relative;
+  left: 10em;
+  margin-top: -2.3em;
+}
+.producto {
+  background: #ddd;
+  padding: 1em;
+  text-align: center;
+  border-radius: 0.5em;
+  box-shadow: 0 0 1em rgba(0,0,0,0.29);
+  color: #02a22a;
+  height: 25em;
+  position: relative;
+}
+/* La imagen ocupa el 100% del ancho y está pegada a los bordes laterales */
+.producto img {
+  width: 112.5%;
+  margin: -1em 0 1em -1em;
+  height: 12em;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  object-fit: cover;
+}
+.precio {
+  font-weight: 700;
+}
+
+/* Botón "Ver Producto" */
+.btn-ver-producto {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #02a22a;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #02a22a;
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 8em;
+  top: 23em;
+  height: 1.4em;
+}
+.btn-ver-producto:hover {
+  background-color: #02a22a;
+  color: #fff;
+}
+
+/* ================================
+   DROPDOWN (Medidas)
+================================ */
+.droptmn {
+  position: relative;
+  display: inline-block;
+}
+.droptmn-menu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  z-index: 1000;
+  min-width: 6.4em;
+  padding: 10px 0;
+  border-radius: 5px;
+  border: 2px solid #02a22a;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 0.2em;
+}
+.droptmn-menu li {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.droptmn-menu li:hover {
+  background-color: #02a22a;
+  color: #fff;
+}
+.droptmn-btn {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #02a22a;
+  border: 2px solid #02a22a;
+  border-radius: 0.3em;
+  cursor: pointer;
+  font-family: 'Gilroy', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  width: 5.9em;
+  height: 2.5em;
+}
+.textomed {
+  position: absolute;
+  left: 0.98em;
+  top: 0.6em;
+}
+.droptmn-btn:hover {
+  background-color: #02a22a;
+  color: #fff;
+}
+
+/* ================================
+   FOOTER
+================================ */
+footer {
+  text-align: center;
+  padding: 1em;
+  background-color: #fff;
+  color: #02a22a;
+  box-shadow: 0 0 0.4em rgba(0,0,0,0.45);
+  width: 100%;
+  position: relative;
+  height: 3.5em;
+  line-height: 0.4em;
+  font-weight: 700;
+  !em;!e;!;
+}
+
+/* ================================
+   SCROLLBAR PERSONALIZADA
+================================ */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background-image: url(https://img.freepik.com/foto-gratis/muro-hormigon-texturizado_53876-89536.jpg);
+  background-size: cover;
+}
+::-webkit-scrollbar-thumb {
+  background: #02a22a;
+  border-radius: 6px;
+}
+.dropdown-content::-webkit-scrollbar {
+  width: 5px;
+}
+.dropdown-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dropdown-content::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 0.5em;
+  padding-bottom: 1em;
+}
+
+/* ================================
+   MEDIA QUERIES (MOBILE-FIRST)
+================================ */
+
+/* Por defecto (móviles): 2 productos por línea */
+
+/* Tabletas y pantallas medianas (768px - 1079px): 3 columnas */
+@media (min-width: 768px) and (max-width: 1079px) {
+  .productos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Notebooks y pantallas grandes (1080px o más): 6 columnas */
+@media (min-width: 1080px) {
+  .productos {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  header h1 {
+    font-size: 3em;
+  }
+  .logreg, #auth-buttons {
+    margin-top: -4em;
+  }
+}
+
+/* Estilos del dropdown de medidas */
+.droptmn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.textomed {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #fff;
+    border: 2px solid #02a22a;
+    border-radius: 0.3em;
+    cursor: pointer;
+    margin-left: -3.5em;
+    margin-top: -1.4em;!;!e;!;
+    font-weight: 700;
+}
+
+.textomed:hover {
+    color: #fff;
+    background: #02a22a;
+}
+
+.droptmn-menu {
+    display: none;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    background: white;
+    border: 2px solid #02a22a;
+    border-radius: 0.3em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    min-width: 5.5em;
+    z-index: 10;
+    margin-left: -2.52em;
+}
+
+.droptmn-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.droptmn-menu li:hover {
+}
+
+/* Clase para mostrar el menú */
+.droptmn-menu.droptmn-show {
+    display: block;
+}
+
+.droptmn-menu::-webkit-scrollbar {
+  width: 0px;
+}
+.droptmn-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.droptmn-menu::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 0.5em;
+  padding-bottom: 1em;
+}

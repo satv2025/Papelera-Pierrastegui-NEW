@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/reg_logueo_pp.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <input type="email" id="email" placeholder="Correo Electrónico" required>
+
+            <div class="password-container">
+                <input type="password" id="login-password" placeholder="Contraseña" required>
+                <!-- Aquí cambiamos el span por un <img> con las rutas de las imágenes -->
+                <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc.png" class="toggle-password" data-target="login-password" alt="Mostrar/Ocultar contraseña" />
+            </div>
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+        <p>¿No tienes cuenta? <a href="registro">Regístrate aquí</a></p>
+    </div>
+
+    <script src="assets/js/togglePassword.js"></script> <!-- Aquí incluimos togglePassword.js -->
+    <script src="assets/js/auth.js"></script> <!-- Aquí incluimos auth.js -->
+</body>
+</html>
