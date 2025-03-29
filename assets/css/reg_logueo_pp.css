@@ -12,6 +12,11 @@ body {
     height: 100vh;
 }
 
+::selection {
+    color: #fff;
+    background: #02a22a;
+}
+
 header {
     background-color: #c5c0a5;
     color: #02a22a;

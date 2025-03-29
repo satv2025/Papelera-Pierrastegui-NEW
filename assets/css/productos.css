@@ -8,6 +8,11 @@ body {
     font-size: 1em;
 }
 
+::selection {
+    color: #fff;
+    background: #02a22a;
+}
+
 header {
     background-color: #fff;
     color: #02a22a;

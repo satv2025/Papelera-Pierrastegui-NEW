@@ -1,5 +1,10 @@
 @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
 
+::selection {
+    color: #fff;
+    background: #02a22a;
+}
+
 body {
     font-family: 'Gilroy', sans-serif;
     margin: 0;
