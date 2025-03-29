@@ -18,6 +18,8 @@ html, body {
   background-size: contain;
 }
 
+#linkcampo {height: 0;}
+
 ::selection {
   color: #fff;
   background: #02a22a;
@@ -277,7 +279,7 @@ a.logotext1 {
 .search-container {
   position: relative;
   width: 33em;
-  margin-top: -3.3em;
+  margin-top: 3.5em;
   left: 44em;
   top: -8.1em;
 }
@@ -313,7 +315,7 @@ a.logotext1 {
 .search-icon {
   color: #02a22a;
   width: 20px;
-  height: 1.67em;
+  height: 1.643em;
   margin-right: -4.2em;!;!e;!em;!e;!;
   margin-left;:;
   margin-left;: 1;
