@@ -1,13 +1,23 @@
 {
   "redirects": [
     {
-      "source": "/:path*.html",
-      "destination": "/:path*",
+      "source": "/index.html",
+      "destination": "/",
       "permanent": true
     },
     {
-      "source": "/index.html",
+      "source": "/index",
       "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/logueo.html",
+      "destination": "/logueo",
+      "permanent": true
+    },
+    {
+      "source": "/registro.html",
+      "destination": "/registro",
       "permanent": true
     }
   ]
