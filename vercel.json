@@ -1,11 +1,9 @@
-module.exports = {
-  async redirects() {
-    return [
-      {
-        source: "/:path*{.html,}",
-        destination: "/:path*",
-        permanent: true,
-      },
-    ];
-  },
-};
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
