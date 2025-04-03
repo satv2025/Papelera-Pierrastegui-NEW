@@ -87,6 +87,7 @@ nav ul li a:hover {
 .contenido-articulo p {
     margin-bottom: 1.8em;
     font-weight: 400;
+    text-align: justify;
 }
 
 .flecha {
@@ -222,4 +223,8 @@ footer p {
 ::-webkit-scrollbar-thumb {
     background: #ddd;
     border-radius: 10px;
+}
+
+footer {
+    font-weight: 700;
 }
