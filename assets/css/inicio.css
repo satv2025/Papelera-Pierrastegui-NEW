@@ -22,13 +22,13 @@ html, body {
 
 ::selection {
   color: #fff;
-  background: #02a22a;
+  background: #356e5e;
 }
 
 button.carrito {
     font-size: 1.5em;
     background-color: #fff !important;!i;!;
-    color: #02a22a !important;!i;!;
+    color: #356e5e!important;!i;!;
     cursor: pointer;
     border-radius: 50%;
     font-family: 'FontAwesome'; /* Para usar FontAwesome */
@@ -54,12 +54,12 @@ button.carrito::after {
     right: -3px; /* Desplazamos el borde hacia afuera */
     bottom: -3px; /* Desplazamos el borde hacia afuera */
     border-radius: 50%; /* Borde redondeado */
-    border: 3px solid #02a22a; /* El borde extra */
+    border: 3px solid #356e5e; /* El borde extra */
     z-index: 1000; /* Colocamos el borde detrás del ícono */
 }
 
 button.carrito:hover {
-    background-color: #02a22a !important;!i;!;
+    background-color: #356e5e!important;!i;!;
     color: #fff !important;!i;!; /* Cambiar color cuando el ratón pasa sobre el botón */
 }
 
@@ -80,7 +80,7 @@ button.carrito i {
     width: 200px; /* Ancho del menú */
     z-index: 2000; /* Para asegurarse de que el menú esté por encima de otros elementos */
     !;!e;!em;!e;!;
-    border: 2px solid #02a22a;
+    border: 2px solid #356e5e;
     z.i: 1;
     margin-top: -1.5em;
 }
@@ -104,12 +104,12 @@ button.carrito i {
     display: block;
     padding: 10px 15px;
     text-decoration: none;
-    color: #02a22a;
+    color: #356e5e;
     font-weight: bold;
 }
 
 .dropdown-menuc ul li a:hover {
-    background-color: #02a22a; /* Color de fondo al pasar el ratón */
+    background-color: #356e5e; /* Color de fondo al pasar el ratón */
     color: #fff;
 }
 
@@ -125,7 +125,7 @@ button.carrito:active + .dropdown-menuc {
 nav.category-menu {
     z-index: 2000;
     position: relative;
-    color: #02a22a;
+    color: #356e5e;
     left: 28em;
     width: 56em;
     font-weight: 600;
@@ -159,19 +159,19 @@ nav.category-menu a {
     display: block;
     padding: 10px;
     background-color: white;
-    color: #02a22a;  /* Color del texto */
+    color: #356e5e;  /* Color del texto */
     text-decoration: none;
 }
 
 /* Efecto hover */
 .dropdown-content-more a:hover {
-    background-color: #02a22a;  /* Fondo en hover */
+    background-color: #356e5e;  /* Fondo en hover */
     color: white;  /* Color del texto en hover */
 }
 
 nav.category-menu a:hover {
     color: #fff;
-    background: #02a22a;
+    background: #356e5e;
 }
 
 /* ================================
@@ -180,7 +180,7 @@ nav.category-menu a:hover {
 a.logotext1,
 a.logotext1:visited {
   text-decoration: none;
-  color: #02a22a;
+  color: #356e5e;
 }
 
 .logotext1 {
@@ -189,7 +189,7 @@ a.logotext1:visited {
     left: -38em;
 }
 a.logotext1:hover {
-  color: #034914;
+  color: #3e997f;
 }
 a.logotext1:focus {
   outline: none;
@@ -232,7 +232,7 @@ a.logotext1:focus {
 }
 
 .headerbox a:hover {
-  color: #02a22a;
+  color: #356e5e;
 }
 
 /* ================================
@@ -265,7 +265,7 @@ header {
 /* Nombre del sitio */
 a.logotext1 {
   text-align: center;
-  color: #02a22a;
+  color: #356e5e;
   font-size: 0.8em !important;!i;!;
   font-weight: 700;
   text-decoration: none;
@@ -287,19 +287,20 @@ a.logotext1 {
 #buscador {
   width: 100%;
   padding: 10px 15px;
-  border: 2px solid #02a22a;
+  border: 2px solid #356e5e;
   border-radius: 0.3em;
   font-size: 16px;
   font-weight: 700;
-  color: #02a22a;
+  color: #356e5e;
+  font-family: 'Gilroy';
 }
 
 #buscador:focus {
   outline: none;
-  border: 2px solid #02a22a;
+  border: 2px solid #356e5e;
 }
 #buscador::placeholder {
-  color: #02a22a;
+  color: #356e5e;
 }
 
 #search-button {
@@ -313,7 +314,7 @@ a.logotext1 {
 }
 
 .search-icon {
-  color: #02a22a;
+  color: #356e5e;
   width: 20px;
   height: 1.643em;
   margin-right: -4.2em;!;!e;!em;!e;!;
@@ -321,7 +322,7 @@ a.logotext1 {
   margin-left;: 1;
   margin-left;: 1e;
   margin-left;: 1;
-  border: 2px solid #02a22a;
+  border: 2px solid #356e5e;
   padding-top: 0.6em;
   padding-bottom: 0.6em;
   padding-left: 0.7em;
@@ -331,14 +332,14 @@ a.logotext1 {
   border-bottom-right-radius: 0.3em;
 }
 
-svg:hover {color: #fff;background: #02a22a;}
+svg:hover {color: #fff;background: #356e5e;}
 
 
 /* ================================
    AUTH BUTTONS
 ================================ */
 #auth-buttons {
-  color: #02a22a;
+  color: #356e5e;
   background: #fff;
   position: relative;
   margin: -2.8em auto 0 auto;
@@ -348,7 +349,7 @@ svg:hover {color: #fff;background: #02a22a;}
 }
 .logreg {
   background: #fff;
-  color: #02a22a;
+  color: #356e5e;
   border: none;
   padding: 0.2em 2em;
   font-family: 'Gilroy';
@@ -363,7 +364,7 @@ svg:hover {color: #fff;background: #02a22a;}
   z-index: 2000;
 }
 .logreg:hover {
-  background: #02a22a;
+  background: #356e5e;
   color: #fff;
   cursor: pointer;
 }
@@ -386,10 +387,10 @@ nav ul {
 nav ul li {
   margin: 0 1em;
   position: relative;
-  color: #02a22a;
+  color: #356e5e;
 }
 nav ul li a {
-  color: #02a22a;
+  color: #356e5e;
   text-decoration: none;
   padding: 0.5em 1em;
   display: block;
@@ -413,7 +414,7 @@ nav ul li a {
 ================================ */
 #catalogo {
   padding: 2em;
-  color: #02a22a;
+  color: #356e5e;
 }
 
 /* Contenedor de productos (mobile-first: 2 columnas) */
@@ -433,7 +434,7 @@ nav ul li a {
   text-align: center;
   border-radius: 0.5em;
   box-shadow: 0 0 1em rgba(0,0,0,0.29);
-  color: #02a22a;
+  color: #356e5e;
   height: 25em;
   position: relative;
 }
@@ -449,17 +450,17 @@ nav ul li a {
 }
 .precio {
   font-weight: 700;
+  font-size: 1.3em;
 }
 
 /* Botón "Ver Producto" */
 .btn-ver-producto {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #fff;
-  color: #02a22a;
+  color: #fff;
+  background: #356e5e;
   text-decoration: none;
   border-radius: 5px;
-  border: 2px solid #02a22a;
   font-weight: 700;
   position: absolute;
   left: 0;
@@ -470,8 +471,8 @@ nav ul li a {
   height: 1.4em;
 }
 .btn-ver-producto:hover {
-  background-color: #02a22a;
-  color: #fff;
+  background-color: #fff;
+  color: #356e5e;
 }
 
 /* ================================
@@ -490,7 +491,7 @@ nav ul li a {
   min-width: 6.4em;
   padding: 10px 0;
   border-radius: 5px;
-  border: 2px solid #02a22a;
+  border: 2px solid #356e5e;
   max-height: 200px;
   overflow-y: auto;
   margin-top: 0.2em;
@@ -501,14 +502,14 @@ nav ul li a {
   font-weight: 700;
 }
 .droptmn-menu li:hover {
-  background-color: #02a22a;
+  background-color: #356e5e;
   color: #fff;
 }
 .droptmn-btn {
   padding: 10px 20px;
   background-color: #fff;
-  color: #02a22a;
-  border: 2px solid #02a22a;
+  color: #356e5e;
+  border: 2px solid #356e5e;
   border-radius: 0.3em;
   cursor: pointer;
   font-family: 'Gilroy', sans-serif;
@@ -523,7 +524,7 @@ nav ul li a {
   top: 0.6em;
 }
 .droptmn-btn:hover {
-  background-color: #02a22a;
+  background-color: #356e5e;
   color: #fff;
 }
 
@@ -534,7 +535,7 @@ footer {
   text-align: center;
   padding: 1em;
   background-color: #fff;
-  color: #02a22a;
+  color: #356e5e;
   box-shadow: 0 0 0.4em rgba(0,0,0,0.45);
   width: 100%;
   position: relative;
@@ -555,7 +556,7 @@ footer {
   background-size: cover;
 }
 ::-webkit-scrollbar-thumb {
-  background: #02a22a;
+  background: #356e5e;
   border-radius: 6px;
 }
 .dropdown-content::-webkit-scrollbar {
@@ -607,7 +608,7 @@ footer {
     display: inline-block;
     padding: 8px 12px;
     background-color: #fff;
-    border: 2px solid #02a22a;
+    border: 1px solid #356e5e;
     border-radius: 0.3em;
     cursor: pointer;
     margin-left: -3.5em;
@@ -617,7 +618,7 @@ footer {
 
 .textomed:hover {
     color: #fff;
-    background: #02a22a;
+    background: #356e5e;
 }
 
 .droptmn-menu {
@@ -626,7 +627,7 @@ footer {
     top: 2em;
     left: 0;
     background: white;
-    border: 2px solid #02a22a;
+    border: 2px solid #356e5e;
     border-radius: 0.3em;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     list-style: none;
