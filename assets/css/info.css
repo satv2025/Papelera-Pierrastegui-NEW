@@ -59,7 +59,7 @@ nav ul li a:hover {
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    background-image: url(/assets/images/fondosn.jpg);
+    background: #ccc;
 }
 
 .articulo-header {
@@ -81,13 +81,32 @@ nav ul li a:hover {
 }
 
 .contenido-articulo {
-    font-size: 1.1em;
-    margin-bottom: 2em;
+    display: flex;
+    align-items: flex-start;
+    text-align: justify;
 }
+
+.texto {
+    flex: 1;
+    max-width: 60%;
+}
+
+.fotosn {
+    max-width: 35%;
+    height: auto;
+    margin-left: 43px;
+    margin-top: 0.32em;
+}
+
+.destacado {
+    clear: both;
+}
+
 
 .contenido-articulo p {
     margin-bottom: 1.8em;
     font-weight: 400;
+    width: 35em;
 }
 
 .flecha {
@@ -223,4 +242,8 @@ footer p {
 ::-webkit-scrollbar-thumb {
     background: #ddd;
     border-radius: 10px;
+}
+
+footer {
+    font-weight: 700;
 }

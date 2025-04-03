@@ -13,6 +13,10 @@ body {
     font-size: 1em;
 }
 
+footer {
+    font-weight: 700;
+}
+
 header {
     background-color: #fff;
     color: #356e5e;

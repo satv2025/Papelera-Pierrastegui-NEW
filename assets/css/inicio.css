@@ -662,3 +662,7 @@ footer {
   border-radius: 0.5em;
   padding-bottom: 1em;
 }
+
+footer {
+  font-weight: 700;
+}
