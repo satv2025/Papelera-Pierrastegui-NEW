@@ -55,10 +55,11 @@ nav ul li a:hover {
     max-width: 900px;
     margin: 4em auto;
     padding: 2.5em 3em;
-    background: #ddd; /* Fondo del contenedor del artículo */
+     /* Fondo del contenedor del artículo */
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
+    background-image: url(/assets/images/fondosn.jpg);
 }
 
 .articulo-header {
