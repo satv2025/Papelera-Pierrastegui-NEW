@@ -2,7 +2,7 @@
 
 ::selection {
     color: #fff;
-    background: #02a22a;
+    background: #356e5e;
 }
 
 body {
@@ -12,12 +12,12 @@ body {
     background-color: #fff;
     font-size: 1em;
     line-height: 1.7;
-    color: #02a22a;
+    color: #356e5e;
 }
 
 header {
     background-color: #fff;
-    color: #02a22a;
+    color: #356e5e;
     padding: 1em;
     text-align: center;
     box-shadow: 0 0 0.4em 0 #00000073;
@@ -37,7 +37,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #02a22a;
+    color: #356e5e;
     text-decoration: none;
     padding: 0.5em 1em;
     font-size: 1.2em;
@@ -46,7 +46,7 @@ nav ul li a {
 
 nav ul li a:hover {
     color: #fff; /* Cambio de color al pasar el mouse */
-    background-color: #02a22a; /* Fondo oscuro al pasar el mouse */
+    background-color: #356e5e; /* Fondo oscuro al pasar el mouse */
     border-radius: 5px; /* Bordes redondeados para el hover */
      /* Aumentamos el padding para un efecto más notorio */
 }
@@ -68,13 +68,13 @@ nav ul li a:hover {
 
 .articulo-header h2 {
     font-size: 2.5em;
-    color: #02a22a;
+    color: #356e5e;
     margin-bottom: 0.5em;
 }
 
 .subtitulo {
     font-size: 1.2em;
-    color: #02a22a;
+    color: #356e5e;
     font-weight: 400;
     margin-bottom: 1.5em;
 }
@@ -102,7 +102,7 @@ nav ul li a:hover {
 .enlace-pago a {
     font-size: 1.5em;
     font-weight: 700;
-    color: #02a22a;
+    color: #356e5e;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -136,7 +136,7 @@ nav ul li a:hover {
 }
 
 .contacto-info a {
-    color: #02a22a;
+    color: #356e5e;
     text-decoration: none;
     font-weight: 700;
     transition: color 0.3s ease;
@@ -150,7 +150,7 @@ footer {
     text-align: center;
     padding: 1em;
     background-color: #fff;
-    color: #02a22a;
+    color: #356e5e;
     margin-top: 2em;
     line-height: 0;
     box-shadow: 0 0 0.4em 0 #00000073;
@@ -165,7 +165,7 @@ footer p {
     }
     
     .contacto-info a {
-        color: #02a22a;
+        color: #356e5e;
         text-decoration: none;
         font-weight: 700;
         transition: color 0.3s ease;
@@ -178,14 +178,14 @@ footer p {
     }
 
     .contacto-info a {
-    color: #02a22a;
+    color: #356e5e;
     text-decoration: none;
     font-weight: 700;
     transition: color 0.3s ease;
 }
 
 .contacto-info a {
-    color: #02a22a;
+    color: #356e5e;
     text-decoration: none;
     font-weight: 700;
     transition: color 0.3s ease;
@@ -201,7 +201,7 @@ footer p {
     }
 
     .contacto-info a {
-        color: #02a22a;
+        color: #356e5e;
         text-decoration: none;
         font-weight: 700;
         transition: color 0.3s ease;
