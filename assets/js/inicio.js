@@ -1,8 +1,8 @@
 const productos = [
     // Arranques
-    { nombre: 'Arranque grueso', descripcion: '', precioARS: '1523945', imagen: '//dcdn-us.mitiendanube.com/stores/005/415/561/products/20-52388681df134230d517386228465592-240-0.webp', imagenHover: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranques%20reforzados.jpg', ruta: 'productos\\arranques\\grueso.html', categoria: 'Arranques', boton: 'Ver Producto', tamanos: ["20x30", "25x35", "30x40", "35x45", "40x50", "45x60", "50x70", "60x90"] },
+    { nombre: 'Arranque grueso', descripcion: '', precioARS: '1523945', imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg',  ruta: 'productos\\arranques\\grueso.html', categoria: 'Arranques', boton: 'Ver Producto', tamanos: ["20x30", "25x35", "30x40", "35x45", "40x50", "45x60", "50x70", "60x90"] },
 
-    { nombre: 'Arranque rendidor', descripcion: '', precioARS: '34875423', imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranques%20reforzados.jpg', ruta: 'productos\\arranques\\rendidor.html', categoria: 'Arranques', boton: 'Ver Producto', tamanos: ["15x20", "15x25", "20x30", "25x35", "30x40", "35x45", "40x50"]},
+    { nombre: 'Arranque rendidor', descripcion: '', precioARS: '34875423', imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg', ruta: 'productos\\arranques\\rendidor.html', categoria: 'Arranques', boton: 'Ver Producto', tamanos: ["15x20", "15x25", "20x30", "25x35", "30x40", "35x45", "40x50"]},
 
     // Bandejas
     { nombre: 'Bandeja aluminio', descripcion: '', precioARS: '853937884', imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg', ruta: 'productos\\bandejas\\aluminio.html', categoria: 'Bandejas', boton: 'Ver Producto', tamanos: ["f75", "f100"]},
