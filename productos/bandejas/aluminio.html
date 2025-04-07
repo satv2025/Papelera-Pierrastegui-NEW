@@ -6,7 +6,7 @@
     <title>Papelera Pierrastegui - Bandejas de Aluminio</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
 </head>
 <body>
     <header>
@@ -22,19 +22,28 @@
     
     <main>
         <section id="producto-detalle">
-            <h2>Bandejas de Aluminio</h2>
+            <h2>Bandeja De Aluminio</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/bandeja-aluminio.jpg" alt="Bandejas de Aluminio">
+                <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg" alt="Arranque Rendidor">
+
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Arranque rendidor de alta calidad, disponible en diferentes tamaños para tus necesidades.</p>
+                    
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar modelo</button>
+                        <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="f75">Bandeja Aluminio F75</li>
-                            <li data-size="f100">Bandeja Aluminio F100</li>
+                            <li data-size="F75" data-price-unit="2500" data-price-bulk="12000" data-bulto="20000">F75 (con tapa)</li>
+                            <li data-size="F100" data-price-unit="2600" data-price-bulk="13000" data-bulto="22000">F100 (con tapa)</li>
+                            <li data-size="P12" data-price-unit="Sin Stock" data-price-bulk="Sin Stock" data-bulto="Sin Stock">P12</li>
                         </ul>
                     </div>
-                    <p class="precio">$450.00</p>
+                    
+                    <div id="uni" style="display: none;">
+                        <p class="precio preciob">Por 10 Unidades: $<span id="precio-10"></span> ARS</p>
+                        <p class="precio preciob">Por 50 Unidades: $<span id="precio-50"></span> ARS</p>
+                        <p class="precio preciob">Por 100 Unidades: $<span id="precio-100"></span> ARS</p>
+                    </div>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -47,5 +56,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop2.js"></script>
 </body>
 </html>

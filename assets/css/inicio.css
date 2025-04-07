@@ -435,14 +435,29 @@ nav ul li a {
   border-radius: 0.5em;
   box-shadow: 0 0 1em rgba(0,0,0,0.29);
   color: #356e5e;
-  height: 25em;
+  height: 18em;
   position: relative;
+}
+
+.producto h3 {
+    margin-top: 0.4em;
+text-transform: lowercase; /* todo en minúsculas */
+}
+
+.producto h3::first-letter {
+  text-transform: uppercase; /* primera letra en mayúscula */
+}
+
+.md {
+    margin-left: 3em;
+    position: relative;
+    left: -1.5em;
 }
 /* La imagen ocupa el 100% del ancho y está pegada a los bordes laterales */
 .producto img {
   width: 112.5%;
   margin: -1em 0 1em -1em;
-  height: 12em;
+  height: 11em;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
   object-fit: cover;
@@ -467,7 +482,7 @@ nav ul li a {
   right: 0;
   margin: 0 auto;
   width: 8em;
-  top: 23em;
+  top: 15.8em;
   height: 1.4em;
 }
 .btn-ver-producto:hover {

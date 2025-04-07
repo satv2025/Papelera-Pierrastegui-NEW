@@ -61,11 +61,17 @@ nav ul li a {
     margin-left: 25em;
     margin-top: 10em;
     border-radius: 0.3em;
+    height: 25.5em;
+}
+
+div#uni {
+    margin-top: 2em;
+    margin-bottom: -2em;
 }
 
 .producto-detalle img {
     width: 100%;
-    max-width: 297px;
+    max-width: 346px;
     height: auto;
     border-radius: 8px;
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
@@ -95,6 +101,7 @@ nav ul li a {
     font-weight: 700;
     font-size: 1.5em;
     color: #356e5e;
+    margin-top: 2em;
 }
 
 .agregar-carrito {
@@ -170,4 +177,20 @@ footer p {
 ::-webkit-scrollbar-thumb {
     background: #356e5e;
     border-radius: 6px;
+}
+
+.preciou {
+    
+}
+.preciob {
+    margin-top: -0.8em;
+}
+
+.preciou, .preciob {
+    font-weight: 700;
+}
+
+.uni {
+    font-size: 1.2em;
+    font-weight: 400;
 }

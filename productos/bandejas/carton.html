@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Bandejas de Cartón</title>
+    <title>Papelera Pierrastegui - Bandejas de Aluminio</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/preciosdrop2.css">
 </head>
 <body>
     <header>
@@ -22,27 +22,34 @@
     
     <main>
         <section id="producto-detalle">
-            <h2>Bandejas de Cartón</h2>
+            <h2>Bandeja De Aluminio</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/bandeja-carton.jpg" alt="Bandejas de Cartón">
+                <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20DE%20CART%C3%93N/bandeja%20de%20carton.webp" alt="Arranque Rendidor">
+
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Arranque rendidor de alta calidad, disponible en diferentes tamaños para tus necesidades.</p>
+                    
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar modelo</button>
                         <ul class="dropdown-menu">
-                            <li data-size="1">Bandeja de Cartón N° 1</li>
-                            <li data-size="2">Bandeja de Cartón N° 2</li>
-                            <li data-size="3">Bandeja de Cartón N° 3</li>
-                            <li data-size="4">Bandeja de Cartón N° 4</li>
-                            <li data-size="5">Bandeja de Cartón N° 5</li>
-                            <li data-size="6">Bandeja de Cartón N° 6</li>
-                            <li data-size="12">Bandeja de Cartón N° 12</li>
-                            <li data-size="12.5">Bandeja de Cartón N° 12.5</li>
-                            <li data-size="13">Bandeja de Cartón N° 13</li>
-                            <li data-size="13.5">Bandeja de Cartón N° 13.5</li>
-                        </ul>
+                            <li data-size="1" data-price-bulk="900" data-bulto="1500">Bandeja de Cartón N° 1</li>
+                            <li data-size="2" data-price-bulk="1000" data-bulto="1600">Bandeja de Cartón N° 2</li>
+                            <li data-size="3" data-price-bulk="1100" data-bulto="1800">Bandeja de Cartón N° 3</li>
+                            <li data-size="4" data-price-bulk="1200" data-bulto="2000">Bandeja de Cartón N° 4</li>
+                            <li data-size="5" data-price-bulk="1350" data-bulto="2350">Bandeja de Cartón N° 5</li>
+                            <li data-size="6" data-price-bulk="Sin Stock" data-bulto="Sin Stock">Bandeja de Cartón N° 6</li>
+                            <li data-size="12" data-price-bulk="Sin Stock" data-bulto="Sin Stock">Bandeja de Cartón N° 12</li>
+                            <li data-size="12.5" data-price-bulk="1800" data-bulto="3200">Bandeja de Cartón N° 12.5</li>
+                            <li data-size="13" data-price-bulk="2000" data-bulto="3400">Bandeja de Cartón N° 13</li>
+                            <li data-size="13.5" data-price-bulk="2100" data-bulto="3900">Bandeja de Cartón N° 13.5</li>
+                        </ul>                        
                     </div>
-                    <p class="precio">$300.00</p>
+                    
+                    <div id="uni" style="display: none;">
+                        <p class="precio preciob">Por 50 Unidades: $<span id="precio-10"></span> ARS</p>
+                        <p class="precio preciob">Por 100 Unidades: $<span id="precio-50"></span> ARS</p>
+                    </div>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -55,5 +62,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop3.js"></script>
 </body>
 </html>
