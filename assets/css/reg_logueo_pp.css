@@ -95,7 +95,7 @@ button {
 }
 
 button:hover {
-    background: #034914;
+    background: #3e997f;
 }
 
 footer {
@@ -118,7 +118,7 @@ a {
 }
 
 a:hover {
-    color: #034914;
+    color: #3e997f;
 }
 
 /* Media Queries para diseño responsivo */

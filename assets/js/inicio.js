@@ -51,7 +51,7 @@ const productos = [
 
     // Film
     { nombre: 'Film', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/FILM%20-%20STRETCH/D_NQ_NP_2X_724993-MLA74413303619_022024-F.webp', ruta: 'productos\\film\\film.html', categoria: 'Film', boton: 'Ver Producto', tamanos: ["38x700", "45x700"]},
-    { nombre: 'Film boliviano', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/FILM%20-%20STRETCH/D_NQ_NP_2X_896757-MLA82920461463_032025-F.webp', ruta: 'productos\\film\\filmboliviano.html', categoria: 'Film', boton: 'Ver Producto', tamanos: ["38", "45"]},
+    { nombre: 'Film boliviano', descripcion: '', precioARS: 8300, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/FILM%20-%20STRETCH/D_NQ_NP_2X_896757-MLA82920461463_032025-F.webp', ruta: 'productos\\film\\filmboliviano.html', categoria: 'Film', boton: 'Ver Producto', tamanos: ["38 ($8.300)", "45 ($8.300)"]},
     { nombre: 'Film económico', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/FILM%20-%20STRETCH/film%205mts.jpg', ruta: 'productos\\film\\filmeconomico.html', categoria: 'Film', boton: 'Ver Producto', tamanos: ["38x300 (respuesto)", "45x300 (repuesto)"]},
     { nombre: 'Stretch virgen', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/FILM%20-%20STRETCH/strech%20con%20manija.jpg', ruta: 'productos\\film\\stretchvirgen.html', categoria: 'Film', boton: 'Ver Producto', tamanos: ["10cm", "con mango", "manual"]},
     { nombre: 'Stretch negro', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/FILM%20-%20STRETCH/rollo%20strech%20negro.jpg', ruta: 'productos\\film\\stretchnegro.html', categoria: 'Film', boton: 'Ver Producto', tamanos: ["10cm", "con mango"]},
@@ -143,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>${producto.nombre}</h3>
                     <p>${producto.descripcion}</p>
                     <p>
-                        Precio: 
                         ${precioFormateado === "A confirmar" 
                             ? '<span class="precio">A confirmar</span>' 
                             : `<span class="precio">$${precioFormateado}</span>`}
@@ -209,7 +208,6 @@ function filtrarCategoria(categoria) {
                 <h3>${producto.nombre}</h3>
                 <p>${producto.descripcion}</p>
                 <p>
-                    Precio: 
                     ${precioFormateado === "A confirmar" 
                         ? '<span class="precio">A confirmar</span>' 
                         : `<span class="precio">$${precioFormateado}</span>`}
