@@ -194,3 +194,10 @@ footer p {
     font-size: 1.2em;
     font-weight: 400;
 }
+
+@media (width: 1366px) {
+    main {
+        margin-left: -16em;
+        margin-top: -3em;
+      }
+}
