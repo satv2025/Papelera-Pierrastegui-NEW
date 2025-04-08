@@ -72,12 +72,14 @@ div#uni {
 .producto-detalle img {
     width: 100%;
     max-width: 346px;
-    height: auto;
+    height: 21.8em;
     border-radius: 8px;
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
     position: absolute;
     margin-top: 4em;
     margin-left: -33em;
+    object-fit: contain;
+    background: #fff;
 }
 
 .producto-info {
