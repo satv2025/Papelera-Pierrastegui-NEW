@@ -11,7 +11,7 @@ const productos = [
     { nombre: 'Bandejas de Telgopor', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg', ruta: 'productos\\bandejas\\Telgopor.html', categoria: 'Bandejas', boton: 'Ver Producto', tamanos: ["N°615", "N°617", "N°618", "N°619", "N°625", "N°628"]},
 
     // Blondas
-    { nombre: 'Blonda', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\blondas\\blonda.html', categoria: 'Blondas', boton: 'Ver Producto', tamanos: ["N°28", "N°32"]},
+    { nombre: 'Blonda', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_708276-MLA48997537211_022022-O.jpg', ruta: 'productos\\blondas\\blonda.html', categoria: 'Blondas', boton: 'Ver Producto', tamanos: ["N°28", "N°32"]},
 
     // Bolsas
     { nombre: 'Bolsas camiseta', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg', ruta: 'productos\\bolsas\\camiseta.html', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["(R) 20x30", "(R) 30x40", "(R) 40x50", "(R) 45x60", "(R) 50x60", "(R) 50x70", "(R) 60x80", "(R) 45X60 Ciudad Negra ", "(E) 30x40", "(E) 40x50"]},
