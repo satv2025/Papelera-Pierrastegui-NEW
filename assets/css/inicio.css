@@ -39,15 +39,15 @@ button.carrito {
     z-index: 3000;
     margin-top: -9.5em;
     position: absolute;
-    text-align: center; /* Asegura que el ícono se centre dentro del botón */
-    line-height: 1; /* Alineación vertical */
+    text-align: center; /* Asegura que el Ã­cono se centre dentro del botÃ³n */
+    line-height: 1; /* AlineaciÃ³n vertical */
     border: none; /* Removemos el borde original */
     margin-left: 68em;
     font-size: 1em;
 }
 
 button.carrito::after {
-    content: ""; /* Pseudo-elemento vacío */
+    content: ""; /* Pseudo-elemento vacÃ­o */
     position: absolute;
     top: -3px; /* Desplazamos el borde hacia afuera */
     left: -3px; /* Desplazamos el borde hacia afuera */
@@ -55,12 +55,12 @@ button.carrito::after {
     bottom: -3px; /* Desplazamos el borde hacia afuera */
     border-radius: 50%; /* Borde redondeado */
     border: 3px solid #356e5e; /* El borde extra */
-    z-index: 1000; /* Colocamos el borde detrás del ícono */
+    z-index: 1000; /* Colocamos el borde detrÃ¡s del Ã­cono */
 }
 
 button.carrito:hover {
     background-color: #356e5e!important;!i;!;
-    color: #fff !important;!i;!; /* Cambiar color cuando el ratón pasa sobre el botón */
+    color: #fff !important;!i;!; /* Cambiar color cuando el ratÃ³n pasa sobre el botÃ³n */
 }
 
 
@@ -68,24 +68,24 @@ button.carrito i {
     font-size: 1.5em;
 }
 
-/* Estilo para el contenedor del menú desplegable */
+/* Estilo para el contenedor del menÃº desplegable */
 .dropdown-menuc {
     position: absolute;
     display: none; /* Inicialmente oculto */
-    top: 27px; /* Distancia desde el botón */
-    right: 19.4em; /* Alineación a la derecha */
+    top: 27px; /* Distancia desde el botÃ³n */
+    right: 19.4em; /* AlineaciÃ³n a la derecha */
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    width: 200px; /* Ancho del menú */
-    z-index: 2000; /* Para asegurarse de que el menú esté por encima de otros elementos */
+    width: 200px; /* Ancho del menÃº */
+    z-index: 2000; /* Para asegurarse de que el menÃº estÃ© por encima de otros elementos */
     !;!e;!em;!e;!;
     border: 2px solid #356e5e;
     z.i: 1;
     margin-top: -1.5em;
 }
 
-/* Estilo de los elementos del menú */
+/* Estilo de los elementos del menÃº */
 .dropdown-menuc ul {
     margin: 0;
     padding: 0;
@@ -93,11 +93,11 @@ button.carrito i {
 }
 
 .dropdown-menuc ul li {
-    border-bottom: 1px solid #f0f0f0; /* Línea de separación entre los elementos */
+    border-bottom: 1px solid #f0f0f0; /* LÃ­nea de separaciÃ³n entre los elementos */
 }
 
 .dropdown-menuc ul li:last-child {
-    border-bottom: none; /* Sin línea de separación en el último elemento */
+    border-bottom: none; /* Sin lÃ­nea de separaciÃ³n en el Ãºltimo elemento */
 }
 
 .dropdown-menuc ul li a {
@@ -109,11 +109,11 @@ button.carrito i {
 }
 
 .dropdown-menuc ul li a:hover {
-    background-color: #356e5e; /* Color de fondo al pasar el ratón */
+    background-color: #356e5e; /* Color de fondo al pasar el ratÃ³n */
     color: #fff;
 }
 
-/* Mostrar el menú cuando el botón se presiona */
+/* Mostrar el menÃº cuando el botÃ³n se presiona */
 button.carrito:focus + .dropdown-menuc, 
 button.carrito:active + .dropdown-menuc {
     display: block;
@@ -126,7 +126,7 @@ nav.category-menu {
     z-index: 2000;
     position: relative;
     color: #356e5e;
-    left: 28em;
+    left: 33em;
     width: 56em;
     font-weight: 600;
     display: flex;
@@ -196,7 +196,7 @@ a.logotext1:focus {
 }
 
 /* ================================
-   HEADERBOX (Navegación fija, fondo negro)
+   HEADERBOX (NavegaciÃ³n fija, fondo negro)
 ================================ */
 .headerbox {
   position: absolute;
@@ -375,7 +375,7 @@ svg:hover {color: #fff;background: #356e5e;}
 }
 
 /* ================================
-   NAVIGACIÓN
+   NAVIGACIÃ“N
 ================================ */
 nav ul {
   list-style: none;
@@ -410,7 +410,7 @@ nav ul li a {
 }
 
 /* ================================
-   CATÁLOGO Y PRODUCTOS
+   CATÃLOGO Y PRODUCTOS
 ================================ */
 #catalogo {
   padding: 2em;
@@ -441,11 +441,11 @@ nav ul li a {
 
 .producto h3 {
     margin-top: 0.4em;
-text-transform: lowercase; /* todo en minúsculas */
+text-transform: lowercase; /* todo en minÃºsculas */
 }
 
 .producto h3::first-letter {
-  text-transform: uppercase; /* primera letra en mayúscula */
+  text-transform: uppercase; /* primera letra en mayÃºscula */
 }
 
 .md {
@@ -453,7 +453,7 @@ text-transform: lowercase; /* todo en minúsculas */
     position: relative;
     left: -1.5em;
 }
-/* La imagen ocupa el 100% del ancho y está pegada a los bordes laterales */
+/* La imagen ocupa el 100% del ancho y estÃ¡ pegada a los bordes laterales */
 .producto img {
   width: 112.5%;
   margin: -1em 0 1em -1em;
@@ -468,7 +468,7 @@ text-transform: lowercase; /* todo en minúsculas */
   font-size: 1.3em;
 }
 
-/* Botón "Ver Producto" */
+/* BotÃ³n "Ver Producto" */
 .btn-ver-producto {
   display: inline-block;
   padding: 10px 20px;
@@ -590,7 +590,7 @@ footer {
    MEDIA QUERIES (MOBILE-FIRST)
 ================================ */
 
-/* Por defecto (móviles): 2 productos por línea */
+/* Por defecto (mÃ³viles): 2 productos por lÃ­nea */
 
 /* Tabletas y pantallas medianas (768px - 1079px): 3 columnas */
 @media (min-width: 768px) and (max-width: 1079px) {
@@ -599,7 +599,18 @@ footer {
   }
 }
 
-/* Notebooks y pantallas grandes (1080px o más): 6 columnas */
+@media (width: 1366px) and (height: 768px) {
+  .producto img {
+    width: 112.5%;
+    margin: -1em 0 1em -1em;
+    height: 11em;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    object-fit: cover;
+    cursor: pointer;
+  }
+}
+/* Notebooks y pantallas grandes (1080px o mÃ¡s): 6 columnas */
 @media (min-width: 1080px) {
   .productos {
     grid-template-columns: repeat(6, 1fr);
@@ -662,7 +673,7 @@ footer {
 .droptmn-menu li:hover {
 }
 
-/* Clase para mostrar el menú */
+/* Clase para mostrar el menÃº */
 .droptmn-menu.droptmn-show {
     display: block;
 }
@@ -681,4 +692,23 @@ footer {
 
 footer {
   font-weight: 700;
+}
+
+@media (width: 1336px) {
+  .productos {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .producto img {
+    width: 118%;
+  }
+
+  nav.category-menu {
+    margin-left: -18em;
+  }
+
+  #catalogo {
+    margin-left: -4em;
+  }
 }
