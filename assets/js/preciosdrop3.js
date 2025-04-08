@@ -4,8 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const items = dropdownMenu.querySelectorAll('li');
 
     const uniDiv = document.getElementById('uni');
-    const precio50Span = document.getElementById('precio-10');  // Por 50 unidades
-    const precio100Span = document.getElementById('precio-50'); // Por 100 unidades
+    const precio50Span = document.getElementById('precio-10');
+    const precio100Span = document.getElementById('precio-50');
+    const monedaSpans = document.querySelectorAll('.moneda');
     const arsSpans = document.querySelectorAll('.ars');
     const imagenProducto = document.getElementById('producto-img');
 
@@ -25,7 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
             precio50Span.textContent = isP50OutOfStock ? 'Sin Stock' : p50;
             precio100Span.textContent = isP100OutOfStock ? 'Sin Stock' : p100;
 
-            // Mostrar u ocultar ARS según stock
+            monedaSpans[0].style.display = isP50OutOfStock ? 'none' : 'inline';
+            monedaSpans[1].style.display = isP100OutOfStock ? 'none' : 'inline';
+
             arsSpans[0].style.display = isP50OutOfStock ? 'none' : 'inline';
             arsSpans[1].style.display = isP100OutOfStock ? 'none' : 'inline';
 
