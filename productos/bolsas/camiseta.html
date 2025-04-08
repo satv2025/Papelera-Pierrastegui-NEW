@@ -26,7 +26,8 @@
             <div class="producto-detalle">
                 <img src="../../assets/images/bolsa-camiseta.jpg" alt="Bolsas Camiseta">
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Arranque rendidor de alta calidad, disponible en diferentes tamaños para tus necesidades.</p>
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
@@ -42,7 +43,12 @@
                             <li data-size="40x50-e">Bolsas Camiseta (E) 40x50</li>
                         </ul>
                     </div>
-                    <p class="precio">$200.00</p>
+
+                    <div id="uni" style="display: none;">
+                        <p class="precio">Precio por paquete: $<span id="precio-paquete"></span></p>
+                        <p class="precio">Precio por bulto: $<span id="precio-bulto"></span></p>
+                    </div>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -55,5 +61,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-bolsas.js"></script>
 </body>
 </html>
