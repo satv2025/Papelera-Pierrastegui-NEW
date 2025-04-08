@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const uniDiv = document.getElementById('uni');
     const precio50Span = document.getElementById('precio-10');  // Por 50 unidades
     const precio100Span = document.getElementById('precio-50'); // Por 100 unidades
+    const arsSpans = document.querySelectorAll('.ars');
     const imagenProducto = document.getElementById('producto-img');
 
     dropdownBtn.addEventListener('click', () => {
@@ -21,27 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const isP50OutOfStock = p50 && p50.toLowerCase() === 'sin stock';
             const isP100OutOfStock = p100 && p100.toLowerCase() === 'sin stock';
 
-            const precio50Parent = precio50Span.parentElement;
-            const precio100Parent = precio100Span.parentElement;
+            precio50Span.textContent = isP50OutOfStock ? 'Sin Stock' : p50;
+            precio100Span.textContent = isP100OutOfStock ? 'Sin Stock' : p100;
 
-            // Actualizar precio de 50 unidades
-            if (isP50OutOfStock) {
-                precio50Parent.innerHTML = 'Por 50 Unidades: <span id="precio-10">Sin Stock</span>';
-            } else {
-                precio50Parent.innerHTML = 'Por 50 Unidades: $<span id="precio-10">' + p50 + '</span> ARS';
-            }
-
-            // Actualizar precio de 100 unidades
-            if (isP100OutOfStock) {
-                precio100Parent.innerHTML = 'Por 100 Unidades: <span id="precio-50">Sin Stock</span>';
-            } else {
-                precio100Parent.innerHTML = 'Por 100 Unidades: $<span id="precio-50">' + p100 + '</span> ARS';
-            }
+            // Mostrar u ocultar ARS según stock
+            arsSpans[0].style.display = isP50OutOfStock ? 'none' : 'inline';
+            arsSpans[1].style.display = isP100OutOfStock ? 'none' : 'inline';
 
             dropdownBtn.textContent = `Tamaño: N° ${medida}`;
             uniDiv.style.display = 'block';
 
-            // Mostrar imagen especial para ciertos tamaños
             if (['12', '12.5', '13', '13.5'].includes(medida)) {
                 imagenProducto.src = 'https://http2.mlstatic.com/D_NQ_NP_973399-MLA43347970158_092020-O.webp';
             } else {
