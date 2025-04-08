@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Bandejas Plásticas</title>
+    <title>Papelera Pierrastegui - Bandejas de Aluminio</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/preciosdrop2.css">
 </head>
 <body>
     <header>
@@ -24,19 +24,37 @@
         <section id="producto-detalle">
             <h2>Bandejas Plásticas</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/bandeja-plastica.jpg" alt="Bandejas Plásticas">
+                <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20105%20rectangular.jpg" alt="Arranque Rendidor">
+
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Arranque rendidor de alta calidad, disponible en diferentes tamaños para tus necesidades.</p>
+                    
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar modelo</button>
                         <ul class="dropdown-menu">
-                            <li data-size="102">Bandeja Plástica N° 102</li>
-                            <li data-size="103">Bandeja Plástica N° 103</li>
-                            <li data-size="105">Bandeja Plástica N° 105 Ovalada</li>
-                            <li data-size="107">Bandeja Plástica N° 107</li>
-                        </ul>
+                            <li data-size="101">101</li>
+                            <li data-size="102">102 (20x17)</li>
+                            <li data-size="103">103 (17x22)</li>
+                            <li data-size="105r">105 (rectangular) (21x26)</li>
+                            <li data-size="105o">105 (ovalada)</li>
+                            <li data-size="107">107</li>
+                            <li data-size="101t">101 (con tapa)</li>
+                            <li data-size="102t">102 (con tapa)</li>
+                        </ul>                        
                     </div>
-                    <p class="precio">$320.00</p>
+                    
+                    <div id="uni" style="display: none;">
+                        <p class="precio preciob">
+                            Por 10 Unidades: <span class="moneda">$</span><span id="precio-10"></span> <span class="ars">ARS</span>
+                        </p>
+                        <p class="precio preciob">
+                            Por 50 Unidades: <span class="moneda">$</span><span id="precio-50"></span> <span class="ars">ARS</span>
+                        </p>
+                        <p class="precio preciob">
+                            Por 100 Unidades: <span class="moneda">$</span><span id="precio-100"></span> <span class="ars">ARS</span>
+                        </p>
+                    </div>                    
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -49,5 +67,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop4.js"></script>
 </body>
 </html>
