@@ -694,7 +694,7 @@ footer {
   font-weight: 700;
 }
 
-@media (width: 1336px) {
+@media (width: 1366px) {
   .productos {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
