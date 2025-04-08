@@ -204,3 +204,30 @@ footer p {
         margin-top: -3em;
       }
 }
+
+.producto-info h3,
+.producto-info p {
+    opacity: 1;
+}
+
+.dropdown-btn {
+    background-color: #fff;
+    color: #356e5e;
+    border: 2px solid #356e5e;
+    padding: 10px;
+    width: 104%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-family: 'Gilroy';
+    margin-top: 3em;
+}
+
+.producto-info p {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    margin-top: -0.7em;
+}
