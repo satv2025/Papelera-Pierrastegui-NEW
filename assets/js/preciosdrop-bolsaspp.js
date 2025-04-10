@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "6x30": { pp: 500, pb: ' FALTAN DATOS' },
-        "8x10": { pp: 410, pb: ' FALTAN DATOS' },
-        "10x25": { pp: 770, pb: ' FALTAN DATOS' },
-        "12x25": { pp: 900, pb: ' FALTAN DATOS' },
-        "15x25": { pp: '1.100', pb: ' FALTAN DATOS' },
-        "15x35": { pp: '1.500', pb: ' FALTAN DATOS' },
-        "20x30": { pp: '2.000', pb: ' FALTAN DATOS' },
-        "25x35": { pp: '2.250', pb: ' FALTAN DATOS' },
-        "30x40": { pp: '3.100', pb: ' FALTAN DATOS' }, 
-        "35x45": { pp: '4.100', pb: ' FALTAN DATOS' },
-        "40x50": { pp: '5.800', pb: ' FALTAN DATOS' },
+        "6x30": { pp: 500 },
+        "8x10": { pp: 410},
+        "10x25": { pp: 770},
+        "12x25": { pp: 900},
+        "15x25": { pp: '1.100'},
+        "15x35": { pp: '1.500'},
+        "20x30": { pp: '2.000'},
+        "25x35": { pp: '2.250'},
+        "30x40": { pp: '3.100'}, 
+        "35x45": { pp: '4.100'},
+        "40x50": { pp: '5.800'},
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
