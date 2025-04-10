@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "N4A": { pp: 1800, pb: 32000, ppb: 20 },
         "N6L": { pp: 2400, pb: 42000, ppb: 20 },
         "N7": { pp: 2800, pb: 26000, ppb: 10 },
-        "N8": { pp: 3500, pb: 32000, ppb: 20 }
+        "N8": { pp: 3500, pb: 32000, ppb: 10 }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
