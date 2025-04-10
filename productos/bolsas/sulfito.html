@@ -22,7 +22,7 @@
     
     <main>
         <section id="producto-detalle">
-            <h2>Bolsas Sulfito</h2>
+            <h2>Bolsas de papel sulfito</h2>
             <div class="producto-detalle">
                 <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg" alt="Bolsas Camiseta">
                 <div class="producto-info">
@@ -31,15 +31,26 @@
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="N3">Bolsas de Factura N° 3</li>
-                            <li data-size="N4">Bolsas de Factura N° 4</li>
-                            <li data-size="N6">Bolsas de Factura N° 6</li>
-                            <li data-size="N7">Bolsas de Factura N° 7</li>
-                            <li data-size="N8">Bolsas de Factura N° 8</li>
-                            <li data-size="delivery">Bolsa Delivery 26x38x17</li>
+                            <li data-size="N3">N°3 (11x23,5)</li>
+                            <li data-size="N4A">N°4 A (15x23,5)</li>
+                            <li data-size="N6L">N°6 L (15,5x35,5)</li>
+                            <li data-size="N7">N°7 (19x35)</li>
+                            <li data-size="N8">N°8 (24,5x41,5)</li>
                         </ul>
                     </div>
-                    <p class="precio">$150.00</p>
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por paquete: 
+                            <span id="precio-paquete"></span>
+                            <span id="precio-paquete-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Precio por bulto 
+                            <span id="precio-bulto-cantidad"></span>: 
+                            <span id="precio-bulto"></span>
+                            <span id="precio-bulto-moneda"></span>
+                        </p>
+                    </div>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -53,5 +64,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-bolsassulfito.js"></script>
 </body>
 </html>
