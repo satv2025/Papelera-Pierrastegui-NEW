@@ -714,8 +714,17 @@ footer {
 }
 
 #sin-stock-bh {
-  color #fff
+  color: #fff;
   background: #f00;
   font-family: 'Gilroy';
   font-weight: 700;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin-left: -5.92em;
+  position: absolute;
+  top: 9.34em;
+  border-top-left-radius: 0.3em;
+  border-top-right-radius: 0.3em;
 }
