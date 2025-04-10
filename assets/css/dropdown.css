@@ -74,11 +74,11 @@
 }
 
 .dropdown-menu::-webkit-scrollbar-track {
-    background: #356e5e;
+    background: #ffffff00;
 }
 
 .dropdown-menu::-webkit-scrollbar-thumb {
-    background: #ffffff00;
+    background: #356e5e;
     border-radius: 0px;
 }
 
