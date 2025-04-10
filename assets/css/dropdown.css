@@ -70,11 +70,11 @@
 
 /* Scrollbar personalizada */
 .dropdown-menu::-webkit-scrollbar {
-    width: 0px;
+    width: 6px;
 }
 
 .dropdown-menu::-webkit-scrollbar-track {
-    background: #c5c0a500;
+    background: #356e5e;
 }
 
 .dropdown-menu::-webkit-scrollbar-thumb {
