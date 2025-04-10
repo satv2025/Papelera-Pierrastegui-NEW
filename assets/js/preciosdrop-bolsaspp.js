@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "6x10": { pp: 900, pb: FALTAN DATOS },
-        "8x10": { pp: 1000, pb: FALTAN DATOS },
-        "10x25": { pp: 1350, pb: FALTAN DATOS },
-        "12x25": { pp: 1750, pb: FALTAN DATOS },
-        "15x25": { pp: 2100, pb: FALTAN DATOS },
-        "15x35": { pp: 3200, pb: FALTAN DATOS },
-        "20x30": { pp: 5000, pb: FALTAN DATOS },
-        "25x35": { pp: 3000, pb: FALTAN DATOS },
-        "30x40": { pp: 650, pb: FALTAN DATOS }, 
-        "35x45": { pp: 1000, pb: FALTAN DATOS },
-        "40x50": { pp: 1000, pb: FALTAN DATOS },
+        "6x30": { pp: 500, pb: FALTAN DATOS },
+        "8x10": { pp: 410, pb: FALTAN DATOS },
+        "10x25": { pp: 770, pb: FALTAN DATOS },
+        "12x25": { pp: 900, pb: FALTAN DATOS },
+        "15x25": { pp: 1100, pb: FALTAN DATOS },
+        "15x35": { pp: 1500, pb: FALTAN DATOS },
+        "20x30": { pp: 2000, pb: FALTAN DATOS },
+        "25x35": { pp: 2250, pb: FALTAN DATOS },
+        "30x40": { pp: 3100, pb: FALTAN DATOS }, 
+        "35x45": { pp: 4100, pb: FALTAN DATOS },
+        "40x50": { pp: 5800, pb: FALTAN DATOS },
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
