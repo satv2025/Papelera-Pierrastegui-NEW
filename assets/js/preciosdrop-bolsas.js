@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "20x30": { pp: 900, pb: 850 * 20 },
-        "30x40": { pp: 1000, pb: 900 * 20 },
-        "40x50": { pp: 1350, pb: 1175 * 20 },
-        "45x60": { pp: 1750, pb: 1600 * 20 },
-        "50x60": { pp: 2100, pb: 1800 * 10 },
+        "20x30": { pp: 900, pb: '17000 (20 unidades)' },
+        "30x40": { pp: 1000, pb: '18000 (20 unidades)' },
+        "40x50": { pp: 1350, pb: '23500 (20 unidades)' },
+        "45x60": { pp: 1750, pb: '33000 (20 unidades)' },
+        "50x60": { pp: 2100, pb: '36000 (20 unidades)' },
         "50x70": { pp: 3200, pb: 3000 * 10 },
         "60x80": { pp: 5000, pb: 4500 * 5 },
         "45x60-negra": { pp: 3000, pb: 2500 * 10 },
