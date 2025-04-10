@@ -712,3 +712,10 @@ footer {
     margin-left: -4em;
   }
 }
+
+#sin-stock-bh {
+  color #fff
+  background: #f00;
+  font-family: 'Gilroy';
+  font-weight: 700;
+}

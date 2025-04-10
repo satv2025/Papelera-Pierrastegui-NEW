@@ -139,16 +139,13 @@ function renderizarProductos(listaProductos) {
     listaProductos.forEach((producto, index) => {
         const precioFormateado = formatearNumeroConPuntos(producto.precioARS);
 
-        // Span SIN STOCK si el producto tiene precio 0
-        const sinStockSpan = producto.precioARS === 0
-            ? `<span class="sin-stock" id="sin-stock-${index}">SIN STOCK</span>`
-            : '';
+        const stockHtml = producto.stockHtml || ''; // solo si existe
 
         const productoHTML = `
             <div class="producto">
                 <div class="imagen-container">
                     <img src="${producto.imagen}" alt="${producto.nombre}">
-                    ${sinStockSpan}
+                    ${stockHtml}
                 </div>
                 <h3>${producto.nombre}${producto.medida ? ` <span class="md">${producto.medida}</span>` : ''}</h3>
                 <a href="${producto.ruta}" class="btn-ver-producto">${producto.boton}</a>
