@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "6x30": { pp: 500 },
+        "6x30": { pp: 500},
         "8x10": { pp: 410},
         "10x25": { pp: 770},
         "12x25": { pp: 900},
