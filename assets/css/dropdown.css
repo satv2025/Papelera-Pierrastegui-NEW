@@ -70,7 +70,7 @@
 
 /* Scrollbar personalizada */
 .dropdown-menu::-webkit-scrollbar {
-    width: 6px;
+    width: 7px;
 }
 
 .dropdown-menu::-webkit-scrollbar-track {
@@ -79,7 +79,7 @@
 
 .dropdown-menu::-webkit-scrollbar-thumb {
     background: #356e5e;
-    border-radius: 0px;
+    border-radius: 5px;
 }
 
 footer {
