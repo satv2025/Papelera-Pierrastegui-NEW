@@ -37,16 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     precioPaqueteMoneda.textContent = "";
                 }
 
-                // Precio por bulto
-                if (!isNaN(pb)) {
-                    precioBulto.textContent = `$${pb}`;
-                    precioBultoMoneda.textContent = "ARS";
-                    precioBultoCantidad.textContent = `(${ppb} paquetes)`;
-                } else {
-                    precioBulto.textContent = "";
-                    precioBultoMoneda.textContent = "";
-                    precioBultoCantidad.textContent = "";
-                }
+// Precio por bulto
+if (!isNaN(pb)) {
+    precioBulto.textContent = `(${ppb} unidades): $${pb}`;
+    precioBultoMoneda.textContent = "ARS";
+    precioBultoCantidad.textContent = ""; // Ya no lo usamos acá
+} else {
+    precioBulto.textContent = "";
+    precioBultoMoneda.textContent = "";
+    precioBultoCantidad.textContent = "";
+}
 
                 precioBox.style.display = "block";
             } else {
