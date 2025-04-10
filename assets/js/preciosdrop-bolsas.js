@@ -1,15 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "20x30": { pp: 900, pb: 17.000, ppb: 20 },
-        "30x40": { pp: 1.000, pb: 18.000, ppb: 20 },
-        "40x50": { pp: 1.350, pb: 23.500, ppb: 20 },
-        "45x60": { pp: 1.750, pb: 33.000, ppb: 20 },
-        "50x60": { pp: 21.000, pb: 36.000, ppb: 20 },
-        "50x70": { pp: 3.200, pb: 30.000, ppb: 10 },
-        "60x80": { pp: 5.000, pb: 22.500, ppb: 5 },
-        "45x60-negra": { pp: 3.000, pb: 25.000, ppb: 10 },
-        "30x40-e": { pp: 650, pb: 11.000, ppb: 20 },
-        "40x50-e": { pp: 1.000, pb: 18.000, ppb: 20 }
+        "20x30": { pp: 900, pb: '17.000', ppb: 20 },
+        "30x40": { pp: '1.000', pb: '18.000', ppb: 20 },
+        "40x50": { pp: '1.350', pb: '23.500', ppb: 20 },
+        "45x60": { pp: '1.750', pb: '33.000', ppb: 20 },
+        "50x60": { pp: '21.000', pb: '36.000', ppb: 20 },
+        "50x70": { pp: '3.200', pb: '30.000', ppb: 10 },
+        "60x80": { pp: '5.000', pb: '22.500', ppb: 5 },
+        "45x60-negra": { pp: '3.000', pb: '25.000', ppb: 10 },
+        "30x40-e": { pp: 650, pb: '11.000', ppb: 20 },
+        "40x50-e": { pp: '1.000', pb: '18.000', ppb: 20 }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");

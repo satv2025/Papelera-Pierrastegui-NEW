@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "N3": { pp: 1.300, pb: 24.000, ppb: 20 },
-        "N4A": { pp: 1.800, pb: 32.000, ppb: 20 },
-        "N6L": { pp: 2.400, pb: 42.000, ppb: 20 },
-        "N7": { pp: 2.800, pb: 26.000, ppb: 10 },
-        "N8": { pp: 3.500, pb: 32.000, ppb: 10 }
+        "N3": { pp: '1.300', pb: '24.000', ppb: 20 },
+        "N4A": { pp: '1.800', pb: '32.000', ppb: 20 },
+        "N6L": { pp: '2.400', pb: '42.000', ppb: 20 },
+        "N7": { pp: '2.800', pb: '26.000', ppb: 10 },
+        "N8": { pp: '3.500', pb: '32.000', ppb: 10 }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");

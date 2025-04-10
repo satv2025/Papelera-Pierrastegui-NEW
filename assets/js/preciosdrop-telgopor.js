@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const arsSpans = document.querySelectorAll('.ars');
 
     const precios = {
-        "617": { p25: 1.500, p50: 2.500, p100: 4.500 },
-        "618": { p25: 1.900, p50: 3.500, p100: 6.700 },
+        "617": { p25: '1.500', p50: '2.500', p100: '4.500' },
+        "618": { p25: '1.900', p50: '3.500', p100: '6.700' },
         "619": { p25: "Sin Stock", p50: "Sin Stock", p100: "Sin Stock" },
-        "628": { p25: 4.800, p50: 9.300, p100: 18.000 }
+        "628": { p25: '4.800', p50: '9.300', p100: '18.000' }
     };
 
     dropdownBtn.addEventListener('click', () => {
