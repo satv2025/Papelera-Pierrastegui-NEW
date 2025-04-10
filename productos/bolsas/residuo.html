@@ -24,20 +24,22 @@
         <section id="producto-detalle">
             <h2>Bolsas de Residuo</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/bolsa-residuo.jpg" alt="Bolsas de Residuo">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20RESIDUO/bolsas%20de%20residuo.jpg" alt="Bolsas de Residuo">
                 <div class="producto-info">
                     <h3>Selecciona un modelo</h3>
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="45x60">Bolsas de Residuo 45x60</li>
-                            <li data-size="50x70">Bolsas de Residuo 50x70</li>
-                            <li data-size="60x90">Bolsas de Residuo 60x90</li>
-                            <li data-size="80x110">Bolsas de Residuo 80x1,10</li>
-                            <li data-size="90x120">Bolsas de Residuo 90x1,20</li>
+                            <li data-size="45x60">45x60</li>
+                            <li data-size="50x70">50x70</li>
+                            <li data-size="60x90">60x90</li>
+                            <li data-size="80x110">80x1,10</li>
                         </ul>
                     </div>
-                    <p class="precio">$120.00</p>
+                    <div id="uni" style="display: none;">
+                        <p class="precio">Precio por paquete: <span id="precio-paquete"></span> <span id="precio-paquete-moneda"></span></p>
+                        <p class="precio">Precio por bulto <span id="precio-bulto"></span> <span id="precio-bulto-moneda"></span> <span id="precio-bulto-cantidad"></span></p>
+                    </div>                    
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -50,5 +52,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-residuo.js"></script>
 </body>
 </html>
