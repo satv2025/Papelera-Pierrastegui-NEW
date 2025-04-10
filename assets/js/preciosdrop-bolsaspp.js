@@ -26,7 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (precios[size]) {
                 precioPaquete.textContent = precios[size].pp;
-                precioBulto.textContent = precios[size].pb;
+
+                if (!isNaN(precios[size].pb)) {
+                    precioBulto.previousSibling.textContent = "Precio por bulto: $";
+                    precioBulto.textContent = precios[size].pb;
+                } else {
+                    precioBulto.previousSibling.textContent = "Precio por bulto:";
+                    precioBulto.textContent = precios[size].pb;
+                }
+
                 precioBox.style.display = "block";
             } else {
                 precioBox.style.display = "none";
