@@ -16,7 +16,7 @@ const productos = [
     // Bolsas
     { nombre: 'Bolsas camiseta', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg', ruta: 'productos\\bolsas\\camiseta.html', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["(R) 20x30", "(R) 30x40", "(R) 40x50", "(R) 45x60", "(R) 50x60", "(R) 50x70", "(R) 60x80", "(R) 45X60 Ciudad Negra ", "(E) 30x40", "(E) 40x50"]},
     { nombre: 'Bolsas sulfito', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg', ruta: 'productos\\bolsas\\sulfito.html', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["N°3", "N°4", "N°6", "N°7", "N°8", "Delivery 26x38x17"]},
-    { nombre: 'Bolsas horno', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\bolsas\\horno.html', categoria: 'Bolsas', boton: 'Ver Producto' },
+    { nombre: 'Bolsas horno', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\bolsas\\horno.html', categoria: 'Bolsas', boton: 'Ver Producto', stockHtml: '<span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>' },
     { nombre: 'Bolsas polipropileno', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg', ruta: 'productos\\bolsas\\polipropileno.html', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["10x15", "10x25", "15x20", "15x25", "20x25", "20x30", "25x35", "30x40", "35x45", "40x50"]},
     { nombre: 'Bolsas residuo', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20DE%20RESIDUO/bolsas%20de%20residuo.jpg', ruta: 'productos\\bolsas\\residuo.html', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["45x60", "50x70", "60x90", "80x1,10", "90x1,20"]},
     { nombre: 'Bolsas riñon', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20RIÑÓN/bolsas-rinon-todoplastic.jpg', ruta: 'productos\\bolsas\\riñon.html', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["15x20", "20x30", "25x35", "30x40", "35x45", "40x50", "50x60", "Vino"]},
@@ -127,9 +127,6 @@ function formatearNumeroConPuntos(numero) {
     return numero.toLocaleString('es-AR');
 }
 
-// -----------------------------
-// Renderizar lista de productos
-// -----------------------------
 function renderizarProductos(listaProductos) {
     const contenedor = document.getElementById('productos');
     contenedor.innerHTML = '';
@@ -142,9 +139,17 @@ function renderizarProductos(listaProductos) {
     listaProductos.forEach((producto, index) => {
         const precioFormateado = formatearNumeroConPuntos(producto.precioARS);
 
+        // Span SIN STOCK si el producto tiene precio 0
+        const sinStockSpan = producto.precioARS === 0
+            ? `<span class="sin-stock" id="sin-stock-${index}">SIN STOCK</span>`
+            : '';
+
         const productoHTML = `
             <div class="producto">
-                <img src="${producto.imagen}" alt="${producto.nombre}">
+                <div class="imagen-container">
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    ${sinStockSpan}
+                </div>
                 <h3>${producto.nombre}${producto.medida ? ` <span class="md">${producto.medida}</span>` : ''}</h3>
                 <a href="${producto.ruta}" class="btn-ver-producto">${producto.boton}</a>
             </div>
