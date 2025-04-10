@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Bolsas Polipropileno</title>
+    <title>Papelera Pierrastegui - Bolsas Camiseta</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/dropdown2.css">
 </head>
 <body>
     <header>
@@ -22,9 +23,9 @@
     
     <main>
         <section id="producto-detalle">
-            <h2>Bolsas Polipropileno</h2>
+            <h2>Bolsas Camiseta</h2>
             <div class="producto-detalle">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg" alt="Bolsas Polipropileno">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg" alt="Bolsas Camiseta">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
                     <p>Arranque rendidor de alta calidad, disponible en diferentes tamaños para tus necesidades.</p>
@@ -44,7 +45,12 @@
                             <li data-size="40x50">Bolsas Polipropileno 40x50</li>
                         </ul>
                     </div>
-                    <p class="precio">$100.00</p>
+
+                    <div id="uni" style="display: none;">
+                        <p class="precio">Precio por paquete: $<span id="precio-paquete"></span></p>
+                        <p class="precio">Precio por bulto: $<span id="precio-bulto"></span></p>
+                    </div>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -57,5 +63,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-bolsaspp.js"></script>
 </body>
 </html>
