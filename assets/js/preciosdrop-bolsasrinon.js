@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const precioBultoMoneda = document.getElementById("precio-bulto-moneda");
     const precioBultoCantidad = document.getElementById("precio-bulto-cantidad");
 
+    const precioPaqueteLabel = document.getElementById("precio-paquete-label");
+    const precioBultoLabel = document.getElementById("precio-bulto-label");
+
+    const sinStockTexto = document.getElementById("sin-stock");
+
     dropdownItems.forEach(item => {
         item.addEventListener("click", () => {
             const size = item.getAttribute("data-size");
@@ -32,27 +37,38 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data) {
                 const { pp, pb, ppb } = data;
 
-                // Precio por paquete
-                if (pp === "SIN STOCK") {
-                    precioPaquete.textContent = "SIN STOCK";
-                    precioPaqueteMoneda.textContent = "";
-                } else {
-                    precioPaquete.textContent = pp;
-                    precioPaqueteMoneda.textContent = "ARS";
-                }
+                const ambosSinStock = pp === "SIN STOCK" && pb === "SIN STOCK";
 
-                // Precio por bulto
-                if (pb === "SIN STOCK") {
-                    precioBulto.textContent = "SIN STOCK";
-                    precioBultoMoneda.textContent = "";
-                    precioBultoCantidad.textContent = "";
-                } else {
-                    precioBulto.textContent = pb;
-                    precioBultoMoneda.textContent = "ARS";
-                    precioBultoCantidad.textContent = `${ppb} unidades`;
-                }
+                if (ambosSinStock) {
+                    precioBox.style.display = "block";
+                    sinStockTexto.style.display = "block";
 
-                precioBox.style.display = "block";
+                    precioPaqueteLabel.style.display = "none";
+                    precioBultoLabel.style.display = "none";
+                } else {
+                    sinStockTexto.style.display = "none";
+
+                    // Precio por paquete
+                    if (pp === "SIN STOCK") {
+                        precioPaqueteLabel.style.display = "none";
+                    } else {
+                        precioPaqueteLabel.style.display = "block";
+                        precioPaquete.textContent = pp;
+                        precioPaqueteMoneda.textContent = "ARS";
+                    }
+
+                    // Precio por bulto
+                    if (pb === "SIN STOCK") {
+                        precioBultoLabel.style.display = "none";
+                    } else {
+                        precioBultoLabel.style.display = "block";
+                        precioBulto.textContent = pb;
+                        precioBultoMoneda.textContent = "ARS";
+                        precioBultoCantidad.textContent = `por bulto (${ppb} unidades):`;
+                    }
+
+                    precioBox.style.display = "block";
+                }
             } else {
                 precioBox.style.display = "none";
             }
