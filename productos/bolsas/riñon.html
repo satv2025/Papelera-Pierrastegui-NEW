@@ -31,17 +31,20 @@
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="15x20">Bolsas Riñón 15x20</li>
-                            <li data-size="20x30">Bolsas Riñón 20x30</li>
-                            <li data-size="25x35">Bolsas Riñón 25x35</li>
-                            <li data-size="30x40">Bolsas Riñón 30x40</li>
-                            <li data-size="35x45">Bolsas Riñón 35x45</li>
-                            <li data-size="40x50">Bolsas Riñón 40x50</li>
-                            <li data-size="50x60">Bolsas Riñón 50x60</li>
-                            <li data-size="vino">Bolsas Riñón Vino</li>
+                            <li data-size="15x20">15x20</li>
+                            <li data-size="20x30">20x30</li>
+                            <li data-size="25x35">25x35</li>
+                            <li data-size="30x40">30x40</li>
+                            <li data-size="35x45">35x45</li>
+                            <li data-size="40x50">40x50</li>
+                            <li data-size="50x60">50x60</li>
+                            <li data-size="vino">Vino</li>
                         </ul>
                     </div>
-                    <p class="precio">$180.00</p>
+                    <div id="uni" style="display: none;">
+                        <p class="precio">Precio por paquete: $<span id="precio-paquete"></span> <span id="precio-paquete-moneda"></span></p>
+                        <p class="precio">Precio por bulto (<span id="precio-bulto-cantidad"></span>): $<span id="precio-bulto"></span> <span id="precio-bulto-moneda"></span></p>
+                    </div>                    
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -54,5 +57,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-bolsasrinon.js"></script>
 </body>
 </html>
