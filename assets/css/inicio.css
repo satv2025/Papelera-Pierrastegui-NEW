@@ -730,6 +730,7 @@ footer {
 }
 
 .sin-stockz {
+  left: 9em;
 }
 
 @media (width: 671px) and (height: 768px) {
