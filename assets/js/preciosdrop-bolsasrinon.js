@@ -33,23 +33,23 @@ document.addEventListener("DOMContentLoaded", function () {
                 const { pp, pb, ppb } = data;
 
                 // Precio por paquete
-                if (!isNaN(pp)) {
+                if (pp === "SIN STOCK") {
+                    precioPaquete.textContent = "SIN STOCK";
+                    precioPaqueteMoneda.textContent = "";
+                } else {
                     precioPaquete.textContent = pp;
                     precioPaqueteMoneda.textContent = "ARS";
-                } else {
-                    precioPaquete.textContent = "";
-                    precioPaqueteMoneda.textContent = "";
                 }
 
                 // Precio por bulto
-                if (!isNaN(pb)) {
-                    precioBultoCantidad.textContent = `${ppb} unidades`;
-                    precioBulto.textContent = pb;
-                    precioBultoMoneda.textContent = "ARS";
-                } else {
-                    precioBulto.textContent = "";
+                if (pb === "SIN STOCK") {
+                    precioBulto.textContent = "SIN STOCK";
                     precioBultoMoneda.textContent = "";
                     precioBultoCantidad.textContent = "";
+                } else {
+                    precioBulto.textContent = pb;
+                    precioBultoMoneda.textContent = "ARS";
+                    precioBultoCantidad.textContent = `${ppb} unidades`;
                 }
 
                 precioBox.style.display = "block";
