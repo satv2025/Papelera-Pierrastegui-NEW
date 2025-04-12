@@ -723,11 +723,10 @@ footer {
   padding-right: 0.5em;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
-  margin-left: -2.93em;
+  margin-left: -7.93em;
   position: absolute;
-  top: 9.34em;
-  border-top-left-radius: 0.3em;
-  border-top-right-radius: 0.3em;
+  top: 1em;
+  border-radius: 0.3em;
 }
 
 @media (width: 671px) and (height: 768px) {
