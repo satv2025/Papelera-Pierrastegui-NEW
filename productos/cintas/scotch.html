@@ -7,6 +7,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/carton_corrugado.css">
 </head>
 <body>
     <header>
@@ -24,26 +25,35 @@
         <section id="producto-detalle">
             <h2>Cinta Scotch</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/cinta-scotch.jpg" alt="Cinta Scotch">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg" alt="Cinta Scotch">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>La cinta Scotch es ideal para embalar, asegurar y sellar. Alta calidad y resistencia.</p>
-                    <p class="precio">$50.00</p>
-                    
-                    <!-- Dropdown para seleccionar tamaño -->
+                    <p>Cinta adhesiva tipo Scotch, ideal para embalaje y uso general. Disponible en distintas medidas.</p>
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
+                        <button class="dropdown-btn">Seleccionar medida</button>
                         <ul class="dropdown-menu">
-                            <li data-size="24x50">24x50</li>
-                            <li data-size="48x100">48x100</li>
+                            <li data-size="24x50">24mmx50m</li>
+                            <li data-size="48x100">48mmx100m</li>
                         </ul>
                     </div>
-                    
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por unidad: 
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Precio por 10 unidades: 
+                            <span id="precio-10"></span>
+                            <span id="precio-10-moneda"></span>
+                        </p>
+                    </div>
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
@@ -51,5 +61,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-cintasc.js"></script>
 </body>
 </html>
