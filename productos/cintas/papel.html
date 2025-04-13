@@ -7,6 +7,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/cinta_papel.css">
 </head>
 <body>
     <header>
@@ -24,27 +25,36 @@
         <section id="producto-detalle">
             <h2>Cinta de Papel</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/cinta-papel.jpg" alt="Cinta de Papel">
+                <img src="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cinta%20de%20papel.jpg" alt="Cinta de Papel">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>La cinta de papel es perfecta para manualidades, embalaje ligero y más. Fuerte, resistente y fácil de usar.</p>
-                    <p class="precio">$40.00</p>
-                    
-                    <!-- Dropdown para seleccionar tamaño -->
+                    <p>Cinta de papel ideal para enmascarar y trabajos de pintura. Disponible en varias medidas.</p>
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
+                        <button class="dropdown-btn">Seleccionar medida</button>
                         <ul class="dropdown-menu">
-                            <li data-size="18">18</li>
-                            <li data-size="24">24</li>
-                            <li data-size="36">36</li>
+                            <li data-size="18mm">18mm</li>
+                            <li data-size="24mm">24mm</li>
+                            <li data-size="36mm">36mm</li>
                         </ul>
                     </div>
-                    
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por unidad: 
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Precio por 10 unidades: 
+                            <span id="precio-10"></span>
+                            <span id="precio-10-moneda"></span>
+                        </p>
+                    </div>
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
@@ -52,5 +62,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-cintap.js"></script>
 </body>
 </html>
