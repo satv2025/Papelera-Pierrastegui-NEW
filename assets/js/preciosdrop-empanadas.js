@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const btn = document.querySelector(".dropdown-btn");
 
     const precioBox = document.getElementById("uni");
-    const sinStockBox = document.getElementById("sin-stock");
+    const sinStock = document.getElementById("sin-stock");
 
     const precio50 = document.getElementById("precio-50");
     const precio50Moneda = document.getElementById("precio-50-moneda");
@@ -27,34 +27,21 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data) {
                 const { u50, u100 } = data;
 
-                const sinStock = u50 === "SIN STOCK" && u100 === "SIN STOCK";
+                const isStock = !(u50.toLowerCase().includes("no está") || u100.toLowerCase().includes("no está"));
 
-                if (sinStock) {
-                    precioBox.style.display = "none";
-                    sinStockBox.style.display = "block";
-                } else {
-                    sinStockBox.style.display = "none";
+                if (isStock) {
+                    precio50.textContent = `$${u50}`;
+                    precio50Moneda.textContent = "ARS";
+
+                    precio100.textContent = `$${u100}`;
+                    precio100Moneda.textContent = "ARS";
+
+                    sinStock.style.display = "none";
                     precioBox.style.display = "block";
-
-                    if (u50 !== "SIN STOCK") {
-                        precio50.textContent = u50;
-                        precio50Moneda.textContent = "ARS";
-                    } else {
-                        precio50.textContent = "";
-                        precio50Moneda.textContent = "";
-                    }
-
-                    if (u100 !== "SIN STOCK") {
-                        precio100.textContent = u100;
-                        precio100Moneda.textContent = "ARS";
-                    } else {
-                        precio100.textContent = "";
-                        precio100Moneda.textContent = "";
-                    }
+                } else {
+                    precioBox.style.display = "none";
+                    sinStock.style.display = "block";
                 }
-            } else {
-                precioBox.style.display = "none";
-                sinStockBox.style.display = "none";
             }
         });
     });
