@@ -24,18 +24,27 @@
         <section id="producto-detalle">
             <h2>Cartón Corrugado</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/carton-corrugado.jpg" alt="Cartón Corrugado">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CART%C3%93N%20CORRUGADO/carton%20corrugado.jpg" alt="Cartón Corrugado">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
                     <p>El cartón corrugado es ideal para embalaje, protección y transporte de productos.</p>
-                    <p class="precio">$150.00</p>
+    
+                    <div id="uni" style="display: block;">
+                        <p class="precio">
+                            Precio por unidad: 
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                    </div>
+                    
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     
                     <!-- Dropdown para seleccionar tamaño -->
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
                             <li data-size="100x20">100x20</li>
-                            <li data-size="90x20">90x20</li>
+                            <li data-size="120x20">120x20</li>
                         </ul>
                     </div>
                     
@@ -43,7 +52,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
@@ -51,5 +60,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-cartonc.js"></script>
 </body>
 </html>
