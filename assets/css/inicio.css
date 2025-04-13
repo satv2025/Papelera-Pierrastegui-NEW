@@ -739,4 +739,8 @@ footer {
     grid-template-columns: repeat(1, 1fr);
     width: 18em;
   }
+
+  .sin-stockz {
+    left: -2em;
+  }
 }
