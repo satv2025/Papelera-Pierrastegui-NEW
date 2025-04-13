@@ -7,6 +7,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/c_e_main.css">
 </head>
 <body>
     <header>
@@ -24,21 +25,36 @@
         <section id="producto-detalle">
             <h2>Cajas de Pizza</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/cajas-pizza.jpg" alt="Cajas de Pizza">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/caja%20de%20pizzas.jpg" alt="Cajas de Pizza">
                 <div class="producto-info">
-                    <h3>Selecciona el tamaño</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Cajas resistentes y térmicas para pizzas. Disponibles en varios tamaños para adaptarse a tu necesidad.</p>
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="pizza">Caja de Pizza</li>
+                            <li data-size="pizza-chica">Pizza Chica</li>
+                            <li data-size="pizza-grande">Pizza Grande</li>
+                            <li data-size="pizza-metro">Pizza Por Metro</li>
                         </ul>
                     </div>
-                    <p class="precio">$150.00</p>
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por 50 unidades: 
+                            <span id="precio-50"></span>
+                            <span id="precio-50-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Precio por 100 unidades: 
+                            <span id="precio-100"></span>
+                            <span id="precio-100-moneda"></span>
+                        </p>
+                    </div>
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
         </section>
-    </main>
+    </main>     
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
@@ -46,5 +62,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-pizza.js"></script>
 </body>
 </html>
