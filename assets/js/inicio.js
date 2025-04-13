@@ -25,8 +25,8 @@ const productos = [
     { nombre: 'Caja Desayuno', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\cajas\\desayuno.html', categoria: 'Cajas', boton: 'Ver Producto' },
     { nombre: 'Caja De Empanada', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARTÍCULOS%20DE%20PIZZERÍA/D_NQ_NP_786174-MLA73101670159_112023-O.webp', ruta: 'productos\\cajas\\empanada.html', categoria: 'Cajas', boton: 'Ver Producto' },
     { nombre: 'Caja De Pizza', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARTÍCULOS%20DE%20PIZZERÍA/caja%20de%20pizzas.jpg', ruta: 'productos\\cajas\\pizza.html', categoria: 'Cajas', boton: 'Ver Producto' },
-    { nombre: 'Caja De Ravioles', descripcion: '', precioARS: 0, imagen: 'https://dpack.com.ar/web/image/product.template/399/image_1024?unique=fc262e0', ruta: 'productos\\cajas\\ravioles.html', categoria: 'Cajas', boton: 'Ver Producto', fondoImagen: 'background-color: #fff;', objectFit: 'object-fit: contain !important;', stockHtml: '<span class="sin-stock" id="sin-stockrav">SIN STOCK</span>' }
-    { nombre: 'Caja De Hamburguesa', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARTÍCULOS%20DE%20PIZZERÍA/caja%20de%20hamburguesa.jpg', ruta: 'productos\\cajas\\hamburguesa.html', categoria: 'Cajas', boton: 'Ver Producto' },
+    { nombre: 'Caja De Ravioles', descripcion: '', precioARS: 0, imagen: 'https://dpack.com.ar/web/image/product.template/399/image_1024?unique=fc262e0', ruta: 'productos\\cajas\\ravioles.html', categoria: 'Cajas', boton: 'Ver Producto' },
+    { nombre: 'Caja De Hamburguesa', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARTÍCULOS%20DE%20PIZZERÍA/caja%20de%20hamburguesa.jpg', stockHtml: '<span class="sin-stock" id="sin-stockrav">SIN STOCK</span>', ruta: 'productos\\cajas\\hamburguesa.html', categoria: 'Cajas', boton: 'Ver Producto' },
 
     // Carton
     { nombre: 'Carton Corrugado', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CARTÓN%20CORRUGADO/carton%20corrugado.jpg', ruta: 'productos\\carton\\corrugado.html', categoria: 'Carton', boton: 'Ver Producto', tamanos: ["90x20", "100x20"]},
@@ -253,23 +253,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-const contenedorProducto = document.createElement('div');
-contenedorProducto.classList.add('producto');
-
-const imagen = document.createElement('img');
-imagen.src = producto.imagen;
-imagen.alt = producto.nombre;
-imagen.style.backgroundColor = '#fff';  // Aplica el fondo blanco
-imagen.style.objectFit = 'contain';  // Aplica el object-fit: contain
-imagen.style.setProperty('object-fit', 'contain', 'important'); // Se aplica el !important
-
-contenedorProducto.appendChild(imagen);
-
-const boton = document.createElement('button');
-boton.textContent = producto.boton;
-boton.onclick = () => window.location.href = producto.ruta;
-
-contenedorProducto.appendChild(boton);
-
-document.body.appendChild(contenedorProducto);
