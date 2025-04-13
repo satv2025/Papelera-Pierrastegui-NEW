@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "media-docena": { u50: none, u100: none },
+        "media-docena": { u50: 'none', u100: 'none' },
         "docena": { u50: '13.000', u100: '24.500' },
         "docena-y-media": { u50: '14.000', u100: '27.500' }
     };
