@@ -3,15 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
         "100x20": { unidad: '10.000' },
         "120x20": { unidad: '12.000' }
     };
-
+    
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
     const btn = document.querySelector(".dropdown-btn");
 
     const precioBox = document.getElementById("uni");
     const sinStock = document.getElementById("sin-stock");
 
-    const precioUnidad = document.getElementById("precio-unidad");
-    const precioUnidadMoneda = document.getElementById("precio-unidad-moneda");
+    const precio = document.getElementById("precio-50");
+    const precioMoneda = document.getElementById("precio-50-moneda");
 
     dropdownItems.forEach(item => {
         item.addEventListener("click", () => {
@@ -21,13 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = precios[size];
 
             if (data) {
-                const { unidad } = data;
+                const { u1 } = data;
 
-                const isStock = !(unidad.toLowerCase().includes("no está"));
+                const isStock = !(u1.toLowerCase().includes("no está"));
 
                 if (isStock) {
-                    precioUnidad.textContent = `$${unidad}`;
-                    precioUnidadMoneda.textContent = "ARS";
+                    precio.textContent = `$${u1}`;
+                    precioMoneda.textContent = "ARS";
+
                     sinStock.style.display = "none";
                     precioBox.style.display = "block";
                 } else {
