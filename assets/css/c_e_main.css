@@ -1,3 +1,8 @@
-.dropdown {
+#sin-stock {
+    margin-top: 0.5em;
+    margin-bottom: -1em;
+}
 
+.dropdown-menu {
+    height: 8.22em;
 }
