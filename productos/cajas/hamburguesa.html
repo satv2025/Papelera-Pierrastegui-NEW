@@ -24,21 +24,28 @@
         <section id="producto-detalle">
             <h2>Cajas de Hamburguesa</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/cajas-hamburguesa.jpg" alt="Cajas de Hamburguesa">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/caja%20de%20hamburguesa.jpg" alt="Cajas de Hamburguesa">
                 <div class="producto-info">
-                    <h3>Selecciona el tamaño</h3>
-                    <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
-                        <ul class="dropdown-menu">
-                            <li data-size="hamburguesa">Caja de Hamburguesa</li>
-                        </ul>
+                    <h3>Descripción del Producto</h3>
+                    <p>Cajas para hamburguesas de excelente calidad, disponibles en diferentes cantidades según tus necesidades.</p>
+                    <div id="uni" style="display: block;">
+                        <p class="precio">
+                            Precio por 50 unidades: 
+                            <span id="precio-50"></span>
+                            <span id="precio-50-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Precio por 100 unidades: 
+                            <span id="precio-100"></span>
+                            <span id="precio-100-moneda"></span>
+                        </p>
                     </div>
-                    <p class="precio">$120.00</p>
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
@@ -46,5 +53,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-hamburguesa.js"></script>
 </body>
 </html>
