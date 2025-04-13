@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "pizza-chica": { u50: 'este precio no está establecido', u100: 'este precio no está establecido' },
-        "pizza-grande": { u50: '18.000', u100: '34.500' },
-        "pizza-metro": { u50: '22.000', u100: '42.000' }
+        "pizza-chica": { u50: '10.000', u100: '18.000' },
+        "pizza-grande": { u50: '7.000', u100: '13.900' },
+        "pizza-metro": { u50: 'none', u100: 'none' }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
@@ -27,14 +27,15 @@ document.addEventListener("DOMContentLoaded", function () {
             if (data) {
                 const { u50, u100 } = data;
 
-                const isStock = !(u50.toLowerCase().includes("no está") || u100.toLowerCase().includes("no está"));
+                const mostrar50 = u50 !== "none" && u50 !== "";
+                const mostrar100 = u100 !== "none" && u100 !== "";
 
-                if (isStock) {
-                    precio50.textContent = `$${u50}`;
-                    precio50Moneda.textContent = "ARS";
+                if (mostrar50 || mostrar100) {
+                    precio50.textContent = mostrar50 ? `$${u50}` : "";
+                    precio50Moneda.textContent = mostrar50 ? "ARS" : "";
 
-                    precio100.textContent = `$${u100}`;
-                    precio100Moneda.textContent = "ARS";
+                    precio100.textContent = mostrar100 ? `$${u100}` : "";
+                    precio100Moneda.textContent = mostrar100 ? "ARS" : "";
 
                     sinStock.style.display = "none";
                     precioBox.style.display = "block";
