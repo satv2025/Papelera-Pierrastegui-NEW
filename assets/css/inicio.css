@@ -730,16 +730,9 @@ footer {
   border-top-right-radius: 0.3em;
 }
 
-.sin-stockz {
-  left: 9em;
-}
-
 @media (width: 671px) and (height: 768px) {
   .productos {
     grid-template-columns: repeat(1, 1fr);
     width: 18em;
-  }
-  .sin-stockz {
-    left: 10em !important;
   }
 }
