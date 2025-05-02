@@ -7,6 +7,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/dropfolex.css">
 </head>
 <body>
     <header>
@@ -24,13 +25,11 @@
         <section id="producto-detalle">
             <h2>Guantes de Nitrilo Negro</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/guantes-nitrilo-m-l.jpg" alt="Guantes de Nitrilo Negro Talle M y L">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_764586-MLU72636722033_112023-F.webp" alt="Guantes de Nitrilo Negro Talle M y L">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
                     <p>Guantes de nitrilo negro, de alta resistencia y comodidad, disponibles en dos talles: M y L. Ideales para diversas aplicaciones y protección.</p>
-
-                    <p class="precio">$Consultar</p>
-
+    
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar Talle</button>
                         <ul class="dropdown-menu">
@@ -38,12 +37,26 @@
                             <li data-talle="L">Talle L</li>
                         </ul>
                     </div>
-                    
+    
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por caja:
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Precio por 10 cajas:
+                            <span id="precio-10"></span>
+                            <span id="precio-10-moneda"></span>
+                        </p>
+                    </div>
+    
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
@@ -51,5 +64,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-guantes.js"></script>
 </body>
 </html>

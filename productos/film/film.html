@@ -7,6 +7,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/dropfilm.css">
 </head>
 <body>
     <header>
@@ -24,7 +25,7 @@
         <section id="producto-detalle">
             <h2>Film</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/film.jpg" alt="Film">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/D_NQ_NP_2X_724993-MLA74413303619_022024-F.webp" alt="Film">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
                     <p>Film estirable de alta calidad para embalaje y protección de productos.</p>
@@ -32,12 +33,24 @@
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="38x700">Film 38x700</li>
-                            <li data-size="45x700">Film 45x700</li>
+                            <li data-size="5mts">5mts</li>
+                            <li data-size="38x300">38x300</li>
+                            <li data-size="38x500">38x500</li>
+                            <li data-size="45x500">45x500</li>
+                            <li data-size="38x700">38x700</li>
+                            <li data-size="45x700">45x700</li>
                         </ul>
                     </div>
-
-                    <p class="precio">$Consultar</p>
+    
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por unidad:
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                    </div>
+    
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -50,5 +63,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-film.js"></script>
 </body>
 </html>

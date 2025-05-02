@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Film Económico</title>
+    <title>Papelera Pierrastegui - Strech Negro</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/dropstretch.css">
 </head>
 <body>
     <header>
@@ -22,22 +23,33 @@
     
     <main>
         <section id="producto-detalle">
-            <h2>Film Económico</h2>
+            <h2>Stretch</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/film-economico.jpg" alt="Film Económico">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/strech%20con%20manija.jpg" alt="Strech">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>Film económico ideal para embalajes ligeros.</p>
+                    <p>Film strech negro de alta resistencia para embalajes y seguridad.</p>
 
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
+                        <button class="dropdown-btn">Seleccionar Tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="38x300">Film Económico 38x300 repuesto</li>
-                            <li data-size="45x300">Film Económico 45x300 repuesto</li>
+                            <li data-size="virgen10cm">Virgen 10cm</li>
+                            <li data-size="virgenmango">Virgen Con Mango</li>
+                            <li data-size="negromango">Negro Con Mango</li>
+                            <li data-size="virgenmanual">Virgen Manual</li>
                         </ul>
                     </div>
 
-                    <p class="precio">$Consultar</p>
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por unidad: 
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                    </div>
+    
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -50,5 +62,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-stretch.js"></script>
 </body>
 </html>
