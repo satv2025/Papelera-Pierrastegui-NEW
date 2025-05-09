@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const btn = document.querySelector(".dropdown-btn");
 
     const precioBox = document.getElementById("uni");
+    const precioTexto = document.querySelector("#uni .precio");
+
     const precioUnidad = document.getElementById("precio-unidad");
     const precioUnidadMoneda = document.getElementById("precio-unidad-moneda");
 
@@ -19,11 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const precio = precios[color];
 
             if (precio) {
-                precioUnidad.textContent = `$${precio}`;
-                precioUnidadMoneda.textContent = "ARS";
+                precioTexto.innerHTML = `
+                    Precio por unidad: 
+                    <span id="precio-unidad">$${precio}</span>
+                    <span id="precio-unidad-moneda">ARS</span>
+                `;
             } else {
-                precioUnidad.textContent = "Sin stock";
-                precioUnidadMoneda.textContent = "";
+                precioTexto.innerHTML = `<span class="sin-stock">Sin stock</span>`;
             }
 
             precioBox.style.display = "block";
