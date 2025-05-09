@@ -61,7 +61,7 @@ const productos = [
 
     // Libreria
     { nombre: 'Abrochadoras', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/LIBRERÍA/abrochadora.jpg', ruta: 'productos\\libreria\\abrochadoras.html', categoria: 'Libreria', boton: 'Ver Producto', stockHtml: '<span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>' },
-    { nombre: 'Biromes', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_852617-MLU76859900259_062024-C.jpg', ruta: 'productos\\libreria\\biromes.html', categoria: 'Libreria', boton: 'Ver Producto' },
+    { nombre: 'Biromes', descripcion: '', precioARS: 0, imagen: '<img class="imgbiromes">https://http2.mlstatic.com/D_852617-MLU76859900259_062024-C.jpg>', ruta: 'productos\\libreria\\biromes.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Cuadernos Universitarios', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\libreria\\cuadernosuniv.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Estallidos', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/LIBRERÍA/estallidos.jpg', ruta: 'productos\\libreria\\estallidos.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Fibrones', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\libreria\\fibrones.html', categoria: 'Libreria', boton: 'Ver Producto' },

@@ -736,3 +736,8 @@ footer {
     width: 18em;
   }
 }
+
+.imgbriomes {
+  object-fit: contain;
+  background: #fff;
+}
