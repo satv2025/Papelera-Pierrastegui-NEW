@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "azul": "70",
-        "negra": "70",
-        "roja": "70"
+        "azul": "700",
+        "negra": "700",
+        "roja": "700"
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
