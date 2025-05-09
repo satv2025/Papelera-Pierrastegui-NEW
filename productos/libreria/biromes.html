@@ -31,14 +31,26 @@
 
                     <p class="precio">$Consultar</p>
 
-                    <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar color</button>
-                        <ul class="dropdown-menu">
-                            <li data-color="azul">Azul</li>
-                            <li data-color="negra">Negra</li>
-                            <li data-color="roja">Roja</li>
-                        </ul>
-                    </div>
+<div class="dropdown">
+    <button class="dropdown-btn">Seleccionar color</button>
+    <ul class="dropdown-menu">
+        <li data-color="azul">Azul</li>
+        <li data-color="negra">Negra</li>
+        <li data-color="roja">Roja</li>
+    </ul>
+</div>
+
+<div id="uni" style="display: none;">
+    <p class="precio">
+        Precio por unidad:
+        <span id="precio-unidad"></span>
+        <span id="precio-unidad-moneda"></span>
+    </p>
+</div>
+
+<div id="sin-stock" style="display: none;">
+    <p>Sin stock</p>
+</div>
                     
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
