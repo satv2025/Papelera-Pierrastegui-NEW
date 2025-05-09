@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <span id="precio-unidad-moneda">ARS</span>
                 `;
             } else {
-                precioTexto.innerHTML = `<span class="sin-stock">Sin stock</span>`;
+                precioTexto.innerHTML = `<span class="sin-stock">Sin Stock</span>`;
             }
 
             precioBox.style.display = "block";
