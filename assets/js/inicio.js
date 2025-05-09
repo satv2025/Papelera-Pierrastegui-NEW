@@ -60,7 +60,7 @@ const productos = [
     { nombre: 'Guante polietileno', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/GUANTES/D_NQ_NP_2X_829059-MLA80203053115_102024-F.webp', ruta: 'productos\\guantes\\polietileno.html', categoria: 'Guantes', boton: 'Ver Producto' },
 
     // Libreria
-    { nombre: 'Abrochadoras', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/LIBRERÍA/abrochadora.jpg', ruta: 'productos\\libreria\\abrochadoras.html', categoria: 'Libreria', boton: 'Ver Producto' },
+    { nombre: 'Abrochadoras', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/LIBRERÍA/abrochadora.jpg', ruta: 'productos\\libreria\\abrochadoras.html', categoria: 'Libreria', boton: 'Ver Producto', stockHtml: '<span class="sin-stock" id="sin-stock-ab">SIN STOCK</span>' },
     { nombre: 'Biromes', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\libreria\\biromes.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Cuadernos Universitarios', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\libreria\\cuadernosuniv.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Estallidos', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/LIBRERÍA/estallidos.jpg', ruta: 'productos\\libreria\\estallidos.html', categoria: 'Libreria', boton: 'Ver Producto' },
