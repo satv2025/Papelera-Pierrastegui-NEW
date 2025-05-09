@@ -1,15 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "cnegra": "850",
-        "rnegra": null // Sin stock
+        "cnegra": "850",     // Punta Chata Negra
+        "rnegra": null       // Punta Redonda Negra = Sin stock
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
     const btn = document.querySelector(".dropdown-btn");
 
     const precioBox = document.getElementById("uni");
-    const sinStock = document.getElementById("sin-stock");
-
     const precioUnidad = document.getElementById("precio-unidad");
     const precioUnidadMoneda = document.getElementById("precio-unidad-moneda");
 
@@ -23,13 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
             if (precio) {
                 precioUnidad.textContent = `$${precio}`;
                 precioUnidadMoneda.textContent = "ARS";
-
-                sinStock.style.display = "none";
-                precioBox.style.display = "block";
             } else {
-                precioBox.style.display = "none";
-                sinStock.style.display = "block";
+                precioUnidad.textContent = "Sin stock";
+                precioUnidadMoneda.textContent = "";
             }
+
+            precioBox.style.display = "block";
         });
     });
 });
