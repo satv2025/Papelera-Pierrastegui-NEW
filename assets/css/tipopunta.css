@@ -1,3 +1,8 @@
 .tipopunta {
-    position:;
+    font-size: 15px;
+}
+
+.colorr {
+    position: absolute !important;
+    left: 1.4em;
 }
