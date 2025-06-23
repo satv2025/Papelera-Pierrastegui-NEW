@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = precios[medida];
 
             if (data) {
-                precioUnidad.textContent = `$${data.unidad}`;
+                precioUnidad.textContent = `Por Unidad: $${data.unidad}`;
                 precioUnidadMoneda.textContent = "ARS";
 
                 sinStock.style.display = "none";
