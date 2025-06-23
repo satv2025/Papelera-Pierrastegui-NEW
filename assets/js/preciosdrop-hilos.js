@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Precios definidos para cada tipo de hilo
     const precios = {
-        "amarillo-chico": { unidad: 500, pack10: 4000 },
-        "amarillo-grande": { unidad: 2500, pack10: 20000 },
-        "blanco-chico": { unidad: 400, pack10: 3000 },
-        "blanco-grande": { unidad: 1800, pack10: 15000 }
+        "amarillo-chico": { unidad: 500, pack10: 4.000 },
+        "amarillo-grande": { unidad: 2.500, pack10: 20.000 },
+        "blanco-chico": { unidad: 400, pack10: 3.000 },
+        "blanco-grande": { unidad: 1.800, pack10: 15.000 }
     };
 
     dropdownBtn.addEventListener("click", function () {
