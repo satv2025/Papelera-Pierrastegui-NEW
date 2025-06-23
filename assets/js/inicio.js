@@ -104,8 +104,8 @@ const productos = [
     { nombre: 'Sorbetes Papel', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/images.jfif', ruta: 'productos\\sorbetes\\papel', categoria: 'Sorbetes', stockHtml: '<span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>' },
 
     // Vasos
-    { nombre: 'Vasos Plástico', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/VASOS/D_841199-MLA52688134406_122022-O.jpg', ruta: 'productos\\vasos\\plastico', categoria: 'Vasos', boton: 'Ver Producto', tamanos: ["220ml", "330ml", "500ml", "1000ml"]},
-    { nombre: 'Vasos Telgopor', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/VASOS/vaso-termico-180-cc-50-unidades1-effa370a04aa41b56b15571658086178-480-0.jpg', ruta: 'productos\\vasos\\telgopor', categoria: 'Vasos', boton: 'Ver Producto', tamanos: ["120ml", "180ml", "240ml"]},
+    { nombre: 'Vasos De Plástico', descripcion: '', precioARS: 0, imagen: 'https://acdn-us.mitiendanube.com/stores/002/197/755/products/vasos-traslucidos1-d02ce594321e32bf8f16570270582440-640-0.jpeg', ruta: 'productos\\vasos\\plastico', categoria: 'Vasos', boton: 'Ver Producto', tamanos: ["220ml", "330ml", "500ml", "1000ml"]},
+    { nombre: 'Vasos De Telgopor', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/VASOS/vaso-termico-180-cc-50-unidades1-effa370a04aa41b56b15571658086178-480-0.jpg', ruta: 'productos\\vasos\\telgopor', categoria: 'Vasos', boton: 'Ver Producto', tamanos: ["120ml", "180ml", "240ml"]},
 ];
 
 // -----------------------------
