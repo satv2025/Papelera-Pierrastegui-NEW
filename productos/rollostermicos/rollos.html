@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Papelera Pierrastegui - Rollos Térmicos</title>
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/css/productos.css" />
+    <link rel="stylesheet" href="../../assets/css/dropdown.css" />
 </head>
 <body>
     <header>
@@ -19,27 +19,32 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
             <h2>Rollos Térmicos</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/rollos-termicos.jpg" alt="Rollos Térmicos">
+                <img src="../../assets/images/rollos-termicos.jpg" alt="Rollos Térmicos" />
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>Rollos térmicos de alta calidad para diversas aplicaciones, como cajas registradoras, impresoras de tickets, entre otras.</p>
+                    <p>Rollos térmicos para impresoras y registradoras en distintos tamaños. Venta por paquete.</p>
 
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
-                        <ul class="dropdown-menu">
-                            <li data-size="57x20">57x20</li>
-                            <li data-size="57x30">57x30</li>
-                            <li data-size="80x30">80x30</li>
-                            <li data-size="44x50">44x50</li>
+                        <button class="dropdown-btn">Seleccionar Medida</button>
+                        <ul class="dropdown-menu" style="height: 5.5em;">
+                            <li data-medida="44x50">44x50</li>
+                            <li data-medida="57x20">57x20</li>
+                            <li data-medida="57x30">57x30</li>
+                            <li data-medida="80x30">80x30</li>
                         </ul>
                     </div>
 
-                    <p class="precio">$Consultar</p>
+                    <div id="uni" style="display:none;">
+                        <p class="precio">Por paquete: <span id="precio-unidad"></span> <span id="precio-unidad-moneda"></span></p>
+                    </div>
+
+                    <p id="sin-stock" class="precio" style="display:none; font-weight:700;">SIN STOCK</p>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -52,5 +57,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-rollostermicos.js"></script>
 </body>
 </html>
