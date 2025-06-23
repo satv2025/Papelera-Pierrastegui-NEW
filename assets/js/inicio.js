@@ -133,17 +133,16 @@ function renderizarProductos(listaProductos) {
 
         const stockHtml = producto.stockHtml || ''; // solo si existe
 
-        const productoHTML = `
-            <div class="producto">
-                <div class="imagen-container">
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
-                    ${stockHtml}
-                </div>
-                <h3>${producto.nombre}${producto.medida ? ` <span class="md">${producto.medida}</span>` : ''}</h3>
-                <a href="${producto.ruta}" class="btn-ver-producto">${producto.boton}</a>
-            </div>
-        `;
-
+const productoHTML = `
+    <div class="producto">
+        <div class="imagen-container">
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            ${stockHtml}
+        </div>
+        <h3>${producto.nombre}${producto.medida ? ` <span class="md">${producto.medida}</span>` : ''}</h3>
+        ${producto.boton ? `<a href="${producto.ruta}" class="btn-ver-producto">${producto.boton}</a>` : ''}
+    </div>
+`;
         contenedor.innerHTML += productoHTML;
 
         if ((index + 1) % 5 === 0) {
