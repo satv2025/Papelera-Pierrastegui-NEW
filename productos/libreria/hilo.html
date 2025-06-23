@@ -3,31 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Papel Aluminio 1kg</title>
+    <title>Papelera Pierrastegui - Hilos</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
+    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="stylesheet" href="../../assets/css/carton_corrugado.css">
 </head>
 <body>
     <header>
         <h1>Papelera Pierrastegui</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../catalogo.html">Catálogo</a></li>
-                <li><a href="../contacto.html">Contacto</a></li>
+                <li><a href="../../index">Inicio</a></li>
+                <li><a href="../../catalogo">Catálogo</a></li>
+                <li><a href="../../contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
     
     <main>
         <section id="producto-detalle">
-            <h2>Papel Aluminio 1kg</h2>
+            <h2>Hilos</h2>
             <div class="producto-detalle">
-                <img src="../assets/images/papel-aluminio-1kg.jpg" alt="Papel Aluminio 1kg">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/HILOS/hilo-ejemplo.jpg" alt="Hilos de algodón y choricero">
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>Este es el mejor papel aluminio para todo tipo de necesidades. Perfecto para la cocina, conservación de alimentos y más.</p>
-                    <p class="precio">$350.00</p>
+                    <p>Hilos resistentes de algodón blanco y choricero amarillo, ideales para embalaje, atado y otros usos industriales o domésticos.</p>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Seleccionar tipo y tamaño</button>
+                        <ul class="dropdown-menu">
+                            <li data-size="amarillo-chico">Amarillo Chico</li>
+                            <li data-size="amarillo-grande">Amarillo Grande</li>
+                            <li data-size="blanco-chico">Blanco Chico</li>
+                            <li data-size="blanco-grande">Blanco Grande</li>
+                        </ul>
+                    </div>
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Precio por unidad: 
+                            <span id="precio-unidad"></span>
+                            <span id="precio-unidad-moneda"></span>
+                        </p>
+                    </div>                    
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -39,6 +57,7 @@
         <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </footer>
 
-    <script src="../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-hilos.js"></script>
 </body>
 </html>
