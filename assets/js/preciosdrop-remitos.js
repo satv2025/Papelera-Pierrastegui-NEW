@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (precio) {
                 precioTexto.innerHTML = `
-                    Precio por unidad: 
+                    Por Unidad: 
                     <span id="precio-unidad">$${precio}</span>
                     <span id="precio-unidad-moneda">ARS</span>
                 `;
