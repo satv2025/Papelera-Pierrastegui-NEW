@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Vasos Plásticos</title>
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vasos Plásticos - Papelera Pierrastegui</title>
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/css/productos.css" />
+    <link rel="stylesheet" href="../../assets/css/dropdown.css" />
 </head>
 <body>
     <header>
@@ -19,19 +19,19 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
             <h2>Vasos Plásticos</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/vasos-plasticos.jpg" alt="Vasos Plásticos">
+                <img src="../../assets/images/vasos-plasticos.jpg" alt="Vasos Plásticos" />
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>Vasos plásticos de diversas capacidades, ideales para bebidas frías y calientes.</p>
+                    <p>Vasos plásticos de diferentes tamaños, ideales para todo tipo de bebidas.</p>
 
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="height: 7em;">
                             <li data-size="220ml">220ml</li>
                             <li data-size="330ml">330ml</li>
                             <li data-size="500ml">500ml</li>
@@ -39,7 +39,13 @@
                         </ul>
                     </div>
 
-                    <p class="precio">$Consultar</p>
+                    <div id="precios" style="display:none;">
+                        <p class="precio">Por 50 unidades: <span id="precio-50"></span> ARS</p>
+                        <p class="precio">Por 100 unidades: <span id="precio-100"></span> ARS</p>
+                    </div>
+
+                    <p id="sin-stock" class="precio" style="display:none; font-weight:700;">SIN STOCK</p>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -52,5 +58,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-vasosplasticos.js"></script>
 </body>
 </html>

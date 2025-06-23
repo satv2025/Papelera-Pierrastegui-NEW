@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Vasos Telgopor</title>
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vasos de Telgopor - Papelera Pierrastegui</title>
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/css/productos.css" />
+    <link rel="stylesheet" href="../../assets/css/dropdown.css" />
 </head>
 <body>
     <header>
@@ -19,26 +19,33 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
-            <h2>Vasos Telgopor</h2>
+            <h2>Vasos de Telgopor</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/vasos-telgopor.jpg" alt="Vasos Telgopor">
+                <img src="../../assets/images/vasos-telgopor.jpg" alt="Vasos de Telgopor" />
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>Vasos de telgopor de alta resistencia para mantener tus bebidas frías o calientes por más tiempo.</p>
+                    <p>Vasos de telgopor disponibles en distintos tamaños y cantidades.</p>
 
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu" style="height: 6em;">
                             <li data-size="120ml">120ml</li>
                             <li data-size="180ml">180ml</li>
                             <li data-size="240ml">240ml</li>
                         </ul>
                     </div>
 
-                    <p class="precio">$Consultar</p>
+                    <div id="precios" style="display:none;">
+                        <p class="precio">Por 25 unidades: <span id="precio-25"></span> ARS</p>
+                        <p class="precio">Por 50 unidades: <span id="precio-50"></span> ARS</p>
+                        <p class="precio">Por 100 unidades: <span id="precio-100"></span> ARS</p>
+                    </div>
+
+                    <p id="sin-stock" class="precio" style="display:none; font-weight:700;">SIN STOCK</p>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -51,5 +58,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-vasostelgopor.js"></script>
 </body>
 </html>
