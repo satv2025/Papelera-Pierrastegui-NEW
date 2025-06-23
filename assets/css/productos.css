@@ -142,11 +142,13 @@ footer {
     position: relative;
     bottom: -43.84em;
     font-weight: 700;
+    height: 2.7em;
 }
 
 footer p {
-    margin: 0.5em 0;
+    margin: 0.7em 0;
     line-height: 0.6em;
+    font-size: 22px;
 }
 
 /* Media Queries */
