@@ -442,7 +442,7 @@ nav ul li a {
 
 .producto h3 {
     margin-top: 0.4em;
-text-transform: lowercase; /* todo en minÃºsculas */
+    text-transform: capitalize; /* todo en minÃºsculas */
 }
 
 .producto h3::first-letter {
@@ -492,59 +492,6 @@ text-transform: lowercase; /* todo en minÃºsculas */
 }
 
 /* ================================
-   DROPDOWN (Medidas)
-================================ */
-.droptmn {
-  position: relative;
-  display: inline-block;
-}
-.droptmn-menu {
-  display: none;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  z-index: 1000;
-  min-width: 6.4em;
-  padding: 10px 0;
-  border-radius: 5px;
-  border: 2px solid #356e5e;
-  max-height: 200px;
-  overflow-y: auto;
-  margin-top: 0.2em;
-}
-.droptmn-menu li {
-  padding: 8px 16px;
-  cursor: pointer;
-  font-weight: 700;
-}
-.droptmn-menu li:hover {
-  background-color: #356e5e;
-  color: #fff;
-}
-.droptmn-btn {
-  padding: 10px 20px;
-  background-color: #fff;
-  color: #356e5e;
-  border: 2px solid #356e5e;
-  border-radius: 0.3em;
-  cursor: pointer;
-  font-family: 'Gilroy', sans-serif;
-  font-weight: 700;
-  font-size: 18px;
-  width: 5.9em;
-  height: 2.5em;
-}
-.textomed {
-  position: absolute;
-  left: 0.98em;
-  top: 0.6em;
-}
-.droptmn-btn:hover {
-  background-color: #356e5e;
-  color: #fff;
-}
-
-/* ================================
    FOOTER
 ================================ */
 footer {
@@ -587,133 +534,6 @@ footer {
   padding-bottom: 1em;
 }
 
-/* ================================
-   MEDIA QUERIES (MOBILE-FIRST)
-================================ */
-
-/* Por defecto (mÃ³viles): 2 productos por lÃ­nea */
-
-/* Tabletas y pantallas medianas (768px - 1079px): 3 columnas */
-@media (min-width: 768px) and (max-width: 1079px) {
-  .productos {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (width: 1366px) and (height: 768px) {
-  .producto img {
-    width: 112.5%;
-    margin: -1em 0 1em -1em;
-    height: 11em;
-    border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
-    object-fit: cover;
-    cursor: pointer;
-  }
-}
-/* Notebooks y pantallas grandes (1080px o mÃ¡s): 6 columnas */
-@media (min-width: 1080px) {
-  .productos {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  header h1 {
-    font-size: 3em;
-  }
-  .logreg, #auth-buttons {
-    margin-top: -4em;
-  }
-}
-
-/* Estilos del dropdown de medidas */
-.droptmn {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.textomed {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #fff;
-    border: 1px solid #356e5e;
-    border-radius: 0.3em;
-    cursor: pointer;
-    margin-left: -6.1em;
-    margin-top: -1.4em;!;!e;!;
-    font-weight: 700;
-    width: 8.6em;
-}
-
-.textomed:hover {
-    color: #fff;
-    background: #356e5e;
-}
-
-.droptmn-menu {
-    display: none;
-    position: absolute;
-    top: 2em;
-    left: 0;
-    background: white;
-    border: 1px solid #356e5e;
-    border-radius: 0.3em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    list-style: none;
-    padding: 5px 0;
-    margin: 0;
-    min-width: 10em;
-    z-index: 10;
-    margin-left: -5.13em;
-}
-
-.droptmn-menu li {
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-.droptmn-menu li:hover {
-}
-
-/* Clase para mostrar el menÃº */
-.droptmn-menu.droptmn-show {
-    display: block;
-}
-
-.droptmn-menu::-webkit-scrollbar {
-  width: 0px;
-}
-.droptmn-menu::-webkit-scrollbar-track {
-  background: transparent;
-}
-.droptmn-menu::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 0.5em;
-  padding-bottom: 1em;
-}
-
-footer {
-  font-weight: 700;
-}
-
-@media (width: 1366px) {
-  .productos {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .producto img {
-    width: 118%;
-  }
-
-  nav.category-menu {
-    margin-left: -18em;
-  }
-
-  #catalogo {
-    margin-left: -4em;
-  }
-}
-
 #sin-stock-bh {
   color: #fff;
   background: #f00;
@@ -728,13 +548,6 @@ footer {
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
   margin-top: -2.9em;
-}
-
-@media (width: 671px) and (height: 768px) {
-  .productos {
-    grid-template-columns: repeat(1, 1fr);
-    width: 18em;
-  }
 }
 
 .imgbriomes {
