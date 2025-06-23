@@ -19,22 +19,32 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
             <h2>Papel Manteca</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/papel-manteca.jpg" alt="Papel Manteca">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/papel-manteca.webp" alt="Papel Manteca">
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Papel manteca ideal para envolver alimentos, resistente a la grasa y de fácil manipulación.</p>
+
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
+                        <button class="dropdown-btn">Seleccionar Presentación</button>
                         <ul class="dropdown-menu">
-                            <li data-size="1kg">Papel Manteca 1kg</li>
-                            <li data-size="chico">Papel Manteca Chico</li>
+                            <li data-medida="chico">Chico</li>
+                            <li data-medida="kg">1KG</li>
                         </ul>
                     </div>
-                    <p class="precio">$120.00</p>
+
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            <span id="precio-unidad"></span> <span id="precio-unidad-moneda"></span>
+                        </p>
+                    </div>
+
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;"></p>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -43,9 +53,9 @@
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
-        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-manteca.js"></script>
 </body>
 </html>
