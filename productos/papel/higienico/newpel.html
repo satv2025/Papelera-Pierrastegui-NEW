@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Papel Higiénico New Pel - Papelera Pierrastegui</title>
+    <link rel="stylesheet" href="../../../assets/css/productos.css" />
+    <link rel="stylesheet" href="../../../assets/css/dropdown.css" />
+</head>
+<body>
+    <header>
+        <h1>Papelera Pierrastegui</h1>
+        <nav>
+            <ul>
+                <li><a href="../../../index.html">Inicio</a></li>
+                <li><a href="../../../catalogo.html">Catálogo</a></li>
+                <li><a href="../../../contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="producto-detalle">
+            <h2>Papel Higiénico New Pel</h2>
+            <div class="producto-detalle">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_747603-MLA80019915704_102024-O.webp" alt="Papel Higiénico New Pel" />
+                <div class="producto-info">
+                    <h3>Descripción del Producto</h3>
+                    <p>Papel higiénico New Pel disponible en dos tipos: Premium triple hoja y Económico.</p>
+
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Seleccionar Tipo</button>
+                        <ul class="dropdown-menu" style="height: 5.5em;">
+                            <li data-tipo="premium">Premium triple hoja</li>
+                            <li data-tipo="economico">Económico</li>
+                        </ul>
+                    </div>
+
+                    <div id="uni" style="display:none;">
+                        <p class="precio">Por unidad: <span id="precio-unidad"></span> <span id="precio-unidad-moneda"></span></p>
+                        <p class="precio">Por bulto: <span id="precio-bulto"></span> <span id="precio-bulto-moneda"></span></p>
+                    </div>
+
+                    <p id="sin-stock" class="precio" style="display:none; font-weight:700;">SIN STOCK</p>
+
+                    <button class="agregar-carrito">Agregar al carrito</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>2025 © Papelera Pierrastegui</p>
+        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+    </footer>
+
+    <script src="../../../assets/js/preciosdrop-higienico-newpel.js"></script>
+</body>
+</html>
