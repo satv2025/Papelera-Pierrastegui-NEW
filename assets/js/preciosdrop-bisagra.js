@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (data) {
                 preciosContainer.innerHTML = `
-                    <p class="precio">${data.descripcion}</p>
                     <p class="precio">Por 50 unidades: ${data.por50}</p>
                     <p class="precio">Por 100 unidades: ${data.por100}</p>
                 `;
