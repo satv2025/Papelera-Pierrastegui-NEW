@@ -442,7 +442,7 @@ nav ul li a {
 
 .producto h3 {
     margin-top: 0.4em;
-    text-transform: capitalize; /* todo en minÃºsculas */
+text-transform: capitalize; /* todo en minÃºsculas */
 }
 
 .producto h3::first-letter {
