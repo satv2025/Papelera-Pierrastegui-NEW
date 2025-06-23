@@ -96,7 +96,7 @@ const productos = [
     { nombre: 'Pote Ensalada de fruta', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/POTES/D_NQ_NP_2X_957775-MLA70448724893_072023-F.webp', ruta: 'productos\\potes\\ensaladafruta', categoria: 'Potes', boton: 'Ver Producto' },
 
     // Rollos térmicos
-    { nombre: 'Rollo térmico', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ROLLOS%20TÉRMICOS/rollo%20termico.jpeg', ruta: 'productos\\rollostermicos\\rollos', categoria: 'RollosTermicos', boton: 'Ver Producto', tamanos: ["44x50", "57x20", "57x30", "80x30"]},
+    { nombre: 'Rollo Térmicos', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ROLLOS%20TÉRMICOS/rollo%20termico.jpeg', ruta: 'productos\\rollostermicos\\rollos', categoria: 'RollosTermicos', boton: 'Ver Producto', tamanos: ["44x50", "57x20", "57x30", "80x30"]},
 
     // Sorbetes
     { nombre: 'Sorbetes Común', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/D_NQ_NP_844300-MLA80844285453_112024-O.webp', ruta: 'productos\\sorbetes\\comun', categoria: 'Sorbetes', boton: 'Ver Producto' },
