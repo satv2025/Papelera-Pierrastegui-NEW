@@ -64,6 +64,11 @@ nav ul li a {
     height: 25.5em;
 }
 
+div#precios {
+    margin-top: 1.6em;
+    margin-bottom: -2em;
+}
+
 #precios-container {
     margin-top: 1.5em;
     margin-bottom: -2.1em;
