@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "chico": "1300",
-        "grande": "2000"
+        "chico": "1.300",
+        "grande": "2.000"
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
