@@ -142,7 +142,7 @@ footer {
     position: relative;
     bottom: -43.84em;
     font-weight: 700;
-    height: 2.7em;
+    height: auto;
 }
 
 footer p {
