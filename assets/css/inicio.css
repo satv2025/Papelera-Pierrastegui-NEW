@@ -534,6 +534,83 @@ footer {
   padding-bottom: 1em;
 }
 
+/* Estilos del dropdown de medidas */
+.droptmn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.textomed {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #fff;
+    border: 1px solid #356e5e;
+    border-radius: 0.3em;
+    cursor: pointer;
+    margin-left: -6.1em;
+    margin-top: -1.4em;!;!e;!;
+    font-weight: 700;
+    width: 8.6em;
+}
+
+.textomed:hover {
+    color: #fff;
+    background: #356e5e;
+}
+
+.droptmn-menu {
+    display: none;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    background: white;
+    border: 1px solid #356e5e;
+    border-radius: 0.3em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    min-width: 10em;
+    z-index: 10;
+    margin-left: -5.13em;
+}
+
+.droptmn-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.droptmn-menu li:hover {
+}
+
+/* Clase para mostrar el menÃº */
+.droptmn-menu.droptmn-show {
+    display: block;
+}
+
+.droptmn-menu::-webkit-scrollbar {
+  width: 0px;
+}
+.droptmn-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+.droptmn-menu::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 0.5em;
+  padding-bottom: 1em;
+}
+
+footer {
+  font-weight: 700;
+}
+
+@media (width: 1366px) {
+  .productos {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
 #sin-stock-bh {
   color: #fff;
   background: #f00;
