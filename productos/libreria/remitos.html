@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Papelera Pierrastegui - Remitos</title>
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/css/productos.css" />
+    <link rel="stylesheet" href="../../assets/css/dropdown.css" />
 </head>
 <body>
     <header>
@@ -19,17 +19,18 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
             <h2>Remitos</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/remitos.jpg" alt="Remitos">
+                <img src="../../assets/images/remitos.jpg" alt="Remitos" />
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
                     <p>Remitos de alta calidad disponibles en tamaños chico y grande.</p>
 
-                    <p class="precio">$Consultar</p>
+                    <!-- Precio dinámico -->
+                    <p class="precio" id="precio-unidad">Por Unidad: $Consultar</p>
 
                     <div class="dropdown">
                         <button class="dropdown-btn">Seleccionar tamaño</button>
@@ -38,7 +39,7 @@
                             <li data-tamaño="grande">Grande</li>
                         </ul>
                     </div>
-                    
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -50,6 +51,7 @@
         <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </footer>
 
+    <script src="../../assets/js/dropdown.js"></script>
     <script src="../../assets/js/preciosdrop-remitos.js"></script>
 </body>
 </html>
