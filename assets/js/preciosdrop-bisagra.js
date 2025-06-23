@@ -1,17 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
         chico: {
-            descripcion: "CHICO (250cc)",
             por50: "$6.200",
             por100: "$12.000"
         },
         mediano: {
-            descripcion: "MEDIANO (350cc)",
             por50: "$6.500",
             por100: "$12.500"
         },
         grande: {
-            descripcion: "GRANDE (500cc)",
             por50: "$6.800",
             por100: "$13.000"
         }
