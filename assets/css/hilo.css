@@ -1,6 +1,7 @@
 .dropdown-menu {
     height: 11em;
     width: 108%;
+    overflow-x: hidden;
 }
 
 .dropdown-btn {
