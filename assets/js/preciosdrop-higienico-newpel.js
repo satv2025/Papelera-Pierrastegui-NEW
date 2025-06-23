@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        economico: { unidad: "450", bulto: "12.000" }
-        premium: { unidad: "1.500", bulto: "13.000" },
+        eco: { unidad: "450", bulto: "12.000" },
+        prem: { unidad: "1.500", bulto: "13.000" }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
