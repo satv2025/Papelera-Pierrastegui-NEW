@@ -1,22 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "premium": {
-            unidad: '1500',
-            bulto: '13000'
-        },
-        "economico": {
-            unidad: '450',
-            bulto: '12000'
-        }
+        economico: { unidad: "450", bulto: "12.000" }
+        premium: { unidad: "1.500", bulto: "13.000" },
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
     const btn = document.querySelector(".dropdown-btn");
 
+    const precioBox = document.getElementById("uni");
+    const sinStock = document.getElementById("sin-stock");
+
     const precioUnidad = document.getElementById("precio-unidad");
+    const precioUnidadMoneda = document.getElementById("precio-unidad-moneda");
+
     const precioBulto = document.getElementById("precio-bulto");
-    const precioUnidadText = document.getElementById("precio-unidad-text");
-    const precioBultoText = document.getElementById("precio-bulto-text");
+    const precioBultoMoneda = document.getElementById("precio-bulto-moneda");
 
     dropdownItems.forEach(item => {
         item.addEventListener("click", () => {
@@ -24,12 +22,21 @@ document.addEventListener("DOMContentLoaded", function () {
             btn.textContent = item.textContent;
 
             const data = precios[tipo];
-            if (data) {
-                precioUnidadText.textContent = "Por unidad:";
-                precioUnidad.textContent = `$${data.unidad} ARS`;
 
-                precioBultoText.textContent = "Por bulto:";
-                precioBulto.textContent = `$${data.bulto} ARS`;
+            if (data) {
+                const { unidad, bulto } = data;
+
+                precioUnidad.textContent = `$${unidad}`;
+                precioUnidadMoneda.textContent = "ARS";
+
+                precioBulto.textContent = `$${bulto}`;
+                precioBultoMoneda.textContent = "ARS";
+
+                sinStock.style.display = "none";
+                precioBox.style.display = "block";
+            } else {
+                precioBox.style.display = "none";
+                sinStock.style.display = "block";
             }
         });
     });
