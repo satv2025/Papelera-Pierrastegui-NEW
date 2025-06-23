@@ -161,29 +161,6 @@ footer p {
     font-size: 22px;
 }
 
-/* Media Queries */
-@media (max-width: 75em) {
-    #producto-detalle {
-        flex-direction: column;
-        margin-left: 4em;
-        width: 46em;
-    }
-}
-
-@media (max-width: 56.25em) {
-    #producto-detalle {
-        flex-direction: column;
-        width: 35em;
-        margin-left: 2em;!em;!e;!;
-    }
-}
-
-@media (max-width: 37.5em) {
-    #producto-detalle {
-        padding: 1em;
-    }
-}
-
 /* Scrollbar personalizada */
 ::-webkit-scrollbar {
     width: 5px;
@@ -254,3 +231,75 @@ footer p {
 #sin-stock {
     font-weight: 700;
 }
+
+/* Media Queries Mejorados para mejor responsividad */
+
+/* Pantallas grandes: hasta 1200px */
+@media (max-width: 75em) { /* 1200px */
+    #producto-detalle {
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        max-width: 600px;
+        position: static;
+        height: auto;
+        padding: 2em 1em;
+    }
+    
+    .producto-detalle img {
+        position: static;
+        margin: 0 auto 1.5em;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.1);
+    }
+    
+    .producto-info {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 0 1em;
+    }
+}
+
+/* Pantallas medianas: hasta 900px */
+@media (max-width: 56.25em) { /* 900px */
+    #producto-detalle {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5em 1em;
+        box-sizing: border-box;
+    }
+
+    .producto-info p {
+        font-size: 1.1em;
+    }
+    
+    .agregar-carrito {
+        width: 100%;
+        font-size: 1.1em;
+        padding: 0.7em;
+    }
+}
+
+/* Pantallas pequeñas: hasta 600px */
+@media (max-width: 37.5em) { /* 600px */
+    #producto-detalle {
+        padding: 1em;
+        width: 100%;
+        margin-left: 0;
+        border-radius: 0;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .producto-info h3 {
+        font-size: 1.3em;
+    }
+
+    .producto-info p {
+        font-size: 1em;
+        margin-top: -0.5em;
+    }
