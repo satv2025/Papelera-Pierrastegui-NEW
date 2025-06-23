@@ -30,7 +30,7 @@ const productos = [
 
     // Carton
     { nombre: 'Carton Corrugado', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CARTÓN%20CORRUGADO/carton%20corrugado.jpg', ruta: 'productos\\carton\\corrugado', categoria: 'Carton', boton: 'Ver Producto', tamanos: ["90x20", "100x20"]},
-    { nombre: 'Tiras de Cartón Satinadas', descripcion: '', precioARS: 0, imagen: 'https://www.flexipack.com.ar/Image/0/600_750-tiras_carton.jpg', ruta: 'productos\\carton\\tirascs', categoria: 'Carton', stockHtml: '<span class="sin-stock sin-stocktcs" id="sin-stock-bh">SIN STOCK</span>' },
+    { nombre: 'Tiras de Cartón Satinadas', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_NQ_NP_774089-MLA77001145185_062024-O.webp', ruta: 'productos\\carton\\tirascs', categoria: 'Carton', stockHtml: '<span class="sin-stock sin-stocktcs" id="sin-stock-bh">SIN STOCK</span>' },
 
     // Cintas
     { nombre: 'Cinta scotch', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20catálogo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg', ruta: 'productos\\cintas\\scotch', categoria: 'Cintas', boton: 'Ver Producto', tamanos: ["24x50", "48x100"]},
