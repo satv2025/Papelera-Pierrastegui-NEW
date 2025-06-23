@@ -51,7 +51,7 @@ header {
 }
 
 .headerbox a:hover {
-  color: #356e5e;
+  color: #02a22a;
 }
 
 /* ================================
@@ -76,7 +76,7 @@ header {
   padding: 0.5em 1em;
   margin: 0.2em;
   border: none;
-  background-color: #356e5e;
+  background-color: #02a22a;
   color: white;
   font-weight: bold;
   border-radius: 4px;
@@ -137,7 +137,7 @@ header {
 }
 
 .dropdown-menuc a:hover {
-  color: #356e5e;
+  color: #02a22a;
 }
 
 /* ================================
@@ -180,7 +180,7 @@ header {
 
 .user-dropdown a:hover,
 .user-dropdown button:hover {
-  color: #356e5e;
+  color: #02a22a;
 }
 
 /* ================================
@@ -202,7 +202,7 @@ header {
 .infomdp {
   margin-left: 1em;
   text-decoration: underline;
-  color: #356e5e;
+  color: #02a22a;
 }
 
 .infomdp:hover {

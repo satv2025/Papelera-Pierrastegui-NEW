@@ -14,12 +14,12 @@ body {
 
 ::selection {
     color: #fff;
-    background: #356e5e;
+    background: #02a22a;
 }
 
 header {
     background-color: #c5c0a5;
-    color: #356e5e;
+    color: #02a22a;
     padding: 1em;
     text-align: center;
     box-shadow: 0 0 0.4em 0 #00000073;
@@ -44,28 +44,28 @@ header {
     height: auto; /* Mantener la proporción de la imagen */
     cursor: pointer; /* Asegura que se vea como un ícono clickeable */
     margin-left: -3em;
-    color: #356e5e;
+    color: #02a22a;
     margin-top: 0.1em;!;!e;!em;!e;!;
 }
 
 
 p {
-    color: #356e5e;
+    color: #02a22a;
 }
 
 .form-container h2 {
-    color: #356e5e;
+    color: #02a22a;
     margin-bottom: 1.5em;
 }
 
 input {
     font-family: 'Gilroy';
-    color: #356e5e;
+    color: #02a22a;
     font-weight: 700;
 }
 
 input::placeholder {
-    color: #356e5e;
+    color: #02a22a;
 }
 
 input[type="email"], input[type="password"], input[type="text"] {
@@ -82,7 +82,7 @@ input::placeholder {}
 
 button {
     border: none;
-    background-color: #356e5e;
+    background-color: #02a22a;
     color: #fff;
     padding: 1em;
     border-radius: 5px;
@@ -102,7 +102,7 @@ footer {
     text-align: center;
     padding: 1em;
     background-color: #c5c0a5;
-    color: #356e5e;
+    color: #02a22a;
     margin-top: auto;
     box-shadow: 0 0 0.4em 0 #00000073;
     position: relative;
@@ -113,7 +113,7 @@ footer {
 /* Enlaces */
 a {
     text-decoration: none;
-    color: #356e5e;
+    color: #02a22a;
     font-weight: bold;
 }
 
@@ -140,7 +140,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: #356e5e;
+    background: #02a22a;
 }
 
 ::-webkit-scrollbar-thumb {

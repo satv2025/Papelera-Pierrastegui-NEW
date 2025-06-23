@@ -2,7 +2,7 @@
 
 ::selection {
     color: #fff;
-    background: #356e5e;
+    background: #02a22a;
 }
 
 body {
@@ -19,7 +19,7 @@ footer {
 
 header {
     background-color: #fff;
-    color: #356e5e;
+    color: #02a22a;
     padding: 1em;
     text-align: center;
     box-shadow: 0 0 0.4em 0 #00000073;
@@ -42,7 +42,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #356e5e;
+    color: #02a22a;
     text-decoration: none;
     padding: 0.5em 1em;
     display: block;
@@ -51,7 +51,7 @@ nav ul li a {
 
 #producto-detalle {
     padding: 2em;
-    color: #356e5e;
+    color: #02a22a;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -107,15 +107,15 @@ div#uni {
 .precio {
     font-weight: 700;
     font-size: 1.5em;
-    color: #356e5e;
+    color: #02a22a;
     margin-top: 2em;
 }
 
 .agregar-carrito {
-    border: 2px solid #356e5e;
+    border: 2px solid #02a22a;
     background-color: #fff;
     padding: 0.8em;
-    color: #356e5e;
+    color: #02a22a;
     font-weight: bold;
     cursor: pointer;
     border-radius: 5px;
@@ -127,7 +127,7 @@ div#uni {
 }
 
 .agregar-carrito:hover {
-    background-color: #356e5e;
+    background-color: #02a22a;
     color: #ddd;
 }
 
@@ -135,7 +135,7 @@ footer {
     text-align: center;
     padding: 1em;
     background-color: #fff;
-    color: #356e5e;
+    color: #02a22a;
     margin-top: 2em;
     line-height: 0;
     box-shadow: 0 0 0.4em 0 #00000073;
@@ -182,7 +182,7 @@ footer p {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #356e5e;
+    background: #02a22a;
     border-radius: 6px;
 }
 
@@ -219,8 +219,8 @@ footer p {
 
 .dropdown-btn {
     background-color: #fff;
-    color: #356e5e;
-    border: 2px solid #356e5e;
+    color: #02a22a;
+    border: 2px solid #02a22a;
     padding: 10px;
     width: 104%;
     text-align: center;
