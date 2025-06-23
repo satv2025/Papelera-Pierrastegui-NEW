@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Papel Cortado</title>
+    <title>Papelera Pierrastegui - Papel Sulfito Cortado</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
@@ -19,24 +19,37 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
-            <h2>Papel Cortado</h2>
+            <h2>Papel Sulfito Cortado</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/papel-cortado.jpg" alt="Papel Cortado">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/papel-cortado.webp" alt="Papel Sulfito Cortado">
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Papel sulfito cortado en distintas medidas. Ideal para embalaje, envoltorio y uso general.</p>
+
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
+                        <button class="dropdown-btn">Seleccionar Medida</button>
                         <ul class="dropdown-menu">
-                            <li data-size="35x45">Papel Cortado 35x45</li>
-                            <li data-size="40x50">Papel Cortado 40x50</li>
-                            <li data-size="50x70">Papel Cortado 50x70</li>
-                            <li data-size="60x90">Papel Cortado 60x90</li>
+                            <li data-medida="35x45">35x45</li>
+                            <li data-medida="40x50">40x50</li>
+                            <li data-medida="50x70">50x70</li>
+                            <li data-medida="60x90">60x90</li>
                         </ul>
                     </div>
-                    <p class="precio">$80.00</p>
+
+                    <div id="uni" style="display: none;">
+                        <p class="precio">
+                            Por 1KG: <span id="precio-unidad"></span> <span id="precio-unidad-moneda"></span>
+                        </p>
+                        <p class="precio">
+                            Por 20KG: <span id="precio-20"></span> <span id="precio-20-moneda"></span>
+                        </p>
+                    </div>
+
+                    <p id="sin-stock" class="precio" style="display: none; font-weight: 700;"></p>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -45,9 +58,9 @@
 
     <footer>
         <p>2025 © Papelera Pierrastegui</p>
-        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/precios-papel-cortado.js"></script>
 </body>
 </html>
