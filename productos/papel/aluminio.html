@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Papelera Pierrastegui - Papel Aluminio</title>
-    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../../assets/css/productos.css" />
+    <link rel="stylesheet" href="../../assets/css/dropdown.css" />
+    <link rel="stylesheet" href="../../assets/css/dropstretch.css" />
 </head>
 <body>
     <header>
@@ -19,22 +20,28 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="producto-detalle">
             <h2>Papel Aluminio</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/papel-aluminio.jpg" alt="Papel Aluminio">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20ALUMINIO/papel-aluminio.jpg" alt="Papel Aluminio" />
                 <div class="producto-info">
-                    <h3>Selecciona un modelo</h3>
+                    <h3>Descripción del Producto</h3>
+                    <p>Papel aluminio disponible en tamaño chico y presentación de 1kg.</p>
+
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
+                        <button class="dropdown-btn">Seleccionar Tamaño</button>
                         <ul class="dropdown-menu">
-                            <li data-size="1kg">Papel Aluminio 1kg</li>
-                            <li data-size="chico">Papel Aluminio Chico</li>
+                            <li data-tamaño="chico">Chico</li>
+                            <li data-tamaño="1kg">1kg</li>
                         </ul>
                     </div>
-                    <p class="precio">$150.00</p>
+
+                    <div id="uni" style="display: none;">
+                        <p class="precio"></p>
+                    </div>
+
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
@@ -47,5 +54,6 @@
     </footer>
 
     <script src="../../assets/js/dropdown.js"></script>
+    <script src="../../assets/js/preciosdrop-papelaluminio.js"></script>
 </body>
 </html>
