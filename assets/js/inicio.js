@@ -101,7 +101,7 @@ const productos = [
     // Sorbetes
     { nombre: 'Sorbetes Común', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/D_NQ_NP_844300-MLA80844285453_112024-O.webp', ruta: 'productos\\sorbetes\\comun', categoria: 'Sorbetes', boton: 'Ver Producto' },
     { nombre: 'Sorbetes Negro', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/sorbetes%20descartables%20negros.jpg', ruta: 'productos\\sorbetes\\negro', categoria: 'Sorbetes', boton: 'Ver Producto' },
-    { nombre: 'Sorbetes Papel', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/images.jfif', ruta: 'productos\\sorbetes\\papel', categoria: 'Sorbetes', boton: 'Ver Producto' },
+    { nombre: 'Sorbetes Papel', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/images.jfif', ruta: 'productos\\sorbetes\\papel', categoria: 'Sorbetes', boton: 'Ver Producto', stockHtml: '<span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>' },
 
     // Vasos
     { nombre: 'Vasos Plástico', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/VASOS/D_841199-MLA52688134406_122022-O.jpg', ruta: 'productos\\vasos\\plastico', categoria: 'Vasos', boton: 'Ver Producto', tamanos: ["220ml", "330ml", "500ml", "1000ml"]},
