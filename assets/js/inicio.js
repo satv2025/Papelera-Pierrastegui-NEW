@@ -73,8 +73,7 @@ const productos = [
     { nombre: 'Talonarios - Remitos', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_Q_NP_2X_774635-MLA48990735891_022022-T.webp', ruta: 'productos\\libreria\\remitos.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Resaltador', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\libreria\\resaltador.html', categoria: 'Libreria', boton: 'Ver Producto' },
     { nombre: 'Tacos De Papel', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/LIBRERÍA/tacos%20de%20papel.jpg', ruta: 'productos\\libreria\\tacospapel.html', categoria: 'Libreria', boton: 'Ver Producto' },
-    { nombre: 'Voligoma', descripcion: '', precioARS: 0, imagen: '', ruta: 'productos\\libreria\\voligoma.html', categoria: 'Libreria', boton: 'Ver Producto' },
-
+    { nombre: 'Voligoma', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_NQ_NP_793654-MLU73983277266_012024-O.webp', ruta: 'productos\\libreria\\voligoma.html', categoria: 'Libreria', boton: 'Ver Producto', stockHtml: '<span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>' },
     // Papel
     { nombre: 'Papel aluminio', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/ALUMINIO/aluminio%205%20mts.jpg', ruta: 'productos\\papel\\aluminio.html', categoria: 'Papel', boton: 'Ver Producto' },
     { nombre: 'Bobina De Papel', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/PAPEL%20SULFITO/bobina%20de%20papel.jpg', ruta: 'productos\\papel\\bobina.html', categoria: 'Papel', boton: 'Ver Producto', tamanos: ["35x45", "40cm", "60cm"]},
