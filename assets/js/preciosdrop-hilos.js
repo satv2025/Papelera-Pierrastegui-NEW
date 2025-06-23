@@ -10,18 +10,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Precios definidos para cada tipo de hilo
     const precios = {
-        "amarillo-chico": { unidad: 500, pack10: 4500 },
-        "amarillo-grande": { unidad: 800, pack10: 7500 },
-        "blanco-chico": { unidad: 550, pack10: 5000 },
-        "blanco-grande": { unidad: 850, pack10: 8000 }
+        "amarillo-chico": { unidad: 500, pack10: 4000 },
+        "amarillo-grande": { unidad: 2500, pack10: 20000 },
+        "blanco-chico": { unidad: 400, pack10: 3000 },
+        "blanco-grande": { unidad: 1800, pack10: 15000 }
     };
 
-    // Mostrar u ocultar el menú al hacer click
     dropdownBtn.addEventListener("click", function () {
         dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
     });
 
-    // Al seleccionar una opción del dropdown
     dropdownMenu.querySelectorAll("li").forEach(item => {
         item.addEventListener("click", function () {
             const tipo = item.getAttribute("data-size");
@@ -35,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 precioDiv.style.display = "block";
 
                 precioUnidad.innerHTML = `
-                    $${precio.unidad} (1 unidad) <br>
-                    $${precio.pack10} (10 unidades)
+                    Por unidad: $${precio.unidad}<br>
+                    Por 10 unidades: $${precio.pack10}
                 `;
                 precioUnidadMoneda.textContent = "ARS";
             } else {
