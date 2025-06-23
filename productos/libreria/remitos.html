@@ -7,6 +7,7 @@
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="../../assets/css/productos.css" />
     <link rel="stylesheet" href="../../assets/css/dropdown.css" />
+    <link rel="stylesheet" href="../../assets/css/dropstretch.css" />
 </head>
 <body>
     <header>
@@ -24,20 +25,21 @@
         <section id="producto-detalle">
             <h2>Remitos</h2>
             <div class="producto-detalle">
-                <img src="../../assets/images/remitos.jpg" alt="Remitos" />
+                <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/REMOTOS/remitos.jpg" alt="Remitos" />
                 <div class="producto-info">
                     <h3>Descripción del Producto</h3>
-                    <p>Remitos de alta calidad disponibles en tamaños chico y grande.</p>
-
-                    <!-- Precio dinámico -->
-                    <p class="precio" id="precio-unidad">Por Unidad: $Consultar</p>
+                    <p>Remitos disponibles en dos tamaños para diferentes necesidades.</p>
 
                     <div class="dropdown">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
-                        <ul class="dropdown-menu" style="height: 5.5em;">
-                            <li data-tamaño="chico">Chico</li>
-                            <li data-tamaño="grande">Grande</li>
+                        <button class="dropdown-btn">Seleccionar Medida</button>
+                        <ul class="dropdown-menu">
+                            <li data-medida="chico">Chico</li>
+                            <li data-medida="grande">Grande</li>
                         </ul>
+                    </div>
+
+                    <div id="uni" style="display: none;">
+                        <p class="precio"></p>
                     </div>
 
                     <button class="agregar-carrito">Agregar al carrito</button>
