@@ -6,11 +6,11 @@
 }
 
 * {
-    font-family: Poppins;
+    font-family: Inter;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #fff;
@@ -136,7 +136,7 @@ div#uni {
     transition: background-color 0.5s ease;
     width: 84.5%;
     margin-top: 1.5em;
-    font-family: 'Gilroy';
+    font-family: 'Inter';
     font-size: 1.2em;
 }
 
@@ -245,7 +245,7 @@ footer p {
     font-weight: bold;
     border-radius: 5px;
     transition: background-color 0.3s;
-    font-family: 'Gilroy';
+    font-family: 'Inter';
     margin-top: 3em;
 }
 
