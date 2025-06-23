@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "35x45": { kg: "2.500", kg20: "45.000" },
-        "40x50": { kg: "2.800", kg20: "50.000" },
-        "50x70": { kg: "3.200", kg20: "58.000" },
-        "60x90": { kg: "4.000", kg20: "70.000" }
+        "35x45": { kg: "2.500", kg20: "22.000" },
+        "40x50": { kg: "2.500", kg20: "22.000" },
+        "50x70": { kg: "2.500", kg20: "22.000" },
+        "60x90": { kg: "2.500", kg20: "22.000" }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
