@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 precioDiv.style.display = "block";
 
                 precioUnidad.innerHTML = `
-                    Por unidad: $${precio.unidad}<br>
-                    Por 10 unidades: $${precio.pack10}
+                    Por Unidad: $${precio.unidad}<br>
+                    Por 10 Unidades: $${precio.pack10}
                 `;
                 precioUnidadMoneda.textContent = "ARS";
             } else {
