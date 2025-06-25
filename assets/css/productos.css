@@ -13,10 +13,6 @@ body {
     font-size: 1em;
 }
 
-footer {
-    font-weight: 700;
-}
-
 header {
     background-color: #fff;
     color: #02a22a;
@@ -147,18 +143,16 @@ footer {
     background-color: #fff;
     color: #02a22a;
     margin-top: 2em;
-    line-height: 0;
     box-shadow: 0 0 0.4em 0 #00000073;
-    position: relative;
-    bottom: -43.84em;
     font-weight: 700;
     height: auto;
+    line-height: 1.2em;
 }
 
 footer p {
-    margin: 0.77em 0;
-    line-height: 0.6em;
+    margin: 0.5em 0;
     font-size: 22px;
+    line-height: 1.2em;
 }
 
 /* Scrollbar personalizada */
