@@ -212,24 +212,6 @@ div#uni {
     color: #ddd;
 }
 
-footer {
-    text-align: center;
-    padding: 1em;
-    background-color: #fff;
-    color: #02a22a;
-    margin-top: 2em;
-    line-height: 0;
-    box-shadow: 0 0 0.4em 0 #00000073;
-    position: relative;
-    bottom: -43.84em;
-    font-weight: 700;
-}
-
-footer p {
-    margin: 0.5em 0;
-    line-height: 0.6em;
-}
-
 /* Media Queries */
 @media (max-width: 75em) {
     #producto-detalle {
