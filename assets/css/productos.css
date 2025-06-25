@@ -149,19 +149,41 @@ body > footer {
 }
 
 footer {
-    text-align: center;
-    padding: 1em;
-    background-color: #fff;
-    color: #02a22a;
-    box-shadow: 0 0 0.4em 0 #00000073;
-    font-weight: 700;
-    line-height: 1.2em;
+  text-align: center;
+  padding: 1em;
+  background-color: #fff;
+  color: #02a22a;
+  box-shadow: 0 0 0.4em 0 #00000073;
+  font-weight: 700;
+  line-height: 1.2em;
+  margin-top: auto;
 }
 
 footer p {
-    margin: 0.5em 0;
-    font-size: 22px;
-    line-height: 1.2em;
+  margin: 0.5em 0;
+  font-size: 22px;
+  line-height: 0.7em;
+}
+
+footer .social-icons {
+  margin-top: 0.7em;
+}
+
+footer .social-icons a {
+  display: inline-block;
+  margin: 0 0.5em;
+  transition: transform 0.2s ease;
+  vertical-align: middle;
+}
+
+footer .social-icons a:hover {
+  transform: scale(1.1);
+}
+
+footer .social-icons svg {
+  width: 28px;
+  height: 28px;
+  fill: #02a22a;
 }
 
 /* Scrollbar personalizada */
