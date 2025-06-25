@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const data = {
         "101": {
-            p10: "500", p50: "1600", p100: "3000",
+            p10: "500", p50: "1.600", p100: "3.000",
             img: "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20101.jpg"
         },
         "101t": {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
             img: "https://http2.mlstatic.com/D_NQ_NP_939710-MLA48445790146_122021-O.webp"
         },
         "102": {
-            p10: "800", p50: "2500", p100: "3800",
+            p10: "800", p50: "2.500", p100: "3.800",
             img: "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/Bandeja%20descartable%20n102.jpg"
         },
         "102t": {
@@ -29,19 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
             img: "https://www.papelerajb.com/wp-content/uploads/2023/05/bandeja_plastica_descartable_con_tapa_102_Boulevares.jpg"
         },
         "103": {
-            p10: "900", p50: "3000", p100: "5200",
+            p10: "900", p50: "3.000", p100: "5.200",
             img: "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20103.jpg"
         },
         "105r": {
-            p10: "1100", p50: "4200", p100: "8100",
+            p10: "1.100", p50: "4.200", p100: "8.100",
             img: "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20105%20rectangular.jpg"
         },
         "105o": {
-            p10: "1000", p50: "3800", p100: "7200",
+            p10: "1.000", p50: "3.800", p100: "7.200",
             img: "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20105%20ovalada.jpg"
         },
         "107": {
-            p10: "1500", p50: "6500", p100: "12000",
+            p10: "1.500", p50: "6.500", p100: "12.000",
             img: "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20107.jpg"
         }
     };
