@@ -25,3 +25,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+   // Detectar "<a href>" y redirijir
+
+   // Mapa de URLs originales a nuevas URLs destino
+const urlMap = {
+  "https://www.facebook.com": "https://nueva-url-para-facebook.com",
+  "https://instagram.com": "https://nueva-url-para-instagram.com",
+  "https://twitter.com": "https://nueva-url-para-twitter.com",
+  "https://wa.me": "https://nueva-url-para-whatsapp.com"
+};
+
+document.querySelectorAll("footer a").forEach(link => {
+  for (const originalUrl in urlMap) {
+    // Si el href del link empieza con alguna de las URLs originales
+    if (link.href.startsWith(originalUrl)) {
+      // Cambia el href a la nueva URL correspondiente
+      link.href = urlMap[originalUrl];
+      break; // Salimos del bucle al encontrar coincidencia
+    }
+  }
+});
