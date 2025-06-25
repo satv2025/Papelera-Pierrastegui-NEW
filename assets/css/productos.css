@@ -1,5 +1,12 @@
 @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
 ::selection {
     color: #fff;
     background: #02a22a;
@@ -137,15 +144,17 @@ div#uni {
     color: #ddd;
 }
 
+body > footer {
+    margin-top: auto;
+}
+
 footer {
     text-align: center;
     padding: 1em;
     background-color: #fff;
     color: #02a22a;
-    margin-top: 2em;
     box-shadow: 0 0 0.4em 0 #00000073;
     font-weight: 700;
-    height: auto;
     line-height: 1.2em;
 }
 
