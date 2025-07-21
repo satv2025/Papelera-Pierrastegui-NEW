@@ -1,6 +1,7 @@
 @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     display: flex;
@@ -144,46 +145,46 @@ div#uni {
     color: #ddd;
 }
 
-body > footer {
+body>footer {
     margin-top: auto;
 }
 
 footer {
-  text-align: center;
-  padding: 1em;
-  background-color: #fff;
-  color: #02a22a;
-  box-shadow: 0 0 0.4em 0 #00000073;
-  font-weight: 700;
-  line-height: 1.2em;
-  margin-top: auto;
+    text-align: center;
+    padding: 1em;
+    background-color: #fff;
+    color: #02a22a;
+    box-shadow: 0 0 0.4em 0 #00000073;
+    font-weight: 700;
+    line-height: 1.2em;
+    margin-top: auto;
 }
 
 footer p {
-  margin: 0.5em 0;
-  font-size: 22px;
-  line-height: 0.7em;
+    margin: 0.5em 0;
+    font-size: 22px;
+    line-height: 0.7em;
 }
 
 footer .social-icons {
-  margin-top: 0.7em;
+    margin-top: 0.7em;
 }
 
 footer .social-icons a {
-  display: inline-block;
-  margin: 0 0.5em;
-  transition: transform 0.2s ease;
-  vertical-align: middle;
+    display: inline-block;
+    margin: 0 0.5em;
+    transition: transform 0.2s ease;
+    vertical-align: middle;
 }
 
 footer .social-icons a:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 footer .social-icons svg {
-  width: 28px;
-  height: 28px;
-  fill: #02a22a;
+    width: 28px;
+    height: 28px;
+    fill: #02a22a;
 }
 
 /* Scrollbar personalizada */
@@ -200,19 +201,18 @@ footer .social-icons svg {
     border-radius: 6px;
 }
 
-.preciou {
-    
-}
+.preciou {}
+
 .preciob {
     margin-top: -0.8em;
 }
 
-.preciou, .preciob {
+.preciou,
+.preciob {
     font-weight: 700;
 }
 
-.precio {
-}
+.precio {}
 
 .uni {
     font-size: 1.2em;
@@ -223,7 +223,7 @@ footer .social-icons svg {
     main {
         margin-left: -16em;
         margin-top: -3em;
-      }
+    }
 }
 
 .producto-info h3,
@@ -260,7 +260,9 @@ footer .social-icons svg {
 /* Media Queries Mejorados para mejor responsividad */
 
 /* Pantallas grandes: hasta 1200px */
-@media (max-width: 75em) { /* 1200px */
+@media (max-width: 75em) {
+
+    /* 1200px */
     #producto-detalle {
         flex-direction: column;
         margin-left: auto;
@@ -271,7 +273,7 @@ footer .social-icons svg {
         height: auto;
         padding: 2em 1em;
     }
-    
+
     .producto-detalle img {
         position: static;
         margin: 0 auto 1.5em;
@@ -280,7 +282,7 @@ footer .social-icons svg {
         display: block;
         box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.1);
     }
-    
+
     .producto-info {
         margin-left: 0;
         max-width: 100%;
@@ -289,7 +291,9 @@ footer .social-icons svg {
 }
 
 /* Pantallas medianas: hasta 900px */
-@media (max-width: 56.25em) { /* 900px */
+@media (max-width: 56.25em) {
+
+    /* 900px */
     #producto-detalle {
         width: 100%;
         margin-left: auto;
@@ -301,7 +305,7 @@ footer .social-icons svg {
     .producto-info p {
         font-size: 1.1em;
     }
-    
+
     .agregar-carrito {
         width: 100%;
         font-size: 1.1em;
@@ -310,7 +314,9 @@ footer .social-icons svg {
 }
 
 /* Pantallas pequeñas: hasta 600px */
-@media (max-width: 37.5em) { /* 600px */
+@media (max-width: 37.5em) {
+
+    /* 600px */
     #producto-detalle {
         padding: 1em;
         width: 100%;
@@ -327,4 +333,8 @@ footer .social-icons svg {
     .producto-info p {
         font-size: 1em;
         margin-top: -0.5em;
+    }
+
+    p {
+        text-align: justify;
     }
