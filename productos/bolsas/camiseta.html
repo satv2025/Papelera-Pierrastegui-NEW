@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Papelera Pierrastegui - Bolsas Camiseta</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+  <!-- CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css" />
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
   <link rel="stylesheet" href="../../assets/css/dropdown2.css">
@@ -125,7 +127,16 @@
     </div>
   </footer>
 
+  <!-- PerfectScrollbar -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css" />
+  <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js"></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var dropdownMenu = document.querySelector('.dropdown-menu');
+      var ps = new PerfectScrollbar(dropdownMenu);
+    });
+  </script>
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop-bolsas.js"></script>
 </body>

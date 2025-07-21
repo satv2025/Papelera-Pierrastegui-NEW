@@ -5,4 +5,5 @@
 .dropdown-menu {
     width: 22.4em;
     overflow-x: hidden !important;
+    overflow-y: hidden !important;
 }
