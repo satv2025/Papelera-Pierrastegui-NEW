@@ -102,8 +102,8 @@ div#uni {
 }
 
 .producto-info {
-    max-width: 655px;
-    margin-left: -8em;
+    max-width: 500px;
+    margin-left: 2em;
     display: flex;
     flex-direction: column;
     margin-top: -4em;
@@ -245,7 +245,7 @@ footer .social-icons svg {
     border-radius: 5px;
     transition: background-color 0.3s;
     font-family: 'Gilroy';
-    margin-top: 0.1em;
+    margin-top: 3em;
 }
 
 .producto-info p {
