@@ -7,3 +7,26 @@
     overflow-x: hidden !important;
     overflow-y: hidden !important;
 }
+
+/* Ocultar scrollbar X de PerfectScrollbar */
+.ps__rail-x {
+    display: none !important;
+}
+
+/* Barra vertical (rail) personalizada */
+.ps__rail-y {
+    background-color: transparent !important;
+    /* Fondo transparente */
+    width: 8px !important;
+    /* Ancho scrollbar */
+    opacity: 1 !important;
+    /* Siempre visible */
+    right: 2px !important;
+    /* Separación del borde */
+}
+
+/* Pulgar (thumb) de la barra vertical */
+.ps__thumb-y {
+    background-color: #02a22a !important;
+    border-radius: 4px;
+}
