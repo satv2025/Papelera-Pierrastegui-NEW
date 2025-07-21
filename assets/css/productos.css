@@ -257,6 +257,14 @@ footer .social-icons svg {
     font-weight: 700;
 }
 
+p {
+    text-align: justify;
+}
+
+#hidden-title {
+    opacity: 0;
+}
+
 /* Media Queries Mejorados para mejor responsividad */
 
 /* Pantallas grandes: hasta 1200px */
@@ -333,12 +341,4 @@ footer .social-icons svg {
     .producto-info p {
         font-size: 1em;
         margin-top: -0.5em;
-    }
-
-    p {
-        text-align: justify;
-    }
-
-    #hidden-title {
-        opacity: 0;
     }
