@@ -105,8 +105,47 @@
       </a>
     </div>
   </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdownBtn = document.querySelector(".dropdown-btn");
+      const dropdownMenu = document.querySelector(".dropdown-menu");
+      const precioUnidad = document.querySelector(".preciou");
+      const precioBulto = document.querySelector(".preciob");
+      const precios = document.querySelector("#uni");
 
+      // Mostrar/Ocultar menú
+      dropdownBtn.addEventListener("click", function () {
+        dropdownMenu.classList.toggle("show");
+      });
 
+      // Escuchar clics en los ítems del menú
+      dropdownMenu.querySelectorAll("li").forEach(item => {
+        item.addEventListener("click", function () {
+          const size = item.getAttribute("data-size");
+          const priceUnit = item.getAttribute("data-price-unit");
+          const priceBulk = item.getAttribute("data-price-bulk");
+
+          // Actualiza texto del botón
+          dropdownBtn.textContent = `Tamaño: ${size}`;
+
+          // Muestra precios actualizados
+          precioUnidad.textContent = `Por Unidad: $${parseInt(priceUnit).toLocaleString()} ARS`;
+          precioBulto.textContent = `Por Bulto (6 unidades): $${parseInt(priceBulk).toLocaleString()} ARS`;
+          precios.style.display = "block";
+
+          // Cierra el menú
+          dropdownMenu.classList.remove("show");
+        });
+      });
+
+      // Cierra el menú si se hace clic fuera
+      document.addEventListener("click", function (e) {
+        if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+          dropdownMenu.classList.remove("show");
+        }
+      });
+    });
+  </script>
   <script src="../../assets/js/dropdown.js"></script>
 </body>
 
