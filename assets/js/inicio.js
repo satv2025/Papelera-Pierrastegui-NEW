@@ -9,9 +9,7 @@ const productos = [
     { nombre: 'Bandejas De Carton', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20DE%20CART%C3%93N/bandeja%20de%20carton.webp', ruta: 'productos\\bandejas\\carton', categoria: 'Bandejas', boton: 'Ver Producto', tamanos: ["N°1", "N°2", "N°3", "N°4", "N°5", "N°6", "N°12", "N°12,5", "N°13", "N°13,5"] },
     { nombre: 'Bandeja plásticas', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20PLÁSTICAS/bandeja%20descartable%20n%20107.jpg', ruta: 'productos\\bandejas\\plastico', categoria: 'Bandejas', boton: 'Ver Producto', tamanos: ["N°102", "N°103", "N°105 Ovalada", "N°107"] },
     { nombre: 'Bandejas de Telgopor', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg', ruta: 'productos\\bandejas\\telgopor', categoria: 'Bandejas', boton: 'Ver Producto', tamanos: ["N°615", "N°617", "N°618", "N°619", "N°625", "N°628"] },
-
-    // Blondas
-    { nombre: 'Blonda', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_708276-MLA48997537211_022022-O.jpg', ruta: 'productos\\blondas\\blonda', categoria: 'Blondas', boton: 'Ver Producto', tamanos: ["N°28", "N°32"] },
+    { nombre: 'Blonda', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_708276-MLA48997537211_022022-O.jpg', ruta: 'productos\\bandejas\\blonda', categoria: 'Bandejas', boton: 'Ver Producto', tamanos: ["N°28", "N°32"] },
 
     // Bolsas
     { nombre: 'Bolsas camiseta', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg', ruta: 'productos\\bolsas\\camiseta', categoria: 'Bolsas', boton: 'Ver Producto', tamanos: ["(R) 20x30", "(R) 30x40", "(R) 40x50", "(R) 45x60", "(R) 50x60", "(R) 50x70", "(R) 60x80", "(R) 45X60 Ciudad Negra ", "(E) 30x40", "(E) 40x50"] },
