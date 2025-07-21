@@ -129,12 +129,21 @@
   <script>
     const imgs = document.querySelectorAll('#contenedor img');
     let index = 0;
+    let direccion = 1; // 1 para avanzar, -1 para retroceder
 
     setInterval(() => {
       imgs[index].classList.remove('visible');
-      index = (index + 1) % imgs.length;
+
+      // Actualizar índice según dirección
+      index += direccion;
+
+      // Si llegamos al final, invertimos la dirección
+      if (index === imgs.length - 1 || index === 0) {
+        direccion *= -1;
+      }
+
       imgs[index].classList.add('visible');
-    }, 10000);
+    }, 5000);
   </script>
 </body>
 
