@@ -29,6 +29,10 @@
     /* Separación del borde */
 }
 
+.ps__rail-y:hover {
+    width: 8px !important;
+}
+
 /* Pulgar (thumb) de la barra vertical */
 .ps__thumb-y {
     background-color: #02a22a !important;
