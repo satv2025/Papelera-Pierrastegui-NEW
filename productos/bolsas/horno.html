@@ -8,6 +8,14 @@
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
+
+  <style>
+    #miImagen {
+      width: 300px;
+      transition: opacity 1s ease-in-out;
+      opacity: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,7 +34,7 @@
     <section id="producto-detalle">
       <h2>Bolsas de Horno</h2>
       <div class="producto-detalle">
-        <img
+        <img id="miImagen"
           src="https://media.istockphoto.com/id/148157090/es/foto/bolsa-de-horno.jpg?s=612x612&w=0&k=20&c=mMx0JZc2bdplKFz4VyIuXVyabZED3vFFLOuPvWsvSUc="
           alt="Bolsas de Horno">
         <div class="producto-info">
@@ -81,9 +89,29 @@
       </a>
     </div>
   </footer>
-
-
   <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    const imagen = document.getElementById('miImagen');
+    const imagenes = [
+      'https://media.istockphoto.com/id/148157090/es/foto/bolsa-de-horno.jpg?s=612x612&w=0&k=20&c=mMx0JZc2bdplKFz4VyIuXVyabZED3vFFLOuPvWsvSUc=',
+      'https://www.papelerajb.com/wp-content/uploads/2023/06/Bolsas-para-horno.jpeg'
+    ];
+    let index = 0;
+
+    setInterval(() => {
+      // Desvanecer la imagen (opacity a 0)
+      imagen.style.opacity = 0;
+
+      // Esperar a que termine el fade out para cambiar la imagen
+      setTimeout(() => {
+        index = (index + 1) % imagenes.length;
+        imagen.src = imagenes[index];
+
+        // Volver a mostrar la imagen con fade in (opacity a 1)
+        imagen.style.opacity = 1;
+      }, 1000); // 1000 ms para que coincida con la transición CSS
+    }, 10000); // Cambiar cada 10 segundos
+  </script>
 </body>
 
 </html>
