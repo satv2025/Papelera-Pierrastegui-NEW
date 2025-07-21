@@ -338,3 +338,7 @@ footer .social-icons svg {
     p {
         text-align: justify;
     }
+
+    #hidden-title {
+        opacity: 0;
+    }
