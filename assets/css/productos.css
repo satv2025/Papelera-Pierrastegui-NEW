@@ -106,6 +106,7 @@ div#uni {
     margin-left: 2em;
     display: flex;
     flex-direction: column;
+    margin-top: -4em;
 }
 
 .producto-info h3 {
