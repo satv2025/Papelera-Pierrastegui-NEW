@@ -20,15 +20,6 @@ document.addEventListener("DOMContentLoaded", () => {
             dropdownBtn.textContent = `Tamaño: ${medida}`;
             uniDiv.style.display = 'block';
 
-            // Cambiar imagen según tamaño (opcional)
-            if (medida === 'N30') {
-                imagenProducto.src = 'https://http2.mlstatic.com/D_980210-MLA31005237197_062019-O.jpg';
-            } else if (medida === 'N32') {
-                imagenProducto.src = 'https://http2.mlstatic.com/D_801244-MLA48714250848_122021-O.jpg';
-            } else {
-                imagenProducto.src = 'https://http2.mlstatic.com/D_708276-MLA48997537211_022022-O.jpg';
-            }
-
             dropdownMenu.style.display = 'none';
         });
     });
