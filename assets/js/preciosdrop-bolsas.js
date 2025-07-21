@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "50x60": { pp: '2.300', pb: '42.000', ppb: 20 },
         "50x70": { pp: '3.200', pb: '30.000', ppb: 10 },
         "60x80": { pp: '5.000', pb: '22.500', ppb: 5 },
-        "45x60-negra": { pp: '3.000', pb: '25.000', ppb: 10 },
-        "30x40-e": { pp: 650, pb: '11.000', ppb: 20 },
-        "40x50-e": { pp: '1.000', pb: '18.000', ppb: 20 }
+        "45x60-negra": { pp: '3.100', pb: '31.000', ppb: 10 },
+        "30x40-e": { pp: 650, pb: '11.600', ppb: 20 },
+        "40x50-e": { pp: '1.100', pb: '20.000', ppb: 20 }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
