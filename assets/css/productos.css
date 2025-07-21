@@ -65,7 +65,7 @@ nav ul li a {
     margin-left: 24em;
     margin-top: 4.6em;
     border-radius: 0.3em;
-    height: 25.5em;
+    height: 27.5em;
 }
 
 div#precios {
@@ -95,8 +95,8 @@ div#uni {
     border-radius: 8px;
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
     position: absolute;
-    margin-top: 4em;
-    margin-left: -33em;
+    margin-top: 5.5em;
+    margin-left: -32.6em;
     object-fit: contain;
     background: #fff;
 }
@@ -260,7 +260,7 @@ footer .social-icons svg {
 
 #desc-p {
     text-align: justify;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 #hidden-title {
