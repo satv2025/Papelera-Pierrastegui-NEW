@@ -273,6 +273,10 @@ footer .social-icons svg {
     opacity: 0;
 }
 
+.ps__rail-y:hover>.ps__thumb-y {
+    width: 6px !important;
+}
+
 /* Media Queries Mejorados para mejor responsividad */
 
 /* Pantallas grandes: hasta 1200px */
