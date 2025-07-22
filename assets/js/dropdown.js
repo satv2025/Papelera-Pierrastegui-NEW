@@ -74,10 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // Estilos personalizados para scrollbar siempre visible y color verde
   const customStyle = `
     .dropdown-menu {
-      max-height: 200px;
       overflow-x: hidden !important;
       overflow-y: auto !important;
-      position: relative;
     }
 
     /* Ocultar scrollbar horizontal */
