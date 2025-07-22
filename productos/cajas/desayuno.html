@@ -62,40 +62,42 @@
           <h3 id="hidden-title">Descripción del producto</h3>
           <ul>
             <li>
-              <p id="desc-p">Caja de cartón microcorrugado. Medida ideal para sandwich.</p>
+              <p id="desc-p">Base de cartón microcorrugado y tapa de cartulina impresa "Feliz día mamá", "papá" o
+                transparentes con visor.</p>
             </li>
             <li>
-              <p id="desc-p">Color marrón por dentro y marrón por fuera.</p>
+              <p id="desc-p">Ideal para desayunos, regalos, consultar modelos en stock.</p>
             </li>
           </ul>
-          <div class="dropdown" style="opacity: 0;">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="15x20">15x20</li>
-              <li data-size="20x30">20x30</li>
-              <li data-size="25x35">25x35</li>
-              <li data-size="30x40">30x40</li>
-              <li data-size="35x45">35x45</li>
-              <li data-size="40x50">40x50</li>
-              <li data-size="50x60">50x60</li>
-              <li data-size="vino">Vino</li>
-            </ul>
-          </div>
-          <div id="uni" style="display: none;">
-            <p id="sin-stock" style="display: none;">SIN STOCK</p>
-
-            <p id="precio-paquete-label" class="precio">
-              Precio por paquete: $<span id="precio-paquete"></span>
-              <span id="precio-paquete-moneda"></span>
-            </p>
-
-            <p id="precio-bulto-label" class="precio">
-              <span id="precio-bulto-cantidad"></span> $<span id="precio-bulto"></span>
-              <span id="precio-bulto-moneda"></span>
-            </p>
-          </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
         </div>
+        <div class="dropdown" style="opacity: 0;">
+          <button class="dropdown-btn">Seleccionar tamaño</button>
+          <ul class="dropdown-menu">
+            <li data-size="15x20">15x20</li>
+            <li data-size="20x30">20x30</li>
+            <li data-size="25x35">25x35</li>
+            <li data-size="30x40">30x40</li>
+            <li data-size="35x45">35x45</li>
+            <li data-size="40x50">40x50</li>
+            <li data-size="50x60">50x60</li>
+            <li data-size="vino">Vino</li>
+          </ul>
+        </div>
+        <div id="uni" style="display: none;">
+          <p id="sin-stock" style="display: none;">SIN STOCK</p>
+
+          <p id="precio-paquete-label" class="precio">
+            Precio por paquete: $<span id="precio-paquete"></span>
+            <span id="precio-paquete-moneda"></span>
+          </p>
+
+          <p id="precio-bulto-label" class="precio">
+            <span id="precio-bulto-cantidad"></span> $<span id="precio-bulto"></span>
+            <span id="precio-bulto-moneda"></span>
+          </p>
+        </div>
+        <button class="agregar-carrito">Agregar al carrito</button>
+      </div>
       </div>
     </section>
   </main>
@@ -138,25 +140,6 @@
       </a>
     </div>
   </footer>
-  <script>
-    const imgs = document.querySelectorAll('#contenedor img');
-    let index = 0;
-    let direccion = 1; // 1 para avanzar, -1 para retroceder
-
-    setInterval(() => {
-      imgs[index].classList.remove('visible');
-
-      // Actualizar índice según dirección
-      index += direccion;
-
-      // Si llegamos al final, invertimos la dirección
-      if (index === imgs.length - 1 || index === 0) {
-        direccion *= -1;
-      }
-
-      imgs[index].classList.add('visible');
-    }, 3000);
-  </script>
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop-bolsasrinon.js"></script>
 </body>
