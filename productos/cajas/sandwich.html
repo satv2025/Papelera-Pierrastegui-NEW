@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
     <style>
-        <style>#contenedor {
+        #contenedor {
             position: relative;
             width: 300px;
             height: 300px;
@@ -23,46 +23,36 @@
             object-fit: cover;
             transition: opacity 1s ease-in-out;
             opacity: 0;
-            margin-left: -40em !important;
+            margin-left: -37em !important;
+        }
+
+        .agregar-carrito {
+            margin-top: -0.5em;
         }
 
         .producto-detalle #contenedor img {
             width: 132% !important;
-            margin-left: 2.4em !important;
-            margin-top: 7em;
         }
 
         #contenedor img.visible {
             opacity: 1;
         }
 
+        .producto-info p {
+            margin-bottom: 0.96em !important;
+        }
+
         .producto-info {
-            margin-top: -5em !important
-        }
-
-        .agregar-carrito,
-        .dropdown-btn {
-            margin-left: 1.4em;
-        }
-
-        .agregar-carrito {
-            margin-top: 3.7em;
-        }
-
-        .dropdown-menu {
-            margin-left: 1.61em;
-        }
-
-        .dropdown-btn {
-            margin-top: 8.6em !important
-        }
-
-        div#uni {
-            margin-left: -6.7em !important;
+            margin-top: -24em !important;
         }
 
         .precio {
-            margin-left: 7em !important;
+            margin-top: 10.4em !important;
+            margin-bottom: -4em !important;
+        }
+
+        .precioo {
+            font-weight: 700 !important;
         }
     </style>
 </head>
@@ -85,9 +75,9 @@
             <div class="producto-detalle">
                 <div id="contenedor">
                     <img src="https://biopackaging.com.ar/wp-content/uploads/2022/01/estuche-mediano-sandwich.jpg"
-                        class="visible" alt="Bolsas de Horno">
+                        class="visible" alt="Caja de Sandwich">
                     <img src="https://biopackaging.com.ar/wp-content/uploads/2022/12/IMG_1768-copy-scaled.jpg"
-                        alt="Bolsas para horno">
+                        alt="Caja de Sandwich">
                 </div>
                 <div class="producto-info">
                     <h3 id="hidden-title">Descripción del producto</h3>
@@ -113,18 +103,10 @@
                         </ul>
                     </div>
                     <div id="uni" style="display: none;">
-                        <p id="sin-stock" style="display: none;">SIN STOCK</p>
-
-                        <p id="precio-paquete-label" class="precio">
-                            Precio por paquete: $<span id="precio-paquete"></span>
-                            <span id="precio-paquete-moneda"></span>
-                        </p>
-
-                        <p id="precio-bulto-label" class="precio">
-                            <span id="precio-bulto-cantidad"></span> $<span id="precio-bulto"></span>
-                            <span id="precio-bulto-moneda"></span>
-                        </p>
+                        <p></p>
                     </div>
+                    <p class="precio">Por 50 Unidades: $14.000 ARS</p>
+                    <p class="precioo">Por 100 Unidades: $27.000 ARS</p>
                     <button class="agregar-carrito">Agregar al carrito</button>
                 </div>
             </div>
