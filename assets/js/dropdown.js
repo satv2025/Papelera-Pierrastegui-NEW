@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
       /* Separación del borde */
     }
 
-    .ps__rail-y:hover {
+    .ps__thumb-y:hover {
       width: 8px !important;
     }
 
