@@ -9,12 +9,34 @@
     <link rel="stylesheet" href="../../assets/css/productos.css">
     <link rel="stylesheet" href="../../assets/css/dropdown.css">
     <style>
-        .producto-info {
-            margin-top: -5em !important
+        <style>#contenedor {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            /* ajusta según tamaño de las imágenes */
         }
 
-        .producto-detalle img {
+        #contenedor img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            object-fit: cover;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+            margin-left: -40em !important;
+        }
+
+        .producto-detalle #contenedor img {
+            width: 132% !important;
             margin-left: -36.6em
+        }
+
+        #contenedor img.visible {
+            opacity: 1;
+        }
+
+        .producto-info {
+            margin-top: -5em !important
         }
 
         .agregar-carrito,
