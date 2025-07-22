@@ -74,8 +74,10 @@ document.addEventListener('DOMContentLoaded', function () {
   // Estilos personalizados para scrollbar siempre visible y color verde
   const customStyle = `
     .dropdown-menu {
+      max-height: 200px;
       overflow-x: hidden !important;
-      overflow-y: hidden !important;
+      overflow-y: auto !important;
+      position: relative;
     }
 
     /* Ocultar scrollbar horizontal */
@@ -88,14 +90,18 @@ document.addEventListener('DOMContentLoaded', function () {
       background-color: transparent !important;
       width: 8px !important;
       opacity: 1 !important;
+      visibility: visible !important;
       transition: none !important;
       pointer-events: auto !important;
       right: 2px !important;
     }
 
+    /* Forzar siempre visible (incluso sin scroll o hover) */
+    .ps__rail-y.ps--active,
     .ps__rail-y:hover {
-      width: 8px !important;
       opacity: 1 !important;
+      visibility: visible !important;
+      transition: none !important;
     }
 
     /* Pulgar de la barra vertical */
