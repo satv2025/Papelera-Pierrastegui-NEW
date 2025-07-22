@@ -281,6 +281,10 @@ footer .social-icons svg {
     width: 6px !important;
 }
 
+ul {
+    list-style: none !important;
+}
+
 /* Media Queries Mejorados para mejor responsividad */
 
 /* Pantallas grandes: hasta 1200px */
