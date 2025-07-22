@@ -10,11 +10,32 @@
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
   <style>
     .precio {
-      margin-top: 11.4em !important;
+      margin-top: 11.8em !important;
     }
 
     .precioo {
       font-weight: 700;
+    }
+
+    main #producto-detalle .producto-detalle .producto-info #desc-p-pro {
+      position: relative;
+      padding-left: 1.2em;
+      /* Espacio para la viñeta */
+      margin-bottom: 0.5em;
+      /* Espacio entre ítems */
+    }
+
+    main #producto-detalle .producto-detalle .producto-info #desc-p-pro::before {
+      content: "•";
+      /* Viñeta */
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: inherit;
+      /* Color de la viñeta */
+      font-size: 1em;
+      /* Tamaño de viñeta */
+      line-height: 1;
     }
   </style>
 </head>
@@ -40,7 +61,8 @@
           alt="Cuchara Sopera">
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Es una cuchara un poco más pequeña que la mediana empleada en su mayoría de veces en cumpleaños fiestas y
+          <p id="desc-p-pro">Es una cuchara un poco más pequeña que la mediana empleada en su mayoría de veces en
+            cumpleaños fiestas y
             reuniones.</p>
 
           <div id="uni">
