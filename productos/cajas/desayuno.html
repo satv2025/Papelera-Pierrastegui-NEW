@@ -19,7 +19,7 @@
 
     .agregar-carrito,
     .dropdown-btn {
-      margin-left: 1.4em;
+      margin-left: -4.6em;
     }
 
     .dropdown-menu {
@@ -35,7 +35,8 @@
     }
 
     .precio {
-      margin-left: 7em !important;
+      margin-left: 1em !important;
+      margin-top: -0.5em;
     }
   </style>
 </head>
@@ -57,19 +58,23 @@
       <h2>Caja De Desayuno</h2>
       <div class="producto-detalle">
         <img
-          src="https://camoga.ar/media/catalog/product/cache/17183a23c5d57b885c9e1f3d66234d68/1/8/18020722_caja_para_desayuno_con_visor_30x30x12_2_.jpg">
+          src="https://camoga.ar/media/catalog/product/cache/17183a23c5d57b885c9e1f3d66234d68/1/8/18020722_caja_para_desayuno_con_visor_30x30x12_2_.jpg"
+          alt="Caja de desayuno">
+
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h3 style="opacity: 0;">Descripción del producto</h3>
           <ul>
             <li>
-              <p id="desc-p">Base de cartón microcorrugado y tapa de cartulina impresa "Feliz día mamá", "papá" o
-                transparentes con visor.</p>
+              <p>Base de cartón microcorrugado y tapa de cartulina impresa "Feliz día mamá", "papá" o transparentes con
+                visor.</p>
             </li>
             <li>
-              <p id="desc-p">Ideal para desayunos, regalos, consultar modelos en stock.</p>
+              <p>Ideal para desayunos, regalos, consultar modelos en stock.</p>
             </li>
           </ul>
         </div>
+
+        <!-- Se mantiene por estructura pero oculto -->
         <div class="dropdown" style="opacity: 0;">
           <button class="dropdown-btn">Seleccionar tamaño</button>
           <ul class="dropdown-menu">
@@ -83,21 +88,16 @@
             <li data-size="vino">Vino</li>
           </ul>
         </div>
-        <div id="uni" style="display: none;">
+
+        <div id="uni" style="display: block;">
           <p id="sin-stock" style="display: none;">SIN STOCK</p>
 
-          <p id="precio-paquete-label" class="precio">
-            Precio por paquete: $<span id="precio-paquete"></span>
-            <span id="precio-paquete-moneda"></span>
-          </p>
-
-          <p id="precio-bulto-label" class="precio">
-            <span id="precio-bulto-cantidad"></span> $<span id="precio-bulto"></span>
-            <span id="precio-bulto-moneda"></span>
+          <p id="precio-paquete-label" class="precio" style="font-size: 1.2em;">
+            Por Unidad: $1.400 ARS
           </p>
         </div>
+
         <button class="agregar-carrito">Agregar al carrito</button>
-      </div>
       </div>
     </section>
   </main>
@@ -140,8 +140,6 @@
       </a>
     </div>
   </footer>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-bolsasrinon.js"></script>
 </body>
 
 </html>
