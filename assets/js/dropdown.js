@@ -71,35 +71,34 @@ document.addEventListener('DOMContentLoaded', function () {
   const psCSS = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
   const psJS = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
 
-  // Inyectar estilos personalizados exactos que diste
+  // Estilos personalizados para scrollbar siempre visible y color verde
   const customStyle = `
     .dropdown-menu {
       overflow-x: hidden !important;
       overflow-y: hidden !important;
     }
 
-    /* Ocultar scrollbar X de PerfectScrollbar */
+    /* Ocultar scrollbar horizontal */
     .ps__rail-x {
       display: none !important;
     }
 
-    /* Barra vertical (rail) personalizada */
+    /* Barra vertical */
     .ps__rail-y {
       background-color: transparent !important;
-      /* Fondo transparente */
       width: 8px !important;
-      /* Ancho scrollbar */
       opacity: 1 !important;
-      /* Siempre visible */
+      transition: none !important;
+      pointer-events: auto !important;
       right: 2px !important;
-      /* Separación del borde */
     }
 
-    .ps__thumb-y:hover {
+    .ps__rail-y:hover {
       width: 8px !important;
+      opacity: 1 !important;
     }
 
-    /* Pulgar (thumb) de la barra vertical */
+    /* Pulgar de la barra vertical */
     .ps__thumb-y {
       background-color: #02a22a !important;
       border-radius: 4px;
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
   styleTag.textContent = customStyle;
   document.head.appendChild(styleTag);
 
-  // Cargar PerfectScrollbar CSS y JS y luego inicializar
+  // Cargar CSS y JS de PerfectScrollbar y luego inicializar
   loadCSS(psCSS)
     .then(() => loadJS(psJS))
     .then(() => {
