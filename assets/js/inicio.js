@@ -29,15 +29,15 @@ const productos = [
 
     // Carton
     { nombre: 'Carton Corrugado', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CARTÓN%20CORRUGADO/carton%20corrugado.jpg', ruta: 'productos\\carton\\corrugado', categoria: 'Carton', boton: 'Ver Producto', tamanos: ["90x20", "100x20"] },
-    { nombre: 'Tiras de Cartón Satinadas', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_NQ_NP_774089-MLA77001145185_062024-O.webp', ruta: 'productos\\carton\\tirascs', categoria: 'Carton', stockHtml: '<span class="sin-stock sin-stocktcs" id="sin-stock-bh">SIN STOCK</span>' },
+    { nombre: 'Tiras de Cartón Satinadas', descripcion: '', precioARS: 0, imagen: 'https://http2.mlstatic.com/D_NQ_NP_774089-MLA77001145185_062024-O.webp', ruta: 'productos\\carton\\tirascs', categoria: 'Carton', boton: 'Ver Producto' },
 
     // Cintas
     { nombre: 'Cinta scotch', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20catálogo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg', ruta: 'productos\\cintas\\scotch', categoria: 'Cintas', boton: 'Ver Producto', tamanos: ["24x50", "48x100"] },
     { nombre: 'Cinta papel', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20catálogo/CINTAS%20ADHESIVAS/cinta%20de%20papel.jpg', ruta: 'productos\\cintas\\papel', categoria: 'Cintas', boton: 'Ver Producto', tamanos: ["18", "24", "36"] },
 
     // Cubiertos
-    { nombre: 'Cuchara Sopera', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/cuchara%20sopera.jpg', ruta: 'productos\\cubiertos\\cucharasopera', categoria: 'Cubiertos', boton: 'Ver Producto' },
-    { nombre: 'Cucharita', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/D_NQ_NP_2X_601101-MLA46721113388_072021-F.webp', ruta: 'productos\\cubiertos\\cucharita', categoria: 'Cubiertos', boton: 'Ver Producto' },
+    { nombre: 'Cuchara Sopera', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/spoon1_16_9.png', ruta: 'productos\\cubiertos\\cucharasopera', categoria: 'Cubiertos', boton: 'Ver Producto' },
+    { nombre: 'Cucharita', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/spoon3_16_9.png', ruta: 'productos\\cubiertos\\cucharita', categoria: 'Cubiertos', boton: 'Ver Producto' },
     { nombre: 'Cuchillo Blanco', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/cuchillo%20descartable.webp', ruta: 'productos\\cubiertos\\cuchilloblanco', categoria: 'Cubiertos', boton: 'Ver Producto' },
     { nombre: 'Cuchillo Negro', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/cuchillo negro descartable.png', ruta: 'productos\\cubiertos\\cuchillonegro', categoria: 'Cubiertos', boton: 'Ver Producto' },
     { nombre: 'Plato torta', descripcion: '', precioARS: 0, imagen: 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CUBIERTOS-PLATOS/D_NQ_NP_2X_745062-MLA76109409291_042024-F.webp', ruta: 'productos\\cubiertos\\platotorta', categoria: 'Cubiertos', boton: 'Ver Producto' },

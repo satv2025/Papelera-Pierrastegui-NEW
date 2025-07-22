@@ -529,7 +529,7 @@ nav ul li a {
 
 /* La imagen ocupa el 100% del ancho y estÃ¡ pegada a los bordes laterales */
 .producto img {
-  width: 112.5%;
+  width: 112%;
   margin: -1em 0 1em -1em;
   height: 11em;
   border-top-left-radius: 0.5em;
