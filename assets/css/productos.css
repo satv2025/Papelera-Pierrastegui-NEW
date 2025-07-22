@@ -275,6 +275,7 @@ footer .social-icons svg {
 
 .producto-info h3 {
     opacity: 0 !important;
+    margin-top: -0.2em;
 }
 
 .ps__rail-y:hover>.ps__thumb-y {
