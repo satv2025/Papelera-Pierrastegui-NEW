@@ -3,7 +3,8 @@
 /* ================================
    BASE Y RESET
 ================================ */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
@@ -18,7 +19,9 @@ html, body {
   background-size: contain;
 }
 
-#linkcampo {height: 0;}
+#linkcampo {
+  height: 0;
+}
 
 ::selection {
   color: #fff;
@@ -26,152 +29,195 @@ html, body {
 }
 
 button.carrito {
-    font-size: 1.5em;
-    background-color: #fff !important;!i;!;
-    color: #02a22a!important;!i;!;
-    cursor: pointer;
-    border-radius: 50%;
-    font-family: 'FontAwesome'; /* Para usar FontAwesome */
-    padding-top: 0.52em;
-    padding-bottom: 0.52em;
-    padding-left: 0.48em;
-    padding-right: 0.5em;
-    z-index: 3000;
-    margin-top: -9.5em;
-    position: absolute;
-    text-align: center; /* Asegura que el Ã­cono se centre dentro del botÃ³n */
-    line-height: 1; /* AlineaciÃ³n vertical */
-    border: none; /* Removemos el borde original */
-    margin-left: 68em;
-    font-size: 1em;
+  font-size: 1.5em;
+  background-color: #fff !important;
+  !i;
+  !;
+  color: #02a22a !important;
+  !i;
+  !;
+  cursor: pointer;
+  border-radius: 50%;
+  font-family: 'FontAwesome';
+  /* Para usar FontAwesome */
+  padding-top: 0.52em;
+  padding-bottom: 0.52em;
+  padding-left: 0.48em;
+  padding-right: 0.5em;
+  z-index: 3000;
+  margin-top: -9.5em;
+  position: absolute;
+  text-align: center;
+  /* Asegura que el Ã­cono se centre dentro del botÃ³n */
+  line-height: 1;
+  /* AlineaciÃ³n vertical */
+  border: none;
+  /* Removemos el borde original */
+  margin-left: 68em;
+  font-size: 1em;
 }
 
 button.carrito::after {
-    content: ""; /* Pseudo-elemento vacÃ­o */
-    position: absolute;
-    top: -3px; /* Desplazamos el borde hacia afuera */
-    left: -3px; /* Desplazamos el borde hacia afuera */
-    right: -3px; /* Desplazamos el borde hacia afuera */
-    bottom: -3px; /* Desplazamos el borde hacia afuera */
-    border-radius: 50%; /* Borde redondeado */
-    border: 3px solid #02a22a; /* El borde extra */
-    z-index: 1000; /* Colocamos el borde detrÃ¡s del Ã­cono */
+  content: "";
+  /* Pseudo-elemento vacÃ­o */
+  position: absolute;
+  top: -3px;
+  /* Desplazamos el borde hacia afuera */
+  left: -3px;
+  /* Desplazamos el borde hacia afuera */
+  right: -3px;
+  /* Desplazamos el borde hacia afuera */
+  bottom: -3px;
+  /* Desplazamos el borde hacia afuera */
+  border-radius: 50%;
+  /* Borde redondeado */
+  border: 3px solid #02a22a;
+  /* El borde extra */
+  z-index: 1000;
+  /* Colocamos el borde detrÃ¡s del Ã­cono */
 }
 
 button.carrito:hover {
-    background-color: #02a22a!important;!i;!;
-    color: #fff !important;!i;!; /* Cambiar color cuando el ratÃ³n pasa sobre el botÃ³n */
+  background-color: #02a22a !important;
+  !i;
+  !;
+  color: #fff !important;
+  !i;
+  !;
+  /* Cambiar color cuando el ratÃ³n pasa sobre el botÃ³n */
 }
 
 
 button.carrito i {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 /* Estilo para el contenedor del menÃº desplegable */
 .dropdown-menuc {
-    position: absolute;
-    display: none; /* Inicialmente oculto */
-    top: 27px; /* Distancia desde el botÃ³n */
-    right: 19.4em; /* AlineaciÃ³n a la derecha */
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    width: 200px; /* Ancho del menÃº */
-    z-index: 2000; /* Para asegurarse de que el menÃº estÃ© por encima de otros elementos */
-    !;!e;!em;!e;!;
-    border: 2px solid #02a22a;
-    z.i: 1;
-    margin-top: -1.5em;
+  position: absolute;
+  display: none;
+  /* Inicialmente oculto */
+  top: 27px;
+  /* Distancia desde el botÃ³n */
+  right: 19.4em;
+  /* AlineaciÃ³n a la derecha */
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  width: 200px;
+  /* Ancho del menÃº */
+  z-index: 2000;
+  /* Para asegurarse de que el menÃº estÃ© por encima de otros elementos */
+  !;
+  !e;
+  !em;
+  !e;
+  !;
+  border: 2px solid #02a22a;
+  z.i: 1;
+  margin-top: -1.5em;
 }
 
 /* Estilo de los elementos del menÃº */
 .dropdown-menuc ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
 }
 
 .dropdown-menuc ul li {
-    border-bottom: 1px solid #f0f0f0; /* LÃ­nea de separaciÃ³n entre los elementos */
+  border-bottom: 1px solid #f0f0f0;
+  /* LÃ­nea de separaciÃ³n entre los elementos */
 }
 
 .dropdown-menuc ul li:last-child {
-    border-bottom: none; /* Sin lÃ­nea de separaciÃ³n en el Ãºltimo elemento */
+  border-bottom: none;
+  /* Sin lÃ­nea de separaciÃ³n en el Ãºltimo elemento */
 }
 
 .dropdown-menuc ul li a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #02a22a;
-    font-weight: bold;
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #02a22a;
+  font-weight: bold;
 }
 
 .dropdown-menuc ul li a:hover {
-    background-color: #02a22a; /* Color de fondo al pasar el ratÃ³n */
-    color: #fff;
+  background-color: #02a22a;
+  /* Color de fondo al pasar el ratÃ³n */
+  color: #fff;
 }
 
 /* Mostrar el menÃº cuando el botÃ³n se presiona */
-button.carrito:focus + .dropdown-menuc, 
-button.carrito:active + .dropdown-menuc {
-    display: block;
+button.carrito:focus+.dropdown-menuc,
+button.carrito:active+.dropdown-menuc {
+  display: block;
 }
 
-.menu-container {
-}
+.menu-container {}
 
 nav.category-menu {
-    z-index: 2000;
-    position: relative;
-    color: #02a22a;
-    left: 33em;
-    width: 56em;
-    font-weight: 600;
-    display: flex;
-    z-index: 1000;
-    gap: 0.4em;  /* Espacio entre los elementos flex */
-    margin-top: -4.23em;
-    height: 2.3em;
+  z-index: 2000;
+  position: relative;
+  color: #02a22a;
+  left: 33em;
+  width: 56em;
+  font-weight: 600;
+  display: flex;
+  z-index: 1000;
+  gap: 0.4em;
+  /* Espacio entre los elementos flex */
+  margin-top: -4.23em;
+  height: 2.3em;
 }
 
 nav.category-menu a {
-    !em;!e;!;
-    cursor: pointer;
-    background: #fff;
-    padding: 8px 12px;
+  !em;
+  !e;
+  !;
+  cursor: pointer;
+  background: #fff;
+  padding: 8px 12px;
 }
 
 .more-btn {
-    position: absolute;!;!e;!em;!e;!;
-    z-index: 1000;
+  position: absolute;
+  !;
+  !e;
+  !em;
+  !e;
+  !;
+  z-index: 1000;
 }
 
 .dropdown-content-more {
-    display: none;
-    margin-top: 3em;
-    margin-left: -1em;
+  display: none;
+  margin-top: 3em;
+  margin-left: -1em;
 }
 
 /* Estilo base */
 .dropdown-content-more a {
-    display: block;
-    padding: 10px;
-    background-color: white;
-    color: #02a22a;  /* Color del texto */
-    text-decoration: none;
+  display: block;
+  padding: 10px;
+  background-color: white;
+  color: #02a22a;
+  /* Color del texto */
+  text-decoration: none;
 }
 
 /* Efecto hover */
 .dropdown-content-more a:hover {
-    background-color: #02a22a;  /* Fondo en hover */
-    color: white;  /* Color del texto en hover */
+  background-color: #02a22a;
+  /* Fondo en hover */
+  color: white;
+  /* Color del texto en hover */
 }
 
 nav.category-menu a:hover {
-    color: #fff;
-    background: #02a22a;
+  color: #fff;
+  background: #02a22a;
 }
 
 /* ================================
@@ -184,13 +230,20 @@ a.logotext1:visited {
 }
 
 .logotext1 {
-    position: relative;
-    top: -6em;!;!e;!em;!e;!;
-    left: -38em;
+  position: relative;
+  top: -6em;
+  !;
+  !e;
+  !em;
+  !e;
+  !;
+  left: -38em;
 }
+
 a.logotext1:hover {
   color: #3e997f;
 }
+
 a.logotext1:focus {
   outline: none;
 }
@@ -246,7 +299,8 @@ header {
   padding: 3.5em 0;
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  margin-top: 3em; /* Espacio para la barra negra fija */
+  margin-top: 3em;
+  /* Espacio para la barra negra fija */
   position: relative;
   height: 3em;
 }
@@ -257,7 +311,11 @@ header {
   height: auto;
   margin-bottom: 0.5em;
   margin-left: 27em;
-  !;!e;!em;!e;!;
+  !;
+  !e;
+  !em;
+  !e;
+  !;
   position: relative;
   top: -6.3em;
 }
@@ -266,13 +324,18 @@ header {
 a.logotext1 {
   text-align: center;
   color: #02a22a;
-  font-size: 0.8em !important;!i;!;
+  font-size: 0.8em !important;
+  !i;
+  !;
   font-weight: 700;
   text-decoration: none;
   line-height: 1.2em;
   z-index: 999;
   position: absolute;
-  top: 0.56em;!em;!e;!;
+  top: 0.56em;
+  !em;
+  !e;
+  !;
   left: 13em;
 }
 
@@ -299,6 +362,7 @@ a.logotext1 {
   outline: none;
   border: 2px solid #02a22a;
 }
+
 #buscador::placeholder {
   color: #02a22a;
 }
@@ -317,11 +381,20 @@ a.logotext1 {
   color: #02a22a;
   width: 20px;
   height: 1.643em;
-  margin-right: -4.2em;!;!e;!em;!e;!;
-  margin-left;:;
-  margin-left;: 1;
-  margin-left;: 1e;
-  margin-left;: 1;
+  margin-right: -4.2em;
+  !;
+  !e;
+  !em;
+  !e;
+  !;
+  margin-left;
+  : ;
+  margin-left;
+  : 1;
+  margin-left;
+  : 1e;
+  margin-left;
+  : 1;
   border: 2px solid #02a22a;
   padding-top: 0.6em;
   padding-bottom: 0.6em;
@@ -332,7 +405,10 @@ a.logotext1 {
   border-bottom-right-radius: 0.3em;
 }
 
-svg:hover {color: #fff;background: #02a22a;}
+svg:hover {
+  color: #fff;
+  background: #02a22a;
+}
 
 
 /* ================================
@@ -347,6 +423,7 @@ svg:hover {color: #fff;background: #02a22a;}
   top: 0.96em;
   left: 15em;
 }
+
 .logreg {
   background: #fff;
   color: #02a22a;
@@ -360,16 +437,24 @@ svg:hover {color: #fff;background: #02a22a;}
   width: 11em;
   margin: -9.7em auto 0;
   position: relative;
-  !;!e;!em;!e;!;
+  !;
+  !e;
+  !em;
+  !e;
+  !;
   z-index: 2000;
 }
+
 .logreg:hover {
   background: #02a22a;
   color: #fff;
   cursor: pointer;
 }
+
 .reg {
-  margin-top: -1.65em !important;!i;!;
+  margin-top: -1.65em !important;
+  !i;
+  !;
   margin-left: 23.4em;
   height: 1.63em;
 }
@@ -384,11 +469,13 @@ nav ul {
   display: flex;
   justify-content: center;
 }
+
 nav ul li {
   margin: 0 1em;
   position: relative;
   color: #02a22a;
 }
+
 nav ul li a {
   color: #02a22a;
   text-decoration: none;
@@ -396,6 +483,7 @@ nav ul li a {
   display: block;
   font-weight: 700;
 }
+
 .nav-menu {
   display: none;
   flex-direction: column;
@@ -406,7 +494,7 @@ nav ul li a {
   width: 100%;
   top: 60px;
   left: 0;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* ================================
@@ -423,7 +511,9 @@ nav ul li a {
   grid-gap: 1em;
   margin: 1em;
   grid-template-columns: repeat(2, 1fr);
-  !em;!e;!;
+  !em;
+  !e;
+  !;
   position: relative;
   left: 10em;
   margin-top: -2.3em;
@@ -434,26 +524,29 @@ nav ul li a {
   padding: 1em;
   text-align: center;
   border-radius: 0.5em;
-  box-shadow: 0 0 1em rgba(0,0,0,0.29);
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.29);
   color: #02a22a;
   height: 18em;
   position: relative;
 }
 
 .producto h3 {
-    margin-top: 0.4em;
-text-transform: capitalize; /* todo en minÃºsculas */
+  margin-top: 0.4em;
+  text-transform: capitalize;
+  /* todo en minÃºsculas */
 }
 
 .producto h3::first-letter {
-  text-transform: uppercase; /* primera letra en mayÃºscula */
+  text-transform: uppercase;
+  /* primera letra en mayÃºscula */
 }
 
 .md {
-    margin-left: 3em;
-    position: relative;
-    left: -1.5em;
+  margin-left: 3em;
+  position: relative;
+  left: -1.5em;
 }
+
 /* La imagen ocupa el 100% del ancho y estÃ¡ pegada a los bordes laterales */
 .producto img {
   width: 112.5%;
@@ -464,6 +557,7 @@ text-transform: capitalize; /* todo en minÃºsculas */
   object-fit: cover;
   cursor: pointer;
 }
+
 .precio {
   font-weight: 700;
   font-size: 1.3em;
@@ -486,6 +580,7 @@ text-transform: capitalize; /* todo en minÃºsculas */
   top: 15.8em;
   height: 1.4em;
 }
+
 .btn-ver-producto:hover {
   background-color: #fff;
   color: #02a22a;
@@ -499,13 +594,15 @@ footer {
   padding: 1em;
   background-color: #fff;
   color: #02a22a;
-  box-shadow: 0 0 0.4em rgba(0,0,0,0.45);
+  box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.45);
   width: 100%;
   position: relative;
   height: 3.5em;
   line-height: 0.4em;
   font-weight: 700;
-  !em;!e;!;
+  !em;
+  !e;
+  !;
 }
 
 /* ================================
@@ -514,20 +611,25 @@ footer {
 ::-webkit-scrollbar {
   width: 5px;
 }
+
 ::-webkit-scrollbar-track {
   background-image: url(https://img.freepik.com/foto-gratis/muro-hormigon-texturizado_53876-89536.jpg);
   background-size: cover;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #02a22a;
   border-radius: 6px;
 }
+
 .dropdown-content::-webkit-scrollbar {
   width: 5px;
 }
+
 .dropdown-content::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .dropdown-content::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 0.5em;
@@ -558,80 +660,88 @@ footer {
     cursor: pointer;
   }
 }
+
 /* Notebooks y pantallas grandes (1080px o mÃ¡s): 6 columnas */
 @media (min-width: 1080px) {
   .productos {
     grid-template-columns: repeat(6, 1fr);
   }
+
   header h1 {
     font-size: 3em;
   }
-  .logreg, #auth-buttons {
+
+  .logreg,
+  #auth-buttons {
     margin-top: -4em;
   }
 }
 
 /* Estilos del dropdown de medidas */
 .droptmn {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
 }
 
 .textomed {
-    display: inline-block;
-    padding: 8px 12px;
-    background-color: #fff;
-    border: 1px solid #02a22a;
-    border-radius: 0.3em;
-    cursor: pointer;
-    margin-left: -6.1em;
-    margin-top: -1.4em;!;!e;!;
-    font-weight: 700;
-    width: 8.6em;
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #fff;
+  border: 1px solid #02a22a;
+  border-radius: 0.3em;
+  cursor: pointer;
+  margin-left: -6.1em;
+  margin-top: -1.4em;
+  !;
+  !e;
+  !;
+  font-weight: 700;
+  width: 8.6em;
 }
 
 .textomed:hover {
-    color: #fff;
-    background: #02a22a;
+  color: #fff;
+  background: #02a22a;
 }
 
 .droptmn-menu {
-    display: none;
-    position: absolute;
-    top: 2em;
-    left: 0;
-    background: white;
-    border: 1px solid #02a22a;
-    border-radius: 0.3em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    list-style: none;
-    padding: 5px 0;
-    margin: 0;
-    min-width: 10em;
-    z-index: 10;
-    margin-left: -5.13em;
+  display: none;
+  position: absolute;
+  top: 2em;
+  left: 0;
+  background: white;
+  border: 1px solid #02a22a;
+  border-radius: 0.3em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  min-width: 10em;
+  z-index: 10;
+  margin-left: -5.13em;
 }
 
 .droptmn-menu li {
-    padding: 8px 12px;
-    cursor: pointer;
+  padding: 8px 12px;
+  cursor: pointer;
 }
 
-.droptmn-menu li:hover {
-}
+.droptmn-menu li:hover {}
 
 /* Clase para mostrar el menÃº */
 .droptmn-menu.droptmn-show {
-    display: block;
+  display: block;
 }
 
 .droptmn-menu::-webkit-scrollbar {
   width: 0px;
 }
+
 .droptmn-menu::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .droptmn-menu::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 0.5em;
@@ -666,12 +776,10 @@ footer {
   background: #f00;
   font-family: 'Gilroy';
   font-weight: 700;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  margin-left: -2.94em;
+  padding: 0.2em 0.5em;
   position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   border-top-left-radius: 0.3em;
   border-top-right-radius: 0.3em;
   margin-top: -2.9em;
