@@ -45,7 +45,7 @@ button.carrito {
   padding-left: 0.48em;
   padding-right: 0.5em;
   z-index: 3000;
-  margin-top: -9.5em;
+  margin-top: -9.8em;
   position: absolute;
   text-align: center;
   /* Asegura que el Ã­cono se centre dentro del botÃ³n */
@@ -110,9 +110,7 @@ button.carrito i {
   /* Para asegurarse de que el menÃº estÃ© por encima de otros elementos */
   !;
   !e;
-  !em;
-  !e;
-  !;
+
   border: 2px solid #02a22a;
   z.i: 1;
   margin-top: -1.5em;
@@ -168,14 +166,13 @@ nav.category-menu {
   z-index: 1000;
   gap: 0.4em;
   /* Espacio entre los elementos flex */
-  margin-top: -4.23em;
+  margin-top: -11.23em;
   height: 2.3em;
+  margin-bottom: 2em;
 }
 
 nav.category-menu a {
-  !em;
-  !e;
-  !;
+
   cursor: pointer;
   background: #fff;
   padding: 8px 12px;
@@ -185,9 +182,7 @@ nav.category-menu a {
   position: absolute;
   !;
   !e;
-  !em;
-  !e;
-  !;
+
   z-index: 1000;
 }
 
@@ -234,9 +229,7 @@ a.logotext1:visited {
   top: -6em;
   !;
   !e;
-  !em;
-  !e;
-  !;
+
   left: -38em;
 }
 
@@ -302,7 +295,7 @@ header {
   margin-top: 3em;
   /* Espacio para la barra negra fija */
   position: relative;
-  height: 3em;
+  height: 0.1em;
 }
 
 /* Logo */
@@ -310,12 +303,9 @@ header {
   width: 6em;
   height: auto;
   margin-bottom: 0.5em;
-  margin-left: 27em;
+  margin-left: 25em;
   !;
   !e;
-  !em;
-  !e;
-  !;
   position: relative;
   top: -6.3em;
 }
@@ -332,10 +322,7 @@ a.logotext1 {
   line-height: 1.2em;
   z-index: 999;
   position: absolute;
-  top: 0.56em;
-  !em;
-  !e;
-  !;
+  top: 0.42em;
   left: 13em;
 }
 
@@ -344,7 +331,7 @@ a.logotext1 {
   width: 33em;
   margin-top: 3.5em;
   left: 44em;
-  top: -8.1em;
+  top: -15.0em;
 }
 
 #buscador {
@@ -380,13 +367,10 @@ a.logotext1 {
 .search-icon {
   color: #02a22a;
   width: 20px;
-  height: 1.643em;
-  margin-right: -4.2em;
+  height: 2em;
+  margin-right: -4.3em;
   !;
   !e;
-  !em;
-  !e;
-  !;
   margin-left;
   : ;
   margin-left;
@@ -397,10 +381,10 @@ a.logotext1 {
   : 1;
   border: 2px solid #02a22a;
   padding-top: 0.6em;
-  padding-bottom: 0.6em;
+  padding-bottom: 0.4em;
   padding-left: 0.7em;
   padding-right: 0.7em;
-  margin-top: 0.3em;
+  margin-top: 0.35em;
   border-top-right-radius: 0.3em;
   border-bottom-right-radius: 0.3em;
 }
@@ -439,9 +423,7 @@ svg:hover {
   position: relative;
   !;
   !e;
-  !em;
-  !e;
-  !;
+
   z-index: 2000;
 }
 
@@ -511,9 +493,7 @@ nav ul li a {
   grid-gap: 1em;
   margin: 1em;
   grid-template-columns: repeat(2, 1fr);
-  !em;
-  !e;
-  !;
+
   position: relative;
   left: 10em;
   margin-top: -2.3em;
@@ -600,40 +580,6 @@ footer {
   height: 3.5em;
   line-height: 0.4em;
   font-weight: 700;
-  !em;
-  !e;
-  !;
-}
-
-/* ================================
-   SCROLLBAR PERSONALIZADA
-================================ */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background-image: url(https://img.freepik.com/foto-gratis/muro-hormigon-texturizado_53876-89536.jpg);
-  background-size: cover;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #02a22a;
-  border-radius: 6px;
-}
-
-.dropdown-content::-webkit-scrollbar {
-  width: 5px;
-}
-
-.dropdown-content::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.dropdown-content::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 0.5em;
-  padding-bottom: 1em;
 }
 
 /* ================================
@@ -673,7 +619,7 @@ footer {
 
   .logreg,
   #auth-buttons {
-    margin-top: -4em;
+    margin-top: -4.03em;
   }
 }
 
@@ -693,9 +639,6 @@ footer {
   cursor: pointer;
   margin-left: -6.1em;
   margin-top: -1.4em;
-  !;
-  !e;
-  !;
   font-weight: 700;
   width: 8.6em;
 }

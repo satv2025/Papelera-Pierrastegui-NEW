@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
     <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/reg_logueo_pp.css">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden !important;
+            overflow-y: hidden !important;
+            /* ¡Importante! Elimina scroll nativo */
+        }
+
+        #page-scroll {
+            height: 100vh;
+            overflow: auto;
+            /* scroll va aquí */
+            position: relative;
+        }
+    </style>
 </head>
+
 <body>
     <div class="form-container">
         <h2>CREA TU CUENTA</h2>
@@ -18,13 +38,15 @@
             <div class="password-container">
                 <input type="password" id="register-password" placeholder="Contraseña" required>
                 <!-- Cambiamos el span por un <img> con las rutas de las imágenes -->
-                <img src="assets/images/ojoc2.png" class="toggle-password" data-target="register-password" alt="Mostrar/Ocultar contraseña" />
+                <img src="assets/images/ojoc2.png" class="toggle-password" data-target="register-password"
+                    alt="Mostrar/Ocultar contraseña" />
             </div>
 
             <div class="password-container">
                 <input type="password" id="confirmpassword" placeholder="Confirmar Contraseña" required>
                 <!-- Cambiamos el span por un <img> con las rutas de las imágenes -->
-                <img src="assets/images/ojoc2.png" class="toggle-password" data-target="confirmpassword" alt="Mostrar/Ocultar contraseña" />
+                <img src="assets/images/ojoc2.png" class="toggle-password" data-target="confirmpassword"
+                    alt="Mostrar/Ocultar contraseña" />
             </div>
 
             <button type="submit">Registrarse</button>
@@ -34,5 +56,7 @@
 
     <script src="assets/js/togglePassword.js"></script> <!-- Aquí incluimos togglePassword.js -->
     <script src="assets/js/auth.js"></script> <!-- Aquí incluimos auth.js -->
+    <script src="assets/js/satv-scroll-main.js"></script>
 </body>
+
 </html>
