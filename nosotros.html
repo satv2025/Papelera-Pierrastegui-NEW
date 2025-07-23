@@ -5,72 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosotros - Papelera Pierrastegui</title>
-    <link rel="icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/css/nosotros.css">
+    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/css/nosotros.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden !important;
-            overflow-y: hidden !important;
-            /* ¡Importante! Elimina scroll nativo */
-        }
-
-        #page-scroll {
-            height: 100vh;
-            overflow: auto;
-            /* scroll va aquí */
-            position: relative;
-        }
-    </style>
 </head>
 
 <body>
+    <!-- Encabezado principal -->
     <header>
         <h1>Papelera Pierrastegui</h1>
         <nav>
             <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../contacto.html">Catálogo</a></li>
-                <li><a href="../nosotros.html">Contacto</a></li>
+                <li><a href="index">Inicio</a></li>
+                <li><a href="nosotros" class="active">Nosotros</a></li>
+                <li><a href="contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <body>
-        <main>
-            <article id="medio-pago-articulo">
-                <header class="articulo-header">
-                    <h2>Sobre Nosotros</h2>
-                </header>
-                <section class="contenido-articulo">
-                    <div class="texto">
-                        <p>En Pierrastegui, somos una papelera mayorista y minorista especializada en la
-                            comercialización de envases, descartables, embalajes, packaging, higiene institucional,
-                            limpieza y artículos para locales comerciales y oficinas. Además, fabricamos insumos para
-                            floristas y moños de auto.</p>
-                        <p class="destacado">Nos comprometemos a ofrecer productos de primera calidad con una amplia
-                            variedad para que encuentres todo en un solo lugar, sin vueltas. Trabajamos con
-                            responsabilidad y cercanía, asegurándonos de brindarte un servicio confiable y eficiente.
-                        </p>
-                        <p>Realizamos entregas directas en Capital Federal y Conurbano, garantizando rapidez y seguridad
-                            en cada pedido.</p>
-                        <p>Si buscás un proveedor que te simplifique el día a día, estamos para ayudarte.</p>
-                    </div>
-                    <img class="fotosn" src="/assets/images/fondosn.jpg" alt="Imagen representativa">
-                </section>
-            </article>
-        </main>
-        <footer>
-            <p>2025 © Papelera Pierrastegui</p>
-            <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-        </footer>
+    <!-- Contenido principal -->
+    <main>
+        <article id="medio-pago-articulo">
+            <header class="articulo-header">
+                <h2>Sobre Nosotros</h2>
+            </header>
 
-        <script src="../assets/js/inicio.js"></script>
-        <script src="assets/js/satv-scroll-main.js"></script>
-    </body>
+            <section class="contenido-articulo">
+                <div class="texto">
+                    <p>En Pierrastegui, somos una papelera mayorista y minorista especializada en la comercialización de
+                        envases, descartables, embalajes, packaging, higiene institucional, limpieza y artículos para
+                        locales comerciales y oficinas. Además, fabricamos insumos para floristas y moños de auto.</p>
+
+                    <p class="destacado">Nos comprometemos a ofrecer productos de primera calidad con una amplia
+                        variedad para que encuentres todo en un solo lugar, sin vueltas. Trabajamos con responsabilidad
+                        y cercanía, asegurándonos de brindarte un servicio confiable y eficiente.</p>
+
+                    <p>Realizamos entregas directas en Capital Federal y Conurbano, garantizando rapidez y seguridad en
+                        cada pedido.</p>
+
+                    <p>Si buscás un proveedor que te simplifique el día a día, estamos para ayudarte.</p>
+                </div>
+
+                <img class="fotosn" src="assets/images/fondosn.jpg" alt="Imagen representativa">
+            </section>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>2025 © Papelera Pierrastegui</p>
+        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/satv-scroll-main.js"></script>
+</body>
 
 </html>

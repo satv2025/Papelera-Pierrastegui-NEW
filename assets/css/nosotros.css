@@ -1,65 +1,86 @@
 @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
 
-::selection {
-    color: #fff;
-    background: #02a22a;
+:root {
+    --primary-color: #02a22a;
+    --text-color: #333;
+    --background-color: #f0f0f0;
+    --shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+* {
+    font-family: 'Gilroy', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Gilroy', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fff;
+    background-color: var(--background-color);
     font-size: 1em;
     line-height: 1.7;
-    color: #02a22a;
+    color: var(--text-color);
 }
 
+/* Header */
 header {
     background-color: #fff;
-    color: #02a22a;
-    padding: 1em;
+    color: var(--primary-color);
+    padding: 20px 40px;
+    box-shadow: var(--shadow);
     text-align: center;
-    box-shadow: 0 0 0.4em 0 #00000073;
-    font-size: 1em !important;!i;!;!;!;
+    border-bottom: 3px solid var(--primary-color);
 }
 
+header h1 {
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+}
+
+/* Navigation */
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     justify-content: center;
-    margin-top: 1.5em;
-}
-
-nav ul li {
-    margin: 0 1.5em;
+    gap: 2em;
+    padding: 0;
+    margin: 1.5em 0 1em 0;
 }
 
 nav ul li a {
-    color: #02a22a;
+    color: var(--primary-color);
     text-decoration: none;
+    background: #fff;
+    outline: 2px solid var(--primary-color);
     padding: 0.5em 1em;
-    font-size: 1.2em;
-    font-weight: 600;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: #fff; /* Cambio de color al pasar el mouse */
-    background-color: #02a22a; /* Fondo oscuro al pasar el mouse */
-    border-radius: 5px; /* Bordes redondeados para el hover */
-     /* Aumentamos el padding para un efecto más notorio */
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: var(--primary-color);
+    color: #fff;
 }
 
+/* Selection */
+::selection {
+    color: #fff;
+    background: var(--primary-color);
+}
+
+/* Contenido principal */
 #medio-pago-articulo {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 4em auto;
     padding: 2.5em 3em;
-     /* Fondo del contenedor del artículo */
+    background: #fff;
     border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow);
     transition: transform 0.3s ease-in-out;
-    background: #ccc;
 }
 
 .articulo-header {
@@ -69,94 +90,79 @@ nav ul li a:hover {
 
 .articulo-header h2 {
     font-size: 2.5em;
-    color: #02a22a;
+    color: var(--primary-color);
     margin-bottom: 0.5em;
-}
-
-.subtitulo {
-    font-size: 1.2em;
-    color: #02a22a;
-    font-weight: 400;
-    margin-bottom: 1.5em;
 }
 
 .contenido-articulo {
     display: flex;
     align-items: flex-start;
-    text-align: justify;
+    gap: 2em;
+    flex-wrap: wrap;
 }
 
 .texto {
-    flex: 1;
-    max-width: 60%;
+    flex: 1 1 60%;
+    min-width: 280px;
+    text-align: justify;
 }
 
-.fotosn {
-    max-width: 35%;
-    height: auto;
-    margin-left: 43px;
-    margin-top: 0.32em;
+.texto p {
+    margin-bottom: 1.8em;
+    color: var(--text-color);
 }
 
 .destacado {
-    clear: both;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 
-
-.contenido-articulo p {
-    margin-bottom: 1.8em;
-    font-weight: 400;
-    width: 35em;
+.fotosn {
+    flex: 1 1 35%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
 }
 
-.flecha {
-    transform: rotate(90deg); /* Rota la flecha 90 grados */
-    transform-origin: center center; /* Rota la flecha 90 grados hacia abajo */
-    width: 0em;
-    margin-left: 27em;
-    margin-top: -4.9em;
-    bottom: -2em;
-    position: relative;
-}
-
+/* Enlace destacado */
 .enlace-pago a {
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: 700;
-    color: #02a22a;
+    color: var(--primary-color);
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
     transition: color 0.3s ease;
-    width: 6em;
-    left: 40.4%;
-    position: relative;
 }
 
 .enlace-pago a:hover {
     color: #fff;
+    background-color: var(--primary-color);
+    padding: 0.3em 0.7em;
+    border-radius: 0.3em;
 }
 
 .enlace-pago img {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
 }
 
+/* Información de contacto */
 .contacto-info {
     list-style: none;
     padding-left: 0;
-    margin-top: 1.5em;
+    margin-top: 2em;
 }
 
 .contacto-info li {
     font-size: 1.2em;
     margin-bottom: 1.2em;
-    line-height: 0.2em;
 }
 
 .contacto-info a {
-    color: #02a22a;
+    color: var(--primary-color);
     text-decoration: none;
     font-weight: 700;
     transition: color 0.3s ease;
@@ -166,84 +172,38 @@ nav ul li a:hover {
     color: #fff;
 }
 
+/* Footer */
 footer {
     text-align: center;
-    padding: 1em;
+    padding: 1.5em;
     background-color: #fff;
-    color: #02a22a;
-    margin-top: 2em;
-    line-height: 0;
-    box-shadow: 0 0 0.4em 0 #00000073;
-}
-
-footer p {
-}
-
-@media (max-width: 75em) {
-    #medio-pago-articulo {
-        padding: 2em;
-    }
-    
-    .contacto-info a {
-        color: #02a22a;
-        text-decoration: none;
-        font-weight: 700;
-        transition: color 0.3s ease;
-    }
-}
-
-@media (max-width: 56.25em) {
-    #medio-pago-articulo {
-        padding: 1.5em;
-    }
-
-    .contacto-info a {
-    color: #02a22a;
-    text-decoration: none;
+    color: var(--primary-color);
+    margin-top: 3em;
+    border-top: 3px solid var(--primary-color);
+    box-shadow: var(--shadow);
     font-weight: 700;
-    transition: color 0.3s ease;
 }
 
-.contacto-info a {
-    color: #02a22a;
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s ease;
-    margin-bottom: -5em;
-    line-height: 1.3em;
-}
-}
+/* Responsive */
 
-@media (max-width: 37.5em) {
-    #medio-pago-articulo {
-        padding: 1.2em;
-        width: 95%;
-    }
-
-    .contacto-info a {
-        color: #02a22a;
-        text-decoration: none;
-        font-weight: 700;
-        transition: color 0.3s ease;
-        line-height: 2;
-        margin-bottom: -36em;
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.6em;
     }
 }
 
-/* Scrollbar personalizada */
-::-webkit-scrollbar {
-    width: 8px;
-}
+@media (max-width: 900px) {
+    .contenido-articulo {
+        flex-direction: column;
+        align-items: center;
+    }
 
-::-webkit-scrollbar-track {
-    background: #fff;
-}
+    .texto {
+        max-width: 100%;
+    }
 
-::-webkit-scrollbar-thumb {
-    background: #ddd;
-    border-radius: 10px;
-}
-
-footer {
-    font-weight: 700;
+    .fotosn {
+        margin: 2em 0 0;
+        width: 100%;
+    }
 }

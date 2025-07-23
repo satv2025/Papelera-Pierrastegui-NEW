@@ -2,118 +2,755 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Papelera Pierrastegui</title>
-    <link rel="icon" href="assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/inicio.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
+
     <header>
-        <button class="carrito dropdownc">🛒</button>
-        <div class="dropdown-menuc">
+        <h1>Papelera Pierrastegui</h1>
+        <nav>
             <ul>
-                <li><a href="#">Ver carrito</a></li>
-                <li><a href="#">Pagar</a></li>
-                <li><a href="#">Productos recomendados</a></li>
-                <li><a href="#">Historial de compras</a></li>
-            </ul>
-        </div>
-        <div class="headerbox">
-            <ul>
-                <li><a href="index">Inicio</a></li>
+                <li><a href="index" class="active">Inicio</a></li>
                 <li><a href="nosotros">Nosotros</a></li>
                 <li><a href="contacto">Contacto</a></li>
             </ul>
-        </div>
-        <a href="https://papelerapierrastegui.com.ar" class="logotext1">
-            <h1>Papelera</h1>
-            <h1>Pierrastegui</h1>
-        </a>
-        <nav>
         </nav>
-        <div id="auth-buttons">
-            <button class="logreg" onclick="window.location.href='logueo'">Iniciar sesión</button>
-            <button class="logreg reg" onclick="window.location.href='registro'">Registrarse</button>
-        </div>
-        <div id="user-menu" style="display:none;">
-            <div class="user-icon" onclick="toggleMenu()">
-                👤 <span id="user-name"></span>
-            </div>
-            <div class="user-dropdown" id="user-dropdown">
-                <a href="#">Opciones</a>
-                <button id="logout">Cerrar sesión</button>
-            </div>
-        </div>
-        <div class="mpavisoext" style="opacity: 0;"><span class="mpaviso">ÚNICO MEDIO DE PAGO: MercadoPago</span> <a
-                class="infomdp" href="info/mediodepago">Mas Información</a></div>
     </header>
-    <a href="https://papelerapierrastegui.com.ar" id="linkcampo">
-        <img class="logo1" src="https://papelerapierrastegui.com.ar/assets/images/favicon.png" alt="Logo">
-    </a>
-    <div class="search-container">
-        <input type="text" id="buscador" onkeyup="filtrarProductos()" placeholder="Buscar productos...">
-        <button id="search-button" class="search-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" role="img" viewBox="0 0 24 24" width="24" height="24"
-                class="search-icon">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10ZM15.6177 17.0319C14.078 18.2635 12.125 19 10 19C5.02944 19 1 14.9706 1 10C1 5.02944 5.02944 1 10 1C14.9706 1 19 5.02944 19 10C19 12.125 18.2635 14.078 17.0319 15.6177L22.7071 21.2929L21.2929 22.7071L15.6177 17.0319Z"
-                    fill="currentColor"></path>
-            </svg>
-        </button>
-    </div>
 
-    <!-- Contenedor del menú -->
-    <div class="menu-container">
-        <nav class="category-menu">
-            <a onclick="filtrarCategoria('arranques')">Arranques</a>
-            <a onclick="filtrarCategoria('bandejas')">Bandejas</a>
-            <a onclick="filtrarCategoria('blondas')">Blondas</a>
-            <a onclick="filtrarCategoria('bolsas')">Bolsas</a>
-            <a onclick="filtrarCategoria('cajas')">Cajas</a>
-            <a onclick="filtrarCategoria('carton')">Cartón</a>
-            <a onclick="filtrarCategoria('cintas')">Cintas</a>
-            <a onclick="filtrarCategoria('cubiertos')">Cubiertos</a>
-            <a onclick="filtrarCategoria('film')">Film</a>
-            <a onclick="filtrarCategoria('stretch')">Stretch</a>
-            <a onclick="filtrarCategoria('folex')">Fólex</a>
+    <div class="container">
+        <div class="menu-container">
+            <div class="category-menu">
+                <span onclick="filtrarCategoria('arranques')">Arranques</span>
+                <span onclick="filtrarCategoria('bandejas')">Bandejas</span>
+                <span onclick="filtrarCategoria('blondas')">Blondas</span>
+                <span onclick="filtrarCategoria('bolsas')">Bolsas</span>
+                <span onclick="filtrarCategoria('cajas')">Cajas</span>
+                <span onclick="filtrarCategoria('carton')">Cartón</span>
+                <span onclick="filtrarCategoria('cintas')">Cintas</span>
+                <span onclick="filtrarCategoria('cubiertos')">Cubiertos</span>
+                <span onclick="filtrarCategoria('film')">Film</span>
+                <span onclick="filtrarCategoria('stretch')">Stretch</span>
+                <span onclick="filtrarCategoria('folex')">Fólex</span>
 
-            <!-- Botón Más como categoría -->
-            <div class="more-dropdown">
-                <a class="more-btn" onclick="toggleMoreDropdown()">Más</a>
-                <div class="dropdown-content-more" id="more-dropdown">
-                    <a onclick="filtrarCategoria('guantes')">Guantes</a>
-                    <a onclick="filtrarCategoria('libreria')">Librería</a>
-                    <a onclick="filtrarCategoria('papel')">Papel</a>
-                    <a onclick="filtrarCategoria('pizzeria')">Pizzería</a>
-                    <a onclick="filtrarCategoria('potes')">Potes</a>
-                    <a onclick="filtrarCategoria('rollostermicos')">Rollos Térmicos</a>
-                    <a onclick="filtrarCategoria('sorbetes')">Sorbetes</a>
-                    <a onclick="filtrarCategoria('vasos')">Vasos</a>
-                    <a onclick="filtrarCategoria('todos')">Todos</a>
+                <div class="more-dropdown">
+                    <span class="more-btn" onclick="toggleMoreDropdown(event)">Más</span>
+                    <div class="dropdown-content-more" id="more-dropdown">
+                        <span onclick="filtrarCategoria('guantes')">Guantes</span>
+                        <span onclick="filtrarCategoria('libreria')">Librería</span>
+                        <span onclick="filtrarCategoria('papel')">Papel</span>
+                        <span onclick="filtrarCategoria('pizzeria')">Pizzería</span>
+                        <span onclick="filtrarCategoria('potes')">Potes</span>
+                        <span onclick="filtrarCategoria('rollostermicos')">Rollos Térmicos</span>
+                        <span onclick="filtrarCategoria('sorbetes')">Sorbetes</span>
+                        <span onclick="filtrarCategoria('vasos')">Vasos</span>
+                        <span onclick="filtrarCategoria('todos')">Todos</span>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </div>
+        </div>
+        <!-- Catálogo completo con todos los productos -->
+        <div class="category" id="todos">
+            <div class="productos-grid">
+                <!-- Productos de arranques -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
+                        alt="Arranque grueso" />
+                    <div class="producto-info">
+                        <div class="nombre">Arranque grueso</div>
+                        <div class="categoria">Arranques</div>
+                        <div class="tamanos"><strong>Tamaños:</strong> 20x25, 20x30, 25x35, 30x40, 35x45, 40x50, 45x60,
+                            50x70, 60x90</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranque%20Rendidor.jpg"
+                        alt="Arranque rendidor" />
+                    <div class="producto-info">
+                        <div class="nombre">Arranque rendidor</div>
+                        <div class="categoria">Arranques</div>
+                        <div class="tamanos"><strong>Tamaños:</strong> 15x20, 15x25, 20x30, 25x35, 30x40, 35x45, 40x50
+                        </div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
 
-    <main>
-        <section id="catalogo">
-            <div class="productos" id="productos">
-                <!-- Productos se insertarán aquí -->
+                <!-- Bandejas -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
+                        alt="Bandejas de aluminio" />
+                    <div class="producto-info">
+                        <div class="nombre">Bandejas de aluminio</div>
+                        <div class="categoria">Bandejas</div>
+                        <div class="tamanos"><strong>Tamaños:</strong> f75, f100</div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20DE%20CART%C3%93N/bandeja%20de%20carton.webp"
+                        alt="Bandejas de cartón" />
+                    <div class="producto-info">
+                        <div class="nombre">Bandejas De Carton</div>
+                        <div class="categoria">Bandejas</div>
+                        <div class="tamanos"><strong>N°1, N°2, N°3, N°4, N°5, N°6, N°12, N°12,5, N°13, N°13,5</strong>
+                        </div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PLÁSTICAS/bandeja%20descartable%20n%20107.jpg"
+                        alt="Bandejas plásticas" />
+                    <div class="producto-info">
+                        <div class="nombre">Bandejas plásticas</div>
+                        <div class="categoria">Bandejas</div>
+                        <div class="tamanos"><strong>N°102, N°103, N°105 Ovalada, N°107</strong></div> <button
+                            class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg"
+                        alt="Bandeja Telgopor" />
+                    <div class="producto-info">
+                        <div class="nombre">Bandejas de Telgopor</div>
+                        <div class="categoria">Bandejas</div>
+                        <div class="tamanos"><strong>N°615, N°617, N°618, N°619, N°625, N°628</strong></div> <button
+                            class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://http2.mlstatic.com/D_708276-MLA48997537211_022022-O.jpg" alt="Blonda" />
+                    <div class="producto-info">
+                        <div class="nombre">Blonda</div>
+                        <div class="categoria">Bandejas</div>
+                        <div class="tamanos"><strong>N°28, N°32</strong></div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Bolsas -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg"
+                        alt="Bolsas camiseta" />
+                    <div class="producto-info">
+                        <div class="nombre">Bolsas camiseta</div>
+                        <div class="categoria">Bolsas</div>
+                        <div class="tamanos"><strong>Tamaños:</strong> (R) 20x30, (R) 30x40, (R) 40x50, (R) 45x60, (R)
+                            50x60, (R) 50x70, (R) 60x80, (R) 45X60 Ciudad Negra, (E) 30x40, (E) 40x50</div> <button
+                            class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg"
+                        alt="Bolsas sulfito" />
+                    <div class="producto-info">
+                        <div class="nombre">Bolsas sulfito</div>
+                        <div class="categoria">Bolsas</div>
+                        <div class="tamanos"><strong>N°3, N°4, N°6, N°7, N°8, Delivery 26x38x17</strong></div> <button
+                            class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <div class="producto-img-container">
+                        <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
+                        <img src="https://media.istockphoto.com/id/148157090/es/foto/bolsa-de-horno.jpg?s=612x612&w=0&k=20&c=mMx0JZc2bdplKFz4VyIuXVyabZED3vFFLOuPvWsvSUc="
+                            alt="Bolsas horno" />
+                    </div>
+                    <div class="producto-info">
+                        <div class="nombre">Bolsas horno</div>
+                        <div class="categoria">Bolsas</div>
+                        <div class="tamanos"><strong>Stock: SIN STOCK</strong></div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg"
+                        alt="Bolsas polipropileno" />
+                    <div class="producto-info">
+                        <div class="nombre">Bolsas polipropileno</div>
+                        <div class="categoria">Bolsas</div>
+                        <div class="tamanos"><strong>10x15, 10x25, 15x20, 15x25, 20x25, 20x30, 25x35, 30x40, 35x45,
+                                40x50</strong></div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20RESIDUO/bolsas%20de%20residuo.jpg"
+                        alt="Bolsas residuo" />
+                    <div class="producto-info">
+                        <div class="nombre">Bolsas residuo</div>
+                        <div class="categoria">Bolsas</div>
+                        <div class="tamanos"><strong>45x60, 50x70, 60x90, 80x1,10, 90x1,20</strong></div> <button
+                            class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RIÑÓN/bolsas-rinon-todoplastic.jpg"
+                        alt="Bolsas riñón" />
+                    <div class="producto-info">
+                        <div class="nombre">Bolsas riñón</div>
+                        <div class="categoria">Bolsas</div>
+                        <div class="tamanos"><strong>15x20, 20x30, 25x35, 30x40, 35x45, 40x50, 50x60, Vino</strong>
+                        </div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Cajas -->
+                <div class="producto">
+                    <img src="https://camoga.ar/media/catalog/product/cache/17183a23c5d57b885c9e1f3d66234d68/1/8/18020722_caja_para_desayuno_con_visor_30x30x12_2_.jpg"
+                        alt="Caja Desayuno" />
+                    <div class="producto-info">
+                        <div class="nombre">Caja De Desayuno</div>
+                        <div class="categoria">Cajas</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://biopackaging.com.ar/wp-content/uploads/2022/01/estuche-mediano-sandwich.jpg"
+                        alt="Caja Sandwich" />
+                    <div class="producto-info">
+                        <div class="nombre">Caja De Sandwich</div>
+                        <div class="categoria">Cajas</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp"
+                        alt="Caja Empanada" />
+                    <div class="producto-info">
+                        <div class="nombre">Caja De Empanada</div>
+                        <div class="categoria">Cajas</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/caja%20de%20pizzas.jpg"
+                        alt="Caja De Pizza" />
+                    <div class="producto-info">
+                        <div class="nombre">Caja De Pizza</div>
+                        <div class="categoria">Cajas</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <div class="producto-img-container">
+                        <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
+                        <img src="https://dpack.com.ar/web/image/product.template/399/image_1024?unique=fc262e0"
+                            alt="Caja Ravioles" />
+                    </div>
+                    <div class="producto-info">
+                        <div class="nombre">Caja De Ravioles</div>
+                        <div class="categoria">Cajas</div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/caja%20de%20hamburguesa.jpg"
+                        alt="Caja Hamburguesa" />
+                    <div class="producto-info">
+                        <div class="nombre">Caja De Hamburguesa</div>
+                        <div class="categoria">Cajas</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Carton -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CART%C3%93N%20CORRUGADO/carton%20corrugado.jpg"
+                        alt="Cartón Corrugado" />
+                    <div class="producto-info">
+                        <div class="nombre">Cartón Corrugado</div>
+                        <div class="categoria">Cartón</div>
+                        <div class="tamanos"><strong>90x20, 100x20</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_774089-MLA77001145185_062024-O.webp"
+                        alt="Tiras de Cartón Satinadas" />
+                    <div class="producto-info">
+                        <div class="nombre">Tiras de Cartón Satinadas</div>
+                        <div class="categoria">Cartón</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Cintas -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg"
+                        alt="Cinta Scotch" />
+                    <div class="producto-info">
+                        <div class="nombre">Cinta Scotch</div>
+                        <div class="categoria">Cintas</div>
+                        <div class="tamanos"><strong>24x50, 48x100</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cinta%20de%20papel.jpg"
+                        alt="Cinta papel" />
+                    <div class="producto-info">
+                        <div class="nombre">Cinta papel</div>
+                        <div class="categoria">Cintas</div>
+                        <div class="tamanos"><strong>18, 24, 36</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+
+                <!-- Cubiertos -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/spoon1_16_9.png"
+                        alt="Cuchara Sopera" />
+                    <div class="producto-info">
+                        <div class="nombre">Cuchara Sopera</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/spoon3_16_9.png"
+                        alt="Cucharita" />
+                    <div class="producto-info">
+                        <div class="nombre">Cucharita</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/knife1_16_9.png"
+                        alt="Cuchillo Blanco" />
+                    <div class="producto-info">
+                        <div class="nombre">Cuchillo Blanco</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/knife2_16_9.png"
+                        alt="Cuchillo Negro" />
+                    <div class="producto-info">
+                        <div class="nombre">Cuchillo Negro</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_2X_745062-MLA76109409291_042024-F.webp"
+                        alt="Plato Torta" />
+                    <div class="producto-info">
+                        <div class="nombre">Plato torta</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_2X_677589-MLA51106764843_082022-F.webp"
+                        alt="Remos" />
+                    <div class="producto-info">
+                        <div class="nombre">Remos</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_2X_835147-MLU78458236278_082024-F.webp"
+                        alt="Tenedor Blanco" />
+                    <div class="producto-info">
+                        <div class="nombre">Tenedor Blanco</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_2X_600612-MLA80900595398_122024-F.webp"
+                        alt="Tenedor Negro" />
+                    <div class="producto-info">
+                        <div class="nombre">Tenedor Negro</div>
+                        <div class="categoria">Cubiertos</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Film -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/D_NQ_NP_2X_724993-MLA74413303619_022024-F.webp"
+                        alt="Film" />
+                    <div class="producto-info">
+                        <div class="nombre">Film</div>
+                        <div class="categoria">Film</div>
+                        <div class="tamanos"><strong>38x700, 45x700</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/strech%20con%20manija.jpg"
+                        alt="Stretch" />
+                    <div class="producto-info">
+                        <div class="nombre">Stretch</div>
+                        <div class="categoria">Stretch</div>
+                        <div class="tamanos"><strong>10cm, con mango, manual</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+
+                <!-- Fólex -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FÓLEX/Folex.webp"
+                        alt="Fólex 20x25" />
+                    <div class="producto-info">
+                        <div class="nombre">Fólex 20x25</div>
+                        <div class="categoria">Fólex</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FÓLEX/Folex%20hamburguesa.webp"
+                        alt="Fólex hamburguesa" />
+                    <div class="producto-info">
+                        <div class="nombre">Fólex hamburguesa</div>
+                        <div class="categoria">Fólex</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FÓLEX/Folex%20hamburguesa.webp"
+                        alt="Papel aluminio hamburguesa 30x40" />
+                    <div class="producto-info">
+                        <div class="nombre">Papel aluminio hamburguesa 30x40</div>
+                        <div class="categoria">Fólex</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Guantes -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_764586-MLU72636722033_112023-F.webp"
+                        alt="Guante nitrilo" />
+                    <div class="producto-info">
+                        <div class="nombre">Guante nitrilo</div>
+                        <div class="categoria">Guantes</div>
+                        <div class="tamanos"><strong>Talle M, Talle L</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_829059-MLA80203053115_102024-F.webp"
+                        alt="Guante polietileno" />
+                    <div class="producto-info">
+                        <div class="nombre">Guante polietileno</div>
+                        <div class="categoria">Guantes</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Libreria -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRERÍA/abrochadora.jpg"
+                        alt="Abrochadoras" />
+                    <div class="producto-info">
+                        <div class="nombre">Abrochadoras</div>
+                        <div class="categoria">Librería</div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/biromes.jpg" alt="Biromes" />
+                    <div class="producto-info">
+                        <div class="nombre">Biromes</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://www.planetoffice.com.ar/images_prg/cuadernos/avon/00002335-1372699040_gde.jpg"
+                        alt="Cuadernos Universitarios" />
+                    <div class="producto-info">
+                        <div class="nombre">Cuadernos Universitarios</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <div class="producto-img-container">
+                        <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRERÍA/estallidos.jpg"
+                            alt="Estallidos" />
+                    </div>
+                    <div class="producto-info">
+                        <div class="nombre">Estallidos</div>
+                        <div class="categoria">Librería</div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="" alt="Fibrones" />
+                    <div class="producto-info">
+                        <div class="nombre">Fibrones</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hilo/hilo.png"
+                        alt="Hilo" />
+                    <div class="producto-info">
+                        <div class="nombre">Hilo</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hojas/A4WP.png"
+                        alt="Hojas A4" />
+                    <div class="producto-info">
+                        <div class="nombre">Hojas A4</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="" alt="Liquid Paper" />
+                    <div class="producto-info">
+                        <div class="nombre">Liquid Paper</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <div class="producto-img-container">
+                        <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRERÍA/maquina%20motex.jpg"
+                            alt="Máquina de Mótex" />
+                    </div>
+                    <div class="producto-info">
+                        <div class="nombre">Máquina De Mótex</div>
+                        <div class="categoria">Librería</div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://acdn-us.mitiendanube.com/stores/001/226/580/products/rollo-etiqueta-motex1-67065ed249e464078715930430084753-640-0.jpg"
+                        alt="Mótex" />
+                    <div class="producto-info">
+                        <div class="nombre">Mótex</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_2X_774635-MLA48990735891_022022-T.webp"
+                        alt="Talonarios - Remitos" />
+                    <div class="producto-info">
+                        <div class="nombre">Talonarios - Remitos</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="" alt="Resaltador" />
+                    <div class="producto-info">
+                        <div class="nombre">Resaltador</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRERÍA/tacos%20de%20papel.jpg"
+                        alt="Tacos De Papel" />
+                    <div class="producto-info">
+                        <div class="nombre">Tacos De Papel</div>
+                        <div class="categoria">Librería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <div class="producto-img-container">
+                        <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
+                        <img src="https://http2.mlstatic.com/D_NQ_NP_793654-MLU73983277266_012024-O.webp"
+                            alt="Voligoma" />
+                    </div>
+                    <div class="producto-info">
+                        <div class="nombre">Voligoma</div>
+                        <div class="categoria">Librería</div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Papel -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/aluminio%205%20mts.jpg"
+                        alt="Papel aluminio" />
+                    <div class="producto-info">
+                        <div class="nombre">Papel aluminio</div>
+                        <div class="categoria">Papel</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/bobina%20de%20papel.jpg"
+                        alt="Bobina De Papel" />
+                    <div class="producto-info">
+                        <div class="nombre">Bobina De Papel</div>
+                        <div class="categoria">Papel</div>
+                        <div class="tamanos"><strong>35x45, 40cm, 60cm</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/Papel%20cortado.webp"
+                        alt="Papel cortado" />
+                    <div class="producto-info">
+                        <div class="nombre">Papel cortado</div>
+                        <div class="categoria">Papel</div>
+                        <div class="tamanos"><strong>35x45, 40x50, 50x70, 60x90</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp"
+                        alt="Papel Manteca" />
+                    <div class="producto-info">
+                        <div class="nombre">Papel Manteca</div>
+                        <div class="categoria">Papel</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGIÉNICO%20-%20ROLLO%20DE%20COCINA/rollo%20de%20cocina%20elegante.jpg"
+                        alt="Rollo De Cocina Elegante" />
+                    <div class="producto-info">
+                        <div class="nombre">Rollo De Cocina Elegante</div>
+                        <div class="categoria">Papel</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_747603-MLA80019915704_102024-O.webp"
+                        alt="Rollo De Cocina New Pel" />
+                    <div class="producto-info">
+                        <div class="nombre">Rollo De Cocina New Pel</div>
+                        <div class="categoria">Papel</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGIÉNICO%20-%20ROLLO%20DE%20COCINA/papel%20higenico%20elegante.jpg"
+                        alt="Papel Higiénico Elegante" />
+                    <div class="producto-info">
+                        <div class="nombre">Papel Higienico Elegante</div>
+                        <div class="categoria">Papel</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGIÉNICO%20-%20ROLLO%20DE%20COCINA/Higi%C3%A9nico%20new%20pel%20l%C3%ADnea%20premium%20triple%20hoja.jpg"
+                        alt="Papel Higiénico New Pel" />
+                    <div class="producto-info">
+                        <div class="nombre">Papel Higiénico New Pel</div>
+                        <div class="categoria">Papel</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Pizzería -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/conos%20de%20papas%20fritas.jpg"
+                        alt="Cono de papas" />
+                    <div class="producto-info">
+                        <div class="nombre">Cono de papas</div>
+                        <div class="categoria">Pizzería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
+                        alt="Fondo pizza chico" />
+                    <div class="producto-info">
+                        <div class="nombre">Fondo pizza chico</div>
+                        <div class="categoria">Pizzería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
+                        alt="Fondo pizza grande" />
+                    <div class="producto-info">
+                        <div class="nombre">Fondo pizza grande</div>
+                        <div class="categoria">Pizzería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/porta%20panchos.jpg"
+                        alt="Porta Panchos" />
+                    <div class="producto-info">
+                        <div class="nombre">Porta Panchos</div>
+                        <div class="categoria">Pizzería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8CLICOS%20DE%20PIZZER%C3%8DA/Tripode-Pizza.webp"
+                        alt="Tripode" />
+                    <div class="producto-info">
+                        <div class="nombre">Tripode</div>
+                        <div class="categoria">Pizzería</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Potes -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/potes%20bisagra.jpg"
+                        alt="Pote bisagra" />
+                    <div class="producto-info">
+                        <div class="nombre">Pote bisagra</div>
+                        <div class="categoria">Potes</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/dip.jpg"
+                        alt="Pote dips" />
+                    <div class="producto-info">
+                        <div class="nombre">Pote dips</div>
+                        <div class="categoria">Potes</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/D_NQ_NP_2X_957775-MLA70448724893_072023-F.webp"
+                        alt="Pote Ensalada de fruta" />
+                    <div class="producto-info">
+                        <div class="nombre">Pote Ensalada de fruta</div>
+                        <div class="categoria">Potes</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Rollos térmicos -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ROLLOS%20TÉRMICOS/rollo%20termico.jpeg"
+                        alt="Rollo Térmico" />
+                    <div class="producto-info">
+                        <div class="nombre">Rollo Térmicos</div>
+                        <div class="categoria">Rollos Térmicos</div>
+                        <div class="tamanos"><strong>44x50, 57x20, 57x30, 80x30</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+
+                <!-- Sorbetes -->
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_844300-MLA80844285453_112024-O.webp"
+                        alt="Sorbetes Común" />
+                    <div class="producto-info">
+                        <div class="nombre">Sorbetes Común</div>
+                        <div class="categoria">Sorbetes</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/sorbetes%20descartables%20negros.jpg"
+                        alt="Sorbetes Negro" />
+                    <div class="producto-info">
+                        <div class="nombre">Sorbetes Negro</div>
+                        <div class="categoria">Sorbetes</div> <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <div class="producto-img-container">
+                        <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/images.jfif"
+                            alt="Sorbetes Papel" />
+                    </div>
+                    <div class="producto-info">
+                        <div class="nombre">Sorbetes Papel</div>
+                        <div class="categoria">Sorbetes</div>
+                        <button class="btn">Ver Producto</button>
+                    </div>
+                </div>
+
+                <!-- Vasos -->
+                <div class="producto">
+                    <img src="https://acdn-us.mitiendanube.com/stores/002/197/755/products/vasos-traslucidos1-d02ce594321e32bf8f16570270582440-640-0.jpeg"
+                        alt="Vasos De Plástico" />
+                    <div class="producto-info">
+                        <div class="nombre">Vasos De Plástico</div>
+                        <div class="categoria">Vasos</div>
+                        <div class="tamanos"><strong>220ml, 330ml, 500ml, 1000ml</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
+                <div class="producto">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/VASOS/vaso-termico-180-cc-50-unidades1-effa370a04aa41b56b15571658086178-480-0.jpg"
+                        alt="Vasos De Telgopor" />
+                    <div class="producto-info">
+                        <div class="nombre">Vasos De Telgopor</div>
+                        <div class="categoria">Vasos</div>
+                        <div class="tamanos"><strong>120ml, 180ml, 240ml</strong></div> <button class="btn">Ver
+                            Producto</button>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>2025 © Papelera Pierrastegui</p>
-        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-    </footer>
-
-    <script src="assets/js/inicio.js"></script>
-    <script src="assets/js/iniciodropdown.js"></script>
-    <script src="assets/js/satv-scroll-main.js"></script>
+        </div>
+        <script src="assets/js/categoriascatalogo.js"></script>
+        <script src="assets/js/satv-scroll-main.js"></script>
 </body>
 
 </html>

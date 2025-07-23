@@ -1,0 +1,741 @@
+@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+
+/* ================================
+   BASE Y RESET
+================================ */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff;
+    font-family: 'Gilroy', sans-serif;
+    font-size: 1em;
+    overflow-x: hidden;
+    background-image: url(https://img.freepik.com/foto-gratis/muro-hormigon-texturizado_53876-89536.jpg);
+    background-size: contain;
+}
+
+#linkcampo {
+    height: 0;
+}
+
+::selection {
+    color: #fff;
+    background: #02a22a;
+}
+
+button.carrito {
+    font-size: 1.5em;
+    background-color: #fff !important;
+    !i;
+    !;
+    color: #02a22a !important;
+    !i;
+    !;
+    cursor: pointer;
+    border-radius: 50%;
+    font-family: 'FontAwesome';
+    /* Para usar FontAwesome */
+    padding-top: 0.52em;
+    padding-bottom: 0.52em;
+    padding-left: 0.48em;
+    padding-right: 0.5em;
+    z-index: 3000;
+    margin-top: -9.8em;
+    position: absolute;
+    text-align: center;
+    /* Asegura que el Ã­cono se centre dentro del botÃ³n */
+    line-height: 1;
+    /* AlineaciÃ³n vertical */
+    border: none;
+    /* Removemos el borde original */
+    margin-left: 68em;
+    font-size: 1em;
+}
+
+button.carrito::after {
+    content: "";
+    /* Pseudo-elemento vacÃ­o */
+    position: absolute;
+    top: -3px;
+    /* Desplazamos el borde hacia afuera */
+    left: -3px;
+    /* Desplazamos el borde hacia afuera */
+    right: -3px;
+    /* Desplazamos el borde hacia afuera */
+    bottom: -3px;
+    /* Desplazamos el borde hacia afuera */
+    border-radius: 50%;
+    /* Borde redondeado */
+    border: 3px solid #02a22a;
+    /* El borde extra */
+    z-index: 1000;
+    /* Colocamos el borde detrÃ¡s del Ã­cono */
+}
+
+button.carrito:hover {
+    background-color: #02a22a !important;
+    !i;
+    !;
+    color: #fff !important;
+    !i;
+    !;
+    /* Cambiar color cuando el ratÃ³n pasa sobre el botÃ³n */
+}
+
+
+button.carrito i {
+    font-size: 1.5em;
+}
+
+/* Estilo para el contenedor del menÃº desplegable */
+.dropdown-menuc {
+    position: absolute;
+    display: none;
+    /* Inicialmente oculto */
+    top: 27px;
+    /* Distancia desde el botÃ³n */
+    right: 19.4em;
+    /* AlineaciÃ³n a la derecha */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width: 200px;
+    /* Ancho del menÃº */
+    z-index: 2000;
+    /* Para asegurarse de que el menÃº estÃ© por encima de otros elementos */
+    !;
+    !e;
+
+    border: 2px solid #02a22a;
+    z.i: 1;
+    margin-top: -1.5em;
+}
+
+/* Estilo de los elementos del menÃº */
+.dropdown-menuc ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.dropdown-menuc ul li {
+    border-bottom: 1px solid #f0f0f0;
+    /* LÃ­nea de separaciÃ³n entre los elementos */
+}
+
+.dropdown-menuc ul li:last-child {
+    border-bottom: none;
+    /* Sin lÃ­nea de separaciÃ³n en el Ãºltimo elemento */
+}
+
+.dropdown-menuc ul li a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #02a22a;
+    font-weight: bold;
+}
+
+.dropdown-menuc ul li a:hover {
+    background-color: #02a22a;
+    /* Color de fondo al pasar el ratÃ³n */
+    color: #fff;
+}
+
+/* Mostrar el menÃº cuando el botÃ³n se presiona */
+button.carrito:focus+.dropdown-menuc,
+button.carrito:active+.dropdown-menuc {
+    display: block;
+}
+
+.menu-container {}
+
+nav.category-menu {
+    z-index: 2000;
+    position: relative;
+    color: #02a22a;
+    left: 33em;
+    width: 56em;
+    font-weight: 600;
+    display: flex;
+    z-index: 1000;
+    gap: 0.4em;
+    /* Espacio entre los elementos flex */
+    margin-top: -11.23em;
+    height: 2.3em;
+    margin-bottom: 2em;
+}
+
+nav.category-menu a {
+
+    cursor: pointer;
+    background: #fff;
+    padding: 8px 12px;
+}
+
+.more-btn {
+    position: absolute;
+    !;
+    !e;
+
+    z-index: 1000;
+}
+
+.dropdown-content-more {
+    display: none;
+    margin-top: 3em;
+    margin-left: -1em;
+}
+
+/* Estilo base */
+.dropdown-content-more a {
+    display: block;
+    padding: 10px;
+    background-color: white;
+    color: #02a22a;
+    /* Color del texto */
+    text-decoration: none;
+}
+
+/* Efecto hover */
+.dropdown-content-more a:hover {
+    background-color: #02a22a;
+    /* Fondo en hover */
+    color: white;
+    /* Color del texto en hover */
+}
+
+nav.category-menu a:hover {
+    color: #fff;
+    background: #02a22a;
+}
+
+/* ================================
+   ENLACES
+================================ */
+a.logotext1,
+a.logotext1:visited {
+    text-decoration: none;
+    color: #02a22a;
+}
+
+.logotext1 {
+    position: relative;
+    top: -6em;
+    !;
+    !e;
+
+    left: -38em;
+}
+
+a.logotext1:hover {
+    color: #3e997f;
+}
+
+a.logotext1:focus {
+    outline: none;
+}
+
+/* ================================
+   HEADERBOX (NavegaciÃ³n fija, fondo negro)
+================================ */
+.headerbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    padding: 0.8em 1.5em;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1.8em;
+    margin-top: -3em;
+}
+
+.headerbox ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.headerbox li {
+    margin-right: 15px;
+}
+
+.headerbox a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.headerbox a:hover {
+    color: #02a22a;
+}
+
+/* ================================
+   HEADER (Zona superior: logo, nombre y buscador)
+================================ */
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5em 0;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    margin-top: 3em;
+    /* Espacio para la barra negra fija */
+    position: relative;
+    height: 0.1em;
+}
+
+/* Logo */
+.logo1 {
+    width: 6em;
+    height: auto;
+    margin-bottom: 0.5em;
+    margin-left: 25em;
+    !;
+    !e;
+    position: relative;
+    top: -6.3em;
+}
+
+/* Nombre del sitio */
+a.logotext1 {
+    text-align: center;
+    color: #02a22a;
+    font-size: 0.8em !important;
+    !i;
+    !;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1.2em;
+    z-index: 999;
+    position: absolute;
+    top: 0.42em;
+    left: 13em;
+}
+
+.search-container {
+    position: relative;
+    width: 33em;
+    margin-top: 3.5em;
+    left: 44em;
+    top: -15.0em;
+}
+
+#buscador {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid #02a22a;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: 700;
+    color: #02a22a;
+    font-family: 'Gilroy';
+}
+
+#buscador:focus {
+    outline: none;
+    border: 2px solid #02a22a;
+}
+
+#buscador::placeholder {
+    color: #02a22a;
+}
+
+#search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    color: #02a22a;
+    width: 20px;
+    height: 2em;
+    margin-right: -4.3em;
+    !;
+    !e;
+    margin-left;
+    : ;
+    margin-left;
+    : 1;
+    margin-left;
+    : 1e;
+    margin-left;
+    : 1;
+    border: 2px solid #02a22a;
+    padding-top: 0.6em;
+    padding-bottom: 0.4em;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    margin-top: 0.35em;
+    border-top-right-radius: 0.3em;
+    border-bottom-right-radius: 0.3em;
+}
+
+svg:hover {
+    color: #fff;
+    background: #02a22a;
+}
+
+
+/* ================================
+   AUTH BUTTONS
+================================ */
+#auth-buttons {
+    color: #02a22a;
+    background: #fff;
+    position: relative;
+    margin: -2.8em auto 0 auto;
+    width: max-content;
+    top: 0.96em;
+    left: 15em;
+}
+
+.logreg {
+    background: #fff;
+    color: #02a22a;
+    border: none;
+    padding: 0.2em 2em;
+    font-family: 'Gilroy';
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 0.3em;
+    display: block;
+    width: 11em;
+    margin: -9.7em auto 0;
+    position: relative;
+    !;
+    !e;
+
+    z-index: 2000;
+}
+
+.logreg:hover {
+    background: #02a22a;
+    color: #fff;
+    cursor: pointer;
+}
+
+.reg {
+    margin-top: -1.65em !important;
+    !i;
+    !;
+    margin-left: 23.4em;
+    height: 1.63em;
+}
+
+/* ================================
+   NAVIGACIÃ“N
+================================ */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 1em;
+    position: relative;
+    color: #02a22a;
+}
+
+nav ul li a {
+    color: #02a22a;
+    text-decoration: none;
+    padding: 0.5em 1em;
+    display: block;
+    font-weight: 700;
+}
+
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 1em 0;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    left: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   CATÃLOGO Y PRODUCTOS
+================================ */
+#catalogo {
+    padding: 2em;
+    color: #02a22a;
+}
+
+/* Contenedor de productos (mobile-first: 2 columnas) */
+.productos {
+    display: grid;
+    grid-gap: 1em;
+    margin: 1em;
+    grid-template-columns: repeat(2, 1fr);
+
+    position: relative;
+    left: 10em;
+    margin-top: -2.3em;
+}
+
+.producto {
+    background: #ddd;
+    padding: 1em;
+    text-align: center;
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.29);
+    color: #02a22a;
+    height: 18em;
+    position: relative;
+}
+
+.producto h3 {
+    margin-top: 0.4em;
+    text-transform: capitalize;
+    /* todo en minÃºsculas */
+}
+
+.producto h3::first-letter {
+    text-transform: uppercase;
+    /* primera letra en mayÃºscula */
+}
+
+.md {
+    margin-left: 3em;
+    position: relative;
+    left: -1.5em;
+}
+
+/* La imagen ocupa el 100% del ancho y estÃ¡ pegada a los bordes laterales */
+.producto img {
+    width: 112%;
+    margin: -1em 0 1em -1em;
+    height: 11em;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.precio {
+    font-weight: 700;
+    font-size: 1.3em;
+}
+
+/* BotÃ³n "Ver Producto" */
+.btn-ver-producto {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fff;
+    background: #02a22a;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 8em;
+    top: 15.8em;
+    height: 1.4em;
+}
+
+.btn-ver-producto:hover {
+    background-color: #fff;
+    color: #02a22a;
+}
+
+/* ================================
+   FOOTER
+================================ */
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #fff;
+    color: #02a22a;
+    box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.45);
+    width: 100%;
+    position: relative;
+    height: 3.5em;
+    line-height: 0.4em;
+    font-weight: 700;
+}
+
+/* ================================
+   MEDIA QUERIES (MOBILE-FIRST)
+================================ */
+
+/* Por defecto (mÃ³viles): 2 productos por lÃ­nea */
+
+/* Tabletas y pantallas medianas (768px - 1079px): 3 columnas */
+@media (min-width: 768px) and (max-width: 1079px) {
+    .productos {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (width: 1366px) and (height: 768px) {
+    .producto img {
+        width: 112.5%;
+        margin: -1em 0 1em -1em;
+        height: 11em;
+        border-top-left-radius: 0.5em;
+        border-top-right-radius: 0.5em;
+        object-fit: cover;
+        cursor: pointer;
+    }
+}
+
+/* Notebooks y pantallas grandes (1080px o mÃ¡s): 6 columnas */
+@media (min-width: 1080px) {
+    .productos {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    header h1 {
+        font-size: 3em;
+    }
+
+    .logreg,
+    #auth-buttons {
+        margin-top: -4.03em;
+    }
+}
+
+/* Estilos del dropdown de medidas */
+.droptmn {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.textomed {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #fff;
+    border: 1px solid #02a22a;
+    border-radius: 0.3em;
+    cursor: pointer;
+    margin-left: -6.1em;
+    margin-top: -1.4em;
+    font-weight: 700;
+    width: 8.6em;
+}
+
+.textomed:hover {
+    color: #fff;
+    background: #02a22a;
+}
+
+.droptmn-menu {
+    display: none;
+    position: absolute;
+    top: 2em;
+    left: 0;
+    background: white;
+    border: 1px solid #02a22a;
+    border-radius: 0.3em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 5px 0;
+    margin: 0;
+    min-width: 10em;
+    z-index: 10;
+    margin-left: -5.13em;
+}
+
+.droptmn-menu li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.droptmn-menu li:hover {}
+
+/* Clase para mostrar el menÃº */
+.droptmn-menu.droptmn-show {
+    display: block;
+}
+
+.droptmn-menu::-webkit-scrollbar {
+    width: 0px;
+}
+
+.droptmn-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.droptmn-menu::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 0.5em;
+    padding-bottom: 1em;
+}
+
+footer {
+    font-weight: 700;
+}
+
+@media (width: 1366px) {
+    .productos {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .producto img {
+        width: 118%;
+    }
+
+    nav.category-menu {
+        margin-left: -18em;
+    }
+
+    #catalogo {
+        margin-left: -4em;
+    }
+}
+
+#sin-stock-bh {
+    color: #fff;
+    background: #f00;
+    font-family: 'Gilroy';
+    font-weight: 700;
+    padding: 0.2em 0.5em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+    margin-top: -2.9em;
+}
+
+@media (width: 671px) and (height: 768px) {
+    .productos {
+        grid-template-columns: repeat(1, 1fr);
+        width: 18em;
+    }
+}
+
+.imgbriomes {
+    object-fit: contain;
+    background: #fff;
+}
