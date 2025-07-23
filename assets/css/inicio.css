@@ -195,30 +195,34 @@ nav ul li a.active {
 .category-menu {
   display: flex;
   flex-wrap: nowrap;
-  gap: 0;
-  align-items: center;
-  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
   font-family: Arial, sans-serif;
+  gap: 0;
   margin-left: 21em;
   margin-bottom: 1.8em;
+
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
 }
 
-/* Igualamos display y tamaño para spans y botón Más */
+.category-menu::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
 .category-menu>span,
 .more-dropdown>.more-btn {
   display: inline-flex;
-  /* Igual display */
   align-items: center;
-  /* Centrar vertical */
   justify-content: center;
-  /* Centrar horizontal */
   height: 2.8em;
-  /* Altura fija igual */
   min-width: 4.5em;
-  /* Ancho mínimo */
   cursor: pointer;
   padding: 0 0.8em;
-  /* Padding horizontal igual */
   border: 2px solid var(--primary-color);
   background: #fff;
   color: var(--primary-color);
@@ -228,22 +232,12 @@ nav ul li a.active {
   transition: all 0.3s ease;
   user-select: none;
   box-sizing: border-box;
-  /* Incluye borde y padding en tamaño */
   text-align: center;
-}
-
-/* Separar elementos con margen para evitar doble borde */
-.category-menu>span:not(:last-child),
-.more-dropdown>.more-btn {
   margin-right: -2px;
+  /* evita doble borde */
 }
 
-span.more-btn {
-  border-left: 2px solid #02a22a;
-  margin-left: 0.1em;
-}
-
-/* Bordes redondeados sólo en extremos */
+/* Bordes redondeados extremos */
 .category-menu>span:first-child {
   border-radius: 6px 0 0 6px;
 }
@@ -251,15 +245,16 @@ span.more-btn {
 .more-dropdown>.more-btn {
   border-radius: 0 6px 6px 0;
   border-left: none;
+  flex-shrink: 0;
+  position: absolute;
+  left: 76.1em;
+  top: -4.45em;
+  height: 2.82em;
 }
 
 /* Hover y activo */
 .category-menu>span:hover,
-.more-dropdown>.more-btn:hover {
-  background-color: var(--primary-color);
-  color: #fff;
-}
-
+.more-dropdown>.more-btn:hover,
 .category-menu>span.active,
 .more-dropdown>.more-btn.active {
   background-color: var(--primary-color);
@@ -270,13 +265,14 @@ span.more-btn {
 .more-dropdown {
   position: relative;
   user-select: none;
+  flex-shrink: 0;
 }
 
 .dropdown-content-more {
   display: none;
   position: absolute;
-  top: 3.4em;
-  right: -2px;
+  top: -1.5em;
+  right: 26.9em;
   background: #fff;
   border: 2px solid var(--primary-color);
   border-radius: 6px;
@@ -310,7 +306,132 @@ span.more-btn {
 
 .dropdown-content-more.show {
   display: flex;
+}
+
+/* RESPONSIVE para menú */
+@media (max-width: 900px) {
+  .category-menu {
+    margin-left: 1em;
+    font-size: 0.95em;
+    min-width: 0;
+  }
+
+  .category-menu>span,
+  .more-dropdown>.more-btn {
+    min-width: 3.8em;
+    padding: 0 0.6em;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-menu {
+    margin-left: 0.5em;
+    font-size: 0.9em;
+  }
+
+  .category-menu>span,
+  .more-dropdown>.more-btn {
+    min-width: 3em;
+    padding: 0 0.5em;
+    font-size: 0.9em;
+  }
+
+  .dropdown-content-more {
+    top: 2.8em;
+    right: 0;
+    min-width: 120px;
+  }
+}
+
+/* Ocultar botón categorías por defecto */
+.btn-categorias {
+  display: none;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.7em 1.2em;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  margin-left: 6.2em;
+  margin-bottom: 1.2em;
+  margin-top: -1.8em;
+  font-size: 1.1em;
+  position: relative;
+}
+
+/* Por defecto está oculto */
+.dropdown-categorias {
+  display: none;
+  position: absolute;
+  top: 2.5em;
+  left: 6.9em;
+  background: white;
+  border: 2px solid var(--primary-color);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 0.5em 0;
+  z-index: 1000;
   flex-direction: column;
+  width: 8.2em;
+  height: 13em;
+  overflow: auto;
+}
+
+/* Mostrar dropdown SOLO en pantallas chicas cuando tenga clase show */
+@media (max-width: 600px) {
+  .dropdown-categorias.show {
+    display: flex;
+    /* o block, como prefieras */
+    flex-direction: column;
+  }
+}
+
+/* Además, para asegurarnos que el menú desktop se oculta en responsive */
+@media (max-width: 600px) {
+  .category-menu {
+    display: none;
+  }
+
+  .btn-categorias {
+    display: inline-block;
+  }
+}
+
+.dropdown-categorias span {
+  display: block;
+  padding: 0.5em 1em;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  color: var(--primary-color);
+  font-weight: 700;
+  background: #fff;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.dropdown-categorias span:last-child {
+  border-bottom: none;
+}
+
+.dropdown-categorias span:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Mostrar solo en pantallas chicas */
+@media (max-width: 600px) {
+  .category-menu {
+    display: none;
+    /* ocultar menú */
+  }
+
+  .btn-categorias {
+    display: inline-block;
+    /* mostrar botón */
+  }
 }
 
 /* Responsive adjustments */

@@ -23,18 +23,20 @@
 
     <div class="container">
         <div class="menu-container">
-            <div class="category-menu">
-                <span onclick="filtrarCategoria('arranques')">Arranques</span>
-                <span onclick="filtrarCategoria('bandejas')">Bandejas</span>
-                <span onclick="filtrarCategoria('blondas')">Blondas</span>
-                <span onclick="filtrarCategoria('bolsas')">Bolsas</span>
-                <span onclick="filtrarCategoria('cajas')">Cajas</span>
-                <span onclick="filtrarCategoria('carton')">Cartón</span>
-                <span onclick="filtrarCategoria('cintas')">Cintas</span>
-                <span onclick="filtrarCategoria('cubiertos')">Cubiertos</span>
-                <span onclick="filtrarCategoria('film')">Film</span>
-                <span onclick="filtrarCategoria('stretch')">Stretch</span>
-                <span onclick="filtrarCategoria('folex')">Fólex</span>
+            <div class="menu-scroll-wrapper" style="position: relative;">
+                <div class="category-menu">
+                    <span onclick="filtrarCategoria('arranques')">Arranques</span>
+                    <span onclick="filtrarCategoria('bandejas')">Bandejas</span>
+                    <span onclick="filtrarCategoria('blondas')">Blondas</span>
+                    <span onclick="filtrarCategoria('bolsas')">Bolsas</span>
+                    <span onclick="filtrarCategoria('cajas')">Cajas</span>
+                    <span onclick="filtrarCategoria('carton')">Cartón</span>
+                    <span onclick="filtrarCategoria('cintas')">Cintas</span>
+                    <span onclick="filtrarCategoria('cubiertos')">Cubiertos</span>
+                    <span onclick="filtrarCategoria('film')">Film</span>
+                    <span onclick="filtrarCategoria('stretch')">Stretch</span>
+                    <span onclick="filtrarCategoria('folex')">Fólex</span>
+                </div>
 
                 <div class="more-dropdown">
                     <span class="more-btn" onclick="toggleMoreDropdown(event)">Más</span>
@@ -50,6 +52,12 @@
                         <span onclick="filtrarCategoria('todos')">Todos</span>
                     </div>
                 </div>
+
+                <!-- BOTÓN RESPONSIVE -->
+                <button class="btn-categorias">Categorías</button>
+
+                <!-- DROPDOWN RESPONSIVE -->
+                <div class="dropdown-categorias"></div>
             </div>
         </div>
         <!-- Catálogo completo con todos los productos -->
@@ -750,6 +758,7 @@
             </div>
         </div>
         <script src="assets/js/categoriascatalogo.js"></script>
+        <script src="assets/js/home-dropdown-scroll.js"></script>
         <script src="assets/js/satv-scroll-main.js"></script>
 </body>
 

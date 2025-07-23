@@ -5,55 +5,108 @@ function normalizeText(text) {
         .replace(/[\u0300-\u036f]/g, ""); // elimina tildes
 }
 
-// Mostrar/ocultar el menú desplegable de "Más"
 function toggleMoreDropdown(event) {
-    event.stopPropagation(); // evitar que se cierre por el click global
-    document.getElementById("more-dropdown").classList.toggle("show");
+    event.stopPropagation();
+    const moreDropdown = document.getElementById("more-dropdown");
+    if (moreDropdown) {
+        moreDropdown.classList.toggle("show");
+    }
 }
 
-// Cerrar el dropdown si se hace clic afuera
 window.addEventListener("click", () => {
-    document.getElementById("more-dropdown").classList.remove("show");
+    const moreDropdown = document.getElementById("more-dropdown");
+    if (moreDropdown) moreDropdown.classList.remove("show");
+    const dropdownCategorias = document.querySelector('.dropdown-categorias');
+    if (dropdownCategorias) dropdownCategorias.classList.remove('show');
 });
 
-// Activar categoría y mostrar productos que coincidan
 function filtrarCategoria(categoria) {
     const normalizada = normalizeText(categoria);
 
-    // Quitar clase 'active' a todos los botones
-    document.querySelectorAll(".category-menu span").forEach((span) => {
+    document.querySelectorAll(".category-menu span, .dropdown-categorias span").forEach(span => {
         span.classList.remove("active");
     });
 
-    // Marcar como activa la categoría correspondiente
-    document.querySelectorAll(".category-menu span").forEach((span) => {
+    document.querySelectorAll(".category-menu span, .dropdown-categorias span").forEach(span => {
         if (normalizeText(span.textContent) === normalizada) {
             span.classList.add("active");
         }
     });
 
-    // Mostrar solo los productos de la categoría
-    document.querySelectorAll(".producto").forEach((producto) => {
+    document.querySelectorAll(".producto").forEach(producto => {
         const cat = producto.querySelector(".categoria");
         if (!cat) return;
-
         const productoCategoria = normalizeText(cat.textContent);
-        if (
-            normalizada === "todos" ||
-            productoCategoria === normalizada
-        ) {
+        if (normalizada === "todos" || productoCategoria === normalizada) {
             producto.style.display = "block";
         } else {
             producto.style.display = "none";
         }
     });
 
-    // Cerrar el dropdown después de hacer click en una categoría
-    document.getElementById("more-dropdown").classList.remove("show");
+    const moreDropdown = document.getElementById("more-dropdown");
+    if (moreDropdown) moreDropdown.classList.remove("show");
+    const dropdownCategorias = document.querySelector('.dropdown-categorias');
+    if (dropdownCategorias) dropdownCategorias.classList.remove('show');
 }
 
-// Inicializar al cargar
-window.addEventListener("DOMContentLoaded", () => {
-    // Mostrar todos los productos al inicio
-    filtrarCategoria("todos");
+document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.querySelector('.menu-scroll-wrapper');
+    if (!wrapper) return;
+
+    wrapper.style.position = 'relative';
+
+    let btnCategorias = document.querySelector('.btn-categorias');
+    let dropdownCategorias = document.querySelector('.dropdown-categorias');
+
+    if (!btnCategorias) {
+        btnCategorias = document.createElement('button');
+        btnCategorias.className = 'btn-categorias';
+        btnCategorias.textContent = 'Categorías';
+        wrapper.appendChild(btnCategorias);
+    }
+
+    if (!dropdownCategorias) {
+        dropdownCategorias = document.createElement('div');
+        dropdownCategorias.className = 'dropdown-categorias';
+        wrapper.appendChild(dropdownCategorias);
+    }
+
+    // Cargar categorías del menú principal y "Más"
+    const categorias = [];
+
+    document.querySelectorAll('.category-menu span').forEach(span => {
+        const match = span.getAttribute('onclick')?.match(/filtrarCategoria\('(.+)'\)/);
+        if (match) categorias.push({ text: span.textContent, filtro: match[1] });
+    });
+
+    document.querySelectorAll('#more-dropdown span').forEach(span => {
+        const match = span.getAttribute('onclick')?.match(/filtrarCategoria\('(.+)'\)/);
+        if (match) categorias.push({ text: span.textContent, filtro: match[1] });
+    });
+
+    dropdownCategorias.innerHTML = '';
+    categorias.forEach(({ text, filtro }) => {
+        const span = document.createElement('span');
+        span.textContent = text;
+        span.style.cursor = 'pointer';
+        span.addEventListener('click', () => {
+            filtrarCategoria(filtro);
+            dropdownCategorias.classList.remove('show');
+        });
+        dropdownCategorias.appendChild(span);
+    });
+
+    btnCategorias.addEventListener('click', e => {
+        e.stopPropagation();
+        dropdownCategorias.classList.toggle('show');
+    });
+
+    // Cerrar dropdown si clic afuera
+    window.addEventListener('click', () => {
+        dropdownCategorias.classList.remove('show');
+    });
+
+    // Mostrar todos al cargar
+    filtrarCategoria('todos');
 });
