@@ -113,7 +113,6 @@
 .dropdown-content-more span {
     display: block;
     padding: 0.5em 1em;
-    border-bottom: 1px solid #eee;
     cursor: pointer;
     color: var(--primary-color);
     font-weight: 700;
