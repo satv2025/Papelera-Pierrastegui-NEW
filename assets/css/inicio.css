@@ -125,7 +125,7 @@ nav ul li a.active {
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: var(--stock-badge-bg);
+  background-color: #b11c38;
   color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
