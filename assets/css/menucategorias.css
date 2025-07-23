@@ -1,0 +1,280 @@
+.category-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    /* scroll horizontal */
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    font-family: Arial, sans-serif;
+    gap: 0;
+    margin-left: 2em;
+    /* menos margen fijo */
+    margin-bottom: 1.8em;
+    font-size: 1.1em;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    position: relative;
+}
+
+.category-menu::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.menu-container {
+    /* mejor evitar zoom, usar font-size o scale si quieres */
+    scale: 0.7;
+    width: 100%;
+    margin-left: 4.4em;
+    margin-bottom: -1.8em;
+}
+
+.category-menu>span,
+.more-dropdown>.more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.8em;
+    min-width: 4.5em;
+    cursor: pointer;
+    padding: 0 0.8em;
+    border: 2px solid var(--primary-color);
+    background: #fff;
+    color: var(--primary-color);
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    user-select: none;
+    box-sizing: border-box;
+    text-align: center;
+    margin-right: -2px;
+    font-size: 1.1em;
+    flex-shrink: 0;
+    /* evitar que se reduzca demasiado */
+}
+
+.category-menu>span:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+.more-dropdown>.more-btn {
+    position: sticky;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2.21em;
+    border-radius: 0 6px 6px 0;
+    border-left: none;
+    cursor: pointer;
+    padding: 0 0.8em;
+    font-size: 1.4em;
+    font-weight: 700;
+    background: #fff;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    user-select: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    width: 4em;
+    flex-shrink: 0;
+    margin-top: 1.09em;
+}
+
+/* Hover y activo */
+.category-menu>span:hover,
+.more-dropdown>.more-btn:hover,
+.category-menu>span.active,
+.more-dropdown>.more-btn.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Dropdown contenido */
+.dropdown-content-more {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 0.5em 0;
+    min-width: 150px;
+    z-index: 999;
+    flex-direction: column;
+}
+
+.dropdown-content-more span {
+    display: block;
+    padding: 0.5em 1em;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-weight: 700;
+    background: #fff;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.dropdown-content-more span:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content-more span:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.dropdown-content-more.show {
+    display: flex;
+}
+
+/* Botón para móviles */
+.btn-categorias {
+    display: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.7em 1.2em;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    border: none;
+    margin-left: 1em;
+    margin-bottom: 1.2em;
+    margin-top: -1.8em;
+    font-size: 1.1em;
+    position: relative;
+}
+
+/* Dropdown categorías para móvil */
+.dropdown-categorias {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 2px solid var(--primary-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    padding: 0.5em 0;
+    z-index: 1000;
+    flex-direction: column;
+    width: 10em;
+    max-height: 15em;
+    overflow-y: auto;
+}
+
+.dropdown-categorias span {
+    display: block;
+    padding: 0.5em 1em;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    color: var(--primary-color);
+    font-weight: 700;
+    background: #fff;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.dropdown-categorias span:last-child {
+    border-bottom: none;
+}
+
+.dropdown-categorias span:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* RESPONSIVE */
+
+/* Extra grandes pantallas */
+@media (min-width: 1801px) {
+    .category-menu {
+        margin-left: 5em;
+        font-size: 1.3em;
+    }
+
+    .category-menu>span,
+    .more-dropdown>.more-btn {
+        min-width: 4em;
+        padding: 0 1.2em;
+    }
+}
+
+/* Grandes pantallas 1400px - 1800px */
+@media (max-width: 1800px) and (min-width: 1401px) {
+    .category-menu {
+        margin-left: 3em;
+        font-size: 1.15em;
+    }
+
+    .category-menu>span,
+    .more-dropdown>.more-btn {
+        min-width: 5em;
+        padding: 0 1em;
+    }
+}
+
+/* Medianos 1024px - 1400px */
+@media (max-width: 1400px) and (min-width: 1024px) {
+    .category-menu {
+        margin-left: 2em;
+        font-size: 1em;
+    }
+
+    .category-menu>span,
+    .more-dropdown>.more-btn {
+        min-width: 4.5em;
+        padding: 0 0.8em;
+    }
+}
+
+/* Tablets 768px - 1023px */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .category-menu {
+        margin-left: 1em;
+        font-size: 0.9em;
+    }
+
+    .category-menu>span,
+    .more-dropdown>.more-btn {
+        min-width: 4em;
+        padding: 0 0.6em;
+    }
+}
+
+/* Móviles grandes 600px - 767px */
+@media (max-width: 767px) and (min-width: 600px) {
+    .category-menu {
+        margin-left: 0.5em;
+        font-size: 0.85em;
+    }
+
+    .category-menu>span,
+    .more-dropdown>.more-btn {
+        min-width: 3.5em;
+        padding: 0 0.5em;
+    }
+}
+
+/* Móviles pequeños <600px: mostrar botón, ocultar menú */
+@media (max-width: 599px) {
+    .category-menu {
+        display: none;
+    }
+
+    .btn-categorias {
+        display: inline-block;
+        margin-left: 1em;
+    }
+}
+
+/* Mostrar dropdown en móvil cuando tenga clase show */
+.dropdown-categorias.show {
+    display: flex;
+    flex-direction: column;
+}
