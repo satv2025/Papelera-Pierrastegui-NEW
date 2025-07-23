@@ -16,6 +16,7 @@ function toggleMoreDropdown(event) {
 window.addEventListener("click", () => {
     const moreDropdown = document.getElementById("more-dropdown");
     if (moreDropdown) moreDropdown.classList.remove("show");
+
     const dropdownCategorias = document.querySelector('.dropdown-categorias');
     if (dropdownCategorias) dropdownCategorias.classList.remove('show');
 });
@@ -75,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar categorías del menú principal y "Más"
     const categorias = [];
 
-    document.querySelectorAll('.category-menu span').forEach(span => {
+    document.querySelectorAll('.category-menu span:not(.more-btn)').forEach(span => {
         const match = span.getAttribute('onclick')?.match(/filtrarCategoria\('(.+)'\)/);
         if (match) categorias.push({ text: span.textContent, filtro: match[1] });
     });
