@@ -16,7 +16,6 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Gilroy', sans-serif;
-    overflow: hidden;
 }
 
 ::selection {
@@ -228,6 +227,20 @@ footer .social-icons svg {
     width: 28px;
     height: 28px;
     fill: #02a22a;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #02a22a;
+    border-radius: 6px;
 }
 
 /* Responsividad: Mobile y tablets */

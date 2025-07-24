@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "20x25": { kg1: '4.000', kg10: '38.000' },
-        "folexburger": { kg1: '5.800', kg10: '60.000' }
+        "20x25": { kg1: '4.200' },
+        "folexburger": { kg1: '6.500' }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
