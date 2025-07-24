@@ -1,7 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "cnegra": "850",     // Punta Chata Negra
-        "rnegra": null       // Punta Redonda Negra = Sin stock
+        "cnegra": "850",   // Negro chata
+        "rnegra": "850",   // Negro redonda
+        "crojo": "850",     // Rojo chata
+        "rrojo": "850",     // Rojo redonda
+        "cazul": "850",     // Azul chata
+        "razul": "850",     // Azul redonda
+        "cverde": "850",    // Verde chata
+        "rverde": "850"     // Verde redonda
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
