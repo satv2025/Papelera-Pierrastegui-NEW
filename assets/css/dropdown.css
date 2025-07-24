@@ -15,7 +15,7 @@
     color: #02a22a;
     border: 2px solid #02a22a;
     padding: 10px;
-    width: 104%;
+    width: 122%;
     text-align: center;
     cursor: pointer;
     font-size: 1.2em;
@@ -25,6 +25,20 @@
     font-family: 'Gilroy';
     margin-top: 9.7em;
     margin-bottom: 4em;
+}
+
+.dropdown-btn::after {
+    content: '▼';
+    /* flecha hacia abajo */
+    display: inline-block;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+    font-size: 0.8em;
+}
+
+.dropdown-btn.open::after {
+    transform: rotate(180deg);
+    /* flecha hacia arriba */
 }
 
 .dropdown-btn:hover {
@@ -37,7 +51,7 @@
     position: absolute;
     background-color: #fff;
     border: 2px solid #02a22a;
-    width: 82%;
+    width: 99.8%;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     overflow: auto;

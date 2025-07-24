@@ -1,18 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Código dropdown
     const dropdownBtn = document.querySelector(".dropdown-btn");
     const dropdownMenu = document.querySelector(".dropdown-menu");
     const sizeOptions = document.querySelectorAll(".dropdown-menu li");
     const uniSpan = document.getElementById('uni');
 
     dropdownBtn.addEventListener("click", function () {
-        dropdownMenu.classList.toggle("show");
+        const isShown = dropdownMenu.classList.toggle("show");
+        dropdownBtn.classList.toggle("open", isShown); // Flecha
     });
 
     sizeOptions.forEach(option => {
         option.addEventListener("click", function () {
             dropdownBtn.textContent = `Tamaño: ${this.dataset.size}`;
             dropdownMenu.classList.remove("show");
+            dropdownBtn.classList.remove("open"); // Flecha hacia abajo
             uniSpan.style.display = 'inline';
         });
     });
@@ -20,10 +21,11 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener("click", function (event) {
         if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownMenu.classList.remove("show");
+            dropdownBtn.classList.remove("open"); // Flecha hacia abajo
         }
     });
 
-    // Código para cambiar href en footer
+    // Cambiar href en footer
     const urlMap = {
         "https://www.facebook.com": "https://nueva-url-para-facebook.com",
         "https://instagram.com": "https://nueva-url-para-instagram.com",

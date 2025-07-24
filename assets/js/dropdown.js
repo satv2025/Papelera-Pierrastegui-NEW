@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     option.addEventListener("click", function () {
       const dropdownBtn = document.querySelector(".dropdown-btn");
       dropdownBtn.textContent = `Tamaño: ${this.dataset.size}`;
+      dropdownBtn.classList.remove("open"); // Quita rotación flecha
       const dropdownMenu = dropdownBtn.closest('.dropdown').querySelector('.dropdown-menu');
       dropdownMenu.classList.remove("show");
       uniSpan.style.display = 'inline';
@@ -17,11 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const dropdownMenu = dropdownBtn.closest('.dropdown').querySelector('.dropdown-menu');
     if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
       dropdownMenu.classList.remove("show");
+      dropdownBtn.classList.remove("open"); // Cierra flecha
     }
   });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
+  // Perfect Scrollbar
   function loadCSS(href) {
     return new Promise(function (resolve, reject) {
       const link = document.createElement('link');
@@ -102,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!menu) return;
 
           const isShown = menu.classList.toggle('show');
+          btn.classList.toggle('open', isShown); // Flecha
 
           if (isShown) {
             const ps = psInstances.get(menu);
