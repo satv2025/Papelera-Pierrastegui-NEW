@@ -14,7 +14,6 @@
             position: relative;
             width: 100%;
             height: 21em;
-            /* mismo alto que .producto img */
             overflow: hidden;
         }
 
@@ -31,6 +30,33 @@
         }
 
         #contenedor img.visible {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        #contenedor-folex {
+            position: relative;
+            width: 100%;
+            height: 21em;
+            overflow: hidden;
+        }
+
+        #contenedor-folex img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: 0;
+        }
+
+        #contenedor-folex img#visible {
+            display: block;
             opacity: 1;
             z-index: 1;
         }
@@ -421,21 +447,19 @@
 
                 <!-- Fólex -->
                 <div class="producto">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FÓLEX/Folex.webp"
-                        alt="Fólex 20x25" />
+                    <div id="contenedor">
+                        <img src="assets/images/folex1.png" class="visible">
+                        <img src="assets/images/folex2.png" style="object-fit: cover !important;">
+                        <img src="assets/images/folex3.png">
+                    </div>
                     <div class="producto-info">
                         <div class="nombre">Fólex 20x25</div>
-                        <div class="categoria">Fólex</div> <button class="btn">Ver Producto</button>
+                        <div class="categoria">Fólex</div>
+                        <div class="tamanos"><strong>20x25cm, papel siliconado</strong></div>
+                        <button class="btn">Ver Producto</button>
                     </div>
                 </div>
-                <div class="producto">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FÓLEX/Folex%20hamburguesa.webp"
-                        alt="Fólex hamburguesa" />
-                    <div class="producto-info">
-                        <div class="nombre">Fólex hamburguesa</div>
-                        <div class="categoria">Fólex</div> <button class="btn">Ver Producto</button>
-                    </div>
-                </div>
+
                 <div class="producto">
                     <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FÓLEX/Folex%20hamburguesa.webp"
                         alt="Papel aluminio hamburguesa 30x40" />
@@ -827,23 +851,23 @@
         <script src="assets/js/home-dropdown-scroll.js"></script>
         <script src="assets/js/satv-scroll-main.js"></script>
         <script>
-            const imgs = document.querySelectorAll('#contenedor img');
-            let index = 0;
-            let direccion = 1; // 1 para avanzar, -1 para retroceder
+            window.addEventListener('DOMContentLoaded', () => {
+                const imgs = document.querySelectorAll('#contenedor img');
+                let index = 0;
+                let direccion = 1;
 
-            setInterval(() => {
-                imgs[index].classList.remove('visible');
+                setInterval(() => {
+                    imgs[index].classList.remove('visible');
 
-                // Actualizar índice según dirección
-                index += direccion;
+                    index += direccion;
 
-                // Si llegamos al final, invertimos la dirección
-                if (index === imgs.length - 1 || index === 0) {
-                    direccion *= -1;
-                }
+                    if (index === imgs.length - 1 || index === 0) {
+                        direccion *= -1;
+                    }
 
-                imgs[index].classList.add('visible');
-            }, 3000);
+                    imgs[index].classList.add('visible');
+                }, 3000);
+            });
         </script>
 </body>
 
