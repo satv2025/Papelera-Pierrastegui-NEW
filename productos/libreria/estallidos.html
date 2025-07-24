@@ -29,18 +29,25 @@
         <img src="../../assets/images/estallidos.jpg" alt="Estallidos">
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Estallidos disponibles en diferentes tamaños: chico, mediano y grande.</p>
+          <p>Carteles para precios disponibles en diferentes tamaños. Paquete por 25 unidades</p>
 
           <div class="dropdown">
             <button class="dropdown-btn">Seleccionar tamaño</button>
             <ul class="dropdown-menu">
-              <li data-tamaño="n2">N°2</li>
-              <li data-tamaño="n4">N°4</li>
-              <li data-tamaño="n6">N°6</li>
-              <li data-tamaño="n8">N°8</li>
+              <li data-tamaño="n1" data-precio="400">N°1</li>
+              <li data-tamaño="n2" data-precio="500">N°2</li>
+              <li data-tamaño="n3" data-precio="650">N°3</li>
+              <li data-tamaño="n4" data-precio="700">N°4</li>
+              <li data-tamaño="n5" data-precio="950">N°5</li>
+              <li data-tamaño="n6" data-precio="1.000">N°6</li>
+              <li data-tamaño="n8" data-precio="1.500">N°8</li>
+              <li data-tamaño="n9" data-precio="3.100">N°9</li>
+              <li data-tamaño="n10" data-precio="4.100">N°10</li>
             </ul>
           </div>
 
+          <!-- Lugar para mostrar el precio -->
+          <p id="precio-mostrado">Precio (25 unidades): -- ARS</p>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -72,10 +79,22 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
-
-
-
   <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    // Selecciona todos los elementos de la lista
+    const items = document.querySelectorAll('.dropdown-menu li');
+    const precioDisplay = document.getElementById('precio-mostrado');
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        const precioNumero = item.getAttribute('data-precio');
+        // Formatear el número con separadores de miles
+        const precioFormateado = new Intl.NumberFormat('es-AR').format(precioNumero);
+        // Actualizar el texto del precio
+        precioDisplay.textContent = `Precio (25 unidades): ${precioFormateado} ARS`;
+      });
+    });
+  </script>
 </body>
 
 </html>

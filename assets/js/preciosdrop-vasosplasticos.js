@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "220ml": { cincuenta: "2700", cien: "3200" },
         "330ml": { cincuenta: "3200", cien: "4700" },
         "500ml": { cincuenta: "3500", cien: "6500" },
-        "1000ml": { cincuenta: "9000", cien: "16800" }
+        "1000ml": { cincuenta: "100000", cien: "1240000" }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
