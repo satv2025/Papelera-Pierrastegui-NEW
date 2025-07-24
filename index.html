@@ -13,7 +13,9 @@
         #contenedor {
             position: relative;
             width: 100%;
-            height: auto;
+            height: 21em;
+            /* mismo alto que .producto img */
+            overflow: hidden;
         }
 
         #contenedor img {
@@ -21,9 +23,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            z-index: 0;
         }
 
         #contenedor img.visible {
