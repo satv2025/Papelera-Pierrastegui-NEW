@@ -93,11 +93,8 @@
         // Actualizar solo el botón con el tamaño
         dropdownButton.textContent = tamaño;
 
-        // Formatear el precio
-        const precioFormateado = new Intl.NumberFormat('es-AR').format(precioNumero);
-
-        // Mostrar el precio en el párrafo
-        precioDisplay.textContent = `Precio (25 unidades): ${precioFormateado} ARS`;
+        // Mostrar el precio exactamente como está en data-precio
+        precioDisplay.textContent = `Precio (25 unidades): ${precioNumero} ARS`;
       });
     });
   </script>
