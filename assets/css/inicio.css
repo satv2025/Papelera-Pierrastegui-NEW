@@ -5,7 +5,7 @@
 :root {
   --primary-color: #02a22a;
   --text-color: #333;
-  --background-color: #f0f0f0;
+  --background-color: #ffffff;
   --neon-green: #39ff14;
   /* Verde neón */
   --shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
@@ -75,6 +75,15 @@ footer h1 {
   margin: 5px 0;
 }
 
+.social-icons svg {
+  fill: #02a22a;
+}
+
+.social-icons a {
+  color: #02a22a;
+  /* Para que el fill actual tome este color si usa currentColor */
+}
+
 /* Navigation */
 nav ul {
   list-style: none;
@@ -132,7 +141,7 @@ nav ul li a.active {
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -146,7 +155,7 @@ nav ul li a.active {
 
 .producto:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
 }
 
 /* Imagen contenedor para posicionar badge y tamaño fijo */
