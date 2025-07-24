@@ -9,6 +9,34 @@
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
   <link rel="stylesheet" href="../../assets/css/dropstretch.css">
+  <style>
+    #contenedor {
+      width: 20em;
+      height: 21em;
+      position: relative;
+    }
+
+    #contenedor img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: block;
+      /* siempre block para que esté en flujo */
+      pointer-events: none;
+      /* para que no interfiera */
+    }
+
+    #contenedor img.visible {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,9 +55,13 @@
     <section id="producto-detalle">
       <h2>Stretch</h2>
       <div class="producto-detalle">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/strech%20con%20manija.jpg"
-          alt="Strech">
+        <div id="contenedor">
+          <img src="../../assets/images/stretch1.jpg" class="visible" alt="Bolsas de Horno">
+          <img src="../../assets/images/stretch2.jpg" alt="Bolsas para horno">
+          <img src="../../assets/images/stretch3.jpg" alt="Bolsas para horno">
+          <img src="../../assets/images/stretch4.jpg" alt="Bolsas para horno">
+          <img src="../../assets/images/stretch5.jpg" alt="Bolsas para horno">
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Film strech negro de alta resistencia para embalajes y seguridad.</p>
@@ -93,6 +125,25 @@
 
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop-stretch.js"></script>
+  <script>
+    const imgs = document.querySelectorAll('#contenedor img');
+    let index = 0;
+    let direccion = 1; // 1 para avanzar, -1 para retroceder
+
+    setInterval(() => {
+      imgs[index].classList.remove('visible');
+
+      // Actualizar índice según dirección
+      index += direccion;
+
+      // Si llegamos al final, invertimos la dirección
+      if (index === imgs.length - 1 || index === 0) {
+        direccion *= -1;
+      }
+
+      imgs[index].classList.add('visible');
+    }, 3000);
+  </script>
 </body>
 
 </html>

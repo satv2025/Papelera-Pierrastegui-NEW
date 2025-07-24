@@ -24,14 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const precio = precios[size];
 
-            // Cambiar imagen si es "negromango"
-            if (size === "negromango") {
-                productoImg.src = "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/rollo%20strech%20negro.jpg";
-            } else {
-                // Imagen default (puedes personalizar este src)
-                productoImg.src = "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/strech%20con%20manija.jpg";
-            }
-
             if (precio && precio !== "none") {
                 precioUnidad.textContent = `$${precio}`;
                 precioUnidadMoneda.textContent = "ARS";
