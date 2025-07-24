@@ -9,6 +9,32 @@
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
   <link rel="stylesheet" href="../../assets/css/dropfilm.css">
+  <style>
+    #contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      /* mismo alto que .producto img */
+      overflow: hidden;
+    }
+
+    #contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      z-index: 0;
+    }
+
+    #contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
