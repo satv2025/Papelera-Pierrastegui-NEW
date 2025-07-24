@@ -47,7 +47,7 @@
           </div>
 
           <!-- Lugar para mostrar el precio -->
-          <p id="precio-mostrado">Precio (25 unidades): -- ARS</p>
+          <p id="precio-mostrado" style="font-weight: 700;"></p>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -81,16 +81,22 @@
   <script src="../../assets/js/social-links.js"></script>
   <script src="../../assets/js/dropdown.js"></script>
   <script>
-    // Selecciona todos los elementos de la lista
     const items = document.querySelectorAll('.dropdown-menu li');
+    const dropdownButton = document.querySelector('.dropdown-btn');
     const precioDisplay = document.getElementById('precio-mostrado');
 
     items.forEach(item => {
       item.addEventListener('click', () => {
+        const tamaño = item.getAttribute('data-tamaño');
         const precioNumero = item.getAttribute('data-precio');
-        // Formatear el número con separadores de miles
+
+        // Actualizar solo el botón con el tamaño
+        dropdownButton.textContent = tamaño;
+
+        // Formatear el precio
         const precioFormateado = new Intl.NumberFormat('es-AR').format(precioNumero);
-        // Actualizar el texto del precio
+
+        // Mostrar el precio en el párrafo
         precioDisplay.textContent = `Precio (25 unidades): ${precioFormateado} ARS`;
       });
     });

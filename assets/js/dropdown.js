@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   sizeOptions.forEach(option => {
     option.addEventListener("click", function () {
       const dropdownBtn = document.querySelector(".dropdown-btn");
-      dropdownBtn.textContent = `Tamaño: ${this.dataset.size}`;
+      // Aquí solo colocamos el tamaño, sin "Tamaño:"
+      dropdownBtn.textContent = this.textContent; // o this.dataset.tamaño si quieres algo más específico
       dropdownBtn.classList.remove("open"); // Quita rotación flecha
       const dropdownMenu = dropdownBtn.closest('.dropdown').querySelector('.dropdown-menu');
       dropdownMenu.classList.remove("show");
