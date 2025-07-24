@@ -139,7 +139,7 @@ div#uni {
     font-weight: 700;
     font-size: 1.5em;
     color: #02a22a;
-    margin-top: 2em;
+    margin-top: -1.8em !important;
 }
 
 .agregar-carrito {
