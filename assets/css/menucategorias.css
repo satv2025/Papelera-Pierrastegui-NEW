@@ -16,6 +16,7 @@
     -ms-overflow-style: none;
     /* IE 10+ */
     position: relative;
+    border-radius: 0.3em;
 }
 
 .category-menu::-webkit-scrollbar {
@@ -41,7 +42,7 @@
     min-width: 4.5em;
     cursor: pointer;
     padding: 0 0.8em;
-    border: 2px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     background: #fff;
     color: var(--primary-color);
     font-weight: 700;
@@ -54,6 +55,10 @@
     font-size: 1.1em;
     flex-shrink: 0;
     /* evitar que se reduzca demasiado */
+}
+
+span.more-btn {
+    border-radius: 0 0.3em 0.3em 0;
 }
 
 .more-dropdown>.more-btn {
@@ -100,14 +105,15 @@
     display: none;
     position: absolute;
     top: 2.9em;
-    right: 8.8em;
+    right: 7.83em;
     background: #fff;
-    border: 1.7px solid var(--primary-color);
+    border: 2px solid var(--primary-color);
     padding: 0.5em 0;
     min-width: 150px;
     z-index: 999;
     flex-direction: column;
     zoom: 1.5;
+    border-radius: 0.3em;
 }
 
 .dropdown-content-more span {
@@ -134,7 +140,7 @@
     display: flex;
 }
 
-/* Botón para móviles */
+/* BotÃ³n para mÃ³viles */
 .btn-categorias {
     display: none;
     background-color: var(--primary-color);
@@ -146,17 +152,17 @@
     user-select: none;
     border: none;
     margin-left: 1em;
-    margin-bottom: 1.2em;
-    margin-top: -1.8em;
+    margin-bottom: 3em;
+    margin-top: 0.4em;
     font-size: 1.1em;
     position: relative;
 }
 
-/* Dropdown categorías para móvil */
+/* Dropdown categorÃ­as para mÃ³vil */
 .dropdown-categorias {
     display: none;
     position: absolute;
-    top: 100%;
+    top: 55%;
     left: 0;
     background: white;
     border: 2px solid var(--primary-color);
@@ -249,7 +255,7 @@
     }
 }
 
-/* Móviles grandes 600px - 767px */
+/* MÃ³viles grandes 600px - 767px */
 @media (max-width: 767px) and (min-width: 600px) {
     .category-menu {
         margin-left: 0.5em;
@@ -263,7 +269,7 @@
     }
 }
 
-/* Móviles pequeños <600px: mostrar botón, ocultar menú */
+/* MÃ³viles pequeÃ±os <600px: mostrar botÃ³n, ocultar menÃº */
 @media (max-width: 599px) {
     .category-menu {
         display: none;
@@ -275,7 +281,7 @@
     }
 }
 
-/* Mostrar dropdown en móvil cuando tenga clase show */
+/* Mostrar dropdown en mÃ³vil cuando tenga clase show */
 .dropdown-categorias.show {
     display: flex;
     flex-direction: column;
