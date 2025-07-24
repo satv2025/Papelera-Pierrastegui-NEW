@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
         "5mts": '1.500',
-        "38x300": '4.800',
-        "38x500": '8.300',
-        "45x500": '9.900',
-        "38x700": '16.500',
-        "45x700": '19.800'
+        "38x300": '4.000',
+        "38x500": '8.900',
+        "38x700": '17.900',
+        "45x500": '11.000',
+        "45x700": '19.900'
+
+
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");

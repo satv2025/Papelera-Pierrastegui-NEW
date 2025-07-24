@@ -30,37 +30,49 @@ body {
     font-size: 1em;
 }
 
+/* Header */
 header {
     background-color: #fff;
-    color: #02a22a;
-    padding: 1em;
+    color: var(--primary-color);
+    padding: 10px 40px;
+    box-shadow: var(--shadow);
     text-align: center;
-    border-bottom: 3px solid var(--neon-green);
-    box-shadow: 0 4px 10px var(--neon-green);
+    border-bottom: 3px solid var(--primary-color);
 }
 
 header h1 {
-    margin: 0;
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color);
 }
 
+/* Navigation */
 nav ul {
     list-style: none;
-    padding: 0;
     display: flex;
     justify-content: center;
-    margin: 0;
-}
-
-nav ul li {
-    margin: 0 1em;
+    gap: 2em;
+    padding: 0;
+    margin: 1.5em 0 1em 0;
 }
 
 nav ul li a {
-    color: #02a22a;
+    color: var(--primary-color);
     text-decoration: none;
+    background: #fff;
+    outline: 2px solid var(--primary-color);
     padding: 0.5em 1em;
-    display: block;
+    border-radius: 6px;
     font-weight: 700;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: var(--primary-color);
+    color: #fff;
 }
 
 #producto-detalle {
@@ -72,7 +84,7 @@ nav ul li a {
     width: 66em;
     position: absolute;
     margin-left: 24em;
-    margin-top: -1.8em !important;
+    margin-top: -0.7em !important;
     top: 12.2em !important;
     border-radius: 0.3em;
     height: 27.5em;
