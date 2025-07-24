@@ -157,7 +157,7 @@ nav ul li a.active {
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -267,7 +267,6 @@ nav ul li a.active {
   font-size: 1em;
   transition: background-color 0.3s ease;
   margin-top: auto;
-  box-shadow: 0 4px 8px rgba(2, 162, 42, 0.4);
 }
 
 .btn:hover {

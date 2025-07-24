@@ -27,9 +27,10 @@
     <section id="producto-detalle">
       <h2>Film</h2>
       <div class="producto-detalle">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/FILM%20-%20STRETCH/D_NQ_NP_2X_724993-MLA74413303619_022024-F.webp"
-          alt="Film">
+        <div id="contenedor">
+          <img src="../../assets/images/film2.jpg" class="visible" alt="Bolsas de Horno">
+          <img src="../../assets/images/film1.jpg" alt="Bolsas para horno">
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Film estirable de alta calidad para embalaje y protección de productos.</p>
@@ -88,6 +89,25 @@
   <script src="../../../assets/js/social-links.js"></script>
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop-film.js"></script>
+  <script>
+    const imgs = document.querySelectorAll('#contenedor img');
+    let index = 0;
+    let direccion = 1; // 1 para avanzar, -1 para retroceder
+
+    setInterval(() => {
+      imgs[index].classList.remove('visible');
+
+      // Actualizar índice según dirección
+      index += direccion;
+
+      // Si llegamos al final, invertimos la dirección
+      if (index === imgs.length - 1 || index === 0) {
+        direccion *= -1;
+      }
+
+      imgs[index].classList.add('visible');
+    }, 3000);
+  </script>
 </body>
 
 </html>
