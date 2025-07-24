@@ -121,6 +121,8 @@ nav ul li a.active {
   /* 4 columnas */
   gap: 28px;
   margin: 0em 4em 0 4em;
+  align-items: stretch;
+  /* Estira las cards para que tengan la misma altura */
 }
 
 /* Producto card */
@@ -131,6 +133,10 @@ nav ul li a.active {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  /* Para que use toda la altura posible del grid */
+  min-height: 450px;
+  /* Altura mínima que te guste, ajusta a tu diseño */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   text-transform: capitalize;
@@ -143,10 +149,26 @@ nav ul li a.active {
 
 /* Imagen contenedor para posicionar badge y tamaño fijo */
 .producto-img-container {
+  height: auto;
+  /* Ya lo tienes definido */
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid #eee;
-  height: 220px;
+  /* Asegura que ocupe todo el alto asignado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.producto-img-container img {
+  height: 100%;
+  /* Que la imagen tome toda la altura del contenedor */
+  width: auto;
+  /* Mantiene proporción */
+  object-fit: contain;
+  /* o cover, según prefieras */
+  display: block;
+  transition: transform 0.4s ease;
 }
 
 .producto img {
@@ -177,6 +199,8 @@ nav ul li a.active {
 /* Info producto */
 .producto-info {
   padding: 18px 20px 25px;
+  flex-grow: 1;
+  /* Que el contenido crezca para llenar el espacio */
   display: flex;
   flex-direction: column;
   flex: 1;

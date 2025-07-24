@@ -179,7 +179,7 @@ span.more-btn {
 .dropdown-categorias span {
     display: block;
     padding: 0.5em 1em;
-    border-bottom: 1px solid #eee;
+    border: 0 !important;
     cursor: pointer;
     color: var(--primary-color);
     font-weight: 700;
