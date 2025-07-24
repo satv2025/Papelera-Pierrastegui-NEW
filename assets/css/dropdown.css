@@ -89,3 +89,10 @@
 footer {
     font-weight: 700;
 }
+
+.ps__rail-y {
+    opacity: 1 !important;
+    /* Siempre visible */
+    pointer-events: auto;
+    /* Para que sea interactivo */
+}

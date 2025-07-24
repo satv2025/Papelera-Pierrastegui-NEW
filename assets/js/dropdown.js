@@ -1,50 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Código dropdown
-  const dropdownBtn = document.querySelector(".dropdown-btn");
-  const dropdownMenu = document.querySelector(".dropdown-menu");
   const sizeOptions = document.querySelectorAll(".dropdown-menu li");
   const uniSpan = document.getElementById('uni');
 
-  dropdownBtn.addEventListener("click", function () {
-    dropdownMenu.classList.toggle("show");
-  });
-
   sizeOptions.forEach(option => {
     option.addEventListener("click", function () {
+      const dropdownBtn = document.querySelector(".dropdown-btn");
       dropdownBtn.textContent = `Tamaño: ${this.dataset.size}`;
+      const dropdownMenu = dropdownBtn.closest('.dropdown').querySelector('.dropdown-menu');
       dropdownMenu.classList.remove("show");
       uniSpan.style.display = 'inline';
     });
   });
 
   document.addEventListener("click", function (event) {
+    const dropdownBtn = document.querySelector(".dropdown-btn");
+    const dropdownMenu = dropdownBtn.closest('.dropdown').querySelector('.dropdown-menu');
     if (!dropdownBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
       dropdownMenu.classList.remove("show");
     }
   });
-
-  // Código para cambiar href en footer
-  const urlMap = {
-    "https://www.facebook.com": "https://nueva-url-para-facebook.com",
-    "https://instagram.com": "https://nueva-url-para-instagram.com",
-    "https://twitter.com": "https://nueva-url-para-twitter.com",
-    "https://wa.me": "https://nueva-url-para-whatsapp.com"
-  };
-
-  document.querySelectorAll("footer a").forEach(link => {
-    for (const originalUrl in urlMap) {
-      if (link.href.startsWith(originalUrl)) {
-        link.href = urlMap[originalUrl];
-        break;
-      }
-    }
-  });
 });
 
-// Uso de PerfectScrollbar
-
 document.addEventListener('DOMContentLoaded', function () {
-  // Función para cargar CSS externo
   function loadCSS(href) {
     return new Promise(function (resolve, reject) {
       const link = document.createElement('link');
@@ -56,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Función para cargar JS externo
   function loadJS(src) {
     return new Promise(function (resolve, reject) {
       const script = document.createElement('script');
@@ -67,23 +43,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // URLs CDN PerfectScrollbar
   const psCSS = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
   const psJS = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
 
-  // Estilos personalizados para scrollbar siempre visible y color verde
   const customStyle = `
     .dropdown-menu {
       overflow-x: hidden !important;
       overflow-y: auto !important;
     }
-
-    /* Ocultar scrollbar horizontal */
     .ps__rail-x {
       display: none !important;
     }
-
-    /* Barra vertical */
     .ps__rail-y {
       background-color: transparent !important;
       width: 8px !important;
@@ -93,36 +63,52 @@ document.addEventListener('DOMContentLoaded', function () {
       pointer-events: auto !important;
       right: 2px !important;
     }
-
-    /* Forzar siempre visible (incluso sin scroll o hover) */
     .ps__rail-y.ps--active,
     .ps__rail-y:hover {
       opacity: 1 !important;
       visibility: visible !important;
       transition: none !important;
     }
-
-    /* Pulgar de la barra vertical */
     .ps__thumb-y {
       background-color: #02a22a !important;
       border-radius: 4px;
     }
   `;
 
-  // Insertar estilos en <head>
   const styleTag = document.createElement('style');
   styleTag.textContent = customStyle;
   document.head.appendChild(styleTag);
 
-  // Cargar CSS y JS de PerfectScrollbar y luego inicializar
   loadCSS(psCSS)
     .then(() => loadJS(psJS))
     .then(() => {
       const dropdownMenus = document.querySelectorAll('.dropdown .dropdown-menu');
+      const psInstances = new Map();
+
       dropdownMenus.forEach(menu => {
-        new PerfectScrollbar(menu, {
+        const psInstance = new PerfectScrollbar(menu, {
           wheelPropagation: false,
           suppressScrollX: true
+        });
+        psInstances.set(menu, psInstance);
+      });
+
+      document.querySelectorAll('.dropdown-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const dropdown = btn.closest('.dropdown');
+          if (!dropdown) return;
+
+          const menu = dropdown.querySelector('.dropdown-menu');
+          if (!menu) return;
+
+          const isShown = menu.classList.toggle('show');
+
+          if (isShown) {
+            const ps = psInstances.get(menu);
+            if (ps) {
+              ps.update();
+            }
+          }
         });
       });
     })
