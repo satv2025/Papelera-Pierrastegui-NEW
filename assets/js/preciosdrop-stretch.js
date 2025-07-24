@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "virgen10cm": '2.500',
-        "virgenmango": '3.000',
-        "negromango": '3.200',
-        "virgenmanual": '2.800'
+        "virgen10cm": '1.700',
+        "virgenmango": '5.500',
+        "virgenmanual": '16.500',
+        "negromango": '7.000',
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
