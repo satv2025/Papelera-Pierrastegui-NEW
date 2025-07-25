@@ -29,8 +29,9 @@ footer p {
 }
 
 .producto-info {
-    margin-top: -23.6em;
-    margin-left: 24em;
+    /* Quité márgenes negativos para que el contenedor se ajuste bien */
+    margin-top: 0;
+    margin-left: 0;
 }
 
 .product-info ul {}
@@ -102,7 +103,8 @@ nav ul li a.active {
     flex-direction: column;
     gap: 1.5em;
     align-items: center;
-    height: 28em;
+    /* Eliminé la altura fija para ajuste dinámico */
+    height: 58em;
 }
 
 /* Imagen del producto */
@@ -161,9 +163,7 @@ m {
     width: 100%;
     max-width: 300px;
     position: relative;
-    margin-top: 1em;
-    top: 3em;
-    margin-left: -11.58em;
+    margin-left: 0em;
 }
 
 .agregar-carrito:hover {
@@ -297,3 +297,4 @@ footer h1 {
     .dropdown {
         margin-top: 0.8em !important;
     }
+}
