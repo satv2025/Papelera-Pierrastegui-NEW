@@ -10,13 +10,31 @@
 
 * {
     box-sizing: border-box;
+    font-family: 'Gilroy';
+}
+
+footer p {
+    font-weight: 700;
+    margin-top: 0.5em;
+    margin-bottom: -0.5em;
+    font-size: 1.2em;
+}
+
+.producto-info ul {
+    position: relative;
+    left: 12.7em;
+    top: -2em;
+    width: 77%;
+}
+
+h2 {
+    margin-left: -40em;
 }
 
 html,
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Gilroy', sans-serif;
     background-color: var(--background-color);
     color: var(--text-color);
 }
@@ -65,16 +83,17 @@ nav ul li a.active {
 
 /* Producto Detalle Layout */
 #producto-detalle {
-    max-width: 800px;
+    max-width: 75%;
     margin: 3em auto;
     padding: 1.5em;
     border-radius: 0.5em;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(0 0 0 / 43%);
     background: #fff;
     display: flex;
     flex-direction: column;
     gap: 1.5em;
     align-items: center;
+    height: 33em;
 }
 
 /* Imagen del producto */
@@ -85,6 +104,8 @@ nav ul li a.active {
     box-shadow: var(--shadow);
     object-fit: contain;
     background: #fff;
+    margin-left: -9em;
+    height: 21em;
 }
 
 /* Información del producto */
@@ -101,12 +122,13 @@ nav ul li a.active {
     font-size: 1.6em;
     font-weight: bold;
     margin: 0.5em 0;
+    margin-top: -16.3em;
 }
 
 .producto-info p {
     font-size: 1.1em;
-    line-height: 1.5;
-    margin-bottom: 1em;
+    line-height: 1.3;
+    margin-bottom: -1em;
     text-align: justify;
 }
 
@@ -131,6 +153,7 @@ nav ul li a.active {
     transition: background-color 0.3s;
     width: 100%;
     max-width: 300px;
+    margin-top: 3em;
 }
 
 .agregar-carrito:hover {
@@ -146,7 +169,6 @@ footer {
     border-top: 3px solid var(--neon-green);
     box-shadow: 0 -4px 10px var(--neon-green);
     width: 100%;
-    padding: 1.5em 1em;
     margin-top: auto;
     display: flex;
     flex-direction: column;
