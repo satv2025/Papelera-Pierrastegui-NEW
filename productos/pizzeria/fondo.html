@@ -13,6 +13,31 @@
     .dropdown-menu {
       width: 133% !important;
     }
+
+    #contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      overflow: hidden;
+    }
+
+    #contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+
+    #contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
   </style>
 </head>
 
@@ -32,10 +57,12 @@
     <section id="producto-detalle">
       <h2>Fondo</h2>
       <div class="producto-detalle">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
-          alt="Fondo Pizza Chico" id="producto-img" />
-
+        <div id="contenedor">
+          <img
+            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
+            alt="bg-id:1483456">
+          <img src="https://papelerapierrastegui.com.ar/assets/images/papelfondo1.jpg" alt="bg-id:148356">
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Bases de cartón para pizzas chicas, resistentes y de calidad gastronómica.</p>
@@ -89,6 +116,30 @@
   <script src="../../assets/js/social-links.js"></script>
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop-fondo.js"></script>
+  <script>
+    const imgs = document.querySelectorAll('#contenedor img');
+    let index = 0;
+    let direccion = 1;
+
+    // Mostrar la primera imagen desde el inicio
+    imgs[index].classList.add('visible');
+
+    // Esperar 3 segundos antes de comenzar el ciclo
+    setTimeout(() => {
+      setInterval(() => {
+        imgs[index].classList.remove('visible');
+
+        index += direccion;
+
+        // Cambiar dirección si estamos al final o al inicio
+        if (index === imgs.length - 1 || index === 0) {
+          direccion *= -1;
+        }
+
+        imgs[index].classList.add('visible');
+      }, 1500);
+    }, 1500); // <- este es el periodo de gracia inicial en milisegundos
+  </script>
 </body>
 
 </html>
