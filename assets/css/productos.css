@@ -319,3 +319,7 @@ footer h1 {
     height: 2.4em !important;
     width: unset !important;
 }
+
+.dropdown-menu li:hover {
+    color: #fff !important;
+}
