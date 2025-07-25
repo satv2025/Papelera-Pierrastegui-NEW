@@ -315,6 +315,7 @@ footer h1 {
 
 .dropdown-menu li {
     color: #02a22a !important;
-    margin-left: -2.25em;
+    margin-left: -2.25em !important;
     height: 2.4em !important;
+    width: unset !important;
 }
