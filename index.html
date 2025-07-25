@@ -953,29 +953,28 @@
         <script src="assets/js/home-dropdown-scroll.js"></script>
         <script src="assets/js/satv-scroll-main.js"></script>
         <script>
-            window.addEventListener('DOMContentLoaded', () => {
-                const imgs = document.querySelectorAll('#contenedor img');
-                let index = 0;
-                let direccion = 1;
+            const imgs = document.querySelectorAll('#contenedor img');
+            let index = 0;
+            let direccion = 1;
 
+            // Mostrar la primera imagen desde el inicio
+            imgs[index].classList.add('visible');
+
+            // Esperar 3 segundos antes de comenzar el ciclo
+            setTimeout(() => {
                 setInterval(() => {
-                    // índice de la imagen actual
-                    const currentIndex = index;
+                    imgs[index].classList.remove('visible');
 
-                    // calcular el próximo índice
                     index += direccion;
 
+                    // Cambiar dirección si estamos al final o al inicio
                     if (index === imgs.length - 1 || index === 0) {
                         direccion *= -1;
                     }
 
-                    // primero mostrar la siguiente imagen
                     imgs[index].classList.add('visible');
-
-                    // después ocultar la anterior
-                    imgs[currentIndex].classList.remove('visible');
                 }, 3000);
-            });
+            }, 3000); // <- este es el periodo de gracia inicial en milisegundos
         </script>
 </body>
 

@@ -130,21 +130,26 @@
   <script>
     const imgs = document.querySelectorAll('#contenedor img');
     let index = 0;
-    let direccion = 1; // 1 para avanzar, -1 para retroceder
+    let direccion = 1;
 
-    setInterval(() => {
-      imgs[index].classList.remove('visible');
+    // Mostrar la primera imagen desde el inicio
+    imgs[index].classList.add('visible');
 
-      // Actualizar índice según dirección
-      index += direccion;
+    // Esperar 3 segundos antes de comenzar el ciclo
+    setTimeout(() => {
+      setInterval(() => {
+        imgs[index].classList.remove('visible');
 
-      // Si llegamos al final, invertimos la dirección
-      if (index === imgs.length - 1 || index === 0) {
-        direccion *= -1;
-      }
+        index += direccion;
 
-      imgs[index].classList.add('visible');
-    }, 1500);
+        // Cambiar dirección si estamos al final o al inicio
+        if (index === imgs.length - 1 || index === 0) {
+          direccion *= -1;
+        }
+
+        imgs[index].classList.add('visible');
+      }, 3000);
+    }, 3000); // <- este es el periodo de gracia inicial en milisegundos
   </script>
 </body>
 
