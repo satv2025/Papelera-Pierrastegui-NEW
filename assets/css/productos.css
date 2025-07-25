@@ -3,7 +3,7 @@
 :root {
     --primary-color: #02a22a;
     --text-color: #333;
-    --background-color: #fff;
+    --background-color: #ffffff;
     --neon-green: #39ff14;
     /* Verde neón */
     --shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
@@ -15,12 +15,19 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    font-family: 'Gilroy', sans-serif;
 }
 
 ::selection {
     color: #fff;
-    background: var(--primary-color);
+    background: #02a22a;
+}
+
+body {
+    font-family: 'Gilroy', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    font-size: 1em;
 }
 
 /* Header */
@@ -37,9 +44,10 @@ header h1 {
     font-size: 2em;
     font-weight: 700;
     letter-spacing: 1px;
+    color: var(--primary-color);
 }
 
-/* Navegación */
+/* Navigation */
 nav ul {
     list-style: none;
     display: flex;
@@ -67,90 +75,103 @@ nav ul li a.active {
     color: #fff;
 }
 
-/* Sección producto detalle */
 #producto-detalle {
     padding: 2em;
-    color: var(--primary-color);
+    color: #02a22a;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    max-width: 66em;
-    margin: 0 auto;
+    justify-content: space-between;
+    width: 66em;
+    position: absolute;
+    margin-left: 24em;
+    margin-top: -1.3em !important;
+    top: 12.2em !important;
     border-radius: 0.3em;
+    height: 27.5em;
     box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
 }
 
-/* Título */
 #producto-detalle h2 {
     margin-left: 0.4em;
     margin-top: -0.2em;
 }
 
-/* Contenedores */
-div#precios,
-#precios-container,
+div#precios {
+    margin-top: 1.6em;
+    margin-bottom: -2em;
+}
+
+#precios-container {
+    margin-top: 1.5em;
+    margin-bottom: -2.1em;
+}
+
+.precio-container {
+    margin-top: 2.3em;
+    margin-bottom: -1.3em;
+}
+
 div#uni {
     margin-top: 1.5em;
     margin-bottom: -2em;
 }
 
-/* Precio grande */
+.precio {
+    position: relative;
+    top: -3.5em;
+}
+
+.precioo {
+    font-weight: 700;
+    position: relative;
+    top: 14.5em;
+}
+
+main #producto-detalle .producto-detalle .producto-info #desc-p-pro {
+    position: relative;
+    padding-left: 1.2em;
+    margin-bottom: 0.5em;
+    top: -5em;
+}
+
+.producto-detalle img {
+    width: 100%;
+    max-width: 346px;
+    height: 21.8em;
+    border-radius: 8px;
+    box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    margin-top: 5.5em;
+    object-fit: contain;
+    background: #fff;
+    left: 2em;
+}
+
+.producto-info {
+    max-width: 655px;
+    margin-left: -8em;
+    display: flex;
+    flex-direction: column;
+    margin-top: -4em;
+}
+
+.producto-info h3 {
+    font-size: 1.5em;
+    margin-bottom: 19em;
+}
+
+.producto-info p {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+}
+
 .precio {
     font-weight: 700;
     font-size: 1.5em;
     color: #02a22a;
-    margin-top: 0;
+    margin-top: -1.8em !important;
 }
 
-/* Otro precio (ejemplo) */
-.precioo {
-    font-weight: 700;
-    margin-top: 0.3em;
-}
-
-/* Descripción del producto */
-#desc-p-pro {
-    padding-left: 1.2em;
-    margin-bottom: 0.5em;
-    line-height: 1.1;
-    text-align: justify;
-}
-
-/* Imagen del producto */
-.producto-detalle img {
-    width: 100%;
-    max-width: 346px;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
-    margin-top: 1em;
-    object-fit: contain;
-}
-
-/* Información del producto */
-.producto-info {
-    max-width: 655px;
-    margin-left: 1em;
-    display: flex;
-    flex-direction: column;
-    margin-top: 1em;
-}
-
-/* Título dentro de info */
-.producto-info h3 {
-    font-size: 1.5em;
-    margin-bottom: 0.5em;
-    opacity: 1;
-}
-
-/* Párrafos dentro de info */
-.producto-info p {
-    margin-bottom: 1em;
-    font-size: 1.2em;
-    opacity: 1;
-}
-
-/* Botón agregar al carrito */
 .agregar-carrito {
     background-color: #02a22a;
     border: none;
@@ -160,20 +181,23 @@ div#uni {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.5s ease;
-    width: 100%;
+    width: 84.5%;
     font-family: 'Gilroy';
     font-size: 1.2em;
     box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
-    margin-top: 2em;
+    position: relative;
+    top: 13em;
 }
 
-/* Hover del botón */
 .agregar-carrito:hover {
     background-color: #fff;
     color: #02a22a;
 }
 
-/* Footer */
+body>footer {
+    margin-top: auto;
+}
+
 footer {
     text-align: center;
     padding: 1em;
@@ -192,17 +216,22 @@ footer p {
     line-height: 1;
 }
 
-/* Redes sociales en footer */
 .social-icons {
     display: flex;
     gap: 12px;
+    /* Espacio entre íconos */
     justify-content: center;
+    /* Centrado horizontal */
     align-items: center;
+    /* Centrado vertical */
     margin-top: 16px;
 }
 
 .social-icons img {
     filter: brightness(0) saturate(100%) invert(41%) sepia(96%) saturate(826%) hue-rotate(97deg) brightness(88%) contrast(98%);
+}
+
+.social-icons a img {
     width: 32px;
     height: 32px;
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease-in-out;
@@ -229,7 +258,7 @@ footer .social-icons svg {
     fill: #02a22a;
 }
 
-/* Scrollbar personalizado */
+/* Scrollbar personalizada */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -243,47 +272,153 @@ footer .social-icons svg {
     border-radius: 6px;
 }
 
-/* Responsividad: Mobile y tablets */
-@media(max-width: 768px) {
-    #producto-detalle {
-        flex-direction: column;
-        align-items: center;
-        padding: 1em;
-        height: auto;
-    }
+.preciou {}
 
-    /* La imagen se ajusta automáticamente en tamaño */
-    .producto-detalle img {
-        max-width: 100%;
-        height: auto;
-        margin: 1em 0;
-    }
+.preciob {
+    margin-top: -0.8em;
+}
 
-    /* Info centrada */
-    .producto-info {
-        max-width: 100%;
-        margin-left: 0;
-        align-items: center;
-        text-align: center;
-    }
+.preciou,
+.preciob {
+    font-weight: 700;
+}
 
-    /* Título en info */
-    .producto-info h3 {
-        font-size: 1.3em;
-        margin-bottom: 0.5em;
-    }
+.precio {}
 
-    /* Párrafos en info */
-    .producto-info p {
-        font-size: 1.1em;
-        margin: 0.5em 0;
-    }
+.uni {
+    font-size: 1.2em;
+    font-weight: 400;
+}
 
-    /* Botón ancho completo en móvil */
-    .agregar-carrito {
-        width: 100%;
-        font-size: 1.2em;
-        padding: 1em;
-        margin-top: 1em;
+@media (width: 1366px) {
+    main {
+        margin-left: -16em;
+        margin-top: -3em;
     }
 }
+
+.producto-info h3,
+.producto-info p {
+    opacity: 1;
+}
+
+.dropdown-btn {
+    background-color: #fff;
+    color: #02a22a;
+    border: 2px solid #02a22a;
+    padding: 10px;
+    width: 104%;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-family: 'Gilroy';
+    margin-top: -0.4em;
+}
+
+.producto-info p {
+    margin-bottom: 1em;
+    font-size: 1.2em;
+    margin-top: -18.9em;
+}
+
+#sin-stock {
+    font-weight: 700;
+}
+
+#desc-p {
+    text-align: justify;
+    line-height: 1.1;
+}
+
+#hidden-title {
+    opacity: 0;
+}
+
+.producto-info h3 {
+    opacity: 0 !important;
+}
+
+.ps__rail-y:hover>.ps__thumb-y {
+    width: 6px !important;
+}
+
+/* Media Queries Mejorados para mejor responsividad */
+
+/* Pantallas grandes: hasta 1200px */
+@media (max-width: 75em) {
+
+    /* 1200px */
+    #producto-detalle {
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        max-width: 600px;
+        position: static;
+        height: auto;
+        padding: 2em 1em;
+    }
+
+    .producto-detalle img {
+        position: static;
+        margin: 0 auto 1.5em;
+        max-width: 100%;
+        height: auto;
+        display: block;
+        box-shadow: 0 0 0.3em rgba(0, 0, 0, 0.1);
+    }
+
+    .producto-info {
+        margin-left: 0;
+        max-width: 100%;
+        padding: 0 1em;
+    }
+}
+
+/* Pantallas medianas: hasta 900px */
+@media (max-width: 56.25em) {
+
+    /* 900px */
+    #producto-detalle {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 1.5em 1em;
+        box-sizing: border-box;
+    }
+
+    .producto-info p {
+        font-size: 1.1em;
+    }
+
+    .agregar-carrito {
+        width: 100%;
+        font-size: 1.1em;
+        padding: 0.7em;
+    }
+}
+
+/* Pantallas pequeñas: hasta 600px */
+@media (max-width: 37.5em) {
+
+    /* 600px */
+    #producto-detalle {
+        padding: 1em;
+        width: 100%;
+        margin-left: 0;
+        border-radius: 0;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .producto-info h3 {
+        font-size: 1.3em;
+    }
+
+    .producto-info p {
+        font-size: 1em;
+        margin-top: -0.5em;
+    }
