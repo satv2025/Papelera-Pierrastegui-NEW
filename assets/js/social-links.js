@@ -1,45 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const socialLinks = {
-        Facebook: "https://www.facebook.com/papelerapierrastegui",
-        Instagram: "https://www.instagram.com/papelerapierrastegui",
-        Twitter: "https://twitter.com/pierrastegui",
-        WhatsApp: "https://wa.me/5491122334455" // reemplazá por tu número real
-    };
+  const socialLinks = {
+    Facebook: "https://facebook.com/papelerapierrastegui",
+    Instagram: "https://instagram.com/pierrastegui.papelera",
+    Twitter: "https://twitter.com/pierrastegui",
+    WhatsApp: "http://wa.me/541123054613" // reemplazá por tu número real
+  };
 
-    const footer = document.querySelector("footer");
+  const footer = document.querySelector("footer");
 
-    if (footer) {
-        const links = footer.querySelectorAll("a[aria-label]");
+  if (footer) {
+    const links = footer.querySelectorAll("a[aria-label]");
 
-        links.forEach(link => {
-            const label = link.getAttribute("aria-label");
-            if (socialLinks[label]) {
-                link.setAttribute("href", socialLinks[label]);
-            }
-        });
-    }
+    links.forEach(link => {
+      const label = link.getAttribute("aria-label");
+      if (socialLinks[label]) {
+        link.setAttribute("href", socialLinks[label]);
+      }
+      // Ocultar Facebook y Twitter
+      if (label === "Facebook" || label === "Twitter") {
+        link.style.display = "none";
+      }
+    });
+  }
 });
-
 
 // Scroll Perfect ScrollBar 
 
 // satv-scroll-main.js
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Crear el contenedor #page-scroll
-    const pageScrollDiv = document.createElement('div');
-    pageScrollDiv.id = 'page-scroll';
+  // 1. Crear el contenedor #page-scroll
+  const pageScrollDiv = document.createElement('div');
+  pageScrollDiv.id = 'page-scroll';
 
-    // 2. Mover TODO el contenido del body dentro de #page-scroll
-    while (document.body.firstChild) {
-        pageScrollDiv.appendChild(document.body.firstChild);
-    }
+  // 2. Mover TODO el contenido del body dentro de #page-scroll
+  while (document.body.firstChild) {
+    pageScrollDiv.appendChild(document.body.firstChild);
+  }
 
-    // 3. Insertar #page-scroll como primer hijo de body
-    document.body.appendChild(pageScrollDiv);
+  // 3. Insertar #page-scroll como primer hijo de body
+  document.body.appendChild(pageScrollDiv);
 
-    // 4. Inyectar estilos personalizados para el scroll
-    const style = document.createElement('style');
-    style.textContent = `
+  // 4. Inyectar estilos personalizados para el scroll
+  const style = document.createElement('style');
+  style.textContent = `
     html, body {
       height: 100%;
       margin: 0;
@@ -80,23 +83,23 @@ document.addEventListener('DOMContentLoaded', () => {
       width: 8px !important;
     }
   `;
-    document.head.appendChild(style);
+  document.head.appendChild(style);
 
-    // 5. Cargar Perfect Scrollbar JS (CDN)
-    const psScript = document.createElement('script');
-    psScript.src = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
-    psScript.onload = () => {
-        // 6. Inicializar Perfect Scrollbar sobre #page-scroll
-        new PerfectScrollbar('#page-scroll', {
-            wheelPropagation: false,
-            suppressScrollX: true,
-        });
-    };
-    document.body.appendChild(psScript);
+  // 5. Cargar Perfect Scrollbar JS (CDN)
+  const psScript = document.createElement('script');
+  psScript.src = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
+  psScript.onload = () => {
+    // 6. Inicializar Perfect Scrollbar sobre #page-scroll
+    new PerfectScrollbar('#page-scroll', {
+      wheelPropagation: false,
+      suppressScrollX: true,
+    });
+  };
+  document.body.appendChild(psScript);
 
-    // 7. También cargar el CSS de Perfect Scrollbar (CDN)
-    const psCSS = document.createElement('link');
-    psCSS.rel = 'stylesheet';
-    psCSS.href = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
-    document.head.appendChild(psCSS);
+  // 7. También cargar el CSS de Perfect Scrollbar (CDN)
+  const psCSS = document.createElement('link');
+  psCSS.rel = 'stylesheet';
+  psCSS.href = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
+  document.head.appendChild(psCSS);
 });
