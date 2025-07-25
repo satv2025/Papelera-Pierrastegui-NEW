@@ -12,6 +12,13 @@
     box-sizing: border-box;
 }
 
+footer p {
+    margin-top: -0.2em;
+    margin-bottom: 0.4em;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
 .dropdown {
     margin-top: 1.2em !important;
 }
