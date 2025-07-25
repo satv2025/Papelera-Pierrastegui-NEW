@@ -4,9 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const items = dropdownMenu.querySelectorAll('li');
 
     const uniDiv = document.getElementById('uni');
-    const precio10 = document.getElementById('precio-10');
-    const precio50 = document.getElementById('precio-50');
-    const precio100 = document.getElementById('precio-100');
+    const precio1kg = document.getElementById('precio-1kg');
+    const precio10kg = document.getElementById('precio-10kg');
     const imagenProducto = document.getElementById('producto-img');
 
     dropdownBtn.addEventListener('click', () => {
@@ -16,18 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
     items.forEach(item => {
         item.addEventListener('click', () => {
             const medida = item.getAttribute('data-size');
-            const p10 = item.getAttribute('data-price-unit');
-            const p50 = item.getAttribute('data-price-bulk');
-            const p100 = item.getAttribute('data-bulto');
+            const p1kg = item.getAttribute('data-price-1kg');
+            const p10kg = item.getAttribute('data-price-10kg');
 
-            precio10.textContent = (p10 && p10.toLowerCase() === 'sin stock') ? 'Sin Stock' : p10;
-            precio50.textContent = (p50 && p50.toLowerCase() === 'sin stock') ? 'Sin Stock' : p50;
-            precio100.textContent = (p100 && p100.toLowerCase() === 'sin stock') ? 'Sin Stock' : p100;
+            precio1kg.textContent = (p1kg && p1kg.toLowerCase() === 'sin stock') ? 'Sin Stock' : p1kg;
+            precio10kg.textContent = (p10kg && p10kg.toLowerCase() === 'sin stock') ? 'Sin Stock' : p10kg;
 
             dropdownBtn.textContent = `Tamaño: ${medida}`;
             uniDiv.style.display = 'block';
 
-            // Imagen opcional personalizada
+            // Imagen personalizada opcional
             if (medida === 'P12') {
                 imagenProducto.src = 'https://www.smpdescartables.com/cdn/shop/products/COD-565.jpg';
             } else {
