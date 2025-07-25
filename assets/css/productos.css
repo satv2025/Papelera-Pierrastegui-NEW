@@ -104,7 +104,7 @@ nav ul li a.active {
     gap: 1.5em;
     align-items: center;
     /* Eliminé la altura fija para ajuste dinámico */
-    height: 58em;
+    height: 64em;
 }
 
 /* Imagen del producto */
@@ -162,8 +162,9 @@ m {
     transition: background-color 0.3s;
     width: 100%;
     max-width: 300px;
-    position: relative;
-    margin-left: 0em;
+    position: absolute;
+    margin-left: -0em;
+    top: 64em;
 }
 
 .agregar-carrito:hover {
@@ -241,6 +242,10 @@ footer h1 {
         padding: 1em;
         margin: 1em;
         max-width: 100%;
+    }
+
+    .dropdown {
+        margin-top: 2em !important;
     }
 
     /* Imagen del producto */
