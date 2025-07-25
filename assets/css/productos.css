@@ -324,3 +324,7 @@ footer h1 {
     color: #fff !important;
     background: #02a22a !important;
 }
+
+.producto-info h3 {
+    display: none;
+}
