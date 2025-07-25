@@ -4,9 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Fondo Pizza Chico</title>
+  <title>Papelera Pierrastegui - Fondo</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
+  <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
 
   <main>
     <section id="producto-detalle">
-      <h2>Fondo Pizza Chico</h2>
+      <h2>Fondo</h2>
       <div class="producto-detalle">
         <img
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
@@ -31,8 +32,23 @@
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Bases de cartón para pizzas chicas, resistentes y de calidad gastronómica.</p>
-          <p class="precio">Por 1KG: $2.600</p>
-          <p class="precio">Por 20KG: $23.000</p>
+          <div class="dropdown">
+            <button class="dropdown-btn">Seleccionar tamaño</button>
+            <ul class="dropdown-menu">
+              <li data-size="F75" data-price-unit="2.500" data-price-bulk="12.000" data-bulto="20000">Pizza (chico)
+              </li>
+              <li data-size="F100" data-price-unit="2.600" data-price-bulk="13.000" data-bulto="22.000">Pizza (grande)
+              </li>
+              <li data-size="P12" data-price-unit="1.900" data-price-bulk="7.500" data-bulto="14.500">Ravioles
+              </li>
+            </ul>
+          </div>
+
+          <div id="uni" style="display: none;">
+            <p class="precio preciob">Por 10 Unidades: $<span id="precio-10"></span> ARS</p>
+            <p class="precio preciob">Por 50 Unidades: $<span id="precio-50"></span> ARS</p>
+            <p class="precio preciob">Por 100 Unidades: $<span id="precio-100"></span> ARS</p>
+          </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -69,8 +85,7 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
-
-
+  <script src="../../assets/js/preciosdrop-fondo.js"></script>
 </body>
 
 </html>
