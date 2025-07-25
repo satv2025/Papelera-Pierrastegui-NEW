@@ -3,7 +3,9 @@
 :root {
     --primary-color: #02a22a;
     --text-color: #333;
-    --background-color: #f0f0f0;
+    --background-color: #ffffff;
+    --neon-green: #39ff14;
+    /* Verde neón */
     --shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
@@ -26,9 +28,9 @@ header {
     background-color: #fff;
     color: var(--primary-color);
     padding: 20px 40px;
-    box-shadow: var(--shadow);
     text-align: center;
-    border-bottom: 3px solid var(--primary-color);
+    border-bottom: 3px solid var(--neon-green);
+    box-shadow: 0 4px 10px var(--neon-green);
 }
 
 header h1 {
