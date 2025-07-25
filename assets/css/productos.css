@@ -305,33 +305,11 @@ footer h1 {
 }
 
 .dropdown-btn {
-    background-color: #fff !important;
-    color: #02a22a !important;
-    border: 2px solid #02a22a !important;
-    padding: 10px !important;
     width: 116% !important;
-    text-align: center !important;
-    cursor: pointer !important;
-    font-size: 1.2em !important;
-    font-weight: bold !important;
-    border-radius: 5px !important;
-    transition: background-color 0.3s !important;
-    font-family: 'Gilroy' !important;
 }
 
 .dropdown-menu {
-    display: none !important;
-    position: absolute !important;
-    background-color: #fff !important;
-    border: 2px solid #02a22a !important;
     width: 116% !important;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
-    border-radius: 5px !important;
-    overflow: auto !important;
-    z-index: 10 !important;
-    margin-top: 0.3em !important;
-    height: 7.5em !important;
-    font-weight: 600 !important;
 }
 
 .dropdown-menu ul li {
