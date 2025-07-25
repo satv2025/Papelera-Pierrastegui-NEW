@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
-        "220ml": { cincuenta: "2.700", cien: "3.200" },
+        "220ml": { cincuenta: "2.000", cien: "3.200" },
         "330ml": { cincuenta: "3.200", cien: "4.700" },
         "500ml": { cincuenta: "3.500", cien: "6.500" },
-        "1000ml": { cincuenta: "100.000", cien: "1.240.000" }
+        "1000ml": { cincuenta: "9.000", cien: "16.800" }
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
