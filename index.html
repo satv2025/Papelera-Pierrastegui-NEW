@@ -953,21 +953,24 @@
             // Mostrar la primera imagen desde el inicio
             imgs[index].classList.add('visible');
 
-            // Esperar 3 segundos antes de comenzar el ciclo
+            // Esperar 1500 ms de gracia inicial (imagen quieta)
             setTimeout(() => {
                 setInterval(() => {
+                    // Ocultar la imagen actual
                     imgs[index].classList.remove('visible');
 
+                    // Avanzar el índice
                     index += direccion;
 
-                    // Cambiar dirección si estamos al final o al inicio
+                    // Invertir dirección si llega a un extremo
                     if (index === imgs.length - 1 || index === 0) {
                         direccion *= -1;
                     }
 
+                    // Mostrar la nueva imagen
                     imgs[index].classList.add('visible');
-                }, 1500);
-            }, 1500); // <- este es el periodo de gracia inicial en milisegundos
+                }, 1500); // Cambia imagen cada 1500 ms
+            }, 1500); // Gracia inicial de 1500 ms
         </script>
 </body>
 
