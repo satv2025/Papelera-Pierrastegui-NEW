@@ -11,26 +11,21 @@
 
   <style>
     #contenedor {
+      width: 20em;
+      height: 20em;
       position: relative;
-      width: 300px;
-      height: 300px;
-      /* ajusta según tamaño de las imágenes */
     }
 
     #contenedor img {
-      position: absolute;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      transition: opacity 1s ease-in-out;
-      opacity: 0;
-
-    }
-
-    .producto-detalle #contenedor img {
-      width: 132% !important;
     }
 
     #contenedor img.visible {
       opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
     }
   </style>
 </head>

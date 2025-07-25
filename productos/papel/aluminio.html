@@ -8,6 +8,29 @@
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
   <link rel="stylesheet" href="../../assets/css/productos.css" />
   <link rel="stylesheet" href="../../assets/css/dropdown.css" />
+  <style>
+    .dropdown-menu {
+      height: 5.5em !important;
+    }
+
+    #contenedor {
+      width: 20em;
+      height: 20em;
+      position: relative;
+    }
+
+    #contenedor img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #contenedor img.visible {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,9 +49,12 @@
     <section id="producto-detalle">
       <h2>Papel Aluminio</h2>
       <div class="producto-detalle">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/aluminio%205%20mts.jpg"
-          alt="Papel Aluminio" />
+        <div id="contenedor">
+          <img
+            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/aluminio%205%20mts.jpg"
+            alt="Papel Aluminio" />
+          <img src="https://papelerapierrastegui.com.ar/assets/images/aluminio1.jpg" alt="Papel Aluminio" />
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Papel aluminio disponible en tamaño chico y presentación de 1kg.</p>
@@ -36,8 +62,8 @@
           <div class="dropdown">
             <button class="dropdown-btn">Seleccionar Tamaño</button>
             <ul class="dropdown-menu" style="height: 5.5em;">
-              <li data-tamaño="chico">Chico</li>
-              <li data-tamaño="1kg">1kg</li>
+              <li data-tamaño="chico">5 Mts</li>
+              <li data-tamaño="1kg">1Kg</li>
             </ul>
           </div>
 
@@ -79,11 +105,27 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
-
-
-
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop-aluminio.js"></script>
+  <script>
+    const imgs = document.querySelectorAll('#contenedor img');
+    let index = 0;
+    let direccion = 1; // 1 para avanzar, -1 para retroceder
+
+    setInterval(() => {
+      imgs[index].classList.remove('visible');
+
+      // Actualizar índice según dirección
+      index += direccion;
+
+      // Si llegamos al final, invertimos la dirección
+      if (index === imgs.length - 1 || index === 0) {
+        direccion *= -1;
+      }
+
+      imgs[index].classList.add('visible');
+    }, 3000);
+  </script>
 </body>
 
 </html>
