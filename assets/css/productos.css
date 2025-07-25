@@ -305,33 +305,33 @@ footer h1 {
 }
 
 .dropdown-btn {
-    background-color: #fff;
-    color: #02a22a;
-    border: 2px solid #02a22a;
-    padding: 10px;
-    width: 116%;
-    text-align: center;
-    cursor: pointer;
-    font-size: 1.2em;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-    font-family: 'Gilroy';
+    background-color: #fff !important;
+    color: #02a22a !important;
+    border: 2px solid #02a22a !important;
+    padding: 10px !important;
+    width: 116% !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+    border-radius: 5px !important;
+    transition: background-color 0.3s !important;
+    font-family: 'Gilroy' !important;
 }
 
 .dropdown-menu {
-    display: none;
-    position: absolute;
-    background-color: #fff;
-    border: 2px solid #02a22a;
-    width: 116%;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: auto;
-    z-index: 10;
-    margin-top: 0.3em;
-    height: 7.5em;
-    font-weight: 600;
+    display: none !important;
+    position: absolute !important;
+    background-color: #fff !important;
+    border: 2px solid #02a22a !important;
+    width: 116% !important;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px !important;
+    overflow: auto !important;
+    z-index: 10 !important;
+    margin-top: 0.3em !important;
+    height: 7.5em !important;
+    font-weight: 600 !important;
 }
 
 .dropdown-menu ul li {
