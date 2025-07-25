@@ -174,14 +174,50 @@ nav ul li a.active {
 
 /* Footer */
 footer {
-    text-align: center;
-    padding: 1.5em;
     background-color: #fff;
     color: var(--primary-color);
-    margin-top: 3em;
-    border-top: 3px solid var(--primary-color);
     box-shadow: var(--shadow);
+    text-align: center;
+    border-top: 3px solid var(--neon-green);
+    box-shadow: 0 -4px 10px var(--neon-green);
+    position: relative;
+    height: 8em;
+    top: 6em;
+    width: 120.3em;
+    left: -2.4em;
+}
+
+footer h1 {
+    font-size: 2em;
     font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    margin: 5px 0;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+    /* Espacio entre íconos */
+    justify-content: center;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Centrado vertical */
+    margin-top: 16px;
+}
+
+.social-icons img {
+    filter: brightness(0) saturate(100%) invert(41%) sepia(96%) saturate(826%) hue-rotate(97deg) brightness(88%) contrast(98%);
+}
+
+.social-icons a img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease-in-out;
+}
+
+.social-icons a:hover img {
+    transform: scale(1.2);
 }
 
 /* Responsive */
