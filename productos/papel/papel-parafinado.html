@@ -4,11 +4,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Papel Para Afinado</title>
+  <title>Papelera Pierrastegui - Papel Parafinado</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <style>
+    .carrusel {
+      width: 20em;
+      height: 20em;
+      position: relative;
+      margin-bottom: 3em !important;
+    }
+
+    .carrusel img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: block;
+      pointer-events: none;
+    }
+
+    .carrusel img.visible {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,11 +54,10 @@
     <section id="producto-detalle">
       <h2>Papel Para Afinado</h2>
       <div class="producto-detalle">
-        <div id="contenedor">
-          <img class="visible" src="../../assets/images/papel-para-afinado.jpg" alt="Papel Para Afinado - imagen 1" />
-          <img src="../../assets/images/papel-para-afinado2.jpg" alt="Papel Para Afinado - imagen 2" />
+        <div class="carrusel">
+          <img class="visible" src="../../assets/images/papel-para-afinado.jpg" alt="Papel Para Afinado - imagen 1">
+          <img src="../../assets/images/papel-para-afinado2.jpg" alt="Papel Para Afinado - imagen 2">
         </div>
-
         <div class="producto-info">
           <h3 id="hidden-title">Descripción del producto</h3>
           <ul>
@@ -93,6 +119,25 @@
   <script src="../../assets/js/social-links.js"></script>
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop2.js"></script>
+  <script>
+    const carrusel = document.querySelector('.carrusel');
+    const imgs = carrusel.querySelectorAll('img');
+    let index = 0;
+    let direccion = 1;
+
+    setTimeout(() => {
+      setInterval(() => {
+        imgs[index].classList.remove('visible');
+        index += direccion;
+
+        if (index === imgs.length - 1 || index === 0) {
+          direccion *= -1;
+        }
+
+        imgs[index].classList.add('visible');
+      }, 1600);
+    }, 1000);
+  </script>
 </body>
 
 </html>
