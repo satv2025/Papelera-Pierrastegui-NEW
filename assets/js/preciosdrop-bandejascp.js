@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const pUnit = item.getAttribute('data-price-unit');
 
             precioValor.textContent = (pUnit && pUnit.toLowerCase() === 'sin stock') ? 'Sin Stock' : pUnit;
-            dropdownBtn.textContent = `Tamaño: ${medida}`;
+            dropdownBtn.textContent = `N° ${medida}`;
             uniDiv.style.display = 'block';
 
             // Imagen opcional personalizada
