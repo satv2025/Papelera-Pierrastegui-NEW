@@ -4,11 +4,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Bandejas De Aluminio</title>
+  <title>Papelera Pierrastegui - Papel Para Bondiola</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <style>
+    .carrusel {
+      width: 20em;
+      height: 20em;
+      position: relative;
+      margin-bottom: 3em !important;
+    }
+
+    .carrusel img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: block;
+      pointer-events: none;
+    }
+
+    .carrusel img.visible {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -25,33 +52,20 @@
 
   <main>
     <section id="producto-detalle">
-      <h2>Bandejas De Aluminio</h2>
+      <h2>Papel Para Bonndiola</h2>
       <div class="producto-detalle">
-        <img id="producto-img"
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/papel-para-bondiola.jpg"
           alt="Arranque Rendidor">
 
         <div class="producto-info">
           <h3 id="hidden-title">Descripción del producto</h3>
           <ul>
             <li>
-              <p id="desc-p">Bandeja fabricada en aluminio, lo que la hace resistente al calor y adecuada para cocinar
-                en el horno.</p>
-            </li>
-            <li>
-              <p id="desc-p">La tapa es de aluminio proporciona un cierre seguro y manteniendo la frescura de los
-                alimentos.</p>
-            </li>
-            <li>
-              <p id="desc-p">Ideal para cocinar y asar una variedad de alimentos como pollos, pastas, carnes, pescados y
-                verduras.</p>
-            </li>
-            <li>
-              <p id="desc-p">Se presenta en packs de 10, 50 Y 100 unidades lo que la hace conveniente para uso doméstico
-                o pequeños eventos.</p>
+              <p id="desc-p">El papel microporoso para bondiola es un tipo de papel diseñado específicamente para
+                facilitar el curado de embutidos como la bondiola. 590 por unidad</p>
             </li>
           </ul>
-          <div class="dropdown">
+          <div class="dropdown" style=" display: none;">
             <button class="dropdown-btn">Seleccionar tamaño</button>
             <ul class="dropdown-menu">
               <li data-size="F75" data-price-unit="2.500" data-price-bulk="12.000" data-bulto="20000">F75 (con tapa)
@@ -63,10 +77,8 @@
             </ul>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio preciob">Por 10 Unidades: $<span id="precio-10"></span> ARS</p>
-            <p class="precio preciob">Por 50 Unidades: $<span id="precio-50"></span> ARS</p>
-            <p class="precio preciob">Por 100 Unidades: $<span id="precio-100"></span> ARS</p>
+          <div id="uni">
+            <p class="precio preciob">Por Unidad: $<span id="precio-50">590</span> ARS</p>
           </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
@@ -104,6 +116,25 @@
   <script src="../../assets/js/social-links.js"></script>
   <script src="../../assets/js/dropdown.js"></script>
   <script src="../../assets/js/preciosdrop2.js"></script>
+  <script>
+    const carrusel = document.querySelector('.carrusel');
+    const imgs = carrusel.querySelectorAll('img');
+    let index = 0;
+    let direccion = 1;
+
+    setTimeout(() => {
+      setInterval(() => {
+        imgs[index].classList.remove('visible');
+        index += direccion;
+
+        if (index === imgs.length - 1 || index === 0) {
+          direccion *= -1;
+        }
+
+        imgs[index].classList.add('visible');
+      }, 1600);
+    }, 1000);
+  </script>
 </body>
 
 </html>
