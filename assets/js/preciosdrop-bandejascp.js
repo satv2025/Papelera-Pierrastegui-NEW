@@ -19,14 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
             precioValor.textContent = (pUnit && pUnit.toLowerCase() === 'sin stock') ? 'Sin Stock' : pUnit;
             dropdownBtn.textContent = `N° ${medida}`;
             uniDiv.style.display = 'block';
-
-            // Imagen opcional personalizada
-            if (medida === 'P12') {
-                imagenProducto.src = 'https://www.smpdescartables.com/cdn/shop/products/COD-565.jpg';
-            } else {
-                imagenProducto.src = 'https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg';
-            }
-
             dropdownMenu.style.display = 'none';
         });
     });
