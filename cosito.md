@@ -1,10 +1,5 @@
 <!-- Hoy -->
-6) Bandejas De Cartón Plateadas | Bandejas Y Potes (bandejas-y-potes)
-10) Pirotines x25/u | Moldes Gastronomía (moldes-gastronomia)
-12) Cinta Frágil | Librería (libreria)
 13) Plato Marmita | Bandejas Y Potes (bandejas-y-potes)
-14) Mini Rollos | Librería
-16) Banditas Elásticas | Librería
 
 
 
@@ -41,3 +36,55 @@ N° 30 $450
 
 
 17 - 18 - 19 - 20 
+
+
+
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\banditas-elasticas.jpg"
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\caja-felices-fiestas1.jpg"
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\caja-felices-fiestas2.jpg"
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\caja-pascua1.jpg"
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\caja-pascua2.jpg"
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\molde-pan-dulce.jpg"
+"C:\Users\skbof\OneDrive\Documentos\GitHub\Papelera-Pierrastegui-NEW\assets\images\molde-rosca.jpg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+BANDEJAS DE CARTON PLATEADAS
+Bandejas de carton  plateadas para posa tortas
+N° 26 $350 
+N° 28 $430
+N° 30 $450
+
+
+
+
+
+
+
+MINIROLLOS:
+rollos pequeños de cinta a menudo utilizados para manualidades, embalaje, regalos. 
+x10 unidades: $3500
+
+
+
+
+PLATO MARMITA:
+Plato térmico de 20cm
+x50 21000
+x100 41500
+
+
+BANDITAS ELASTICAS:
+ Lazos de goma, generalmente con forma circular que se utilizan para sujetar diversos objetos. 
+500 GRAMOS: 6800
+1000 GRAMOS:13800
