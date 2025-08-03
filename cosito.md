@@ -69,6 +69,4 @@ Clips | Librería
 Pincha Papeles | Librería
 
 <!-- Modificar -->
-Cinta Scotch = Agregar "Cinta Escolar"
-Tacos De Papel = Cambiar Foto
 Abrochadora = Cambiar Foto
