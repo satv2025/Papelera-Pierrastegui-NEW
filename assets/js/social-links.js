@@ -22,6 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // Corregir rutas de imágenes sociales
+  const images = document.querySelectorAll('img[src^="../../../assets/images/svg/social/"]');
+
+  images.forEach(img => {
+    const fileName = img.src.split("/").pop(); // Obtener el nombre del archivo
+    img.src = `https://papelerapierrastegui.com.ar/assets/images/svg/social/${fileName}`;
+  });
 });
 
 // Scroll Perfect ScrollBar 

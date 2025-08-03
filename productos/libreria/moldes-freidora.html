@@ -4,9 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Voligoma</title>
+  <title>Papelera Pierrastegui - Moldes Air Fryer</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
+  <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <link rel="stylesheet" href="../../assets/css/dropfolex.css">
 </head>
 
 <body>
@@ -14,29 +16,43 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="../catalogo.html">Catálogo</a></li>
-        <li><a href="../contacto.html">Contacto</a></li>
+        <li><a href="../../index.html">Inicio</a></li>
+        <li><a href="../../catalogo.html">Catálogo</a></li>
+        <li><a href="../../contacto.html">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <section id="producto-detalle">
-      <h2>Voligoma</h2>
+      <h2 style="margin-left: -25em !important;">Moldes Para Freidora De Aire (Air Fryer)</h2>
       <div class="producto-detalle">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_793654-MLU73983277266_012024-O.webp" alt="Papel Aluminio 1kg">
+        <img src="../../assets/images/moldes-freidora.jpg" alt="Moldes para freidora de aire">
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Para uso escolar, diseñado para pegar papel, cartón y cartulina.</p>
-          <p class="precio">$1.300 ARS</p>
+          <p>Ideales para mantener limpia tu freidora de aire mientras cocinas. Disponibles en tamaño mediano y grande.
+          </p>
+
+          <div class="dropdown">
+            <button class="dropdown-btn">Seleccionar Tamaño</button>
+            <ul class="dropdown-menu">
+              <li data-size="Mediano" data-price-unit="2300" data-units="25">Mediano</li>
+              <li data-size="Grande" data-price-unit="3000" data-units="25">Grande</li>
+            </ul>
+          </div>
+
+          <div id="uni" style="display: none;">
+            <p class="precio">
+              Por 25 Unidades: $<span id="precio-25"></span> ARS
+            </p>
+          </div>
+
+          <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
     </section>
   </main>
-
-  <script src="../../assets/js/dropdown.js"></script>
 
   <footer>
     <p>2025 © Papelera Pierrastegui</p>
@@ -61,12 +77,31 @@
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
+  <!-- Script para dropdown dinámico -->
+  <script>
+    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    const precio25 = document.getElementById('precio-25');
+    const precioBox = document.getElementById('uni');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const price = item.getAttribute('data-price-unit');
+        const size = item.getAttribute('data-size');
+
+        // Cambiar texto del botón
+        dropdownBtn.textContent = `Seleccionado: ${size}`;
+
+        // Mostrar el precio
+        precio25.textContent = price;
+        precioBox.style.display = 'block';
+      });
+    });
+  </script>
+
+  <!-- Otros scripts -->
   <script src="../../assets/js/social-links.js"></script>
-
-
-
-  <script src="../assets/js/dropdown.js"></script>
+  <script src="../../assets/js/dropdown.js"></script>
 </body>
 
 </html>

@@ -88,3 +88,24 @@ BANDITAS ELASTICAS:
  Lazos de goma, generalmente con forma circular que se utilizan para sujetar diversos objetos. 
 500 GRAMOS: 6800
 1000 GRAMOS:13800
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Tanda 1 -->
+Tijera De Oficina | Libreria
+Marcadores De Tiza Líquida | Librería
+Calcudora | Librería
+Moldes Para Freidora De Aire| Librería
+Cutter (trincheta) | Librería
+Porta Cinta | Librería
+Tiza | Librería

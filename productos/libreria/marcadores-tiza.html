@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Voligoma</title>
+  <title>Papelera Pierrastegui - Marcadores De Tiza Líquida</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -23,13 +23,17 @@
 
   <main>
     <section id="producto-detalle">
-      <h2>Voligoma</h2>
+      <h2>Marcadores De Tiza Líquida</h2>
       <div class="producto-detalle">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_793654-MLU73983277266_012024-O.webp" alt="Papel Aluminio 1kg">
+        <div class="contenedor">
+          <img class="visible" src="../../assets/images/marcadores-tiza.jpg"
+            alt="Marcadores De Tiza Líquida - imagen 1" />
+          <img src="../../assets/images/marcadores-tiza2.jpg" alt="Marcadores De Tiza Líquida - imagen 2" />
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Para uso escolar, diseñado para pegar papel, cartón y cartulina.</p>
-          <p class="precio">$1.300 ARS</p>
+          <p>Marcadores de tiza líquida: caja por 6 colores.</p>
+          <p class="precio">$15.000 ARS</p>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -63,10 +67,42 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
-
-
-
   <script src="../assets/js/dropdown.js"></script>
+  <script>
+    // Función para hacer el ciclo de imágenes de un contenedor dado
+    function cicloImagenes(contenedor) {
+      const imgs = contenedor.querySelectorAll('img');
+      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
+
+      let index = 0;
+      let direccion = 1;
+
+      // Asegurar que la primera imagen esté visible y las demás no
+      imgs.forEach((img, i) => {
+        img.classList.toggle('visible', i === 0);
+      });
+
+      setTimeout(() => {
+        setInterval(() => {
+          imgs[index].classList.remove('visible');
+
+          index += direccion;
+
+          if (index === imgs.length - 1 || index === 0) {
+            direccion *= -1;
+          }
+
+          imgs[index].classList.add('visible');
+        }, 1500);
+      }, 1500);
+    }
+
+    // Ejecutar para todos los contenedores que están dentro de producto-img-container
+    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
+
+    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
+    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
+  </script>
 </body>
 
 </html>
