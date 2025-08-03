@@ -284,4 +284,5 @@ span.more-btn {
 .dropdown-categorias.show {
     display: flex;
     flex-direction: column;
+    z-index: 2000;
 }
