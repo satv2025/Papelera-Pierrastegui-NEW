@@ -8,6 +8,32 @@
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <style>
+    .contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      overflow: hidden;
+    }
+
+    .contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+
+    .contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,15 +52,30 @@
     <section id="producto-detalle">
       <h2>Tacos de Papel</h2>
       <div class="producto-detalle">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/tacos%20de%20papel.jpg"
-          alt="Tacos de Papel">
+        <div class="contenedor">
+          <img class="visible"
+            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/tacos%20de%20papel.jpg"
+            alt="Tacos de Papel">
+          <img src="../../assets/images/tacos-papel.jpg">
+          <img src="../../assets/images/tacos-autoadhesivo.jpg">
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Tacos de papel de alta calidad, ideales para oficinas y comercios.</p>
           <p>Medida 9x9 y vienen en packs de 400 unidades.</p>
 
-          <p class="precio">Por Unidad: $2.300</p>
+          <div class="dropdown">
+            <button class="dropdown-btn">Seleccionar opción</button>
+            <ul class="dropdown-menu">
+              <li data-precio="1500">Color</li>
+              <li data-precio="2300">Blanco</li>
+              <li data-precio="1100">Auto Adhesivo</li>
+            </ul>
+          </div>
+
+          <div id="uni" style="display: none;">
+            <p class="precio" id="precio-mostrar"></p>
+          </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -66,9 +107,62 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
+  <script>
+    // Función para hacer el ciclo de imágenes de un contenedor dado
+    function cicloImagenes(contenedor) {
+      const imgs = contenedor.querySelectorAll('img');
+      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
 
+      let index = 0;
+      let direccion = 1;
 
+      // Asegurar que la primera imagen esté visible y las demás no
+      imgs.forEach((img, i) => {
+        img.classList.toggle('visible', i === 0);
+      });
 
+      setTimeout(() => {
+        setInterval(() => {
+          imgs[index].classList.remove('visible');
+
+          index += direccion;
+
+          if (index === imgs.length - 1 || index === 0) {
+            direccion *= -1;
+          }
+
+          imgs[index].classList.add('visible');
+        }, 1500);
+      }, 1500);
+    }
+
+    // Ejecutar para todos los contenedores que están dentro de producto-img-container
+    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
+
+    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
+    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
+  </script>
+  <script>
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    const precioBox = document.getElementById('uni');
+    const precioMostrar = document.getElementById('precio-mostrar');
+
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const opcion = item.textContent;
+        const precio = parseFloat(item.getAttribute('data-precio'));
+
+        dropdownBtn.textContent = `Seleccionado: ${opcion}`;
+
+        // Formatear número con punto como miles
+        const precioFormateado = precio.toLocaleString('es-AR');
+
+        precioMostrar.textContent = `Precio: ${precioFormateado} ARS`;
+        precioBox.style.display = 'block';
+      });
+    });
+  </script>
   <script src="../../assets/js/dropdown.js"></script>
 </body>
 
