@@ -1,7 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     const precios = {
+        "12x25": { unidad: '350', x10: '3.300' },
         "24x50": { unidad: '500', x10: '4.000' },
         "48x100": { unidad: '1.400', x10: '11.000' }
+    };
+
+    const imagenes = {
+        "12x25": "https://papelerapierrastegui.com.ar/assets/images/cinta-escolar.jpg",
+        "24x50": "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg",
+        "48x100": "https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20catálogo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg"
     };
 
     const dropdownItems = document.querySelectorAll(".dropdown-menu li");
@@ -16,11 +23,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const precio10 = document.getElementById("precio-10");
     const precio10Moneda = document.getElementById("precio-10-moneda");
 
+    const productoImg = document.getElementById("producto-img"); // Asegurate de tener este <img> en tu HTML
+
     dropdownItems.forEach(item => {
         item.addEventListener("click", () => {
             const size = item.getAttribute("data-size");
             btn.textContent = item.textContent;
 
+            // Actualizar imagen
+            const nuevaImagen = imagenes[size];
+            if (productoImg && nuevaImagen) {
+                productoImg.src = nuevaImagen;
+                productoImg.alt = `Producto ${size}`;
+            }
+
+            // Actualizar precios
             const data = precios[size];
 
             if (data) {
