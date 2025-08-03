@@ -4,9 +4,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Voligoma</title>
+  <title>Papelera Pierrastegui - Clips</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
+  <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <link rel="stylesheet" href="../../assets/css/dropfolex.css">
+  <style>
+    .contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      overflow: hidden;
+    }
+
+    .contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+
+    .contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -14,29 +42,38 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="../catalogo.html">Catálogo</a></li>
-        <li><a href="../contacto.html">Contacto</a></li>
+        <li><a href="../../index.html">Inicio</a></li>
+        <li><a href="../../catalogo.html">Catálogo</a></li>
+        <li><a href="../../contacto.html">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
     <section id="producto-detalle">
-      <h2>Voligoma</h2>
+      <h2>Clips</h2>
       <div class="producto-detalle">
-        <img src="https://http2.mlstatic.com/D_NQ_NP_793654-MLU73983277266_012024-O.webp" alt="Papel Aluminio 1kg">
+        <img src="https://papelerapierrastegui.com.ar/assets/images/cinta-bifaz.jpg" alt="Tiza Blanca - imagen 1">
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Para uso escolar, diseñado para pegar papel, cartón y cartulina.</p>
-          <p class="precio">$1.300 ARS</p>
+          <p>Clips ideales para sujetar hojas. Disponible en cajas de 100 unidades. </p>
+
+          <div class="dropdown">
+            <button class="dropdown-btn">Seleccionar color</button>
+            <ul class="dropdown-menu">
+              <li data-name="1810" data-price="500">N°3</li>
+              <li data-name="2410" data-price="700">N°5</li>
+            </ul>
+          </div>
+
+          <div id="precio-container" style="display: none;">
+            <p class="precio">Precio: $<span id="precio"></span> ARS</p>
+          </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
     </section>
   </main>
-
-  <script src="../../assets/js/dropdown.js"></script>
 
   <footer>
     <p>2025 © Papelera Pierrastegui</p>
@@ -63,10 +100,24 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
+  <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    const precioSpan = document.getElementById('precio');
+    const precioContainer = document.getElementById('precio-container');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
 
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const nombre = item.getAttribute('data-name');
+        const precio = item.getAttribute('data-price');
 
-
-  <script src="../assets/js/dropdown.js"></script>
+        dropdownBtn.textContent = `Seleccionado: ${nombre}`;
+        precioSpan.textContent = precio;
+        precioContainer.style.display = 'block';
+      });
+    });
+  </script>
 </body>
 
 </html>

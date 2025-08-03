@@ -4,11 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Tiza</title>
+  <title>Papelera Pierrastegui - Cinta Bifaz</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/dropfolex.css">
   <style>
     .contenedor {
       position: relative;
@@ -51,26 +50,27 @@
 
   <main>
     <section id="producto-detalle">
-      <h2>Tiza</h2>
+      <h2>Cinta Bifaz</h2>
       <div class="producto-detalle">
         <div class="contenedor">
-          <img class="visible" src="../../assets/images/tiza-blanca.jpg" alt="Tiza Blanca - imagen 1" />
-          <img src="../../assets/images/tiza-color.jpg" alt="Tiza Color - imagen 2" />
+          <img class="visible" src="../../assets/images/silicona-barra.jpg" alt="Marcadores De Tiza Líquida - imagen 1">
+          <img src="../../assets/images/silicona-liquida.jpg" alt="Marcadores De Tiza Líquida - imagen 2">
         </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Tizas para escribir sobre pizarron. Disponible en color y blancas. </p>
+          <p>Cinta bifaz para manualidades. Disponible en dos medidas.</p>
 
           <div class="dropdown">
             <button class="dropdown-btn">Seleccionar color</button>
             <ul class="dropdown-menu">
-              <li data-name="Blancas" data-price="50">Blancas</li>
-              <li data-name="Color" data-price="70">Color</li>
+              <li data-name="1810" data-price="950">30ml</li>
+              <li data-name="2410" data-price="2.200">100ml</li>
+              <li data-name="Barra" data-price="3.000">Barra</li>
             </ul>
           </div>
 
           <div id="precio-container" style="display: none;">
-            <p class="precio">Precio: $<span id="precio"></span> ARS</p>
+            <p class="precio"><span id="precio"></span></p>
           </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
@@ -151,7 +151,13 @@
         const precio = item.getAttribute('data-price');
 
         dropdownBtn.textContent = `Seleccionado: ${nombre}`;
-        precioSpan.textContent = precio;
+
+        if (nombre === 'Barra') {
+          precioSpan.textContent = `Por 10 Unidades: $${precio} ARS`;
+        } else {
+          precioSpan.textContent = `Precio: $${precio} ARS`;
+        }
+
         precioContainer.style.display = 'block';
       });
     });
