@@ -7,6 +7,32 @@
   <title>Papelera Pierrastegui - Marcadores De Tiza Líquida</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
+  <style>
+    .contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      overflow: hidden;
+    }
+
+    .contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+
+    .contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
