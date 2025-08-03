@@ -8,6 +8,32 @@
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <style>
+    .contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      overflow: hidden;
+    }
+
+    .contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+
+    .contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,12 +52,27 @@
     <section id="producto-detalle">
       <h2>Resaltadores</h2>
       <div class="producto-detalle">
-        <img src="../../assets/images/resaltadores.jpg" alt="Resaltadores">
+        <div class="contenedor">
+          <img class="visible"
+            src="https://acdn-us.mitiendanube.com/stores/001/570/838/products/resaltadores-trabi-pastel11-059005e3cf6630f07a16511691664860-1024-1024.png"
+            alt="Marcadores De Tiza Líquida - imagen 1" />
+          <img src="../../assets/images/resaltadores1.jpg" alt="Resaltadores">
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
-          <p>Resaltadores de colores, ideales para destacar información importante.</p>
+          <p>Resaltadores de colores flúor y pasteles, ideales para destacar información importante.</p>
 
-          <p class="precio">$Consultar</p>
+          <div class="dropdown">
+            <button class="dropdown-btn">Seleccionar color</button>
+            <ul class="dropdown-menu">
+              <li data-name="Flúor" data-price="700">Flúor</li>
+              <li data-name="Pastel" data-price="700">Pastel</li>
+            </ul>
+          </div>
+
+          <div id="precio-container" style="display: none;">
+            <p class="precio">Precio: $<span id="precio"></span> ARS</p>
+          </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -63,10 +104,59 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
-
-
-
   <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    // Función para hacer el ciclo de imágenes de un contenedor dado
+    function cicloImagenes(contenedor) {
+      const imgs = contenedor.querySelectorAll('img');
+      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
+
+      let index = 0;
+      let direccion = 1;
+
+      // Asegurar que la primera imagen esté visible y las demás no
+      imgs.forEach((img, i) => {
+        img.classList.toggle('visible', i === 0);
+      });
+
+      setTimeout(() => {
+        setInterval(() => {
+          imgs[index].classList.remove('visible');
+
+          index += direccion;
+
+          if (index === imgs.length - 1 || index === 0) {
+            direccion *= -1;
+          }
+
+          imgs[index].classList.add('visible');
+        }, 1500);
+      }, 1500);
+    }
+
+    // Ejecutar para todos los contenedores que están dentro de producto-img-container
+    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
+
+    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
+    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
+  </script>
+  <script>
+    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    const precioSpan = document.getElementById('precio');
+    const precioContainer = document.getElementById('precio-container');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const nombre = item.getAttribute('data-name');
+        const precio = item.getAttribute('data-price');
+
+        dropdownBtn.textContent = `Seleccionado: ${nombre}`;
+        precioSpan.textContent = precio;
+        precioContainer.style.display = 'block';
+      });
+    });
+  </script>
 </body>
 
 </html>
