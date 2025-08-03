@@ -48,6 +48,10 @@
             object-fit: cover !important;
             margin-left: -2em;
         }
+
+        #conteimg2 img {
+            object-fit: contain !important;
+        }
     </style>
 </head>
 
@@ -1016,7 +1020,7 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <div class="contenedor">
+                        <div class="contenedor" id="conteimg2">
                             <img class="visible" src="assets/images/marcadores-tiza.jpg"
                                 alt="Marcadores De Tiza Líquida - imagen 1" />
                             <img src="assets/images/marcadores-tiza2.jpg" alt="Marcadores De Tiza Líquida - imagen 2" />
@@ -1480,8 +1484,8 @@
                         }
 
                         imgs[index].classList.add('visible');
-                    }, 1500);
-                }, 1500);
+                    }, 3000);
+                }, 3000);
             }
 
             // Ejecutar para todos los contenedores que están dentro de producto-img-container
