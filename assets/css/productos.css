@@ -328,3 +328,7 @@ footer h1 {
 .producto-info h3 {
     display: none;
 }
+
+.dropdown-btn {
+    text-transform: capitalize !important;
+}
