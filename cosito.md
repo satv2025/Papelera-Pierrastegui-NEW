@@ -62,11 +62,10 @@ BANDITAS ELASTICAS:
 1000 GRAMOS:13800
 
 <!-- Tanda 1 -->
-Cutter (trincheta) | Librería
-Porta Cinta | Librería
+Cutter (trincheta) | Librería | | index hecho
+Porta Cinta | Librería | index hecho
 Tiza | Librería
 Clips | Librería
 Pincha Papeles | Librería
-
-<!-- Modificar -->
-Abrochadora = Cambiar Foto
+Silicona | Librería
+Cinta Bifaz | Librería

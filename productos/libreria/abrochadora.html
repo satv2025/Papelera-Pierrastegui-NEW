@@ -8,6 +8,33 @@
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
   <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <link rel="stylesheet" href="../../assets/css/dropfolex.css">
+  <style>
+    .contenedor {
+      position: relative;
+      width: 100%;
+      height: 21em;
+      overflow: hidden;
+    }
+
+    .contenedor img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 0;
+    }
+
+    .contenedor img.visible {
+      opacity: 1;
+      z-index: 1;
+    }
+  </style>
 </head>
 
 <body>
@@ -26,14 +53,28 @@
     <section id="producto-detalle">
       <h2>Abrochadora</h2>
       <div class="producto-detalle">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/abrochadora.jpg"
-          alt="Abrochadoras">
+        <div class="contenedor">
+          <img class="visible"
+            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/abrochadora.jpg"
+            alt="Abrochadoras">
+          <img src="../../assets/images/abrochadora2.jpg" alt="Marcadores De Tiza Líquida - imagen 2" />
+        </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
           <p>Abrochadoras de alta calidad para uso doméstico y profesional.</p>
+          <div class="dropdown">
+            <button class="dropdown-btn">Seleccionar Tamaño</button>
+            <ul class="dropdown-menu">
+              <li data-size="Mediano" data-price-unit="7.350" data-units="25">10/50</li>
+              <li data-size="Grande" data-price-unit="10.500" data-units="25">21/6</li>
+            </ul>
+          </div>
 
-          <p class="precio">$3.800 ARS</p>
+          <div id="uni" style="display: none;">
+            <p class="precio">
+              Precio: $<span id="precio-25"></span> ARS
+            </p>
+          </div>
           <button class="agregar-carrito">Agregar al carrito</button>
         </div>
       </div>
@@ -65,10 +106,63 @@
 
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
-
-
-
   <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    // Función para hacer el ciclo de imágenes de un contenedor dado
+    function cicloImagenes(contenedor) {
+      const imgs = contenedor.querySelectorAll('img');
+      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
+
+      let index = 0;
+      let direccion = 1;
+
+      // Asegurar que la primera imagen esté visible y las demás no
+      imgs.forEach((img, i) => {
+        img.classList.toggle('visible', i === 0);
+      });
+
+      setTimeout(() => {
+        setInterval(() => {
+          imgs[index].classList.remove('visible');
+
+          index += direccion;
+
+          if (index === imgs.length - 1 || index === 0) {
+            direccion *= -1;
+          }
+
+          imgs[index].classList.add('visible');
+        }, 1500);
+      }, 1500);
+    }
+
+    // Ejecutar para todos los contenedores que están dentro de producto-img-container
+    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
+
+    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
+    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
+  </script>
+  <!-- Script para dropdown dinámico -->
+  <script>
+    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
+    const precio25 = document.getElementById('precio-25');
+    const precioBox = document.getElementById('uni');
+    const dropdownBtn = document.querySelector('.dropdown-btn');
+
+    dropdownItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const price = item.getAttribute('data-price-unit');
+        const size = item.getAttribute('data-size');
+
+        // Cambiar texto del botón
+        dropdownBtn.textContent = `Seleccionado: ${size}`;
+
+        // Mostrar el precio
+        precio25.textContent = price;
+        precioBox.style.display = 'block';
+      });
+    });
+  </script>
 </body>
 
 </html>
