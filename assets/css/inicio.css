@@ -144,7 +144,7 @@ nav ul li a.active {
 /* Grid productos sin categorías */
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   /* 4 columnas */
   gap: 28px;
   margin: 0em 4em 0 4em;
