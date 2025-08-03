@@ -54,8 +54,8 @@
       <h2>Clips</h2>
       <div class="producto-detalle">
         <div class="contenedor">
-          <img class="visible" src="../../assets/images/clips3.jpg" alt="Clips - imagen 1" />
-          <img src="../../assets/images/clips5.jpg" alt="Clips - imagen 2" />
+          <img class="visible" src="../../assets/images/clips3.jpg" alt="Clips - imagen 1">
+          <img src="../../assets/images/clips5.jpg" alt="Clips - imagen 2">
         </div>
         <div class="producto-info">
           <h3>Descripción del Producto</h3>
@@ -104,6 +104,41 @@
   <!-- Script para reemplazar dinámicamente los href -->
   <script src="../../assets/js/social-links.js"></script>
   <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    // Función para hacer el ciclo de imágenes de un contenedor dado
+    function cicloImagenes(contenedor) {
+      const imgs = contenedor.querySelectorAll('img');
+      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
+
+      let index = 0;
+      let direccion = 1;
+
+      // Asegurar que la primera imagen esté visible y las demás no
+      imgs.forEach((img, i) => {
+        img.classList.toggle('visible', i === 0);
+      });
+
+      setTimeout(() => {
+        setInterval(() => {
+          imgs[index].classList.remove('visible');
+
+          index += direccion;
+
+          if (index === imgs.length - 1 || index === 0) {
+            direccion *= -1;
+          }
+
+          imgs[index].classList.add('visible');
+        }, 1500);
+      }, 1500);
+    }
+
+    // Ejecutar para todos los contenedores que están dentro de producto-img-container
+    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
+
+    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
+    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
+  </script>
   <script>
     const dropdownItems = document.querySelectorAll('.dropdown-menu li');
     const precioSpan = document.getElementById('precio');
