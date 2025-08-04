@@ -185,14 +185,6 @@
             display: block;
         }
 
-        /* Logo */
-        #pp-logo img {
-            border: 1px solid #3b2d00;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-        }
-
         /* Links generales */
         a {
             text-decoration: none !important;
@@ -215,11 +207,13 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            margin-top: -2.6em;
         }
 
         #pp-logo span {
             font-size: 1.5rem;
             font-weight: bold;
+            margin-top: -0.6em;
         }
 
         /* Buscador */
@@ -339,6 +333,78 @@
         .mi-cuenta {
             margin-left: -1em;
         }
+
+        /* Estilos base para enlaces y spans */
+        .carrito-pro a,
+        .carrito-pro span,
+        .mail a,
+        .mail span,
+        .ig a,
+        .ig span,
+        .wp a,
+        .wp span,
+        .mi-cuenta a,
+        .mi-cuenta span,
+        .inicio a,
+        .inicio span,
+        {
+        transition: color 0.3s ease;
+        font-weight: 700;
+        cursor: pointer;
+        }
+
+        /* Hover en imágenes — excluye pp-logo */
+        .carrito-pro:hover img,
+        .mail:hover img,
+        .ig:hover img,
+        .wp:hover img,
+        .mi-cuenta:hover img,
+        .inicio:hover img {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(30%) saturate(7%) hue-rotate(151deg) brightness(105%) contrast(101%);
+            transition: filter 0.3s ease;
+            font-weight: 700;
+        }
+
+        /* Hover en texto */
+        .carrito-pro:hover a,
+        .carrito-pro:hover span,
+        .mail:hover a,
+        .mail:hover span,
+        .ig:hover a,
+        .ig:hover span,
+        .wp:hover a,
+        .wp:hover span,
+        .mi-cuenta:hover a,
+        .mi-cuenta:hover span,
+        .inicio:hover a,
+        .inicio:hover span {
+            color: #000;
+            font-weight: 700;
+            transition: color 0.3s ease, font-weight 0.3s ease;
+        }
+
+        .pp-logo:hover a,
+        .pp-logo:hover span {
+            color: #000;
+        }
+
+        /* Estilos base del logo */
+        #pp-logo img {
+            border: 2px solid #3b2d00;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            transition: border-color 0.3s ease;
+            position: relative;
+            top: 2.9em;
+            left: -3.8em;
+        }
+
+        .pp-name {
+            display: block;
+            text-align: center;
+            margin-left: 4em;
+        }
     </style>
 </head>
 
@@ -346,9 +412,12 @@
 
     <header>
         <!-- IZQUIERDA: Logo + Nombre -->
-        <div id="pp-logo">
-            <img src="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" alt="Logo Papelera Pierrastegui">
-            <span>Papelera Pierrastegui</span>
+        <div id="pp-logo" class="pp-logo">
+            <a href="https://papelerapierrastegui.com.ar">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico"
+                    alt="Logo Papelera Pierrastegui">
+                <span class="pp-name">Papelera<br>Pierrastegui</span>
+            </a>
         </div>
 
         <!-- CENTRO: Buscador -->
@@ -359,11 +428,11 @@
 
         <!-- DERECHA: Enlaces -->
         <div class="nav-links">
-            <div>
+            <div class="inicio">
                 <a href="index">Inicio</a>
             </div>
 
-            <div>
+            <div class="mail">
                 <a href="mailto:info@papelerapierrastegui.com.ar" class="icon-text">
                     <span>Contactános<br>Por Mail</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/email.svg" alt="Mail"
@@ -371,7 +440,7 @@
                 </a>
             </div>
 
-            <div>
+            <div class="ig">
                 <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" rel="noopener noreferrer"
                     aria-label="Instagram" class="icon-text">
                     <span>Seguinos<br>En Instagram</span>
@@ -380,7 +449,7 @@
                 </a>
             </div>
 
-            <div>
+            <div class="wp">
                 <a href="https://wa.me/5491122334455" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
                     class="icon-text">
                     <span>Contactános<br>Por Whatsapp</span>
@@ -390,7 +459,7 @@
             </div>
 
             <div class="carrito-pro">
-                <a href="#" aria-label="Carrito" class="icon-text">
+                <a aria-label="Carrito" class="icon-text">
                     <span>Carrito</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito"
                         class="cart-icon">
