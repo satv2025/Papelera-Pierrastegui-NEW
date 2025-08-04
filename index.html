@@ -10,6 +10,10 @@
     <link rel="icon" type="image/x-icon" href="assets/images/favicon1.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
     <style>
+        * {
+            font-family: 'Gilroy';
+        }
+
         /* Imágenes que cambian */
         .contenedor {
             position: relative;
@@ -180,20 +184,224 @@
             cursor: pointer;
             display: block;
         }
+
+        /* Logo */
+        #pp-logo img {
+            border: 1px solid #3b2d00;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+        }
+
+        /* Links generales */
+        a {
+            text-decoration: none !important;
+            color: #3b2d00;
+            font-weight: normal;
+            line-height: 1.18;
+        }
+
+        /* Header container */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Logo y nombre */
+        #pp-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        #pp-logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Buscador */
+        .search-bar {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            max-width: 300px;
+            margin: 0 2rem;
+            border: 2px solid #3b2d00;
+            /* mismo borde para todo el contenedor */
+            border-radius: 0.4em;
+            padding: 0.2em 0.5em;
+            /* para dar espacio interno */
+            background: #FCF5E2;
+            background-color: #FCF5E2;
+            max-width: 53em;
+            /* igual que el input antes */
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            /* ya el borde está en el contenedor */
+            font-size: 1rem;
+            padding: 1em 0.8rem;
+            outline: none;
+            background: #FCF5E200;
+            color: #3b2d00;
+            font-weight: 700;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            /* El borde ya está en el contenedor, así que nada */
+        }
+
+        .search-bar img {
+            width: 30px;
+            height: 30px;
+            margin-top: -0.2em;
+            cursor: pointer;
+            user-select: none;
+            filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+            opacity: 0.5;
+            background: #ffffff00;
+            position: relative;
+            left: -0.7em;
+        }
+
+        ::placeholder {
+            color: #3b2d00;
+            opacity: 0.5;
+            background: #FCF5E2;
+        }
+
+        /* Para navegadores basados en WebKit/Blink (Chrome, Edge, Opera, Safari) */
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            background-color: #FCF5E2 !important;
+            -webkit-box-shadow: 0 0 0px 1000px #FCF5E2 inset !important;
+            -webkit-text-fill-color: #3b2d00 !important;
+            font-weight: 700 !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+            font-family: 'Gilroy' !important;
+            /* Truco para mantener el color */
+        }
+
+        /* Firefox no soporta esto directamente.
+   Podés prevenir su autofill con autocomplete="off" o manejarlo con JS si hacés algo personalizado. */
+
+        /* Internet Explorer tampoco permite estilizar autofill, y ya no se recomienda usarlo. */
+
+        /* Contenedor de enlaces */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: nowrap;
+        }
+
+        /* Enlaces con iconos */
+        .icon-text {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: normal;
+        }
+
+        /* Iconos tamaño y alineación */
+        .icon-right,
+        .mail-icon,
+        .cart-icon,
+        .mi-cuenta-svg {
+            width: 36px;
+            height: 36px;
+            vertical-align: middle;
+            filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+        }
+
+        /* Filtro especial para icono mail */
+        .mail-icon {
+            filter: brightness(0) saturate(100%) invert(17%) sepia(61%) saturate(845%) hue-rotate(15deg) brightness(96%) contrast(104%);
+        }
+
+        .carrito-pro {
+            margin-left: -1em;
+        }
+
+        .mi-cuenta {
+            margin-left: -1em;
+        }
     </style>
 </head>
 
 <body>
 
     <header>
-        <h1>Papelera Pierrastegui</h1>
-        <nav>
-            <ul>
-                <li><a href="index" class="active">Inicio</a></li>
-                <li><a href="nosotros">Nosotros</a></li>
-                <li><a href="contacto">Contacto</a></li>
-            </ul>
-        </nav>
+        <!-- IZQUIERDA: Logo + Nombre -->
+        <div id="pp-logo">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" alt="Logo Papelera Pierrastegui">
+            <span>Papelera Pierrastegui</span>
+        </div>
+
+        <!-- CENTRO: Buscador -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Buscar productos..." />
+            <img src="assets/images/svg/web/lupa2.svg" alt="Lupa" />
+        </div>
+
+        <!-- DERECHA: Enlaces -->
+        <div class="nav-links">
+            <div>
+                <a href="index">Inicio</a>
+            </div>
+
+            <div>
+                <a href="mailto:info@papelerapierrastegui.com.ar" class="icon-text">
+                    <span>Contactános<br>Por Mail</span>
+                    <img src="assets/images/svg/social/email.svg" alt="Mail" class="mail-icon">
+                </a>
+            </div>
+
+            <div>
+                <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" rel="noopener noreferrer"
+                    aria-label="Instagram" class="icon-text">
+                    <span>Seguinos<br>En Instagram</span>
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
+                        alt="Instagram" class="icon-right">
+                </a>
+            </div>
+
+            <div>
+                <a href="https://wa.me/5491122334455" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                    class="icon-text">
+                    <span>Contactános<br>Por Whatsapp</span>
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp"
+                        class="icon-right">
+                </a>
+            </div>
+
+            <div class="carrito-pro">
+                <a href="#" aria-label="Carrito" class="icon-text">
+                    <span>Carrito</span>
+                    <img src="assets/images/svg/web/carrito.svg" alt="Carrito" class="cart-icon">
+                </a>
+            </div>
+
+            <div class="mi-cuenta">
+                <a href="logueo">
+                    Mi Cuenta
+                    <img src="assets/images/svg/web/account.svg" alt="Carrito" class="mi-cuenta-svg">
+                </a>
+            </div>
+        </div>
     </header>
 
     </head>
@@ -1982,6 +2190,47 @@
                         window.location.href = url;
                     });
                 }
+            });
+        </script>
+
+        <!-- SCRIPT Buscador -->
+        <script>
+            // Guardamos el estado original de los productos al cargar la página
+            const grid = document.querySelector('.productos-grid');
+            const productosOriginales = Array.from(grid.querySelectorAll('.producto'));
+
+            document.getElementById('search-input').addEventListener('input', function () {
+                const query = this.value.toLowerCase();
+
+                if (query === '') {
+                    // Mostrar todos los productos en orden original
+                    while (grid.firstChild) {
+                        grid.removeChild(grid.firstChild);
+                    }
+                    productosOriginales.forEach(producto => {
+                        producto.style.display = '';
+                        grid.appendChild(producto);
+                    });
+                    return;
+                }
+
+                // Filtrar productos que coinciden
+                const visibles = productosOriginales.filter(producto => {
+                    const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
+                    const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
+                    return nombre.includes(query) || categoria.includes(query);
+                });
+
+                // Vaciar grid
+                while (grid.firstChild) {
+                    grid.removeChild(grid.firstChild);
+                }
+
+                // Reinsertar solo los visibles
+                visibles.forEach(producto => {
+                    producto.style.display = '';
+                    grid.appendChild(producto);
+                });
             });
         </script>
     </body>
