@@ -3,12 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-  --primary-color: #02a22a;
+  --primary-color: #3b2d00;
   --text-color: #333;
-  --background-color: #ffffff;
-  --neon-green: #39ff14;
+  --background-color: #E1DABD;
+  --neon-green: #37ff14;
   /* Verde neón */
-  --shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0);
 }
 
 * {
@@ -37,12 +37,11 @@ body {
 
 /* Header */
 header {
-  background-color: #fff;
-  color: var(--primary-color);
+  background-color: #E1DABD;
+  color: #3b2d00;
   padding: 20px 40px;
   text-align: center;
-  border-bottom: 3px solid var(--neon-green);
-  box-shadow: 0 4px 10px var(--neon-green);
+  border-bottom: 3px solid #3b2d00;
 }
 
 header h1 {
@@ -54,16 +53,14 @@ header h1 {
 
 /* Footer */
 footer {
-  background-color: #fff;
+  background-color: #E1DABD;
   color: var(--primary-color);
-  box-shadow: var(--shadow);
   text-align: center;
-  border-top: 3px solid var(--neon-green);
-  box-shadow: 0 -4px 10px var(--neon-green);
+  border-top: 3px solid #3b2d00;
   position: relative;
   height: 8em;
   top: 6em;
-  width: 120.3em;
+  width: 123em;
   left: -2.4em;
 }
 
@@ -111,28 +108,27 @@ nav ul {
 }
 
 nav ul li a {
-  color: var(--primary-color);
+  color: #3b2d00;
   text-decoration: none;
-  background: #fff;
-  outline: 2px solid var(--neon-green);
+  background: #E1DABD;
+  outline: 2px solid #3b2d00;
   padding: 0.5em 1em;
   border-radius: 6px;
   font-weight: 700;
   font-size: 1.1em;
   transition: all 0.3s ease;
-  box-shadow: 0 0 8px var(--neon-green), 0 0 15px var(--neon-green);
 }
 
 nav ul li a:hover,
 nav ul li a.active {
-  background-color: var(--primary-color);
-  color: #fff;
+  background-color: #3b2d00;
+  color: #E1DABD;
 }
 
 /* Selection */
 ::selection {
-  color: #fff;
-  background: var(--primary-color);
+  color: #E1DABD;
+  background: #3b2d00;
 }
 
 .container {
@@ -154,7 +150,7 @@ nav ul li a.active {
 
 /* Producto card */
 .producto {
-  background: #fff;
+  background: #FCF5E2;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
@@ -172,6 +168,16 @@ nav ul li a.active {
 .producto:hover {
   transform: scale(1.05);
   box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
+}
+
+.producto:hover:not(.no-hover) {
+  transform: scale(1.05);
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+  background-color: #E1DABD;
+  color: #3b2d00;
 }
 
 /* Imagen contenedor para posicionar badge y tamaño fijo */
@@ -211,7 +217,7 @@ nav ul li a.active {
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: #b11c38;
+  background-color: #fc0814;
   color: #fff;
   padding: 6px 12px;
   border-radius: 6px;
@@ -243,7 +249,7 @@ nav ul li a.active {
 
 .categoria {
   font-size: 1em;
-  color: #888;
+  color: #3b2d00;
   margin-bottom: 14px;
   font-style: italic;
 }
@@ -256,8 +262,8 @@ nav ul li a.active {
 
 /* Botón */
 .btn {
-  background-color: #02a22a;
-  color: #fff;
+  background-color: #3b2d00;
+  color: #FCF5E2;
   padding: 12px;
   text-align: center;
   border: none;
@@ -267,12 +273,6 @@ nav ul li a.active {
   font-size: 1em;
   transition: background-color 0.3s ease;
   margin-top: auto;
-}
-
-.btn:hover {
-  background-color: var(--button-hover);
-  box-shadow: 0 6px 12px rgba(1, 109, 17, 0.6);
-  color: #02a22a;
 }
 
 .tamanos {

@@ -1,10 +1,11 @@
 @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
 
 :root {
-    --primary-color: #02a22a;
+    --primary-color: #3C7361;
     --text-color: #333;
     --background-color: #ffffff;
-    --neon-green: #39ff14;
+    --neon-green: #3C7361;
+    ;
     --shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 
@@ -55,8 +56,7 @@ header {
     color: var(--primary-color);
     padding: 10px 40px;
     text-align: center;
-    border-bottom: 3px solid var(--neon-green);
-    box-shadow: 0 4px 10px var(--neon-green);
+    border-bottom: 3px solid #3C7361;
 }
 
 header h1 {
@@ -76,10 +76,10 @@ nav ul {
 }
 
 nav ul li a {
-    color: var(--primary-color);
+    color: #3C7361;
     text-decoration: none;
     padding: 0.5em 1em;
-    border: 2px solid var(--primary-color);
+    outline: 2px solid #3C7361;
     border-radius: 6px;
     font-weight: bold;
     transition: all 0.3s ease;
@@ -87,7 +87,7 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-    background-color: var(--primary-color);
+    background-color: #3C7361;
     color: #fff;
 }
 
@@ -177,8 +177,7 @@ m {
 footer {
     background-color: #fff;
     color: var(--primary-color);
-    border-top: 3px solid var(--neon-green);
-    box-shadow: 0 -4px 10px var(--neon-green);
+    border-top: 3px solid #3C7361;
     width: 100%;
     padding: 1.5em 1em;
     margin-top: auto;
@@ -314,7 +313,7 @@ footer h1 {
 }
 
 .dropdown-menu li {
-    color: #02a22a !important;
+    color: #3C7361 !important;
     margin-left: -2.27em !important;
     height: 2.4em !important;
     width: unset !important;
@@ -322,7 +321,7 @@ footer h1 {
 
 .dropdown-menu li:hover {
     color: #fff !important;
-    background: #02a22a !important;
+    background: #3C7361 !important;
 }
 
 .producto-info h3 {
