@@ -346,11 +346,10 @@
         .mi-cuenta a,
         .mi-cuenta span,
         .inicio a,
-        .inicio span,
-        {
-        transition: color 0.3s ease;
-        font-weight: 700;
-        cursor: pointer;
+        .inicio span {
+            transition: color 0.3s ease;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         /* Hover en imágenes — excluye pp-logo */
@@ -405,6 +404,11 @@
             text-align: center;
             margin-left: 4em;
         }
+
+        /* Hover en el contenedor para cambiar borde de la imagen */
+        #pp-logo:hover img {
+            border-color: #000;
+        }
     </style>
 </head>
 
@@ -415,7 +419,7 @@
         <div id="pp-logo" class="pp-logo">
             <a href="https://papelerapierrastegui.com.ar">
                 <img src="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico"
-                    alt="Logo Papelera Pierrastegui">
+                    alt="Logo Papelera Pierrastegui" class="pp-logo-svg">
                 <span class="pp-name">Papelera<br>Pierrastegui</span>
             </a>
         </div>
