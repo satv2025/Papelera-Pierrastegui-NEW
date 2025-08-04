@@ -49,18 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden !important;
+      overflow: hidden !important; /* bloquea scroll nativo en body */
     }
     #page-scroll {
       height: 100vh;
-      overflow: auto !important;
+      overflow: auto !important; /* mantiene scroll funcional */
       position: relative;
+
+      /* Oculta barras nativas sin romper scroll */
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* IE 10+ */
     }
     #page-scroll::-webkit-scrollbar {
-      display: none; /* Chrome, Safari, Opera */
+      width: 0px;
+      height: 0px;
+      background: transparent; /* Chrome, Safari y Opera */
     }
+
     /* Perfect Scrollbar custom styles */
     .ps__rail-x {
       display: none !important;
@@ -92,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   document.head.appendChild(style);
 
+  // Carga Perfect Scrollbar JS
   const psScript = document.createElement('script');
   psScript.src = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
   psScript.onload = () => {
@@ -100,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
       suppressScrollX: true,
     });
 
+    // Actualiza scrollbar al hacer selección y mover mouse para autoscroll
     let isSelecting = false;
 
     document.addEventListener('selectionchange', () => {
@@ -115,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   document.body.appendChild(psScript);
 
+  // Carga Perfect Scrollbar CSS
   const psCSS = document.createElement('link');
   psCSS.rel = 'stylesheet';
   psCSS.href = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
