@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       transition: none !important;
     }
     .ps__thumb-y {
-      background-color: #02a22a !important;
+      background-color: #3b2d00 !important;
       border-radius: 4px;
       width: 8px !important;
     }
