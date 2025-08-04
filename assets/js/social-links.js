@@ -33,22 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Scroll Perfect ScrollBar 
-
-// satv-scroll-main.js
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Crear el contenedor #page-scroll
   const pageScrollDiv = document.createElement('div');
   pageScrollDiv.id = 'page-scroll';
 
-  // 2. Mover TODO el contenido del body dentro de #page-scroll
   while (document.body.firstChild) {
     pageScrollDiv.appendChild(document.body.firstChild);
   }
 
-  // 3. Insertar #page-scroll como primer hijo de body
   document.body.appendChild(pageScrollDiv);
 
-  // 4. Inyectar estilos personalizados para el scroll
   const style = document.createElement('style');
   style.textContent = `
     html, body {
@@ -59,8 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     #page-scroll {
       height: 100vh;
-      overflow: hidden !important;
+      overflow: auto !important;
       position: relative;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE 10+ */
+    }
+    #page-scroll::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
     }
     /* Perfect Scrollbar custom styles */
     .ps__rail-x {
@@ -93,19 +92,29 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   document.head.appendChild(style);
 
-  // 5. Cargar Perfect Scrollbar JS (CDN)
   const psScript = document.createElement('script');
   psScript.src = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
   psScript.onload = () => {
-    // 6. Inicializar Perfect Scrollbar sobre #page-scroll
-    new PerfectScrollbar('#page-scroll', {
+    const psInstance = new PerfectScrollbar('#page-scroll', {
       wheelPropagation: false,
       suppressScrollX: true,
+    });
+
+    let isSelecting = false;
+
+    document.addEventListener('selectionchange', () => {
+      const selection = document.getSelection();
+      isSelecting = selection && !selection.isCollapsed;
+    });
+
+    document.addEventListener('mousemove', () => {
+      if (isSelecting) {
+        psInstance.update();
+      }
     });
   };
   document.body.appendChild(psScript);
 
-  // 7. También cargar el CSS de Perfect Scrollbar (CDN)
   const psCSS = document.createElement('link');
   psCSS.rel = 'stylesheet';
   psCSS.href = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
