@@ -241,14 +241,14 @@ nav ul li a.active {
 
 .nombre {
   font-weight: 700;
-  font-size: 1.176em;
+  font-size: 1.15em;
   margin-bottom: 10px;
   color: #111;
   letter-spacing: 0.02em;
 }
 
 .categoria {
-  font-size: 1em;
+  font-size: 0.9em;
   color: #3b2d00;
   margin-bottom: 14px;
   font-style: italic;
@@ -306,4 +306,405 @@ nav ul li a.active {
     grid-template-columns: 1fr;
     margin: unset;
   }
+}
+
+/* Imágenes que cambian */
+.contenedor {
+  position: relative;
+  width: 100%;
+  height: 21em;
+  overflow: hidden;
+}
+
+.contenedor img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+
+.contenedor img.visible {
+  opacity: 1;
+  z-index: 1;
+}
+
+.foleximgs img {
+  object-fit: cover !important;
+}
+
+.proximo {
+  display: none !important;
+}
+
+#conteimg {
+  width: 115%;
+  object-fit: cover !important;
+  margin-left: -2em;
+}
+
+#conteimg2 img {
+  object-fit: contain !important;
+}
+
+/* Nuevo panel de categorías */
+.main-navbar {
+  background-color: #FCF5E2;
+  position: relative;
+  z-index: 1000;
+  margin: 2em 0 2em 31em;
+  width: 119.8em;
+  text-transform: capitalize;
+  color: #3b2d00;
+  padding-left: 4em;
+  margin-left: 0em;
+  height: 4.2em;
+  padding-top: 0.4em;
+  font-size: 1.3em;
+  margin-top: 0em;
+}
+
+.nav-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  position: relative;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.nav-item>a {
+  text-decoration: none;
+  color: #3b2d00;
+  transition: color 0.3s;
+}
+
+.nav-item:hover>a {
+  color: #000;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #FCF5E2;
+  min-width: 250px;
+  white-space: nowrap;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu>a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #3b2d00;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-submenu>a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: #FCF5E2;
+  min-width: 220px;
+  text-transform: capitalize;
+}
+
+.dropdown-submenu:hover .submenu {
+  display: block;
+}
+
+.submenu a {
+  display: block;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s, color 0.2s;
+  color: #3b2d00;
+  cursor: pointer;
+  text-transform: capitalize;
+  text-decoration: none !important;
+}
+
+.submenu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+/* Hover en el link principal */
+.dropdown-submenu:hover>a {
+  color: #000;
+}
+
+/* Hover en ítems del submenu */
+.dropdown-submenu .submenu a:hover {
+  color: #000;
+}
+
+.arrow {
+  margin-left: 0.3rem;
+  color: #3b2d00;
+  font-family: FONTAWESOME;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+/* Cuando haces hover en el enlace dentro de .nav-item.dropdown */
+.nav-item.dropdown:hover .arrow {
+  transform: rotate(180deg);
+  color: #000;
+}
+
+.btn-reset {
+  cursor: pointer;
+  display: block;
+}
+
+/* Links generales */
+a {
+  text-decoration: none !important;
+  color: #3b2d00;
+  font-weight: normal;
+  line-height: 1.18;
+}
+
+/* Header container */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Logo y nombre */
+#pp-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: -2.6em;
+}
+
+#pp-logo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: -0.6em;
+}
+
+/* Buscador */
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 300px;
+  margin: 0 2rem;
+  border: 2px solid #3b2d00;
+  /* mismo borde para todo el contenedor */
+  border-radius: 0.4em;
+  padding: 0.2em 0.5em;
+  /* para dar espacio interno */
+  background: #FCF5E2;
+  background-color: #FCF5E2;
+  max-width: 53em;
+  /* igual que el input antes */
+  margin-top: 0.1em;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  /* ya el borde está en el contenedor */
+  font-size: 1rem;
+  padding: 1em 0.8rem;
+  outline: none;
+  background: #FCF5E200;
+  color: #3b2d00;
+  font-weight: 700;
+}
+
+.search-bar input:focus {
+  outline: none;
+  /* El borde ya está en el contenedor, así que nada */
+}
+
+.search-bar img {
+  width: 30px;
+  height: 30px;
+  margin-top: -0.2em;
+  cursor: pointer;
+  user-select: none;
+  filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+  opacity: 0.5;
+  background: #ffffff00;
+  position: relative;
+  left: -0.7em;
+}
+
+::placeholder {
+  color: #3b2d00;
+  opacity: 0.5;
+  background: #FCF5E2;
+}
+
+/* Para navegadores basados en WebKit/Blink (Chrome, Edge, Opera, Safari) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  background-color: #FCF5E2 !important;
+  -webkit-box-shadow: 0 0 0px 1000px #FCF5E2 inset !important;
+  -webkit-text-fill-color: #3b2d00 !important;
+  font-weight: 700 !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+  font-family: 'Gilroy' !important;
+  /* Truco para mantener el color */
+}
+
+/* Firefox no soporta esto directamente.
+   Podés prevenir su autofill con autocomplete="off" o manejarlo con JS si hacés algo personalizado. */
+
+/* Internet Explorer tampoco permite estilizar autofill, y ya no se recomienda usarlo. */
+
+/* Contenedor de enlaces */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: nowrap;
+}
+
+/* Enlaces con iconos */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: normal;
+}
+
+/* Iconos tamaño y alineación */
+.icon-right,
+.mail-icon,
+.cart-icon,
+.mi-cuenta-svg {
+  width: 36px;
+  height: auto;
+  vertical-align: middle;
+  filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+}
+
+.casa {
+  position: relative;
+  left: 0.6em;
+  top: -0.3em;
+}
+
+.mi-cuenta-svg {
+  margin-left: -10em;
+}
+
+/* Filtro especial para icono mail */
+.mail-icon {
+  filter: brightness(0) saturate(100%) invert(17%) sepia(61%) saturate(845%) hue-rotate(15deg) brightness(96%) contrast(104%);
+}
+
+.carrito-pro {
+  margin-left: -1em;
+}
+
+.mi-cuenta {
+  margin-left: -1em;
+}
+
+/* Estilos base para enlaces y spans */
+.carrito-pro a,
+.carrito-pro span,
+.mail a,
+.mail span,
+.ig a,
+.ig span,
+.wp a,
+.wp span,
+.mi-cuenta a,
+.mi-cuenta span,
+.inicio a,
+.inicio span {
+  transition: color 0.3s ease;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Hover en imágenes — excluye pp-logo */
+.carrito-pro:hover img,
+.mail:hover img,
+.ig:hover img,
+.wp:hover img,
+.mi-cuenta:hover img,
+.inicio:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(30%) saturate(7%) hue-rotate(151deg) brightness(105%) contrast(101%);
+  transition: filter 0.3s ease;
+  font-weight: 700;
+}
+
+/* Hover en texto */
+.carrito-pro:hover a,
+.carrito-pro:hover span,
+.mail:hover a,
+.mail:hover span,
+.ig:hover a,
+.ig:hover span,
+.wp:hover a,
+.wp:hover span,
+.mi-cuenta:hover a,
+.mi-cuenta:hover span,
+.inicio:hover a,
+.inicio:hover span {
+  color: #000;
+  font-weight: 700;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.pp-logo:hover a,
+.pp-logo:hover span {
+  color: #000;
+}
+
+/* Estilos base del logo */
+#pp-logo img {
+  border: 2px solid #3b2d00;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  transition: border-color 0.3s ease;
+  position: relative;
+  top: 2.9em;
+  left: -3.8em;
+}
+
+/* Hover en el contenedor para cambiar borde de la imagen */
+#pp-logo:hover img {
+  border-color: #000;
 }

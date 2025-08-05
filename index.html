@@ -8,412 +8,471 @@
     <link rel="stylesheet" href="assets/css/inicio.css">
     <link rel="stylesheet" href="assets/css/menucategorias.css">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon1.ico">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Gilroy';
-        }
-
-        /* Imágenes que cambian */
-        .contenedor {
-            position: relative;
-            width: 100%;
-            height: 21em;
-            overflow: hidden;
-        }
-
-        .contenedor img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            z-index: 0;
-        }
-
-        .contenedor img.visible {
-            opacity: 1;
-            z-index: 1;
-        }
-
-        .foleximgs img {
-            object-fit: cover !important;
-        }
-
-        .proximo {
-            display: none !important;
-        }
-
-        #conteimg {
-            width: 115%;
-            object-fit: cover !important;
-            margin-left: -2em;
-        }
-
-        #conteimg2 img {
-            object-fit: contain !important;
-        }
-
-        /* Nuevo panel de categorías */
-        .main-navbar {
-            background-color: #FCF5E2;
-            position: relative;
-            z-index: 1000;
-            margin: 2em 0 2em 31em;
-            width: 119.8em;
-            text-transform: capitalize;
-            color: #3b2d00;
-            padding-left: 4em;
-            margin-left: 0em;
-            height: 4.2em;
-            padding-top: 0.4em;
-            font-size: 1.3em;
-            margin-top: 0em;
-        }
-
-        .nav-items {
+        /* ===== Estilos Generales - Desktop ===== */
+        .pp-main-navbar,
+        .pp-search-bar,
+        .pp-nav-links {
             display: flex;
-            flex-wrap: wrap;
+            /* visibles en desktop */
         }
 
-        .nav-item {
-            position: relative;
-            padding: 1rem;
-            cursor: pointer;
-        }
-
-        .nav-item>a {
-            text-decoration: none;
-            color: #3b2d00;
-            transition: color 0.3s;
-        }
-
-        .nav-item:hover>a {
-            color: #000;
-        }
-
-        .dropdown-menu {
+        .menu-toggle {
             display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #FCF5E2;
-            min-width: 250px;
-            white-space: nowrap;
         }
 
-        .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-
-        .dropdown-submenu {
-            position: relative;
-        }
-
-        .dropdown-submenu>a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: #3b2d00;
-            text-decoration: none;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .dropdown-submenu>a:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-            color: #000;
-        }
-
-        .submenu {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 100%;
-            background-color: #FCF5E2;
-            min-width: 220px;
-            text-transform: capitalize;
-        }
-
-        .dropdown-submenu:hover .submenu {
-            display: block;
-        }
-
-        .submenu a {
-            display: block;
-            padding: 0.5rem 1rem;
-            transition: background-color 0.2s, color 0.2s;
-            color: #3b2d00;
-            cursor: pointer;
-            text-transform: capitalize;
-            text-decoration: none !important;
-        }
-
-        .submenu a:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-            color: #000;
-        }
-
-        /* Hover en el link principal */
-        .dropdown-submenu:hover>a {
-            color: #000;
-        }
-
-        /* Hover en ítems del submenu */
-        .dropdown-submenu .submenu a:hover {
-            color: #000;
-        }
-
-        .arrow {
-            margin-left: 0.3rem;
-            color: #3b2d00;
-            font-family: FONTAWESOME;
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-
-        /* Cuando haces hover en el enlace dentro de .nav-item.dropdown */
-        .nav-item.dropdown:hover .arrow {
-            transform: rotate(180deg);
-            color: #000;
-        }
-
-        .btn-reset {
-            cursor: pointer;
-            display: block;
-        }
-
-        /* Links generales */
-        a {
-            text-decoration: none !important;
-            color: #3b2d00;
-            font-weight: normal;
-            line-height: 1.18;
-        }
-
-        /* Header container */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            flex-wrap: wrap;
-        }
-
-        /* Logo y nombre */
-        #pp-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: -2.6em;
-        }
-
-        #pp-logo span {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: -0.6em;
-        }
-
-        /* Buscador */
-        .search-bar {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            max-width: 300px;
-            margin: 0 2rem;
-            border: 2px solid #3b2d00;
-            /* mismo borde para todo el contenedor */
-            border-radius: 0.4em;
-            padding: 0.2em 0.5em;
-            /* para dar espacio interno */
-            background: #FCF5E2;
-            background-color: #FCF5E2;
-            max-width: 53em;
-            /* igual que el input antes */
-            margin-top: 0.1em;
-        }
-
-        .search-bar input {
-            flex-grow: 1;
-            border: none;
-            /* ya el borde está en el contenedor */
-            font-size: 1rem;
-            padding: 1em 0.8rem;
-            outline: none;
-            background: #FCF5E200;
-            color: #3b2d00;
-            font-weight: 700;
-        }
-
-        .search-bar input:focus {
-            outline: none;
-            /* El borde ya está en el contenedor, así que nada */
-        }
-
-        .search-bar img {
-            width: 30px;
-            height: 30px;
-            margin-top: -0.2em;
-            cursor: pointer;
-            user-select: none;
-            filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
-            opacity: 0.5;
-            background: #ffffff00;
-            position: relative;
-            left: -0.7em;
-        }
-
-        ::placeholder {
-            color: #3b2d00;
-            opacity: 0.5;
-            background: #FCF5E2;
-        }
-
-        /* Para navegadores basados en WebKit/Blink (Chrome, Edge, Opera, Safari) */
-        input:-webkit-autofill,
-        input:-webkit-autofill:hover,
-        input:-webkit-autofill:focus,
-        textarea:-webkit-autofill,
-        textarea:-webkit-autofill:hover,
-        textarea:-webkit-autofill:focus,
-        select:-webkit-autofill,
-        select:-webkit-autofill:hover,
-        select:-webkit-autofill:focus {
-            background-color: #FCF5E2 !important;
-            -webkit-box-shadow: 0 0 0px 1000px #FCF5E2 inset !important;
-            -webkit-text-fill-color: #3b2d00 !important;
-            font-weight: 700 !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-            font-family: 'Gilroy' !important;
-            /* Truco para mantener el color */
-        }
-
-        /* Firefox no soporta esto directamente.
-   Podés prevenir su autofill con autocomplete="off" o manejarlo con JS si hacés algo personalizado. */
-
-        /* Internet Explorer tampoco permite estilizar autofill, y ya no se recomienda usarlo. */
-
-        /* Contenedor de enlaces */
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: nowrap;
-        }
-
-        /* Enlaces con iconos */
-        .icon-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-weight: normal;
-        }
-
-        /* Iconos tamaño y alineación */
-        .icon-right,
-        .mail-icon,
-        .cart-icon,
-        .mi-cuenta-svg {
-            width: 36px;
-            height: 36px;
-            vertical-align: middle;
-            filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
-        }
-
-        /* Filtro especial para icono mail */
-        .mail-icon {
-            filter: brightness(0) saturate(100%) invert(17%) sepia(61%) saturate(845%) hue-rotate(15deg) brightness(96%) contrast(104%);
-        }
-
-        .carrito-pro {
-            margin-left: -1em;
-        }
-
-        .mi-cuenta {
-            margin-left: -1em;
-        }
-
-        /* Estilos base para enlaces y spans */
-        .carrito-pro a,
-        .carrito-pro span,
-        .mail a,
-        .mail span,
-        .ig a,
-        .ig span,
-        .wp a,
-        .wp span,
-        .mi-cuenta a,
-        .mi-cuenta span,
-        .inicio a,
-        .inicio span {
-            transition: color 0.3s ease;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        /* Hover en imágenes — excluye pp-logo */
-        .carrito-pro:hover img,
-        .mail:hover img,
-        .ig:hover img,
-        .wp:hover img,
-        .mi-cuenta:hover img,
-        .inicio:hover img {
-            filter: brightness(0) saturate(100%) invert(0%) sepia(30%) saturate(7%) hue-rotate(151deg) brightness(105%) contrast(101%);
-            transition: filter 0.3s ease;
-            font-weight: 700;
-        }
-
-        /* Hover en texto */
-        .carrito-pro:hover a,
-        .carrito-pro:hover span,
-        .mail:hover a,
-        .mail:hover span,
-        .ig:hover a,
-        .ig:hover span,
-        .wp:hover a,
-        .wp:hover span,
-        .mi-cuenta:hover a,
-        .mi-cuenta:hover span,
-        .inicio:hover a,
-        .inicio:hover span {
-            color: #000;
-            font-weight: 700;
-            transition: color 0.3s ease, font-weight 0.3s ease;
-        }
-
-        .pp-logo:hover a,
-        .pp-logo:hover span {
-            color: #000;
-        }
-
-        /* Estilos base del logo */
-        #pp-logo img {
-            border: 2px solid #3b2d00;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            transition: border-color 0.3s ease;
-            position: relative;
-            top: 2.9em;
-            left: -3.8em;
-        }
-
+        /* Estilos base para desktop */
         .pp-name {
             display: block;
             text-align: center;
             margin-left: 4em;
+            /* válido en desktop */
+            margin-top: 0;
+            /* opcional */
+            margin-bottom: 0;
+            /* opcional */
         }
 
-        /* Hover en el contenedor para cambiar borde de la imagen */
-        #pp-logo:hover img {
-            border-color: #000;
+        /* Sidebar - oculto por defecto en desktop */
+        #pp-sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: #FCF5E2;
+            color: #3b2d00;
+            overflow-y: auto;
+            transition: left 0.3s ease;
+            z-index: 1500;
+            padding: 15px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+            font-family: Arial, sans-serif;
+            display: none;
+            /* oculto en desktop */
+        }
+
+        /* Mostrar sidebar cuando tenga la clase 'open' */
+        #pp-sidebar.open {
+            left: 0;
+            display: block;
+            /* visible en móvil */
+        }
+
+        /* Botón cerrar */
+        #pp-close-btn {
+            font-size: 28px;
+            cursor: pointer;
+            color: #3b2d00;
+            margin-bottom: 20px;
+            user-select: none;
+            text-align: right;
+        }
+
+        /* Links del menú */
+        .pp-nav-items a {
+            color: #3b2d00;
+            text-decoration: none;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        /* Hover en enlaces */
+        .pp-nav-items a:hover {
+            background-color: #e0d9b8;
+        }
+
+        /* Dropdown y submenús en móvil */
+        .pp-dropdown-menu,
+        .pp-submenu {
+            display: none;
+            padding-left: 15px;
+            border-left: 2px solid #c9c18a;
+            margin-top: 5px;
+        }
+
+        /* Mostrar en mobile cuando tengan la clase 'open' */
+        .pp-dropdown-menu.open,
+        .pp-submenu.open {
+            display: block;
+        }
+
+        /* Estilo para triggers de dropdown en móvil */
+        .pp-nav-items .pp-dropdown-trigger {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            padding: 8px 10px;
+            user-select: none;
+        }
+
+        /* Opcionales: iconos o flechas en triggers */
+        .pp-dropdown-trigger span {
+            font-size: 1em;
+        }
+
+        /* Estilos para enlaces en submenús en móvil */
+        .pp-submenu a {
+            display: block;
+            padding: 0.3rem 0.7rem;
+            color: #3b2d00;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+
+        /* Hover en submenús en móvil */
+        .pp-submenu a:hover {
+            background-color: #e0d9b8;
+        }
+
+        /* Responsivo - para pantallas <= 992px */
+        @media (max-width: 992px) {
+
+            /* Ocultar navbar, barra de búsqueda, etc. */
+            .pp-main-navbar,
+            .pp-search-bar,
+            .pp-nav-links,
+            .main-navbar,
+            .search-bar,
+            #red {
+                display: none !important;
+            }
+
+            .pp-logo-svg {
+                opacity: 0;
+            }
+
+            /* Mostrar botón menú hamburguesa */
+            .menu-toggle {
+                display: block;
+                position: relative;
+                top: 1rem;
+                left: 1.8rem;
+                font-size: 2rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #3b2d00;
+                z-index: 2001;
+                user-select: none;
+            }
+
+            #pp-logo span {
+                margin-top: -2.5em;
+                margin-bottom: 0.7em;
+                margin-left: 4.8em;
+            }
+
+            /* Sidebar en móvil */
+            #pp-sidebar {
+                display: block;
+                /* ya lo controlamos con JavaScript */
+                position: fixed;
+                top: 0;
+                left: -320px;
+                /* oculto por defecto */
+                width: 300px;
+                height: 100vh;
+                background-color: #FCF5E2;
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+                overflow-y: auto;
+                transition: left 0.3s ease;
+                z-index: 1500;
+                padding: 1rem;
+                font-family: Arial, sans-serif;
+                color: #3b2d00;
+            }
+
+            /* Mostrar sidebar cuando tenga la clase 'open' */
+            #pp-sidebar.open {
+                left: 0;
+            }
+
+            /* Botón cerrar en móvil */
+            #pp-close-btn {
+                font-size: 2.5rem;
+                cursor: pointer;
+                color: #3b2d00;
+                text-align: right;
+                margin-bottom: 1rem;
+                user-select: none;
+            }
+
+            /* Estilos para los submenús en móvil */
+            .dropdown-submenu {
+                margin-bottom: 1rem;
+            }
+
+            /* Trigger para submenús en móvil */
+            .dropdown-submenu>a.submenu-toggle {
+                display: block;
+                font-weight: bold;
+                cursor: pointer;
+                padding: 0.5rem 0.7rem;
+                border-radius: 4px;
+                user-select: none;
+            }
+
+            /* Hover en trigger de submenús */
+            .dropdown-submenu>a.submenu-toggle:hover {
+                background-color: #e0d9b8;
+            }
+
+            /* Submenús en móvil */
+            .submenu {
+                display: none;
+                padding-left: 15px;
+                margin-top: 0.5rem;
+                border-left: 2px solid #c9c18a;
+            }
+
+            /* Mostrar submenús cuando tengan la clase 'open' */
+            .submenu.open {
+                display: block;
+            }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Botón menú hamburguesa -->
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+
+    <!-- Sidebar -->
+    <div class="pp-sidebar" id="pp-sidebar">
+        <div class="pp-close-btn" id="pp-close-btn">&times;</div>
+        <div class="pp-nav-items">
+
+            <!-- Menú principal -->
+            <a href="#" class="pp-link">Todos los productos</a>
+            <div class="pp-dropdown-menu">
+                <!-- Artículos de Embalaje -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Artículos de Embalaje <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol">Rollo
+                        Pluribol</a>
+                </div>
+
+                <!-- Bandejas y Potes -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Bandejas y Potes <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/bandejas-de-carton-plateadas">Bandejas
+                        de cartón plateadas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/aluminio">Bandejas de
+                        aluminio</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/telgopor">Bandejas de
+                        telgopor</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plastico">Bandejas
+                        plásticas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/bisagra">Potes bisagra</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/potes-de-helado">Pote
+                        de helado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/dips">Potes DIPS</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/ensaladafruta">Potes
+                        ensalada de fruta</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/ensaladera-con-tapa">Ensaladera
+                        con tapa</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plato-marmita">Plato
+                        marmita</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/carton">Cartón corrugado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/blonda">Blonda</a>
+                </div>
+
+                <!-- Bolsas y Sobres -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Bolsas y Sobres <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/arranques/grueso">Arranques Grueso</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/arranques/rendidor">Arranques Rendidor</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/camiseta">Camiseta</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/residuo">Residuos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/horno">Horno</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/bolsas/polipropileno">Polipropileno</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/riñon">Riñón</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/ziploc">Ziploc</a>
+                </div>
+
+                <!-- Cajas de Cartón -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Cajas de Cartón <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/pizza">Pizza</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/empanada">Empanadas</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/hamburguesa">Hamburguesa</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/sandwich">Sándwich</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/ravioles">Ravioles</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/desayuno">Desayuno</a>
+                </div>
+
+                <!-- Cubiertos y Sorbetes -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Cubiertos y Sorbetes <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cucharasopera">Cuchara sopera</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/cubiertos/cucharita">Cucharita</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo B/N</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/negro">Cuchillo B/N</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor B/N</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/negro">Tenedor B/N</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/remos">Remos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/platotorta">Platos de torta</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/sorbetes/comun">Sorbetes</a>
+                </div>
+
+                <!-- Guantes -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Guantes <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/guantes/nitirlo">Nitrilo</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/guantes/polietileno">Polietileno</a>
+                </div>
+
+                <!-- Higiénicos -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Higiénicos <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/elegante">Papel higiénico
+                        elegante</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/newpel">Papel higiénico
+                        económico</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/premium">Papel higiénico
+                        premium</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/elegante">Rollo de cocina
+                        elegante</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/newpel">Rollo de cocina new
+                        pel</a>
+                </div>
+
+                <!-- Librería y Cotillón -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Librería y Cotillón <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/libreria/abrochadora">Abrochadora</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/banditas-elasticas">Bandas
+                        elásticas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/biromes">Birome</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/boligoma">Boligoma</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/ganchos-de-abrochadora">Ganchos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/calcos">Calcos</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/libreria/cuadernosuniv">Cuadernos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/estallidos">Estallidos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/fibrones">Fibrones</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/hojas">Hojas A4</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/liquidpaper">Liquid paper</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/maquinamotex">Máquina de motex</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/rollos-motex">Rollos motex</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/remitos">Remitos</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/libreria/resaltadores">Resaltadores</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/tacospapel">Tacos de papel</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/globos">Globos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/vela">Vela / Velón</a>
+                </div>
+
+                <!-- Moldes Gastronomía -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Moldes Gastronomía <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/budinera/aluminio">Budineras</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/pascua/caja">Rosca de
+                        pascua</a>
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/moldes-gastronomia/pirotines">Pirotines</a>
+                </div>
+
+                <!-- Papel -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Papel <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/aluminio">Papel aluminio</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/manteca">Papel manteca</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/folex/folex">Fólex</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/bobina">Bobina sulfito</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-cortado">Papel sulfito
+                        cortado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-parafinado">Papel parafinado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/blonda">Blondas de papel</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/papel/servilletas">Servilletas</a>
+                </div>
+
+                <!-- Regalería -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Regalería <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a
+                        href="https://papelerapierrastegui.com.ar/productos/productos/libreria/mini-rollos">Minirollos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/mono-facil">Moño fácil</a>
+                </div>
+
+                <!-- Vasos -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Vasos <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/vasos/plastico">Plásticos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/vasos/telgopor">Telgopor</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/vasos/vasos-carton">Cartón</a>
+                </div>
+
+                <!-- Cartón -->
+                <div class="pp-dropdown-trigger" tabindex="0">
+                    Cartón <span>▸</span>
+                </div>
+                <div class="pp-submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/carton/corrugado">Trípode</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/conopapas">Cono de fritas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/portapanchos">Porta panchos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/carton/tirascs">Tiras satinadas</a>
+                </div>
+
+            </div>
+            </nav>
+        </div>
+        <a href="#" class="pp-link">Rubros</a><br><a href="#" class="pp-link">Promociones especiales</a><br><a
+            href="logueo" class="pp-link">Convertite en cliente</a><br><a href="nosotros" class="pp-link">¿Quiénes
+            somos?</a>
+
+        <hr>
+    </div>
+
+    </div>
+    </div>
+    </div>
 
     <header>
         <!-- IZQUIERDA: Logo + Nombre -->
@@ -434,12 +493,13 @@
         <!-- DERECHA: Enlaces -->
         <div class="nav-links">
             <div class="inicio">
-                <a href="index">Inicio</a>
+                <a href="index" id="red">Inicio</a>
+                <img src="assets/images/svg/web/home3.svg" alt="Instagram" class="icon-right casa">
             </div>
 
-            <div class="mail">
+            <div class=" mail">
                 <a href="mailto:info@papelerapierrastegui.com.ar" class="icon-text">
-                    <span>Contactános<br>Por Mail</span>
+                    <span id="red">Contactános<br>Por Mail</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/email.svg" alt="Mail"
                         class="mail-icon">
                 </a>
@@ -448,7 +508,7 @@
             <div class="ig">
                 <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" rel="noopener noreferrer"
                     aria-label="Instagram" class="icon-text">
-                    <span>Seguinos<br>En Instagram</span>
+                    <span id="red">Seguinos<br>En Instagram</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
                         alt="Instagram" class="icon-right">
                 </a>
@@ -457,7 +517,7 @@
             <div class="wp">
                 <a href="https://wa.me/5491122334455" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
                     class="icon-text">
-                    <span>Contactános<br>Por Whatsapp</span>
+                    <span id="red">Contactános<br>Por Whatsapp</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp"
                         class="icon-right">
                 </a>
@@ -465,17 +525,17 @@
 
             <div class="carrito-pro">
                 <a aria-label="Carrito" class="icon-text">
-                    <span>Carrito</span>
+                    <span id="red">Carrito</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito"
                         class="cart-icon">
                 </a>
             </div>
 
             <div class="mi-cuenta">
-                <a href="logueo">
-                    Mi Cuenta
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg//web/account.svg" alt="Carrito"
-                        class="mi-cuenta-svg">
+                <a href="logueo" target="_blank" rel="noopener noreferrer" aria-label="Mi Cuenta" class="icon-text">
+                    <span id="red">Mi Cuenta</span>
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Mi Cuenta"
+                        class="icon-right">
                 </a>
             </div>
         </div>
@@ -741,15 +801,8 @@
                 </div>
 
             </div> <!-- nav-items -->
+            </div>
         </nav>
-
-        <!-- BOTÓN RESPONSIVE -->
-        <button class="btn-categorias">Categorías</button>
-
-        <!-- DROPDOWN RESPONSIVE -->
-        <div class="dropdown-categorias"></div>
-        </div>
-        </div>
         <!-- Catálogo completo con todos los productos -->
         <div class="category" id="todos">
             <div class="productos-grid">
@@ -2105,7 +2158,9 @@
         <script src="assets/js/home-dropdown-scroll.js"></script>
         <script src="assets/js/satv-scroll-main.js"></script>
         <script>
-            // Función para hacer el ciclo de imágenes de un contenedor dado
+            // =========================
+            // Función para hacer ciclo de imágenes
+            // =========================
             function cicloImagenes(contenedor) {
                 const imgs = contenedor.querySelectorAll('img');
                 if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
@@ -2122,25 +2177,25 @@
                     setInterval(() => {
                         imgs[index].classList.remove('visible');
 
-                        index += direccion;
-
+                        // Cambiar dirección si llega a los extremos
                         if (index === imgs.length - 1 || index === 0) {
                             direccion *= -1;
                         }
 
+                        index += direccion;
                         imgs[index].classList.add('visible');
                     }, 3000);
                 }, 3000);
             }
 
-            // Ejecutar para todos los contenedores que están dentro de producto-img-container
+            // Ejecutar ciclo en todos los contenedores dentro de producto-img-container
             document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
-
-            // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
+            // Ejecutar ciclo en otros contenedores que NO están dentro de producto-img-container
             document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
-        </script>
 
-        <script>
+            // =========================
+            // Reemplazo de botones con enlaces en productos
+            // =========================
             const links = [
                 "https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol",
                 "https://papelerapierrastegui.com.ar/productos/arranques/grueso",
@@ -2240,15 +2295,13 @@
                 "https://papelerapierrastegui.com.ar/productos/vasos/plastico",
                 "https://papelerapierrastegui.com.ar/productos/vasos/telgopor"
             ];
-
             function extraerUrl(onclickStr) {
                 const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
                 return match ? match[1] : null;
             }
 
             document.querySelectorAll('.producto').forEach(producto => {
-                // Si tiene clase "proximo", lo salteamos
-                if (producto.classList.contains('proximo')) return;
+                if (producto.classList.contains('proximo')) return; // Saltar productos con clase proximo
 
                 const btn = producto.querySelector('button.btn');
                 if (!btn) return;
@@ -2269,19 +2322,18 @@
                     });
                 }
             });
-        </script>
 
-        <!-- SCRIPT Buscador -->
-        <script>
-            // Guardamos el estado original de los productos al cargar la página
+            // =========================
+            // Buscador de productos
+            // =========================
             const grid = document.querySelector('.productos-grid');
             const productosOriginales = Array.from(grid.querySelectorAll('.producto'));
 
             document.getElementById('search-input').addEventListener('input', function () {
                 const query = this.value.toLowerCase();
 
+                // Si está vacío, mostrar todos en orden original
                 if (query === '') {
-                    // Mostrar todos los productos en orden original
                     while (grid.firstChild) {
                         grid.removeChild(grid.firstChild);
                     }
@@ -2292,7 +2344,7 @@
                     return;
                 }
 
-                // Filtrar productos que coinciden
+                // Filtrar productos
                 const visibles = productosOriginales.filter(producto => {
                     const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
                     const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
@@ -2304,10 +2356,77 @@
                     grid.removeChild(grid.firstChild);
                 }
 
-                // Reinsertar solo los visibles
+                // Reinsertar solo visibles
                 visibles.forEach(producto => {
                     producto.style.display = '';
                     grid.appendChild(producto);
+                });
+            });
+
+            // =========================
+            // Menú lateral y dropdown
+            // =========================
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.getElementById('pp-sidebar');
+            const closeBtn = document.getElementById('pp-close-btn');
+            const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
+
+            // Función para abrir/cerrar el sidebar
+            if (menuToggle && sidebar && closeBtn) {
+                menuToggle.addEventListener('click', () => {
+                    sidebar.style.display = 'block';
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    sidebar.style.display = 'none';
+                });
+
+                // Cerrar sidebar al hacer clic fuera
+                document.addEventListener('click', (e) => {
+                    if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
+                        sidebar.style.display = 'none';
+                    }
+                });
+            }
+
+            // Alternar submenús
+            dropdownTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const submenu = trigger.nextElementSibling;
+                    if (submenu) {
+                        if (submenu.style.display === 'block') {
+                            submenu.style.display = 'none';
+                        } else {
+                            submenu.style.display = 'block';
+                        }
+                    }
+                });
+            });
+
+            // =========================
+            // Segundo script para menú (alternativo)
+            // =========================
+            const menuToggleAlt = document.getElementById('menu-toggle');
+            const sidebarAlt = document.getElementById('pp-sidebar');
+            const closeBtnAlt = document.getElementById('pp-close-btn');
+
+            if (menuToggleAlt && sidebarAlt && closeBtnAlt) {
+                menuToggleAlt.addEventListener('click', () => {
+                    sidebarAlt.classList.add('open');
+                });
+                closeBtnAlt.addEventListener('click', () => {
+                    sidebarAlt.classList.remove('open');
+                });
+            }
+
+            // Dropdown en menú
+            document.querySelectorAll('.pp-nav-items > a').forEach(link => {
+                link.addEventListener('click', e => {
+                    const next = link.nextElementSibling;
+                    if (next && next.classList.contains('pp-dropdown-menu')) {
+                        e.preventDefault();
+                        next.classList.toggle('open');
+                    }
                 });
             });
         </script>
