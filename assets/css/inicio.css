@@ -25,7 +25,11 @@ footer .web-copyright {
 footer p {
   font-weight: 700;
   font-size: 1.5em;
-  line-height: 1.4;
+  line-height: 1;
+}
+
+p.copyr {
+  margin-top: 1.4em;
 }
 
 body {
@@ -297,14 +301,30 @@ nav ul li a.active {
     padding: 15px 15px 20px;
   }
 
+  .producto {
+    height: 0.6em;
+  }
+
   .btn {
     font-size: 0.95em;
     padding: 10px;
   }
 
   .productos-grid {
-    grid-template-columns: 1fr;
-    margin: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas iguales */
+    column-gap: 10px;
+    /* Menos espacio entre columnas */
+    margin: 0 15px 8px 15px;
+    /* top 0, right 15px, bottom 8px, left 15px */
+    gap: 10px;
+    margin-top: 1em;
+    margin-bottom: -5em;
+  }
+
+  .producto img {
+    height: 14em;
   }
 }
 

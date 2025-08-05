@@ -141,7 +141,8 @@
             .pp-nav-links,
             .main-navbar,
             .search-bar,
-            #red {
+            #red,
+            footer {
                 display: none !important;
             }
 
@@ -152,9 +153,10 @@
             /* Mostrar botón menú hamburguesa */
             .menu-toggle {
                 display: block;
-                position: relative;
+                position: sticky;
                 top: 1rem;
-                left: 1.8rem;
+                left: 2rem;
+                margin-left: 1em;
                 font-size: 2rem;
                 background: none;
                 border: none;
@@ -237,6 +239,44 @@
             .submenu.open {
                 display: block;
             }
+
+
+            /* Buscador */
+            .search-bar {
+                display: flex;
+                align-items: center;
+                flex-grow: 1;
+                max-width: 300px;
+                margin: 0 0 1.5rem 0;
+                padding: 0.2em 0.5em;
+                border: 2px solid #3b2d00;
+                border-radius: 0.4em;
+                background-color: #FCF5E2;
+            }
+
+            .search-bar input[type="text"] {
+                flex-grow: 1;
+                padding: 1em 0.8rem;
+                font-size: 1rem;
+                font-weight: 700;
+                color: #3b2d00;
+                border: none;
+                outline: none;
+                background: transparent;
+            }
+
+            .search-bar img {
+                width: 30px;
+                height: 30px;
+                margin-left: -0.7em;
+                cursor: pointer;
+                user-select: none;
+                filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+                opacity: 0.5;
+                position: relative;
+                left: 0;
+                background: transparent;
+            }
         }
     </style>
 </head>
@@ -250,6 +290,11 @@
     <div class="pp-sidebar" id="pp-sidebar">
         <div class="pp-close-btn" id="pp-close-btn">&times;</div>
         <div class="pp-nav-items">
+            <!-- Buscador -->
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar productos..." />
+                <img src="assets/images/svg/web/lupa2.svg" alt="Lupa" />
+            </div>
 
             <!-- Menú principal -->
             <a href="#" class="pp-link">Todos los productos</a>
@@ -335,10 +380,11 @@
                 <div class="pp-submenu">
                     <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cucharasopera">Cuchara sopera</a>
                     <a href="https://papelerapierrastegui.com.ar/productos/productos/cubiertos/cucharita">Cucharita</a>
-                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo B/N</a>
-                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/negro">Cuchillo B/N</a>
-                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor B/N</a>
-                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/negro">Tenedor B/N</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo
+                        Blanco</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/negro">Cuchillo Negro</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor Blanco</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/negro">Tenedor Negro</a>
                     <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/remos">Remos</a>
                     <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/platotorta">Platos de torta</a>
                     <a href="https://papelerapierrastegui.com.ar/productos/sorbetes/comun">Sorbetes</a>
@@ -468,6 +514,13 @@
             somos?</a>
 
         <hr>
+        <a class="copyr copyr-responsive">2025 © Papelera Pierrastegui</a><br>
+        <a class="copyp copyp-responsive">2025 © Sol Argentino TV Group</a>
+        <!-- CENTRO: Buscador -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Buscar productos..." />
+            <img src="assets/images/svg/web/lupa2.svg" alt="Lupa" />
+        </div>
     </div>
 
     </div>
@@ -506,7 +559,7 @@
             </div>
 
             <div class="ig">
-                <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" rel="noopener noreferrer"
+                <a href="https://www.instagram.com/pierrastegui.papelera" target="_blank" rel="noopener noreferrer"
                     aria-label="Instagram" class="icon-text">
                     <span id="red">Seguinos<br>En Instagram</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
@@ -515,7 +568,7 @@
             </div>
 
             <div class="wp">
-                <a href="https://wa.me/5491122334455" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+                <a href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
                     class="icon-text">
                     <span id="red">Contactános<br>Por Whatsapp</span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp"
@@ -639,13 +692,13 @@
                                 <a
                                     href="https://papelerapierrastegui.com.ar/productos/productos/cubiertos/cucharita">Cucharita</a>
                                 <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo
-                                    B/N</a>
+                                    Blanco</a>
                                 <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/negro">Cuchillo
-                                    B/N</a>
+                                    Negro</a>
                                 <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor
-                                    B/N</a>
+                                    Blanco</a>
                                 <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/negro">Tenedor
-                                    B/N</a>
+                                    Negro</a>
                                 <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/remos">Remos</a>
                                 <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/platotorta">Platos de
                                     torta</a>
@@ -2127,30 +2180,8 @@
             </div>
         </div>
         <footer>
-            <p>2025 © Papelera Pierrastegui</p>
-            <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-            <div class="social-icons">
-                <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-                    rel="noopener noreferrer">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-                </a>
-
-                <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-                    rel="noopener noreferrer">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
-                        alt="Instagram">
-                </a>
-
-                <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter"
-                    rel="noopener noreferrer">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-                </a>
-
-                <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-                </a>
-            </div>
+            <p class="copyr">2025 © Papelera Pierrastegui</p>
+            <p class="copyp">2025 © Sol Argentino TV Group | Creado por los desarrolladores de Sol Argentino TV</p>
         </footer>
         <!-- Script para reemplazar dinámicamente los href -->
         <script src="assets/js/social-links.js"></script>
