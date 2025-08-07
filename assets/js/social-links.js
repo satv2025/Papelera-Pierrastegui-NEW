@@ -32,17 +32,33 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Scroll Perfect ScrollBar 
 document.addEventListener('DOMContentLoaded', () => {
-  const pageScrollDiv = document.createElement('div');
-  pageScrollDiv.id = 'page-scroll';
+  const sidebar = document.getElementById('pp-sidebar');
 
-  while (document.body.firstChild) {
-    pageScrollDiv.appendChild(document.body.firstChild);
+  // Crear #page-scroll
+  let pageScrollDiv = document.getElementById('page-scroll');
+  if (!pageScrollDiv) {
+    pageScrollDiv = document.createElement('div');
+    pageScrollDiv.id = 'page-scroll';
   }
 
-  document.body.appendChild(pageScrollDiv);
+  // Insertar #page-scroll justo después de #pp-sidebar o al final del body si no existe sidebar
+  if (sidebar && sidebar.parentNode) {
+    sidebar.parentNode.insertBefore(pageScrollDiv, sidebar.nextSibling);
+  } else {
+    document.body.appendChild(pageScrollDiv);
+  }
 
+  // Mover todo excepto #pp-sidebar y #page-scroll dentro de #page-scroll
+  const childrenToMove = [];
+  document.body.childNodes.forEach(node => {
+    if (node !== sidebar && node !== pageScrollDiv && node.nodeType === Node.ELEMENT_NODE) {
+      childrenToMove.push(node);
+    }
+  });
+  childrenToMove.forEach(node => pageScrollDiv.appendChild(node));
+
+  // Añadir estilos CSS para bloquear scroll nativo y estilos scrollbar
   const style = document.createElement('style');
   style.textContent = `
     html, body {
@@ -55,8 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
       height: 100vh;
       overflow: auto !important; /* mantiene scroll funcional */
       position: relative;
-
-      /* Oculta barras nativas sin romper scroll */
       scrollbar-width: none; /* Firefox */
       -ms-overflow-style: none; /* IE 10+ */
     }
@@ -65,8 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
       height: 0px;
       background: transparent; /* Chrome, Safari y Opera */
     }
-
-    /* Perfect Scrollbar custom styles */
     .ps__rail-x {
       display: none !important;
     }
@@ -97,16 +109,21 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   document.head.appendChild(style);
 
-  // Carga Perfect Scrollbar JS
+  // Cargar Perfect Scrollbar CSS
+  const psCSS = document.createElement('link');
+  psCSS.rel = 'stylesheet';
+  psCSS.href = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
+  document.head.appendChild(psCSS);
+
+  // Cargar Perfect Scrollbar JS y luego inicializar
   const psScript = document.createElement('script');
   psScript.src = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/dist/perfect-scrollbar.min.js';
   psScript.onload = () => {
-    const psInstance = new PerfectScrollbar('#page-scroll', {
+    const psInstance = new PerfectScrollbar(pageScrollDiv, {
       wheelPropagation: false,
       suppressScrollX: true,
     });
 
-    // Actualiza scrollbar al hacer selección y mover mouse para autoscroll
     let isSelecting = false;
 
     document.addEventListener('selectionchange', () => {
@@ -121,10 +138,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
   document.body.appendChild(psScript);
-
-  // Carga Perfect Scrollbar CSS
-  const psCSS = document.createElement('link');
-  psCSS.rel = 'stylesheet';
-  psCSS.href = 'https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.5/css/perfect-scrollbar.css';
-  document.head.appendChild(psCSS);
 });

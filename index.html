@@ -60,6 +60,10 @@
             /* visible en móvil */
         }
 
+        #pp-sidebar.open~#page-scroll {
+            overflow: hidden !important;
+        }
+
         /* Botón cerrar */
         #pp-close-btn {
             font-size: 28px;
@@ -153,10 +157,9 @@
             /* Mostrar botón menú hamburguesa */
             .menu-toggle {
                 display: block;
-                position: sticky;
+                position: relative;
                 top: 1rem;
                 left: 2rem;
-                margin-left: 1em;
                 font-size: 2rem;
                 background: none;
                 width: 2%;
@@ -165,6 +168,12 @@
                 color: #3b2d00;
                 z-index: 2001;
                 user-select: none;
+            }
+
+            /* Estado sticky cuando el sidebar está abierto */
+            .menu-toggle.sticky-mode {
+                position: sticky;
+                top: 1rem;
             }
 
             #pp-logo span {
@@ -191,11 +200,6 @@
                 padding: 1rem;
                 font-family: Arial, sans-serif;
                 color: #3b2d00;
-            }
-
-            /* Mostrar sidebar cuando tenga la clase 'open' */
-            #pp-sidebar.open {
-                left: 0;
             }
 
             /* Botón cerrar en móvil */
@@ -277,6 +281,46 @@
                 position: relative;
                 left: 0;
                 background: transparent;
+            }
+        }
+
+        /* Sidebar abierto */
+        #pp-sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            /* oculto por defecto */
+            width: 300px;
+            height: 100vh;
+            transition: left 0.3s ease;
+            display: none;
+            /* oculto por defecto */
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        #pp-sidebar.open {
+            left: 0;
+            display: block;
+        }
+
+        /* Bloqueo scroll body y html */
+        .scroll-locked {
+            overflow: hidden !important;
+            height: 100vh !important;
+        }
+
+        /* Responsive para max-width 992px */
+        @media (max-width: 992px) {
+            #pp-sidebar {
+                left: -100%;
+                width: 80vw;
+                display: none;
+            }
+
+            #pp-sidebar.open {
+                left: 0;
+                display: block;
             }
         }
     </style>
@@ -2462,6 +2506,52 @@
                 });
             });
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const sidebar = document.getElementById('pp-sidebar');
+                const toggleBtn = document.getElementById('menu-toggle'); // tu botón para abrir/cerrar
+                const pageScroll = document.getElementById('page-scroll');
+                let psInstance = null;
+
+                // Función para crear PerfectScrollbar
+                function initPS() {
+                    if (!psInstance) {
+                        psInstance = new PerfectScrollbar('#page-scroll', {
+                            wheelPropagation: false,
+                            suppressScrollX: true,
+                        });
+                    }
+                }
+
+                // Función para destruir PerfectScrollbar
+                function destroyPS() {
+                    if (psInstance) {
+                        psInstance.destroy();
+                        psInstance = null;
+                    }
+                }
+
+                // Inicializamos PerfectScrollbar
+                initPS();
+
+                toggleBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+
+                    if (sidebar.classList.contains('open')) {
+                        // Sidebar abierto: destruimos PS para anularlo
+                        destroyPS();
+                        // Opcional: bloquear scroll body si querés
+                        document.body.style.overflow = 'hidden';
+                    } else {
+                        // Sidebar cerrado: volvemos a crear PS
+                        initPS();
+                        // Quitamos bloqueo scroll body
+                        document.body.style.overflow = '';
+                    }
+                });
+            });
+        </script>
+
     </body>
 
 </html>
