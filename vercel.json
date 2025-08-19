@@ -1,10 +1,7 @@
 {
   "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/admin/:path*",
-      "destination": "/admin/:path*"
-    },
     {
       "source": "/(.*)/",
       "destination": "/$1.html"
@@ -14,5 +11,14 @@
       "destination": "/$1.html"
     }
   ],
-  "trailingSlash": false
+  "routes": [
+    {
+      "src": "/admin/config.yml",
+      "dest": "/admin/config.yml"
+    },
+    {
+      "src": "/admin/(.*)",
+      "dest": "/admin/$1"
+    }
+  ]
 }
