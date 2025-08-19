@@ -9,7 +9,7 @@
 
     <style>
         @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
-        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Inter&family=Poppins&display=swap');
 
         :root {
             --primary-color: #3b2d00;
@@ -73,19 +73,25 @@
         <h1>Panel De Administración / Papelera Pierrastegui</h1>
     </header>
 
-    <main id="cms">
-        <!-- Netlify CMS se cargará aquí -->
-    </main>
+    <main id="cms"></main>
 
-    <footer>
-        &copy; 2025 Papelera Pierrastegui
-    </footer>
+    <footer>&copy; 2025 Papelera Pierrastegui</footer>
 
-    <!-- Netlify CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script>
-        // Ajuste: usar ruta relativa para config.yml dentro de la misma carpeta
-        CMS.init({ config: './config.yml' });
+        async function loadCMSConfig() {
+            try {
+                const res = await fetch('./config.yml');
+                const text = await res.text();
+                const config = jsyaml.load(text);
+                CMS.init({ config });
+            } catch (err) {
+                console.error('Error loading CMS config:', err);
+            }
+        }
+
+        loadCMSConfig();
     </script>
 
 </body>
