@@ -2,6 +2,10 @@
   "cleanUrls": true,
   "rewrites": [
     {
+      "source": "/admin/:path*",
+      "destination": "/admin/:path*"
+    },
+    {
       "source": "/(.*)/",
       "destination": "/$1.html"
     },
