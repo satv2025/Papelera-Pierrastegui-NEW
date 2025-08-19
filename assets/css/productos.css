@@ -21,6 +21,7 @@ main {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .container,
@@ -239,7 +240,7 @@ footer {
     text-align: center;
     font-size: 0.9rem;
     position: relative;
-    margin-top: auto;
+    margin-top: -12em;
 }
 
 footer p {

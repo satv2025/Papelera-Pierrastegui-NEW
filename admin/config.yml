@@ -1,0 +1,19 @@
+backend:
+  name: github
+  repo: TU_USUARIO/TU_REPO
+  branch: main
+
+media_folder: "src/assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "products"
+    label: "Productos"
+    folder: "src/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Nombre", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "text" }
+      - { label: "Precio", name: "price", widget: "number" }
+      - { label: "Imagen", name: "image", widget: "image" }
