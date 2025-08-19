@@ -3,8 +3,13 @@ backend:
   repo: satv2025/Papelera-Pierrastegui-NEW
   branch: main
 
-media_folder: "src/assets/images"
-public_folder: "/assets/images"
+media_folder: ""           # se usará la raíz del repo o carpeta específica en GitHub
+public_folder: ""          # se usará la misma ruta en la web
+
+media_library:
+  name: uploadcare
+  config:
+    publicKey: "ebac821dcde16e4d8000"  # reemplazá por tu clave de Uploadcare
 
 collections:
   - name: "products"
