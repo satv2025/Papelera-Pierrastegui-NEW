@@ -3,18 +3,18 @@ backend:
   repo: satv2025/Papelera-Pierrastegui-NEW
   branch: main
 
-media_folder: "assets/images"    # donde se guardan las imágenes en el repo
-public_folder: "/assets/images"  # ruta pública usada por el frontend
+media_folder: "assets/images"
+public_folder: "/assets/images"
 
 media_library:
   name: uploadcare
   config:
-    publicKey: "ebac821dcde16e4d8000"  # reemplaza con tu clave real si quieres subir imágenes
+    publicKey: "ebac821dcde16e4d8000"
 
 collections:
   - name: "products"
     label: "Productos"
-    folder: "src/products"   # carpeta en el repo donde se guardarán los productos
+    folder: "src/products"
     create: true
     slug: "{{slug}}"
     fields:
