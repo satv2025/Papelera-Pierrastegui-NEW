@@ -8,9 +8,8 @@
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon1.ico">
 
     <style>
-        /* Importar fuentes */
         @import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
-        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
 
         :root {
             --primary-color: #3b2d00;
@@ -48,7 +47,6 @@
             letter-spacing: 1px;
         }
 
-        /* Contenedor CMS */
         #cms {
             max-width: 1200px;
             margin: 40px auto;
@@ -86,7 +84,8 @@
     <!-- Netlify CMS -->
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
     <script>
-        CMS.init({ config: 'config.yml' });
+        // Ajuste: usar ruta relativa para config.yml dentro de la misma carpeta
+        CMS.init({ config: './config.yml' });
     </script>
 
 </body>
