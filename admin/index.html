@@ -15,7 +15,6 @@
             --primary-color: #3b2d00;
             --text-color: #3b2d00;
             --background-color: #E1DABD;
-            --neon-green: #37ff14;
             --shadow: 0 4px 14px rgba(0, 0, 0, 0);
         }
 
@@ -64,36 +63,64 @@
             padding: 2em 0;
             margin-top: 4em;
         }
+
+        .product {
+            border-bottom: 1px solid #ccc;
+            padding: 1em 0;
+        }
+
+        .product img {
+            max-width: 150px;
+            display: block;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
 <body>
-
     <header>
         <h1>Panel De Administración / Papelera Pierrastegui</h1>
     </header>
 
-    <main id="cms"></main>
+    <main id="cms">
+        <h2>Productos cargando...</h2>
+    </main>
 
     <footer>&copy; 2025 Papelera Pierrastegui</footer>
 
-    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script>
-        async function loadCMSConfig() {
+        const space = "rkzndmb5t5yr";
+        const accessToken = "GqaEC_bH9PQ8BZbuxXdpbP4Bkn6MALlui5MePbDty6Y";
+        const contentType = "products"; // El content_type que creaste en Contentful
+
+        async function loadProducts() {
+            const container = document.getElementById('cms');
+            container.innerHTML = "<h2>Cargando productos...</h2>";
             try {
-                const res = await fetch('./config.yml');
-                const text = await res.text();
-                const config = jsyaml.load(text);
-                CMS.init({ config });
+                const res = await fetch(`https://cdn.contentful.com/spaces/${space}/entries?access_token=${accessToken}&content_type=${contentType}`);
+                const data = await res.json();
+                container.innerHTML = ""; // limpiar mensaje de carga
+                data.items.forEach(item => {
+                    const fields = item.fields;
+                    const imgUrl = fields.image?.fields?.file?.url;
+                    const div = document.createElement('div');
+                    div.className = "product";
+                    div.innerHTML = `
+                        <h3>${fields.title}</h3>
+                        <p>${fields.description}</p>
+                        <p>Precio: $${fields.price || '0'}</p>
+                        ${imgUrl ? `<img src="${imgUrl}" alt="${fields.title}">` : ''}
+                    `;
+                    container.appendChild(div);
+                });
             } catch (err) {
-                console.error('Error loading CMS config:', err);
+                container.innerHTML = "<p>Error cargando productos.</p>";
+                console.error(err);
             }
         }
 
-        loadCMSConfig();
+        loadProducts();
     </script>
-
 </body>
 
 </html>
