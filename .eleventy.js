@@ -9,15 +9,24 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/json");
   eleventyConfig.addPassthroughCopy("info");
 
-  // Passthrough de toda la carpeta productos de forma recursiva
-  const productosDir = "productos";
+  // Carpeta de productos según Netlify CMS
+  const productosDir = "src/products";
+
+  // Función segura para copiar recursivamente, solo si existe
   function addPassthroughRecursively(dir) {
+    if (!fs.existsSync(dir)) {
+      console.warn(`⚠️  Carpeta no encontrada: ${dir}. Se omite.`);
+      return;
+    }
+
     eleventyConfig.addPassthroughCopy(dir);
+
     fs.readdirSync(dir, { withFileTypes: true }).forEach((entry) => {
       if (entry.isDirectory()) {
         addPassthroughRecursively(path.join(dir, entry.name));
       }
     });
   }
+
   addPassthroughRecursively(productosDir);
 };
