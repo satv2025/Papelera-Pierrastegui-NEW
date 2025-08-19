@@ -3,12 +3,12 @@ const path = require("path");
 
 module.exports = function (eleventyConfig) {
   // Passthrough de css, js, images, json e info
+  eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("assets/css");
   eleventyConfig.addPassthroughCopy("assets/images");
   eleventyConfig.addPassthroughCopy("assets/js");
   eleventyConfig.addPassthroughCopy("assets/json");
   eleventyConfig.addPassthroughCopy("info");
-  eleventyConfig.addPassthroughCopy("admin");
 
   // Carpeta de productos según Netlify CMS
   const productosDir = "src/products";
