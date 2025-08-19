@@ -8,6 +8,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets/js");
   eleventyConfig.addPassthroughCopy("assets/json");
   eleventyConfig.addPassthroughCopy("info");
+  eleventyConfig.addPassthroughCopy("admin");
 
   // Carpeta de productos según Netlify CMS
   const productosDir = "src/products";
