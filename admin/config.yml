@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: TU_USUARIO/TU_REPO
+  repo: satv2025/Papelera-Pierrastegui-NEW
   branch: main
 
 media_folder: "src/assets/images"
