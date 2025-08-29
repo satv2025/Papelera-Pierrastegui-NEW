@@ -728,3 +728,33 @@ select:-webkit-autofill:focus {
 #pp-logo:hover img {
   border-color: #000;
 }
+
+/* Scrollbar para Chrome, Brave, Edge, Opera, Safari (WebKit) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e1dabd;
+  /* fondo del track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b2d00;
+  /* color del thumb */
+  border-radius: 4px;
+  /* opcional, para redondear */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a4500;
+  /* color cuando haces hover */
+}
+
+/* Scrollbar para Firefox */
+* {
+  scrollbar-width: thin;
+  /* ancho del scrollbar */
+  scrollbar-color: #3b2d00 #e1dabd;
+  /* thumb y track */
+}
