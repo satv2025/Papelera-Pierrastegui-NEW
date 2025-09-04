@@ -131,7 +131,7 @@ nav ul li a.active {
 }
 
 /* Selection */
-::selection {
+body::selection {
   color: #E1DABD;
   background: #3b2d00;
 }
