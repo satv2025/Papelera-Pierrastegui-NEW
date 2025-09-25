@@ -1,4 +1,4 @@
-@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+@import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
 ::selection {
     color: #fff;
@@ -21,7 +21,7 @@ header {
     padding: 1em;
     text-align: center;
     box-shadow: 0 0 0.4em 0 #00000073;
-    font-size: 1em !important;!i;!;!;!;
+    font-size: 1em !important;
 }
 
 nav ul {
@@ -45,17 +45,21 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #fff; /* Cambio de color al pasar el mouse */
-    background-color: #02a22a; /* Fondo oscuro al pasar el mouse */
-    border-radius: 5px; /* Bordes redondeados para el hover */
-     /* Aumentamos el padding para un efecto más notorio */
+    color: #fff;
+    /* Cambio de color al pasar el mouse */
+    background-color: #02a22a;
+    /* Fondo oscuro al pasar el mouse */
+    border-radius: 5px;
+    /* Bordes redondeados para el hover */
+    /* Aumentamos el padding para un efecto más notorio */
 }
 
 #medio-pago-articulo {
     max-width: 900px;
     margin: 4em auto;
     padding: 2.5em 3em;
-    background: #ddd; /* Fondo del contenedor del artículo */
+    background: #ddd;
+    /* Fondo del contenedor del artículo */
     border-radius: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
@@ -91,8 +95,10 @@ nav ul li a:hover {
 }
 
 .flecha {
-    transform: rotate(90deg); /* Rota la flecha 90 grados */
-    transform-origin: center center; /* Rota la flecha 90 grados hacia abajo */
+    transform: rotate(90deg);
+    /* Rota la flecha 90 grados */
+    transform-origin: center center;
+    /* Rota la flecha 90 grados hacia abajo */
     width: 0em;
     margin-left: 27em;
     margin-top: -4.9em;
@@ -157,14 +163,13 @@ footer {
     box-shadow: 0 0 0.4em 0 #00000073;
 }
 
-footer p {
-}
+footer p {}
 
 @media (max-width: 75em) {
     #medio-pago-articulo {
         padding: 2em;
     }
-    
+
     .contacto-info a {
         color: #02a22a;
         text-decoration: none;
@@ -179,20 +184,20 @@ footer p {
     }
 
     .contacto-info a {
-    color: #02a22a;
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s ease;
-}
+        color: #02a22a;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.3s ease;
+    }
 
-.contacto-info a {
-    color: #02a22a;
-    text-decoration: none;
-    font-weight: 700;
-    transition: color 0.3s ease;
-    margin-bottom: -5em;
-    line-height: 1.3em;
-}
+    .contacto-info a {
+        color: #02a22a;
+        text-decoration: none;
+        font-weight: 700;
+        transition: color 0.3s ease;
+        margin-bottom: -5em;
+        line-height: 1.3em;
+    }
 }
 
 @media (max-width: 37.5em) {

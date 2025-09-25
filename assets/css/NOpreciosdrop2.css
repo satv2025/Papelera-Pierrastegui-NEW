@@ -56,8 +56,10 @@
     font-size: 1.2em;
     text-align: center;
     transition: background-color 0.3s;
-    width: 112%;  /* Hace que el <li> ocupe todo el ancho */
-    display: block; /* Asegura que el hover cubra todo */
+    width: 112%;
+    /* Hace que el <li> ocupe todo el ancho */
+    display: block;
+    /* Asegura que el hover cubra todo */
     margin-left: -2.07em;
     position: relative;
 }
@@ -86,7 +88,7 @@ footer {
     font-weight: 700;
 }
 
-@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+@import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
 ::selection {
     color: #fff;
@@ -225,7 +227,7 @@ div#uni {
     #producto-detalle {
         flex-direction: column;
         width: 35em;
-        margin-left: 2em;!em;!e;!;
+        margin-left: 2em !important;
     }
 }
 
@@ -249,14 +251,14 @@ div#uni {
     border-radius: 6px;
 }
 
-.preciou {
-    
-}
+.preciou {}
+
 .preciob {
     margin-top: -0.8em;
 }
 
-.preciou, .preciob {
+.preciou,
+.preciob {
     font-weight: 700;
 }
 

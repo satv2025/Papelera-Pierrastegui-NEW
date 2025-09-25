@@ -1,4 +1,4 @@
-@import url('https://fuentes.solargentinotv.com.ar/importgilroy.css');
+@import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
 /* ================================
    BASE Y RESET
@@ -31,11 +31,7 @@ body {
 button.carrito {
     font-size: 1.5em;
     background-color: #fff !important;
-    !i;
-    !;
     color: #02a22a !important;
-    !i;
-    !;
     cursor: pointer;
     border-radius: 50%;
     font-family: 'FontAwesome';
@@ -79,11 +75,7 @@ button.carrito::after {
 
 button.carrito:hover {
     background-color: #02a22a !important;
-    !i;
-    !;
     color: #fff !important;
-    !i;
-    !;
     /* Cambiar color cuando el ratÃ³n pasa sobre el botÃ³n */
 }
 
@@ -108,11 +100,7 @@ button.carrito i {
     /* Ancho del menÃº */
     z-index: 2000;
     /* Para asegurarse de que el menÃº estÃ© por encima de otros elementos */
-    !;
-    !e;
-
     border: 2px solid #02a22a;
-    z.i: 1;
     margin-top: -1.5em;
 }
 
@@ -180,9 +168,6 @@ nav.category-menu a {
 
 .more-btn {
     position: absolute;
-    !;
-    !e;
-
     z-index: 1000;
 }
 
@@ -227,9 +212,6 @@ a.logotext1:visited {
 .logotext1 {
     position: relative;
     top: -6em;
-    !;
-    !e;
-
     left: -38em;
 }
 
@@ -304,8 +286,6 @@ header {
     height: auto;
     margin-bottom: 0.5em;
     margin-left: 25em;
-    !;
-    !e;
     position: relative;
     top: -6.3em;
 }
@@ -315,8 +295,6 @@ a.logotext1 {
     text-align: center;
     color: #02a22a;
     font-size: 0.8em !important;
-    !i;
-    !;
     font-weight: 700;
     text-decoration: none;
     line-height: 1.2em;
@@ -369,16 +347,6 @@ a.logotext1 {
     width: 20px;
     height: 2em;
     margin-right: -4.3em;
-    !;
-    !e;
-    margin-left;
-    : ;
-    margin-left;
-    : 1;
-    margin-left;
-    : 1e;
-    margin-left;
-    : 1;
     border: 2px solid #02a22a;
     padding-top: 0.6em;
     padding-bottom: 0.4em;
@@ -421,9 +389,6 @@ svg:hover {
     width: 11em;
     margin: -9.7em auto 0;
     position: relative;
-    !;
-    !e;
-
     z-index: 2000;
 }
 
@@ -435,8 +400,6 @@ svg:hover {
 
 .reg {
     margin-top: -1.65em !important;
-    !i;
-    !;
     margin-left: 23.4em;
     height: 1.63em;
 }
