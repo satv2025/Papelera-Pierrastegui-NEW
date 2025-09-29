@@ -7,7 +7,7 @@
     <title>Papelera Pierrastegui</title>
     <link rel="stylesheet" href="assets/css/inicio.css">
     <link rel="stylesheet" href="assets/css/menucategorias.css">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon1.ico">
+    <link rel="icon" type="image/x-icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         /* ===== Estilos Generales - Desktop ===== */
@@ -477,13 +477,24 @@
             }
         }
 
+        .producto-img-container .contenedor {
+            position: relative;
+            overflow: hidden;
+        }
+
         .producto-img-container .contenedor img {
-            display: none;
-            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /* asegura que todas las imágenes encajen */
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
         }
 
         .producto-img-container .contenedor img.visible {
-            display: block;
+            opacity: 1;
+            z-index: 1;
         }
     </style>
 </head>
@@ -524,7 +535,7 @@
                 <!-- Buscador -->
                 <div class="search-bar">
                     <input type="text" id="search-input" placeholder="Buscar productos..." />
-                    <img src="assets/images/svg/web/lupa2.svg" alt="Lupa" />
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" alt="Lupa" />
                 </div>
 
                 <!-- Menú principal -->
@@ -764,7 +775,7 @@
         <!-- CENTRO: Buscador -->
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Buscar productos..." />
-            <img src="assets/images/svg/web/lupa2.svg" alt="Lupa" />
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" alt="Lupa" />
         </div>
     </div>
 
@@ -785,14 +796,15 @@
         <!-- CENTRO: Buscador -->
         <div class="search-bar">
             <input type="text" id="search-input" placeholder="Buscar productos..." />
-            <img src="assets/images/svg/web/lupa2.svg" alt="Lupa" />
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" alt="Lupa" />
         </div>
 
         <!-- DERECHA: Enlaces -->
         <div class="nav-links">
             <div class="inicio">
                 <a href="index" id="red">Inicio</a>
-                <img src="assets/images/svg/web/home3.svg" alt="Instagram" class="icon-right casa">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/home3.svg" alt="Instagram"
+                    class="icon-right casa">
             </div>
 
             <div class=" mail">
@@ -1094,7 +1106,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/pluribol.jpg" alt="Rollo Pluribol" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/pluribol.jpg"
+                            alt="Rollo Pluribol" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Rollo Pluribol</div>
@@ -1107,7 +1120,7 @@
 
                 <!-- Productos de arranques -->
                 <div class=" producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
                         alt="Arranque grueso" />
                     <div class="producto-info">
                         <div class="nombre">Arranque grueso</div>
@@ -1121,7 +1134,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranque%20Rendidor.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranque%20Rendidor.jpg"
                         alt="Arranque rendidor" />
                     <div class="producto-info">
                         <div class="nombre">Arranque rendidor</div>
@@ -1137,7 +1150,7 @@
 
                 <!-- Bandejas Y Potes-->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
                         alt="Bandejas de aluminio" />
                     <div class="producto-info">
                         <div class="nombre">Bandejas de aluminio</div>
@@ -1149,7 +1162,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20DE%20CART%C3%93N/bandeja%20de%20carton.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20DE%20CART%C3%93N/bandeja%20de%20carton.webp"
                         alt="Bandejas de cartón" />
                     <div class="producto-info">
                         <div class="nombre">Bandejas De Carton</div>
@@ -1163,7 +1176,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PLÁSTICAS/bandeja%20descartable%20n%20107.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PLÁSTICAS/bandeja%20descartable%20n%20107.jpg"
                         alt="Bandejas plásticas" />
                     <div class="producto-info">
                         <div class="nombre">Bandejas plásticas</div>
@@ -1175,7 +1188,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg"
                         alt="Bandeja Telgopor" />
                     <div class="producto-info">
                         <div class="nombre">Bandejas de Telgopor</div>
@@ -1212,7 +1225,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/potes%20bisagra.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/potes%20bisagra.jpg"
                         alt="Pote bisagra" />
                     <div class="producto-info">
                         <div class="nombre">Pote bisagra</div>
@@ -1223,7 +1236,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/dip.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/dip.jpg"
                         alt="Pote dips" />
                     <div class="producto-info">
                         <div class="nombre">Pote dips</div>
@@ -1234,7 +1247,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/D_NQ_NP_2X_957775-MLA70448724893_072023-F.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/POTES/D_NQ_NP_2X_957775-MLA70448724893_072023-F.webp"
                         alt="Pote Ensalada de fruta" />
                     <div class="producto-info">
                         <div class="nombre">Pote Ensalada de fruta</div>
@@ -1247,7 +1260,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/ensaladera-con-tapa.jpg" alt="Ensaladeras Con Tapa" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/ensaladera-con-tapa.jpg"
+                            alt="Ensaladeras Con Tapa" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Ensaladeras Con Tapa</div>
@@ -1262,7 +1276,8 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img class="visible" src="assets/images/potes-de-helado.jpg"
+                            <img class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/potes-de-helado.jpg"
                                 alt="Potes De Helado - imagen 1" />
                             <!-- Si hay más imágenes se agregan aquí -->
                         </div>
@@ -1279,7 +1294,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/plato-marmita.jpg" alt="Plato Marmita" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/plato-marmita.jpg"
+                            alt="Plato Marmita" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Plato Marmita</div>
@@ -1294,7 +1310,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/budineras-de-papel.jpg" alt="Budineras De Papel" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/budineras-de-papel.jpg"
+                            alt="Budineras De Papel" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Budineras De Papel</div>
@@ -1308,7 +1325,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/budineras-de-aluminio.jpg" alt="Budineras De Aluminio" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/budineras-de-aluminio.jpg"
+                            alt="Budineras De Aluminio" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Budineras De Aluminio</div>
@@ -1323,8 +1341,10 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img src="assets/images/pirotines.jpg" alt="Papel Aluminio" class="visible">
-                            <img src="assets/images/pirotinesrgb.jpg" alt="Papel Aluminio">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/pirotines.jpg"
+                                alt="Papel Aluminio" class="visible">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/pirotinesrgb.jpg"
+                                alt="Papel Aluminio">
                         </div>
                     </div>
                     <div class="producto-info">
@@ -1339,7 +1359,8 @@
                 <div class="producto proximo" style="display: none !important;">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/molde-rosca.jpg" alt="Molde Rosca De Pascua" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/molde-rosca.jpg"
+                            alt="Molde Rosca De Pascua" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Molde Rosca De Pascua</div>
@@ -1353,7 +1374,8 @@
                 <div class="producto proximo" style="display: none !important;">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/molde-pan-dulce.jpg" alt="Molde De Pan Dulce" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/molde-pan-dulce.jpg"
+                            alt="Molde De Pan Dulce" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Molde De Pan Dulce</div>
@@ -1368,8 +1390,11 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img class="visible" src="assets/images/caja-pascua1.jpg" alt="Potes De Helado - imagen 1">
-                            <img src="assets/images/caja-pascua2.jpg" alt="Potes De Helado - imagen 1">
+                            <img class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/caja-pascua1.jpg"
+                                alt="Potes De Helado - imagen 1">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/caja-pascua2.jpg"
+                                alt="Potes De Helado - imagen 1">
                         </div>
                     </div>
                     <div class="producto-info">
@@ -1383,7 +1408,7 @@
 
                 <!-- Bolsas -->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20CAMISETA/bolsa%20camiseta%20foto.jpg"
                         alt="Bolsas camiseta" />
                     <div class="producto-info">
                         <div class="nombre">Bolsas camiseta</div>
@@ -1397,7 +1422,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg"
                         alt="Bolsas sulfito" />
                     <div class="producto-info">
                         <div class="nombre">Bolsas sulfito</div>
@@ -1421,7 +1446,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg"
                         alt="Bolsas polipropileno" />
                     <div class="producto-info">
                         <div class="nombre">Bolsas polipropileno</div>
@@ -1434,7 +1459,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20RESIDUO/bolsas%20de%20residuo.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20RESIDUO/bolsas%20de%20residuo.jpg"
                         alt="Bolsas residuo" />
                     <div class="producto-info">
                         <div class="nombre">Bolsas residuo</div>
@@ -1446,7 +1471,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RIÑÓN/bolsas-rinon-todoplastic.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RIÑÓN/bolsas-rinon-todoplastic.jpg"
                         alt="Bolsas riñón" />
                     <div class="producto-info">
                         <div class="nombre">Bolsas riñón</div>
@@ -1483,7 +1508,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp"
                         alt="Caja Empanada" />
                     <div class="producto-info">
                         <div class="nombre">Caja De Empanada</div>
@@ -1505,7 +1530,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos productos papelera para catálogo/ARTÍCULOS DE PIZZERÍA/caja de hamburguesa.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARTÍCULOS DE PIZZERÍA/caja de hamburguesa.jpg"
                         alt="Caja Hamburguesa" />
                     <div class="producto-info">
                         <div class="nombre">Caja De Hamburguesa</div>
@@ -1519,9 +1544,11 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img class="visible" src="assets/images/red-para-bondiola.jpg"
+                            <img class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/red-para-bondiola.jpg"
                                 alt="Red Para Bondiola - imagen 1" />
-                            <img src="assets/images/red-para-bondiola2.jpg" alt="Red Para Bondiola - imagen 2" />
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/red-para-bondiola2.jpg"
+                                alt="Red Para Bondiola - imagen 2" />
                         </div>
                     </div>
                     <div class="producto-info">
@@ -1537,9 +1564,11 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img class="visible" src="assets/images/caja-felices-fiestas1.jpg"
+                            <img class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/caja-felices-fiestas1.jpg"
                                 alt="Potes De Helado - imagen 1" />
-                            <img src="assets/images/caja-felices-fiestas2.jpg" alt="Potes De Helado - imagen 1" />
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/caja-felices-fiestas2.jpg"
+                                alt="Potes De Helado - imagen 1" />
                         </div>
                     </div>
                     <div class="producto-info">
@@ -1553,7 +1582,7 @@
 
                 <!-- Carton -->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CART%C3%93N%20CORRUGADO/carton%20corrugado.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CART%C3%93N%20CORRUGADO/carton%20corrugado.jpg"
                         alt="Cartón Corrugado" />
                     <div class="producto-info">
                         <div class="nombre">Cartón Corrugado</div>
@@ -1604,7 +1633,7 @@
 
                 <!-- Cubiertos -->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/spoon1_16_9.png"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/spoon1_16_9.png"
                         alt="Cuchara Sopera" />
                     <div class="producto-info">
                         <div class="nombre">Cuchara Sopera</div>
@@ -1615,7 +1644,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/spoon3_16_9.png"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/spoon3_16_9.png"
                         alt="Cucharita" />
                     <div class="producto-info">
                         <div class="nombre">Cucharita</div>
@@ -1626,7 +1655,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/knife1_16_9.png"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/knife1_16_9.png"
                         alt="Cuchillo Blanco" />
                     <div class="producto-info">
                         <div class="nombre">Cuchillo Blanco</div>
@@ -1637,7 +1666,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/knife2_16_9.png"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/knife2_16_9.png"
                         alt="Cuchillo Negro" />
                     <div class="producto-info">
                         <div class="nombre">Cuchillo Negro</div>
@@ -1651,8 +1680,10 @@
                 <!-- Film -->
                 <div class="producto">
                     <div class="contenedor">
-                        <img src="assets/images/film1.jpg" class="visible" alt="Bolsas de Horno" />
-                        <img src="assets/images/film2.jpg" alt="Bolsas para horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/film1.jpg" class="visible"
+                            alt="Bolsas de Horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/film2.jpg"
+                            alt="Bolsas para horno" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Film</div>
@@ -1665,11 +1696,16 @@
                 </div>
                 <div class="producto">
                     <div class="contenedor">
-                        <img src="assets/images/stretch1.jpg" class="visible" alt="Bolsas de Horno" />
-                        <img src="assets/images/stretch2.jpg" alt="Bolsas para horno" />
-                        <img src="assets/images/stretch3.jpg" alt="Bolsas para horno" />
-                        <img src="assets/images/stretch4.jpg" alt="Bolsas para horno" />
-                        <img src="assets/images/stretch5.jpg" alt="Bolsas para horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/stretch1.jpg" class="visible"
+                            alt="Bolsas de Horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/stretch2.jpg"
+                            alt="Bolsas para horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/stretch3.jpg"
+                            alt="Bolsas para horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/stretch4.jpg"
+                            alt="Bolsas para horno" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/stretch5.jpg"
+                            alt="Bolsas para horno" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Stretch</div>
@@ -1684,10 +1720,12 @@
                 <!-- Fólex -->
                 <div class="producto">
                     <div class="contenedor foleximgs">
-                        <img src="assets/images/folex1.png" class="visible">
-                        <img src="assets/images/folex2.png">
-                        <img src="assets/images/Fotos productos papelera para catálogo/FÓLEX/Folex hamburguesa.webp">
-                        <img src="assets/images/Fotos productos papelera para catálogo/FÓLEX/Folex.webp">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/folex1.png" class="visible">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/folex2.png">
+                        <img
+                            src="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/FÓLEX/Folex hamburguesa.webp">
+                        <img
+                            src="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/FÓLEX/Folex.webp">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Fólex</div>
@@ -1699,7 +1737,8 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/burguerpaper1.jpg" alt="Papel aluminio hamburguesa 30x40" />
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/burguerpaper1.jpg"
+                        alt="Papel aluminio hamburguesa 30x40" />
                     <div class="producto-info">
                         <div class="nombre">Papel aluminio hamburguesa 30x40</div>
                         <div class="categoria">Fólex</div>
@@ -1711,7 +1750,7 @@
 
                 <!-- Guantes -->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_764586-MLU72636722033_112023-F.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_764586-MLU72636722033_112023-F.webp"
                         alt="Guante nitrilo" />
                     <div class="producto-info">
                         <div class="nombre">Guante nitrilo</div>
@@ -1723,7 +1762,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_829059-MLA80203053115_102024-F.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/GUANTES/D_NQ_NP_2X_829059-MLA80203053115_102024-F.webp"
                         alt="Guante polietileno" />
                     <div class="producto-info">
                         <div class="nombre">Guante polietileno</div>
@@ -1737,9 +1776,10 @@
                 <!-- Libreria -->
                 <div class="producto">
                     <div class="contenedor">
-                        <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRERÍA/abrochadora.jpg"
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRERÍA/abrochadora.jpg"
                             alt="Abrochadoras" />
-                        <img src="assets/images/abrochadora2.jpg" alt="Papel Aluminio" class="visible">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/abrochadora2.jpg"
+                            alt="Papel Aluminio" class="visible">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Abrochadora</div>
@@ -1750,7 +1790,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/biromes.jpg" alt="Biromes" />
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/biromes.jpg" alt="Biromes" />
                     <div class="producto-info">
                         <div class="nombre">Biromes</div>
                         <div class="categoria">Librería</div>
@@ -1773,7 +1813,7 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
-                        <img src="assets/images/estallidos.jpg" alt="Estallidos" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg" alt="Estallidos" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Estallidos</div>
@@ -1795,7 +1835,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hilo/hilo.png"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hilo/hilo.png"
                         alt="Hilo" />
                     <div class="producto-info">
                         <div class="nombre">Hilo</div>
@@ -1806,7 +1846,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hojas/A4WP.png"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hojas/A4WP.png"
                         alt="Hojas A4" />
                     <div class="producto-info">
                         <div class="nombre">Hojas A4</div>
@@ -1817,7 +1857,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/liquidpaper.jpg" alt="Liquid Paper">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/liquidpaper.jpg" alt="Liquid Paper">
                     <div class="producto-info">
                         <div class="nombre">Liquid Paper</div>
                         <div class="categoria">Librería</div>
@@ -1827,7 +1867,8 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/maquinamotex.jpg" alt="Máquina de Mótex" />
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/maquinamotex.jpg"
+                        alt="Máquina de Mótex" />
                     <div class="producto-info">
                         <div class="nombre">Etiquetadora De Precios</div>
                         <div class="categoria">Librería</div>
@@ -1895,7 +1936,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">SIN STOCK</span>
-                        <img src="assets/images/adhesivo-pizzini.jpg" alt="Voligoma" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/adhesivo-pizzini.jpg"
+                            alt="Voligoma" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Pegamento (Adhesivo) Pizzini</div>
@@ -1910,9 +1952,12 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img src="assets/images/ganchos-abrochadora.jpg" alt="Papel Aluminio" class="visible">
-                            <img src="assets/images/ganchos-abrochadora1.jpg" alt="Papel Aluminio">
-                            <img src="assets/images/ganchos-abrochadora2.jpg" alt="Papel Aluminio">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/ganchos-abrochadora.jpg"
+                                alt="Papel Aluminio" class="visible">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/ganchos-abrochadora1.jpg"
+                                alt="Papel Aluminio">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/ganchos-abrochadora2.jpg"
+                                alt="Papel Aluminio">
                         </div>
                     </div>
                     <div class="producto-info">
@@ -1927,7 +1972,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/cinta-fragil.jpg" alt="Cinta Frágil" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/cinta-fragil.jpg"
+                            alt="Cinta Frágil" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Cinta Frágil</div>
@@ -1941,7 +1987,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/mini-rollos.jpg" alt="Mini Rollos" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/mini-rollos.jpg"
+                            alt="Mini Rollos" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Mini Rollos</div>
@@ -1955,7 +2002,7 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/moño-facil.jpg" alt="Moño Fácil" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/moño-facil.jpg" alt="Moño Fácil" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Moño Fácil</div>
@@ -1969,7 +2016,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/banditas-elasticas.jpg" alt="Banditas Elásticas" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/banditas-elasticas.jpg"
+                            alt="Banditas Elásticas" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Banditas Elásticas</div>
@@ -1985,7 +2033,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/tijera-oficina.jpg" alt="Tijera De Oficina" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/tijera-oficina.jpg"
+                            alt="Tijera De Oficina" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Tijera De Oficina</div>
@@ -2001,9 +2050,11 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor" id="conteimg2">
-                            <img class="visible" src="assets/images/marcadores-tiza.jpg"
+                            <img class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/marcadores-tiza.jpg"
                                 alt="Marcadores De Tiza Líquida - imagen 1" />
-                            <img src="assets/images/marcadores-tiza2.jpg" alt="Marcadores De Tiza Líquida - imagen 2" />
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/marcadores-tiza2.jpg"
+                                alt="Marcadores De Tiza Líquida - imagen 2" />
                         </div>
                     </div>
                     <div class="producto-info">
@@ -2019,7 +2070,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/calculadora.jpg" alt="Calculadora" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/calculadora.jpg"
+                            alt="Calculadora" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Calculadora</div>
@@ -2034,7 +2086,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/moldes-freidora.jpg" alt="Moldes Para Freidora De Aire" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/moldes-freidora.jpg"
+                            alt="Moldes Para Freidora De Aire" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Moldes Para Freidora De Aire</div>
@@ -2049,7 +2102,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/trincheta.jpg" alt="Cutter (trincheta)">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/trincheta.jpg"
+                            alt="Cutter (trincheta)">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Cutter (trincheta)</div>
@@ -2064,7 +2118,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/porta-cinta.jpg" alt="Porta Cinta" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/porta-cinta.jpg"
+                            alt="Porta Cinta" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Porta Cinta</div>
@@ -2080,8 +2135,10 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img class="visible" src="assets/images/clips3.jpg" alt="Clips - imagen 1" />
-                            <img src="assets/images/clips5.jpg" alt="Clips - imagen 2" />
+                            <img class="visible" src="https://papelerapierrastegui.com.ar/assets/images/clips3.jpg"
+                                alt="Clips - imagen 1" />
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/clips5.jpg"
+                                alt="Clips - imagen 2" />
                         </div>
                     </div>
                     <div class="producto-info">
@@ -2098,8 +2155,10 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor" id="conteimg2">
-                            <img class="visible" src="assets/images/tiza-blanca.jpg" alt="Tiza Blanca - imagen 1" />
-                            <img src="assets/images/tiza-color.jpg" alt="Tiza Color - imagen 2" />
+                            <img class="visible" src="https://papelerapierrastegui.com.ar/assets/images/tiza-blanca.jpg"
+                                alt="Tiza Blanca - imagen 1" />
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/tiza-color.jpg"
+                                alt="Tiza Color - imagen 2" />
                         </div>
                     </div>
                     <div class="producto-info">
@@ -2115,7 +2174,7 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/chinches.jpg" alt="Porta Cinta" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/chinches.jpg" alt="Porta Cinta" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Pincha Papeles</div>
@@ -2131,9 +2190,11 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img id="conteimg" class="visible" src="assets/images/silicona-barra.jpg"
+                            <img id="conteimg" class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/silicona-barra.jpg"
                                 alt="Marcadores De Tiza Líquida - imagen 1">
-                            <img id="conteimg" src="assets/images/silicona-liquida.jpg"
+                            <img id="conteimg"
+                                src="https://papelerapierrastegui.com.ar/assets/images/silicona-liquida.jpg"
                                 alt="Marcadores De Tiza Líquida - imagen 2">
                         </div>
 
@@ -2151,7 +2212,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/cinta-bifaz.jpg" alt="Porta Cinta" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/cinta-bifaz.jpg"
+                            alt="Porta Cinta" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Cinta Bifaz</div>
@@ -2166,9 +2228,9 @@
                 <!-- Papel -->
                 <div class="producto">
                     <div class="contenedor">
-                        <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/aluminio%205%20mts.jpg"
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/aluminio%205%20mts.jpg"
                             alt="Papel Aluminio" />
-                        <img src="assets/images/aluminio.jpg" alt="Papel Aluminio">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/aluminio.jpg" alt="Papel Aluminio">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Papel Aluminio</div>
@@ -2179,7 +2241,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/bobina%20de%20papel.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/bobina%20de%20papel.jpg"
                         alt="Bobina De Papel" />
                     <div class="producto-info">
                         <div class="nombre">Bobina De Papel</div>
@@ -2191,7 +2253,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/Papel%20cortado.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20SULFITO/Papel%20cortado.webp"
                         alt="Papel cortado" />
                     <div class="producto-info">
                         <div class="nombre">Papel cortado</div>
@@ -2203,7 +2265,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp"
                         alt="Papel Manteca" />
                     <div class="producto-info">
                         <div class="nombre">Papel Manteca</div>
@@ -2214,7 +2276,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGIÉNICO%20-%20ROLLO%20DE%20COCINA/rollo%20de%20cocina%20elegante.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGIÉNICO%20-%20ROLLO%20DE%20COCINA/rollo%20de%20cocina%20elegante.jpg"
                         alt="Rollo De Cocina Elegante" />
                     <div class="producto-info">
                         <div class="nombre">Rollo De Cocina Elegante</div>
@@ -2236,7 +2298,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos productos papelera para catálogo/PAPEL HIGIÉNICO - ROLLO DE COCINA/papel higenico elegante.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/PAPEL HIGIÉNICO - ROLLO DE COCINA/papel higenico elegante.jpg"
                         alt="Papel Higiénico Elegante" />
                     <div class="producto-info">
                         <div class="nombre">Papel Higienico Elegante</div>
@@ -2247,7 +2309,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos productos papelera para catálogo/PAPEL HIGIÉNICO - ROLLO DE COCINA/Higiénico new pel línea premium triple hoja.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/PAPEL HIGIÉNICO - ROLLO DE COCINA/Higiénico new pel línea premium triple hoja.jpg"
                         alt="Papel Higiénico NewPel" />
                     <div class="producto-info">
                         <div class="nombre">Papel Higienico NewPel</div>
@@ -2261,9 +2323,11 @@
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
                         <div class="contenedor">
-                            <img class="visible" src="assets/images/papel-para-afinado.jpg"
+                            <img class="visible"
+                                src="https://papelerapierrastegui.com.ar/assets/images/papel-para-afinado.jpg"
                                 alt="Papel Parafinado - imagen 1" />
-                            <img src="assets/images/papel-para-afinado2.jpg" alt="Papel Para Afinado - imagen 2" />
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/papel-para-afinado2.jpg"
+                                alt="Papel Para Afinado - imagen 2" />
                         </div>
                     </div>
                     <div class="producto-info">
@@ -2278,7 +2342,8 @@
                 <div class="producto">
                     <div class="producto-img-container">
                         <span class="sin-stock" id="sin-stock-bh">NUEVO!</span>
-                        <img src="assets/images/papel-para-bondiola.jpg" alt="Papel Para Bondiola" />
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/papel-para-bondiola.jpg"
+                            alt="Papel Para Bondiola" />
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Papel Para Bondiola</div>
@@ -2303,9 +2368,9 @@
                 </div>
                 <div class="producto">
                     <div class="contenedor">
-                        <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
                             alt="bg-id:1483456">
-                        <img src="assets/images/papelfondo1.jpg" alt="bg-id:148356">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/papelfondo1.jpg" alt="bg-id:148356">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Fondo</div>
@@ -2340,7 +2405,7 @@
 
                 <!-- Rollos térmicos -->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ROLLOS%20TÉRMICOS/rollo%20termico.jpeg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ROLLOS%20TÉRMICOS/rollo%20termico.jpeg"
                         alt="Rollo Térmico" />
                     <div class="producto-info">
                         <div class="nombre">Rollo Térmicos</div>
@@ -2354,7 +2419,7 @@
 
                 <!-- Sorbetes -->
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_844300-MLA80844285453_112024-O.webp"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_844300-MLA80844285453_112024-O.webp"
                         alt="Sorbetes Común" />
                     <div class="producto-info">
                         <div class="nombre">Sorbetes Común</div>
@@ -2365,7 +2430,7 @@
                     </div>
                 </div>
                 <div class="producto">
-                    <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/sorbetes%20descartables%20negros.jpg"
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/sorbetes%20descartables%20negros.jpg"
                         alt="Sorbetes Negro" />
                     <div class="producto-info">
                         <div class="nombre">Sorbetes Negro</div>
@@ -2379,8 +2444,10 @@
                 <!-- Vasos -->
                 <div class="producto">
                     <div class="contenedor">
-                        <img class="visible" src="assets/images/vasosp1.jpg" alt="Vaso plástico - vasosp1">
-                        <img src="assets/images/vasosp2.jpg" alt="Vaso plástico - vasosp2">
+                        <img class="visible" src="https://papelerapierrastegui.com.ar/assets/images/vasosp1.jpg"
+                            alt="Vaso plástico - vasosp1">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/vasosp2.jpg"
+                            alt="Vaso plástico - vasosp2">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Vasos De Plástico</div>
@@ -2393,9 +2460,11 @@
                 </div>
                 <div class="producto">
                     <div class="contenedor">
-                        <img class="visible" src="assets/images/vasost1.jpg" alt="Vaso telgopor - vasost1">
-                        <img src="assets/images/vasost2.jpg" alt="Vaso telgopor - vasost2">
-                        <img src="assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/VASOS/vaso-termico-180-cc-50-unidades1-effa370a04aa41b56b15571658086178-480-0.jpg"
+                        <img class="visible" src="https://papelerapierrastegui.com.ar/assets/images/vasost1.jpg"
+                            alt="Vaso telgopor - vasost1">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/vasost2.jpg"
+                            alt="Vaso telgopor - vasost2">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/VASOS/vaso-termico-180-cc-50-unidades1-effa370a04aa41b56b15571658086178-480-0.jpg"
                             alt="Vaso telgopor - vaso térmico 180cc">
                     </div>
                     <div class="producto-info">
