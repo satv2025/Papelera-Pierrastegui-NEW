@@ -338,8 +338,8 @@
             align-items: flex-start;
             z-index: 9999;
             overflow: hidden;
-            /* Modal puede scrollear si hace falta */
             overflow-y: hidden;
+            /* bloquea scroll */
         }
 
         /* Cuando modal está activo, bloquea scroll del body */
@@ -350,7 +350,6 @@
         /* Caja central del modal */
         .modal-box {
             width: 47%;
-            /* Ancho del modal */
             max-width: 70em;
             background-color: #181818;
             border-radius: 8px;
@@ -359,7 +358,6 @@
             color: #fff;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
             margin-top: 2em;
-            /* empuja un poco hacia abajo */
             height: 100%;
             font-size: 18px !important;
         }
@@ -429,6 +427,54 @@
         .modal-box::selection {
             color: #181818;
             background-color: #fff;
+        }
+
+        /* 📱 Responsividad */
+
+        /* Tablets (≤ 1024px) */
+        @media (max-width: 1024px) {
+            .modal-box {
+                width: 90%;
+                height: auto;
+                margin-top: 1em;
+                font-size: 16px !important;
+            }
+
+            .modal-content {
+                padding-left: 2em !important;
+                padding-right: 2em !important;
+                font-size: 20px;
+            }
+        }
+
+        /* Móviles (≤ 768px) */
+        @media (max-width: 768px) {
+            .modal {
+                align-items: center;
+                /* centra en móviles */
+            }
+
+            .modal-box {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                margin: 0;
+                font-size: 16px !important;
+            }
+
+            .modal-content {
+                padding: 1em !important;
+                font-size: 18px;
+            }
+
+            .modal-content h2 {
+                font-size: 22px;
+            }
+
+            .close-btn {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
@@ -700,8 +746,7 @@
                 </div>
             </div>
         </div>
-        <a href="#" class="pp-link">Rubros</a><br><a href="#" class="pp-link">Promociones especiales</a><br><a
-            href="logueo" class="pp-link">Convertite en cliente</a><br><a href="nosotros" class="pp-link">¿Quiénes
+        <a href="nosotros" class="pp-link">¿Quiénes
             somos?</a>
 
         <hr>
@@ -1025,21 +1070,6 @@
 
                     </div> <!-- dropdown-menu -->
                 </div> <!-- nav-item dropdown -->
-
-                <div class="nav-item dropdown">
-                    <a>Rubros <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></a>
-                    <!-- Aquí podés agregar otro dropdown-menu si querés -->
-                </div>
-
-                <div class="nav-item dropdown">
-                    <a>Promociones especiales</a>
-                    <!-- Aquí podés agregar otro dropdown-menu si querés -->
-                </div>
-
-                <div class="nav-item dropdown">
-                    <a href="logueo">Convertite en cliente</a>
-                </div>
-
                 <div class="nav-item dropdown">
                     <a href="nosotros">¿Quiénes somos?</a>
                 </div>
