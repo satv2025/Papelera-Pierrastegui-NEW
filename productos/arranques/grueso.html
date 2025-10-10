@@ -7,6 +7,63 @@
   <title>Arranque Grueso - Papelera Pierrastegui</title>
   <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+  <style>
+    /* === SCROLLBAR UNIVERSAL === */
+
+    /* WebKit (Chrome, Edge Chromium, Opera, Safari) */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+      /* sin fondo */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #3b2d00;
+      /* color principal */
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #2a2100;
+      /* tono más oscuro al hover */
+    }
+
+    /* Firefox */
+    * {
+      scrollbar-width: thin;
+      /* delgado */
+      scrollbar-color: #3b2d00 transparent;
+      /* thumb color / track color */
+    }
+
+    /* Microsoft Edge (Legacy) y IE 10-11 */
+    body {
+      -ms-overflow-style: -ms-autohiding-scrollbar;
+      /* oculta hasta que se use */
+      scrollbar-face-color: #3b2d00;
+      /* color del pulgar */
+      scrollbar-track-color: transparent;
+      /* fondo sin color */
+      scrollbar-highlight-color: #3b2d00;
+      scrollbar-shadow-color: #3b2d00;
+      scrollbar-3dlight-color: #3b2d00;
+      scrollbar-darkshadow-color: #3b2d00;
+      scrollbar-arrow-color: #3b2d00;
+    }
+
+    /* Safari (refuerzo para iOS/macOS) */
+    html::-webkit-scrollbar-thumb {
+      background-color: #3b2d00;
+    }
+
+    html::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  </style>
 </head>
 
 <body>
