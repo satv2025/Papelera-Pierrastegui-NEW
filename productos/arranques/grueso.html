@@ -7,63 +7,6 @@
   <title>Arranque Grueso - Papelera Pierrastegui</title>
   <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
-  <style>
-    /* === SCROLLBAR UNIVERSAL === */
-
-    /* WebKit (Chrome, Edge Chromium, Opera, Safari) */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-      /* sin fondo */
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: #3b2d00;
-      /* color principal */
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: #2a2100;
-      /* tono más oscuro al hover */
-    }
-
-    /* Firefox */
-    * {
-      scrollbar-width: thin;
-      /* delgado */
-      scrollbar-color: #3b2d00 transparent;
-      /* thumb color / track color */
-    }
-
-    /* Microsoft Edge (Legacy) y IE 10-11 */
-    body {
-      -ms-overflow-style: -ms-autohiding-scrollbar;
-      /* oculta hasta que se use */
-      scrollbar-face-color: #3b2d00;
-      /* color del pulgar */
-      scrollbar-track-color: transparent;
-      /* fondo sin color */
-      scrollbar-highlight-color: #3b2d00;
-      scrollbar-shadow-color: #3b2d00;
-      scrollbar-3dlight-color: #3b2d00;
-      scrollbar-darkshadow-color: #3b2d00;
-      scrollbar-arrow-color: #3b2d00;
-    }
-
-    /* Safari (refuerzo para iOS/macOS) */
-    html::-webkit-scrollbar-thumb {
-      background-color: #3b2d00;
-    }
-
-    html::-webkit-scrollbar-track {
-      background: transparent;
-    }
-  </style>
 </head>
 
 <body>
@@ -111,14 +54,14 @@
             <p class="precio-bulto">Por bulto (6 unidades): $25.200 ARS</p>
           </div>
 
-          <!-- Cantidad -->
+          <!-- Tipo -->
           <div class="cantidad-container">
-            <label for="cantidad-dropdown">Cantidad:</label>
-            <div class="dropdown" id="cantidad-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-              <span class="dropdown-btn selected">1 <span class="arrow">▼</span></span>
+            <label for="tipo-dropdown">Tipo:</label>
+            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+              <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
               <div class="dropdown-menu" role="listbox">
-                <span class="dropdown-item" data-value="1">1</span>
-                <span class="dropdown-item" data-value="6">6</span>
+                <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
+                <span class="dropdown-item" data-type="bulto" data-mult="6">Bulto (6)</span>
               </div>
             </div>
             <button id="limpiar">Limpiar</button>
@@ -157,10 +100,10 @@
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-      const cantidadDropdown = document.getElementById('cantidad-dropdown');
-      const cantidadBtn = cantidadDropdown.querySelector('.dropdown-btn');
-      const cantidadMenu = cantidadDropdown.querySelector('.dropdown-menu');
-      const cantidadItems = cantidadMenu.querySelectorAll('.dropdown-item');
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
       const limpiarBtn = document.getElementById('limpiar');
       const decBtn = document.getElementById('decrementar');
@@ -173,6 +116,7 @@
 
       let selectedSize = null;
       let cantidad = 1;
+      let tipo = { type: 'unidad', mult: 1 };
 
       const arrow = () => {
         const span = document.createElement('span');
@@ -194,13 +138,11 @@
         precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
         precioBulto.textContent = `Por bulto (6 unidades): $${priceB.toLocaleString('es-AR')} ARS`;
 
-        let total;
-        if (cantidad >= 6) {
-          const bul = Math.floor(cantidad / 6);
-          const rest = cantidad % 6;
-          total = bul * priceB + rest * priceU;
-        } else {
+        let total = 0;
+        if (tipo.type === 'unidad') {
           total = cantidad * priceU;
+        } else {
+          total = cantidad * priceB; // cada bulto es un conjunto de 6 unidades
         }
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
@@ -226,25 +168,24 @@
         });
       });
 
-      // Dropdown cantidad
-      cantidadBtn.addEventListener('click', () => {
-        cantidadMenu.classList.toggle('active');
+      // Dropdown tipo (Unidad o Bulto)
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
       });
 
-      cantidadItems.forEach(opt => {
+      tipoItems.forEach(opt => {
         opt.addEventListener('click', () => {
-          cantidadItems.forEach(o => o.classList.remove('selected'));
+          tipoItems.forEach(o => o.classList.remove('selected'));
           opt.classList.add('selected');
-          cantidad = Number(opt.dataset.value);
-          cantidadBtn.textContent = `${cantidad} `;
-          cantidadBtn.appendChild(arrow());
-          cantidadMenu.classList.remove('active');
-          cantidadVisual.textContent = cantidad;
+          tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
+          tipoBtn.textContent = `${opt.textContent} `;
+          tipoBtn.appendChild(arrow());
+          tipoMenu.classList.remove('active');
           updateTotal();
         });
       });
 
-      // Incrementar / decrementar
+      // Incrementar / decrementar cantidad
       incBtn.addEventListener('click', () => {
         if (cantidad < 100) {
           cantidad++;
@@ -265,13 +206,15 @@
       limpiarBtn.addEventListener('click', () => {
         selectedSize = null;
         cantidad = 1;
+        tipo = { type: 'unidad', mult: 1 };
         sizeBtn.textContent = 'Seleccionar Tamaño ';
         sizeBtn.appendChild(arrow());
-        cantidadBtn.textContent = '1 ';
-        cantidadBtn.appendChild(arrow());
+        tipoBtn.textContent = 'Unidad (1) ';
+        tipoBtn.appendChild(arrow());
         cantidadVisual.textContent = '1';
         sizeItems.forEach(i => i.classList.remove('selected'));
-        cantidadItems.forEach(i => i.classList.remove('selected'));
+        tipoItems.forEach(i => i.classList.remove('selected'));
+        tipoItems[0].classList.add('selected');
         precios.style.display = 'none';
         totalDisplay.textContent = 'Total: $0';
       });
@@ -279,7 +222,7 @@
       // Cerrar dropdowns al hacer clic afuera
       document.addEventListener('click', e => {
         if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
-        if (!cantidadDropdown.contains(e.target)) cantidadMenu.classList.remove('active');
+        if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
       });
     });
   </script>

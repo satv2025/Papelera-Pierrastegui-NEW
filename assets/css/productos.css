@@ -100,7 +100,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #E1DABD;
+    color: #ff7600;
 }
 
 /* Dropdown */
@@ -111,9 +111,9 @@ nav ul li a:hover {
 }
 
 .dropdown-btn {
-    background-color: #ff7600;
-    color: #FCF5E2;
-    border: none;
+    background-color: #fff;
+    color: #ff7600;
+    border: solid 2px #ff7600;
     padding: 12px 20px;
     font-size: 1rem;
     border-radius: 5px;
@@ -125,8 +125,13 @@ nav ul li a:hover {
     align-items: center;
 }
 
+button.dropdown-btn:hover {
+    color: #fff;
+    background: #ff7600;
+}
+
 .dropdown-btn:focus {
-    outline: 2px solid #E1DABD;
+    outline: 2px solid #ff7600;
 }
 
 .dropdown-menu {
@@ -159,8 +164,8 @@ nav ul li a:hover {
 }
 
 .dropdown-item:hover {
-    background-color: #fff;
-    color: #ff7600;
+    background-color: #ff7600;
+    color: #fff;
 }
 
 .precios {
@@ -298,4 +303,50 @@ footer p {
     .total {
         font-size: 1.1rem;
     }
+}
+
+/* === SCROLLBAR UNIVERSAL === */
+
+/* WebKit (Chrome, Edge Chromium, Opera, Safari) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ff7600;
+    /* color principal */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #eba366;
+    /* color al hover */
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #ff7600 transparent;
+    /* thumb / track */
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #eba366;
+}
+
+/* Microsoft Edge (Legacy) y IE 10-11 */
+body {
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    scrollbar-face-color: #ff7600;
+    scrollbar-track-color: transparent;
+    scrollbar-highlight-color: #ff7600;
+    scrollbar-shadow-color: #ff7600;
+    scrollbar-3dlight-color: #ff7600;
+    scrollbar-darkshadow-color: #ff7600;
+    scrollbar-arrow-color: #ff7600;
 }
