@@ -93,7 +93,7 @@ nav ul {
 }
 
 nav ul li a {
-    color: #FCF5E2;
+    color: #ff7600;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -328,25 +328,16 @@ footer p {
     /* color al hover */
 }
 
-/* Firefox */
-* {
-    scrollbar-width: thin;
-    scrollbar-color: #ff7600 transparent;
-    /* thumb / track */
-}
-
 *::-webkit-scrollbar-thumb:hover {
     background-color: #eba366;
 }
 
-/* Microsoft Edge (Legacy) y IE 10-11 */
-body {
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    scrollbar-face-color: #ff7600;
-    scrollbar-track-color: transparent;
-    scrollbar-highlight-color: #ff7600;
-    scrollbar-shadow-color: #ff7600;
-    scrollbar-3dlight-color: #ff7600;
-    scrollbar-darkshadow-color: #ff7600;
-    scrollbar-arrow-color: #ff7600;
+
+/* Firefox */
+@-moz-document url-prefix() {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #ff7600 transparent;
+        /* thumb / track */
+    }
 }
