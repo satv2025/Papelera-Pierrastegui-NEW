@@ -479,7 +479,7 @@ body::selection {
 
 .arrow {
   margin-left: 0.3rem;
-  color: #3b2d00;
+  color: #ff7600;
   font-family: FONTAWESOME;
   transition: transform 0.3s ease;
   display: inline-block;
