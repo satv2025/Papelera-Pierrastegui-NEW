@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const incrementarBtn = document.getElementById('incrementar');
     const cantidadVisual = document.getElementById('cantidad-visual');
     const totalDisplay = document.querySelector('.total');
+    const preciosBox = document.querySelector('.precios');
+    const precioUnitText = document.querySelector('.precio-unit');
+    const precioBulkText = document.querySelector('.precio-bulto');
 
     // Variables de estado
     let selectedSize = null;
@@ -20,7 +23,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const unitPriceDefault = 4700;
     const bulkPriceDefault = 25200;
 
-    // Manejar dropdown tamaño
+    // ---------- Funciones auxiliares ----------
+    const createArrow = () => {
+        const span = document.createElement('span');
+        span.classList.add('arrow');
+        span.textContent = '▼';
+        return span;
+    };
+
+    const deselectCantidadDropdown = () => {
+        cantidadOptions.forEach(o => o.classList.remove('selected'));
+        cantidadBtn.textContent = `${selectedCantidad} `;
+        cantidadBtn.appendChild(createArrow());
+    };
+
+    const updatePrices = () => {
+        if (!selectedSize) {
+            preciosBox.style.display = 'none';
+            totalDisplay.textContent = 'Total: $0';
+            return;
+        }
+
+        preciosBox.style.display = 'block';
+        const unitPrice = selectedSize.priceUnit || unitPriceDefault;
+        const bulkPrice = selectedSize.priceBulk || bulkPriceDefault;
+
+        precioUnitText.textContent = `Por unidad: $${unitPrice.toLocaleString('es-AR')} ARS`;
+        precioBulkText.textContent = `Por bulto (6 unidades): $${bulkPrice.toLocaleString('es-AR')} ARS`;
+
+        let total = 0;
+        if (selectedCantidad >= 6) {
+            const bulkCount = Math.floor(selectedCantidad / 6);
+            const remainingUnits = selectedCantidad % 6;
+            total = (bulkCount * bulkPrice) + (remainingUnits * unitPrice);
+        } else {
+            total = selectedCantidad * unitPrice;
+        }
+
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+    };
+
+    // ---------- Dropdown tamaño ----------
     sizeDropdownBtn.addEventListener('click', () => {
         sizeDropdownMenu.classList.toggle('active');
         sizeDropdownBtn.setAttribute('aria-expanded', sizeDropdownMenu.classList.contains('active'));
@@ -35,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 priceUnit: Number(option.dataset.priceUnit),
                 priceBulk: Number(option.dataset.priceBulk),
             };
-            sizeDropdownBtn.textContent = `${selectedSize.size}`;
+            sizeDropdownBtn.textContent = `${selectedSize.size} `;
             sizeDropdownBtn.appendChild(createArrow());
             sizeDropdownMenu.classList.remove('active');
             sizeDropdownBtn.setAttribute('aria-expanded', false);
@@ -43,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Manejar dropdown cantidad
+    // ---------- Dropdown cantidad ----------
     cantidadBtn.addEventListener('click', () => {
         cantidadMenu.classList.toggle('active');
         cantidadBtn.setAttribute('aria-expanded', cantidadMenu.classList.contains('active'));
@@ -63,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Incrementar / Decrementar botones
+    // ---------- Botones + y - ----------
     incrementarBtn.addEventListener('click', () => {
         if (selectedCantidad < 100) {
             selectedCantidad++;
@@ -82,6 +125,30 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Botón limpiar
+    // ---------- Botón "Limpiar" ----------
     limpiarBtn.addEventListener('click', () => {
-        selectedSize
+        selectedSize = null;
+        selectedCantidad = 1;
+
+        // Reset de UI
+        sizeOptions.forEach(o => o.classList.remove('selected'));
+        sizeDropdownBtn.textContent = 'Seleccionar Tamaño ';
+        sizeDropdownBtn.appendChild(createArrow());
+        cantidadVisual.textContent = '1';
+        cantidadOptions.forEach(o => o.classList.remove('selected'));
+        cantidadBtn.textContent = '1 ';
+        cantidadBtn.appendChild(createArrow());
+        preciosBox.style.display = 'none';
+        totalDisplay.textContent = 'Total: $0';
+    });
+
+    // ---------- Cierre de dropdowns al hacer clic fuera ----------
+    document.addEventListener('click', (e) => {
+        if (!sizeDropdownBtn.contains(e.target) && !sizeDropdownMenu.contains(e.target)) {
+            sizeDropdownMenu.classList.remove('active');
+        }
+        if (!cantidadDropdown.contains(e.target)) {
+            cantidadMenu.classList.remove('active');
+        }
+    });
+});
