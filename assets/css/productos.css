@@ -131,7 +131,7 @@ button.dropdown-btn:hover {
 }
 
 .dropdown-btn:focus {
-    outline: 2px solid #ff7600;
+    outline: none;
 }
 
 .dropdown-menu {
