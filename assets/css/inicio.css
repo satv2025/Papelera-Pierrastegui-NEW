@@ -428,7 +428,7 @@ body::selection {
 .dropdown-submenu>a {
   display: block;
   padding: 0.5rem 1rem;
-  color: #3b2d00;
+  color: #ff7600;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
 }
