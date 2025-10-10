@@ -7,12 +7,6 @@
   <title>Arranque Grueso - Papelera Pierrastegui</title>
   <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
-
-  <style>
-    footer {
-      position: relative;
-    }
-  </style>
 </head>
 
 <body>
@@ -37,47 +31,43 @@
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
           alt="Arranque Grueso" />
         <div class="producto-info">
+          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
-              Seleccionar Tamaño<span class="arrow">▼</span>
+              Seleccionar Tamaño <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu" role="listbox" tabindex="-1">
-              <div class="dropdown-item" data-size="15x20" data-price-unit="4700" data-price-bulk="25200" role="option">
-                15x20</div>
-              <div class="dropdown-item" data-size="15x25" data-price-unit="4700" data-price-bulk="25200" role="option">
-                15x25</div>
-              <div class="dropdown-item" data-size="20x25" data-price-unit="4700" data-price-bulk="25200" role="option">
-                20x25</div>
-              <div class="dropdown-item" data-size="20x30" data-price-unit="4700" data-price-bulk="25200" role="option">
-                20x30</div>
-              <div class="dropdown-item" data-size="25x35" data-price-unit="4700" data-price-bulk="25200" role="option">
-                25x35</div>
-              <div class="dropdown-item" data-size="30x40" data-price-unit="4700" data-price-bulk="25200" role="option">
-                30x40</div>
-              <div class="dropdown-item" data-size="35x45" data-price-unit="4700" data-price-bulk="25200" role="option">
-                35x45</div>
-              <div class="dropdown-item" data-size="40x50" data-price-unit="4700" data-price-bulk="25200" role="option">
-                40x50</div>
+              <div class="dropdown-item" data-size="15x20" data-price-unit="4700" data-price-bulk="25200">15x20</div>
+              <div class="dropdown-item" data-size="15x25" data-price-unit="4700" data-price-bulk="25200">15x25</div>
+              <div class="dropdown-item" data-size="20x25" data-price-unit="4700" data-price-bulk="25200">20x25</div>
+              <div class="dropdown-item" data-size="20x30" data-price-unit="4700" data-price-bulk="25200">20x30</div>
+              <div class="dropdown-item" data-size="25x35" data-price-unit="4700" data-price-bulk="25200">25x35</div>
+              <div class="dropdown-item" data-size="30x40" data-price-unit="4700" data-price-bulk="25200">30x40</div>
+              <div class="dropdown-item" data-size="35x45" data-price-unit="4700" data-price-bulk="25200">35x45</div>
+              <div class="dropdown-item" data-size="40x50" data-price-unit="4700" data-price-bulk="25200">40x50</div>
             </div>
           </div>
 
+          <!-- Precios -->
           <div class="precios" style="display:none;">
             <p class="precio-unit">Por unidad: $4.700 ARS</p>
             <p class="precio-bulto">Por bulto (6 unidades): $25.200 ARS</p>
           </div>
 
+          <!-- Cantidad -->
           <div class="cantidad-container">
             <label for="cantidad-dropdown">Cantidad:</label>
             <div class="dropdown" id="cantidad-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
               <span class="dropdown-btn selected">1 <span class="arrow">▼</span></span>
               <div class="dropdown-menu" role="listbox">
-                <span class="dropdown-item a" data-value="1" role="option">1</span>
-                <span class="dropdown-item" data-value="6" role="option">6</span>
+                <span class="dropdown-item" data-value="1">1</span>
+                <span class="dropdown-item" data-value="6">6</span>
               </div>
             </div>
             <button id="limpiar">Limpiar</button>
           </div>
 
+          <!-- Incremento manual -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
@@ -88,11 +78,8 @@
 
           <h3>Descripción del producto</h3>
           <ul>
-            <li>Rollos de bolsas de arranque de distintas medidas y pesan xkg, son transparentes, prácticos y
-              resistentes y sus medidas se adaptan a tus distintas necesidades, tanto en el hogar como en tu comercio.
-            </li>
-            <li>Son útiles para guardar todo tipo de alimentos, fraccionar productos en tu negocio, para poner en los
-              cestos de residuos más chicos, múltiples usos.</li>
+            <li>Rollos de bolsas de arranque de distintas medidas, transparentes, prácticos y resistentes.</li>
+            <li>Útiles para guardar alimentos, fraccionar productos o colocar en cestos de residuos pequeños.</li>
           </ul>
         </div>
       </div>
@@ -105,8 +92,141 @@
       <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
-  <script defer src="../../assets/js/productos.js"></script>
-  <script defer src="../../assets/js/perfect-scrollbar.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+      const cantidadDropdown = document.getElementById('cantidad-dropdown');
+      const cantidadBtn = cantidadDropdown.querySelector('.dropdown-btn');
+      const cantidadMenu = cantidadDropdown.querySelector('.dropdown-menu');
+      const cantidadItems = cantidadMenu.querySelectorAll('.dropdown-item');
+
+      const limpiarBtn = document.getElementById('limpiar');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const precios = document.querySelector('.precios');
+      const precioUnit = document.querySelector('.precio-unit');
+      const precioBulto = document.querySelector('.precio-bulto');
+      const totalDisplay = document.querySelector('.total');
+
+      let selectedSize = null;
+      let cantidad = 1;
+
+      const arrow = () => {
+        const span = document.createElement('span');
+        span.classList.add('arrow');
+        span.textContent = '▼';
+        return span;
+      };
+
+      function updateTotal() {
+        if (!selectedSize) {
+          precios.style.display = 'none';
+          totalDisplay.textContent = 'Total: $0';
+          return;
+        }
+
+        precios.style.display = 'block';
+        const priceU = Number(selectedSize.priceUnit);
+        const priceB = Number(selectedSize.priceBulk);
+        precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
+        precioBulto.textContent = `Por bulto (6 unidades): $${priceB.toLocaleString('es-AR')} ARS`;
+
+        let total;
+        if (cantidad >= 6) {
+          const bul = Math.floor(cantidad / 6);
+          const rest = cantidad % 6;
+          total = bul * priceB + rest * priceU;
+        } else {
+          total = cantidad * priceU;
+        }
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+      }
+
+      // Dropdown tamaño
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedSize = {
+            size: item.dataset.size,
+            priceUnit: item.dataset.priceUnit,
+            priceBulk: item.dataset.priceBulk
+          };
+          sizeBtn.textContent = `${selectedSize.size} `;
+          sizeBtn.appendChild(arrow());
+          sizeMenu.classList.remove('active');
+          updateTotal();
+        });
+      });
+
+      // Dropdown cantidad
+      cantidadBtn.addEventListener('click', () => {
+        cantidadMenu.classList.toggle('active');
+      });
+
+      cantidadItems.forEach(opt => {
+        opt.addEventListener('click', () => {
+          cantidadItems.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          cantidad = Number(opt.dataset.value);
+          cantidadBtn.textContent = `${cantidad} `;
+          cantidadBtn.appendChild(arrow());
+          cantidadMenu.classList.remove('active');
+          cantidadVisual.textContent = cantidad;
+          updateTotal();
+        });
+      });
+
+      // Incrementar / decrementar
+      incBtn.addEventListener('click', () => {
+        if (cantidad < 100) {
+          cantidad++;
+          cantidadVisual.textContent = cantidad;
+          updateTotal();
+        }
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) {
+          cantidad--;
+          cantidadVisual.textContent = cantidad;
+          updateTotal();
+        }
+      });
+
+      // Limpiar
+      limpiarBtn.addEventListener('click', () => {
+        selectedSize = null;
+        cantidad = 1;
+        sizeBtn.textContent = 'Seleccionar Tamaño ';
+        sizeBtn.appendChild(arrow());
+        cantidadBtn.textContent = '1 ';
+        cantidadBtn.appendChild(arrow());
+        cantidadVisual.textContent = '1';
+        sizeItems.forEach(i => i.classList.remove('selected'));
+        cantidadItems.forEach(i => i.classList.remove('selected'));
+        precios.style.display = 'none';
+        totalDisplay.textContent = 'Total: $0';
+      });
+
+      // Cerrar dropdowns al hacer clic afuera
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
+        if (!cantidadDropdown.contains(e.target)) cantidadMenu.classList.remove('active');
+      });
+    });
+  </script>
+
 </body>
 
 </html>
