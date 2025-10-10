@@ -9,6 +9,10 @@
     padding: 0;
 }
 
+section h2 {
+    color: #ff7600;
+}
+
 html,
 body {
     height: 100%;
