@@ -95,6 +95,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // DROPDOWNS
       const sizeDropdown = document.getElementById('size-dropdown');
       const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
@@ -105,18 +106,22 @@
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
       const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      // BOTONES
       const limpiarBtn = document.getElementById('limpiar');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
+
+      // DISPLAY
       const cantidadVisual = document.getElementById('cantidad-visual');
       const precios = document.querySelector('.precios');
       const precioUnit = document.querySelector('.precio-unit');
       const precioBulto = document.querySelector('.precio-bulto');
       const totalDisplay = document.querySelector('.total');
 
+      // ESTADO
       let selectedSize = null;
       let cantidad = 1;
-      let tipo = { type: 'unidad', mult: 1 };
+      let tipo = { type: 'unidad', mult: 1 }; // unidad x1, bulto x6
 
       const arrow = () => {
         const span = document.createElement('span');
@@ -125,6 +130,7 @@
         return span;
       };
 
+      // FUNCION PARA CALCULAR TOTAL
       function updateTotal() {
         if (!selectedSize) {
           precios.style.display = 'none';
@@ -135,19 +141,22 @@
         precios.style.display = 'block';
         const priceU = Number(selectedSize.priceUnit);
         const priceB = Number(selectedSize.priceBulk);
+
         precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
         precioBulto.textContent = `Por bulto (6 unidades): $${priceB.toLocaleString('es-AR')} ARS`;
 
         let total = 0;
+
         if (tipo.type === 'unidad') {
           total = cantidad * priceU;
         } else {
-          total = cantidad * priceB; // cada bulto es un conjunto de 6 unidades
+          total = cantidad * priceB; // cada bulto ya es de 6 unidades
         }
+
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
 
-      // Dropdown tamaño
+      // SELECCIÓN DE TAMAÑO
       sizeBtn.addEventListener('click', () => {
         sizeMenu.classList.toggle('active');
       });
@@ -168,7 +177,7 @@
         });
       });
 
-      // Dropdown tipo (Unidad o Bulto)
+      // SELECCIÓN DE TIPO (Unidad / Bulto)
       tipoBtn.addEventListener('click', () => {
         tipoMenu.classList.toggle('active');
       });
@@ -185,7 +194,7 @@
         });
       });
 
-      // Incrementar / decrementar cantidad
+      // BOTONES + / -
       incBtn.addEventListener('click', () => {
         if (cantidad < 100) {
           cantidad++;
@@ -202,7 +211,7 @@
         }
       });
 
-      // Limpiar
+      // LIMPIAR SELECCIONES
       limpiarBtn.addEventListener('click', () => {
         selectedSize = null;
         cantidad = 1;
@@ -214,16 +223,17 @@
         cantidadVisual.textContent = '1';
         sizeItems.forEach(i => i.classList.remove('selected'));
         tipoItems.forEach(i => i.classList.remove('selected'));
-        tipoItems[0].classList.add('selected');
+        tipoItems[0].classList.add('selected'); // volver a Unidad
         precios.style.display = 'none';
         totalDisplay.textContent = 'Total: $0';
       });
 
-      // Cerrar dropdowns al hacer clic afuera
+      // CERRAR DROPDOWNS AL HACER CLIC FUERA
       document.addEventListener('click', e => {
         if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
         if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
       });
+
     });
   </script>
 
