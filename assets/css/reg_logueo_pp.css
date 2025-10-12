@@ -100,7 +100,7 @@ body {
 /* Placeholder (usamos solo ::after para evitar solapamientos) */
 .custom-input::after {
     content: attr(data-placeholder);
-    color: var(--muted);
+    color: var(--orange);
     position: absolute;
     left: 1rem;
     top: 50%;

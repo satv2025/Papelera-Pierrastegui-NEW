@@ -1,16 +1,18 @@
 // /assets/js/functionality.js
-// Handles custom-inputs (placeholders, selection, caret, classes)
+import { loginUser, registerUser, loginWithGoogle } from './auth.js';
 
+/* ---------- Custom Inputs ---------- */
 const customInputs = Array.from(document.querySelectorAll(".custom-input"));
 let activeInput = null;
-const values = {};
+export const values = {}; // exportar para auth.js
 
 /* ---------- Selection / caret helpers ---------- */
 function getSelectionOffsetsWithin(el) {
     const sel = window.getSelection();
     if (!sel || sel.rangeCount === 0) return { start: el.textContent.length, end: el.textContent.length, collapsed: true };
     const range = sel.getRangeAt(0);
-    if (!el.contains(range.startContainer) || !el.contains(range.endContainer)) return { start: el.textContent.length, end: el.textContent.length, collapsed: true };
+    if (!el.contains(range.startContainer) || !el.contains(range.endContainer))
+        return { start: el.textContent.length, end: el.textContent.length, collapsed: true };
 
     const offsetOf = (node, nodeOffset) => {
         const r = document.createRange();
@@ -49,7 +51,7 @@ function setCaretIndex(el, index) {
     sel.addRange(range);
 }
 
-/* ---------- Init inputs ---------- */
+/* ---------- Initialize Inputs ---------- */
 customInputs.forEach(el => {
     if (!el.hasAttribute('contenteditable')) el.setAttribute('contenteditable', 'true');
     if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
@@ -57,12 +59,23 @@ customInputs.forEach(el => {
     const key = el.dataset.key;
     if (key) values[key] = el.dataset.value || el.textContent || "";
 
-    // focus handling
-    el.addEventListener('click', () => { customInputs.forEach(x => x.classList.remove('focused')); el.classList.add('focused'); activeInput = el; });
-    el.addEventListener('focus', () => { customInputs.forEach(x => x.classList.remove('focused')); el.classList.add('focused'); activeInput = el; });
-    el.addEventListener('blur', () => { el.classList.remove('focused'); activeInput = null; });
+    // Focus handling
+    el.addEventListener('click', () => {
+        customInputs.forEach(x => x.classList.remove('focused'));
+        el.classList.add('focused');
+        activeInput = el;
+    });
+    el.addEventListener('focus', () => {
+        customInputs.forEach(x => x.classList.remove('focused'));
+        el.classList.add('focused');
+        activeInput = el;
+    });
+    el.addEventListener('blur', () => {
+        el.classList.remove('focused');
+        activeInput = null;
+    });
 
-    // input & paste
+    // Input & Paste
     el.addEventListener('input', () => {
         const name = el.dataset.key;
         if (!name) return;
@@ -93,7 +106,7 @@ document.addEventListener('keydown', (e) => {
     const sel = getSelectionOffsetsWithin(el);
     values[name] = values[name] || "";
 
-    // Backspace/Delete
+    // Backspace / Delete
     if (key === "Backspace" || key === "Delete") {
         e.preventDefault();
         if (!sel.collapsed) values[name] = values[name].slice(0, sel.start) + values[name].slice(sel.end);
@@ -116,4 +129,32 @@ document.addEventListener('keydown', (e) => {
         el.classList.add('has-value');
         return;
     }
+});
+
+/* ---------- DOM Loaded: Buttons & Navigation ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLogin = document.getElementById('btn-login');
+    const btnRegister = document.getElementById('btn-register');
+    const btnLoginGoogle = document.getElementById('btn-login-google');
+    const btnRegisterGoogle = document.getElementById('btn-register-google');
+    const btnLoginPage = document.getElementById('btn-login-page');
+    const btnRegisterPage = document.getElementById('btn-register-page');
+
+    // Login
+    if (btnLogin) btnLogin.addEventListener('click', async () => {
+        try { await loginUser(values); } catch (err) { alert(err.message); }
+    });
+
+    // Register
+    if (btnRegister) btnRegister.addEventListener('click', async () => {
+        try { await registerUser(values); } catch (err) { alert(err.message); }
+    });
+
+    // Google
+    if (btnLoginGoogle) btnLoginGoogle.addEventListener('click', loginWithGoogle);
+    if (btnRegisterGoogle) btnRegisterGoogle.addEventListener('click', loginWithGoogle);
+
+    // Navigation
+    if (btnLoginPage) btnLoginPage.addEventListener('click', () => window.location.replace('/logueo'));
+    if (btnRegisterPage) btnRegisterPage.addEventListener('click', () => window.location.replace('/registro'));
 });
