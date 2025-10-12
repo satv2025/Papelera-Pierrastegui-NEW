@@ -1,7 +1,7 @@
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
 body {
-    font-family: 'Gilroy', sans-serif;
+    font-family: 'Gilroy';
     margin: 0;
     padding: 0;
     background-color: #fff;
@@ -9,120 +9,70 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
 }
 
-::selection {
-    color: #fff;
-    background: #ff7600;
-}
-
-/* Header y Footer */
-header,
-footer {
-    background-color: #c5c0a5;
-    color: #ff7600;
-    text-align: center;
-    padding: 1em;
-    box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.45);
-}
-
-footer {
-    font-weight: 700;
-    position: relative;
-    width: 100%;
-}
-
-/* Contenedor principal del formulario */
 .form-container {
     background-color: #ffffff;
     width: 100%;
     max-width: 400px;
     padding: 2em;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
     text-align: center;
-    position: relative;
-    margin: 0 auto;
 }
 
-/* Títulos y párrafos */
-.form-container h2 {
+h2 {
     color: #ff7600;
     margin-bottom: 1.5em;
 }
 
-p {
-    color: #ff7600;
-    margin-top: 1em;
-}
-
-/* Inputs */
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
+.custom-input {
+    border: 2px solid #ff7600;
+    border-radius: 6px;
     padding: 1em;
     margin: 0.8em 0;
-    border-radius: 5px;
-    border: none;
-    font-size: 1em;
-    font-weight: 700;
+    min-height: 2em;
     color: #ff7600;
-    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
-    font-family: 'Gilroy', sans-serif;
+    font-weight: bold;
+    cursor: text;
+    user-select: none;
+    position: relative;
 }
 
-input::placeholder {
-    color: #ff7600;
+.custom-input::after {
+    content: attr(placeholder);
+    color: #ff7600aa;
+    position: absolute;
+    top: 50%;
+    left: 1em;
+    transform: translateY(-50%);
 }
 
-input:focus {
-    outline: none;
+.custom-input.focused::after {
+    display: none;
 }
 
-/* Botones */
 button {
     border: none;
     background-color: #ff7600;
     color: #fff;
     padding: 1em;
-    border-radius: 5px;
-    width: 100%;
-    cursor: pointer;
+    border-radius: 6px;
     font-weight: bold;
-    font-size: 1em;
+    cursor: pointer;
+    width: 100%;
     margin-top: 1em;
-    font-family: 'Gilroy', sans-serif;
-    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #764526;
 }
 
-/* Contenedor para mostrar/ocultar contraseña */
 .password-container {
     position: relative;
-    display: flex;
-    align-items: center;
 }
 
-.password-container input {
-    padding-right: 2.5em;
-}
-
-.toggle-password {
-    width: 28px;
-    height: auto;
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* Scrollbar personalizada */
 ::-webkit-scrollbar {
     width: 5px;
 }
@@ -134,29 +84,4 @@ button:hover {
 ::-webkit-scrollbar-thumb {
     background: #fff;
     border-radius: 6px;
-}
-
-/* Links */
-a {
-    text-decoration: none;
-    color: #ff7600;
-    font-weight: bold;
-}
-
-a:hover {
-    color: #764526;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    .form-container {
-        padding: 1.5em;
-        width: 90%;
-    }
-}
-
-@media (max-width: 600px) {
-    .form-container {
-        padding: 1.2em;
-    }
 }
