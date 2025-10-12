@@ -577,9 +577,9 @@ header {
 }
 
 ::placeholder {
-  color: #3b2d00;
-  opacity: 0.5;
-  background: #FCF5E2;
+  color: #ff7600;
+  opacity: 1;
+  background: #fff;
 }
 
 /* Para navegadores basados en WebKit/Blink (Chrome, Edge, Opera, Safari) */
