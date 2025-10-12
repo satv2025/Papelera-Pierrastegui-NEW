@@ -42,7 +42,6 @@ body {
     background: var(--bg);
 }
 
-/* .form-container ya lo usabas; lo dejo compatible */
 .form-container {
     width: 100%;
     max-width: 420px;
@@ -56,7 +55,6 @@ body {
     top: 20%;
 }
 
-/* Títulos/párrafos */
 .form-container h2 {
     color: var(--orange);
     margin: 0 0 1rem 0;
@@ -72,7 +70,6 @@ body {
 }
 
 /* ---------- Custom inputs (no native <input>) ---------- */
-/* Usamos data-placeholder para mostrar texto. */
 .custom-input,
 [data-placeholder] {
     border: 2px solid var(--orange);
@@ -83,6 +80,9 @@ body {
     color: var(--orange);
     font-weight: 800;
     text-align: left;
+    /* texto de izquierda a derecha */
+    direction: ltr;
+    /* fuerza dirección LTR */
     position: relative;
     cursor: text;
     overflow: hidden;
@@ -94,14 +94,11 @@ body {
 
 .custom-input:empty::before {
     content: attr(data-placeholder);
-    color: var(--orange);
+    color: var(--muted);
     font-weight: 800;
     pointer-events: none;
-    /* que no interfiera con escribir */
 }
 
-
-/* placeholder-like via pseudo-element */
 .custom-input::after {
     content: attr(data-placeholder);
     color: var(--muted);
@@ -110,29 +107,28 @@ body {
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
-    transition: opacity .12s, transform .12s;
+    transition: opacity 0.12s, transform 0.12s;
     font-weight: 700;
 }
 
-/* When focused, hide placeholder */
 .custom-input.focused::after {
     opacity: 0;
-    transform: translateY(-60%);
+    /* no desaparece el tamaño ni color del placeholder al focus */
+    transform: translateY(-50%);
 }
 
-/* When it has characters, small left padding looks better */
 .custom-input.has-value {
     padding-left: 1rem;
 }
 
-/* small caret indicator (optional) */
 .custom-input.focused::before {
     content: "";
     width: 2px;
     height: 1.1em;
     background: var(--orange);
     position: absolute;
-    right: 1rem;
+    left: 1rem;
+    /* caret al inicio, no a la derecha */
     top: 50%;
     transform: translateY(-50%);
     opacity: 0.7;
@@ -145,7 +141,7 @@ body {
     }
 }
 
-/* allow tab focus look */
+/* Focus visual */
 .custom-input:focus {
     box-shadow: 0 0 0 3px rgba(255, 118, 0, 0.06);
 }
@@ -177,7 +173,6 @@ button[type="button"]:active {
     transform: translateY(1px);
 }
 
-/* secondary/ghost style if needed */
 .btn-ghost {
     background: #fff;
     color: var(--orange);
@@ -193,21 +188,12 @@ button[type="button"]:active {
     border-radius: 2px;
 }
 
-/* ---------- toggle password icon (si lo usás) ---------- */
+/* ---------- toggle password icon ---------- */
 .toggle-password {
     width: 26px;
     height: 26px;
     display: inline-block;
     cursor: pointer;
-    filter: none;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* si querés un estilo para icono dentro de custom-input */
-.custom-input .toggle-password {
     position: absolute;
     right: 8px;
     top: 50%;
@@ -244,7 +230,6 @@ button[type="button"]:active {
 }
 
 /* ---------- Accessibility tweaks ---------- */
-/* Visually hide the element but keep for screen readers (if you later add ARIA) */
 .sr-only {
     position: absolute !important;
     height: 1px;
@@ -255,14 +240,13 @@ button[type="button"]:active {
 }
 
 /* ---------- Avoid accidental native form behaviors ---------- */
-/* In case any <form> is present elsewhere, prevent default enter behaviors on auth pages */
 .auth-prevent-native-enter {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
 }
 
-/* ---------- Small theme-consistency helpers (optional) ---------- */
+/* ---------- Theme helpers ---------- */
 a {
     color: var(--orange);
     text-decoration: none;
