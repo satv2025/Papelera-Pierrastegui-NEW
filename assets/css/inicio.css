@@ -601,11 +601,6 @@ select:-webkit-autofill:focus {
   /* Truco para mantener el color */
 }
 
-/* Firefox no soporta esto directamente.
-   Podés prevenir su autofill con autocomplete="off" o manejarlo con JS si hacés algo personalizado. */
-
-/* Internet Explorer tampoco permite estilizar autofill, y ya no se recomienda usarlo. */
-
 /* Contenedor de enlaces */
 .nav-links {
   display: flex;
