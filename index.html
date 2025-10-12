@@ -496,6 +496,18 @@
             opacity: 1;
             z-index: 1;
         }
+
+        /* Cuando se pasa el mouse sobre cualquier enlace dentro de .nav-links */
+        .nav-links a:hover {
+            color: #000;
+            /* Texto negro */
+        }
+
+        /* Hacer que todos los íconos SVG o imágenes dentro del enlace se vuelvan negros */
+        .nav-links a:hover img {
+            filter: brightness(0);
+            /* Iconos negros */
+        }
     </style>
 </head>
 
