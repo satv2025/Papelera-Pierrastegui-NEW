@@ -4,7 +4,7 @@ import { loginUser, registerUser, loginWithGoogle } from './auth.js';
 /* ---------- Custom Inputs ---------- */
 const customInputs = Array.from(document.querySelectorAll(".custom-input"));
 let activeInput = null;
-export const values = {}; // exportar para auth.js
+export const values = {}; // exportado para auth.js
 
 /* ---------- Selection / caret helpers ---------- */
 function getSelectionOffsetsWithin(el) {
@@ -60,20 +60,9 @@ customInputs.forEach(el => {
     if (key) values[key] = el.dataset.value || el.textContent || "";
 
     // Focus handling
-    el.addEventListener('click', () => {
-        customInputs.forEach(x => x.classList.remove('focused'));
-        el.classList.add('focused');
-        activeInput = el;
-    });
-    el.addEventListener('focus', () => {
-        customInputs.forEach(x => x.classList.remove('focused'));
-        el.classList.add('focused');
-        activeInput = el;
-    });
-    el.addEventListener('blur', () => {
-        el.classList.remove('focused');
-        activeInput = null;
-    });
+    el.addEventListener('click', () => { customInputs.forEach(x => x.classList.remove('focused')); el.classList.add('focused'); activeInput = el; });
+    el.addEventListener('focus', () => { customInputs.forEach(x => x.classList.remove('focused')); el.classList.add('focused'); activeInput = el; });
+    el.addEventListener('blur', () => { el.classList.remove('focused'); activeInput = null; });
 
     // Input & Paste
     el.addEventListener('input', () => {
@@ -131,7 +120,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-/* ---------- DOM Loaded: Buttons & Navigation ---------- */
+/* ---------- DOM Loaded: Buttons ---------- */
 document.addEventListener('DOMContentLoaded', () => {
     const btnLogin = document.getElementById('btn-login');
     const btnRegister = document.getElementById('btn-register');
@@ -151,8 +140,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Google
-    if (btnLoginGoogle) btnLoginGoogle.addEventListener('click', loginWithGoogle);
-    if (btnRegisterGoogle) btnRegisterGoogle.addEventListener('click', loginWithGoogle);
+    if (btnLoginGoogle) btnLoginGoogle.addEventListener('click', async () => {
+        try { await loginWithGoogle(); } catch (err) { alert(err.message); }
+    });
+    if (btnRegisterGoogle) btnRegisterGoogle.addEventListener('click', async () => {
+        try { await loginWithGoogle(); } catch (err) { alert(err.message); }
+    });
 
     // Navigation
     if (btnLoginPage) btnLoginPage.addEventListener('click', () => window.location.replace('/logueo'));
