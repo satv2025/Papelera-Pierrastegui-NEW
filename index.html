@@ -497,16 +497,26 @@
             z-index: 1;
         }
 
-        /* Cuando se pasa el mouse sobre cualquier enlace dentro de .nav-links */
-        .nav-links a:hover {
+        /* Textos al pasar el mouse */
+        #red:hover,
+        #mi-cuenta-text:hover {
             color: #000;
-            /* Texto negro */
         }
 
-        /* Hacer que todos los íconos SVG o imágenes dentro del enlace se vuelvan negros */
-        .nav-links a:hover img {
-            filter: brightness(0);
-            /* Iconos negros */
+        /* Imágenes/íconos al pasar el mouse */
+        .icon-right:hover img,
+        .casa:hover img,
+        .mail-icon:hover img,
+        .cart-icon:hover img {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+        }
+
+        /* En caso de que la propia imagen tenga la clase directamente */
+        .icon-right:hover,
+        .casa:hover,
+        .mail-icon:hover,
+        .cart-icon:hover {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
         }
     </style>
 </head>
@@ -854,12 +864,11 @@
             </div>
 
             <div class="mi-cuenta">
-                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Mi Cuenta" class="icon-text"
-                    id="mi-cuenta-link">
-                    <span id="mi-cuenta-text"></span>
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Mi Cuenta"
-                        class="icon-right">
-                </a>
+                <div id="mi-cuenta-container">
+                    <!-- Aquí se inyecta dinámicamente -->
+                </div>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Mi Cuenta"
+                    class="icon-right">
             </div>
 
             <script type="module">
@@ -879,18 +888,33 @@
                 const app = initializeApp(firebaseConfig);
                 const auth = getAuth();
 
-                const miCuentaText = document.getElementById("mi-cuenta-text");
-                const miCuentaLink = document.getElementById("mi-cuenta-link");
+                const container = document.getElementById("mi-cuenta-container");
 
                 onAuthStateChanged(auth, (user) => {
+                    container.innerHTML = ""; // Limpiar contenido previo
+
                     if (user) {
                         // Usuario logueado
-                        miCuentaText.textContent = "Mi Cuenta";
-                        miCuentaLink.href = "mi-cuenta.html"; // Redirige a la página de cuenta
+                        const linkCuenta = document.createElement("a");
+                        linkCuenta.href = "/mi-cuenta.html";
+                        linkCuenta.textContent = "Mi Cuenta";
+                        linkCuenta.classList.add("icon-text");
+                        container.appendChild(linkCuenta);
                     } else {
-                        // Usuario no logueado
-                        miCuentaText.innerHTML = 'Iniciar Sesión<br>Registrarse';
-                        miCuentaLink.href = "logueo"; // Redirige a login/registro
+                        // Usuario no logueado → dos botones
+                        const btnLogin = document.createElement("button");
+                        btnLogin.textContent = "Iniciar Sesión";
+                        btnLogin.onclick = () => window.location.href = "/logueo";
+                        btnLogin.classList.add("btn-login"); // puedes usar tu clase CSS
+
+                        const btnRegistro = document.createElement("button");
+                        btnRegistro.textContent = "Registrarse";
+                        btnRegistro.onclick = () => window.location.href = "/registro";
+                        btnRegistro.classList.add("btn-registro"); // puedes usar tu clase CSS
+
+                        container.appendChild(btnLogin);
+                        container.appendChild(document.createElement("br")); // separación visual
+                        container.appendChild(btnRegistro);
                     }
                 });
             </script>
