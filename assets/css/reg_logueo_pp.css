@@ -14,25 +14,25 @@ body {
 
 ::selection {
     color: #fff;
-    background: #02a22a;
+    background: #ff7600;
 }
 
 header {
     background-color: #c5c0a5;
-    color: #02a22a;
+    color: #ff7600;
     padding: 1em;
     text-align: center;
     box-shadow: 0 0 0.4em 0 #00000073;
 }
 
 .form-container {
-    background-color: #ddd;
+    background-color: #ffffff;
     width: 100%;
     max-width: 400px;
     margin: 2em;
     padding: 2em;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
     text-align: center;
     position: absolute;
     left: 38%;
@@ -47,28 +47,28 @@ header {
     cursor: pointer;
     /* Asegura que se vea como un ícono clickeable */
     margin-left: -3em;
-    color: #02a22a;
+    color: #ff7600;
     margin-top: 0.1em;
 }
 
 
 p {
-    color: #02a22a;
+    color: #ff7600;
 }
 
 .form-container h2 {
-    color: #02a22a;
+    color: #ff7600;
     margin-bottom: 1.5em;
 }
 
 input {
     font-family: 'Gilroy';
-    color: #02a22a;
+    color: #ff7600;
     font-weight: 700;
 }
 
 input::placeholder {
-    color: #02a22a;
+    color: #ff7600;
 }
 
 input[type="email"],
@@ -77,17 +77,25 @@ input[type="text"] {
     width: 100%;
     padding: 1em;
     margin: 0.8em 0;
-    border: 1px solid #ccc;
     border-radius: 5px;
+    border: none;
     box-sizing: border-box;
     font-size: 1em;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
+
 }
 
-input::placeholder {}
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    /* quita el borde azul del navegador */
+
+}
 
 button {
     border: none;
-    background-color: #02a22a;
+    background-color: #ff7600;
     color: #fff;
     padding: 1em;
     border-radius: 5px;
@@ -100,14 +108,14 @@ button {
 }
 
 button:hover {
-    background: #3e997f;
+    background: #764526;
 }
 
 footer {
     text-align: center;
     padding: 1em;
     background-color: #c5c0a5;
-    color: #02a22a;
+    color: #ff7600;
     margin-top: auto;
     box-shadow: 0 0 0.4em 0 #00000073;
     position: relative;
@@ -118,12 +126,12 @@ footer {
 /* Enlaces */
 a {
     text-decoration: none;
-    color: #02a22a;
+    color: #ff7600;
     font-weight: bold;
 }
 
 a:hover {
-    color: #3e997f;
+    color: #764526;
 }
 
 /* Media Queries para diseño responsivo */
@@ -149,7 +157,7 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-    background: #02a22a;
+    background: #ff7600;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -178,4 +186,8 @@ a:hover {
 
 footer {
     font-weight: 700;
+}
+
+img {
+    filter: brightness(0) saturate(100%) invert(44%) sepia(69%) saturate(1808%) hue-rotate(2deg) brightness(105%) contrast(102%);
 }
