@@ -497,20 +497,26 @@
             z-index: 1;
         }
 
-        /* Textos */
+        /* Textos al pasar el mouse */
         #red:hover,
         #mi-cuenta-text:hover {
             color: #000;
         }
 
-        /* Iconos / imágenes */
-        .inicio .casa:hover,
-        .mail .mail-icon:hover,
-        .ig .icon-right:hover,
-        .wp .icon-right:hover,
-        .carrito-pro .cart-icon:hover,
-        .mi-cuenta .mi-cuenta-svg:hover {
-            filter: brightness(0);
+        /* Imágenes/íconos al pasar el mouse */
+        .icon-right:hover img,
+        .casa:hover img,
+        .mail-icon:hover img,
+        .cart-icon:hover img {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+        }
+
+        /* En caso de que la propia imagen tenga la clase directamente */
+        .icon-right:hover,
+        .casa:hover,
+        .mail-icon:hover,
+        .cart-icon:hover {
+            filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
         }
     </style>
 </head>
@@ -859,7 +865,7 @@
 
             <div class="mi-cuenta">
                 <div id="mi-cuenta-container">
-                    <!-- Se inyecta dinámicamente -->
+                    <!-- Aquí se inyecta dinámicamente -->
                 </div>
                 <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Mi Cuenta"
                     class="icon-right">
@@ -888,28 +894,27 @@
                     container.innerHTML = ""; // Limpiar contenido previo
 
                     if (user) {
-                        // Usuario logueado → link "Mi Cuenta"
+                        // Usuario logueado
                         const linkCuenta = document.createElement("a");
                         linkCuenta.href = "/mi-cuenta.html";
-                        linkCuenta.classList.add("icon-text");
                         linkCuenta.textContent = "Mi Cuenta";
+                        linkCuenta.classList.add("icon-text");
                         container.appendChild(linkCuenta);
                     } else {
-                        // Usuario no logueado → dos "botones" respetando CSS
-                        const loginLink = document.createElement("a");
-                        loginLink.href = "/logueo";
-                        loginLink.classList.add("icon-text");
-                        loginLink.textContent = "Iniciar Sesión";
+                        // Usuario no logueado → dos botones
+                        const btnLogin = document.createElement("button");
+                        btnLogin.textContent = "Iniciar Sesión";
+                        btnLogin.onclick = () => window.location.href = "/logueo";
+                        btnLogin.classList.add("btn-login"); // puedes usar tu clase CSS
 
-                        const registroLink = document.createElement("a");
-                        registroLink.href = "/registro";
-                        registroLink.classList.add("icon-text");
-                        registroLink.textContent = "Registrarse";
+                        const btnRegistro = document.createElement("button");
+                        btnRegistro.textContent = "Registrarse";
+                        btnRegistro.onclick = () => window.location.href = "/registro";
+                        btnRegistro.classList.add("btn-registro"); // puedes usar tu clase CSS
 
-                        // Separación visual con <br> (respetando layout)
-                        container.appendChild(loginLink);
-                        container.appendChild(document.createElement("br"));
-                        container.appendChild(registroLink);
+                        container.appendChild(btnLogin);
+                        container.appendChild(document.createElement("br")); // separación visual
+                        container.appendChild(btnRegistro);
                     }
                 });
             </script>
