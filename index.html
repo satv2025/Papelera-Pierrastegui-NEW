@@ -842,12 +842,46 @@
             </div>
 
             <div class="mi-cuenta">
-                <a href="logueo" target="_blank" rel="noopener noreferrer" aria-label="Mi Cuenta" class="icon-text">
-                    <span id="red">Mi Cuenta</span>
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Mi Cuenta" class="icon-text"
+                    id="mi-cuenta-link">
+                    <span id="mi-cuenta-text"></span>
                     <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Mi Cuenta"
                         class="icon-right">
                 </a>
             </div>
+
+            <script type="module">
+                import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+                const firebaseConfig = {
+                    apiKey: "AIzaSyD9T9Y34jeQUtscNdjn-aZ54B4kEisNk3c",
+                    authDomain: "papelera-pie.firebaseapp.com",
+                    projectId: "papelera-pie",
+                    storageBucket: "papelera-pie.firebasestorage.app",
+                    messagingSenderId: "407925272882",
+                    appId: "1:407925272882:web:4ce4347c5cba2e95b4a72b",
+                    measurementId: "G-YXB9F6CTN0"
+                };
+
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth();
+
+                const miCuentaText = document.getElementById("mi-cuenta-text");
+                const miCuentaLink = document.getElementById("mi-cuenta-link");
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        // Usuario logueado
+                        miCuentaText.textContent = "Mi Cuenta";
+                        miCuentaLink.href = "mi-cuenta.html"; // Redirige a la página de cuenta
+                    } else {
+                        // Usuario no logueado
+                        miCuentaText.innerHTML = 'Iniciar Sesión<br>Registrarse';
+                        miCuentaLink.href = "logueo"; // Redirige a login/registro
+                    }
+                });
+            </script>
         </div>
     </header>
 
