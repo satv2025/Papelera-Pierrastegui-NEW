@@ -2,9 +2,11 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Registro - Papelería Pierrastegui</title>
+
+    <!-- Tu CSS remoto -->
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/reg_logueo_pp.css">
 </head>
 
@@ -13,15 +15,24 @@
         <h2>CREA TU CUENTA</h2>
 
         <div id="register-fields">
-            <div class="custom-input" data-key="username" placeholder="Nombre de usuario"></div>
-            <div class="custom-input" data-key="email" placeholder="Correo electrónico"></div>
-            <div class="custom-input" data-key="password" placeholder="Contraseña" data-password="true"></div>
-            <div class="custom-input" data-key="confirm" placeholder="Confirmar contraseña" data-password="true"></div>
-            <button id="btn-register">Registrarse</button>
-            <button id="btn-login-page">Ir a Login</button>
+            <div class="custom-input" data-key="username" data-password="false" data-placeholder="Nombre de usuario"
+                tabindex="0"></div>
+            <div class="custom-input" data-key="email" data-password="false" data-placeholder="Correo electrónico"
+                tabindex="0"></div>
+            <div class="custom-input" data-key="password" data-password="true" data-placeholder="Contraseña"
+                tabindex="0"></div>
+            <div class="custom-input" data-key="confirm" data-password="true" data-placeholder="Confirmar contraseña"
+                tabindex="0"></div>
+
+            <button id="btn-register" type="button">Registrarse</button>
+            <button id="btn-register-google" type="button">Registrarse con Google</button>
+
+            <hr style="margin: 1rem 0; border: none; border-top:1px solid #ffd6b3;" />
+            <button id="btn-login-page" type="button">Ir a Login</button>
         </div>
     </div>
 
+    <!-- Usa exactamente los scripts remotos que pediste -->
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/togglePassword.js"></script>
 </body>

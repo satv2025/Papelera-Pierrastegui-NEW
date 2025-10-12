@@ -1,3 +1,4 @@
+// auth.js (ES module) - reemplazar en /assets/js/auth.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import {
     getAuth,
@@ -16,7 +17,7 @@ import {
     where
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
-// Firebase config
+/* ---------- CONFIG: tu Firebase ---------- */
 const firebaseConfig = {
     apiKey: "AIzaSyD9T9Y34jeQUtscNdjn-aZ54B4kEisNk3c",
     authDomain: "papelera-pie.firebaseapp.com",
@@ -32,119 +33,204 @@ const auth = getAuth();
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
-// Custom inputs
-const customInputs = document.querySelectorAll(".custom-input");
+/* ---------- SETTINGS ---------- */
+const ROOT_HOME = "https://papelerapierrastegui.com.ar/"; // ruta absoluta a home
+// Detecta si estamos en una página de autenticación (defensivo)
+const isAuthPage = (() => {
+    const p = window.location.pathname.toLowerCase();
+    return p.includes("/logueo") || p.includes("/registro") || p.endsWith("/login") || p.endsWith("/registro.html") || p.endsWith("/logueo.html");
+})();
+
+/* ---------- CUSTOM INPUTS (NO NATIVE INPUTS) ---------- */
+const customInputs = Array.from(document.querySelectorAll(".custom-input"));
 let activeInput = null;
 const values = {};
 
-customInputs.forEach(ci => {
-    ci.addEventListener("click", () => {
-        customInputs.forEach(c => c.classList.remove("focused"));
-        ci.classList.add("focused");
-        activeInput = ci;
+// focus handling
+customInputs.forEach(el => {
+    el.setAttribute("tabindex", "0");
+    el.addEventListener("click", () => {
+        customInputs.forEach(x => x.classList.remove("focused"));
+        el.classList.add("focused");
+        activeInput = el;
+        el.focus();
+    });
+    el.addEventListener("focus", () => {
+        customInputs.forEach(x => x.classList.remove("focused"));
+        el.classList.add("focused");
+        activeInput = el;
+    });
+    el.addEventListener("blur", () => {
+        el.classList.remove("focused");
+        activeInput = null;
     });
 });
 
-document.addEventListener("keydown", e => {
-    if (!activeInput) return;
-    const key = e.key;
-
-    if (key === "Backspace") {
-        values[activeInput.dataset.key] = values[activeInput.dataset.key] || "";
-        values[activeInput.dataset.key] = values[activeInput.dataset.key].slice(0, -1);
-    } else if (key.length === 1) {
-        values[activeInput.dataset.key] = values[activeInput.dataset.key] || "";
-        values[activeInput.dataset.key] += key;
+// keyboard capture: printable chars + Backspace only
+document.addEventListener("keydown", (e) => {
+    // Prevent Enter from doing anything native *on auth pages*
+    if (isAuthPage && e.key === "Enter") {
+        e.preventDefault();
     }
 
-    if (activeInput.dataset.password) {
-        activeInput.textContent = "*".repeat(values[activeInput.dataset.key].length);
+    if (!activeInput) return;
+
+    e.preventDefault(); // we control all keys when a custom input is active
+
+    const key = e.key;
+    const name = activeInput.dataset.key;
+    if (!name) return;
+
+    values[name] = values[name] || "";
+
+    if (key === "Backspace") {
+        values[name] = values[name].slice(0, -1);
+    } else if (key.length === 1) {
+        // Accept printable characters only (basic)
+        values[name] += key;
     } else {
-        activeInput.textContent = values[activeInput.dataset.key];
+        // ignore e.g. Shift, Ctrl, Arrow keys, etc.
+        return;
+    }
+
+    // Render masked or plain text
+    const isPassword = activeInput.dataset.password === "true";
+    activeInput.textContent = isPassword ? "*".repeat(values[name].length) : values[name];
+
+    // toggle placeholder class
+    if (values[name].length > 0) {
+        activeInput.classList.add("has-value");
+    } else {
+        activeInput.classList.remove("has-value");
     }
 });
 
-// Register
+// safety: prevent Enter on buttons from doing native submit in any browser
+Array.from(document.querySelectorAll("button")).forEach(btn => {
+    btn.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") e.preventDefault();
+    });
+});
+
+/* ---------- NAV between pages (buttons exist in HTML) ---------- */
+const goToLoginPageBtn = document.getElementById("btn-login-page");
+if (goToLoginPageBtn) {
+    goToLoginPageBtn.addEventListener("click", () => window.location.replace("/logueo"));
+}
+const goToRegisterPageBtn = document.getElementById("btn-register-page");
+if (goToRegisterPageBtn) {
+    goToRegisterPageBtn.addEventListener("click", () => window.location.replace("/registro"));
+}
+
+/* ---------- AUTH FLOWS ---------- */
+
+// Helper: small validation
+function isEmailLooksLike(e) {
+    return typeof e === "string" && /\S+@\S+\.\S+/.test(e);
+}
+
+/* REGISTER (email) */
 const btnRegister = document.getElementById("btn-register");
 if (btnRegister) {
     btnRegister.addEventListener("click", async () => {
-        const email = values.email;
-        const password = values.password;
-        const confirm = values.confirm;
-        const username = values.username;
+        const email = (values.email || "").trim();
+        const password = (values.password || "").trim();
+        const confirm = (values.confirm || "").trim();
+        const username = (values.username || "").trim();
 
-        if (!email || !password || !confirm || !username) return alert("Completa todos los campos");
-        if (password !== confirm) return alert("Contraseñas no coinciden");
+        if (!email || !password || !confirm || !username) return alert("Completa todos los campos.");
+        if (!isEmailLooksLike(email)) return alert("Ingresa un correo válido.");
+        if (password !== confirm) return alert("Las contraseñas no coinciden.");
 
         try {
-            const emailQ = query(collection(db, "users"), where("email", "==", email));
-            const emailSnap = await getDocs(emailQ);
-            if (!emailSnap.empty) return alert("Correo ya registrado");
+            // email exists?
+            const qEmail = query(collection(db, "users"), where("email", "==", email));
+            const snapEmail = await getDocs(qEmail);
+            if (!snapEmail.empty) return alert("Este correo ya está registrado.");
 
-            const usernameQ = query(collection(db, "users"), where("username", "==", username));
-            const usernameSnap = await getDocs(usernameQ);
-            if (!usernameSnap.empty) return alert("Usuario en uso");
+            // username exists?
+            const qUser = query(collection(db, "users"), where("username", "==", username));
+            const snapUser = await getDocs(qUser);
+            if (!snapUser.empty) return alert("Nombre de usuario en uso.");
 
             const cred = await createUserWithEmailAndPassword(auth, email, password);
-            await addDoc(collection(db, "users"), { uid: cred.user.uid, email, username });
-            window.location.href = "index.html";
+            await addDoc(collection(db, "users"), { uid: cred.user.uid, username, email });
+
+            console.log("Registro OK, redirigiendo a home.");
+            // redirige con replace para evitar historial
+            window.location.replace(ROOT_HOME);
         } catch (err) {
-            console.error(err);
-            alert(err.message);
+            console.error("Register error:", err);
+            alert(err.message || "Error al registrar.");
         }
     });
 }
 
-// Login
+/* LOGIN (email) */
 const btnLogin = document.getElementById("btn-login");
 if (btnLogin) {
     btnLogin.addEventListener("click", async () => {
-        const email = values.email;
-        const password = values.password;
+        const email = (values.email || "").trim();
+        const password = (values.password || "").trim();
 
-        if (!email || !password) return alert("Completa todos los campos");
+        if (!email || !password) return alert("Completa todos los campos.");
+        if (!isEmailLooksLike(email)) return alert("Ingresa un correo válido.");
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            window.location.href = "index.html";
+            console.log("Login OK, redirigiendo a home.");
+            window.location.replace(ROOT_HOME);
         } catch (err) {
-            console.error(err);
-            alert(err.message);
+            console.error("Login error:", err);
+            if (err.code === "auth/user-not-found") alert("Correo no registrado.");
+            else if (err.code === "auth/wrong-password") alert("Contraseña incorrecta.");
+            else alert(err.message || "Error al iniciar sesión.");
         }
     });
 }
 
-// Google login
-const btnGoogle = document.getElementById("btn-login-google");
-if (btnGoogle) {
-    btnGoogle.addEventListener("click", async () => {
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
-            const user = result.user;
+/* GOOGLE (register/login) */
+const btnLoginGoogle = document.getElementById("btn-login-google");
+const btnRegisterGoogle = document.getElementById("btn-register-google");
 
-            const userQuery = query(collection(db, "users"), where("uid", "==", user.uid));
-            const snapshot = await getDocs(userQuery);
-            if (snapshot.empty) {
-                await addDoc(collection(db, "users"), {
-                    uid: user.uid,
-                    email: user.email,
-                    username: user.displayName || "UsuarioGoogle"
-                });
-            }
+const googleHandler = async () => {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        if (!user) throw new Error("No se obtuvo usuario de Google.");
 
-            window.location.href = "index.html";
-        } catch (err) {
-            console.error(err);
-            alert(err.message);
+        // Si primer login, guardar en Firestore
+        const q = query(collection(db, "users"), where("uid", "==", user.uid));
+        const snap = await getDocs(q);
+        if (snap.empty) {
+            await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                email: user.email,
+                username: user.displayName || "UsuarioGoogle"
+            });
         }
-    });
-}
 
-// Auth state
-onAuthStateChanged(auth, user => {
+        console.log("Google Auth OK, redirigiendo a home.");
+        window.location.replace(ROOT_HOME);
+    } catch (err) {
+        console.error("Google sign-in error:", err);
+        alert(err.message || "Error en Google Sign-In.");
+    }
+};
+
+if (btnLoginGoogle) btnLoginGoogle.addEventListener("click", googleHandler);
+if (btnRegisterGoogle) btnRegisterGoogle.addEventListener("click", googleHandler);
+
+/* ---------- onAuthStateChanged: solo redirige si estamos en página de auth ---------- */
+onAuthStateChanged(auth, (user) => {
     if (user) {
-        if (window.location.pathname.includes("logueo") || window.location.pathname.includes("registro")) {
-            window.location.href = "index.html";
+        // redirige a home si estamos en página de auth
+        if (isAuthPage) {
+            console.log("Usuario ya logueado -> redirigiendo a home");
+            window.location.replace(ROOT_HOME);
         }
+    } else {
+        // no action needed when logged out
+        console.log("No hay usuario logueado.");
     }
 });
