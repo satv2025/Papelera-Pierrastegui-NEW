@@ -865,9 +865,46 @@
                     class="icon-right">
             </div>
 
+            <style>
+                /* Dropdown estilo simple */
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    right: 0;
+                    background-color: #fff;
+                    min-width: 120px;
+                    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+                    z-index: 10;
+                    border-radius: 6px;
+                    overflow: hidden;
+                }
+
+                .dropdown-content button {
+                    width: 100%;
+                    padding: 8px 12px;
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    text-align: left;
+                }
+
+                .dropdown-content button:hover {
+                    background-color: #f1f1f1;
+                }
+
+                .dropdown.show .dropdown-content {
+                    display: block;
+                }
+            </style>
+
             <script type="module">
                 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-                import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+                import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
                 const firebaseConfig = {
                     apiKey: "AIzaSyD9T9Y34jeQUtscNdjn-aZ54B4kEisNk3c",
@@ -881,33 +918,57 @@
 
                 const app = initializeApp(firebaseConfig);
                 const auth = getAuth();
-
                 const container = document.getElementById("mi-cuenta-container");
 
                 onAuthStateChanged(auth, (user) => {
                     container.innerHTML = ""; // Limpiar contenido previo
 
                     if (user) {
-                        // Usuario logueado
-                        const linkCuenta = document.createElement("a");
-                        linkCuenta.href = "/mi-cuenta.html";
-                        linkCuenta.textContent = "Mi Cuenta";
-                        linkCuenta.classList.add("icon-text");
-                        container.appendChild(linkCuenta);
+                        // Usuario logueado → Dropdown con Cerrar Sesión
+                        const dropdown = document.createElement("div");
+                        dropdown.classList.add("dropdown");
+
+                        const btn = document.createElement("button");
+                        btn.textContent = user.displayName || "Mi Cuenta";
+                        btn.onclick = () => dropdown.classList.toggle("show");
+
+                        const content = document.createElement("div");
+                        content.classList.add("dropdown-content");
+
+                        const logoutBtn = document.createElement("button");
+                        logoutBtn.textContent = "Cerrar Sesión";
+                        logoutBtn.onclick = async () => {
+                            await signOut(auth);
+                            dropdown.classList.remove("show");
+                            window.location.reload(); // Refrescar para mostrar botones de login/registro
+                        };
+
+                        content.appendChild(logoutBtn);
+                        dropdown.appendChild(btn);
+                        dropdown.appendChild(content);
+                        container.appendChild(dropdown);
+
+                        // Cerrar dropdown si hace clic fuera
+                        window.addEventListener("click", (e) => {
+                            if (!dropdown.contains(e.target)) {
+                                dropdown.classList.remove("show");
+                            }
+                        });
+
                     } else {
-                        // Usuario no logueado → dos botones
+                        // Usuario no logueado → botones
                         const btnLogin = document.createElement("button");
                         btnLogin.textContent = "Iniciar Sesión";
                         btnLogin.onclick = () => window.location.href = "/logueo";
-                        btnLogin.classList.add("btn-login"); // puedes usar tu clase CSS
+                        btnLogin.classList.add("btn-login");
 
                         const btnRegistro = document.createElement("button");
                         btnRegistro.textContent = "Registrarse";
                         btnRegistro.onclick = () => window.location.href = "/registro";
-                        btnRegistro.classList.add("btn-registro"); // puedes usar tu clase CSS
+                        btnRegistro.classList.add("btn-registro");
 
                         container.appendChild(btnLogin);
-                        container.appendChild(document.createElement("br")); // separación visual
+                        container.appendChild(document.createElement("br"));
                         container.appendChild(btnRegistro);
                     }
                 });
