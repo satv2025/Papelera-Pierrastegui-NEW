@@ -6,8 +6,7 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     GoogleAuthProvider,
-    signInWithPopup,
-    signOut
+    signInWithPopup
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import {
     getFirestore,
@@ -34,86 +33,67 @@ const auth = getAuth();
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
-// ---------- REGISTRO CON EMAIL ----------
-const registerForm = document.getElementById("register-form");
-if (registerForm) {
-    registerForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        event.stopPropagation(); // evita bubbling innecesario
-
+// ---------- REGISTRO EMAIL ----------
+const btnRegister = document.getElementById("btn-register");
+if (btnRegister) {
+    btnRegister.addEventListener("click", async () => {
         const email = document.getElementById("register-email").value.trim();
         const password = document.getElementById("register-password").value.trim();
         const username = document.getElementById("username").value.trim();
 
+        if (!email || !password || !username) return alert("Completa todos los campos");
+        if (password !== document.getElementById("confirmpassword").value) return alert("Las contraseñas no coinciden");
+
         try {
-            // Verificar si email ya existe
             const emailQuery = query(collection(db, "users"), where("email", "==", email));
             const emailSnapshot = await getDocs(emailQuery);
-            if (!emailSnapshot.empty) {
-                alert("Este correo ya está registrado.");
-                return;
-            }
+            if (!emailSnapshot.empty) return alert("Este correo ya está registrado.");
 
-            // Verificar si username ya existe
             const usernameQuery = query(collection(db, "users"), where("username", "==", username));
             const usernameSnapshot = await getDocs(usernameQuery);
-            if (!usernameSnapshot.empty) {
-                alert("Nombre de usuario en uso.");
-                return;
-            }
+            if (!usernameSnapshot.empty) return alert("Nombre de usuario en uso.");
 
-            // Crear usuario
             const cred = await createUserWithEmailAndPassword(auth, email, password);
-            await addDoc(collection(db, "users"), {
-                uid: cred.user.uid,
-                username,
-                email
-            });
+            await addDoc(collection(db, "users"), { uid: cred.user.uid, username, email });
 
-            window.location.replace("index.html"); // redirige sin dejar historial
-        } catch (error) {
-            console.error(error);
-            alert("Error al registrar: " + error.message);
+            window.location.replace("index.html");
+        } catch (err) {
+            console.error(err);
+            alert("Error al registrar: " + err.message);
         }
     });
 }
 
-// ---------- LOGIN CON EMAIL ----------
-const loginForm = document.getElementById("login-form");
-if (loginForm) {
-    loginForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
+// ---------- LOGIN EMAIL ----------
+const btnLogin = document.getElementById("btn-login");
+if (btnLogin) {
+    btnLogin.addEventListener("click", async () => {
         const email = document.getElementById("login-email").value.trim();
         const password = document.getElementById("login-password").value.trim();
 
+        if (!email || !password) return alert("Completa todos los campos");
+
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            window.location.replace("index.html"); // redirige tras login
-        } catch (error) {
-            console.error(error);
-            if (error.code === "auth/user-not-found") {
-                alert("Correo no registrado.");
-            } else if (error.code === "auth/wrong-password") {
-                alert("Contraseña incorrecta.");
-            } else {
-                alert("Error: " + error.message);
-            }
+            window.location.replace("index.html");
+        } catch (err) {
+            console.error(err);
+            if (err.code === "auth/user-not-found") alert("Correo no registrado.");
+            else if (err.code === "auth/wrong-password") alert("Contraseña incorrecta.");
+            else alert("Error: " + err.message);
         }
     });
 }
 
-// ---------- LOGIN/REGISTRO CON GOOGLE ----------
+// ---------- LOGIN/REGISTRO GOOGLE ----------
 const googleButtons = document.querySelectorAll("#btn-google, #btn-login-google");
 googleButtons.forEach(btn => {
-    btn.type = "button"; // evita que el botón haga submit del form
+    btn.type = "button";
     btn.addEventListener("click", async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             const user = result.user;
 
-            // Guardar usuario en Firestore si es primer login
             const userQuery = query(collection(db, "users"), where("uid", "==", user.uid));
             const snapshot = await getDocs(userQuery);
             if (snapshot.empty) {
@@ -124,20 +104,17 @@ googleButtons.forEach(btn => {
                 });
             }
 
-            window.location.replace("index.html"); // redirige tras login Google
-        } catch (error) {
-            console.error(error);
-            alert("Error en Google Sign-In: " + error.message);
+            window.location.replace("index.html");
+        } catch (err) {
+            console.error(err);
+            alert("Error en Google Sign-In: " + err.message);
         }
     });
 });
 
-// ---------- COMPROBAR ESTADO DE AUTENTICACIÓN ----------
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // Evitar volver a login/registro si ya está logueado
-        if (window.location.pathname.includes("logueo") || window.location.pathname.includes("registro")) {
-            window.location.replace("index.html");
-        }
+// ---------- Estado de autenticación ----------
+onAuthStateChanged(auth, user => {
+    if (user && (window.location.pathname.includes("logueo") || window.location.pathname.includes("registro"))) {
+        window.location.replace("index.html");
     }
 });

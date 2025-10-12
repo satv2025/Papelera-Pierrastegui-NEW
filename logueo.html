@@ -4,45 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-    <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico">
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/reg_logueo_pp.css">
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden !important;
-            overflow-y: hidden !important;
-        }
-
-        #page-scroll {
-            height: 100vh;
-            overflow: auto;
-            position: relative;
-        }
-    </style>
 </head>
 
 <body>
     <div class="form-container">
-        <h2>Iniciar Sesión</h2>
-        <form id="login-form">
-            <input type="email" id="email" placeholder="Correo Electrónico" required>
+        <h2>INICIA SESIÓN</h2>
+
+        <div id="opciones-login">
+            <button id="btn-login-email">Login con E-Mail</button>
+            <button id="btn-login-google">Login con Google</button>
+        </div>
+
+        <div id="login-fields" class="oculto">
+            <input type="email" id="login-email" placeholder="Correo Electrónico" required>
+
             <div class="password-container">
                 <input type="password" id="login-password" placeholder="Contraseña" required>
                 <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc2.png" class="toggle-password"
                     data-target="login-password" alt="Mostrar/Ocultar contraseña" />
             </div>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
+
+            <button id="btn-login">Iniciar Sesión</button>
+        </div>
+
         <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a></p>
     </div>
 
     <script src="https://papelerapierrastegui.com.ar/assets/js/togglePassword.js"></script>
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
-    <script src="https://papelerapierrastegui.com.ar/assets/js/satv-scroll-main.js"></script>
+    <script>
+        document.getElementById("btn-login-email").addEventListener("click", function () {
+            document.getElementById("opciones-login").classList.add("oculto");
+            document.getElementById("login-fields").classList.remove("oculto");
+        });
+    </script>
 </body>
 
 </html>

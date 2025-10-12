@@ -7,71 +7,46 @@
     <title>Registrarse</title>
     <link rel="icon" type="image/x-icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico">
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/reg_logueo_pp.css">
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden !important;
-            overflow-y: hidden !important;
-        }
-
-        #page-scroll {
-            height: 100vh;
-            overflow: auto;
-            position: relative;
-        }
-
-        .oculto {
-            display: none !important;
-        }
-    </style>
 </head>
 
 <body>
     <div class="form-container">
         <h2>CREA TU CUENTA</h2>
 
-        <!-- Botones iniciales -->
         <div id="opciones-registro">
             <button id="btn-email">Registrarse con E-Mail</button>
             <button id="btn-google">Registrarse con Google</button>
         </div>
 
-        <!-- Formulario oculto -->
-        <form id="register-form" class="oculto">
+        <div id="register-fields" class="oculto">
             <input type="text" id="fullname" placeholder="Nombre Completo" required>
             <input type="text" id="username" placeholder="Nombre de Usuario" required>
-            <input type="email" id="email" placeholder="Correo Electrónico" required>
+            <input type="email" id="register-email" placeholder="Correo Electrónico" required>
+
             <div class="password-container">
                 <input type="password" id="register-password" placeholder="Contraseña" required>
                 <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc2.png" class="toggle-password"
                     data-target="register-password" alt="Mostrar/Ocultar contraseña" />
             </div>
+
             <div class="password-container">
                 <input type="password" id="confirmpassword" placeholder="Confirmar Contraseña" required>
                 <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc2.png" class="toggle-password"
                     data-target="confirmpassword" alt="Mostrar/Ocultar contraseña" />
             </div>
-            <button type="submit">Registrarse</button>
-        </form>
+
+            <button id="btn-register">Registrarse</button>
+        </div>
 
         <p>¿Ya tienes cuenta? <a href="/logueo">Inicia sesión aquí</a></p>
     </div>
 
     <script src="https://papelerapierrastegui.com.ar/assets/js/togglePassword.js"></script>
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
-    <script src="https://papelerapierrastegui.com.ar/assets/js/satv-scroll-main.js"></script>
-
     <script>
         document.getElementById("btn-email").addEventListener("click", function () {
             document.getElementById("opciones-registro").classList.add("oculto");
-            document.getElementById("register-form").classList.remove("oculto");
-        });
-
-        document.getElementById("btn-google").addEventListener("click", function () {
-            alert("Aquí iría la conexión con Google (OAuth).");
+            document.getElementById("register-fields").classList.remove("oculto");
         });
     </script>
 </body>

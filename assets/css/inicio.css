@@ -82,8 +82,8 @@ button.btn-registro:hover,
 
 div#mi-cuenta-container {
   position: relative;
-  top: 1em;
-  margin-right: 7em;
+  top: 0em;
+  margin-right: 10em;
 }
 
 footer .web-copyright {
@@ -127,10 +127,10 @@ header h1 {
 
 /* Footer */
 footer {
-  background-color: #E1DABD;
+  background-color: #fff;
   color: var(--primary-color);
   text-align: center;
-  border-top: 3px solid #3b2d00;
+  border-top: 3px solid #ff7600;
   position: relative;
   height: 8em;
   top: 6em;
@@ -182,10 +182,10 @@ nav ul {
 }
 
 nav ul li a {
-  color: #3b2d00;
+  color: #ff7600;
   text-decoration: none;
-  background: #E1DABD;
-  outline: 2px solid #3b2d00;
+  background: #fff;
+  outline: 2px solid #ff7600;
   padding: 0.5em 1em;
   border-radius: 6px;
   font-weight: 700;
@@ -195,14 +195,14 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-  background-color: #3b2d00;
-  color: #E1DABD;
+  background-color: #ff7600;
+  color: #fff;
 }
 
 /* Selection */
 body::selection {
-  color: #E1DABD;
-  background: #3b2d00;
+  color: #fff;
+  background: #ff7600;
 }
 
 .container {
@@ -445,7 +445,7 @@ body::selection {
   margin: 2em 0 2em 31em;
   width: 100%;
   text-transform: capitalize;
-  color: #3b2d00;
+  color: #ff7600;
   padding-left: 4em;
   margin-left: 0em;
   height: 4.2em;
@@ -524,7 +524,7 @@ body::selection {
   display: block;
   padding: 0.5rem 1rem;
   transition: background-color 0.2s, color 0.2s;
-  color: #3b2d00;
+  color: #ff7600;
   cursor: pointer;
   text-transform: capitalize;
   text-decoration: none !important;
@@ -662,7 +662,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   background-color: #FCF5E2 !important;
   -webkit-box-shadow: 0 0 0px 1000px #FCF5E2 inset !important;
-  -webkit-text-fill-color: #3b2d00 !important;
+  -webkit-text-fill-color: #ff7600 !important;
   font-weight: 700 !important;
   transition: background-color 5000s ease-in-out 0s !important;
   font-family: 'Gilroy' !important;
@@ -675,7 +675,7 @@ select:-webkit-autofill:focus {
   align-items: center;
   gap: 2rem;
   flex-wrap: nowrap;
-  margin-right: -3em;
+  margin-right: -6em;
 }
 
 /* Enlaces con iconos */
@@ -698,10 +698,8 @@ select:-webkit-autofill:focus {
 }
 
 .mi-cuenta img.icon-right {
-  margin-left: 2em;
-  margin-top: -4.46em;
-  position: relative;
-  top: 1.2em;
+  position: absolute;
+  top: 2em;
 }
 
 .casa {
@@ -782,7 +780,7 @@ select:-webkit-autofill:focus {
 
 /* Estilos base del logo */
 #pp-logo img {
-  border: 2px solid #3b2d00;
+  border: 2px solid #ff7600;
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -816,7 +814,7 @@ select:-webkit-autofill:focus {
   html {
     scrollbar-width: thin;
     /* ancho del scrollbar */
-    scrollbar-color: #3b2d00 #e1dabd;
+    scrollbar-color: #ff7600 #e1dabd;
     /* thumb y track */
   }
 }
