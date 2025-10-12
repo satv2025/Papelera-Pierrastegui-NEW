@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Login - Papelería Pierrastegui</title>
 
-    <!-- Tu CSS remoto -->
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/reg_logueo_pp.css">
 </head>
 
@@ -16,10 +15,10 @@
 
         <div id="login-fields">
             <!-- custom "inputs" (NO <input>) -->
-            <div class="custom-input" data-key="email" data-password="false" data-placeholder="Correo electrónico"
+            <div class="custom-input" contenteditable="true" data-key="email" data-placeholder="Correo electrónico"
                 tabindex="0"></div>
-            <div class="custom-input" data-key="password" data-password="true" data-placeholder="Contraseña"
-                tabindex="0"></div>
+            <div class="custom-input" contenteditable="true" data-key="password" data-password="true"
+                data-placeholder="Contraseña" tabindex="0"></div>
 
             <button id="btn-login" type="button">Iniciar Sesión</button>
             <button id="btn-login-google" type="button">Iniciar con Google</button>
@@ -29,7 +28,6 @@
         </div>
     </div>
 
-    <!-- Usa exactamente los scripts remotos que pediste -->
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/togglePassword.js"></script>
 </body>
