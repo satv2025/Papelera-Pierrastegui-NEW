@@ -15,13 +15,11 @@
             padding: 0;
             overflow-x: hidden !important;
             overflow-y: hidden !important;
-            /* ¡Importante! Elimina scroll nativo */
         }
 
         #page-scroll {
             height: 100vh;
             overflow: auto;
-            /* scroll va aquí */
             position: relative;
         }
     </style>
@@ -32,21 +30,18 @@
         <h2>Iniciar Sesión</h2>
         <form id="login-form">
             <input type="email" id="email" placeholder="Correo Electrónico" required>
-
             <div class="password-container">
                 <input type="password" id="login-password" placeholder="Contraseña" required>
-                <!-- Aquí cambiamos el span por un <img> con las rutas de las imágenes -->
                 <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc2.png" class="toggle-password"
                     data-target="login-password" alt="Mostrar/Ocultar contraseña" />
             </div>
-
             <button type="submit">Iniciar Sesión</button>
         </form>
-        <p>¿No tienes cuenta? <a href="https://papelerapierrastegui.com.ar/registro">Regístrate aquí</a></p>
+        <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a></p>
     </div>
 
     <script src="https://papelerapierrastegui.com.ar/assets/js/togglePassword.js"></script>
-    <script src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
+    <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
     <script src="https://papelerapierrastegui.com.ar/assets/js/satv-scroll-main.js"></script>
 </body>
 

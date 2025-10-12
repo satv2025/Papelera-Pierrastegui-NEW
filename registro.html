@@ -23,7 +23,6 @@
             position: relative;
         }
 
-        /* Solo agregamos esto para ocultar el form */
         .oculto {
             display: none !important;
         }
@@ -45,37 +44,32 @@
             <input type="text" id="fullname" placeholder="Nombre Completo" required>
             <input type="text" id="username" placeholder="Nombre de Usuario" required>
             <input type="email" id="email" placeholder="Correo Electrónico" required>
-
             <div class="password-container">
                 <input type="password" id="register-password" placeholder="Contraseña" required>
                 <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc2.png" class="toggle-password"
                     data-target="register-password" alt="Mostrar/Ocultar contraseña" />
             </div>
-
             <div class="password-container">
                 <input type="password" id="confirmpassword" placeholder="Confirmar Contraseña" required>
                 <img src="https://papelerapierrastegui.com.ar/assets/images/ojoc2.png" class="toggle-password"
                     data-target="confirmpassword" alt="Mostrar/Ocultar contraseña" />
             </div>
-
             <button type="submit">Registrarse</button>
         </form>
 
-        <p>¿Ya tienes cuenta? <a href="https://papelerapierrastegui.com.ar/logueo">Inicia sesión aquí</a></p>
+        <p>¿Ya tienes cuenta? <a href="/logueo">Inicia sesión aquí</a></p>
     </div>
 
     <script src="https://papelerapierrastegui.com.ar/assets/js/togglePassword.js"></script>
-    <script src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
+    <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
     <script src="https://papelerapierrastegui.com.ar/assets/js/satv-scroll-main.js"></script>
 
     <script>
-        // Mostrar el formulario y ocultar los botones
         document.getElementById("btn-email").addEventListener("click", function () {
             document.getElementById("opciones-registro").classList.add("oculto");
             document.getElementById("register-form").classList.remove("oculto");
         });
 
-        // Ejemplo para el botón de Google (puedes conectar tu OAuth aquí)
         document.getElementById("btn-google").addEventListener("click", function () {
             alert("Aquí iría la conexión con Google (OAuth).");
         });

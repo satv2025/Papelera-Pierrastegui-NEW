@@ -11,6 +11,7 @@ import {
 import {
     getFirestore,
     collection,
+    addDoc,
     getDocs,
     query,
     where
@@ -42,43 +43,35 @@ if (registerForm) {
         const password = document.getElementById("register-password").value.trim();
         const username = document.getElementById("username").value.trim();
 
-        // Limpiar errores previos
-        const emailError = document.getElementById("email-error");
-        const usernameError = document.getElementById("username-error");
-        emailError.textContent = "";
-        usernameError.textContent = "";
-
         try {
-            // Verificar correo
-            const userQuery = query(collection(db, "users"), where("email", "==", email));
-            const emailSnapshot = await getDocs(userQuery);
+            // Verificar si email ya existe
+            const emailQuery = query(collection(db, "users"), where("email", "==", email));
+            const emailSnapshot = await getDocs(emailQuery);
             if (!emailSnapshot.empty) {
-                emailError.textContent = "Este correo ya está registrado.";
+                alert("Este correo ya está registrado.");
                 return;
             }
 
-            // Verificar username
+            // Verificar si username ya existe
             const usernameQuery = query(collection(db, "users"), where("username", "==", username));
             const usernameSnapshot = await getDocs(usernameQuery);
             if (!usernameSnapshot.empty) {
-                usernameError.textContent = "Nombre de usuario en uso.";
+                alert("Nombre de usuario en uso.");
                 return;
             }
 
             // Crear usuario
             const cred = await createUserWithEmailAndPassword(auth, email, password);
-            const userRef = collection(db, "users");
-            await userRef.add({
+            await addDoc(collection(db, "users"), {
                 uid: cred.user.uid,
                 username,
                 email
             });
 
-            alert("Registro exitoso");
-            window.location.href = "index.html";
+            window.location.href = "index.html"; // Redirigir tras registro
         } catch (error) {
             console.error(error);
-            emailError.textContent = error.message || "Error al registrar.";
+            alert("Error al registrar: " + error.message);
         }
     });
 }
@@ -92,23 +85,17 @@ if (loginForm) {
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("login-password").value.trim();
 
-        const emailError = document.getElementById("login-email-error");
-        const passwordError = document.getElementById("login-password-error");
-        emailError.textContent = "";
-        passwordError.textContent = "";
-
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            alert("Inicio de sesión exitoso");
-            window.location.href = "index.html";
+            window.location.href = "index.html"; // Redirigir tras login
         } catch (error) {
             console.error(error);
             if (error.code === "auth/user-not-found") {
-                emailError.textContent = "Correo no registrado.";
+                alert("Correo no registrado.");
             } else if (error.code === "auth/wrong-password") {
-                passwordError.textContent = "Contraseña incorrecta.";
+                alert("Contraseña incorrecta.");
             } else {
-                passwordError.textContent = "Error inesperado.";
+                alert("Error: " + error.message);
             }
         }
     });
@@ -126,15 +113,14 @@ googleButtons.forEach(btn => {
             const userQuery = query(collection(db, "users"), where("uid", "==", user.uid));
             const snapshot = await getDocs(userQuery);
             if (snapshot.empty) {
-                await collection(db, "users").add({
+                await addDoc(collection(db, "users"), {
                     uid: user.uid,
                     email: user.email,
                     username: user.displayName || "UsuarioGoogle"
                 });
             }
 
-            alert("Inicio con Google exitoso");
-            window.location.href = "index.html";
+            window.location.href = "index.html"; // Redirigir tras login
         } catch (error) {
             console.error(error);
             alert("Error en Google Sign-In: " + error.message);
@@ -146,6 +132,8 @@ googleButtons.forEach(btn => {
 onAuthStateChanged(auth, (user) => {
     if (user) {
         // Evitar volver a login/registro si ya está logueado
-        window.location.href = "index.html";
+        if (window.location.pathname.includes("logueo") || window.location.pathname.includes("registro")) {
+            window.location.href = "index.html";
+        }
     }
 });
