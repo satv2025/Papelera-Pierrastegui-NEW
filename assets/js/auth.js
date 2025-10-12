@@ -5,8 +5,7 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithRedirect,
-    getRedirectResult,
+    signInWithPopup,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import {
@@ -23,7 +22,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyD9T9Y34jeQUtscNdjn-aZ54B4kEisNk3c",
     authDomain: "papelera-pie.firebaseapp.com",
     projectId: "papelera-pie",
-    storageBucket: "papelera-pie.firebasestorage.app",
+    storageBucket: "papelera-pie",
     messagingSenderId: "407925272882",
     appId: "1:407925272882:web:4ce4347c5cba2e95b4a72b",
     measurementId: "G-YXB9F6CTN0"
@@ -52,12 +51,10 @@ export async function registerUser(values) {
     if (!isEmailLooksLike(email)) throw new Error("Ingresa un correo válido.");
     if (password !== confirm) throw new Error("Las contraseñas no coinciden.");
 
-    // check email exists
     const qEmail = query(collection(db, "users"), where("email", "==", email));
     const snapEmail = await getDocs(qEmail);
     if (!snapEmail.empty) throw new Error("Este correo ya está registrado.");
 
-    // check username exists
     const qUser = query(collection(db, "users"), where("username", "==", username));
     const snapUser = await getDocs(qUser);
     if (!snapUser.empty) throw new Error("Nombre de usuario en uso.");
@@ -80,31 +77,26 @@ export async function loginUser(values) {
     window.location.replace(ROOT_HOME);
 }
 
-/* ---------- GOOGLE LOGIN / REDIRECT ---------- */
-export function loginWithGoogleRedirect() {
-    signInWithRedirect(auth, googleProvider);
+/* ---------- GOOGLE LOGIN ---------- */
+export async function loginWithGoogle() {
+    const result = await signInWithPopup(auth, googleProvider);
+    const user = result.user;
+    if (!user) throw new Error("No se obtuvo usuario de Google.");
+
+    const q = query(collection(db, "users"), where("uid", "==", user.uid));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+        await addDoc(collection(db, "users"), {
+            uid: user.uid,
+            email: user.email,
+            username: user.displayName || "UsuarioGoogle"
+        });
+    }
+
+    window.location.replace(ROOT_HOME);
 }
 
-// Al cargar, chequeamos si venimos del redirect
-getRedirectResult(auth)
-    .then(async (result) => {
-        if (result?.user) {
-            const user = result.user;
-            const q = query(collection(db, "users"), where("uid", "==", user.uid));
-            const snap = await getDocs(q);
-            if (snap.empty) {
-                await addDoc(collection(db, "users"), {
-                    uid: user.uid,
-                    email: user.email,
-                    username: user.displayName || "UsuarioGoogle"
-                });
-            }
-            window.location.replace(ROOT_HOME);
-        }
-    })
-    .catch(err => console.error("Google redirect error:", err));
-
-/* ---------- ON AUTH STATE ---------- */
+/* ---------- REDIRECCION SI YA LOGUEADO ---------- */
 export function redirectIfLoggedIn() {
     onAuthStateChanged(auth, (user) => {
         if (user && (window.location.pathname.includes("logueo") || window.location.pathname.includes("registro"))) {
