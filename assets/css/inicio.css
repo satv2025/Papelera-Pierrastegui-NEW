@@ -18,8 +18,11 @@
   padding: 0;
 }
 
+/* Estilo base para botones y dropdown */
 button.btn-login,
-button.btn-registro {
+button.btn-registro,
+.dropdown>button,
+.dropdown-content button {
   color: #ff7600;
   font-weight: 700;
   border: 2px solid #ff7600;
@@ -28,18 +31,53 @@ button.btn-registro {
   padding-right: 0.6em;
   padding-top: 0.19em;
   padding-bottom: 0.2em;
-  width: 8em;
-  margin-bottom: 0.4em;
   background: #fff;
   cursor: pointer;
   font-size: 16px;
+  width: 8em;
   transition: background 0.3s ease, color 0.3s ease;
+  text-align: center;
 }
 
+/* Hover de todos los botones */
 button.btn-login:hover,
-button.btn-registro:hover {
+button.btn-registro:hover,
+.dropdown>button:hover,
+.dropdown-content button:hover {
   background: #ff7600;
   color: #fff;
+}
+
+/* Dropdown general */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Contenedor de los items del dropdown */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background: #fff;
+  min-width: 100%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0.3em;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Mostrar dropdown cuando se activa */
+.dropdown.show .dropdown-content {
+  display: block;
+}
+
+/* Ajuste de los botones dentro del dropdown */
+.dropdown-content button {
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 0;
 }
 
 div#mi-cuenta-container {
@@ -637,6 +675,7 @@ select:-webkit-autofill:focus {
   align-items: center;
   gap: 2rem;
   flex-wrap: nowrap;
+  margin-right: -3em;
 }
 
 /* Enlaces con iconos */
@@ -659,8 +698,10 @@ select:-webkit-autofill:focus {
 }
 
 .mi-cuenta img.icon-right {
-  margin-left: 6em;
+  margin-left: 2em;
   margin-top: -4.46em;
+  position: relative;
+  top: 1.2em;
 }
 
 .casa {

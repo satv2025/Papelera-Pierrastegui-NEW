@@ -6,7 +6,8 @@ import {
     signInWithEmailAndPassword,
     onAuthStateChanged,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithPopup,
+    signOut
 } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import {
     getFirestore,
@@ -38,8 +39,9 @@ const registerForm = document.getElementById("register-form");
 if (registerForm) {
     registerForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+        event.stopPropagation(); // evita bubbling innecesario
 
-        const email = document.getElementById("email").value.trim();
+        const email = document.getElementById("register-email").value.trim();
         const password = document.getElementById("register-password").value.trim();
         const username = document.getElementById("username").value.trim();
 
@@ -68,7 +70,7 @@ if (registerForm) {
                 email
             });
 
-            window.location.href = "index.html"; // Redirigir tras registro
+            window.location.replace("index.html"); // redirige sin dejar historial
         } catch (error) {
             console.error(error);
             alert("Error al registrar: " + error.message);
@@ -81,13 +83,14 @@ const loginForm = document.getElementById("login-form");
 if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+        event.stopPropagation();
 
-        const email = document.getElementById("email").value.trim();
+        const email = document.getElementById("login-email").value.trim();
         const password = document.getElementById("login-password").value.trim();
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            window.location.href = "index.html"; // Redirigir tras login
+            window.location.replace("index.html"); // redirige tras login
         } catch (error) {
             console.error(error);
             if (error.code === "auth/user-not-found") {
@@ -104,6 +107,7 @@ if (loginForm) {
 // ---------- LOGIN/REGISTRO CON GOOGLE ----------
 const googleButtons = document.querySelectorAll("#btn-google, #btn-login-google");
 googleButtons.forEach(btn => {
+    btn.type = "button"; // evita que el botón haga submit del form
     btn.addEventListener("click", async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
@@ -120,7 +124,7 @@ googleButtons.forEach(btn => {
                 });
             }
 
-            window.location.href = "index.html"; // Redirigir tras login
+            window.location.replace("index.html"); // redirige tras login Google
         } catch (error) {
             console.error(error);
             alert("Error en Google Sign-In: " + error.message);
@@ -133,7 +137,7 @@ onAuthStateChanged(auth, (user) => {
     if (user) {
         // Evitar volver a login/registro si ya está logueado
         if (window.location.pathname.includes("logueo") || window.location.pathname.includes("registro")) {
-            window.location.href = "index.html";
+            window.location.replace("index.html");
         }
     }
 });
