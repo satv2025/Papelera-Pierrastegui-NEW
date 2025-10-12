@@ -34,7 +34,7 @@ button.btn-registro,
   background: #fff;
   cursor: pointer;
   font-size: 16px;
-  width: 8em;
+  width: 10em;
   transition: background 0.3s ease, color 0.3s ease;
   text-align: center;
 }
@@ -441,7 +441,6 @@ body::selection {
 .main-navbar {
   background-color: #ccc;
   position: relative;
-  z-index: 1000;
   margin: 2em 0 2em 31em;
   width: 100%;
   text-transform: capitalize;
@@ -699,7 +698,8 @@ select:-webkit-autofill:focus {
 
 .mi-cuenta img.icon-right {
   position: absolute;
-  top: 2em;
+  top: 1.8em;
+  margin-left: 0.6em;
 }
 
 .casa {
@@ -817,4 +817,63 @@ select:-webkit-autofill:focus {
     scrollbar-color: #ff7600 #e1dabd;
     /* thumb y track */
   }
+}
+
+<style>
+
+/* Dropdown estilo simple */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid #ff7600;
+  margin-top: 0.2em;
+  width: 100%;
+}
+
+.dropdown-content:hover {
+  color: #fff;
+  background: #ff7600;
+}
+
+.dropdown-content button {
+  width: 100%;
+  background: none;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: center;
+  text-align: c;
+  text-align: ;
+
+  background-color: #ff7600;
+  color: #fff;
+  color: #ff;
+  color: #f;
+  color: #;
+  background-color: #ff7600;
+  shape-rendering: geometricprecision;
+  background-color: #ff7600;
+  left: -4em;
+}
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown.show .dropdown-content {
+  display: block;
 }
