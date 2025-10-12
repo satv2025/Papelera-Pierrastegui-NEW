@@ -1,7 +1,7 @@
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
 body {
-    font-family: 'Gilroy';
+    font-family: 'Gilroy', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #fff;
@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 ::selection {
@@ -17,82 +17,71 @@ body {
     background: #ff7600;
 }
 
-header {
+/* Header y Footer */
+header,
+footer {
     background-color: #c5c0a5;
     color: #ff7600;
-    padding: 1em;
     text-align: center;
-    box-shadow: 0 0 0.4em 0 #00000073;
+    padding: 1em;
+    box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.45);
 }
 
+footer {
+    font-weight: 700;
+    position: relative;
+    width: 100%;
+}
+
+/* Contenedor principal del formulario */
 .form-container {
     background-color: #ffffff;
     width: 100%;
     max-width: 400px;
-    margin: 2em;
     padding: 2em;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     text-align: center;
-    position: absolute;
-    left: 38%;
+    position: relative;
+    margin: 0 auto;
 }
 
-/* Ajustar tamaño de las imágenes de los íconos */
-.toggle-password {
-    width: 28px;
-    /* Ajusta el tamaño deseado */
-    height: auto;
-    /* Mantener la proporción de la imagen */
-    cursor: pointer;
-    /* Asegura que se vea como un ícono clickeable */
-    margin-left: -3em;
-    color: #ff7600;
-    margin-top: 0.1em;
-}
-
-
-p {
-    color: #ff7600;
-}
-
+/* Títulos y párrafos */
 .form-container h2 {
     color: #ff7600;
     margin-bottom: 1.5em;
 }
 
-input {
-    font-family: 'Gilroy';
+p {
     color: #ff7600;
+    margin-top: 1em;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 1em;
+    margin: 0.8em 0;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
     font-weight: 700;
+    color: #ff7600;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-family: 'Gilroy', sans-serif;
 }
 
 input::placeholder {
     color: #ff7600;
 }
 
-input[type="email"],
-input[type="password"],
-input[type="text"] {
-    width: 100%;
-    padding: 1em;
-    margin: 0.8em 0;
-    border-radius: 5px;
-    border: none;
-    box-sizing: border-box;
-    font-size: 1em;
-    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.3);
-
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="text"]:focus {
+input:focus {
     outline: none;
-    /* quita el borde azul del navegador */
-
 }
 
+/* Botones */
 button {
     border: none;
     background-color: #ff7600;
@@ -104,51 +93,33 @@ button {
     font-weight: bold;
     font-size: 1em;
     margin-top: 1em;
-    font-family: 'Gilroy';
+    font-family: 'Gilroy', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #764526;
+    background-color: #764526;
 }
 
-footer {
-    text-align: center;
-    padding: 1em;
-    background-color: #c5c0a5;
-    color: #ff7600;
-    margin-top: auto;
-    box-shadow: 0 0 0.4em 0 #00000073;
+/* Contenedor para mostrar/ocultar contraseña */
+.password-container {
     position: relative;
-    bottom: 0;
-    width: 100%;
+    display: flex;
+    align-items: center;
 }
 
-/* Enlaces */
-a {
-    text-decoration: none;
-    color: #ff7600;
-    font-weight: bold;
+.password-container input {
+    padding-right: 2.5em;
 }
 
-a:hover {
-    color: #764526;
-}
-
-/* Media Queries para diseño responsivo */
-@media (max-width: 56.25em) {
-
-    /* 900px */
-    .form-container {
-        padding: 1.5em;
-    }
-}
-
-@media (max-width: 37.5em) {
-
-    /* 600px */
-    .form-container {
-        padding: 1.2em;
-    }
+.toggle-password {
+    width: 28px;
+    height: auto;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* Scrollbar personalizada */
@@ -165,29 +136,27 @@ a:hover {
     border-radius: 6px;
 }
 
-.password-container {
-    position: relative;
-    display: flex;
-    align-items: center;
+/* Links */
+a {
+    text-decoration: none;
+    color: #ff7600;
+    font-weight: bold;
 }
 
-.password-container input {
-    width: 100%;
-    padding-right: 2.5em;
-    /* Espacio para el icono */
+a:hover {
+    color: #764526;
 }
 
-.password-container span {
-    position: absolute;
-    right: 10px;
-    cursor: pointer;
-    font-size: 1.2em;
+/* Responsive */
+@media (max-width: 900px) {
+    .form-container {
+        padding: 1.5em;
+        width: 90%;
+    }
 }
 
-footer {
-    font-weight: 700;
-}
-
-img {
-    filter: brightness(0) saturate(100%) invert(44%) sepia(69%) saturate(1808%) hue-rotate(2deg) brightness(105%) contrast(102%);
+@media (max-width: 600px) {
+    .form-container {
+        padding: 1.2em;
+    }
 }
