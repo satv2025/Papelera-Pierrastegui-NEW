@@ -15,7 +15,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Gilroy', sans-serif;
+    font-family: 'Gilroy', 'Segoe UI', 'Century Gothic';
 }
 
 img {
@@ -42,6 +42,7 @@ body {
     background: var(--bg);
 }
 
+/* .form-container ahora se centra por el contenedor .auth-page */
 .form-container {
     width: 100%;
     max-width: 420px;
@@ -51,8 +52,10 @@ body {
     box-shadow: var(--shadow);
     text-align: center;
     position: relative;
-    left: 40%;
-    top: 20%;
+    /* opcional si necesitas posicionar hijos */
+    margin: 0 auto;
+    /* centra en su contenedor si hace falta */
+    /* se eliminó left:40% y top:20% porque rompían el centrado */
 }
 
 .form-container h2 {
@@ -70,6 +73,7 @@ body {
 }
 
 /* ---------- Custom inputs (no native <input>) ---------- */
+/* Uso recomendado: <div class="custom-input" contenteditable="true" data-placeholder="Correo electrónico" tabindex="0"></div> */
 .custom-input,
 [data-placeholder] {
     border: 2px solid var(--orange);
@@ -90,15 +94,10 @@ body {
     display: flex;
     align-items: center;
     opacity: 1;
+    /* permitir selección de texto si es editable */
 }
 
-.custom-input:empty::before {
-    content: attr(data-placeholder);
-    color: var(--muted);
-    font-weight: 800;
-    pointer-events: none;
-}
-
+/* Placeholder (usamos solo ::after para evitar solapamientos) */
 .custom-input::after {
     content: attr(data-placeholder);
     color: var(--muted);
@@ -109,42 +108,35 @@ body {
     pointer-events: none;
     transition: opacity 0.12s, transform 0.12s;
     font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.custom-input.focused::after {
+/* Oculta placeholder cuando el elemento tiene valor o está enfocado.
+   Permitimos tanto :focus (nativo) como la clase .focused (JS). */
+.custom-input:focus::after,
+.custom-input.focused::after,
+.custom-input.has-value::after {
     opacity: 0;
-    /* no desaparece el tamaño ni color del placeholder al focus */
     transform: translateY(-50%);
 }
 
-.custom-input.has-value {
-    padding-left: 1rem;
-}
-
-.custom-input.focused::before {
-    content: "";
-    width: 2px;
-    height: 1.1em;
-    background: var(--orange);
-    position: absolute;
-    left: 1rem;
-    /* caret al inicio, no a la derecha */
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.7;
-    animation: blink 1s steps(2, start) infinite;
-}
-
-@keyframes blink {
-    50% {
-        opacity: 0;
-    }
-}
-
-/* Focus visual */
-.custom-input:focus {
+/* Evitar que el texto "salte" al hacer focus:
+   mantenemos el mismo padding y tamaños tanto en estado normal como en focus */
+.custom-input:focus,
+.custom-input.focused {
     box-shadow: 0 0 0 3px rgba(255, 118, 0, 0.06);
+    /* no cambiamos font-size ni padding aquí para evitar "saltos" */
 }
+
+/* Si el elemento está vacío y quieres un estilo distinto (opcional) */
+.custom-input:empty {
+    /* nada que provoque reflow/resize abrupto */
+}
+
+/* Si quieres que el contenido editable muestre caret nativo correctamente,
+   asegúrate de usar contenteditable="true" en el HTML. */
 
 /* ---------- Buttons (type="button") ---------- */
 button[type="button"],
@@ -194,6 +186,14 @@ button[type="button"]:active {
     height: 26px;
     display: inline-block;
     cursor: pointer;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* icono dentro del custom-input */
+.custom-input .toggle-password {
     position: absolute;
     right: 8px;
     top: 50%;
