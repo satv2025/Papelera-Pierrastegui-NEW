@@ -479,9 +479,10 @@ body::selection {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #FCF5E2;
+  background-color: #ccc;
   min-width: 250px;
   white-space: nowrap;
+  z-index: 1000;
 }
 
 .dropdown:hover .dropdown-menu {

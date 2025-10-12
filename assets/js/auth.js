@@ -1,4 +1,4 @@
-// auth.js (ES module) - reemplazar en /assets/js/auth.js
+// auth.js (ES module) - listo para copiar
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import {
     getAuth,
@@ -40,106 +40,119 @@ const isAuthPage = (() => {
     return p.includes("/logueo") || p.includes("/registro") || p.endsWith("/login") || p.endsWith("/registro.html") || p.endsWith("/logueo.html");
 })();
 
-/* ---------- CUSTOM INPUTS (funcionan como inputs nativos) ---------- */
-const customInputs = Array.from(document.querySelectorAll(".custom-input"));
-
-// Toggle has-value placeholder
-customInputs.forEach(input => {
-    const updateClass = () => {
-        if (input.textContent.trim().length > 0) input.classList.add("has-value");
-        else input.classList.remove("has-value");
-    };
-    input.addEventListener("input", updateClass);
-    input.addEventListener("focus", () => input.classList.add("focused"));
-    input.addEventListener("blur", () => input.classList.remove("focused"));
-    updateClass();
-});
-
-// Helper para obtener valor
+/* ---------- FUNCIONES AUXILIARES ---------- */
 const getInputValue = key => {
     const el = document.querySelector(`.custom-input[data-key="${key}"]`);
     return el ? el.textContent.trim() : '';
 };
 
-/* ---------- NAV buttons ---------- */
-document.getElementById("btn-login-page")?.addEventListener("click", () => window.location.replace("/logueo"));
-document.getElementById("btn-register-page")?.addEventListener("click", () => window.location.replace("/registro"));
+/* ---------- FUNCION PRINCIPAL ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+    // CUSTOM INPUTS
+    const customInputs = Array.from(document.querySelectorAll(".custom-input"));
 
-/* ---------- REGISTER ---------- */
-document.getElementById("btn-register")?.addEventListener("click", async () => {
-    const email = getInputValue("email");
-    const password = getInputValue("password");
-    const confirm = getInputValue("confirm");
-    const username = getInputValue("username");
+    customInputs.forEach(input => {
+        // fuerza contenteditable
+        if (!input.hasAttribute("contenteditable")) input.setAttribute("contenteditable", "true");
 
-    if (!email || !password || !confirm || !username) return alert("Completa todos los campos.");
-    if (!/\S+@\S+\.\S+/.test(email)) return alert("Ingresa un correo válido.");
-    if (password !== confirm) return alert("Las contraseñas no coinciden.");
+        // placeholder toggle
+        const updateClass = () => {
+            if (input.textContent.trim().length > 0) input.classList.add("has-value");
+            else input.classList.remove("has-value");
+        };
 
-    try {
-        const qEmail = query(collection(db, "users"), where("email", "==", email));
-        const snapEmail = await getDocs(qEmail);
-        if (!snapEmail.empty) return alert("Este correo ya está registrado.");
+        input.addEventListener("input", updateClass);
+        input.addEventListener("focus", () => input.classList.add("focused"));
+        input.addEventListener("blur", () => input.classList.remove("focused"));
+        updateClass();
+    });
 
-        const qUser = query(collection(db, "users"), where("username", "==", username));
-        const snapUser = await getDocs(qUser);
-        if (!snapUser.empty) return alert("Nombre de usuario en uso.");
+    // NAV BUTTONS
+    document.getElementById("btn-login-page")?.addEventListener("click", () => window.location.replace("/logueo"));
+    document.getElementById("btn-register-page")?.addEventListener("click", () => window.location.replace("/registro"));
 
-        const cred = await createUserWithEmailAndPassword(auth, email, password);
-        await addDoc(collection(db, "users"), { uid: cred.user.uid, username, email });
-        window.location.replace(ROOT_HOME);
-    } catch (err) {
-        console.error(err);
-        alert(err.message || "Error al registrar.");
-    }
-});
+    /* ---------- REGISTER ---------- */
+    document.getElementById("btn-register")?.addEventListener("click", async () => {
+        const email = getInputValue("email");
+        const password = getInputValue("password");
+        const confirm = getInputValue("confirm");
+        const username = getInputValue("username");
 
-/* ---------- LOGIN ---------- */
-document.getElementById("btn-login")?.addEventListener("click", async () => {
-    const email = getInputValue("email");
-    const password = getInputValue("password");
+        if (!email || !password || !confirm || !username) return alert("Completa todos los campos.");
+        if (!/\S+@\S+\.\S+/.test(email)) return alert("Ingresa un correo válido.");
+        if (password !== confirm) return alert("Las contraseñas no coinciden.");
 
-    if (!email || !password) return alert("Completa todos los campos.");
-    if (!/\S+@\S+\.\S+/.test(email)) return alert("Ingresa un correo válido.");
+        try {
+            const qEmail = query(collection(db, "users"), where("email", "==", email));
+            const snapEmail = await getDocs(qEmail);
+            if (!snapEmail.empty) return alert("Este correo ya está registrado.");
 
-    try {
-        await signInWithEmailAndPassword(auth, email, password);
-        window.location.replace(ROOT_HOME);
-    } catch (err) {
-        console.error(err);
-        if (err.code === "auth/user-not-found") alert("Correo no registrado.");
-        else if (err.code === "auth/wrong-password") alert("Contraseña incorrecta.");
-        else alert(err.message || "Error al iniciar sesión.");
-    }
-});
+            const qUser = query(collection(db, "users"), where("username", "==", username));
+            const snapUser = await getDocs(qUser);
+            if (!snapUser.empty) return alert("Nombre de usuario en uso.");
 
-/* ---------- GOOGLE AUTH ---------- */
-const googleHandler = async () => {
-    try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
-        if (!user) throw new Error("No se obtuvo usuario de Google.");
+            const cred = await createUserWithEmailAndPassword(auth, email, password);
+            await addDoc(collection(db, "users"), { uid: cred.user.uid, username, email });
 
-        const q = query(collection(db, "users"), where("uid", "==", user.uid));
-        const snap = await getDocs(q);
-        if (snap.empty) {
-            await addDoc(collection(db, "users"), {
-                uid: user.uid,
-                email: user.email,
-                username: user.displayName || "UsuarioGoogle"
-            });
+            window.location.replace(ROOT_HOME);
+        } catch (err) {
+            console.error("Register error:", err);
+            alert(err.message || "Error al registrar.");
         }
-        window.location.replace(ROOT_HOME);
-    } catch (err) {
-        console.error(err);
-        alert(err.message || "Error en Google Sign-In.");
-    }
-};
+    });
 
-document.getElementById("btn-login-google")?.addEventListener("click", googleHandler);
-document.getElementById("btn-register-google")?.addEventListener("click", googleHandler);
+    /* ---------- LOGIN ---------- */
+    document.getElementById("btn-login")?.addEventListener("click", async () => {
+        const email = getInputValue("email");
+        const password = getInputValue("password");
+
+        if (!email || !password) return alert("Completa todos los campos.");
+        if (!/\S+@\S+\.\S+/.test(email)) return alert("Ingresa un correo válido.");
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            window.location.replace(ROOT_HOME);
+        } catch (err) {
+            console.error("Login error:", err);
+            if (err.code === "auth/user-not-found") alert("Correo no registrado.");
+            else if (err.code === "auth/wrong-password") alert("Contraseña incorrecta.");
+            else alert(err.message || "Error al iniciar sesión.");
+        }
+    });
+
+    /* ---------- GOOGLE AUTH ---------- */
+    const googleHandler = async () => {
+        try {
+            const result = await signInWithPopup(auth, googleProvider);
+            const user = result.user;
+            if (!user) throw new Error("No se obtuvo usuario de Google.");
+
+            const q = query(collection(db, "users"), where("uid", "==", user.uid));
+            const snap = await getDocs(q);
+            if (snap.empty) {
+                await addDoc(collection(db, "users"), {
+                    uid: user.uid,
+                    email: user.email,
+                    username: user.displayName || "UsuarioGoogle"
+                });
+            }
+            window.location.replace(ROOT_HOME);
+        } catch (err) {
+            console.error(err);
+            alert(err.message || "Error en Google Sign-In.");
+        }
+    };
+
+    document.getElementById("btn-login-google")?.addEventListener("click", googleHandler);
+    document.getElementById("btn-register-google")?.addEventListener("click", googleHandler);
+
+    /* ---------- Prevent native Enter submit ---------- */
+    Array.from(document.querySelectorAll("button")).forEach(btn => {
+        btn.addEventListener("keydown", e => { if (e.key === "Enter") e.preventDefault(); });
+    });
+});
 
 /* ---------- Auth state ---------- */
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, user => {
     if (user && isAuthPage) window.location.replace(ROOT_HOME);
 });
