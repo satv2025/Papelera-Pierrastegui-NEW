@@ -18,6 +18,29 @@
   padding: 0;
 }
 
+button.btn-login,
+button.btn-registro {
+  color: #ff7600;
+  font-weight: 700;
+  border: 2px solid #ff7600;
+  border-radius: 0.3em;
+  padding-left: 0.6em;
+  padding-right: 0.6em;
+  padding-top: 0.19em;
+  padding-bottom: 0.2em;
+  width: 8em;
+  margin-bottom: 0.4em;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.btn-login:hover,
+button.btn-registro:hover {
+  background: #ff7600;
+  color: #fff;
+}
+
 div#mi-cuenta-container {
   position: relative;
   top: 1em;
@@ -635,8 +658,8 @@ select:-webkit-autofill:focus {
 }
 
 .mi-cuenta img.icon-right {
-  margin-left: 3em;
-  margin-top: -3.4em;
+  margin-left: 6em;
+  margin-top: -4.46em;
 }
 
 .casa {
