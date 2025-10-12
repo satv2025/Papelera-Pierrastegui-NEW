@@ -52,6 +52,8 @@ body {
     box-shadow: var(--shadow);
     text-align: center;
     position: relative;
+    left: 40%;
+    top: 20%;
 }
 
 /* Títulos/párrafos */
@@ -71,7 +73,8 @@ body {
 
 /* ---------- Custom inputs (no native <input>) ---------- */
 /* Usamos data-placeholder para mostrar texto. */
-.custom-input {
+.custom-input,
+[data-placeholder] {
     border: 2px solid var(--orange);
     border-radius: 8px;
     padding: 0.9rem 1rem;
@@ -82,12 +85,21 @@ body {
     text-align: left;
     position: relative;
     cursor: text;
-    user-select: none;
     overflow: hidden;
     outline: none;
     display: flex;
     align-items: center;
+    opacity: 1;
 }
+
+.custom-input:empty::before {
+    content: attr(data-placeholder);
+    color: var(--orange);
+    font-weight: 800;
+    pointer-events: none;
+    /* que no interfiera con escribir */
+}
+
 
 /* placeholder-like via pseudo-element */
 .custom-input::after {
@@ -260,5 +272,3 @@ a {
 a:hover {
     color: var(--dark);
 }
-
-/* End of reg_logueo_pp.css */

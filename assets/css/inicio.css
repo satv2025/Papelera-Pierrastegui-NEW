@@ -819,8 +819,6 @@ select:-webkit-autofill:focus {
   }
 }
 
-<style>
-
 /* Dropdown estilo simple */
 .dropdown {
   position: relative;
@@ -856,22 +854,13 @@ select:-webkit-autofill:focus {
   background: none;
   cursor: pointer;
   text-align: center;
-  text-align: c;
-  text-align: ;
-
-  background-color: #ff7600;
-  color: #fff;
-  color: #ff;
-  color: #f;
-  color: #;
-  background-color: #ff7600;
   shape-rendering: geometricprecision;
-  background-color: #ff7600;
   left: -4em;
 }
 
 .dropdown-content button:hover {
-  background-color: #f1f1f1;
+  color: #fff;
+  background-color: #ff7600;
 }
 
 .dropdown.show .dropdown-content {
