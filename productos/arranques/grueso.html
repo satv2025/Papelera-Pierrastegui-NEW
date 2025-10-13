@@ -21,222 +21,1567 @@
         </ul>
       </nav>
     </div>
-  </header>
-
-  <main>
-    <section class="producto container">
-      <h2>BOLSAS DE ARRANQUE GRUESO</h2>
-      <div class="producto-contenido">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
-          alt="Arranque Grueso" />
-        <div class="producto-info">
-          <!-- Dropdown Tamaño -->
-          <div class="dropdown" id="size-dropdown">
-            <button class="dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
-              Seleccionar Tamaño <span class="arrow">▼</span>
-            </button>
-            <div class="dropdown-menu" role="listbox" tabindex="-1">
-              <div class="dropdown-item" data-size="15x20" data-price-unit="4700" data-price-bulk="25200">15x20</div>
-              <div class="dropdown-item" data-size="15x25" data-price-unit="4700" data-price-bulk="25200">15x25</div>
-              <div class="dropdown-item" data-size="20x25" data-price-unit="4700" data-price-bulk="25200">20x25</div>
-              <div class="dropdown-item" data-size="20x30" data-price-unit="4700" data-price-bulk="25200">20x30</div>
-              <div class="dropdown-item" data-size="25x35" data-price-unit="4700" data-price-bulk="25200">25x35</div>
-              <div class="dropdown-item" data-size="30x40" data-price-unit="4700" data-price-bulk="25200">30x40</div>
-              <div class="dropdown-item" data-size="35x45" data-price-unit="4700" data-price-bulk="25200">35x45</div>
-              <div class="dropdown-item" data-size="40x50" data-price-unit="4700" data-price-bulk="25200">40x50</div>
-            </div>
-          </div>
-
-          <!-- Precios -->
-          <div class="precios" style="display:none;">
-            <p class="precio-unit">Por unidad: $4.700 ARS</p>
-            <p class="precio-bulto">Por bulto (6 unidades): $25.200 ARS</p>
-          </div>
-
-          <!-- Tipo -->
-          <div class="cantidad-container">
-            <label for="tipo-dropdown">Tipo:</label>
-            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-              <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
-              <div class="dropdown-menu" role="listbox">
-                <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
-                <span class="dropdown-item" data-type="bulto" data-mult="6">Bulto (6)</span>
-              </div>
-            </div>
-            <button id="limpiar">Limpiar</button>
-          </div>
-
-          <!-- Incremento manual -->
-          <div class="agregar-carrito-cantidad">
-            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
-            <span id="cantidad-visual">1</span>
-            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
-          </div>
-
-          <p class="total">Total: $0</p>
-
-          <h3>Descripción del producto</h3>
-          <ul>
-            <li>Rollos de bolsas de arranque de distintas medidas, transparentes, prácticos y resistentes.</li>
-            <li>Útiles para guardar alimentos, fraccionar productos o colocar en cestos de residuos pequeños.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container-footer">
-      <p>2025 © Papelera Pierrastegui</p>
-      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-    </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // DROPDOWNS
-      const sizeDropdown = document.getElementById('size-dropdown');
-      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
-      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
-      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
-
-      const tipoDropdown = document.getElementById('tipo-dropdown');
-      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
-      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
-      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
-      // BOTONES
-      const limpiarBtn = document.getElementById('limpiar');
-      const decBtn = document.getElementById('decrementar');
-      const incBtn = document.getElementById('incrementar');
-
-      // DISPLAY
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const precios = document.querySelector('.precios');
-      const precioUnit = document.querySelector('.precio-unit');
-      const precioBulto = document.querySelector('.precio-bulto');
-      const totalDisplay = document.querySelector('.total');
-
-      // ESTADO
-      let selectedSize = null;
-      let cantidad = 1;
-      let tipo = { type: 'unidad', mult: 1 }; // unidad x1, bulto x6
-
-      const arrow = () => {
-        const span = document.createElement('span');
-        span.classList.add('arrow');
-        span.textContent = '▼';
-        return span;
-      };
-
-      // FUNCION PARA CALCULAR TOTAL
-      function updateTotal() {
-        if (!selectedSize) {
-          precios.style.display = 'none';
-          totalDisplay.textContent = 'Total: $0';
-          return;
-        }
-
-        precios.style.display = 'block';
-        const priceU = Number(selectedSize.priceUnit);
-        const priceB = Number(selectedSize.priceBulk);
-
-        precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
-        precioBulto.textContent = `Por bulto (6 unidades): $${priceB.toLocaleString('es-AR')} ARS`;
-
-        let total = 0;
-
-        if (tipo.type === 'unidad') {
-          total = cantidad * priceU;
-        } else {
-          total = cantidad * priceB; // cada bulto ya es de 6 unidades
-        }
-
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+    <style>
+      /* ===== Estilos Generales - Desktop ===== */
+      .pp-main-navbar,
+      .pp-search-bar,
+      .pp-nav-links {
+        display: flex;
+        /* visibles en desktop */
       }
 
-      // SELECCIÓN DE TAMAÑO
-      sizeBtn.addEventListener('click', () => {
-        sizeMenu.classList.toggle('active');
-      });
+      .menu-toggle {
+        display: none;
+      }
 
-      sizeItems.forEach(item => {
-        item.addEventListener('click', () => {
-          sizeItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          selectedSize = {
-            size: item.dataset.size,
-            priceUnit: item.dataset.priceUnit,
-            priceBulk: item.dataset.priceBulk
-          };
-          sizeBtn.textContent = `${selectedSize.size} `;
-          sizeBtn.appendChild(arrow());
-          sizeMenu.classList.remove('active');
-          updateTotal();
-        });
-      });
+      /* Estilos base para desktop */
+      .pp-name {
+        display: block;
+        text-align: center;
+        margin-left: 4em;
+        /* válido en desktop */
+        margin-top: 0;
+        /* opcional */
+        margin-bottom: 0;
+        /* opcional */
+      }
 
-      // SELECCIÓN DE TIPO (Unidad / Bulto)
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
-      });
+      /* Sidebar - oculto por defecto en desktop */
+      #pp-sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        width: 300px;
+        height: 100vh;
+        background-color: #FCF5E2;
+        color: #3b2d00;
+        overflow-y: auto;
+        transition: left 0.3s ease;
+        z-index: 1500;
+        padding: 15px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+        font-family: Arial, sans-serif;
+        display: none;
+        /* oculto en desktop */
+      }
 
-      tipoItems.forEach(opt => {
-        opt.addEventListener('click', () => {
-          tipoItems.forEach(o => o.classList.remove('selected'));
-          opt.classList.add('selected');
-          tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
-          tipoBtn.textContent = `${opt.textContent} `;
-          tipoBtn.appendChild(arrow());
-          tipoMenu.classList.remove('active');
-          updateTotal();
-        });
-      });
+      /* Mostrar sidebar cuando tenga la clase 'open' */
+      #pp-sidebar.open {
+        left: 0;
+        display: block;
+        /* visible en móvil */
+      }
 
-      // BOTONES + / -
-      incBtn.addEventListener('click', () => {
-        if (cantidad < 100) {
-          cantidad++;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
+      #pp-sidebar.open~#page-scroll {
+        overflow: hidden !important;
+      }
+
+      /* Botón cerrar */
+      #pp-close-btn {
+        font-size: 28px;
+        cursor: pointer;
+        color: #3b2d00;
+        margin-bottom: 20px;
+        user-select: none;
+        text-align: right;
+      }
+
+      /* Links del menú */
+      .pp-nav-items a {
+        color: #3b2d00;
+        text-decoration: none;
+        display: block;
+        padding: 8px 10px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+        font-weight: 500;
+      }
+
+      /* Hover en enlaces */
+      .pp-nav-items a:hover {
+        background-color: #e0d9b8;
+      }
+
+      /* Dropdown y submenús en móvil */
+      .pp-dropdown-menu,
+      .pp-submenu {
+        display: none;
+        padding-left: 15px;
+        border-left: 2px solid #c9c18a;
+        margin-top: 5px;
+      }
+
+      /* Mostrar en mobile cuando tengan la clase 'open' */
+      .pp-dropdown-menu.open,
+      .pp-submenu.open {
+        display: block;
+      }
+
+      /* Estilo para triggers de dropdown en móvil */
+      .pp-nav-items .pp-dropdown-trigger {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        padding: 8px 10px;
+        user-select: none;
+      }
+
+      /* Opcionales: iconos o flechas en triggers */
+      .pp-dropdown-trigger span {
+        font-size: 1em;
+      }
+
+      /* Estilos para enlaces en submenús en móvil */
+      .pp-submenu a {
+        display: block;
+        padding: 0.3rem 0.7rem;
+        color: #3b2d00;
+        text-decoration: none;
+        font-weight: 500;
+        border-radius: 4px;
+      }
+
+      /* Hover en submenús en móvil */
+      .pp-submenu a:hover {
+        background-color: #e0d9b8;
+      }
+
+      /* Responsivo - para pantallas <= 992px */
+      @media (max-width: 992px) {
+
+        /* Ocultar navbar, barra de búsqueda, etc. */
+        .pp-main-navbar,
+        .pp-search-bar,
+        .pp-nav-links,
+        .main-navbar,
+        .search-bar,
+        #red,
+        footer {
+          display: none !important;
         }
-      });
 
-      decBtn.addEventListener('click', () => {
-        if (cantidad > 1) {
-          cantidad--;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
+        .pp-logo-svg {
+          opacity: 0;
         }
-      });
 
-      // LIMPIAR SELECCIONES
-      limpiarBtn.addEventListener('click', () => {
-        selectedSize = null;
-        cantidad = 1;
-        tipo = { type: 'unidad', mult: 1 };
-        sizeBtn.textContent = 'Seleccionar Tamaño ';
-        sizeBtn.appendChild(arrow());
-        tipoBtn.textContent = 'Unidad (1) ';
-        tipoBtn.appendChild(arrow());
-        cantidadVisual.textContent = '1';
-        sizeItems.forEach(i => i.classList.remove('selected'));
-        tipoItems.forEach(i => i.classList.remove('selected'));
-        tipoItems[0].classList.add('selected'); // volver a Unidad
-        precios.style.display = 'none';
-        totalDisplay.textContent = 'Total: $0';
-      });
+        /* Mostrar botón menú hamburguesa */
+        .menu-toggle {
+          display: block;
+          position: relative;
+          top: 1rem;
+          left: 2rem;
+          font-size: 2rem;
+          background: none;
+          width: 2%;
+          border: none;
+          cursor: pointer;
+          color: #3b2d00;
+          z-index: 2001;
+          user-select: none;
+        }
 
-      // CERRAR DROPDOWNS AL HACER CLIC FUERA
-      document.addEventListener('click', e => {
-        if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
-        if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
-      });
+        /* Estado sticky cuando el sidebar está abierto */
+        .menu-toggle.sticky-mode {
+          position: sticky;
+          top: 1rem;
+        }
 
-    });
-  </script>
+        #pp-logo span {
+          margin-top: -2.5em;
+          margin-bottom: 0.7em;
+          margin-left: 4.8em;
+        }
 
-</body>
+        /* Sidebar en móvil */
+        #pp-sidebar {
+          display: block;
+          /* ya lo controlamos con JavaScript */
+          position: fixed;
+          top: 0;
+          left: -320px;
+          /* oculto por defecto */
+          width: 300px;
+          height: 100vh;
+          background-color: #FCF5E2;
+          box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+          overflow-y: auto;
+          transition: left 0.3s ease;
+          z-index: 1500;
+          padding: 1rem;
+          font-family: Arial, sans-serif;
+          color: #3b2d00;
+        }
+
+        /* Botón cerrar en móvil */
+        #pp-close-btn {
+          font-size: 2.5rem;
+          cursor: pointer;
+          color: #3b2d00;
+          text-align: right;
+          margin-bottom: 1rem;
+          user-select: none;
+        }
+
+        /* Estilos para los submenús en móvil */
+        .dropdown-submenu {
+          margin-bottom: 1rem;
+        }
+
+        /* Trigger para submenús en móvil */
+        .dropdown-submenu>a.submenu-toggle {
+          display: block;
+          font-weight: bold;
+          cursor: pointer;
+          padding: 0.5rem 0.7rem;
+          border-radius: 4px;
+          user-select: none;
+        }
+
+        /* Hover en trigger de submenús */
+        .dropdown-submenu>a.submenu-toggle:hover {
+          background-color: #e0d9b8;
+        }
+
+        /* Submenús en móvil */
+        .submenu {
+          display: none;
+          padding-left: 15px;
+          margin-top: 0.5rem;
+          border-left: 2px solid #c9c18a;
+        }
+
+        /* Mostrar submenús cuando tengan la clase 'open' */
+        .submenu.open {
+          display: block;
+        }
+
+
+        /* Buscador */
+        .search-bar {
+          display: flex;
+          align-items: center;
+          flex-grow: 1;
+          max-width: 300px;
+          margin: 0 0 1.5rem 0;
+          padding: 0.2em 0.5em;
+          border: 2px solid #3b2d00;
+          border-radius: 0.4em;
+          background-color: #FCF5E2;
+        }
+
+        .search-bar input[type="text"] {
+          flex-grow: 1;
+          padding: 1em 0.8rem;
+          font-size: 1rem;
+          font-weight: 700;
+          color: #3b2d00;
+          border: none;
+          outline: none;
+          background: transparent;
+        }
+
+        .search-bar img {
+          width: 30px;
+          height: 30px;
+          margin-left: -0.7em;
+          cursor: pointer;
+          user-select: none;
+          filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+          opacity: 0.5;
+          position: relative;
+          left: 0;
+          background: transparent;
+        }
+      }
+
+      /* Sidebar abierto */
+      #pp-sidebar {
+        position: fixed;
+        top: 0;
+        left: -300px;
+        /* oculto por defecto */
+        width: 300px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        display: none;
+        /* oculto por defecto */
+        overflow-y: auto;
+        z-index: 1000;
+      }
+
+      #pp-sidebar.open {
+        left: 0;
+        display: block;
+      }
+
+      /* Bloqueo scroll body y html */
+      .scroll-locked {
+        overflow: hidden !important;
+        height: 100vh !important;
+      }
+
+      /* Responsive para max-width 992px */
+      @media (max-width: 992px) {
+        #pp-sidebar {
+          left: -100%;
+          width: 80vw;
+          display: none;
+        }
+
+        #pp-sidebar.open {
+          left: 0;
+          display: block;
+        }
+      }
+
+      /* Fondo modal */
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000000c9;
+        /* Fondo estilo Netflix */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        z-index: 9999;
+        overflow: hidden;
+        overflow-y: hidden;
+        /* bloquea scroll */
+      }
+
+      /* Cuando modal está activo, bloquea scroll del body */
+      body.modal-open {
+        overflow-y: hidden;
+      }
+
+      /* Caja central del modal */
+      .modal-box {
+        width: 47%;
+        max-width: 70em;
+        background-color: #181818;
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+        color: #fff;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        margin-top: 2em;
+        height: 100%;
+        font-size: 18px !important;
+      }
+
+      /* Imagen con overlay */
+      .modal-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+      }
+
+      .modal-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Overlay gradiente sobre la imagen */
+      .modal-image::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, #181818, transparent 50%);
+        pointer-events: none;
+      }
+
+      /* Contenido */
+      .modal-content {
+        padding: 20px;
+        font-size: 28px;
+        padding-left: 4em !important;
+        padding-right: 4em !important;
+      }
+
+      .modal-content h2 {
+        margin-bottom: 10px;
+        font-size: 30px;
+      }
+
+      /* Botón cerrar circular */
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: none;
+        background-color: #1818187c;
+        color: #fff;
+        font-size: 22px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+        z-index: 1000;
+      }
+
+      .modal-content a {
+        color: #1da1f2;
+        text-decoration: underline;
+      }
+
+      .modal-box::selection {
+        color: #181818;
+        background-color: #fff;
+      }
+
+      /* 📱 Responsividad */
+
+      /* Tablets (≤ 1024px) */
+      @media (max-width: 1024px) {
+        .modal-box {
+          width: 90%;
+          height: auto;
+          margin-top: 1em;
+          font-size: 16px !important;
+        }
+
+        .modal-content {
+          padding-left: 2em !important;
+          padding-right: 2em !important;
+          font-size: 20px;
+        }
+      }
+
+      /* Móviles (≤ 768px) */
+      @media (max-width: 768px) {
+        .modal {
+          align-items: center;
+          /* centra en móviles */
+        }
+
+        .modal-box {
+          width: 100%;
+          height: 100%;
+          border-radius: 0;
+          margin: 0;
+          font-size: 16px !important;
+        }
+
+        .modal-content {
+          padding: 1em !important;
+          font-size: 18px;
+        }
+
+        .modal-content h2 {
+          font-size: 22px;
+        }
+
+        .close-btn {
+          top: 10px;
+          right: 10px;
+        }
+      }
+
+      .producto-img-container .contenedor {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .producto-img-container .contenedor img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        /* asegura que todas las imágenes encajen */
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+      }
+
+      .producto-img-container .contenedor img.visible {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      /* Textos al pasar el mouse */
+      #red:hover,
+      #mi-cuenta-text:hover {
+        color: #000;
+      }
+
+      /* Imágenes/íconos al pasar el mouse */
+      .icon-right:hover img,
+      .casa:hover img,
+      .mail-icon:hover img,
+      .cart-icon:hover img {
+        filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+      }
+
+      /* En caso de que la propia imagen tenga la clase directamente */
+      .icon-right:hover,
+      .casa:hover,
+      .mail-icon:hover,
+      .cart-icon:hover {
+        filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+      }
+    </style>
+    </head>
+
+    <body>
+
+      <!-- Botón menú hamburguesa -->
+      <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+      <div id="maintenance-modal" class="modal">
+        <div class="modal-box">
+          <button class="close-btn">&times;</button>
+
+          <!-- Imagen principal -->
+          <div class="modal-image">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/fondosn.jpg" alt="Imagen Modal">
+          </div>
+
+          <!-- Contenido -->
+          <div class="modal-content">
+            <h2>PÁGINA EN MANTENIMIENTO</h2>
+            <p>La opción de compra no está disponible en este momento.</p>
+            <p>Por el momento esta página funcionará como
+              catálogo de consulta.</p>
+            <p>Más info en:
+              <a href="https://www.instagram.com/pierrastegui.papelera" target="_blank">
+                instagram.com/pierrastegui.papelera
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div id="pp-sidebar">
+        <div id="pp-page-scroll">
+          <div id="pp-close-btn">&times;</div>
+          <div class="pp-nav-items">
+            <!-- Buscador -->
+            <div class="search-bar">
+              <input type="text" id="search-input" placeholder="Buscar productos..." />
+              <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" alt="Lupa" />
+            </div>
+
+            <!-- Menú principal -->
+            <a href="#" class="pp-link">Todos los productos</a>
+            <div class="pp-dropdown-menu">
+              <!-- Artículos de Embalaje -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Artículos de Embalaje <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol">Rollo
+                  Pluribol</a>
+              </div>
+
+              <!-- Bandejas y Potes -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Bandejas y Potes <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/bandejas-de-carton-plateadas">Bandejas
+                  de cartón plateadas</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/aluminio">Bandejas de
+                  aluminio</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/telgopor">Bandejas de
+                  telgopor</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plastico">Bandejas
+                  plásticas</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/bisagra">Potes
+                  bisagra</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/potes-de-helado">Pote
+                  de helado</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/dips">Potes DIPS</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/ensaladafruta">Potes
+                  ensalada de fruta</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/ensaladera-con-tapa">Ensaladera
+                  con tapa</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plato-marmita">Plato
+                  marmita</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/carton">Cartón
+                  corrugado</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/blonda">Blonda</a>
+              </div>
+
+              <!-- Bolsas y Sobres -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Bolsas y Sobres <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/arranques/grueso">Arranques Grueso</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/arranques/rendidor">Arranques
+                  Rendidor</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bolsas/camiseta">Camiseta</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bolsas/residuo">Residuos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bolsas/horno">Horno</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/bolsas/polipropileno">Polipropileno</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bolsas/riñon">Riñón</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bolsas/ziploc">Ziploc</a>
+              </div>
+
+              <!-- Cajas de Cartón -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Cajas de Cartón <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/pizza">Pizza</a>
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/empanada">Empanadas</a>
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/hamburguesa">Hamburguesa</a>
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/sandwich">Sándwich</a>
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/ravioles">Ravioles</a>
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/desayuno">Desayuno</a>
+              </div>
+
+              <!-- Cubiertos y Sorbetes -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Cubiertos y Sorbetes <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cucharasopera">Cuchara
+                  sopera</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/cubiertos/cucharita">Cucharita</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo
+                  Blanco</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/negro">Cuchillo
+                  Negro</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor
+                  Blanco</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/negro">Tenedor
+                  Negro</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/remos">Remos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/platotorta">Platos de torta</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/sorbetes/comun">Sorbetes</a>
+              </div>
+
+              <!-- Guantes -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Guantes <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/guantes/nitirlo">Nitrilo</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/guantes/polietileno">Polietileno</a>
+              </div>
+
+              <!-- Higiénicos -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Higiénicos <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/elegante">Papel higiénico
+                  elegante</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/newpel">Papel higiénico
+                  económico</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/premium">Papel higiénico
+                  premium</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/elegante">Rollo de cocina
+                  elegante</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/newpel">Rollo de cocina new
+                  pel</a>
+              </div>
+
+              <!-- Librería y Cotillón -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Librería y Cotillón <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/abrochadora">Abrochadora</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/banditas-elasticas">Bandas
+                  elásticas</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/biromes">Birome</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/boligoma">Boligoma</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/ganchos-de-abrochadora">Ganchos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/calcos">Calcos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/cuadernosuniv">Cuadernos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/estallidos">Estallidos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/fibrones">Fibrones</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/hojas">Hojas A4</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/liquidpaper">Liquid paper</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/maquinamotex">Máquina de
+                  motex</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/rollos-motex">Rollos motex</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/remitos">Remitos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/resaltadores">Resaltadores</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/tacospapel">Tacos de papel</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/globos">Globos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/vela">Vela / Velón</a>
+              </div>
+
+              <!-- Moldes Gastronomía -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Moldes Gastronomía <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/budinera/aluminio">Budineras</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/pascua/caja">Rosca de
+                  pascua</a>
+                <a
+                  href="https://papelerapierrastegui.com.ar/productos/productos/moldes-gastronomia/pirotines">Pirotines</a>
+              </div>
+
+              <!-- Papel -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Papel <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/aluminio">Papel aluminio</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/manteca">Papel manteca</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/folex/folex">Fólex</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/bobina">Bobina sulfito</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-cortado">Papel sulfito
+                  cortado</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-parafinado">Papel
+                  parafinado</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/blonda">Blondas de
+                  papel</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/papel/servilletas">Servilletas</a>
+              </div>
+
+              <!-- Regalería -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Regalería <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/mini-rollos">Minirollos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/libreria/mono-facil">Moño fácil</a>
+              </div>
+
+              <!-- Vasos -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Vasos <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/vasos/plastico">Plásticos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/vasos/telgopor">Telgopor</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/vasos/vasos-carton">Cartón</a>
+              </div>
+
+              <!-- Cartón -->
+              <div class="pp-dropdown-trigger" tabindex="0">
+                Cartón <span>▸</span>
+              </div>
+              <div class="pp-submenu">
+                <a href="https://papelerapierrastegui.com.ar/productos/carton/corrugado">Trípode</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/conopapas">Cono de fritas</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/portapanchos">Porta panchos</a>
+                <a href="https://papelerapierrastegui.com.ar/productos/carton/tirascs">Tiras satinadas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="nosotros" class="pp-link">¿Quiénes
+          somos?</a>
+
+        <hr>
+        <a class="copyr copyr-responsive">2025 © Papelera Pierrastegui</a><br>
+        <a class="copyp copyp-responsive">2025 © Sol Argentino TV Group</a>
+        <!-- CENTRO: Buscador -->
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Buscar productos..." />
+          <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" alt="Lupa" />
+        </div>
+      </div>
+
+      </div>
+      </div>
+      </div>
+
+      <header>
+        <!-- IZQUIERDA: Logo + Nombre -->
+        <div id="pp-logo" class="pp-logo">
+          <a href="https://papelerapierrastegui.com.ar">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" alt="Logo Papelera Pierrastegui"
+              class="pp-logo-svg">
+            <span class="pp-name">Papelera<br>Pierrastegui</span>
+          </a>
+        </div>
+
+        <!-- CENTRO: Buscador -->
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Buscar productos..." />
+          <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" alt="Lupa" />
+        </div>
+
+        <!-- DERECHA: Enlaces -->
+        <div class="nav-links">
+          <div class=" mail">
+            <a href="mailto:info@papelerapierrastegui.com.ar" class="icon-text">
+              <span id="red">Contactános<br>Por Mail</span>
+              <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/email.svg" alt="Mail"
+                class="mail-icon">
+            </a>
+          </div>
+
+          <div class="ig">
+            <a href="https://www.instagram.com/pierrastegui.papelera" target="_blank" rel="noopener noreferrer"
+              aria-label="Instagram" class="icon-text">
+              <span id="red">Seguinos<br>En Instagram</span>
+              <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram"
+                class="icon-right">
+            </a>
+          </div>
+
+          <div class="wp">
+            <a href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"
+              class="icon-text">
+              <span id="red">Contactános<br>Por Whatsapp</span>
+              <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp"
+                class="icon-right">
+            </a>
+          </div>
+
+          <div class="carrito-pro">
+            <a aria-label="Carrito" class="icon-text">
+              <span id="red">Carrito</span>
+              <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito"
+                class="cart-icon">
+            </a>
+          </div>
+
+          <div class="mi-cuenta">
+            <div id="mi-cuenta-container">
+              <!-- Aquí se inyecta dinámicamente -->
+            </div>
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Mi Cuenta"
+              class="icon-right">
+          </div>
+
+          <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+            import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+
+            const firebaseConfig = {
+              apiKey: "AIzaSyD9T9Y34jeQUtscNdjn-aZ54B4kEisNk3c",
+              authDomain: "papelera-pie.firebaseapp.com",
+              projectId: "papelera-pie",
+              storageBucket: "papelera-pie.firebasestorage.app",
+              messagingSenderId: "407925272882",
+              appId: "1:407925272882:web:4ce4347c5cba2e95b4a72b",
+              measurementId: "G-YXB9F6CTN0"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth();
+            const container = document.getElementById("mi-cuenta-container");
+
+            onAuthStateChanged(auth, (user) => {
+              container.innerHTML = ""; // Limpiar contenido previo
+
+              if (user) {
+                // Usuario logueado → Dropdown con Cerrar Sesión
+                const dropdown = document.createElement("div");
+                dropdown.classList.add("dropdown");
+
+                const btn = document.createElement("button");
+                btn.textContent = user.displayName || "Mi Cuenta";
+                btn.onclick = () => dropdown.classList.toggle("show");
+
+                const content = document.createElement("div");
+                content.classList.add("dropdown-content");
+
+                const logoutBtn = document.createElement("button");
+                logoutBtn.textContent = "Cerrar Sesión";
+                logoutBtn.onclick = async () => {
+                  await signOut(auth);
+                  dropdown.classList.remove("show");
+                  window.location.reload(); // Refrescar para mostrar botones de login/registro
+                };
+
+                content.appendChild(logoutBtn);
+                dropdown.appendChild(btn);
+                dropdown.appendChild(content);
+                container.appendChild(dropdown);
+
+                // Cerrar dropdown si hace clic fuera
+                window.addEventListener("click", (e) => {
+                  if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove("show");
+                  }
+                });
+
+              } else {
+                // Usuario no logueado → botones
+                const btnLogin = document.createElement("button");
+                btnLogin.textContent = "Iniciar Sesión";
+                btnLogin.onclick = () => window.location.href = "/logueo";
+                btnLogin.classList.add("btn-login");
+
+                container.appendChild(btnLogin);
+                container.appendChild(document.createElement("br"));
+                container.appendChild(btnRegistro);
+              }
+            });
+          </script>
+        </div>
+      </header>
+
+      <body>
+
+        <nav class="main-navbar">
+          <div class="nav-items">
+
+            <div class="nav-item dropdown">
+              <a>Todos los productos <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span></a>
+              <div class="dropdown-menu">
+
+                <div class="dropdown-submenu">
+                  <a>Artículos de Embalaje</a>
+                  <div class="submenu">
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol">Rollo
+                      Pluribol</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Bandejas y Potes</a>
+                  <div class="submenu">
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/bandejas-de-carton-plateadas">Bandejas
+                      de cartón plateadas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/aluminio">Bandejas
+                      de
+                      aluminio</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/telgopor">Bandejas
+                      de
+                      telgopor</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plastico">Bandejas
+                      Plásticas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/bisagra">Potes
+                      bisagra</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/potes-de-helado">Pote
+                      de helado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/dips">Potes
+                      DIPS</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/ensaladafruta">Potes
+                      ensalada de fruta</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/ensaladera-con-tapa">Ensaladera
+                      con tapa</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plato-marmita">Plato
+                      marmita</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/carton">Cartón
+                      corrugado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/blonda">Blonda</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Bolsas y Sobres</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/arranques/grueso">Arranques
+                      Grueso</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/arranques/rendidor">Arranques
+                      Rendidor</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/camiseta">Camiseta</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/residuo">Residuos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/horno">Horno</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/bolsas/polipropileno">Polipropileno</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/riñon">Riñón</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bolsas/ziploc">Ziploc</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Cajas de Cartón</a>
+                  <div class="submenu">
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/pizza">Pizza</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/empanada">Empanadas</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/hamburguesa">Hamburguesa</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/sandwich">Sándwich</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/ravioles">Ravioles</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/desayuno">Desayuno</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Cubiertos y Sorbetes</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cucharasopera">Cuchara
+                      sopera</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/cubiertos/cucharita">Cucharita</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo
+                      Blanco</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/negro">Cuchillo
+                      Negro</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor
+                      Blanco</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/negro">Tenedor
+                      Negro</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/remos">Remos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/platotorta">Platos de
+                      torta</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/sorbetes/comun">Sorbetes</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Guantes</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/guantes/nitirlo">Nitrilo</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/guantes/polietileno">Polietileno</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Higiénicos</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/elegante">Papel
+                      higiénico elegante</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/newpel">Papel
+                      higiénico económico</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/premium">Papel
+                      higiénico premium</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/elegante">Rollo de
+                      cocina
+                      elegante</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/newpel">Rollo de
+                      cocina
+                      new pel</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Librería y Cotillón</a>
+                  <div class="submenu">
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/libreria/abrochadora">Abrochadora</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/banditas-elasticas">Bandas
+                      elásticas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/biromes">Birome</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/boligoma">Boligoma</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/ganchos-de-abrochadora">Ganchos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/calcos">Calcos</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/libreria/cuadernosuniv">Cuadernos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/libreria/estallidos">Estallidos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/fibrones">Fibrones</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/hojas">Hojas A4</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/liquidpaper">Liquid
+                      paper</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/maquinamotex">Máquina de
+                      motex</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/rollos-motex">Rollos
+                      motex</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/remitos">Remitos</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/libreria/resaltadores">Resaltadores</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/tacospapel">Tacos de
+                      papel</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/globos">Globos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/vela">Vela / Velón</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Moldes Gastronomía</a>
+                  <div class="submenu">
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/budinera/aluminio">Budineras</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/pascua/caja">Rosca
+                      de pascua</a>
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/moldes-gastronomia/pirotines">Pirotines</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Papel</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/aluminio">Papel
+                      aluminio</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/manteca">Papel manteca</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/folex/folex">Fólex</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/bobina">Bobina sulfito</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-cortado">Papel
+                      sulfito
+                      cortado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-parafinado">Papel
+                      parafinado</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/blonda">Blondas
+                      de
+                      papel</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/productos/papel/servilletas">Servilletas</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Regalería</a>
+                  <div class="submenu">
+                    <a
+                      href="https://papelerapierrastegui.com.ar/productos/productos/libreria/mini-rollos">Minirollos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/libreria/mono-facil">Moño
+                      fácil</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Vasos</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/vasos/plastico">Plásticos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/vasos/telgopor">Telgopor</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/vasos/vasos-carton">Cartón</a>
+                  </div>
+                </div>
+
+                <div class="dropdown-submenu">
+                  <a>Cartón</a>
+                  <div class="submenu">
+                    <a href="https://papelerapierrastegui.com.ar/productos/carton/corrugado">Trípode</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/conopapas">Cono de
+                      fritas</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/portapanchos">Porta
+                      panchos</a>
+                    <a href="https://papelerapierrastegui.com.ar/productos/carton/tirascs">Tiras
+                      satinadas</a>
+                  </div>
+                </div>
+
+              </div> <!-- dropdown-menu -->
+            </div> <!-- nav-item dropdown -->
+            <div class="nav-item dropdown">
+              <a href="nosotros">¿Quiénes somos?</a>
+            </div>
+
+          </div> <!-- nav-items -->
+          </div>
+          <main>
+            <section class="producto container">
+              <h2>BOLSAS DE ARRANQUE GRUESO</h2>
+              <div class="producto-contenido">
+                <img
+                  src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
+                  alt="Arranque Grueso" />
+                <div class="producto-info">
+                  <!-- Dropdown Tamaño -->
+                  <div class="dropdown" id="size-dropdown">
+                    <button class="dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
+                      Seleccionar Tamaño <span class="arrow">▼</span>
+                    </button>
+                    <div class="dropdown-menu" role="listbox" tabindex="-1">
+                      <div class="dropdown-item" data-size="15x20" data-price-unit="4700" data-price-bulk="25200">15x20
+                      </div>
+                      <div class="dropdown-item" data-size="15x25" data-price-unit="4700" data-price-bulk="25200">15x25
+                      </div>
+                      <div class="dropdown-item" data-size="20x25" data-price-unit="4700" data-price-bulk="25200">20x25
+                      </div>
+                      <div class="dropdown-item" data-size="20x30" data-price-unit="4700" data-price-bulk="25200">20x30
+                      </div>
+                      <div class="dropdown-item" data-size="25x35" data-price-unit="4700" data-price-bulk="25200">25x35
+                      </div>
+                      <div class="dropdown-item" data-size="30x40" data-price-unit="4700" data-price-bulk="25200">30x40
+                      </div>
+                      <div class="dropdown-item" data-size="35x45" data-price-unit="4700" data-price-bulk="25200">35x45
+                      </div>
+                      <div class="dropdown-item" data-size="40x50" data-price-unit="4700" data-price-bulk="25200">40x50
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Precios -->
+                  <div class="precios" style="display:none;">
+                    <p class="precio-unit">Por unidad: $4.700 ARS</p>
+                    <p class="precio-bulto">Por bulto (6 unidades): $25.200 ARS</p>
+                  </div>
+
+                  <!-- Tipo -->
+                  <div class="cantidad-container">
+                    <label for="tipo-dropdown">Tipo:</label>
+                    <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                      <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
+                      <div class="dropdown-menu" role="listbox">
+                        <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
+                        <span class="dropdown-item" data-type="bulto" data-mult="6">Bulto (6)</span>
+                      </div>
+                    </div>
+                    <button id="limpiar">Limpiar</button>
+                  </div>
+
+                  <!-- Incremento manual -->
+                  <div class="agregar-carrito-cantidad">
+                    <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+                    <span id="cantidad-visual">1</span>
+                    <button id="incrementar" aria-label="Aumentar cantidad">+</button>
+                  </div>
+
+                  <p class="total">Total: $0</p>
+
+                  <h3>Descripción del producto</h3>
+                  <ul>
+                    <li>Rollos de bolsas de arranque de distintas medidas, transparentes, prácticos y resistentes.</li>
+                    <li>Útiles para guardar alimentos, fraccionar productos o colocar en cestos de residuos pequeños.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+          </main>
+
+          <footer>
+            <div class="container-footer">
+              <p>2025 © Papelera Pierrastegui</p>
+              <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+            </div>
+          </footer>
+          <!-- Script para reemplazar dinámicamente los href -->
+          <script src="assets/js/social-links.js"></script>
+          <script src="assets/js/categoriascatalogo.js"></script>
+          <script src="assets/js/home-dropdown-scroll.js"></script>
+          <script src="assets/js/satv-scroll-main.js"></script>
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              function cicloImagenes(contenedor) {
+                const imgs = contenedor.querySelectorAll("img");
+                if (imgs.length < 2) return; // nada que hacer si hay menos de 2
+
+                let index = 0;
+
+                setInterval(() => {
+                  // ocultar la actual
+                  imgs[index].classList.remove("visible");
+
+                  // pasar a la siguiente
+                  index = (index + 1) % imgs.length;
+
+                  // mostrar la siguiente
+                  imgs[index].classList.add("visible");
+                }, 3000); // cada 3 segundos
+              }
+
+              // Ejecutar en cada contenedor dentro de producto-img-container
+              document.querySelectorAll(".producto-img-container .contenedor").forEach(cicloImagenes);
+            });
+          </script>
+
+          <script>
+            // =========================
+            // Reemplazo de botones con enlaces en productos
+            // =========================
+            const links = [
+              "https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol",
+              "https://papelerapierrastegui.com.ar/productos/arranques/grueso",
+              "https://papelerapierrastegui.com.ar/productos/arranques/rendidor",
+              // ... resto de los enlaces
+              "https://papelerapierrastegui.com.ar/productos/vasos/plastico",
+              "https://papelerapierrastegui.com.ar/productos/vasos/telgopor"
+            ];
+
+            function extraerUrl(onclickStr) {
+              const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+              return match ? match[1] : null;
+            }
+
+            document.querySelectorAll('.producto').forEach(producto => {
+              if (producto.classList.contains('proximo')) return;
+
+              const btn = producto.querySelector('button.btn');
+              if (!btn) return;
+
+              const onclickAttr = btn.getAttribute('onclick');
+              if (!onclickAttr) return;
+
+              const url = extraerUrl(onclickAttr);
+              if (!url) return;
+
+              if (links.includes(url)) {
+                const nuevoDiv = document.createElement('div');
+                nuevoDiv.classList.add('btn-reset');
+                producto.parentNode.insertBefore(nuevoDiv, producto);
+                nuevoDiv.appendChild(producto);
+                nuevoDiv.addEventListener('click', () => {
+                  window.location.href = url;
+                });
+              }
+            });
+          </script>
+
+          <script>
+            // =========================
+            // Buscador de productos
+            // =========================
+            const grid = document.querySelector('.productos-grid');
+            const productosOriginales = Array.from(grid.querySelectorAll('.producto'));
+
+            document.getElementById('search-input').addEventListener('input', function () {
+              const query = this.value.toLowerCase();
+
+              if (query === '') {
+                while (grid.firstChild) {
+                  grid.removeChild(grid.firstChild);
+                }
+                productosOriginales.forEach(producto => {
+                  producto.style.display = '';
+                  grid.appendChild(producto);
+                });
+                return;
+              }
+
+              const visibles = productosOriginales.filter(producto => {
+                const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
+                const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
+                return nombre.includes(query) || categoria.includes(query);
+              });
+
+              while (grid.firstChild) {
+                grid.removeChild(grid.firstChild);
+              }
+
+              visibles.forEach(producto => {
+                producto.style.display = '';
+                grid.appendChild(producto);
+              });
+            });
+          </script>
+
+          <script>
+            // =========================
+            // Menú lateral y dropdown
+            // =========================
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.getElementById('pp-sidebar');
+            const closeBtn = document.getElementById('pp-close-btn');
+            const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
+
+            if (menuToggle && sidebar && closeBtn) {
+              menuToggle.addEventListener('click', () => {
+                sidebar.style.display = 'block';
+              });
+
+              closeBtn.addEventListener('click', () => {
+                sidebar.style.display = 'none';
+              });
+
+              document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
+                  sidebar.style.display = 'none';
+                }
+              });
+            }
+
+            dropdownTriggers.forEach(trigger => {
+              trigger.addEventListener('click', () => {
+                const submenu = trigger.nextElementSibling;
+                if (submenu) {
+                  submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                }
+              });
+            });
+          </script>
+
+          <script>
+            // =========================
+            // Segundo script para menú (alternativo)
+            // =========================
+            const menuToggleAlt = document.getElementById('menu-toggle');
+            const sidebarAlt = document.getElementById('pp-sidebar');
+            const closeBtnAlt = document.getElementById('pp-close-btn');
+
+            if (menuToggleAlt && sidebarAlt && closeBtnAlt) {
+              menuToggleAlt.addEventListener('click', () => {
+                sidebarAlt.classList.add('open');
+              });
+              closeBtnAlt.addEventListener('click', () => {
+                sidebarAlt.classList.remove('open');
+              });
+            }
+
+            document.querySelectorAll('.pp-nav-items > a').forEach(link => {
+              link.addEventListener('click', e => {
+                const next = link.nextElementSibling;
+                if (next && next.classList.contains('pp-dropdown-menu')) {
+                  e.preventDefault();
+                  next.classList.toggle('open');
+                }
+              });
+            });
+          </script>
+
+          <script>
+            // =========================
+            // Modal de mantenimiento
+            // =========================
+            document.addEventListener("DOMContentLoaded", () => {
+              const modal = document.getElementById("maintenance-modal");
+              const closeBtn = document.querySelector(".close-btn");
+
+              document.body.classList.add("modal-open");
+
+              closeBtn.addEventListener("click", () => {
+                modal.style.display = "none";
+                document.body.classList.remove("modal-open");
+              });
+            });
+          </script>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              // DROPDOWNS
+              const sizeDropdown = document.getElementById('size-dropdown');
+              const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+              const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+              const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+              const tipoDropdown = document.getElementById('tipo-dropdown');
+              const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+              const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+              const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+              // BOTONES
+              const limpiarBtn = document.getElementById('limpiar');
+              const decBtn = document.getElementById('decrementar');
+              const incBtn = document.getElementById('incrementar');
+
+              // DISPLAY
+              const cantidadVisual = document.getElementById('cantidad-visual');
+              const precios = document.querySelector('.precios');
+              const precioUnit = document.querySelector('.precio-unit');
+              const precioBulto = document.querySelector('.precio-bulto');
+              const totalDisplay = document.querySelector('.total');
+
+              // ESTADO
+              let selectedSize = null;
+              let cantidad = 1;
+              let tipo = { type: 'unidad', mult: 1 }; // unidad x1, bulto x6
+
+              const arrow = () => {
+                const span = document.createElement('span');
+                span.classList.add('arrow');
+                span.textContent = '▼';
+                return span;
+              };
+
+              // FUNCION PARA CALCULAR TOTAL
+              function updateTotal() {
+                if (!selectedSize) {
+                  precios.style.display = 'none';
+                  totalDisplay.textContent = 'Total: $0';
+                  return;
+                }
+
+                precios.style.display = 'block';
+                const priceU = Number(selectedSize.priceUnit);
+                const priceB = Number(selectedSize.priceBulk);
+
+                precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
+                precioBulto.textContent = `Por bulto (6 unidades): $${priceB.toLocaleString('es-AR')} ARS`;
+
+                let total = 0;
+
+                if (tipo.type === 'unidad') {
+                  total = cantidad * priceU;
+                } else {
+                  total = cantidad * priceB; // cada bulto ya es de 6 unidades
+                }
+
+                totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+              }
+
+              // SELECCIÓN DE TAMAÑO
+              sizeBtn.addEventListener('click', () => {
+                sizeMenu.classList.toggle('active');
+              });
+
+              sizeItems.forEach(item => {
+                item.addEventListener('click', () => {
+                  sizeItems.forEach(i => i.classList.remove('selected'));
+                  item.classList.add('selected');
+                  selectedSize = {
+                    size: item.dataset.size,
+                    priceUnit: item.dataset.priceUnit,
+                    priceBulk: item.dataset.priceBulk
+                  };
+                  sizeBtn.textContent = `${selectedSize.size} `;
+                  sizeBtn.appendChild(arrow());
+                  sizeMenu.classList.remove('active');
+                  updateTotal();
+                });
+              });
+
+              // SELECCIÓN DE TIPO (Unidad / Bulto)
+              tipoBtn.addEventListener('click', () => {
+                tipoMenu.classList.toggle('active');
+              });
+
+              tipoItems.forEach(opt => {
+                opt.addEventListener('click', () => {
+                  tipoItems.forEach(o => o.classList.remove('selected'));
+                  opt.classList.add('selected');
+                  tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
+                  tipoBtn.textContent = `${opt.textContent} `;
+                  tipoBtn.appendChild(arrow());
+                  tipoMenu.classList.remove('active');
+                  updateTotal();
+                });
+              });
+
+              // BOTONES + / -
+              incBtn.addEventListener('click', () => {
+                if (cantidad < 100) {
+                  cantidad++;
+                  cantidadVisual.textContent = cantidad;
+                  updateTotal();
+                }
+              });
+
+              decBtn.addEventListener('click', () => {
+                if (cantidad > 1) {
+                  cantidad--;
+                  cantidadVisual.textContent = cantidad;
+                  updateTotal();
+                }
+              });
+
+              // LIMPIAR SELECCIONES
+              limpiarBtn.addEventListener('click', () => {
+                selectedSize = null;
+                cantidad = 1;
+                tipo = { type: 'unidad', mult: 1 };
+                sizeBtn.textContent = 'Seleccionar Tamaño ';
+                sizeBtn.appendChild(arrow());
+                tipoBtn.textContent = 'Unidad (1) ';
+                tipoBtn.appendChild(arrow());
+                cantidadVisual.textContent = '1';
+                sizeItems.forEach(i => i.classList.remove('selected'));
+                tipoItems.forEach(i => i.classList.remove('selected'));
+                tipoItems[0].classList.add('selected'); // volver a Unidad
+                precios.style.display = 'none';
+                totalDisplay.textContent = 'Total: $0';
+              });
+
+              // CERRAR DROPDOWNS AL HACER CLIC FUERA
+              document.addEventListener('click', e => {
+                if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
+                if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
+              });
+
+            });
+          </script>
+
+      </body>
 
 </html>
