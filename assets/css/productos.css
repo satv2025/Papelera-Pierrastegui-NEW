@@ -177,7 +177,7 @@ button.dropdown-btn:hover {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100%;
+    width: 111%;
     max-height: 200px;
     overflow-y: auto;
     background-color: #fff;
@@ -187,6 +187,7 @@ button.dropdown-btn:hover {
     display: none;
     z-index: 10;
     margin-top: 0.3em;
+    height: 10em;
 }
 
 .dropdown-menu.active {

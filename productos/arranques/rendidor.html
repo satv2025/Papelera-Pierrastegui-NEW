@@ -2,106 +2,222 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Arranque Rendidor</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arranque Rendidor - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
   <header>
-    <h1>Papelera Pierrastegui</h1>
-    <nav>
-      <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../catalogo">Catálogo</a></li>
-        <li><a href="../../contacto">Contacto</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <h1>Papelera Pierrastegui</h1>
+      <nav>
+        <ul>
+          <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+          <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+          <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Arranque Rendidor</h2>
-      <div class="producto-detalle">
+    <section class="producto container">
+      <h2>ARRANQUE RENDIDOR</h2>
+      <div class="producto-contenido">
         <img
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranque%20Rendidor.jpg"
-          alt="Arranque Rendidor">
+          alt="Arranque Rendidor" />
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
-          <ul>
-            <li>
-              <p id="desc-p">Rollos de bolsa de arranque, son transparentes, prácticas y resistentes, sus medidas se
-                adaptan a tus distintas necesidades, tanto en el hogar como en tu comercio.</p>
-            </li>
-            <li>
-              <p id="desc-p">Son aptas alimentos, y pueden ser utilizadas para guardar cosas tanto en la heladera como
-                en el freezer.</p>
-            </li>
-            <li>
-              <p id="desc-p">No son aptas para el calor, productos calientes ni para el microondas.</p>
-            </li>
-            <li>
-              <p id="desc-p">También sirven para los desechos de tu mascota al salir a pasear. Múltiples usos.</p>
-            </li>
-          </ul>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="15x20" data-price-unit="1400" data-price-bulk="15600" data-bulto="12">15x20</li>
-              <li data-size="15x25" data-price-unit="1700" data-price-bulk="19200" data-bulto="12">15x25</li>
-              <li data-size="20x25" data-price-unit="1580" data-price-bulk="17064" data-bulto="12">20x25</li>
-              <li data-size="20x30" data-price-unit="2500" data-price-bulk="24000" data-bulto="12">20x30</li>
-              <li data-size="25x35" data-price-unit="3000" data-price-bulk="24000" data-bulto="9">25x35</li>
-              <li data-size="30x40" data-price-unit="4200" data-price-bulk="21600" data-bulto="6">30x40</li>
-              <li data-size="35x45" data-price-unit="3000" data-price-bulk="24300" data-bulto="9">35x45</li>
-              <li data-size="40x50" data-price-unit="3800" data-price-bulk="21000" data-bulto="6">40x50</li>
-            </ul>
+
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
+              Seleccionar Tamaño <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu" role="listbox" tabindex="-1">
+              <div class="dropdown-item" data-size="15x20" data-price-unit="1850" data-price-bulk="17250">15x20</div>
+              <div class="dropdown-item" data-size="15x25" data-price-unit="2000" data-price-bulk="21900">15x25</div>
+              <div class="dropdown-item" data-size="20x30" data-price-unit="2600" data-price-bulk="26300">20x30</div>
+              <div class="dropdown-item" data-size="25x35" data-price-unit="3500" data-price-bulk="27000">25x35</div>
+              <div class="dropdown-item" data-size="30x40" data-price-unit="4700" data-price-bulk="23900">30x40</div>
+              <div class="dropdown-item" data-size="35x45" data-price-unit="3500" data-price-bulk="27000">35x45</div>
+              <div class="dropdown-item" data-size="40x50" data-price-unit="4200" data-price-bulk="21000">40x50</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio preciou">Por Unidad: $<span id="precio-unit"></span> ARS</p>
-            <p class="precio preciob">Por Bulto (<span id="cantidad-bulto"></span> unidades): $<span
-                id="precio-bulto"></span> ARS</p>
+          <!-- Precios -->
+          <div class="precios" style="display:none;">
+            <p class="precio-unit">Por unidad: $0 ARS</p>
+            <p class="precio-bulto">Por bulto: $0 ARS</p>
           </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <!-- Tipo (Unidad/Bulto) -->
+          <div class="cantidad-container">
+            <label for="tipo-dropdown">Tipo:</label>
+            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+              <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
+              <div class="dropdown-menu" role="listbox">
+                <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
+                <span class="dropdown-item" data-type="bulto" data-mult="1">Bulto</span>
+              </div>
+            </div>
+            <button id="limpiar">Limpiar</button>
+          </div>
+
+          <!-- Incremento manual -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+
+          <button class="agregar-carrito">Agregar al Carrito</button>
+
+          <h3>Descripción del producto</h3>
+          <ul>
+            <li>Rollos de bolsa de arranque, transparentes, prácticas y resistentes.</li>
+            <li>Sus medidas se adaptan a tus distintas necesidades en el hogar o comercio.</li>
+            <li>Aptas para alimentos, heladera y freezer.</li>
+            <li>No aptas para calor, productos calientes ni microondas.</li>
+            <li>También sirven para desechos de tu mascota. Múltiples usos.</li>
+          </ul>
+
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop.js"></script>
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+      const limpiarBtn = document.getElementById('limpiar');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const precios = document.querySelector('.precios');
+      const precioUnit = document.querySelector('.precio-unit');
+      const precioBulto = document.querySelector('.precio-bulto');
+      const totalDisplay = document.querySelector('.total');
+
+      let selectedSize = null;
+      let cantidad = 1;
+      let tipo = { type: 'unidad', mult: 1 };
+
+      const arrow = () => {
+        const span = document.createElement('span');
+        span.classList.add('arrow');
+        span.textContent = '▼';
+        return span;
+      };
+
+      function updateTotal() {
+        if (!selectedSize) {
+          precios.style.display = 'none';
+          totalDisplay.textContent = 'Total: $0';
+          return;
+        }
+
+        precios.style.display = 'block';
+        const priceU = Number(selectedSize.priceUnit);
+        const priceB = Number(selectedSize.priceBulk);
+
+        precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
+        precioBulto.textContent = `Por bulto: $${priceB.toLocaleString('es-AR')} ARS`;
+
+        let total = tipo.type === 'unidad' ? cantidad * priceU : cantidad * priceB;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+      }
+
+      sizeBtn.addEventListener('click', () => sizeMenu.classList.toggle('active'));
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedSize = {
+            size: item.dataset.size,
+            priceUnit: item.dataset.priceUnit,
+            priceBulk: item.dataset.priceBulk
+          };
+          sizeBtn.textContent = `${selectedSize.size} `;
+          sizeBtn.appendChild(arrow());
+          sizeMenu.classList.remove('active');
+          updateTotal();
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
+      tipoItems.forEach(opt => {
+        opt.addEventListener('click', () => {
+          tipoItems.forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
+          tipoBtn.textContent = `${opt.textContent} `;
+          tipoBtn.appendChild(arrow());
+          tipoMenu.classList.remove('active');
+          updateTotal();
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        if (cantidad < 100) {
+          cantidad++;
+          cantidadVisual.textContent = cantidad;
+          updateTotal();
+        }
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) {
+          cantidad--;
+          cantidadVisual.textContent = cantidad;
+          updateTotal();
+        }
+      });
+
+      limpiarBtn.addEventListener('click', () => {
+        selectedSize = null;
+        cantidad = 1;
+        tipo = { type: 'unidad', mult: 1 };
+        sizeBtn.textContent = 'Seleccionar Tamaño ';
+        sizeBtn.appendChild(arrow());
+        tipoBtn.textContent = 'Unidad (1) ';
+        tipoBtn.appendChild(arrow());
+        cantidadVisual.textContent = '1';
+        sizeItems.forEach(i => i.classList.remove('selected'));
+        tipoItems.forEach(i => i.classList.remove('selected'));
+        tipoItems[0].classList.add('selected');
+        precios.style.display = 'none';
+        totalDisplay.textContent = 'Total: $0';
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
+        if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
+      });
+    });
+  </script>
 </body>
 
 </html>
