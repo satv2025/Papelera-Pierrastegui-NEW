@@ -2572,134 +2572,39 @@
         <script src="assets/js/home-dropdown-scroll.js"></script>
         <script src="assets/js/satv-scroll-main.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener("DOMContentLoaded", () => {
 
                 // =========================
-                // 1. Carrusel de imágenes
+                // Carrusel de imágenes en productos
                 // =========================
                 function cicloImagenes(contenedor) {
                     const imgs = contenedor.querySelectorAll("img");
                     if (imgs.length < 2) return;
+
                     let index = 0;
+                    // Mostrar la primera imagen
+                    imgs.forEach((img, i) => img.classList.toggle('visible', i === 0));
+
                     setInterval(() => {
                         imgs[index].classList.remove("visible");
                         index = (index + 1) % imgs.length;
                         imgs[index].classList.add("visible");
                     }, 3000);
                 }
+
                 document.querySelectorAll(".producto-img-container .contenedor").forEach(cicloImagenes);
 
+
                 // =========================
-                // 2. Reemplazo de botones con enlaces
+                // Reemplazo de botones con enlaces
                 // =========================
                 const links = [
-                    "productos/cajas-de-carton-y-gastronomia/desayuno",
-                    "productos/cajas-de-carton-y-gastronomia/empanada",
-                    "productos/cajas-de-carton-y-gastronomia/hamburguesa",
-                    "productos/cajas-de-carton-y-gastronomia/pizza",
-                    "productos/cajas-de-carton-y-gastronomia/ravioles",
-                    "productos/cajas-de-carton-y-gastronomia/red-para-bondiola",
-                    "productos/cajas-de-carton-y-gastronomia/sandwich",
-                    "productos/carton/corrugado",
-                    "productos/carton/tirascs",
-                    "productos/cintas/papel",
-                    "productos/cintas/scotch",
-                    "productos/cubiertos/cuchillos/blanco",
-                    "productos/cubiertos/cuchillos/negro",
-                    "productos/cubiertos/tenedor/blanco",
-                    "productos/cubiertos/tenedor/negro",
-                    "productos/cubiertos/cucharasopera",
-                    "productos/cubiertos/cucharita",
-                    "productos/cubiertos/platotorta",
-                    "productos/cubiertos/remos",
-                    "productos/film/film",
-                    "productos/folex/folex",
-                    "productos/folex/hamburguesa",
-                    "productos/guantes/nitirlo",
-                    "productos/guantes/polietileno",
-                    "productos/libreria/abrochadora",
-                    "productos/libreria/adhesivo-pizzini",
-                    "productos/libreria/banditas-elasticas",
-                    "productos/libreria/biromes",
-                    "productos/libreria/calculadora",
-                    "productos/libreria/cinta-bifaz",
-                    "productos/libreria/cinta-fragil",
-                    "productos/libreria/clips",
-                    "productos/libreria/cuadernosuniv",
-                    "productos/libreria/cutter",
-                    "productos/libreria/estallidos",
-                    "productos/libreria/fibrones",
-                    "productos/libreria/ganchos-de-abrochadora",
-                    "productos/libreria/hilo",
-                    "productos/libreria/hojas",
-                    "productos/libreria/liquidpaper",
-                    "productos/libreria/maquinamotex",
-                    "productos/libreria/marcadores-tiza",
-                    "productos/libreria/mini-rollos",
-                    "productos/libreria/moldes-freidora",
-                    "productos/libreria/mono-facil",
-                    "productos/libreria/motex",
-                    "productos/libreria/pincha-papeles",
-                    "productos/libreria/portacinta",
-                    "productos/libreria/remitos",
-                    "productos/libreria/resaltador",
-                    "productos/libreria/silicona",
-                    "productos/libreria/tacospapel",
-                    "productos/libreria/tijera-oficina",
-                    "productos/libreria/tiza",
-                    "productos/moldes-gastronomia/budinera/aluminio",
-                    "productos/moldes-gastronomia/budinera/papel",
-                    "productos/moldes-gastronomia/navidad-ano-nuevo/molde",
-                    "productos/moldes-gastronomia/pascua/caja",
-                    "productos/moldes-gastronomia/pascua/molde",
-                    "productos/moldes-gastronomia/pirotines",
-                    "productos/papel/cocina/elegante",
-                    "productos/papel/cocina/newpel",
-                    "productos/papel/higienico/elegante",
-                    "productos/papel/higienico/newpel",
-                    "productos/papel/aluminio",
-                    "productos/papel/bobina",
-                    "productos/papel/cortado",
-                    "productos/papel/manteca",
-                    "productos/papel/papel-para-bondiola",
-                    "productos/papel/papel-parafinado",
-                    "productos/pizzeria/conopapas",
-                    "productos/pizzeria/fondo",
-                    "productos/pizzeria/portapanchos",
-                    "productos/pizzeria/tripode",
-                    "productos/potes/bisagra",
-                    "productos/potes/dips",
-                    "productos/potes/ensaladafruta",
-                    "productos/rollostermicos/rollos",
-                    "productos/sorbetes/comun",
-                    "productos/sorbetes/negro",
-                    "productos/sorbetes/papel",
-                    "productos/stretch/stretch",
-                    "productos/vasos/plastico",
-                    "productos/vasos/telgopor",
-                    "productos/cajas-de-carton-y-gastronomia/felices-fiestas/caja",
-                    "productos/bolsas/ziploc",
-                    "productos/bolsas/sulfito",
-                    "productos/bolsas/riñon",
-                    "productos/bolsas/residuo",
-                    "productos/bolsas/polipropileno",
-                    "productos/bolsas/horno",
-                    "productos/bolsas/camiseta",
-                    "productos/bandejas-y-potes/telgopor",
-                    "productos/bandejas-y-potes/potes-de-helado",
-                    "productos/bandejas-y-potes/plato-marmita",
-                    "productos/bandejas-y-potes/plastico",
-                    "productos/bandejas-y-potes/ensaladera-con-tapa",
-                    "productos/bandejas-y-potes/ensaladafruta",
-                    "productos/bandejas-y-potes/dips",
-                    "productos/bandejas-y-potes/carton",
-                    "productos/bandejas-y-potes/blonda",
-                    "productos/bandejas-y-potes/bisagra",
-                    "productos/bandejas-y-potes/bandejas-de-carton-plateadas",
-                    "productos/bandejas-y-potes/aluminio",
-                    "productos/articulos-de-embajale-y-proteccion/rollo-pluribol",
-                    "productos/arranques/rendidor",
-                    "productos/arranques/grueso.html"
+                    "https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol",
+                    "https://papelerapierrastegui.com.ar/productos/arranques/grueso",
+                    "https://papelerapierrastegui.com.ar/productos/arranques/rendidor",
+                    "https://papelerapierrastegui.com.ar/productos/vasos/plastico",
+                    "https://papelerapierrastegui.com.ar/productos/vasos/telgopor"
+                    // ... agregá todas las URLs que necesites
                 ];
 
                 function extraerUrl(onclickStr) {
@@ -2713,56 +2618,48 @@
                     if (!btn) return;
                     const onclickAttr = btn.getAttribute('onclick');
                     if (!onclickAttr) return;
+
                     const url = extraerUrl(onclickAttr);
                     if (!url) return;
+
                     if (links.includes(url)) {
                         const nuevoDiv = document.createElement('div');
                         nuevoDiv.classList.add('btn-reset');
                         producto.parentNode.insertBefore(nuevoDiv, producto);
                         nuevoDiv.appendChild(producto);
-                        nuevoDiv.addEventListener('click', () => { window.location.href = url; });
+                        nuevoDiv.addEventListener('click', () => {
+                            window.location.href = url;
+                        });
                     }
                 });
 
+
                 // =========================
-                // 3. Buscador en tiempo real (flexible)
+                // Buscador de productos
                 // =========================
-                const grid = document.querySelector('.productos-grid');
-                if (grid) {
-                    const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]'));
-                    const searchInputs = document.querySelectorAll('.search-input');
+                const grids = document.querySelectorAll('.productos-grid');
+                const searchInputs = document.querySelectorAll('.search-input');
 
-                    const noResults = document.createElement('div');
-                    noResults.textContent = 'No hay productos que coincidan';
-                    noResults.style.display = 'none';
-                    noResults.classList.add('no-results');
-                    grid.parentNode.insertBefore(noResults, grid.nextSibling);
+                searchInputs.forEach(input => {
+                    input.addEventListener('input', function () {
+                        const query = this.value.toLowerCase().trim();
 
-                    function filtrarProductos(query) {
-                        let anyVisible = false;
-                        productosOriginales.forEach(producto => {
-                            const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
-                            const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
-                            if (nombre.includes(query) || categoria.includes(query)) {
-                                producto.style.display = '';
-                                anyVisible = true;
-                            } else {
-                                producto.style.display = 'none';
-                            }
-                        });
-                        noResults.style.display = anyVisible ? 'none' : '';
-                    }
+                        grids.forEach(grid => {
+                            const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]'));
 
-                    searchInputs.forEach(input => {
-                        input.addEventListener('input', function () {
-                            const query = this.value.toLowerCase().trim();
-                            filtrarProductos(query);
+                            productosOriginales.forEach(producto => {
+                                const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
+                                const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
+
+                                producto.style.display = (nombre.includes(query) || categoria.includes(query)) ? '' : 'none';
+                            });
                         });
                     });
-                }
+                });
+
 
                 // =========================
-                // 4. Menú lateral y dropdown
+                // Menú lateral y dropdown
                 // =========================
                 const menuToggle = document.querySelector('.menu-toggle');
                 const sidebar = document.getElementById('pp-sidebar');
@@ -2770,11 +2667,17 @@
                 const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
 
                 if (menuToggle && sidebar && closeBtn) {
-                    menuToggle.addEventListener('click', () => { sidebar.classList.add('open'); });
-                    closeBtn.addEventListener('click', () => { sidebar.classList.remove('open'); });
-                    document.addEventListener('click', e => {
+                    menuToggle.addEventListener('click', () => {
+                        sidebar.style.display = 'block';
+                    });
+
+                    closeBtn.addEventListener('click', () => {
+                        sidebar.style.display = 'none';
+                    });
+
+                    document.addEventListener('click', (e) => {
                         if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
-                            sidebar.classList.remove('open');
+                            sidebar.style.display = 'none';
                         }
                     });
                 }
@@ -2782,17 +2685,49 @@
                 dropdownTriggers.forEach(trigger => {
                     trigger.addEventListener('click', () => {
                         const submenu = trigger.nextElementSibling;
-                        if (submenu) submenu.classList.toggle('open');
+                        if (submenu) {
+                            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                        }
                     });
                 });
 
+
                 // =========================
-                // 5. Modal de mantenimiento
+                // Segundo script para menú (alternativo)
+                // =========================
+                const menuToggleAlt = document.getElementById('menu-toggle');
+                const sidebarAlt = document.getElementById('pp-sidebar');
+                const closeBtnAlt = document.getElementById('pp-close-btn');
+
+                if (menuToggleAlt && sidebarAlt && closeBtnAlt) {
+                    menuToggleAlt.addEventListener('click', () => {
+                        sidebarAlt.classList.add('open');
+                    });
+                    closeBtnAlt.addEventListener('click', () => {
+                        sidebarAlt.classList.remove('open');
+                    });
+                }
+
+                document.querySelectorAll('.pp-nav-items > a').forEach(link => {
+                    link.addEventListener('click', e => {
+                        const next = link.nextElementSibling;
+                        if (next && next.classList.contains('pp-dropdown-menu')) {
+                            e.preventDefault();
+                            next.classList.toggle('open');
+                        }
+                    });
+                });
+
+
+                // =========================
+                // Modal de mantenimiento
                 // =========================
                 const modal = document.getElementById("maintenance-modal");
                 const closeModalBtn = document.querySelector(".close-btn");
+
                 if (modal && closeModalBtn) {
                     document.body.classList.add("modal-open");
+
                     closeModalBtn.addEventListener("click", () => {
                         modal.style.display = "none";
                         document.body.classList.remove("modal-open");
