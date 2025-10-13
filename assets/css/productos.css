@@ -9,6 +9,12 @@
     padding: 0;
 }
 
+button.agregar-carrito:hover {
+    color: #ff7600 !important;
+    background: #fff !important;
+    border: none;
+}
+
 section h2 {
     color: #ff7600;
 }
@@ -129,6 +135,30 @@ nav ul li a:hover {
     align-items: center;
 }
 
+button.agregar-carrito {
+    width: 11em;
+    color: #fff;
+    background: #ff7600;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: none;
+    /* Sombra negra uniforme alrededor */
+    box-shadow: 0 0 10px rgb(0 0 0 / 63%);
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 18px;
+    margin-left: 0.2em;
+    transition: background-color 0.4s ease;
+    /* transición suave */
+}
+
 .dropdown-btn:hover {
     color: #fff;
     background: #ff7600;
@@ -207,11 +237,15 @@ button.dropdown-btn:hover {
     color: #fff;
     transition: background-color 0.3s ease;
     margin-left: 2em;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 63%);
 }
 
 .cantidad-container button:hover,
 .agregar-carrito-cantidad button:hover {
-    background-color: #2a2100;
+    background-color: #fff;
+    color: #ff7600;
 }
 
 .agregar-carrito-cantidad {
