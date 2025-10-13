@@ -2575,19 +2575,69 @@
             document.addEventListener('DOMContentLoaded', () => {
 
                 // =========================
-                // 1. Carrusel de imágenes
+                // 1. Carrusel de imágenes (robusto: funciona aunque haya imágenes dentro de elementos hidden)
                 // =========================
                 function cicloImagenes(contenedor) {
-                    const imgs = contenedor.querySelectorAll("img");
-                    if (imgs.length < 2) return;
-                    let index = 0;
-                    setInterval(() => {
-                        imgs[index].classList.remove("visible");
-                        index = (index + 1) % imgs.length;
-                        imgs[index].classList.add("visible");
-                    }, 3000);
+                    const allImgs = Array.from(contenedor.querySelectorAll("img"));
+                    if (allImgs.length < 1) return;
+
+                    // devuelve solo las imágenes que están realmente visibles en el DOM (no solo con display:inline)
+                    function getVisibleImgs() {
+                        return allImgs.filter(img => {
+                            if (!img.isConnected) return false; // no está en el DOM
+                            let el = img;
+                            while (el && el !== document.documentElement) {
+                                const style = window.getComputedStyle(el);
+                                if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+                                    return false;
+                                }
+                                if (el === contenedor) break; // llegamos al contenedor sin encontrar nada
+                                el = el.parentElement;
+                            }
+                            return true;
+                        });
+                    }
+
+                    // Limpia intervalo previo si existe
+                    if (contenedor.dataset.carouselIntervalId) {
+                        clearInterval(Number(contenedor.dataset.carouselIntervalId));
+                        delete contenedor.dataset.carouselIntervalId;
+                    }
+
+                    // Estado inicial: remover 'visible' y setear la primera realmente visible
+                    const visiblesInicial = getVisibleImgs();
+                    allImgs.forEach(img => img.classList.remove('visible'));
+                    if (visiblesInicial.length) visiblesInicial[0].classList.add('visible');
+
+                    const intervalo = Number(contenedor.dataset.interval) || 3000;
+                    const intervaloId = setInterval(() => {
+                        const visibles = getVisibleImgs();
+                        if (visibles.length < 1) return; // nada visible ahora -> no hacer nada
+
+                        // quitar 'visible' de imágenes que ya no están en el conjunto visible
+                        allImgs.forEach(img => { if (!visibles.includes(img)) img.classList.remove('visible'); });
+
+                        // posición actual dentro de visibles
+                        let actualIdx = visibles.findIndex(img => img.classList.contains('visible'));
+
+                        if (actualIdx === -1) {
+                            // si ninguna tiene la clase, asignamos la primera visible
+                            visibles[0].classList.add('visible');
+                            return;
+                        }
+
+                        // rotamos
+                        visibles[actualIdx].classList.remove('visible');
+                        const siguiente = (actualIdx + 1) % visibles.length;
+                        visibles[siguiente].classList.add('visible');
+                    }, intervalo);
+
+                    contenedor.dataset.carouselIntervalId = String(intervaloId);
                 }
+
+                // Inicializar carruseles
                 document.querySelectorAll(".producto-img-container .contenedor").forEach(cicloImagenes);
+
 
                 // =========================
                 // 2. Reemplazo de botones con enlaces
@@ -2703,45 +2753,55 @@
                 ];
 
                 function extraerUrl(onclickStr) {
-                    const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+                    const match = onclickStr && onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
                     return match ? match[1] : null;
                 }
 
                 document.querySelectorAll('.producto').forEach(producto => {
-                    if (producto.classList.contains('proximo')) return;
-                    const btn = producto.querySelector('button.btn');
-                    if (!btn) return;
-                    const onclickAttr = btn.getAttribute('onclick');
-                    if (!onclickAttr) return;
-                    const url = extraerUrl(onclickAttr);
-                    if (!url) return;
-                    if (links.includes(url)) {
-                        const nuevoDiv = document.createElement('div');
-                        nuevoDiv.classList.add('btn-reset');
-                        producto.parentNode.insertBefore(nuevoDiv, producto);
-                        nuevoDiv.appendChild(producto);
-                        nuevoDiv.addEventListener('click', () => { window.location.href = url; });
+                    try {
+                        if (producto.classList.contains('proximo')) return;
+                        const btn = producto.querySelector('button.btn');
+                        if (!btn) return;
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (!onclickAttr) return;
+                        const url = extraerUrl(onclickAttr);
+                        if (!url) return;
+                        if (links.includes(url)) {
+                            const nuevoDiv = document.createElement('div');
+                            nuevoDiv.classList.add('btn-reset');
+                            producto.parentNode.insertBefore(nuevoDiv, producto);
+                            nuevoDiv.appendChild(producto);
+                            nuevoDiv.addEventListener('click', () => { window.location.href = url; });
+                        }
+                    } catch (e) {
+                        // defensivo: seguir si hay algún producto mal formado
+                        console.error('Error procesando .producto:', e);
                     }
                 });
 
+
                 // =========================
-                // 3. Buscador en tiempo real
+                // 3. Buscador en tiempo real (solo filtra, no reordena ni re-inserta)
                 // =========================
                 const grid = document.querySelector('.productos-grid');
                 if (grid) {
-                    const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]'));
+                    // Cacheamos elementos y textos normalizados para evitar tocar el DOM al filtrar
+                    const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]')).map(prod => {
+                        return {
+                            el: prod,
+                            nombre: prod.querySelector('.nombre')?.textContent.toLowerCase() || '',
+                            categoria: prod.querySelector('.categoria')?.textContent.toLowerCase() || ''
+                        };
+                    });
                     const searchInputs = document.querySelectorAll('#search-input');
 
                     function filtrarProductos(query) {
-                        const visibles = [];
-                        productosOriginales.forEach(producto => {
-                            const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
-                            const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
-                            if (nombre.includes(query) || categoria.includes(query)) {
-                                producto.style.display = '';
-                                visibles.push(producto);
+                        // Solo mostramos/ocultamos; NO reinsertamos en el grid para no "mover" nodos
+                        productosOriginales.forEach(({ el, nombre, categoria }) => {
+                            if (!query || nombre.includes(query) || categoria.includes(query)) {
+                                el.style.display = '';
                             } else {
-                                producto.style.display = 'none';
+                                el.style.display = 'none';
                             }
                         });
                     }
@@ -2753,6 +2813,7 @@
                         });
                     });
                 }
+
 
                 // =========================
                 // 4. Menú lateral y dropdown
@@ -2778,6 +2839,7 @@
                         if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
                     });
                 });
+
 
                 // =========================
                 // 5. Modal de mantenimiento
