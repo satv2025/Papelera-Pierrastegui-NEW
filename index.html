@@ -2639,39 +2639,46 @@
         </script>
 
         <script>
-            // =========================
-            // Buscador de productos
-            // =========================
-            const grid = document.querySelector('.productos-grid');
-            const productosOriginales = Array.from(grid.querySelectorAll('.producto'));
+            document.addEventListener('DOMContentLoaded', () => {
+                // =========================
+                // Buscador de productos
+                // =========================
 
-            document.getElementById('search-input').addEventListener('input', function () {
-                const query = this.value.toLowerCase();
+                const grid = document.querySelector('.productos-grid');
+                if (!grid) return; // Si no hay grid, no hacer nada
 
-                if (query === '') {
-                    while (grid.firstChild) {
-                        grid.removeChild(grid.firstChild);
+                // Tomamos todos los productos, ignorando espacios extra en las clases
+                const productosOriginales = Array.from(grid.querySelectorAll('.producto'));
+
+                const searchInput = document.getElementById('search-input');
+                if (!searchInput) return;
+
+                searchInput.addEventListener('input', function () {
+                    const query = this.value.toLowerCase().trim();
+
+                    // Si el buscador está vacío, mostramos todos los productos
+                    if (query === '') {
+                        while (grid.firstChild) grid.removeChild(grid.firstChild);
+                        productosOriginales.forEach(producto => {
+                            producto.style.display = '';
+                            grid.appendChild(producto);
+                        });
+                        return;
                     }
-                    productosOriginales.forEach(producto => {
+
+                    // Filtramos productos por nombre o categoría
+                    const visibles = productosOriginales.filter(producto => {
+                        const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
+                        const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
+                        return nombre.includes(query) || categoria.includes(query);
+                    });
+
+                    // Limpiamos el grid y agregamos los visibles
+                    while (grid.firstChild) grid.removeChild(grid.firstChild);
+                    visibles.forEach(producto => {
                         producto.style.display = '';
                         grid.appendChild(producto);
                     });
-                    return;
-                }
-
-                const visibles = productosOriginales.filter(producto => {
-                    const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
-                    const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
-                    return nombre.includes(query) || categoria.includes(query);
-                });
-
-                while (grid.firstChild) {
-                    grid.removeChild(grid.firstChild);
-                }
-
-                visibles.forEach(producto => {
-                    producto.style.display = '';
-                    grid.appendChild(producto);
                 });
             });
         </script>
