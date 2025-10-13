@@ -248,39 +248,28 @@ body::selection {
   color: #ff7600;
 }
 
-/* Contenedor de imagen del carrusel */
+/* Imagen contenedor para posicionar badge y tamaño fijo */
 .producto-img-container {
   height: auto;
+  /* Ya lo tienes definido */
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid #eee;
+  /* Asegura que ocupe todo el alto asignado */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Imágenes dentro del contenedor */
-.producto-img-container img,
-.contenedor img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+.producto-img-container img {
   height: 100%;
-  object-fit: cover;
-  /* Mantener proporción y cubrir el contenedor */
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  z-index: 0;
-}
-
-/* Imagen visible en carrusel */
-.producto-img-container img.visible,
-.contenedor img.visible {
-  opacity: 1;
-  z-index: 1;
-  position: relative;
-  /* Para que se vea correctamente */
+  /* Que la imagen tome toda la altura del contenedor */
+  width: auto;
+  /* Mantiene proporción */
+  object-fit: contain;
+  /* o cover, según prefieras */
+  display: block;
+  transition: transform 0.4s ease;
 }
 
 .producto img {
@@ -410,6 +399,24 @@ body::selection {
   width: 100%;
   height: 21em;
   overflow: hidden;
+}
+
+.contenedor img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+
+.contenedor img.visible {
+  opacity: 1;
+  z-index: 1;
 }
 
 .foleximgs img {
