@@ -35,50 +35,45 @@
             <li>Arranques rendidores de alta calidad, ideales para embalaje y protección de productos.</li>
           </ul>
 
+          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccionar Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="15x20" data-price-unit="1850" data-price-x50="0"
-                data-price-x100="17250"
+              <div class="dropdown-item" data-size="15x20" data-price-unit="1850" data-price-bulto="22200"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 15x20
               </div>
-              <div class="dropdown-item" data-size="15x25" data-price-unit="2000" data-price-x50="0"
-                data-price-x100="21900"
+              <div class="dropdown-item" data-size="15x25" data-price-unit="2000" data-price-bulto="24000"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 15x25
               </div>
-              <div class="dropdown-item" data-size="20x30" data-price-unit="2600" data-price-x50="0"
-                data-price-x100="26300"
+              <div class="dropdown-item" data-size="20x30" data-price-unit="2600" data-price-bulto="31200"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 20x30
               </div>
-              <div class="dropdown-item" data-size="25x35" data-price-unit="3500" data-price-x50="0"
-                data-price-x100="27000"
+              <div class="dropdown-item" data-size="25x35" data-price-unit="3500" data-price-bulto="31500"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 25x35
               </div>
-              <div class="dropdown-item" data-size="30x40" data-price-unit="4500" data-price-x50="0"
-                data-price-x100="23900"
+              <div class="dropdown-item" data-size="30x40" data-price-unit="4500" data-price-bulto="27000"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 30x40
               </div>
-              <div class="dropdown-item" data-size="35x45" data-price-unit="3500" data-price-x50="0"
-                data-price-x100="27000"
+              <div class="dropdown-item" data-size="35x45" data-price-unit="3500" data-price-bulto="31500"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 35x45
               </div>
-              <div class="dropdown-item" data-size="40x50" data-price-unit="4000" data-price-x50="0"
-                data-price-x100="21000"
+              <div class="dropdown-item" data-size="40x50" data-price-unit="4000" data-price-bulto="24000"
                 data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/ARRANQUES/Arranque%20Rendidor.jpg">
                 40x50
               </div>
             </div>
           </div>
 
+          <!-- Dropdown Tipo -->
           <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
             <button class="dropdown-btn">
               <span class="text">Unidad</span>
@@ -90,6 +85,7 @@
             </div>
           </div>
 
+          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
@@ -111,7 +107,6 @@
   </footer>
 
   <script>
-    // Script es el mismo que en Gruesos
     document.addEventListener('DOMContentLoaded', () => {
       const sizeDropdown = document.getElementById('size-dropdown');
       const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
@@ -144,7 +139,7 @@
         if (tipo === 'unidad') {
           total = cantidad * Number(selectedSize.dataset.priceUnit);
         } else if (tipo === 'bulto') {
-          total = cantidad * Number(selectedSize.dataset.priceX100);
+          total = cantidad * Number(selectedSize.dataset.priceBulto);
         }
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }

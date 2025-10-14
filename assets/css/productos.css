@@ -127,12 +127,13 @@ nav ul li a:hover {
 
 .producto-contenido img {
     flex: 1 1 300px;
-    border-radius: 10px;
-    object-fit: contain;
+    border-radius: 0.3em;
+    object-fit: cover;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
     background: none;
     width: 23em;
+    height: 33.56em;
 }
 
 .producto-info {
