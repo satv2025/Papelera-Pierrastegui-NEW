@@ -119,6 +119,9 @@
       let tipo = 'unidad';
       let cantidad = 1;
 
+      // Ocultar dropdown tipo al inicio
+      tipoDropdown.style.display = 'none';
+
       function updateTotal() {
         if (!selectedSize) {
           totalDisplay.textContent = "Total: $0";
@@ -138,7 +141,7 @@
       // Dropdown tamaño
       sizeBtn.addEventListener('click', () => {
         sizeMenu.classList.toggle('active');
-        sizeBtn.classList.toggle('active'); // para rotar la flecha
+        sizeBtn.classList.toggle('active'); // solo esta flecha gira
       });
 
       sizeItems.forEach(item => {
@@ -160,14 +163,14 @@
 
           updateTotal();
           sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active'); // para la flecha
+          sizeBtn.classList.remove('active'); // flecha vuelve a posición
         });
       });
 
       // Dropdown tipo
       tipoBtn.addEventListener('click', () => {
         tipoMenu.classList.toggle('active');
-        tipoBtn.classList.toggle('active'); // para rotar la flecha
+        tipoBtn.classList.toggle('active'); // solo esta flecha gira
       });
 
       tipoItems.forEach(item => {
@@ -178,7 +181,7 @@
           tipo = item.dataset.type;
           updateTotal();
           tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active'); // para la flecha
+          tipoBtn.classList.remove('active'); // flecha vuelve a posición
         });
       });
 
