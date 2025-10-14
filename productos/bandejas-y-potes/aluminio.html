@@ -136,7 +136,11 @@
       }
 
       // Dropdown tamaño
-      sizeBtn.addEventListener('click', () => sizeMenu.classList.toggle('active'));
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active'); // para rotar la flecha
+      });
+
       sizeItems.forEach(item => {
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
@@ -144,13 +148,28 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
+
+          // Mostrar dropdown de tipo al elegir tamaño
+          tipoDropdown.style.display = 'block';
+
+          // Reset tipo a unidad
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoItems[0].classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = tipoItems[0].textContent;
+          tipo = 'unidad';
+
           updateTotal();
           sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active'); // para la flecha
         });
       });
 
       // Dropdown tipo
-      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active'); // para rotar la flecha
+      });
+
       tipoItems.forEach(item => {
         item.addEventListener('click', () => {
           tipoItems.forEach(i => i.classList.remove('selected'));
@@ -159,6 +178,7 @@
           tipo = item.dataset.type;
           updateTotal();
           tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active'); // para la flecha
         });
       });
 
@@ -168,6 +188,7 @@
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
+
       decBtn.addEventListener('click', () => {
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
@@ -176,8 +197,14 @@
 
       // Cerrar dropdown al hacer click afuera
       document.addEventListener('click', e => {
-        if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
-        if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
       });
     });
   </script>
