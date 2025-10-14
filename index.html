@@ -2575,89 +2575,72 @@
             document.addEventListener('DOMContentLoaded', () => {
 
                 // =========================
-                // Utilidades
-                // =========================
-                function isElementReallyVisible(el, stopAt = null) {
-                    if (!el || !el.isConnected) return false;
-                    let node = el;
-                    while (node && node !== document.documentElement) {
-                        const style = window.getComputedStyle(node);
-                        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
-                            return false;
-                        }
-                        if (stopAt && node === stopAt) break;
-                        node = node.parentElement;
-                    }
-                    return true;
-                }
-
-                function normalizePathFromHref(href) {
-                    // devuelve el pathname (sin leading slash) de href, sea absoluto o relativo
-                    try {
-                        const u = new URL(href, location.origin);
-                        return (u.pathname + (u.search || '')).replace(/^\/+/, '').replace(/\/$/, '');
-                    } catch (e) {
-                        // si no es parseable, limpiar / al inicio/fin
-                        return String(href).replace(/^\/+/, '').replace(/\/$/, '');
-                    }
-                }
-
-                // =========================
-                // 1. Carrusel de imágenes (robusto: solo rota entre imágenes realmente visibles)
+                // 1. Carrusel de imágenes (robusto: funciona aunque haya imágenes dentro de elementos hidden)
                 // =========================
                 function cicloImagenes(contenedor) {
                     const allImgs = Array.from(contenedor.querySelectorAll("img"));
                     if (allImgs.length < 1) return;
 
-                    // devuelve solo imágenes que están realmente visibles (no ocultas por ancestros)
+                    // devuelve solo las imágenes que están realmente visibles en el DOM (no solo con display:inline)
                     function getVisibleImgs() {
-                        return allImgs.filter(img => isElementReallyVisible(img, contenedor));
+                        return allImgs.filter(img => {
+                            if (!img.isConnected) return false; // no está en el DOM
+                            let el = img;
+                            while (el && el !== document.documentElement) {
+                                const style = window.getComputedStyle(el);
+                                if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+                                    return false;
+                                }
+                                if (el === contenedor) break; // llegamos al contenedor sin encontrar nada
+                                el = el.parentElement;
+                            }
+                            return true;
+                        });
                     }
 
-                    // limpiar intervalo previo si existiera
+                    // Limpia intervalo previo si existe
                     if (contenedor.dataset.carouselIntervalId) {
                         clearInterval(Number(contenedor.dataset.carouselIntervalId));
                         delete contenedor.dataset.carouselIntervalId;
                     }
 
-                    // estado inicial: quitar 'visible' y asignar la primera visible
-                    const visiblesInit = getVisibleImgs();
+                    // Estado inicial: remover 'visible' y setear la primera realmente visible
+                    const visiblesInicial = getVisibleImgs();
                     allImgs.forEach(img => img.classList.remove('visible'));
-                    if (visiblesInit.length) visiblesInit[0].classList.add('visible');
+                    if (visiblesInicial.length) visiblesInicial[0].classList.add('visible');
 
                     const intervalo = Number(contenedor.dataset.interval) || 3000;
                     const intervaloId = setInterval(() => {
                         const visibles = getVisibleImgs();
-                        if (visibles.length < 1) return; // si no hay visibles, no hacemos nada
+                        if (visibles.length < 1) return; // nada visible ahora -> no hacer nada
 
-                        // quitamos 'visible' de imágenes que ya no están dentro de visibles
+                        // quitar 'visible' de imágenes que ya no están en el conjunto visible
                         allImgs.forEach(img => { if (!visibles.includes(img)) img.classList.remove('visible'); });
 
-                        // encontramos la actual dentro de visibles
+                        // posición actual dentro de visibles
                         let actualIdx = visibles.findIndex(img => img.classList.contains('visible'));
 
                         if (actualIdx === -1) {
-                            // ninguna marcada -> marcar la primera visible
+                            // si ninguna tiene la clase, asignamos la primera visible
                             visibles[0].classList.add('visible');
                             return;
                         }
 
-                        // rotamos al siguiente visible
+                        // rotamos
                         visibles[actualIdx].classList.remove('visible');
                         const siguiente = (actualIdx + 1) % visibles.length;
                         visibles[siguiente].classList.add('visible');
-
                     }, intervalo);
 
                     contenedor.dataset.carouselIntervalId = String(intervaloId);
                 }
 
-                // Inicializar todos los carruseles
+                // Inicializar carruseles
                 document.querySelectorAll(".producto-img-container .contenedor").forEach(cicloImagenes);
 
 
                 // =========================
-                // 2. Reemplazo de botones con enlaces (maneja href absoluto/relativo)
+                // 2. Reemplazo de botones con enlaces
                 // =========================
                 const links = [
                     "productos/cajas-de-carton-y-gastronomia/desayuno.html",
@@ -2769,26 +2752,9 @@
                     "productos/arranques/grueso.html"
                 ];
 
-                // pre-normalizamos los links para comparar por endsWith
-                const normalizedLinks = links.map(l => String(l).replace(/^\/+/, '').replace(/\/$/, ''));
-
                 function extraerUrl(onclickStr) {
-                    if (!onclickStr) return null;
-                    // intentar extraer la cadena entre comillas tras window.location.href=
-                    const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
-                    if (!match) return null;
-                    const raw = match[1];
-                    const path = normalizePathFromHref(raw); // ej: productos/libreria/resaltador o productos/libreria/resaltador.html
-
-                    // comparo si path termina con alguno de los links normalizados
-                    const found = normalizedLinks.find(link => path.endsWith(link));
-                    if (found) {
-                        // devuelvo la forma relativa matched (misma forma que en el array) para que includes funcione
-                        return found;
-                    }
-
-                    // si no matchea por endsWith con los existentes, devolvemos la ruta completa normalizada
-                    return path;
+                    const match = onclickStr && onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+                    return match ? match[1] : null;
                 }
 
                 document.querySelectorAll('.producto').forEach(producto => {
@@ -2800,21 +2766,15 @@
                         if (!onclickAttr) return;
                         const url = extraerUrl(onclickAttr);
                         if (!url) return;
-                        // Si url es una de las rutas en la lista, creamos wrapper clickable
-                        if (normalizedLinks.includes(url)) {
+                        if (links.includes(url)) {
                             const nuevoDiv = document.createElement('div');
                             nuevoDiv.classList.add('btn-reset');
-                            // defensiva: si parentNode no existe, saltar
-                            if (!producto.parentNode) return;
                             producto.parentNode.insertBefore(nuevoDiv, producto);
                             nuevoDiv.appendChild(producto);
-                            nuevoDiv.addEventListener('click', () => {
-                                // construimos un href relativo/absoluto seguro
-                                const targetHref = location.origin + '/' + url;
-                                window.location.href = targetHref;
-                            });
+                            nuevoDiv.addEventListener('click', () => { window.location.href = url; });
                         }
                     } catch (e) {
+                        // defensivo: seguir si hay algún producto mal formado
                         console.error('Error procesando .producto:', e);
                     }
                 });
@@ -2825,16 +2785,18 @@
                 // =========================
                 const grid = document.querySelector('.productos-grid');
                 if (grid) {
+                    // Cacheamos elementos y textos normalizados para evitar tocar el DOM al filtrar
                     const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]')).map(prod => {
                         return {
                             el: prod,
-                            nombre: prod.querySelector('.nombre')?.textContent.toLowerCase().trim() || '',
-                            categoria: prod.querySelector('.categoria')?.textContent.toLowerCase().trim() || ''
+                            nombre: prod.querySelector('.nombre')?.textContent.toLowerCase() || '',
+                            categoria: prod.querySelector('.categoria')?.textContent.toLowerCase() || ''
                         };
                     });
                     const searchInputs = document.querySelectorAll('#search-input');
 
                     function filtrarProductos(query) {
+                        // Solo mostramos/ocultamos; NO reinsertamos en el grid para no "mover" nodos
                         productosOriginales.forEach(({ el, nombre, categoria }) => {
                             if (!query || nombre.includes(query) || categoria.includes(query)) {
                                 el.style.display = '';
