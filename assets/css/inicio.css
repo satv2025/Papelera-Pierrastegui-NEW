@@ -925,6 +925,5 @@ img.icon-right:Hover {
 .mail:hover,
 .ig:hover,
 .carrito-pro:hover {
-  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
-  !important
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%) !important;
 }
