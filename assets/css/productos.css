@@ -212,7 +212,7 @@ nav ul li a:hover {
 
 .dropdown-menu::-webkit-scrollbar-thumb {
     background-color: #ff7600;
-    border-radius: 4px;
+
 }
 
 @-moz-document url-prefix() {
