@@ -57,7 +57,8 @@
           <!-- Tipo -->
           <div class="cantidad-container">
             <label for="tipo-dropdown">Tipo:</label>
-            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false"
+              style="display:none;">
               <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
               <div class="dropdown-menu" role="listbox">
                 <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
@@ -93,150 +94,7 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // DROPDOWNS
-      const sizeDropdown = document.getElementById('size-dropdown');
-      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
-      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
-      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
-
-      const tipoDropdown = document.getElementById('tipo-dropdown');
-      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
-      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
-      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
-      // BOTONES
-      const limpiarBtn = document.getElementById('limpiar');
-      const decBtn = document.getElementById('decrementar');
-      const incBtn = document.getElementById('incrementar');
-
-      // DISPLAY
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const precios = document.querySelector('.precios');
-      const precioUnit = document.querySelector('.precio-unit');
-      const precioBulto = document.querySelector('.precio-bulto');
-      const totalDisplay = document.querySelector('.total');
-
-      // ESTADO
-      let selectedSize = null;
-      let cantidad = 1;
-      let tipo = { type: 'unidad', mult: 1 }; // unidad x1, bulto x6
-
-      const arrow = () => {
-        const span = document.createElement('span');
-        span.classList.add('arrow');
-        span.textContent = '▼';
-        return span;
-      };
-
-      // FUNCION PARA CALCULAR TOTAL
-      function updateTotal() {
-        if (!selectedSize) {
-          precios.style.display = 'none';
-          totalDisplay.textContent = 'Total: $0';
-          return;
-        }
-
-        precios.style.display = 'block';
-        const priceU = Number(selectedSize.priceUnit);
-        const priceB = Number(selectedSize.priceBulk);
-
-        precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
-        precioBulto.textContent = `Por bulto (6 unidades): $${priceB.toLocaleString('es-AR')} ARS`;
-
-        let total = 0;
-
-        if (tipo.type === 'unidad') {
-          total = cantidad * priceU;
-        } else {
-          total = cantidad * priceB; // cada bulto ya es de 6 unidades
-        }
-
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
-      }
-
-      // SELECCIÓN DE TAMAÑO
-      sizeBtn.addEventListener('click', () => {
-        sizeMenu.classList.toggle('active');
-      });
-
-      sizeItems.forEach(item => {
-        item.addEventListener('click', () => {
-          sizeItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          selectedSize = {
-            size: item.dataset.size,
-            priceUnit: item.dataset.priceUnit,
-            priceBulk: item.dataset.priceBulk
-          };
-          sizeBtn.textContent = `${selectedSize.size} `;
-          sizeBtn.appendChild(arrow());
-          sizeMenu.classList.remove('active');
-          updateTotal();
-        });
-      });
-
-      // SELECCIÓN DE TIPO (Unidad / Bulto)
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
-      });
-
-      tipoItems.forEach(opt => {
-        opt.addEventListener('click', () => {
-          tipoItems.forEach(o => o.classList.remove('selected'));
-          opt.classList.add('selected');
-          tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
-          tipoBtn.textContent = `${opt.textContent} `;
-          tipoBtn.appendChild(arrow());
-          tipoMenu.classList.remove('active');
-          updateTotal();
-        });
-      });
-
-      // BOTONES + / -
-      incBtn.addEventListener('click', () => {
-        if (cantidad < 100) {
-          cantidad++;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
-        }
-      });
-
-      decBtn.addEventListener('click', () => {
-        if (cantidad > 1) {
-          cantidad--;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
-        }
-      });
-
-      // LIMPIAR SELECCIONES
-      limpiarBtn.addEventListener('click', () => {
-        selectedSize = null;
-        cantidad = 1;
-        tipo = { type: 'unidad', mult: 1 };
-        sizeBtn.textContent = 'Seleccionar Tamaño ';
-        sizeBtn.appendChild(arrow());
-        tipoBtn.textContent = 'Unidad (1) ';
-        tipoBtn.appendChild(arrow());
-        cantidadVisual.textContent = '1';
-        sizeItems.forEach(i => i.classList.remove('selected'));
-        tipoItems.forEach(i => i.classList.remove('selected'));
-        tipoItems[0].classList.add('selected'); // volver a Unidad
-        precios.style.display = 'none';
-        totalDisplay.textContent = 'Total: $0';
-      });
-
-      // CERRAR DROPDOWNS AL HACER CLIC FUERA
-      document.addEventListener('click', e => {
-        if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
-        if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
-      });
-
-    });
-  </script>
-
+  <script src="https://papelerapierrastegui.com.ar/assets/js/arranque-grueso.js"></script>
 </body>
 
 </html>

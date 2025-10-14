@@ -29,22 +29,17 @@
       <div class="producto-contenido">
         <img src="https://papelerapierrastegui.com.ar/assets/images/pluribol.jpg" alt="Rollo Pluribol" />
         <div class="producto-info">
-          <!-- Precio fijo -->
           <div class="precios">
             <p class="precio-unit">Por unidad: $9.500</p>
           </div>
 
-          <!-- Incremento manual -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
             <button id="incrementar" aria-label="Aumentar cantidad">+</button>
           </div>
 
-          <!-- Total dinámico -->
           <p class="total">Total: $9.500</p>
-
-          <!-- Botón Agregar al Carrito -->
           <button class="agregar-carrito dropdown-btn">Agregar al Carrito</button>
 
           <h3>Descripción del producto</h3>
@@ -65,39 +60,7 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const precioUnit = 9500; // Precio fijo
-      let cantidad = 1;
-
-      const decBtn = document.getElementById('decrementar');
-      const incBtn = document.getElementById('incrementar');
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const totalDisplay = document.querySelector('.total');
-
-      function updateTotal() {
-        const total = cantidad * precioUnit;
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
-      }
-
-      incBtn.addEventListener('click', () => {
-        if (cantidad < 100) {
-          cantidad++;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
-        }
-      });
-
-      decBtn.addEventListener('click', () => {
-        if (cantidad > 1) {
-          cantidad--;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
-        }
-      });
-    });
-  </script>
-
+  <script src="https://papelerapierrastegui.com.ar/assets/js/rollo-pluribol.js"></script>
 </body>
 
 </html>
