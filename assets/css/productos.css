@@ -3,44 +3,51 @@
 
 /* Reset */
 * {
-    font-family: 'Gilroy', sans-serif;
+    font-family: 'Gilroy', 'Segoe UI';
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* Botones */
 button.agregar-carrito:hover {
     color: #ff7600 !important;
     background: #fff !important;
     border: none;
 }
 
+/* Titulos secciones */
 section h2 {
     color: #ff7600;
+    text-align: center;
 }
 
+/* Estructura principal */
 html,
 body {
     height: 100%;
-    overflow: hidden !important;
+    overflow-x: hidden;
     background-color: #fff;
 }
 
 main {
-    flex: 1 0 auto;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
+    flex: 1 0 auto;
+    overflow-x: hidden;
 }
 
+/* Contenedores */
 .container,
 .container-footer {
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
 
+/* Producto */
 .producto {
     position: relative;
     top: 4em;
@@ -48,50 +55,52 @@ main {
 }
 
 .producto h2 {
-    font-size: 2rem;
+    font-size: clamp(1.6rem, 2vw, 2rem);
     margin-bottom: 20px;
     text-align: center;
 }
 
 .producto-contenido {
     display: flex;
-    gap: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    overflow: hidden;
     border: 3px solid #ff7600;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .producto-contenido img {
-    max-width: 350px;
     width: 100%;
+    max-width: 350px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(59, 45, 0, 0.12);
+    object-fit: cover;
 }
 
 .producto-info {
-    flex: 1;
-    min-width: 280px;
+    flex: 1 1 280px;
     max-height: calc(100vh - 300px);
     overflow-y: auto;
     padding-right: 8px;
 }
 
+/* Header y nav */
 header {
     background-color: #fff;
     color: #ff7600;
     border-bottom: 3px solid #ff7600;
     padding: 15px 0;
     z-index: 100;
+    text-align: center;
 }
 
 header h1 {
-    font-size: 1.8rem;
+    font-size: clamp(1.5rem, 2vw, 1.8rem);
     margin-bottom: 8px;
-    text-align: center;
 }
 
 nav ul {
@@ -109,75 +118,38 @@ nav ul li a {
     transition: color 0.3s ease;
 }
 
-nav ul li a:hover {
-    color: #ff7600;
-}
-
 /* Dropdown */
 .dropdown {
     position: relative;
+    width: 100%;
+    max-width: 350px;
     margin-bottom: 20px;
-    width: 28%;
 }
 
 .dropdown-btn {
+    width: 100%;
     background-color: #fff;
     color: #ff7600;
-    border: solid 2px #ff7600;
-    padding: 12px 20px;
+    border: 2px solid #ff7600;
+    padding: 12px 16px;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    width: 111%;
-    text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-button.agregar-carrito {
-    width: 11em;
-    color: #fff;
-    background: #ff7600;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    border: none;
-    /* Sombra negra uniforme alrededor */
-    box-shadow: 0 0 10px rgb(0 0 0 / 63%);
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-    padding-top: 0.6em;
-    padding-bottom: 0.6em;
-    border-radius: 0.3em;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 18px;
-    margin-left: 0.2em;
-    transition: background-color 0.4s ease;
-    /* transición suave */
-}
-
 .dropdown-btn:hover {
     color: #fff;
-    background: #ff7600;
-}
-
-button.dropdown-btn:hover {
-    color: #fff;
-    background: #ff7600;
-}
-
-.dropdown-btn:focus {
-    outline: none;
+    background-color: #ff7600;
 }
 
 .dropdown-menu {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 111%;
+    width: 100%;
     max-height: 200px;
     overflow-y: auto;
     background-color: #fff;
@@ -185,8 +157,8 @@ button.dropdown-btn:hover {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(59, 45, 0, 0.1);
     display: none;
-    z-index: 10;
     margin-top: 0.3em;
+    z-index: 10;
 }
 
 .dropdown-menu.active {
@@ -196,10 +168,9 @@ button.dropdown-btn:hover {
 .dropdown-item {
     padding: 10px 15px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
     color: #ff7600;
-    justify-content: center;
     display: flex;
+    justify-content: center;
 }
 
 .dropdown-item:hover {
@@ -207,18 +178,14 @@ button.dropdown-btn:hover {
     color: #fff;
 }
 
-.precios {
-    margin-bottom: 20px;
-    font-weight: 600;
-    color: #ff7600;
-}
-
-.cantidad-container {
-    margin-bottom: 20px;
+/* Cantidad y botones */
+.cantidad-container,
+.agregar-carrito-cantidad {
     display: flex;
-    align-items: center;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .cantidad-container label {
@@ -235,24 +202,16 @@ button.dropdown-btn:hover {
     border-radius: 5px;
     cursor: pointer;
     color: #fff;
-    transition: background-color 0.3s ease;
-    margin-left: 2em;
     font-weight: 700;
     font-size: 14px;
     box-shadow: 0 0 10px rgb(0 0 0 / 63%);
+    transition: all 0.3s ease;
 }
 
 .cantidad-container button:hover,
 .agregar-carrito-cantidad button:hover {
     background-color: #fff;
     color: #ff7600;
-}
-
-.agregar-carrito-cantidad {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 30px;
 }
 
 #cantidad-visual {
@@ -270,6 +229,7 @@ button.dropdown-btn:hover {
     margin-bottom: 30px;
 }
 
+/* Listas y títulos */
 h3 {
     margin-bottom: 10px;
     color: #ff7600;
@@ -281,82 +241,19 @@ ul {
     color: #ff7600;
 }
 
+/* Footer */
 footer {
     background-color: #fff;
     color: #ff7600;
-    3px solid #ff7600: 0 -4px 10px #ff7600;
     padding: 20px 0;
     text-align: center;
-    font-size: 0.9rem;
-    position: relative;
-    margin-top: -12em;
     border-top: 3px solid #ff7600;
     font-weight: 700;
 }
 
-footer p {
-    margin-bottom: 6px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-    .producto-contenido {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .dropdown {
-        width: 45%;
-    }
-}
-
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .dropdown {
-        width: 100%;
-    }
-
-    .cantidad-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .cantidad-container button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
-    .producto h2 {
-        font-size: 1.6rem;
-    }
-
-    .dropdown-btn {
-        font-size: 0.95rem;
-        padding: 10px 16px;
-    }
-
-    .total {
-        font-size: 1.1rem;
-    }
-}
-
-/* === SCROLLBAR UNIVERSAL === */
-
-/* WebKit (Chrome, Edge Chromium, Opera, Safari) */
+/* Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
-    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -365,25 +262,64 @@ footer p {
 
 ::-webkit-scrollbar-thumb {
     background-color: #ff7600;
-    /* color principal */
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: #eba366;
-    /* color al hover */
 }
 
-*::-webkit-scrollbar-thumb:hover {
-    background-color: #eba366;
-}
-
-
-/* Firefox */
 @-moz-document url-prefix() {
     * {
         scrollbar-width: thin;
         scrollbar-color: #ff7600 transparent;
-        /* thumb / track */
+    }
+}
+
+/* === RESPONSIVE TOTAL === */
+@media (max-width: 1024px) {
+    .producto-contenido {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dropdown {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .cantidad-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cantidad-container button,
+    .agregar-carrito-cantidad button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    .producto h2 {
+        font-size: 1.5rem;
+    }
+
+    .dropdown-btn {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
+
+    .total {
+        font-size: 1.1rem;
     }
 }
