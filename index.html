@@ -2575,19 +2575,80 @@
             document.addEventListener('DOMContentLoaded', () => {
 
                 // =========================
-                // 1. Carrusel de imágenes
+                // 1. Carrusel con botones prev/next
                 // =========================
-                function cicloImagenes(contenedor) {
-                    const imgs = contenedor.querySelectorAll("img");
-                    if (imgs.length < 2) return;
+                function inicializarCarrusel(contenedor) {
+                    const imgs = contenedor.querySelectorAll('img');
+                    if (imgs.length <= 1) return;
+
+                    // Creamos botones
+                    const prevBtn = document.createElement('button');
+                    const nextBtn = document.createElement('button');
+                    prevBtn.classList.add('carousel-prev');
+                    nextBtn.classList.add('carousel-next');
+                    prevBtn.innerHTML = '❮';
+                    nextBtn.innerHTML = '❯';
+
+                    // Estilo básico inline para que funcione sin CSS extra
+                    Object.assign(prevBtn.style, {
+                        position: 'absolute',
+                        top: '50%',
+                        left: '5px',
+                        transform: 'translateY(-50%)',
+                        background: 'rgba(0,0,0,0.4)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        cursor: 'pointer',
+                        zIndex: '5'
+                    });
+                    Object.assign(nextBtn.style, {
+                        position: 'absolute',
+                        top: '50%',
+                        right: '5px',
+                        transform: 'translateY(-50%)',
+                        background: 'rgba(0,0,0,0.4)',
+                        color: '#fff',
+                        border: 'none',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        cursor: 'pointer',
+                        zIndex: '5'
+                    });
+
+                    // Insertar botones en el contenedor padre (posición relativa)
+                    const wrapper = contenedor.closest('.producto-img-container') || contenedor;
+                    wrapper.style.position = 'relative';
+                    wrapper.appendChild(prevBtn);
+                    wrapper.appendChild(nextBtn);
+
+                    // Estado del índice actual
                     let index = 0;
-                    setInterval(() => {
-                        imgs[index].classList.remove("visible");
-                        index = (index + 1) % imgs.length;
-                        imgs[index].classList.add("visible");
-                    }, 3000);
+                    imgs.forEach((img, i) => {
+                        img.style.display = i === 0 ? 'block' : 'none';
+                    });
+
+                    function mostrarImagen(nuevoIndex) {
+                        imgs[index].style.display = 'none';
+                        index = (nuevoIndex + imgs.length) % imgs.length;
+                        imgs[index].style.display = 'block';
+                    }
+
+                    prevBtn.addEventListener('click', e => {
+                        e.stopPropagation();
+                        mostrarImagen(index - 1);
+                    });
+
+                    nextBtn.addEventListener('click', e => {
+                        e.stopPropagation();
+                        mostrarImagen(index + 1);
+                    });
                 }
-                document.querySelectorAll(".producto-img-container .contenedor").forEach(cicloImagenes);
+
+                document.querySelectorAll('.producto-img-container .contenedor').forEach(inicializarCarrusel);
 
                 // =========================
                 // 2. Reemplazo de botones con enlaces
@@ -2725,7 +2786,7 @@
                 });
 
                 // =========================
-                // 3. Buscador en tiempo real
+                // 3. Buscador en tiempo real (igual)
                 // =========================
                 const grid = document.querySelector('.productos-grid');
                 if (grid) {
@@ -2733,13 +2794,11 @@
                     const searchInputs = document.querySelectorAll('#search-input');
 
                     function filtrarProductos(query) {
-                        const visibles = [];
                         productosOriginales.forEach(producto => {
                             const nombre = producto.querySelector('.nombre')?.textContent.toLowerCase() || '';
                             const categoria = producto.querySelector('.categoria')?.textContent.toLowerCase() || '';
                             if (nombre.includes(query) || categoria.includes(query)) {
                                 producto.style.display = '';
-                                visibles.push(producto);
                             } else {
                                 producto.style.display = 'none';
                             }
