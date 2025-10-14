@@ -32,34 +32,8 @@
           <ul>
             <li>Rollo de papel resistente, ideal para envoltorios y empaques.</li>
             <li>Perfecto para comercios, oficinas y uso doméstico.</li>
-            <li>Disponible en rollos individuales.</li>
             <li>Se vende por unidad.</li>
           </ul>
-
-          <!-- Dropdown Tamaño -->
-          <div class="dropdown" id="size-dropdown">
-            <button class="dropdown-btn">
-              <span class="text">Seleccionar Tamaño</span>
-              <span class="arrow">▼</span>
-            </button>
-            <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="unidad" data-price-unit="9500"
-                data-img="../../assets/images/ROLLO_PLURIBOL/rollo_pluribol.jpg">
-                Unidad
-              </div>
-            </div>
-          </div>
-
-          <!-- Dropdown Tipo -->
-          <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-            <button class="dropdown-btn">
-              <span class="text">Unidad</span>
-              <span class="arrow">▼</span>
-            </button>
-            <div class="dropdown-menu">
-              <div class="dropdown-item selected" data-type="unidad">Unidad</div>
-            </div>
-          </div>
 
           <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
@@ -68,7 +42,7 @@
             <button id="incrementar" aria-label="Aumentar cantidad">+</button>
           </div>
 
-          <p class="total">Total: $0</p>
+          <p class="total">Total: $9.500 ARS</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
@@ -84,55 +58,18 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const sizeDropdown = document.getElementById('size-dropdown');
-      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
-      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
-      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
-
-      const tipoDropdown = document.getElementById('tipo-dropdown');
-      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
-      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
-      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
       const totalDisplay = document.querySelector('.total');
-      const productoImg = document.getElementById('producto-img');
 
-      let selectedSize = null;
-      let tipo = 'unidad';
+      const precioUnitario = 9500;
       let cantidad = 1;
 
-      tipoDropdown.style.display = 'none';
-
       function updateTotal() {
-        if (!selectedSize) {
-          totalDisplay.textContent = "Total: $0";
-          return;
-        }
-        let total = cantidad * Number(selectedSize.dataset.priceUnit);
+        let total = cantidad * precioUnitario;
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
-
-      sizeBtn.addEventListener('click', () => {
-        sizeMenu.classList.toggle('active');
-        sizeBtn.classList.toggle('active');
-      });
-
-      sizeItems.forEach(item => {
-        item.addEventListener('click', () => {
-          sizeItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          sizeBtn.querySelector('.text').textContent = item.textContent;
-          selectedSize = item;
-          productoImg.src = item.dataset.img;
-          tipoDropdown.style.display = 'block';
-          updateTotal();
-          sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active');
-        });
-      });
 
       incBtn.addEventListener('click', () => {
         if (cantidad < 100) cantidad++;
@@ -144,17 +81,6 @@
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
         updateTotal();
-      });
-
-      document.addEventListener('click', e => {
-        if (!sizeDropdown.contains(e.target)) {
-          sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active');
-        }
-        if (!tipoDropdown.contains(e.target)) {
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
-        }
       });
     });
   </script>

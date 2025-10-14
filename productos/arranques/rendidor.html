@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Rendidor</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
+  <title>Papelera Pierrastegui - Arranque Rendidor</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -14,9 +14,9 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../catalogo">Catálogo</a></li>
-        <li><a href="../../contacto">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
@@ -24,16 +24,16 @@
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-        <img id="producto-img" src="../../assets/images/RENDIDOR/rendidor.jpg" alt="Rendidor">
+        <img id="producto-img"
+          src="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/15x20.jpg"
+          alt="Arranque Rendidor">
 
         <div class="producto-info">
-          <h2>Rendidor</h2>
+          <h2>Arranque Rendidor</h2>
 
           <ul>
-            <li>Bolsa económica y resistente, ideal para residuos generales.</li>
-            <li>Perfecta para uso doméstico o comercial.</li>
-            <li>Disponible en varios tamaños y presentaciones.</li>
-            <li>Se vende por unidad o packs de 50 y 100.</li>
+            <li>Arranques más finos y rendidores.</li>
+            <li>Disponible en varios tamaños y opciones Bulto/Unidad.</li>
           </ul>
 
           <!-- Dropdown Tamaño -->
@@ -43,17 +43,33 @@
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="30x40" data-price-unit="350" data-price-x50="16000"
-                data-price-x100="31000" data-img="../../assets/images/RENDIDOR/rendidor_30x40.jpg">
+              <div class="dropdown-item" data-size="15x20" data-price-unit="1850" data-price-bulto="17250"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/15x20.jpg">
+                15x20
+              </div>
+              <div class="dropdown-item" data-size="15x25" data-price-unit="2000" data-price-bulto="21900"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/15x25.jpg">
+                15x25
+              </div>
+              <div class="dropdown-item" data-size="20x30" data-price-unit="2600" data-price-bulto="26300"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/20x30.jpg">
+                20x30
+              </div>
+              <div class="dropdown-item" data-size="25x35" data-price-unit="3500" data-price-bulto="27000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/25x35.jpg">
+                25x35
+              </div>
+              <div class="dropdown-item" data-size="30x40" data-price-unit="4500" data-price-bulto="23900"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/30x40.jpg">
                 30x40
               </div>
-              <div class="dropdown-item" data-size="40x50" data-price-unit="400" data-price-x50="19000"
-                data-price-x100="37000" data-img="../../assets/images/RENDIDOR/rendidor_40x50.jpg">
-                40x50
+              <div class="dropdown-item" data-size="35x45" data-price-unit="3500" data-price-bulto="27000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/35x45.jpg">
+                35x45
               </div>
-              <div class="dropdown-item" data-size="50x60" data-price-unit="450" data-price-x50="22000"
-                data-price-x100="43000" data-img="../../assets/images/RENDIDOR/rendidor_50x60.jpg">
-                50x60
+              <div class="dropdown-item" data-size="40x50" data-price-unit="4000" data-price-bulto="21000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/ARRANQUES/40x50.jpg">
+                40x50
               </div>
             </div>
           </div>
@@ -66,8 +82,7 @@
             </button>
             <div class="dropdown-menu">
               <div class="dropdown-item selected" data-type="unidad">Unidad</div>
-              <div class="dropdown-item" data-type="x50">x50</div>
-              <div class="dropdown-item" data-type="x100">x100</div>
+              <div class="dropdown-item" data-type="bulto">Bulto</div>
             </div>
           </div>
 
@@ -124,10 +139,8 @@
         let total = 0;
         if (tipo === 'unidad') {
           total = cantidad * Number(selectedSize.dataset.priceUnit);
-        } else if (tipo === 'x50') {
-          total = cantidad * Number(selectedSize.dataset.priceX50);
-        } else if (tipo === 'x100') {
-          total = cantidad * Number(selectedSize.dataset.priceX100);
+        } else if (tipo === 'bulto') {
+          total = cantidad * Number(selectedSize.dataset.priceBulto);
         }
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
