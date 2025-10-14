@@ -38,37 +38,26 @@
               Seleccionar Tamaño <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu" role="listbox" tabindex="-1">
-              <div class="dropdown-item" data-size="F75unidad" data-price-unit="260" data-price-bulk="12000"
-                data-bulto="50">F75 (Unidad / x50)</div>
-              <div class="dropdown-item" data-size="F75x100" data-price-unit="0" data-price-bulk="22000"
-                data-bulto="100">F75 x100</div>
-              <div class="dropdown-item" data-size="F100unidad" data-price-unit="300" data-price-bulk="0"
-                data-bulto="1">F100 (Unidad)</div>
-              <div class="dropdown-item" data-size="F100x50" data-price-unit="0" data-price-bulk="14000"
-                data-bulto="50">F100 x50</div>
-              <div class="dropdown-item" data-size="F100x100" data-price-unit="0" data-price-bulk="27000"
-                data-bulto="100">F100 x100</div>
-              <div class="dropdown-item" data-size="P12unidad" data-price-unit="190" data-price-bulk="8000"
-                data-bulto="50">P12 (Unidad / x50)</div>
-              <div class="dropdown-item" data-size="P12x100" data-price-unit="0" data-price-bulk="15500"
-                data-bulto="100">P12 x100</div>
+              <div class="dropdown-item" data-size="F100" data-unit="300" data-x50="14000" data-x100="27000">F100</div>
+              <div class="dropdown-item" data-size="P12" data-unit="190" data-x50="8000" data-x100="15500">P12</div>
+              <div class="dropdown-item" data-size="F75" data-unit="260" data-x50="12000" data-x100="22000">F75</div>
             </div>
           </div>
 
           <!-- Precios -->
           <div class="precios" style="display:none;">
-            <p class="precio-unit">Por unidad: $0</p>
-            <p class="precio-bulto">Por bulto: $0</p>
+            <p class="precio">Precio: $0</p>
           </div>
 
-          <!-- Tipo (Unidad/Bulto) -->
+          <!-- Tipo (Unidad/x50/x100) -->
           <div class="cantidad-container">
-            <label for="tipo-dropdown">Tipo:</label>
+            <label for="tipo-dropdown">Cantidad:</label>
             <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-              <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
+              <span class="dropdown-btn selected">Unidad <span class="arrow">▼</span></span>
               <div class="dropdown-menu" role="listbox">
-                <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
-                <span class="dropdown-item" data-type="bulto" data-mult="1">Bulto</span>
+                <span class="dropdown-item selected" data-type="unit">Unidad</span>
+                <span class="dropdown-item" data-type="x50">x50</span>
+                <span class="dropdown-item" data-type="x100">x100</span>
               </div>
             </div>
             <button id="limpiar">Limpiar</button>
@@ -116,21 +105,20 @@
       const tipoDropdown = document.getElementById('tipo-dropdown');
       const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
       const cantidadContainer = document.querySelector('.cantidad-container');
       const limpiarBtn = document.getElementById('limpiar');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
-
       const cantidadVisual = document.getElementById('cantidad-visual');
       const precios = document.querySelector('.precios');
-      const precioUnit = document.querySelector('.precio-unit');
-      const precioBulto = document.querySelector('.precio-bulto');
+      const precioDisplay = precios.querySelector('.precio');
       const totalDisplay = document.querySelector('.total');
 
       let selectedSize = null;
+      let selectedType = 'unit';
       let cantidad = 1;
-      let tipo = { type: 'unidad', mult: 1 };
 
       cantidadContainer.style.display = 'none';
 
@@ -149,14 +137,13 @@
         }
 
         precios.style.display = 'block';
-        const priceU = Number(selectedSize.priceUnit);
-        const priceB = Number(selectedSize.priceBulk);
+        let price = 0;
+        if (selectedType === 'unit') price = Number(selectedSize.dataset.unit);
+        if (selectedType === 'x50') price = Number(selectedSize.dataset.x50);
+        if (selectedType === 'x100') price = Number(selectedSize.dataset.x100);
 
-        precioUnit.textContent = `Por unidad: $${priceU.toLocaleString('es-AR')} ARS`;
-        precioBulto.textContent = `Por bulto: $${priceB.toLocaleString('es-AR')} ARS`;
-
-        let total = tipo.type === 'unidad' ? cantidad * priceU : cantidad * priceB;
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+        precioDisplay.textContent = `Precio: $${price.toLocaleString('es-AR')} ARS`;
+        totalDisplay.textContent = `Total: $${(price * cantidad).toLocaleString('es-AR')} ARS`;
       }
 
       sizeBtn.addEventListener('click', () => sizeMenu.classList.toggle('active'));
@@ -164,47 +151,27 @@
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
-
-          selectedSize = {
-            size: item.dataset.size,
-            priceUnit: item.dataset.priceUnit,
-            priceBulk: item.dataset.priceBulk
-          };
-
+          selectedSize = item;
           cantidadContainer.style.display = 'flex';
-
-          const cantidadBulto = Number(item.dataset.bulto) || 1;
-
-          tipoMenu.innerHTML = `
-            <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
-            <span class="dropdown-item" data-type="bulto" data-mult="${cantidadBulto}">Bulto (${cantidadBulto})</span>
-          `;
-
-          tipo = { type: 'unidad', mult: 1 };
-          tipoBtn.textContent = 'Unidad (1) ';
-          tipoBtn.appendChild(arrow());
-
-          const newTipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-          newTipoItems.forEach(opt => {
-            opt.addEventListener('click', () => {
-              newTipoItems.forEach(o => o.classList.remove('selected'));
-              opt.classList.add('selected');
-              tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
-              tipoBtn.textContent = `${opt.textContent} `;
-              tipoBtn.appendChild(arrow());
-              tipoMenu.classList.remove('active');
-              updateTotal();
-            });
-          });
-
           sizeBtn.textContent = `${item.textContent} `;
           sizeBtn.appendChild(arrow());
-          sizeMenu.classList.remove('active');
           updateTotal();
+          sizeMenu.classList.remove('active');
         });
       });
 
       tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
+      tipoMenu.querySelectorAll('.dropdown-item').forEach(opt => {
+        opt.addEventListener('click', () => {
+          tipoMenu.querySelectorAll('.dropdown-item').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          selectedType = opt.dataset.type;
+          tipoBtn.textContent = `${opt.textContent} `;
+          tipoBtn.appendChild(arrow());
+          tipoMenu.classList.remove('active');
+          updateTotal();
+        });
+      });
 
       incBtn.addEventListener('click', () => {
         if (cantidad < 100) {
@@ -224,18 +191,16 @@
 
       limpiarBtn.addEventListener('click', () => {
         selectedSize = null;
+        selectedType = 'unit';
         cantidad = 1;
-        tipo = { type: 'unidad', mult: 1 };
         sizeBtn.textContent = 'Seleccionar Tamaño ';
         sizeBtn.appendChild(arrow());
-        tipoMenu.innerHTML = `
-          <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
-          <span class="dropdown-item" data-type="bulto" data-mult="1">Bulto</span>
-        `;
-        tipoBtn.textContent = 'Unidad (1) ';
+        tipoBtn.textContent = 'Unidad ';
         tipoBtn.appendChild(arrow());
         cantidadVisual.textContent = '1';
         sizeItems.forEach(i => i.classList.remove('selected'));
+        tipoMenu.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('selected'));
+        tipoMenu.querySelector('.dropdown-item[data-type="unit"]').classList.add('selected');
         precios.style.display = 'none';
         totalDisplay.textContent = 'Total: $0';
         cantidadContainer.style.display = 'none';
