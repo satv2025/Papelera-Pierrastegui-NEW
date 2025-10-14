@@ -2,73 +2,76 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Arranque Grueso - Papelera Pierrastegui</title>
-  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papelera Pierrastegui - Arranque Grueso</title>
+  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
 
 <body>
   <header>
-    <div class="container">
-      <h1>Papelera Pierrastegui</h1>
-      <nav>
-        <ul>
-          <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
-          <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
-          <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
-        </ul>
-      </nav>
-    </div>
+    <h1>Papelera Pierrastegui</h1>
+    <nav>
+      <ul>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
     <section class="producto container">
-      <h2>BOLSAS DE ARRANQUE GRUESO</h2>
       <div class="producto-contenido">
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ARRANQUES/Arranques%20reforzados.jpg"
-          alt="Arranque Grueso" />
+        <img id="producto-img" src="../../assets/images/ARRANQUE_GRUESO/arranque_grueso.jpg" alt="Arranque Grueso">
+
         <div class="producto-info">
+          <h2>Arranque Grueso</h2>
+
+          <ul>
+            <li>Bolsa reforzada de arranque grueso para residuos.</li>
+            <li>Alta resistencia, ideal para carga pesada.</li>
+            <li>Disponible en varios tamaños según necesidad.</li>
+            <li>Se vende por unidad o packs de 50 y 100.</li>
+          </ul>
+
           <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
-            <button class="dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
-              Seleccionar Tamaño <span class="arrow">▼</span>
+            <button class="dropdown-btn">
+              <span class="text">Seleccionar Tamaño</span>
+              <span class="arrow">▼</span>
             </button>
-            <div class="dropdown-menu" role="listbox" tabindex="-1">
-              <div class="dropdown-item" data-size="15x20" data-price-unit="4700" data-price-bulk="25200">15x20</div>
-              <div class="dropdown-item" data-size="15x25" data-price-unit="4700" data-price-bulk="25200">15x25</div>
-              <div class="dropdown-item" data-size="20x25" data-price-unit="4700" data-price-bulk="25200">20x25</div>
-              <div class="dropdown-item" data-size="20x30" data-price-unit="4700" data-price-bulk="25200">20x30</div>
-              <div class="dropdown-item" data-size="25x35" data-price-unit="4700" data-price-bulk="25200">25x35</div>
-              <div class="dropdown-item" data-size="30x40" data-price-unit="4700" data-price-bulk="25200">30x40</div>
-              <div class="dropdown-item" data-size="35x45" data-price-unit="4700" data-price-bulk="25200">35x45</div>
-              <div class="dropdown-item" data-size="40x50" data-price-unit="4700" data-price-bulk="25200">40x50</div>
-            </div>
-          </div>
-
-          <!-- Precios -->
-          <div class="precios" style="display:none;">
-            <p class="precio-unit">Por unidad: $4.700 ARS</p>
-            <p class="precio-bulto">Por bulto (6 unidades): $25.200 ARS</p>
-          </div>
-
-          <!-- Tipo -->
-          <div class="cantidad-container">
-            <label for="tipo-dropdown">Tipo:</label>
-            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false"
-              style="display:none;">
-              <span class="dropdown-btn selected">Unidad (1) <span class="arrow">▼</span></span>
-              <div class="dropdown-menu" role="listbox">
-                <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
-                <span class="dropdown-item" data-type="bulto" data-mult="6">Bulto (6)</span>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="30x40" data-price-unit="500" data-price-x50="24000"
+                data-price-x100="46000" data-img="../../assets/images/ARRANQUE_GRUESO/arranque_grueso_30x40.jpg">
+                30x40
+              </div>
+              <div class="dropdown-item" data-size="40x50" data-price-unit="600" data-price-x50="29000"
+                data-price-x100="56000" data-img="../../assets/images/ARRANQUE_GRUESO/arranque_grueso_40x50.jpg">
+                40x50
+              </div>
+              <div class="dropdown-item" data-size="50x60" data-price-unit="700" data-price-x50="34000"
+                data-price-x100="66000" data-img="../../assets/images/ARRANQUE_GRUESO/arranque_grueso_50x60.jpg">
+                50x60
               </div>
             </div>
-            <button id="limpiar">Limpiar</button>
           </div>
 
-          <!-- Incremento manual -->
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+            <button class="dropdown-btn">
+              <span class="text">Unidad</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item selected" data-type="unidad">Unidad</div>
+              <div class="dropdown-item" data-type="x50">x50</div>
+              <div class="dropdown-item" data-type="x100">x100</div>
+            </div>
+          </div>
+
+          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
@@ -76,12 +79,7 @@
           </div>
 
           <p class="total">Total: $0</p>
-
-          <h3>Descripción del producto</h3>
-          <ul>
-            <li>Rollos de bolsas de arranque de distintas medidas, transparentes, prácticos y resistentes.</li>
-            <li>Útiles para guardar alimentos, fraccionar productos o colocar en cestos de residuos pequeños.</li>
-          </ul>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
@@ -94,7 +92,115 @@
     </div>
   </footer>
 
-  <script src="https://papelerapierrastegui.com.ar/assets/js/arranque-grueso.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
+
+      let selectedSize = null;
+      let tipo = 'unidad';
+      let cantidad = 1;
+
+      // Ocultar dropdown tipo al inicio
+      tipoDropdown.style.display = 'none';
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = 0;
+        if (tipo === 'unidad') {
+          total = cantidad * Number(selectedSize.dataset.priceUnit);
+        } else if (tipo === 'x50') {
+          total = cantidad * Number(selectedSize.dataset.priceX50);
+        } else if (tipo === 'x100') {
+          total = cantidad * Number(selectedSize.dataset.priceX100);
+        }
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+      }
+
+      // Dropdown tamaño
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+
+          tipoDropdown.style.display = 'block';
+
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoItems[0].classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = tipoItems[0].textContent;
+          tipo = 'unidad';
+
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        if (cantidad < 100) cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
