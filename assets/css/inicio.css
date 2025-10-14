@@ -18,6 +18,12 @@
   padding: 0;
 }
 
+.carousel-prev,
+.carousel-next {
+  color: #ff7600 !important;
+  background: #ffffff00 !important;
+}
+
 /* Estilo base para botones y dropdown */
 button.btn-login,
 button.btn-registro,
