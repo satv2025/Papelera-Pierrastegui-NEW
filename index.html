@@ -2576,7 +2576,7 @@
             document.addEventListener('DOMContentLoaded', () => {
 
                 // =========================
-                // Carrusel flexible con prev/next
+                // 1. Carrusel flexible con prev/next
                 // =========================
                 function inicializarCarrusel(producto) {
                     const contenedor = producto.querySelector('.contenedor');
@@ -2639,13 +2639,118 @@
                 // Inicializar todos los productos
                 document.querySelectorAll('.producto').forEach(p => inicializarCarrusel(p));
 
+
                 // =========================
-                // Botones con enlace
+                // 2. Botones con enlace
                 // =========================
                 const links = [
-                    "productos/stretch/stretch",
-                    "productos/libreria/resaltador"
-                    // agregar el resto sin .html
+                    "productos/cajas-de-carton-y-gastronomia/desayuno.html",
+                    "productos/cajas-de-carton-y-gastronomia/empanada.html",
+                    "productos/cajas-de-carton-y-gastronomia/hamburguesa.html",
+                    "productos/cajas-de-carton-y-gastronomia/pizza.html",
+                    "productos/cajas-de-carton-y-gastronomia/ravioles.html",
+                    "productos/cajas-de-carton-y-gastronomia/red-para-bondiola.html",
+                    "productos/cajas-de-carton-y-gastronomia/sandwich.html",
+                    "productos/carton/corrugado.html",
+                    "productos/carton/tirascs.html",
+                    "productos/cintas/papel.html",
+                    "productos/cintas/scotch.html",
+                    "productos/cubiertos/cuchillos/blanco.html",
+                    "productos/cubiertos/cuchillos/negro.html",
+                    "productos/cubiertos/tenedor/blanco.html",
+                    "productos/cubiertos/tenedor/negro.html",
+                    "productos/cubiertos/cucharasopera.html",
+                    "productos/cubiertos/cucharita.html",
+                    "productos/cubiertos/platotorta.html",
+                    "productos/cubiertos/remos.html",
+                    "productos/film/film.html",
+                    "productos/folex/folex.html",
+                    "productos/folex/hamburguesa.html",
+                    "productos/guantes/nitirlo.html",
+                    "productos/guantes/polietileno.html",
+                    "productos/libreria/abrochadora.html",
+                    "productos/libreria/adhesivo-pizzini.html",
+                    "productos/libreria/banditas-elasticas.html",
+                    "productos/libreria/biromes.html",
+                    "productos/libreria/calculadora.html",
+                    "productos/libreria/cinta-bifaz.html",
+                    "productos/libreria/cinta-fragil.html",
+                    "productos/libreria/clips.html",
+                    "productos/libreria/cuadernosuniv.html",
+                    "productos/libreria/cutter.html",
+                    "productos/libreria/estallidos.html",
+                    "productos/libreria/fibrones.html",
+                    "productos/libreria/ganchos-de-abrochadora.html",
+                    "productos/libreria/hilo.html",
+                    "productos/libreria/hojas.html",
+                    "productos/libreria/liquidpaper.html",
+                    "productos/libreria/maquinamotex.html",
+                    "productos/libreria/marcadores-tiza.html",
+                    "productos/libreria/mini-rollos.html",
+                    "productos/libreria/moldes-freidora.html",
+                    "productos/libreria/mono-facil.html",
+                    "productos/libreria/motex.html",
+                    "productos/libreria/pincha-papeles.html",
+                    "productos/libreria/portacinta.html",
+                    "productos/libreria/remitos.html",
+                    "productos/libreria/resaltador.html",
+                    "productos/libreria/silicona.html",
+                    "productos/libreria/tacospapel.html",
+                    "productos/libreria/tijera-oficina.html",
+                    "productos/libreria/tiza.html",
+                    "productos/moldes-gastronomia/budinera/aluminio.html",
+                    "productos/moldes-gastronomia/budinera/papel.html",
+                    "productos/moldes-gastronomia/navidad-ano-nuevo/molde.html",
+                    "productos/moldes-gastronomia/pascua/caja.html",
+                    "productos/moldes-gastronomia/pascua/molde.html",
+                    "productos/moldes-gastronomia/pirotines.html",
+                    "productos/papel/cocina/elegante.html",
+                    "productos/papel/cocina/newpel.html",
+                    "productos/papel/higienico/elegante.html",
+                    "productos/papel/higienico/newpel.html",
+                    "productos/papel/aluminio.html",
+                    "productos/papel/bobina.html",
+                    "productos/papel/cortado.html",
+                    "productos/papel/manteca.html",
+                    "productos/papel/papel-para-bondiola.html",
+                    "productos/papel/papel-parafinado.html",
+                    "productos/pizzeria/conopapas.html",
+                    "productos/pizzeria/fondo.html",
+                    "productos/pizzeria/portapanchos.html",
+                    "productos/pizzeria/tripode.html",
+                    "productos/potes/bisagra.html",
+                    "productos/potes/dips.html",
+                    "productos/potes/ensaladafruta.html",
+                    "productos/rollostermicos/rollos.html",
+                    "productos/sorbetes/comun.html",
+                    "productos/sorbetes/negro.html",
+                    "productos/sorbetes/papel.html",
+                    "productos/stretch/stretch.html",
+                    "productos/vasos/plastico.html",
+                    "productos/vasos/telgopor.html",
+                    "productos/cajas-de-carton-y-gastronomia/felices-fiestas/caja.html",
+                    "productos/bolsas/ziploc.html",
+                    "productos/bolsas/sulfito.html",
+                    "productos/bolsas/riñon.html",
+                    "productos/bolsas/residuo.html",
+                    "productos/bolsas/polipropileno.html",
+                    "productos/bolsas/horno.html",
+                    "productos/bolsas/camiseta.html",
+                    "productos/bandejas-y-potes/telgopor.html",
+                    "productos/bandejas-y-potes/potes-de-helado.html",
+                    "productos/bandejas-y-potes/plato-marmita.html",
+                    "productos/bandejas-y-potes/plastico.html",
+                    "productos/bandejas-y-potes/ensaladera-con-tapa.html",
+                    "productos/bandejas-y-potes/ensaladafruta.html",
+                    "productos/bandejas-y-potes/dips.html",
+                    "productos/bandejas-y-potes/carton.html",
+                    "productos/bandejas-y-potes/blonda.html",
+                    "productos/bandejas-y-potes/bisagra.html",
+                    "productos/bandejas-y-potes/bandejas-de-carton-plateadas.html",
+                    "productos/bandejas-y-potes/aluminio.html",
+                    "productos/articulos-de-embajale-y-proteccion/rollo-pluribol.html",
+                    "productos/arranques/rendidor.html",
+                    "productos/arranques/grueso.html"
                 ];
 
                 function extraerUrl(onclickStr) {
@@ -2672,8 +2777,9 @@
                     }
                 });
 
+
                 // =========================
-                // Buscador eliminando/restaurando productos
+                // 3. Buscador eliminando/restaurando productos
                 // =========================
                 const grid = document.querySelector('.productos-grid');
                 if (grid) {
@@ -2698,8 +2804,56 @@
                     }));
                 }
 
+
+                // =========================
+                // 4. Menú lateral y dropdown
+                // =========================
+                const menuToggle = document.querySelector('.menu-toggle');
+                const sidebar = document.getElementById('pp-sidebar');
+                const closeBtn = document.getElementById('pp-close-btn');
+                const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
+
+                if (menuToggle && sidebar && closeBtn) {
+                    menuToggle.addEventListener('click', () => { sidebar.style.display = 'block'; });
+                    closeBtn.addEventListener('click', () => { sidebar.style.display = 'none'; });
+                    document.addEventListener('click', (e) => {
+                        if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
+                            sidebar.style.display = 'none';
+                        }
+                    });
+                }
+
+                dropdownTriggers.forEach(trigger => {
+                    trigger.addEventListener('click', () => {
+                        const submenu = trigger.nextElementSibling;
+                        if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                    });
+                });
+
+
+                // =========================
+                // 5. Modal de mantenimiento
+                // =========================
+                const modal = document.getElementById("maintenance-modal");
+                const closeModalBtn = document.querySelector(".close-btn");
+                if (modal && closeModalBtn) {
+                    document.body.classList.add("modal-open");
+                    closeModalBtn.addEventListener("click", () => {
+                        modal.style.display = "none";
+                        document.body.classList.remove("modal-open");
+                    });
+                    // Click fuera del modal también lo cierra
+                    modal.addEventListener("click", (e) => {
+                        if (e.target === modal) {
+                            modal.style.display = "none";
+                            document.body.classList.remove("modal-open");
+                        }
+                    });
+                }
+
             });
         </script>
+
     </body>
 
 </html>
