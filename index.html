@@ -2576,76 +2576,76 @@
             document.addEventListener('DOMContentLoaded', () => {
 
                 // =========================
-                // 1. Carrusel flexible
+                // Carrusel flexible con prev/next
                 // =========================
                 function inicializarCarrusel(producto) {
                     const contenedor = producto.querySelector('.contenedor');
                     if (!contenedor) return;
 
                     const imgs = Array.from(contenedor.querySelectorAll('img'));
-                    if (imgs.length <= 1) return;
+                    if (imgs.length === 0) return;
 
-                    let index = 0;
+                    // Agregar relative si no tiene
+                    if (getComputedStyle(producto).position === 'static') {
+                        producto.style.position = 'relative';
+                    }
+
+                    let index = imgs.findIndex(img => img.classList.contains('visible'));
+                    if (index === -1) index = 0;
+
+                    // Crear botones si no existen
+                    let prevBtn = producto.querySelector('.carousel-prev');
+                    let nextBtn = producto.querySelector('.carousel-next');
+
+                    if (!prevBtn) {
+                        prevBtn = document.createElement('button');
+                        prevBtn.className = 'carousel-prev';
+                        prevBtn.textContent = '❮';
+                        Object.assign(prevBtn.style, {
+                            position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '5px',
+                            background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%',
+                            width: '30px', height: '30px', cursor: 'pointer', zIndex: '5', fontSize: '18px'
+                        });
+                        producto.appendChild(prevBtn);
+                    }
+
+                    if (!nextBtn) {
+                        nextBtn = document.createElement('button');
+                        nextBtn.className = 'carousel-next';
+                        nextBtn.textContent = '❯';
+                        Object.assign(nextBtn.style, {
+                            position: 'absolute', top: '50%', transform: 'translateY(-50%)', right: '5px',
+                            background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%',
+                            width: '30px', height: '30px', cursor: 'pointer', zIndex: '5', fontSize: '18px'
+                        });
+                        producto.appendChild(nextBtn);
+                    }
 
                     function actualizar() {
                         imgs.forEach((img, i) => {
-                            if (i === index) {
-                                img.style.display = 'block';
-                                img.classList.add('visible');
-                            } else {
-                                img.style.display = 'none';
-                                img.classList.remove('visible');
-                            }
+                            img.style.display = (i === index) ? 'block' : 'none';
+                            img.classList.toggle('visible', i === index);
                         });
-                        prevBtn.style.display = index === 0 ? 'none' : 'block';
-                        nextBtn.style.display = index === imgs.length - 1 ? 'none' : 'block';
+                        prevBtn.style.display = (index === 0) ? 'none' : 'block';
+                        nextBtn.style.display = (index === imgs.length - 1) ? 'none' : 'block';
                     }
 
-                    // eliminar botones previos si existieran
-                    producto.querySelectorAll('.carousel-prev, .carousel-next').forEach(b => b.remove());
-
-                    const prevBtn = document.createElement('button');
-                    const nextBtn = document.createElement('button');
-                    prevBtn.textContent = '❮';
-                    nextBtn.textContent = '❯';
-                    prevBtn.classList.add('carousel-prev');
-                    nextBtn.classList.add('carousel-next');
-
-                    Object.assign(prevBtn.style, {
-                        position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '5px',
-                        background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%',
-                        width: '30px', height: '30px', cursor: 'pointer', zIndex: '5', fontSize: '18px'
-                    });
-                    Object.assign(nextBtn.style, {
-                        position: 'absolute', top: '50%', transform: 'translateY(-50%)', right: '5px',
-                        background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%',
-                        width: '30px', height: '30px', cursor: 'pointer', zIndex: '5', fontSize: '18px'
-                    });
-
-                    producto.appendChild(prevBtn);
-                    producto.appendChild(nextBtn);
-
-                    prevBtn.addEventListener('click', e => {
-                        e.stopPropagation();
-                        if (index > 0) { index--; actualizar(); }
-                    });
-                    nextBtn.addEventListener('click', e => {
-                        e.stopPropagation();
-                        if (index < imgs.length - 1) { index++; actualizar(); }
-                    });
+                    prevBtn.onclick = e => { e.stopPropagation(); if (index > 0) { index--; actualizar(); } };
+                    nextBtn.onclick = e => { e.stopPropagation(); if (index < imgs.length - 1) { index++; actualizar(); } };
 
                     actualizar();
                 }
 
+                // Inicializar todos los productos
                 document.querySelectorAll('.producto').forEach(p => inicializarCarrusel(p));
 
                 // =========================
-                // 2. Reemplazo de botones con enlaces (sin .html)
+                // Botones con enlace
                 // =========================
                 const links = [
                     "productos/stretch/stretch",
-                    "productos/libreria/resaltador",
-                    // ... agregar todos los demás links sin .html
+                    "productos/libreria/resaltador"
+                    // agregar el resto sin .html
                 ];
 
                 function extraerUrl(onclickStr) {
@@ -2673,7 +2673,7 @@
                 });
 
                 // =========================
-                // 3. Buscador (elimina y restaura productos)
+                // Buscador eliminando/restaurando productos
                 // =========================
                 const grid = document.querySelector('.productos-grid');
                 if (grid) {
@@ -2687,55 +2687,15 @@
                             const categoria = prod.querySelector('.categoria')?.textContent.toLowerCase() || '';
                             if (!query || nombre.includes(query) || categoria.includes(query)) {
                                 grid.appendChild(prod);
-                                inicializarCarrusel(prod); // reinicializo carrusel para este producto
+                                inicializarCarrusel(prod);
                             }
                         });
                     }
 
-                    searchInputs.forEach(input => {
-                        input.addEventListener('input', function () {
-                            const query = this.value.toLowerCase().trim();
-                            filtrarProductos(query);
-                        });
-                    });
-                }
-
-                // =========================
-                // 4. Menú lateral y dropdown
-                // =========================
-                const menuToggle = document.querySelector('.menu-toggle');
-                const sidebar = document.getElementById('pp-sidebar');
-                const closeBtn = document.getElementById('pp-close-btn');
-                const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
-
-                if (menuToggle && sidebar && closeBtn) {
-                    menuToggle.addEventListener('click', () => { sidebar.style.display = 'block'; });
-                    closeBtn.addEventListener('click', () => { sidebar.style.display = 'none'; });
-                    document.addEventListener('click', e => {
-                        if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
-                            sidebar.style.display = 'none';
-                        }
-                    });
-                }
-
-                dropdownTriggers.forEach(trigger => {
-                    trigger.addEventListener('click', () => {
-                        const submenu = trigger.nextElementSibling;
-                        if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                    });
-                });
-
-                // =========================
-                // 5. Modal de mantenimiento
-                // =========================
-                const modal = document.getElementById("maintenance-modal");
-                const closeModalBtn = document.querySelector(".close-btn");
-                if (modal && closeModalBtn) {
-                    document.body.classList.add("modal-open");
-                    closeModalBtn.addEventListener("click", () => {
-                        modal.style.display = "none";
-                        document.body.classList.remove("modal-open");
-                    });
+                    searchInputs.forEach(input => input.addEventListener('input', function () {
+                        const query = this.value.toLowerCase().trim();
+                        filtrarProductos(query);
+                    }));
                 }
 
             });
