@@ -18,6 +18,10 @@
   padding: 0;
 }
 
+.wp:hover {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
 .carousel-prev,
 .carousel-next {
   color: #ff7600 !important;
@@ -93,6 +97,20 @@ div#mi-cuenta-container {
   margin-right: 10em;
 }
 
+div#mi-cuenta-container:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+.mi-cuenta:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%) !important;
+}
+
+.btn-login:hover {
+  color: #000 !important;
+  background: #fff !important;
+  border: 2px solid #000 !important;
+}
+
 footer .web-copyright {
   margin-top: 1.1em;
 }
@@ -123,6 +141,17 @@ header {
   text-align: center;
   border-bottom: 3px solid #ff7600;
   box-shadow: 0 4px 10px #ff7600;
+}
+
+.wp:hover,
+.mail:hover,
+.ig:hover,
+.carrito-pro:hover {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+.mi-cuenta:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
 }
 
 header h1 {
@@ -733,6 +762,10 @@ select:-webkit-autofill:focus {
   margin-left: -1em;
 }
 
+.icon-right img:hover {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
 /* Estilos base para enlaces y spans */
 .carrito-pro a,
 .carrito-pro span,
@@ -751,6 +784,14 @@ select:-webkit-autofill:focus {
   cursor: pointer;
 }
 
+span#red:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+span#red:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
 /* Hover en imágenes — excluye pp-logo */
 .carrito-pro:hover img,
 .mail:hover img,
@@ -761,6 +802,10 @@ select:-webkit-autofill:focus {
   filter: brightness(0) saturate(100%) invert(0%) sepia(30%) saturate(7%) hue-rotate(151deg) brightness(105%) contrast(101%);
   transition: filter 0.3s ease;
   font-weight: 700;
+}
+
+img.icon-right:Hover {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%) !important;
 }
 
 /* Hover en texto */
@@ -873,4 +918,13 @@ select:-webkit-autofill:focus {
 
 .dropdown.show .dropdown-content {
   display: block;
+}
+
+
+.wp:hover,
+.mail:hover,
+.ig:hover,
+.carrito-pro:hover {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+  !important
 }
