@@ -155,7 +155,7 @@
         let total = 0;
         if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
         else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
       sizeBtn.addEventListener('click', () => {

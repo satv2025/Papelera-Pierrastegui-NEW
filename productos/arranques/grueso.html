@@ -134,7 +134,7 @@
         }
         let total = tipo === 'unidad' ? cantidad * Number(selectedSize.dataset.priceUnit)
           : cantidad * Number(selectedSize.dataset.priceBulto);
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
       function updateBultoText() {

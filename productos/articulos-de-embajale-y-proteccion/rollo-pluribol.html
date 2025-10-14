@@ -39,7 +39,7 @@
             <button id="incrementar" aria-label="Aumentar cantidad">+</button>
           </div>
 
-          <p class="total">Total: $9500 ARS</p>
+          <p class="total">Total: $9.500</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
@@ -64,7 +64,7 @@
 
       function updateTotal() {
         const total = cantidad * precioUnitario;
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
       incBtn.addEventListener('click', () => {
