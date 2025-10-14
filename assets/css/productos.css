@@ -187,7 +187,6 @@ button.dropdown-btn:hover {
     display: none;
     z-index: 10;
     margin-top: 0.3em;
-    height: 10em;
 }
 
 .dropdown-menu.active {

@@ -111,6 +111,7 @@
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
       const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      const cantidadContainer = document.querySelector('.cantidad-container');
       const limpiarBtn = document.getElementById('limpiar');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -121,9 +122,23 @@
       const precioBulto = document.querySelector('.precio-bulto');
       const totalDisplay = document.querySelector('.total');
 
+      // Cantidades por bulto según tamaño
+      const bultoPorTamaño = {
+        "15x20": 12,
+        "15x25": 12,
+        "20x30": 12,
+        "25x35": 9,
+        "30x40": 6,
+        "35x45": 9,
+        "40x50": 6
+      };
+
       let selectedSize = null;
       let cantidad = 1;
       let tipo = { type: 'unidad', mult: 1 };
+
+      // Ocultar "Tipo:" hasta que se elija tamaño
+      cantidadContainer.style.display = 'none';
 
       const arrow = () => {
         const span = document.createElement('span');
@@ -155,11 +170,43 @@
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
+
           selectedSize = {
             size: item.dataset.size,
             priceUnit: item.dataset.priceUnit,
             priceBulk: item.dataset.priceBulk
           };
+
+          // Mostrar dropdown "Tipo" y botón limpiar
+          cantidadContainer.style.display = 'flex';
+
+          // Cambiar cantidad por bulto según tamaño
+          const cantidadBulto = bultoPorTamaño[selectedSize.size] || 1;
+
+          // Actualizar opciones del tipo
+          tipoMenu.innerHTML = `
+          <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
+          <span class="dropdown-item" data-type="bulto" data-mult="${cantidadBulto}">Bulto (${cantidadBulto})</span>
+        `;
+
+          tipo = { type: 'unidad', mult: 1 };
+          tipoBtn.textContent = 'Unidad (1) ';
+          tipoBtn.appendChild(arrow());
+
+          // Reasignar eventos a las nuevas opciones
+          const newTipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+          newTipoItems.forEach(opt => {
+            opt.addEventListener('click', () => {
+              newTipoItems.forEach(o => o.classList.remove('selected'));
+              opt.classList.add('selected');
+              tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
+              tipoBtn.textContent = `${opt.textContent} `;
+              tipoBtn.appendChild(arrow());
+              tipoMenu.classList.remove('active');
+              updateTotal();
+            });
+          });
+
           sizeBtn.textContent = `${selectedSize.size} `;
           sizeBtn.appendChild(arrow());
           sizeMenu.classList.remove('active');
@@ -168,17 +215,6 @@
       });
 
       tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
-      tipoItems.forEach(opt => {
-        opt.addEventListener('click', () => {
-          tipoItems.forEach(o => o.classList.remove('selected'));
-          opt.classList.add('selected');
-          tipo = { type: opt.dataset.type, mult: Number(opt.dataset.mult) };
-          tipoBtn.textContent = `${opt.textContent} `;
-          tipoBtn.appendChild(arrow());
-          tipoMenu.classList.remove('active');
-          updateTotal();
-        });
-      });
 
       incBtn.addEventListener('click', () => {
         if (cantidad < 100) {
@@ -202,14 +238,17 @@
         tipo = { type: 'unidad', mult: 1 };
         sizeBtn.textContent = 'Seleccionar Tamaño ';
         sizeBtn.appendChild(arrow());
+        tipoMenu.innerHTML = `
+        <span class="dropdown-item selected" data-type="unidad" data-mult="1">Unidad (1)</span>
+        <span class="dropdown-item" data-type="bulto" data-mult="1">Bulto</span>
+      `;
         tipoBtn.textContent = 'Unidad (1) ';
         tipoBtn.appendChild(arrow());
         cantidadVisual.textContent = '1';
         sizeItems.forEach(i => i.classList.remove('selected'));
-        tipoItems.forEach(i => i.classList.remove('selected'));
-        tipoItems[0].classList.add('selected');
         precios.style.display = 'none';
         totalDisplay.textContent = 'Total: $0';
+        cantidadContainer.style.display = 'none';
       });
 
       document.addEventListener('click', e => {
