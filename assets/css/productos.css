@@ -388,3 +388,8 @@ footer {
     transform: rotate(180deg);
     /* gira 180° cuando está activo */
 }
+
+#tipo-dropdown {
+    display: none;
+    /* oculto por defecto */
+}
