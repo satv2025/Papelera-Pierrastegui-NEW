@@ -40,10 +40,11 @@
 
           <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
-            <button class="dropdown-btn" aria-haspopup="listbox" aria-expanded="false">
-              Seleccionar Tamaño <span class="arrow">▼</span>
+            <button class="dropdown-btn">
+              <span class="text">Seleccionar Tamaño</span>
+              <span class="arrow">▼</span>
             </button>
-            <div class="dropdown-menu" role="listbox" tabindex="-1">
+            <div class="dropdown-menu">
               <div class="dropdown-item" data-size="F100" data-price-unit="300" data-price-x50="14000"
                 data-price-x100="27000"
                 data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f100.jpg">
@@ -62,16 +63,20 @@
             </div>
           </div>
 
-          <!-- Dropdown Tipo (Unidad, x50, x100) -->
+          <!-- Dropdown Tipo -->
           <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-            <button class="dropdown-btn selected">Unidad <span class="arrow">▼</span></button>
-            <div class="dropdown-menu" role="listbox">
+            <button class="dropdown-btn">
+              <span class="text">Unidad</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
               <div class="dropdown-item selected" data-type="unidad">Unidad</div>
               <div class="dropdown-item" data-type="x50">x50</div>
               <div class="dropdown-item" data-type="x100">x100</div>
             </div>
           </div>
 
+          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
@@ -130,14 +135,13 @@
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
 
+      // Dropdown tamaño
       sizeBtn.addEventListener('click', () => sizeMenu.classList.toggle('active'));
-      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
-
       sizeItems.forEach(item => {
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
-          sizeBtn.textContent = item.textContent + ' ▼';
+          sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
           updateTotal();
@@ -145,29 +149,32 @@
         });
       });
 
+      // Dropdown tipo
+      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
       tipoItems.forEach(item => {
         item.addEventListener('click', () => {
           tipoItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
-          tipoBtn.textContent = item.textContent + ' ▼';
+          tipoBtn.querySelector('.text').textContent = item.textContent;
           tipo = item.dataset.type;
           updateTotal();
           tipoMenu.classList.remove('active');
         });
       });
 
+      // Incrementar / decrementar cantidad
       incBtn.addEventListener('click', () => {
         if (cantidad < 100) cantidad++;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
-
       decBtn.addEventListener('click', () => {
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
 
+      // Cerrar dropdown al hacer click afuera
       document.addEventListener('click', e => {
         if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove('active');
         if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove('active');
