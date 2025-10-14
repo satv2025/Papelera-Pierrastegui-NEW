@@ -22,6 +22,7 @@
 .carousel-next {
   color: #ff7600 !important;
   background: #ffffff00 !important;
+  margin-top: -4.4em;
 }
 
 /* Estilo base para botones y dropdown */
