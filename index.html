@@ -2573,252 +2573,325 @@
         <script src="assets/js/satv-scroll-main.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                try {
 
-                    // -----------------------------
-                    // Utilidades
-                    // -----------------------------
-                    function isElementReallyVisible(el, stopAt = null) {
-                        if (!el || !el.isConnected) return false;
-                        let node = el;
-                        while (node && node !== document.documentElement) {
-                            const style = window.getComputedStyle(node);
-                            if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') return false;
-                            if (stopAt && node === stopAt) break;
-                            node = node.parentElement;
+                // =========================
+                // Utilidades
+                // =========================
+                function isElementReallyVisible(el, stopAt = null) {
+                    if (!el || !el.isConnected) return false;
+                    let node = el;
+                    while (node && node !== document.documentElement) {
+                        const style = window.getComputedStyle(node);
+                        if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+                            return false;
                         }
-                        return true;
+                        if (stopAt && node === stopAt) break;
+                        node = node.parentElement;
                     }
-
-                    function normalizePathFromHref(href) {
-                        try {
-                            const u = new URL(href, location.origin);
-                            return (u.pathname + (u.search || '')).replace(/^\/+/, '').replace(/\/$/, '');
-                        } catch (e) {
-                            return String(href).replace(/^\/+/, '').replace(/\/$/, '');
-                        }
-                    }
-
-                    // -----------------------------
-                    // 1) Carrusel robusto (recalcula imágenes cada tick)
-                    // -----------------------------
-                    function cicloImagenes(contenedor) {
-                        if (!contenedor) return;
-
-                        // limpiamos intervalo previo
-                        if (contenedor.dataset.carouselIntervalId) {
-                            clearInterval(Number(contenedor.dataset.carouselIntervalId));
-                            delete contenedor.dataset.carouselIntervalId;
-                        }
-
-                        const intervalo = Number(contenedor.dataset.interval) || 3000;
-
-                        // aseguramos estado inicial coherente
-                        function ensureInitialVisible() {
-                            const imgs = Array.from(contenedor.querySelectorAll('img'));
-                            const visibles = imgs.filter(img => isElementReallyVisible(img, contenedor));
-                            imgs.forEach(img => img.classList.remove('visible'));
-                            if (visibles.length) visibles[0].classList.add('visible');
-                        }
-                        ensureInitialVisible();
-
-                        const id = setInterval(() => {
-                            // recalculamos imágenes (no cacheamos nodos permanentemente)
-                            const allImgs = Array.from(contenedor.querySelectorAll('img'));
-                            if (allImgs.length < 1) return;
-
-                            const visibles = allImgs.filter(img => isElementReallyVisible(img, contenedor));
-                            if (visibles.length < 1) {
-                                // eliminar cualquier clase 'visible' si no hay visibles
-                                allImgs.forEach(img => img.classList.remove('visible'));
-                                return;
-                            }
-
-                            // quitamos 'visible' de imgs que ya no están en visibles
-                            allImgs.forEach(img => { if (!visibles.includes(img)) img.classList.remove('visible'); });
-
-                            let actualIdx = visibles.findIndex(img => img.classList.contains('visible'));
-                            if (actualIdx === -1) {
-                                visibles[0].classList.add('visible');
-                                return;
-                            }
-
-                            visibles[actualIdx].classList.remove('visible');
-                            const siguiente = (actualIdx + 1) % visibles.length;
-                            visibles[siguiente].classList.add('visible');
-
-                        }, intervalo);
-
-                        contenedor.dataset.carouselIntervalId = String(id);
-                    }
-
-                    // inicializar todos los carruseles
-                    document.querySelectorAll('.producto-img-container .contenedor').forEach(cont => {
-                        try { cicloImagenes(cont); } catch (e) { console.error('Carrusel init error:', e); }
-                    });
-
-
-                    // -----------------------------
-                    // 2) Manejo de enlaces/click en la tarjeta (sin mover nodos)
-                    //    Extraemos la URL del onclick si existe y añadimos click handler seguro
-                    // -----------------------------
-                    function extraerHrefDesdeOnclick(onclickStr) {
-                        if (!onclickStr) return null;
-                        const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
-                        if (!match) return null;
-                        try {
-                            return new URL(match[1], location.origin).href;
-                        } catch (e) {
-                            return match[1];
-                        }
-                    }
-
-                    document.querySelectorAll('.producto').forEach(producto => {
-                        try {
-                            if (producto.classList.contains('proximo')) return;
-
-                            // evitar múltiples listeners
-                            if (producto.dataset.clickInit === '1') return;
-
-                            // si hay un botón con onclick con window.location.href, obtenemos href y añadimos listener
-                            const btn = producto.querySelector('button.btn');
-                            const onclickAttr = btn ? btn.getAttribute('onclick') : null;
-                            const href = extraerHrefDesdeOnclick(onclickAttr);
-
-                            if (href) {
-                                producto.addEventListener('click', (ev) => {
-                                    // si el click vino de un botón o link interno, dejamos que el handler original actúe
-                                    if (ev.target.closest('button') || ev.target.closest('a')) return;
-                                    window.location.href = href;
-                                });
-                            }
-
-                            producto.dataset.clickInit = '1';
-                        } catch (e) {
-                            console.error('Error al preparar click en .producto:', e);
-                        }
-                    });
-
-
-                    // -----------------------------
-                    // 3) Buscador: REMOVER productos que no coinciden y RESTAURAR cuando coinciden
-                    //    (guardamos parent + sibling para restaurar posición)
-                    // -----------------------------
-                    const grid = document.querySelector('.productos-grid');
-                    if (grid) {
-                        // snapshot inicial con referencia a parent y nextSibling para restaurar orden
-                        const productosData = Array.from(grid.querySelectorAll('div[class*="producto"]')).map((el) => {
-                            return {
-                                el,
-                                nombre: el.querySelector('.nombre')?.textContent.toLowerCase().trim() || '',
-                                categoria: el.querySelector('.categoria')?.textContent.toLowerCase().trim() || '',
-                                parent: el.parentNode,               // parent en momento inicial
-                                nextSibling: el.nextSibling          // puede ser null
-                            };
-                        });
-
-                        function restoreElementToParent(item) {
-                            // defensivo: comprobar que sigue siendo un Node
-                            if (!item || !item.el || item.el.nodeType !== Node.ELEMENT_NODE) return;
-                            // si ya está en DOM, nada que hacer
-                            if (item.el.isConnected) return;
-
-                            const parent = item.parent && item.parent.isConnected ? item.parent : grid;
-                            // si nextSibling existe y está conectado, insertar antes de él; si no, append
-                            if (item.nextSibling && item.nextSibling.isConnected) {
-                                parent.insertBefore(item.el, item.nextSibling);
-                            } else {
-                                parent.appendChild(item.el);
-                            }
-                        }
-
-                        function removeElementFromDOM(item) {
-                            if (!item || !item.el) return;
-                            if (item.el.isConnected && item.el.parentNode) {
-                                try { item.el.parentNode.removeChild(item.el); } catch (e) { console.error('removeChild falló:', e); }
-                            }
-                        }
-
-                        function filtrarProductosRemoviendo(query) {
-                            productosData.forEach(item => {
-                                try {
-                                    const matches = !query || item.nombre.includes(query) || item.categoria.includes(query);
-                                    if (matches) {
-                                        // restaurar si fue removido
-                                        restoreElementToParent(item);
-                                    } else {
-                                        // remover si está en DOM
-                                        removeElementFromDOM(item);
-                                    }
-                                } catch (e) {
-                                    console.error('Error filtrando producto (removiendo):', e);
-                                }
-                            });
-                        }
-
-                        // debounce
-                        function debounce(fn, wait) {
-                            let t;
-                            return function (...args) {
-                                clearTimeout(t);
-                                t = setTimeout(() => fn.apply(this, args), wait);
-                            };
-                        }
-
-                        const inputs = document.querySelectorAll('#search-input');
-                        const debounced = debounce((q) => filtrarProductosRemoviendo(q), 120);
-
-                        inputs.forEach(inp => {
-                            inp.addEventListener('input', function () {
-                                const q = this.value.toLowerCase().trim();
-                                debounced(q);
-                            });
-                        });
-                    } // end grid
-
-
-                    // -----------------------------
-                    // 4) Menú lateral y dropdown (sin cambios significativos)
-                    // -----------------------------
-                    const menuToggle = document.querySelector('.menu-toggle');
-                    const sidebar = document.getElementById('pp-sidebar');
-                    const closeBtn = document.getElementById('pp-close-btn');
-                    const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
-
-                    if (menuToggle && sidebar && closeBtn) {
-                        menuToggle.addEventListener('click', () => { sidebar.style.display = 'block'; });
-                        closeBtn.addEventListener('click', () => { sidebar.style.display = 'none'; });
-                        document.addEventListener('click', (e) => {
-                            if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
-                                sidebar.style.display = 'none';
-                            }
-                        });
-                    }
-
-                    dropdownTriggers.forEach(trigger => {
-                        trigger.addEventListener('click', () => {
-                            const submenu = trigger.nextElementSibling;
-                            if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-                        });
-                    });
-
-
-                    // -----------------------------
-                    // 5) Modal mantenimiento
-                    // -----------------------------
-                    const modal = document.getElementById('maintenance-modal');
-                    const closeModalBtn = document.querySelector('.close-btn');
-                    if (modal && closeModalBtn) {
-                        document.body.classList.add('modal-open');
-                        closeModalBtn.addEventListener('click', () => {
-                            modal.style.display = 'none';
-                            document.body.classList.remove('modal-open');
-                        });
-                    }
-
-                } catch (err) {
-                    console.error('Error global script:', err);
+                    return true;
                 }
+
+                function normalizePathFromHref(href) {
+                    // devuelve el pathname (sin leading slash) de href, sea absoluto o relativo
+                    try {
+                        const u = new URL(href, location.origin);
+                        return (u.pathname + (u.search || '')).replace(/^\/+/, '').replace(/\/$/, '');
+                    } catch (e) {
+                        // si no es parseable, limpiar / al inicio/fin
+                        return String(href).replace(/^\/+/, '').replace(/\/$/, '');
+                    }
+                }
+
+                // =========================
+                // 1. Carrusel de imágenes (robusto: solo rota entre imágenes realmente visibles)
+                // =========================
+                function cicloImagenes(contenedor) {
+                    const allImgs = Array.from(contenedor.querySelectorAll("img"));
+                    if (allImgs.length < 1) return;
+
+                    // devuelve solo imágenes que están realmente visibles (no ocultas por ancestros)
+                    function getVisibleImgs() {
+                        return allImgs.filter(img => isElementReallyVisible(img, contenedor));
+                    }
+
+                    // limpiar intervalo previo si existiera
+                    if (contenedor.dataset.carouselIntervalId) {
+                        clearInterval(Number(contenedor.dataset.carouselIntervalId));
+                        delete contenedor.dataset.carouselIntervalId;
+                    }
+
+                    // estado inicial: quitar 'visible' y asignar la primera visible
+                    const visiblesInit = getVisibleImgs();
+                    allImgs.forEach(img => img.classList.remove('visible'));
+                    if (visiblesInit.length) visiblesInit[0].classList.add('visible');
+
+                    const intervalo = Number(contenedor.dataset.interval) || 3000;
+                    const intervaloId = setInterval(() => {
+                        const visibles = getVisibleImgs();
+                        if (visibles.length < 1) return; // si no hay visibles, no hacemos nada
+
+                        // quitamos 'visible' de imágenes que ya no están dentro de visibles
+                        allImgs.forEach(img => { if (!visibles.includes(img)) img.classList.remove('visible'); });
+
+                        // encontramos la actual dentro de visibles
+                        let actualIdx = visibles.findIndex(img => img.classList.contains('visible'));
+
+                        if (actualIdx === -1) {
+                            // ninguna marcada -> marcar la primera visible
+                            visibles[0].classList.add('visible');
+                            return;
+                        }
+
+                        // rotamos al siguiente visible
+                        visibles[actualIdx].classList.remove('visible');
+                        const siguiente = (actualIdx + 1) % visibles.length;
+                        visibles[siguiente].classList.add('visible');
+
+                    }, intervalo);
+
+                    contenedor.dataset.carouselIntervalId = String(intervaloId);
+                }
+
+                // Inicializar todos los carruseles
+                document.querySelectorAll(".producto-img-container .contenedor").forEach(cicloImagenes);
+
+
+                // =========================
+                // 2. Reemplazo de botones con enlaces (maneja href absoluto/relativo)
+                // =========================
+                const links = [
+                    "productos/cajas-de-carton-y-gastronomia/desayuno.html",
+                    "productos/cajas-de-carton-y-gastronomia/empanada.html",
+                    "productos/cajas-de-carton-y-gastronomia/hamburguesa.html",
+                    "productos/cajas-de-carton-y-gastronomia/pizza.html",
+                    "productos/cajas-de-carton-y-gastronomia/ravioles.html",
+                    "productos/cajas-de-carton-y-gastronomia/red-para-bondiola.html",
+                    "productos/cajas-de-carton-y-gastronomia/sandwich.html",
+                    "productos/carton/corrugado.html",
+                    "productos/carton/tirascs.html",
+                    "productos/cintas/papel.html",
+                    "productos/cintas/scotch.html",
+                    "productos/cubiertos/cuchillos/blanco.html",
+                    "productos/cubiertos/cuchillos/negro.html",
+                    "productos/cubiertos/tenedor/blanco.html",
+                    "productos/cubiertos/tenedor/negro.html",
+                    "productos/cubiertos/cucharasopera.html",
+                    "productos/cubiertos/cucharita.html",
+                    "productos/cubiertos/platotorta.html",
+                    "productos/cubiertos/remos.html",
+                    "productos/film/film.html",
+                    "productos/folex/folex.html",
+                    "productos/folex/hamburguesa.html",
+                    "productos/guantes/nitirlo.html",
+                    "productos/guantes/polietileno.html",
+                    "productos/libreria/abrochadora.html",
+                    "productos/libreria/adhesivo-pizzini.html",
+                    "productos/libreria/banditas-elasticas.html",
+                    "productos/libreria/biromes.html",
+                    "productos/libreria/calculadora.html",
+                    "productos/libreria/cinta-bifaz.html",
+                    "productos/libreria/cinta-fragil.html",
+                    "productos/libreria/clips.html",
+                    "productos/libreria/cuadernosuniv.html",
+                    "productos/libreria/cutter.html",
+                    "productos/libreria/estallidos.html",
+                    "productos/libreria/fibrones.html",
+                    "productos/libreria/ganchos-de-abrochadora.html",
+                    "productos/libreria/hilo.html",
+                    "productos/libreria/hojas.html",
+                    "productos/libreria/liquidpaper.html",
+                    "productos/libreria/maquinamotex.html",
+                    "productos/libreria/marcadores-tiza.html",
+                    "productos/libreria/mini-rollos.html",
+                    "productos/libreria/moldes-freidora.html",
+                    "productos/libreria/mono-facil.html",
+                    "productos/libreria/motex.html",
+                    "productos/libreria/pincha-papeles.html",
+                    "productos/libreria/portacinta.html",
+                    "productos/libreria/remitos.html",
+                    "productos/libreria/resaltador.html",
+                    "productos/libreria/silicona.html",
+                    "productos/libreria/tacospapel.html",
+                    "productos/libreria/tijera-oficina.html",
+                    "productos/libreria/tiza.html",
+                    "productos/moldes-gastronomia/budinera/aluminio.html",
+                    "productos/moldes-gastronomia/budinera/papel.html",
+                    "productos/moldes-gastronomia/navidad-ano-nuevo/molde.html",
+                    "productos/moldes-gastronomia/pascua/caja.html",
+                    "productos/moldes-gastronomia/pascua/molde.html",
+                    "productos/moldes-gastronomia/pirotines.html",
+                    "productos/papel/cocina/elegante.html",
+                    "productos/papel/cocina/newpel.html",
+                    "productos/papel/higienico/elegante.html",
+                    "productos/papel/higienico/newpel.html",
+                    "productos/papel/aluminio.html",
+                    "productos/papel/bobina.html",
+                    "productos/papel/cortado.html",
+                    "productos/papel/manteca.html",
+                    "productos/papel/papel-para-bondiola.html",
+                    "productos/papel/papel-parafinado.html",
+                    "productos/pizzeria/conopapas.html",
+                    "productos/pizzeria/fondo.html",
+                    "productos/pizzeria/portapanchos.html",
+                    "productos/pizzeria/tripode.html",
+                    "productos/potes/bisagra.html",
+                    "productos/potes/dips.html",
+                    "productos/potes/ensaladafruta.html",
+                    "productos/rollostermicos/rollos.html",
+                    "productos/sorbetes/comun.html",
+                    "productos/sorbetes/negro.html",
+                    "productos/sorbetes/papel.html",
+                    "productos/stretch/stretch.html",
+                    "productos/vasos/plastico.html",
+                    "productos/vasos/telgopor.html",
+                    "productos/cajas-de-carton-y-gastronomia/felices-fiestas/caja.html",
+                    "productos/bolsas/ziploc.html",
+                    "productos/bolsas/sulfito.html",
+                    "productos/bolsas/riñon.html",
+                    "productos/bolsas/residuo.html",
+                    "productos/bolsas/polipropileno.html",
+                    "productos/bolsas/horno.html",
+                    "productos/bolsas/camiseta.html",
+                    "productos/bandejas-y-potes/telgopor.html",
+                    "productos/bandejas-y-potes/potes-de-helado.html",
+                    "productos/bandejas-y-potes/plato-marmita.html",
+                    "productos/bandejas-y-potes/plastico.html",
+                    "productos/bandejas-y-potes/ensaladera-con-tapa.html",
+                    "productos/bandejas-y-potes/ensaladafruta.html",
+                    "productos/bandejas-y-potes/dips.html",
+                    "productos/bandejas-y-potes/carton.html",
+                    "productos/bandejas-y-potes/blonda.html",
+                    "productos/bandejas-y-potes/bisagra.html",
+                    "productos/bandejas-y-potes/bandejas-de-carton-plateadas.html",
+                    "productos/bandejas-y-potes/aluminio.html",
+                    "productos/articulos-de-embajale-y-proteccion/rollo-pluribol.html",
+                    "productos/arranques/rendidor.html",
+                    "productos/arranques/grueso.html"
+                ];
+
+                // pre-normalizamos los links para comparar por endsWith
+                const normalizedLinks = links.map(l => String(l).replace(/^\/+/, '').replace(/\/$/, ''));
+
+                function extraerUrl(onclickStr) {
+                    if (!onclickStr) return null;
+                    // intentar extraer la cadena entre comillas tras window.location.href=
+                    const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+                    if (!match) return null;
+                    const raw = match[1];
+                    const path = normalizePathFromHref(raw); // ej: productos/libreria/resaltador o productos/libreria/resaltador.html
+
+                    // comparo si path termina con alguno de los links normalizados
+                    const found = normalizedLinks.find(link => path.endsWith(link));
+                    if (found) {
+                        // devuelvo la forma relativa matched (misma forma que en el array) para que includes funcione
+                        return found;
+                    }
+
+                    // si no matchea por endsWith con los existentes, devolvemos la ruta completa normalizada
+                    return path;
+                }
+
+                document.querySelectorAll('.producto').forEach(producto => {
+                    try {
+                        if (producto.classList.contains('proximo')) return;
+                        const btn = producto.querySelector('button.btn');
+                        if (!btn) return;
+                        const onclickAttr = btn.getAttribute('onclick');
+                        if (!onclickAttr) return;
+                        const url = extraerUrl(onclickAttr);
+                        if (!url) return;
+                        // Si url es una de las rutas en la lista, creamos wrapper clickable
+                        if (normalizedLinks.includes(url)) {
+                            const nuevoDiv = document.createElement('div');
+                            nuevoDiv.classList.add('btn-reset');
+                            // defensiva: si parentNode no existe, saltar
+                            if (!producto.parentNode) return;
+                            producto.parentNode.insertBefore(nuevoDiv, producto);
+                            nuevoDiv.appendChild(producto);
+                            nuevoDiv.addEventListener('click', () => {
+                                // construimos un href relativo/absoluto seguro
+                                const targetHref = location.origin + '/' + url;
+                                window.location.href = targetHref;
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Error procesando .producto:', e);
+                    }
+                });
+
+
+                // =========================
+                // 3. Buscador en tiempo real (solo filtra, no reordena ni re-inserta)
+                // =========================
+                const grid = document.querySelector('.productos-grid');
+                if (grid) {
+                    const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]')).map(prod => {
+                        return {
+                            el: prod,
+                            nombre: prod.querySelector('.nombre')?.textContent.toLowerCase().trim() || '',
+                            categoria: prod.querySelector('.categoria')?.textContent.toLowerCase().trim() || ''
+                        };
+                    });
+                    const searchInputs = document.querySelectorAll('#search-input');
+
+                    function filtrarProductos(query) {
+                        productosOriginales.forEach(({ el, nombre, categoria }) => {
+                            if (!query || nombre.includes(query) || categoria.includes(query)) {
+                                el.style.display = '';
+                            } else {
+                                el.style.display = 'none';
+                            }
+                        });
+                    }
+
+                    searchInputs.forEach(input => {
+                        input.addEventListener('input', function () {
+                            const query = this.value.toLowerCase().trim();
+                            filtrarProductos(query);
+                        });
+                    });
+                }
+
+
+                // =========================
+                // 4. Menú lateral y dropdown
+                // =========================
+                const menuToggle = document.querySelector('.menu-toggle');
+                const sidebar = document.getElementById('pp-sidebar');
+                const closeBtn = document.getElementById('pp-close-btn');
+                const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
+
+                if (menuToggle && sidebar && closeBtn) {
+                    menuToggle.addEventListener('click', () => { sidebar.style.display = 'block'; });
+                    closeBtn.addEventListener('click', () => { sidebar.style.display = 'none'; });
+                    document.addEventListener('click', (e) => {
+                        if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
+                            sidebar.style.display = 'none';
+                        }
+                    });
+                }
+
+                dropdownTriggers.forEach(trigger => {
+                    trigger.addEventListener('click', () => {
+                        const submenu = trigger.nextElementSibling;
+                        if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+                    });
+                });
+
+
+                // =========================
+                // 5. Modal de mantenimiento
+                // =========================
+                const modal = document.getElementById("maintenance-modal");
+                const closeModalBtn = document.querySelector(".close-btn");
+                if (modal && closeModalBtn) {
+                    document.body.classList.add("modal-open");
+                    closeModalBtn.addEventListener("click", () => {
+                        modal.style.display = "none";
+                        document.body.classList.remove("modal-open");
+                    });
+                }
+
             });
         </script>
     </body>
