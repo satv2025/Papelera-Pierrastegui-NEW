@@ -25,12 +25,11 @@
     <section class="producto container">
       <div class="producto-contenido">
         <img id="producto-img"
-          src="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f100.jpg"
-          alt="Bandeja de Aluminio">
+          src="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
+          alt="Bandejas De Aluminio">
 
         <div class="producto-info">
           <h2>Bandejas De Aluminio</h2>
-
           <ul>
             <li>Bandeja fabricada en aluminio, resistente al calor y adecuada para horno.</li>
             <li>La tapa de aluminio proporciona un cierre seguro y mantiene la frescura de los alimentos.</li>
@@ -38,49 +37,43 @@
             <li>Se presenta en packs de Unidad, 50 y 100, conveniente para uso doméstico o eventos.</li>
           </ul>
 
-          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccionar Tamaño</span>
+              <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
               <div class="dropdown-item" data-size="F100" data-price-unit="300" data-price-x50="14000"
                 data-price-x100="27000"
-                data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f100.jpg">
-                F100
-              </div>
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg">
+                F100</div>
               <div class="dropdown-item" data-size="F75" data-price-unit="260" data-price-x50="12000"
                 data-price-x100="22000"
-                data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f75.jpg">
-                F75
-              </div>
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f75.jpg">
+                F75</div>
               <div class="dropdown-item" data-size="P12" data-price-unit="190" data-price-x50="8000"
                 data-price-x100="15500"
-                data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/Bandeja de aluminio P12.jpg">
-                P12
-              </div>
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/Bandeja%20de%20aluminio%20P12.jpg">
+                P12</div>
             </div>
           </div>
 
-          <!-- Dropdown Tipo -->
-          <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+          <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Unidad</span>
+              <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item selected" data-type="unidad">Unidad</div>
+              <div class="dropdown-item" data-type="unidad">Unidad</div>
               <div class="dropdown-item" data-type="x50">x50</div>
               <div class="dropdown-item" data-type="x100">x100</div>
             </div>
           </div>
 
-          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
-            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+            <button id="decrementar">-</button>
             <span id="cantidad-visual">1</span>
-            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
+            <button id="incrementar">+</button>
           </div>
 
           <p class="total">Total: $0</p>
@@ -116,32 +109,26 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
-      let tipo = 'unidad';
+      let tipo = '';
       let cantidad = 1;
 
-      // Ocultar dropdown tipo al inicio
       tipoDropdown.style.display = 'none';
 
       function updateTotal() {
-        if (!selectedSize) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
         let total = 0;
-        if (tipo === 'unidad') {
-          total = cantidad * Number(selectedSize.dataset.priceUnit);
-        } else if (tipo === 'x50') {
-          total = cantidad * Number(selectedSize.dataset.priceX50);
-        } else if (tipo === 'x100') {
-          total = cantidad * Number(selectedSize.dataset.priceX100);
-        }
+        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
+        else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+        else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
 
-      // Dropdown tamaño
       sizeBtn.addEventListener('click', () => {
         sizeMenu.classList.toggle('active');
-        sizeBtn.classList.toggle('active'); // solo esta flecha gira
+        sizeBtn.classList.toggle('active');
       });
 
       sizeItems.forEach(item => {
@@ -151,26 +138,19 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
-
-          // Mostrar dropdown de tipo al elegir tamaño
           tipoDropdown.style.display = 'block';
-
-          // Reset tipo a unidad
+          tipo = '';
           tipoItems.forEach(i => i.classList.remove('selected'));
-          tipoItems[0].classList.add('selected');
-          tipoBtn.querySelector('.text').textContent = tipoItems[0].textContent;
-          tipo = 'unidad';
-
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active'); // flecha vuelve a posición
+          sizeBtn.classList.remove('active');
         });
       });
 
-      // Dropdown tipo
       tipoBtn.addEventListener('click', () => {
         tipoMenu.classList.toggle('active');
-        tipoBtn.classList.toggle('active'); // solo esta flecha gira
+        tipoBtn.classList.toggle('active');
       });
 
       tipoItems.forEach(item => {
@@ -181,13 +161,12 @@
           tipo = item.dataset.type;
           updateTotal();
           tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active'); // flecha vuelve a posición
+          tipoBtn.classList.remove('active');
         });
       });
 
-      // Incrementar / decrementar cantidad
       incBtn.addEventListener('click', () => {
-        if (cantidad < 100) cantidad++;
+        cantidad++;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
@@ -198,7 +177,6 @@
         updateTotal();
       });
 
-      // Cerrar dropdown al hacer click afuera
       document.addEventListener('click', e => {
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
