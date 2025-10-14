@@ -2,35 +2,41 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bandejas De Aluminio - Papelera Pierrastegui</title>
-  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Papelera Pierrastegui - Bandejas De Aluminio</title>
+  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
 
 <body>
   <header>
-    <div class="container">
-      <h1>Papelera Pierrastegui</h1>
-      <nav>
-        <ul>
-          <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
-          <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
-          <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
-        </ul>
-      </nav>
-    </div>
+    <h1>Papelera Pierrastegui</h1>
+    <nav>
+      <ul>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-        <h2>Bandejas De Aluminio</h2>
-        <img
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
-          alt="Bandejas De Aluminio" />
+        <img id="producto-img"
+          src="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f100.jpg"
+          alt="Bandeja de Aluminio">
+
         <div class="producto-info">
+          <h2>Bandejas De Aluminio</h2>
+
+          <ul>
+            <li>Bandeja fabricada en aluminio, resistente al calor y adecuada para horno.</li>
+            <li>La tapa de aluminio proporciona un cierre seguro y mantiene la frescura de los alimentos.</li>
+            <li>Ideal para cocinar pollos, pastas, carnes, pescados y verduras.</li>
+            <li>Se presenta en packs de Unidad, 50 y 100, conveniente para uso doméstico o eventos.</li>
+          </ul>
 
           <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
@@ -38,41 +44,34 @@
               Seleccionar Tamaño <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu" role="listbox" tabindex="-1">
-              <div class="dropdown-item" data-size="P12" data-unit="190" data-x50="8000" data-x100="15500"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20p12.jpg">
-                P12
-              </div>
-              <div class="dropdown-item" data-size="F75" data-unit="260" data-x50="12000" data-x100="22000"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f75.jpg">
-                F75
-              </div>
-              <div class="dropdown-item" data-size="F100" data-unit="300" data-x50="14000" data-x100="27000"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg">
+              <div class="dropdown-item" data-size="F100" data-price-unit="300" data-price-x50="14000"
+                data-price-x100="27000"
+                data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f100.jpg">
                 F100
               </div>
-            </div>
-          </div>
-
-          <!-- Precios -->
-          <div class="precios" style="display:none;">
-            <p class="precio">Precio: $0</p>
-          </div>
-
-          <!-- Tipo (Unidad/x50/x100) -->
-          <div class="cantidad-container">
-            <label for="tipo-dropdown">Cantidad:</label>
-            <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
-              <span class="dropdown-btn selected">Unidad <span class="arrow">▼</span></span>
-              <div class="dropdown-menu" role="listbox">
-                <span class="dropdown-item selected" data-type="unit">Unidad</span>
-                <span class="dropdown-item" data-type="x50">x50</span>
-                <span class="dropdown-item" data-type="x100">x100</span>
+              <div class="dropdown-item" data-size="F75" data-price-unit="260" data-price-x50="12000"
+                data-price-x100="22000"
+                data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/bandeja de aluminio f75.jpg">
+                F75
+              </div>
+              <div class="dropdown-item" data-size="P12" data-price-unit="190" data-price-x50="8000"
+                data-price-x100="15500"
+                data-img="../../assets/images/Fotos productos papelera para catálogo/ALUMINIO/Bandeja de aluminio P12.jpg">
+                P12
               </div>
             </div>
-            <button id="limpiar">Limpiar</button>
           </div>
 
-          <!-- Incremento manual -->
+          <!-- Dropdown Tipo (Unidad, x50, x100) -->
+          <div class="dropdown" id="tipo-dropdown" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+            <button class="dropdown-btn selected">Unidad <span class="arrow">▼</span></button>
+            <div class="dropdown-menu" role="listbox">
+              <div class="dropdown-item selected" data-type="unidad">Unidad</div>
+              <div class="dropdown-item" data-type="x50">x50</div>
+              <div class="dropdown-item" data-type="x100">x100</div>
+            </div>
+          </div>
+
           <div class="agregar-carrito-cantidad">
             <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
@@ -80,18 +79,7 @@
           </div>
 
           <p class="total">Total: $0</p>
-
           <button class="agregar-carrito">Agregar al Carrito</button>
-
-          <h3>Descripción del producto</h3>
-          <ul>
-            <li>Bandeja fabricada en aluminio, resistente al calor y adecuada para cocinar en horno.</li>
-            <li>La tapa de aluminio proporciona un cierre seguro manteniendo la frescura de los alimentos.</li>
-            <li>Ideal para cocinar y asar pollos, pastas, carnes, pescados y verduras.</li>
-            <li>Se presenta en packs de unidad, 50 y 100 unidades, conveniente para uso doméstico o pequeños eventos.
-            </li>
-          </ul>
-
         </div>
       </div>
     </section>
@@ -114,109 +102,70 @@
       const tipoDropdown = document.getElementById('tipo-dropdown');
       const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
-      const cantidadContainer = document.querySelector('.cantidad-container');
-      const limpiarBtn = document.getElementById('limpiar');
+      const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const precios = document.querySelector('.precios');
-      const precioDisplay = precios.querySelector('.precio');
       const totalDisplay = document.querySelector('.total');
-      const productoImg = document.querySelector('.producto-contenido img');
+      const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
-      let selectedType = 'unit';
+      let tipo = 'unidad';
       let cantidad = 1;
-
-      cantidadContainer.style.display = 'none';
-
-      const arrow = () => {
-        const span = document.createElement('span');
-        span.classList.add('arrow');
-        span.textContent = '▼';
-        return span;
-      };
 
       function updateTotal() {
         if (!selectedSize) {
-          precios.style.display = 'none';
-          totalDisplay.textContent = 'Total: $0';
+          totalDisplay.textContent = "Total: $0";
           return;
         }
-
-        precios.style.display = 'block';
-        let price = 0;
-        if (selectedType === 'unit') price = Number(selectedSize.dataset.unit);
-        if (selectedType === 'x50') price = Number(selectedSize.dataset.x50);
-        if (selectedType === 'x100') price = Number(selectedSize.dataset.x100);
-
-        precioDisplay.textContent = `Precio: $${price.toLocaleString('es-AR')} ARS`;
-        totalDisplay.textContent = `Total: $${(price * cantidad).toLocaleString('es-AR')} ARS`;
+        let total = 0;
+        if (tipo === 'unidad') {
+          total = cantidad * Number(selectedSize.dataset.priceUnit);
+        } else if (tipo === 'x50') {
+          total = cantidad * Number(selectedSize.dataset.priceX50);
+        } else if (tipo === 'x100') {
+          total = cantidad * Number(selectedSize.dataset.priceX100);
+        }
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
       }
 
       sizeBtn.addEventListener('click', () => sizeMenu.classList.toggle('active'));
+      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
+
       sizeItems.forEach(item => {
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
+          sizeBtn.textContent = item.textContent + ' ▼';
           selectedSize = item;
-
-          // Cambiar imagen
           productoImg.src = item.dataset.img;
-
-          cantidadContainer.style.display = 'flex';
-          sizeBtn.textContent = `${item.textContent} `;
-          sizeBtn.appendChild(arrow());
           updateTotal();
           sizeMenu.classList.remove('active');
         });
       });
 
-      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
-      tipoMenu.querySelectorAll('.dropdown-item').forEach(opt => {
-        opt.addEventListener('click', () => {
-          tipoMenu.querySelectorAll('.dropdown-item').forEach(o => o.classList.remove('selected'));
-          opt.classList.add('selected');
-          selectedType = opt.dataset.type;
-          tipoBtn.textContent = `${opt.textContent} `;
-          tipoBtn.appendChild(arrow());
-          tipoMenu.classList.remove('active');
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.textContent = item.textContent + ' ▼';
+          tipo = item.dataset.type;
           updateTotal();
+          tipoMenu.classList.remove('active');
         });
       });
 
       incBtn.addEventListener('click', () => {
-        if (cantidad < 100) {
-          cantidad++;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
-        }
+        if (cantidad < 100) cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
       });
 
       decBtn.addEventListener('click', () => {
-        if (cantidad > 1) {
-          cantidad--;
-          cantidadVisual.textContent = cantidad;
-          updateTotal();
-        }
-      });
-
-      limpiarBtn.addEventListener('click', () => {
-        selectedSize = null;
-        selectedType = 'unit';
-        cantidad = 1;
-        sizeBtn.textContent = 'Seleccionar Tamaño ';
-        sizeBtn.appendChild(arrow());
-        tipoBtn.textContent = 'Unidad ';
-        tipoBtn.appendChild(arrow());
-        cantidadVisual.textContent = '1';
-        sizeItems.forEach(i => i.classList.remove('selected'));
-        tipoMenu.querySelectorAll('.dropdown-item').forEach(i => i.classList.remove('selected'));
-        tipoMenu.querySelector('.dropdown-item[data-type="unit"]').classList.add('selected');
-        precios.style.display = 'none';
-        totalDisplay.textContent = 'Total: $0';
-        cantidadContainer.style.display = 'none';
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
       });
 
       document.addEventListener('click', e => {

@@ -9,33 +9,18 @@
     padding: 0;
 }
 
-/* Botones */
-button.agregar-carrito:hover {
-    color: #ff7600 !important;
-    background: #fff !important;
-    border: none;
-}
-
-/* Titulos secciones */
-section h2 {
-    color: #ff7600;
-    text-align: center;
-}
-
-/* Estructura principal */
+/* Body y estructura */
 html,
 body {
     height: 100%;
-    overflow-x: hidden;
     background-color: #fff;
+    color: #333;
+    overflow-x: hidden;
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
     flex: 1 0 auto;
-    overflow-x: hidden;
+    padding: 2rem 0;
 }
 
 /* Contenedores */
@@ -47,118 +32,153 @@ main {
     padding: 0 15px;
 }
 
-/* Producto */
-.producto {
-    position: relative;
-    top: 4em;
-    flex: 1;
-}
-
-.producto h2 {
-    font-size: clamp(1.6rem, 2vw, 2rem);
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.producto-contenido {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    border: 3px solid #ff7600;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.producto-contenido img {
-    width: 100%;
-    max-width: 350px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(59, 45, 0, 0.12);
-    object-fit: cover;
-}
-
-.producto-info {
-    flex: 1 1 280px;
-    max-height: calc(100vh - 300px);
-    overflow-y: auto;
-    padding-right: 8px;
-}
-
-/* Header y nav */
+/* Header */
 header {
     background-color: #fff;
-    color: #ff7600;
     border-bottom: 3px solid #ff7600;
     padding: 15px 0;
-    z-index: 100;
     text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 header h1 {
-    font-size: clamp(1.5rem, 2vw, 1.8rem);
-    margin-bottom: 8px;
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    color: #ff7600;
+    margin-bottom: 10px;
 }
 
 nav ul {
-    list-style: none;
     display: flex;
     justify-content: center;
-    gap: 20px;
+    list-style: none;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
 nav ul li a {
     color: #ff7600;
-    text-decoration: none;
     font-weight: 600;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #d75a00;
+}
+
+/* Producto */
+.producto {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.producto-contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 25px;
+    border: 3px solid #ff7600;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.producto-contenido h2 {
+    width: 100%;
+    text-align: center;
+    color: #ff7600;
+    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+    margin-bottom: 15px;
+}
+
+.producto-contenido img {
+    flex: 1 1 300px;
+    max-width: 350px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.producto-contenido img:hover {
+    transform: scale(1.03);
+}
+
+.producto-info {
+    flex: 1 1 350px;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 /* Dropdown */
 .dropdown {
     position: relative;
     width: 100%;
-    max-width: 350px;
     margin-bottom: 20px;
 }
 
 .dropdown-btn {
     width: 100%;
     background-color: #fff;
-    color: #ff7600;
     border: 2px solid #ff7600;
     padding: 12px 16px;
+    border-radius: 8px;
     font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
+    font-weight: 600;
+    color: #ff7600;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .dropdown-btn:hover {
-    color: #fff;
     background-color: #ff7600;
+    color: #fff;
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: 110%;
     left: 0;
     width: 100%;
     max-height: 200px;
     overflow-y: auto;
+    /* scroll nativo */
     background-color: #fff;
     border: 2px solid #ff7600;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(59, 45, 0, 0.1);
+    border-radius: 8px;
     display: none;
-    margin-top: 0.3em;
     z-index: 10;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Scrollbar nativa para dropdown */
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dropdown-menu::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #ff7600;
+    border-radius: 4px;
+}
+
+@-moz-document url-prefix() {
+    .dropdown-menu {
+        scrollbar-width: thin;
+        scrollbar-color: #ff7600 #fff;
+    }
 }
 
 .dropdown-menu.active {
@@ -166,46 +186,48 @@ nav ul li a {
 }
 
 .dropdown-item {
-    padding: 10px 15px;
+    padding: 12px 15px;
     cursor: pointer;
     color: #ff7600;
-    display: flex;
-    justify-content: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
 }
 
-.dropdown-item:hover {
+.dropdown-item:hover,
+.dropdown-item.selected {
     background-color: #ff7600;
     color: #fff;
 }
 
-/* Cantidad y botones */
+/* Cantidad */
 .cantidad-container,
 .agregar-carrito-cantidad {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
 .cantidad-container label {
-    font-weight: 600;
-    min-width: 70px;
+    font-weight: 700;
+    min-width: 80px;
     color: #ff7600;
 }
 
 .cantidad-container button,
 .agregar-carrito-cantidad button {
-    padding: 7px 15px;
     background-color: #ff7600;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
     color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
     font-weight: 700;
-    font-size: 14px;
-    box-shadow: 0 0 10px rgb(0 0 0 / 63%);
+    font-size: 0.95rem;
+    cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .cantidad-container button:hover,
@@ -214,87 +236,90 @@ nav ul li a {
     color: #ff7600;
 }
 
+/* Cantidad visual */
 #cantidad-visual {
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: #ff7600;
-    min-width: 30px;
+    min-width: 40px;
     text-align: center;
 }
 
+/* Total */
 .total {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #ff7600;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-/* Listas y títulos */
+/* Listas y descripción */
 h3 {
-    margin-bottom: 10px;
     color: #ff7600;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 ul {
-    list-style-type: disc;
     margin-left: 20px;
     color: #ff7600;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 /* Footer */
 footer {
     background-color: #fff;
     color: #ff7600;
-    padding: 20px 0;
+    padding: 25px 0;
     text-align: center;
     border-top: 3px solid #ff7600;
-    font-weight: 700;
+    font-weight: 600;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
+/* Scrollbar nativa para info del producto */
+.producto-info::-webkit-scrollbar {
     width: 8px;
 }
 
-::-webkit-scrollbar-track {
-    background: transparent;
+.producto-info::-webkit-scrollbar-track {
+    background: #fff;
 }
 
-::-webkit-scrollbar-thumb {
+.producto-info::-webkit-scrollbar-thumb {
     background-color: #ff7600;
     border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background-color: #eba366;
-}
-
 @-moz-document url-prefix() {
-    * {
+    .producto-info {
         scrollbar-width: thin;
-        scrollbar-color: #ff7600 transparent;
+        scrollbar-color: #ff7600 #fff;
     }
 }
 
-/* === RESPONSIVE TOTAL === */
+/* Responsivo */
 @media (max-width: 1024px) {
     .producto-contenido {
         flex-direction: column;
         align-items: center;
+        padding: 20px;
     }
 
-    .dropdown {
-        max-width: 100%;
+    .producto-info {
+        max-height: none;
+        width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     nav ul {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
     }
 
-    .cantidad-container {
+    .cantidad-container,
+    .agregar-carrito-cantidad {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -310,7 +335,7 @@ footer {
         font-size: 1.4rem;
     }
 
-    .producto h2 {
+    .producto-contenido h2 {
         font-size: 1.5rem;
     }
 
@@ -320,6 +345,6 @@ footer {
     }
 
     .total {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 }
