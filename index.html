@@ -1989,7 +1989,8 @@
                             <img class="visible"
                                 src="https://acdn-us.mitiendanube.com/stores/001/570/838/products/resaltadores-trabi-pastel11-059005e3cf6630f07a16511691664860-1024-1024.png"
                                 alt="Marcadores De Tiza Líquida - imagen 1" />
-                            <img src="../../assets/images/resaltadores1.jpg" alt="Resaltadores">
+                            <img src="https://papelerapierrastegui.com.ar/assets/images/resaltadores1.jpg"
+                                alt="Resaltadores">
                         </div>
                     </div>
                     <div class="producto-info">
@@ -2005,8 +2006,8 @@
                         <img class="visible"
                             src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/tacos%20de%20papel.jpg"
                             alt="Tacos de Papel">
-                        <img src="../../assets/images/tacos-papel.jpg">
-                        <img src="../../assets/images/tacos-autoadhesivo.jpg">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/tacos-papel.jpg">
+                        <img src="https://papelerapierrastegui.com.ar/assets/images/tacos-autoadhesivo.jpg">
                     </div>
                     <div class="producto-info">
                         <div class="nombre">Tacos De Papel</div>
@@ -2575,20 +2576,30 @@
             document.addEventListener('DOMContentLoaded', () => {
 
                 // =========================
-                // 1. Carrusel con botones prev/next (sin bucle)
+                // 1. Carrusel de imágenes (Previous/Next)
                 // =========================
                 function inicializarCarrusel(contenedor) {
-                    const imgs = contenedor.querySelectorAll('img');
+                    const imgs = Array.from(contenedor.querySelectorAll('img'));
                     if (imgs.length <= 1) return;
 
                     let index = 0;
 
-                    imgs.forEach((img, i) => {
-                        img.style.display = i === 0 ? 'block' : 'none';
-                    });
+                    function actualizar() {
+                        imgs.forEach((img, i) => {
+                            if (i === index) {
+                                img.style.display = 'block';
+                                img.classList.add('visible');
+                            } else {
+                                img.style.display = 'none';
+                                img.classList.remove('visible');
+                            }
+                        });
+                        prevBtn.style.display = index === 0 ? 'none' : 'block';
+                        nextBtn.style.display = index === imgs.length - 1 ? 'none' : 'block';
+                    }
 
                     const wrapper = contenedor.closest('.producto-img-container') || contenedor;
-                    wrapper.style.position = 'relative';
+                    wrapper.querySelectorAll('.carousel-prev, .carousel-next').forEach(b => b.remove());
 
                     const prevBtn = document.createElement('button');
                     const nextBtn = document.createElement('button');
@@ -2597,66 +2608,43 @@
                     prevBtn.classList.add('carousel-prev');
                     nextBtn.classList.add('carousel-next');
 
-                    const estiloBase = {
-                        position: 'absolute',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'rgba(0,0,0,0.5)',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: '50%',
-                        width: '30px',
-                        height: '30px',
-                        cursor: 'pointer',
-                        zIndex: '5',
-                        fontSize: '18px',
-                        transition: 'opacity 0.2s ease'
-                    };
-                    Object.assign(prevBtn.style, estiloBase, { left: '5px' });
-                    Object.assign(nextBtn.style, estiloBase, { right: '5px' });
+                    Object.assign(prevBtn.style, {
+                        position: 'absolute', top: '50%', transform: 'translateY(-50%)', left: '5px',
+                        background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%',
+                        width: '30px', height: '30px', cursor: 'pointer', zIndex: '5', fontSize: '18px'
+                    });
+                    Object.assign(nextBtn.style, {
+                        position: 'absolute', top: '50%', transform: 'translateY(-50%)', right: '5px',
+                        background: 'rgba(0,0,0,0.5)', color: '#fff', border: 'none', borderRadius: '50%',
+                        width: '30px', height: '30px', cursor: 'pointer', zIndex: '5', fontSize: '18px'
+                    });
 
                     wrapper.appendChild(prevBtn);
                     wrapper.appendChild(nextBtn);
 
-                    function mostrarImagen(nuevoIndex) {
-                        imgs[index].style.display = 'none';
-                        index = nuevoIndex;
-                        imgs[index].style.display = 'block';
-                        actualizarBotones();
-                    }
-
-                    function actualizarBotones() {
-                        prevBtn.style.display = index === 0 ? 'none' : 'block';
-                        nextBtn.style.display = index === imgs.length - 1 ? 'none' : 'block';
-                    }
-
                     prevBtn.addEventListener('click', e => {
                         e.stopPropagation();
-                        if (index > 0) mostrarImagen(index - 1);
+                        if (index > 0) {
+                            index--;
+                            actualizar();
+                        }
                     });
-
                     nextBtn.addEventListener('click', e => {
                         e.stopPropagation();
-                        if (index < imgs.length - 1) mostrarImagen(index + 1);
+                        if (index < imgs.length - 1) {
+                            index++;
+                            actualizar();
+                        }
                     });
 
-                    actualizarBotones();
+                    actualizar();
                 }
 
-                function inicializarTodosLosCarruseles() {
-                    document.querySelectorAll('.producto-img-container .contenedor').forEach(inicializarCarrusel);
-                }
-                inicializarTodosLosCarruseles();
-
+                document.querySelectorAll(".producto-img-container .contenedor").forEach(inicializarCarrusel);
 
                 // =========================
-                // 2. Reemplazo de botones con enlaces
+                // 2. Reemplazo de botones con enlaces (sin .html)
                 // =========================
-                function extraerUrl(onclickStr) {
-                    const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
-                    return match ? match[1] : null;
-                }
-
                 const links = [
                     "productos/cajas-de-carton-y-gastronomia/desayuno",
                     "productos/cajas-de-carton-y-gastronomia/empanada",
@@ -2767,6 +2755,12 @@
                     "productos/arranques/grueso"
                 ];
 
+                function extraerUrl(onclickStr) {
+                    const match = onclickStr.match(/window\.location\.href\s*=\s*['"]([^'"]+)['"]/);
+                    if (!match) return null;
+                    return match[1].replace(/\.html$/, '');
+                }
+
                 document.querySelectorAll('.producto').forEach(producto => {
                     if (producto.classList.contains('proximo')) return;
                     const btn = producto.querySelector('button.btn');
@@ -2778,37 +2772,30 @@
                     if (links.includes(url)) {
                         const nuevoDiv = document.createElement('div');
                         nuevoDiv.classList.add('btn-reset');
+                        if (!producto.parentNode) return;
                         producto.parentNode.insertBefore(nuevoDiv, producto);
                         nuevoDiv.appendChild(producto);
                         nuevoDiv.addEventListener('click', () => { window.location.href = url; });
                     }
                 });
 
-
                 // =========================
-                // 3. Buscador que borra e inserta productos
+                // 3. Buscador (elimina y restaura productos)
                 // =========================
                 const grid = document.querySelector('.productos-grid');
                 if (grid) {
-                    const productosOriginales = Array.from(grid.children);
-                    const copiaProductos = productosOriginales.map(p => p.cloneNode(true));
+                    const productosOriginales = Array.from(grid.querySelectorAll('div[class*="producto"]'));
                     const searchInputs = document.querySelectorAll('#search-input');
 
                     function filtrarProductos(query) {
-                        grid.innerHTML = '';
-
-                        if (!query) {
-                            copiaProductos.forEach(p => grid.appendChild(p.cloneNode(true)));
-                        } else {
-                            const resultados = copiaProductos.filter(prod => {
-                                const nombre = prod.querySelector('.nombre')?.textContent.toLowerCase() || '';
-                                const categoria = prod.querySelector('.categoria')?.textContent.toLowerCase() || '';
-                                return nombre.includes(query) || categoria.includes(query);
-                            });
-                            resultados.forEach(p => grid.appendChild(p.cloneNode(true)));
-                        }
-
-                        inicializarTodosLosCarruseles();
+                        grid.innerHTML = ''; // limpio todo
+                        productosOriginales.forEach(prod => {
+                            const nombre = prod.querySelector('.nombre')?.textContent.toLowerCase() || '';
+                            const categoria = prod.querySelector('.categoria')?.textContent.toLowerCase() || '';
+                            if (!query || nombre.includes(query) || categoria.includes(query)) {
+                                grid.appendChild(prod); // lo agrego de vuelta
+                            }
+                        });
                     }
 
                     searchInputs.forEach(input => {
@@ -2818,7 +2805,6 @@
                         });
                     });
                 }
-
 
                 // =========================
                 // 4. Menú lateral y dropdown
@@ -2831,7 +2817,7 @@
                 if (menuToggle && sidebar && closeBtn) {
                     menuToggle.addEventListener('click', () => { sidebar.style.display = 'block'; });
                     closeBtn.addEventListener('click', () => { sidebar.style.display = 'none'; });
-                    document.addEventListener('click', (e) => {
+                    document.addEventListener('click', e => {
                         if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
                             sidebar.style.display = 'none';
                         }
@@ -2844,7 +2830,6 @@
                         if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
                     });
                 });
-
 
                 // =========================
                 // 5. Modal de mantenimiento
