@@ -7,7 +7,6 @@
   <title>Papelera Pierrastegui - Bandejas De Cartón</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/preciosdrop2.css">
 </head>
 
 <body>
@@ -23,87 +22,131 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Bandejas De Cartón</h2>
-      <div class="producto-detalle">
+    <section class="producto container">
+      <div class="producto-contenido">
         <img id="producto-img"
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20DE%20CART%C3%93N/bandeja%20de%20carton.webp"
-          alt="Arranque Rendidor">
+          src="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20DE%20CARTÓN/bandeja%20de%20carton.webp"
+          alt="Bandejas De Cartón">
 
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h2>Bandejas De Cartón</h2>
           <ul>
-            <li>
-              <p id="desc-p">Bandejas de carton gris reforzadas y son ideales para destacar los alimentos, suelen
-                utilizarse para rotiserías y pasteleria.</p>
-            </li>
-            <li>
-              <p id="desc-p">Vienen en diferentes medidas y fraccionadas de 50 y 100 unidades.</p>
-            </li>
+            <li>Bandejas de cartón gris reforzadas, ideales para rotiserías y pastelería.</li>
+            <li>Se presentan en packs de 50 y 100 unidades.</li>
           </ul>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar modelo</button>
-            <ul class="dropdown-menu">
-              <li data-size="1" data-price-bulk="900" data-bulto="1.500">N° 1 (17x14)</li>
-              <li data-size="2" data-price-bulk="1.000" data-bulto="1.600">N° 2 (20x17)</li>
-              <li data-size="3" data-price-bulk="1.100" data-bulto="1.800">N° 3 (17x22)</li>
-              <li data-size="4" data-price-bulk="1.200" data-bulto="2.000">N° 4 (21x26)</li>
-              <li data-size="5" data-price-bulk="1.350" data-bulto="2.350">N° 5 (20x27)</li>
-              <li data-size="6" data-price-bulk="Sin Stock" data-bulto="Sin Stock">N° 6 (25x31)</li>
-              <li data-size="12" data-price-bulk="Sin Stock" data-bulto="Sin Stock">N° 12 (18)</li>
-              <li data-size="12.5" data-price-bulk="1.800" data-bulto="3.200">N° 12.5 (21)</li>
-              <li data-size="13" data-price-bulk="2.000" data-bulto="3.400">N° 13 (24)</li>
-              <li data-size="13.5" data-price-bulk="2.100" data-bulto="3.900">N° 13.5</li>
-            </ul>
+
+          <!-- Dropdown Modelo -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná el modelo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="N1x100" data-price="1600">Bandejas de Cartón N° 1 x100</div>
+              <div class="dropdown-item" data-size="N12.5x100" data-price="3200">Bandejas de Cartón N° 12,5 x100</div>
+              <div class="dropdown-item" data-size="N12.5x50" data-price="1650">Bandejas de Cartón N° 12,5 x50</div>
+              <div class="dropdown-item" data-size="N13x100" data-price="3600">Bandejas de Cartón N° 13 x100</div>
+              <div class="dropdown-item" data-size="N13x50" data-price="1900">Bandejas de Cartón N° 13 x50</div>
+              <div class="dropdown-item" data-size="N13.5x100" data-price="4100">Bandejas de Cartón N° 13,5 x100</div>
+              <div class="dropdown-item" data-size="N13.5x50" data-price="2100">Bandejas de Cartón N° 13,5 x50</div>
+              <div class="dropdown-item" data-size="N2x100" data-price="1700">Bandejas de Cartón N° 2 x100</div>
+              <div class="dropdown-item" data-size="N2x50" data-price="900">Bandejas de Cartón N° 2 x50</div>
+              <div class="dropdown-item" data-size="N3x100" data-price="2000">Bandejas de Cartón N° 3 x100</div>
+              <div class="dropdown-item" data-size="N3x50" data-price="1200">Bandejas de Cartón N° 3 x50</div>
+              <div class="dropdown-item" data-size="N4x100" data-price="2650">Bandejas de Cartón N° 4 x100</div>
+              <div class="dropdown-item" data-size="N4x50" data-price="1500">Bandejas de Cartón N° 4 x50</div>
+              <div class="dropdown-item" data-size="N5x100" data-price="3300">Bandejas de Cartón N° 5 x100</div>
+              <div class="dropdown-item" data-size="N5x50" data-price="1800">Bandejas de Cartón N° 5 x50</div>
+              <div class="dropdown-item" data-size="N14x100" data-price="6400">Bandejas de Cartón N° 14 x100</div>
+              <div class="dropdown-item" data-size="N14x50" data-price="3500">Bandejas de Cartón N° 14 x50</div>
+              <div class="dropdown-item" data-size="N1x50" data-price="900">Bandejas de Cartón N° 1 x50</div>
+              <div class="dropdown-item" data-size="N15" data-price="6900">Bandejas de Cartón N° 15</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio preciob">
-              Por 50 Unidades: <span class="moneda">$</span><span id="precio-10"></span> <span class="ars">ARS</span>
-            </p>
-            <p class="precio preciob">
-              Por 100 Unidades: <span class="moneda">$</span><span id="precio-50"></span> <span class="ars">ARS</span>
-            </p>
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
           </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <p class="total">Total: $0 ARS</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
+      let selectedItem = null;
+      let cantidad = 1;
 
+      function updateTotal() {
+        if (!selectedItem) {
+          totalDisplay.textContent = "Total: $0 ARS";
+          return;
+        }
+        const total = cantidad * Number(selectedItem.dataset.price);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
+      }
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop3.js"></script>
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedItem = item;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
