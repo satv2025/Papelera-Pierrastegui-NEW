@@ -24,25 +24,15 @@
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-        <img id="producto-img" src="../../assets/images/ROLLO_PLURIBOL/rollo_pluribol.jpg" alt="Rollo Pluribol">
+        <img id="producto-img" src="../../assets/images/pluribol.jpg" alt="Rollo Pluribol">
 
         <div class="producto-info">
           <h2>Rollo Pluribol</h2>
-
           <ul>
-            <li>Rollo de papel resistente, ideal para envoltorios y empaques.</li>
-            <li>Perfecto para comercios, oficinas y uso doméstico.</li>
-            <li>Se vende por unidad.</li>
+            <li>Rollo de Pluribol para embalaje y protección de productos delicados.</li>
           </ul>
 
-          <!-- Cantidad -->
-          <div class="agregar-carrito-cantidad">
-            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
-            <span id="cantidad-visual">1</span>
-            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
-          </div>
-
-          <p class="total">Total: $9.500 ARS</p>
+          <p class="total">Total: $9500 ARS</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
@@ -55,35 +45,6 @@
       <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const decBtn = document.getElementById('decrementar');
-      const incBtn = document.getElementById('incrementar');
-      const totalDisplay = document.querySelector('.total');
-
-      const precioUnitario = 9500;
-      let cantidad = 1;
-
-      function updateTotal() {
-        let total = cantidad * precioUnitario;
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')} ARS`;
-      }
-
-      incBtn.addEventListener('click', () => {
-        if (cantidad < 100) cantidad++;
-        cantidadVisual.textContent = cantidad;
-        updateTotal();
-      });
-
-      decBtn.addEventListener('click', () => {
-        if (cantidad > 1) cantidad--;
-        cantidadVisual.textContent = cantidad;
-        updateTotal();
-      });
-    });
-  </script>
 </body>
 
 </html>
