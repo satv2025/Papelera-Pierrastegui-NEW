@@ -2,13 +2,11 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Papelera Pierrastegui - Potes de Helado</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="../../assets/css/productos.css" />
-  <link rel="stylesheet" href="../../assets/css/preciosdrop.css" />
-  <link rel="stylesheet" href="../../assets/css/dropdown.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pote de Helado - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -16,96 +14,154 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../catalogo">Catálogo</a></li>
-        <li><a href="../../contacto">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Potes de Helado</h2>
-      <div class="producto-detalle">
-        <img id="producto-img" src="../../assets/images/potes-de-helado.jpg" alt="Potes de Helado" />
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/potes-de-helado.jpg"
+          alt="Potes de Helado">
 
         <div class="producto-info">
-          <h3>Descripción del producto</h3>
-          <p>Recipientes diseñados para contener, conservar y transportar helados.</p>
+          <h2>Potes de Helado</h2>
+          <ul>
+            <li>Potes de telgopor expandido ideales para heladerías.</li>
+            <li>Presentaciones: 1/4 kg, 1/2 kg y 1 kg.</li>
+            <li>Disponibles en packs de 20 y 100 unidades.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="¼" data-price-20="4000" data-price-100="18500">¼ Kilo</li>
-              <li data-size="½" data-price-20="5700" data-price-100="27500">½ Kilo</li>
-              <li data-size="1kg" data-price-20="7900" data-price-100="38500">1 Kg</li>
-            </ul>
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="4to"
+                data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2Rxqf51V1N-gFnvN4-ckpCUKiaKjSnob0w&s"
+                data-x20="4400" data-x100="20000">1/4 Kg</div>
+              <div class="dropdown-item" data-size="medio"
+                data-img="https://packingenvases.com.ar/wp-content/uploads/2024/05/465.jpg" data-x20="6600"
+                data-x100="31500">1/2 Kg</div>
+              <div class="dropdown-item" data-size="1kg"
+                data-img="https://todoenvase.com.ar/wp-content/uploads/2015/12/Pote-de-expandido-de-helado-de-1-kg.jpg"
+                data-x20="7900" data-x100="38500">1 Kg</div>
+            </div>
           </div>
 
-          <div id="uni" style="display:none;">
-            <p class="precio preciob">Por 20 unidades: $<span id="precio-20"></span> ARS</p>
-            <p class="precio preciob">Por 100 unidades: $<span id="precio-100"></span> ARS</p>
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown" style="display:none;">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="x20">x20</div>
+              <div class="dropdown-item" data-type="x100">x100</div>
+            </div>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook" />
-      </a>
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram" />
-      </a>
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter" />
-      </a>
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp" />
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const dropdownBtn = document.querySelector('.dropdown-btn');
-      const dropdownMenu = document.querySelector('.dropdown-menu');
-      const items = dropdownMenu.querySelectorAll('li');
-      const uniDiv = document.getElementById('uni');
-      const precio20 = document.getElementById('precio-20');
-      const precio100 = document.getElementById('precio-100');
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-      dropdownBtn.addEventListener('click', () => {
-        dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+      const productoImg = document.getElementById('producto-img');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+
+      let selectedSize = null;
+      let selectedTipo = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize || !selectedTipo) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const price = selectedTipo === 'x20' ? selectedSize.dataset.x20 : selectedSize.dataset.x100;
+        totalDisplay.textContent = `Total: $${(cantidad * Number(price)).toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
       });
 
-      items.forEach(item => {
+      sizeItems.forEach(item => {
         item.addEventListener('click', () => {
-          const size = item.getAttribute('data-size');
-          const p20 = item.getAttribute('data-price-20');
-          const p100 = item.getAttribute('data-price-100');
-
-          dropdownBtn.textContent = `Tamaño: ${size}`;
-          precio20.textContent = p20;
-          precio100.textContent = p100;
-          uniDiv.style.display = 'block';
-          dropdownMenu.style.display = 'none';
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          tipoDropdown.style.display = 'block';
+          selectedTipo = null;
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          updateTotal();
+          sizeMenu.classList.remove('active');
         });
       });
 
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.dropdown')) {
-          dropdownMenu.style.display = 'none';
-        }
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedTipo = item.dataset.type;
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
       });
     });
   </script>
