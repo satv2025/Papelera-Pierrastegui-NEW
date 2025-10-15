@@ -50,8 +50,8 @@
             </div>
           </div>
 
-          <!-- Dropdown Tipo (visible desde inicio) -->
-          <div class="dropdown" id="tipo-dropdown" style="display: block;">
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown" style="display: none;">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
@@ -105,6 +105,8 @@
       let tipo = '';
       let cantidad = 1;
 
+      tipoDropdown.style.display = 'none';
+
       function updateTotal() {
         if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
@@ -126,6 +128,10 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
