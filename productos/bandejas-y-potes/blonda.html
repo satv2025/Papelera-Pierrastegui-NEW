@@ -29,15 +29,15 @@
         <div class="producto-info">
           <h2>Blondas</h2>
           <ul>
-            <li>Blondas de papel decorativas para pastelería, repostería y presentación de alimentos.</li>
-            <li>Disponibles en distintos tamaños: N° 28, N° 30 y N° 32.</li>
-            <li><strong>Presentación:</strong> por paquete.</li>
+            <li>Blondas de papel decorativas ideales para pastelería, repostería y presentación de productos.</li>
+            <li>Disponibles en tamaños N° 28, N° 30 y N° 32.</li>
+            <li>Presentación: por paquete.</li>
           </ul>
 
-          <!-- Dropdown Tipo -->
+          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Tipo</span>
+              <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
@@ -57,6 +57,17 @@
                 N° 32
               </div>
 
+            </div>
+          </div>
+
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="paquete">Por Paquete</div>
             </div>
           </div>
 
@@ -89,6 +100,11 @@
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -96,10 +112,11 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
+      let tipo = '';
       let cantidad = 1;
 
       function updateTotal() {
-        if (!selectedSize) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
@@ -125,6 +142,23 @@
         });
       });
 
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
       incBtn.addEventListener('click', () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
@@ -141,6 +175,10 @@
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         }
       });
     });
