@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Bandejas De Telgopor</title>
+  <title>Bandejas de Telgopor - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/telgodrop.css">
 </head>
 
 <body>
@@ -24,86 +22,182 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Bandejas de Telgopor</h2>
-      <div class="producto-detalle">
+    <section class="producto container">
+      <div class="producto-contenido">
         <img id="producto-img"
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg"
+          src="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido%20617.jpg"
           alt="Bandejas de Telgopor">
 
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h2>Bandejas de Telgopor</h2>
           <ul>
-            <li>
-              <p id="desc-p">Las Bandejas de Telgopor son la solución perfecta para tus eventos o reuniones, con
-                distintos tamaños estas bandejas son ideales para servir alimentos de manera práctica y segura.</p>
-            </li>
-            <li>
-              <p id="desc-p">Su material de Telgopor las hace ligeras y fáciles de transportar, además de ser
-                completamente desechables.</p>
-            </li>
+            <li>Bandejas de telgopor expandido, livianas, resistentes y térmicas.</li>
+            <li>Ideales para alimentos fríos o calientes.</li>
+            <li>Disponibles en tamaños N° 617, 618 y 628.</li>
+            <li>Se presentan en packs de 50 o 100 unidades.</li>
           </ul>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar modelo</button>
-            <ul class="dropdown-menu">
-              <li data-size="617">Bandeja de Telgopor N° 617</li>
-              <li data-size="618">Bandeja de Telgopor N° 618</li>
-              <li data-size="619">Bandeja de Telgopor N° 619</li>
-              <li data-size="628">Bandeja de Telgopor N° 628</li>
-            </ul>
+
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+
+              <div class="dropdown-item" data-size="617" data-price-unit="0" data-price-x50="2500"
+                data-price-x100="4500"
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido%20617.jpg">
+                N° 617
+              </div>
+
+              <div class="dropdown-item" data-size="618" data-price-unit="0" data-price-x50="3500"
+                data-price-x100="6700"
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido%20618.jpg">
+                N° 618
+              </div>
+
+              <div class="dropdown-item" data-size="628" data-price-unit="0" data-price-x50="9300"
+                data-price-x100="18000"
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido%20628.jpg">
+                N° 628
+              </div>
+
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio preciob">
-              Por 25 Unidades: <span class="moneda">$</span><span id="precio-10"></span> <span class="ars">ARS</span>
-            </p>
-            <p class="precio preciob">
-              Por 50 Unidades: <span class="moneda">$</span><span id="precio-50"></span> <span class="ars">ARS</span>
-            </p>
-            <p class="precio preciob">
-              Por 100 Unidades: <span class="moneda">$</span><span id="precio-100"></span> <span class="ars">ARS</span>
-            </p>
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="x50">x50</div>
+              <div class="dropdown-item" data-type="x100">x100</div>
+            </div>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <!-- Total -->
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
+      let selectedSize = null;
+      let tipo = '';
+      let cantidad = 1;
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-telgopor.js"></script>
+      tipoDropdown.style.display = 'none';
+
+      function updateTotal() {
+        if (!selectedSize || tipo === '') {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = 0;
+        if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+        else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
-</html
+</html>
