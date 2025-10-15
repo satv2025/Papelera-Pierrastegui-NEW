@@ -31,10 +31,10 @@
         <div class="producto-info">
           <h2>Bandejas Plásticas</h2>
           <ul>
-            <li>Bandeja plástica resistente, ideal para alimentos fríos o calientes.</li>
-            <li>Disponibles en varios tamaños y modelos, con o sin tapa.</li>
+            <li>Bandejas plásticas resistentes, ideales para alimentos fríos o calientes.</li>
+            <li>Disponibles en varios tamaños y modelos.</li>
             <li>Perfectas para servicio de comida, repostería o eventos.</li>
-            <li>Presentaciones prácticas para todo tipo de necesidades.</li>
+            <li>Presentaciones prácticas en unidad, pack x50 o x100 según el modelo.</li>
           </ul>
 
           <div class="dropdown" id="size-dropdown">
@@ -44,30 +44,54 @@
             </button>
             <div class="dropdown-menu">
 
-              <div class="dropdown-item" data-price="50"
+              <div class="dropdown-item" data-size="101" data-price-unit="50" data-price-x50="1600"
+                data-price-x100="3000"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20101.jpg">
-                Bandejas Plásticas N° 101</div>
+                Bandejas Plásticas N° 101
+              </div>
 
-              <div class="dropdown-item" data-price="3800"
+              <div class="dropdown-item" data-size="102" data-price-unit="80" data-price-x50="2500"
+                data-price-x100="3800"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/Bandeja%20descartable%20n102.jpg">
-                Bandejas Plásticas N° 102</div>
+                Bandejas Plásticas N° 102
+              </div>
 
-              <div class="dropdown-item" data-price="6200"
+              <div class="dropdown-item" data-size="103" data-price-unit="90" data-price-x50="3200"
+                data-price-x100="6200"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20103.jpg">
-                Bandejas Plásticas N° 103</div>
+                Bandejas Plásticas N° 103
+              </div>
 
-              <div class="dropdown-item" data-price="8150"
+              <div class="dropdown-item" data-size="105-ovalada" data-price-unit="110" data-price-x50="3800"
+                data-price-x100="8150"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20105%20ovalada.jpg">
-                Bandejas Plásticas N° 105 Ovalada</div>
+                Bandejas Plásticas N° 105 Ovalada
+              </div>
 
-              <div class="dropdown-item" data-price="9350"
+              <div class="dropdown-item" data-size="105-rectangular" data-price-unit="120" data-price-x50="4750"
+                data-price-x100="9350"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20105%20rectangular.jpg">
-                Bandejas Plásticas N° 105 Rectangular</div>
+                Bandejas Plásticas N° 105 Rectangular
+              </div>
 
-              <div class="dropdown-item" data-price="12000"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BANDEJAS%20PL%C3%81STICAS/bandeja%20descartable%20n%20107.jpg">
-                Bandejas Plásticas N° 107</div>
+              <div class="dropdown-item" data-size="107" data-price-unit="150" data-price-x50="6500"
+                data-price-x100="12000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%Álogo/BANDEJAS%20PLÁSTICAS/bandeja%20descartable%20n%20107.jpg">
+                Bandejas Plásticas N° 107
+              </div>
 
+            </div>
+          </div>
+
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="unidad">Unidad</div>
+              <div class="dropdown-item" data-type="x50">x50</div>
+              <div class="dropdown-item" data-type="x100">x100</div>
             </div>
           </div>
 
@@ -98,21 +122,32 @@
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
       const totalDisplay = document.querySelector('.total');
       const productoImg = document.getElementById('producto-img');
 
-      let selectedItem = null;
+      let selectedSize = null;
+      let tipo = '';
       let cantidad = 1;
 
+      tipoDropdown.style.display = 'none';
+
       function updateTotal() {
-        if (!selectedItem) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        const total = cantidad * Number(selectedItem.dataset.price);
+        let total = 0;
+        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
+        else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+        else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
@@ -126,11 +161,32 @@
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           sizeBtn.querySelector('.text').textContent = item.textContent;
-          selectedItem = item;
+          selectedSize = item;
           productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         });
       });
 
@@ -150,6 +206,10 @@
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         }
       });
     });
