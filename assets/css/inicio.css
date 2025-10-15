@@ -505,6 +505,7 @@ body::selection {
   text-decoration: none;
   color: #ff7600;
   transition: color 0.3s;
+  font-weight: 700;
 }
 
 .nav-item:hover>a {
