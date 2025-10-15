@@ -36,6 +36,7 @@
             <li>Presentación por unidad o pack de 50.</li>
           </ul>
 
+          <!-- Dropdown Tipo -->
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
@@ -47,12 +48,14 @@
             </div>
           </div>
 
+          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar">-</button>
             <span id="cantidad-visual">1</span>
             <button id="incrementar">+</button>
           </div>
 
+          <!-- Total -->
           <p class="total">Total: $0</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
@@ -73,6 +76,7 @@
       const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
       const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -80,6 +84,10 @@
 
       let selectedTipo = null;
       let cantidad = 1;
+
+      // Abrir "Seleccioná El Tipo" por defecto
+      tipoMenu.classList.add('active');
+      tipoBtn.classList.add('active');
 
       function updateTotal() {
         if (!selectedTipo) {
