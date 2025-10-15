@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Bandejas De Cartón Plateadas</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
+  <title>Bandejas Plateadas - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -16,72 +14,134 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../catalogo">Catálogo</a></li>
-        <li><a href="../../contacto">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Bandejas De Cartón Plateadas</h2>
-      <div class="producto-detalle">
-        <img id="producto-img" src="../../assets/images/bandejas-de-carton-plateadas.jpg"
-          alt="Bandejas De Cartón Plateadas">
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/bandejas-de-carton-plateadas2.jpg"
+          alt="Bandejas Plateadas">
+
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h2>Bandejas Plateadas</h2>
           <ul>
-            <li>
-              <p id="desc-p">Bandejas de carton plateadas para posa tortas.</p>
-            </li>
+            <li>Bandejas plateadas resistentes y elegantes.</li>
+            <li>Ideales para presentación de productos, rotisería o pastelería.</li>
+            <li>Disponibles en los tamaños N° 22 y N° 24.</li>
+            <li>Se venden por unidad.</li>
           </ul>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="26" data-price-unit="350">N° 26</li>
-              <li data-size="28" data-price-unit="430">N° 28</li>
-              <li data-size="30" data-price-unit="450">N° 30</li>
-            </ul>
+
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+
+              <div class="dropdown-item" data-size="22" data-price-unit="300"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/bandejas-de-carton-plateadas2.jpg">
+                N° 22
+              </div>
+
+              <div class="dropdown-item" data-size="24" data-price-unit="400"
+                data-img="https://www.1solouso.com/productos/imagenes/img_16604_b90a82e1f8ca418f6ec2b921b855a7a3_20.png">
+                N° 24
+              </div>
+
+            </div>
           </div>
 
-          <div id="uni" style="display:none;">
-            <p class="precio preciob">Precio: $<span id="precio-valor"></span> ARS</p>
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <!-- Total -->
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-bandejascp.js"></script>
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
+
+      let selectedSize = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>

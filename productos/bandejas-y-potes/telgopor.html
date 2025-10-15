@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bandejas de Telgopor - Papelera Pierrastegui</title>
+  <title>Bandejas Plateadas - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -24,17 +24,16 @@
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-        <img id="producto-img"
-          src="../../assets/images/Fotos%20productos%20papelera%20para%20catálogo/BANDEJAS%20EXPANDIDO/Bandeja%20expandido.jpg"
-          alt="Bandejas de Telgopor">
+        <img id="producto-img" src="https://http2.mlstatic.com/D_NQ_NP_965946-MLA52422035279_112022-O.webp"
+          alt="Bandejas Plateadas">
 
         <div class="producto-info">
-          <h2>Bandejas de Telgopor</h2>
+          <h2>Bandejas Plateadas</h2>
           <ul>
-            <li>Bandejas de telgopor expandido, livianas, resistentes y térmicas.</li>
-            <li>Ideales para alimentos fríos o calientes.</li>
-            <li>Disponibles en tamaños N° 617, 618 y 628.</li>
-            <li>Se presentan en packs de 50 o 100 unidades.</li>
+            <li>Bandejas plateadas resistentes y elegantes.</li>
+            <li>Ideales para presentación de productos, rotisería o pastelería.</li>
+            <li>Disponibles en los tamaños N° 22 y N° 24.</li>
+            <li>Se venden por unidad.</li>
           </ul>
 
           <!-- Dropdown Tamaño -->
@@ -45,35 +44,16 @@
             </button>
             <div class="dropdown-menu">
 
-              <div class="dropdown-item" data-size="617" data-price-unit="0" data-price-x50="2500"
-                data-price-x100="4500" data-img="https://http2.mlstatic.com/D_634286-MLA76899968659_062024-C.jpg">
-                N° 617
-              </div>
-
-              <div class="dropdown-item" data-size="618" data-price-unit="0" data-price-x50="3500"
-                data-price-x100="6700"
+              <div class="dropdown-item" data-size="22" data-price-unit="300"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_965946-MLA52422035279_112022-O.webp">
-                N° 618
+                N° 22
               </div>
 
-              <div class="dropdown-item" data-size="628" data-price-unit="0" data-price-x50="9300"
-                data-price-x100="18000"
-                data-img="https://http2.mlstatic.com/D_NQ_NP_976155-MLA74305012181_012024-O.webp">
-                N° 628
+              <div class="dropdown-item" data-size="24" data-price-unit="400"
+                data-img="https://http2.mlstatic.com/D_634286-MLA76899968659_062024-C.jpg">
+                N° 24
               </div>
 
-            </div>
-          </div>
-
-          <!-- Dropdown Tipo -->
-          <div class="dropdown" id="tipo-dropdown">
-            <button class="dropdown-btn">
-              <span class="text">Seleccioná El Tipo</span>
-              <span class="arrow">▼</span>
-            </button>
-            <div class="dropdown-menu">
-              <div class="dropdown-item" data-type="x50">x50</div>
-              <div class="dropdown-item" data-type="x100">x100</div>
             </div>
           </div>
 
@@ -106,11 +86,6 @@
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-      const tipoDropdown = document.getElementById('tipo-dropdown');
-      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
-      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
-      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -118,19 +93,14 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
-      let tipo = '';
       let cantidad = 1;
 
-      tipoDropdown.style.display = 'none';
-
       function updateTotal() {
-        if (!selectedSize || tipo === '') {
+        if (!selectedSize) {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        let total = 0;
-        if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
-        else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
+        const total = cantidad * Number(selectedSize.dataset.priceUnit);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
@@ -146,30 +116,9 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
-          tipoDropdown.style.display = 'block';
-          tipo = '';
-          tipoItems.forEach(i => i.classList.remove('selected'));
-          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
-        });
-      });
-
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
-        tipoBtn.classList.toggle('active');
-      });
-
-      tipoItems.forEach(item => {
-        item.addEventListener('click', () => {
-          tipoItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          tipoBtn.querySelector('.text').textContent = item.textContent;
-          tipo = item.dataset.type;
-          updateTotal();
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
         });
       });
 
@@ -189,10 +138,6 @@
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
-        }
-        if (!tipoDropdown.contains(e.target)) {
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
         }
       });
     });
