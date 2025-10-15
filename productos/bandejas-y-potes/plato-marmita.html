@@ -30,11 +30,11 @@
         <div class="producto-info">
           <h2>Plato Marmita</h2>
           <ul>
-            <li>Platos térmicos de telgopor con divisiones, ideales para comidas preparadas.</li>
-            <li>Disponibles por unidad o en packs de 50 y 100.</li>
+            <li>Platos térmicos de telgopor, ideales para comidas calientes.</li>
+            <li>Presentación por unidad, x50 o x100.</li>
           </ul>
 
-          <!-- Dropdown Tipo -->
+          <!-- Dropdown Tipo (visible por defecto) -->
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
@@ -47,14 +47,12 @@
             </div>
           </div>
 
-          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar">-</button>
             <span id="cantidad-visual">1</span>
             <button id="incrementar">+</button>
           </div>
 
-          <!-- Total -->
           <p class="total">Total: $0</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
@@ -84,53 +82,29 @@
       let selectedTipo = null;
       let cantidad = 1;
 
-      // Abrir "Seleccioná El Tipo" por defecto
-      tipoMenu.classList.add('active');
-      tipoBtn.classList.add('active');
-
       function updateTotal() {
-        if (!selectedTipo) {
-          totalDisplay.textContent = "Total: $0";
-          return;
-        }
+        if (!selectedTipo) { totalDisplay.textContent = "Total: $0"; return; }
         const total = cantidad * Number(selectedTipo.dataset.price);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
-        tipoBtn.classList.toggle('active');
-      });
+      tipoBtn.addEventListener('click', () => { tipoMenu.classList.toggle('active'); tipoBtn.classList.toggle('active'); });
 
       tipoItems.forEach(item => {
         item.addEventListener('click', () => {
           tipoItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           tipoBtn.querySelector('.text').textContent = item.textContent;
-          selectedTipo = item;
-          updateTotal();
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
+          selectedTipo = item; updateTotal();
+          tipoMenu.classList.remove('active'); tipoBtn.classList.remove('active');
         });
       });
 
-      incBtn.addEventListener('click', () => {
-        cantidad++;
-        cantidadVisual.textContent = cantidad;
-        updateTotal();
-      });
-
-      decBtn.addEventListener('click', () => {
-        if (cantidad > 1) cantidad--;
-        cantidadVisual.textContent = cantidad;
-        updateTotal();
-      });
+      incBtn.addEventListener('click', () => { cantidad++; cantidadVisual.textContent = cantidad; updateTotal(); });
+      decBtn.addEventListener('click', () => { if (cantidad > 1) cantidad--; cantidadVisual.textContent = cantidad; updateTotal(); });
 
       document.addEventListener('click', e => {
-        if (!tipoDropdown.contains(e.target)) {
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
-        }
+        if (!tipoDropdown.contains(e.target)) { tipoMenu.classList.remove('active'); tipoBtn.classList.remove('active'); }
       });
     });
   </script>
