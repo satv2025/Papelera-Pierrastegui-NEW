@@ -36,26 +36,24 @@
             <li>Presentación por unidad o pack de 50.</li>
           </ul>
 
-          <!-- Dropdown Tipo (visible por defecto) -->
+          <!-- Dropdown Tipo (VISIBLE) -->
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-type="unidad" data-price="156">Unidad</div>
+              <div class="dropdown-item" data-type="unidad" data-price="7800">Por Paquete</div>
               <div class="dropdown-item" data-type="x50" data-price="5000">x50</div>
             </div>
           </div>
 
-          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar">-</button>
             <span id="cantidad-visual">1</span>
             <button id="incrementar">+</button>
           </div>
 
-          <!-- Total -->
           <p class="total">Total: $0</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
@@ -76,7 +74,6 @@
       const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
       const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -86,31 +83,23 @@
       let cantidad = 1;
 
       function updateTotal() {
-        if (!selectedTipo) { totalDisplay.textContent = "Total: $0"; return; }
-        const total = cantidad * Number(selectedTipo.dataset.price);
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+        if (!selectedTipo) return totalDisplay.textContent = "Total: $0";
+        totalDisplay.textContent = `Total: $${(cantidad * selectedTipo.dataset.price).toLocaleString('es-AR')}`;
       }
 
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active'); tipoBtn.classList.toggle('active');
-      });
-
+      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
       tipoItems.forEach(item => {
         item.addEventListener('click', () => {
           tipoItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           tipoBtn.querySelector('.text').textContent = item.textContent;
-          selectedTipo = item; updateTotal();
-          tipoMenu.classList.remove('active'); tipoBtn.classList.remove('active');
+          selectedTipo = item;
+          tipoMenu.classList.remove('active');
+          updateTotal();
         });
       });
-
       incBtn.addEventListener('click', () => { cantidad++; cantidadVisual.textContent = cantidad; updateTotal(); });
       decBtn.addEventListener('click', () => { if (cantidad > 1) cantidad--; cantidadVisual.textContent = cantidad; updateTotal(); });
-
-      document.addEventListener('click', e => {
-        if (!tipoDropdown.contains(e.target)) { tipoMenu.classList.remove('active'); tipoBtn.classList.remove('active'); }
-      });
     });
   </script>
 </body>

@@ -35,7 +35,7 @@
             <li>Con tapa a presión. Presentación: unidad, x50 o x100.</li>
           </ul>
 
-          <!-- Dropdown Tipo (visible por defecto) -->
+          <!-- Dropdown Tipo (VISIBLE) -->
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
@@ -74,39 +74,30 @@
       const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
       const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
       const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
       const totalDisplay = document.querySelector('.total');
-
-      let selectedTipo = null;
-      let cantidad = 1;
+      let selectedTipo = null, cantidad = 1;
 
       function updateTotal() {
-        if (!selectedTipo) { totalDisplay.textContent = "Total: $0"; return; }
-        const total = cantidad * Number(selectedTipo.dataset.price);
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+        if (!selectedTipo) return totalDisplay.textContent = "Total: $0";
+        totalDisplay.textContent = `Total: $${(cantidad * selectedTipo.dataset.price).toLocaleString('es-AR')}`;
       }
 
-      tipoBtn.addEventListener('click', () => { tipoMenu.classList.toggle('active'); tipoBtn.classList.toggle('active'); });
-
+      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
       tipoItems.forEach(item => {
         item.addEventListener('click', () => {
           tipoItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           tipoBtn.querySelector('.text').textContent = item.textContent;
-          selectedTipo = item; updateTotal();
-          tipoMenu.classList.remove('active'); tipoBtn.classList.remove('active');
+          selectedTipo = item;
+          tipoMenu.classList.remove('active');
+          updateTotal();
         });
       });
-
       incBtn.addEventListener('click', () => { cantidad++; cantidadVisual.textContent = cantidad; updateTotal(); });
       decBtn.addEventListener('click', () => { if (cantidad > 1) cantidad--; cantidadVisual.textContent = cantidad; updateTotal(); });
-
-      document.addEventListener('click', e => {
-        if (!tipoDropdown.contains(e.target)) { tipoMenu.classList.remove('active'); tipoBtn.classList.remove('active'); }
-      });
     });
   </script>
 </body>
