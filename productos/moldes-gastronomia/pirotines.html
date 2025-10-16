@@ -4,40 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Pirotines</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <style>
-    #contenedor {
-      width: 20em;
-      height: 20em;
-      position: relative;
-      margin-bottom: 3em !important;
-    }
-
-    #contenedor img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      display: block;
-      /* siempre block para que esté en flujo */
-      pointer-events: none;
-      /* para que no interfiera */
-    }
-
-    #contenedor img.visible {
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 1;
-    }
-  </style>
+  <title>Pirotines - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -45,103 +14,99 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index">Inicio</a></li>
-        <li><a href="../../catalogo">Catálogo</a></li>
-        <li><a href="../../contacto">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Pirotines</h2>
-      <div class="producto-detalle">
-        <div id="contenedor">
-          <img src="../../assets/images/pirotines.jpg" class="visible" alt="Bolsas de Horno">
-          <img src="../../assets/images/pirotinesrgb.jpg" alt="Bolsas para horno">
-        </div>
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/pirotinespro.png"
+          alt="Potes Ensalada de Fruta">
+
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h2>Pirotines</h2>
+          <p>
+            <strong>Izquierda:</strong> Pirotines de papel blanco con un delicado diseño floral azul.
+            Su textura plisada y acabado prolijo los hacen ideales para presentaciones elegantes,
+            mesas dulces o cupcakes con un estilo clásico y sofisticado.
+          </p>
+          <p>
+            <strong>Derecha:</strong> Pirotines de colores vibrantes, apilados en un degradado tipo arcoíris.
+            Alegres, llamativos y llenos de energía, son perfectos para fiestas, cumpleaños o cualquier
+            ocasión donde quieras que tus cupcakes se roben todas las miradas.
+          </p>
           <ul>
-            <li>
-              <p id="desc-p">Los pirotines son pequeños moldes de papel utilizados en repostería para
-                hacer muffins, cupcakes, bombones, entre otros dulces.</p>
-            </li>
+            <li>De papel resistente y aptos para horno.</li>
+            <li>Dos estilos: floral clásico o arcoíris divertido.</li>
+            <li>Presentación: packs de 50 o 100 unidades.</li>
           </ul>
-          <div class="dropdown" style="display: none;">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="F75" data-price-unit="2.500" data-price-bulk="12.000" data-bulto="20000">F75
-                (con tapa)
-              </li>
-              <li data-size="F100" data-price-unit="2.600" data-price-bulk="13.000" data-bulto="22.000">
-                F100 (con tapa)
-              </li>
-              <li data-size="P12" data-price-unit="1.900" data-price-bulk="7.500" data-bulto="14.500">P12
-              </li>
-            </ul>
+
+          <!-- Dropdown Tipo (VISIBLE) -->
+          <div class="dropdown" style="display: block;" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="x25" data-price="1500">x25</div>
+            </div>
           </div>
 
-          <div id="uni">
-            <p class="precio preciob">N° 10 (por 25 unidades): $1.200 ARS</p>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop2.js"></script>
   <script>
-    const imgs = document.querySelectorAll('#contenedor img');
-    let index = 0;
-    let direccion = 1;
+    document.addEventListener('DOMContentLoaded', () => {
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      let selectedTipo = null, cantidad = 1;
 
-    // Mostrar la primera imagen desde el inicio
-    imgs[index].classList.add('visible');
+      function updateTotal() {
+        if (!selectedTipo) return totalDisplay.textContent = "Total: $0";
+        totalDisplay.textContent = `Total: $${(cantidad * selectedTipo.dataset.price).toLocaleString('es-AR')}`;
+      }
 
-    // Esperar 3 segundos antes de comenzar el ciclo
-    setTimeout(() => {
-      setInterval(() => {
-        imgs[index].classList.remove('visible');
-
-        index += direccion;
-
-        // Cambiar dirección si estamos al final o al inicio
-        if (index === imgs.length - 1 || index === 0) {
-          direccion *= -1;
-        }
-
-        imgs[index].classList.add('visible');
-      }, 1500);
-    }, 1500); // <- este es el periodo de gracia inicial en milisegundos
+      tipoBtn.addEventListener('click', () => tipoMenu.classList.toggle('active'));
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          selectedTipo = item;
+          tipoMenu.classList.remove('active');
+          updateTotal();
+        });
+      });
+      incBtn.addEventListener('click', () => { cantidad++; cantidadVisual.textContent = cantidad; updateTotal(); });
+      decBtn.addEventListener('click', () => { if (cantidad > 1) cantidad--; cantidadVisual.textContent = cantidad; updateTotal(); });
+    });
   </script>
 </body>
 
