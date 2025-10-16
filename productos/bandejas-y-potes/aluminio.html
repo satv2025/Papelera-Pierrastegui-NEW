@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Budineras - Papelera Pierrastegui</title>
+  <title>Bandejas De Aluminio - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -24,44 +24,43 @@
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-        <img id="producto-img" src="https://http2.mlstatic.com/D_NQ_NP_644889-MLA47956036891_102021-O.webp"
-          alt="Budineras">
+        <img id="producto-img"
+          src="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg"
+          alt="Bandejas De Aluminio">
 
         <div class="producto-info">
-          <h2>Budineras</h2>
+          <h2>Bandejas De Aluminio</h2>
           <ul>
-            <li>Budineras de papel y aluminio ideales para panificados y repostería.</li>
-            <li>Disponibles en versiones Mini, Papel normal y Aluminio.</li>
-            <li>Se presentan por unidad o en packs de 50 y 100 unidades.</li>
+            <li>Bandeja fabricada en aluminio, resistente al calor y adecuada para horno.</li>
+            <li>La tapa de aluminio proporciona un cierre seguro y mantiene la frescura de los alimentos.</li>
+            <li>Ideal para cocinar pollos, pastas, carnes, pescados y verduras.</li>
+            <li>Se presenta en packs de Unidad, 50 y 100, conveniente para uso doméstico o eventos.</li>
           </ul>
 
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Tipo</span>
+              <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="mini" data-price-unit="50" data-price-x50="8500"
-                data-price-x100="16000"
-                data-img="https://http2.mlstatic.com/D_NQ_NP_992739-MLA80948328597_112024-O.webp">
-                Papel Mini
-              </div>
-              <div class="dropdown-item" data-size="papel" data-price-unit="220" data-price-x50="10000"
-                data-price-x100="17000"
-                data-img="https://http2.mlstatic.com/D_NQ_NP_644889-MLA47956036891_102021-O.webp">
-                Papel
-              </div>
-              <div class="dropdown-item" data-size="aluminio" data-price-unit="190" data-price-x50=""
+              <div class="dropdown-item" data-size="F100" data-price-unit="300" data-price-x50="14000"
+                data-price-x100="27000"
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f100.jpg">
+                F100</div>
+              <div class="dropdown-item" data-size="F75" data-price-unit="260" data-price-x50="12000"
+                data-price-x100="22000"
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/bandeja%20de%20aluminio%20f75.jpg">
+                F75</div>
+              <div class="dropdown-item" data-size="P12" data-price-unit="190" data-price-x50="8000"
                 data-price-x100="15500"
-                data-img="https://acdn-us.mitiendanube.com/stores/004/033/662/products/20200416055741_29336-91b72c8a244f3215ce17084959496089-1024-1024.jpg">
-                Aluminio
-              </div>
+                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ALUMINIO/Bandeja%20de%20aluminio%20P12.jpg">
+                P12</div>
             </div>
           </div>
 
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Tipo de Presentación</span>
+              <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
@@ -124,11 +123,7 @@
         if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
         else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
         else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
-        if (isNaN(total) || total === 0) {
-          totalDisplay.textContent = "Total: No disponible";
-        } else {
-          totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
-        }
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
       sizeBtn.addEventListener('click', () => {
@@ -146,7 +141,7 @@
           tipoDropdown.style.display = 'block';
           tipo = '';
           tipoItems.forEach(i => i.classList.remove('selected'));
-          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo de Presentación";
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');

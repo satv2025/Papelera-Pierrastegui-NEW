@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budineras - Papelera Pierrastegui</title>
-    <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
 
 <body>
@@ -14,9 +14,9 @@
         <h1>Papelera Pierrastegui</h1>
         <nav>
             <ul>
-                <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
-                <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
-                <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
+                <li><a href="../../index">Inicio</a></li>
+                <li><a href="../../catalogo">Catálogo</a></li>
+                <li><a href="../../contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -25,43 +25,47 @@
         <section class="producto container">
             <div class="producto-contenido">
                 <img id="producto-img" src="https://http2.mlstatic.com/D_NQ_NP_644889-MLA47956036891_102021-O.webp"
-                    alt="Budineras de papel">
+                    alt="Budineras">
 
                 <div class="producto-info">
                     <h2>Budineras</h2>
                     <ul>
                         <li>Budineras de papel y aluminio ideales para panificados y repostería.</li>
-                        <li>Presentaciones: Mini, Papel normal y Aluminio.</li>
-                        <li>Disponibles por unidad, packs de 50 o 100 unidades.</li>
+                        <li>Disponibles en versiones Mini, Papel normal y Aluminio.</li>
+                        <li>Se presentan en unidades y packs de 50 y 100 unidades.</li>
                     </ul>
 
-                    <!-- Dropdown Tamaño -->
                     <div class="dropdown" id="size-dropdown">
                         <button class="dropdown-btn">
                             <span class="text">Seleccioná El Tamaño</span>
                             <span class="arrow">▼</span>
                         </button>
                         <div class="dropdown-menu">
-                            <div class="dropdown-item" data-size="mini"
-                                data-img="https://http2.mlstatic.com/D_NQ_NP_992739-MLA80948328597_112024-O.webp"
-                                data-unid="50" data-x50="8500" data-x100="16000">Papel Mini</div>
-                            <div class="dropdown-item" data-size="papel"
-                                data-img="https://http2.mlstatic.com/D_NQ_NP_644889-MLA47956036891_102021-O.webp"
-                                data-unid="220" data-x50="10000" data-x100="17000">Papel Normal</div>
-                            <div class="dropdown-item" data-size="aluminio"
-                                data-img="https://acdn-us.mitiendanube.com/stores/004/033/662/products/20200416055741_29336-91b72c8a244f3215ce17084959496089-1024-1024.jpg"
-                                data-unid="190" data-x100="15500">Aluminio</div>
+                            <div class="dropdown-item" data-size="Papel Mini" data-price-unit="50" data-price-x50="8500"
+                                data-price-x100="16000"
+                                data-img="https://http2.mlstatic.com/D_NQ_NP_992739-MLA80948328597_112024-O.webp">
+                                Papel Mini
+                            </div>
+                            <div class="dropdown-item" data-size="Papel" data-price-unit="220" data-price-x50="10000"
+                                data-price-x100="17000"
+                                data-img="https://http2.mlstatic.com/D_NQ_NP_644889-MLA47956036891_102021-O.webp">
+                                Papel
+                            </div>
+                            <div class="dropdown-item" data-size="Aluminio" data-price-unit="190" data-price-x50=""
+                                data-price-x100="15500"
+                                data-img="https://acdn-us.mitiendanube.com/stores/004/033/662/products/20200416055741_29336-91b72c8a244f3215ce17084959496089-1024-1024.jpg">
+                                Aluminio
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Dropdown Tipo -->
-                    <div class="dropdown" id="tipo-dropdown" style="display:none;">
+                    <div class="dropdown" id="tipo-dropdown">
                         <button class="dropdown-btn">
                             <span class="text">Seleccioná El Tipo</span>
                             <span class="arrow">▼</span>
                         </button>
                         <div class="dropdown-menu">
-                            <div class="dropdown-item" data-type="unid">Unidad</div>
+                            <div class="dropdown-item" data-type="unidad">Unidad</div>
                             <div class="dropdown-item" data-type="x50">x50</div>
                             <div class="dropdown-item" data-type="x100">x100</div>
                         </div>
@@ -99,62 +103,70 @@
             const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
             const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
-            const productoImg = document.getElementById('producto-img');
             const cantidadVisual = document.getElementById('cantidad-visual');
             const decBtn = document.getElementById('decrementar');
             const incBtn = document.getElementById('incrementar');
             const totalDisplay = document.querySelector('.total');
+            const productoImg = document.getElementById('producto-img');
 
             let selectedSize = null;
-            let selectedTipo = null;
+            let tipo = '';
             let cantidad = 1;
 
+            tipoDropdown.style.display = 'none';
+
             function updateTotal() {
-                if (!selectedSize || !selectedTipo) {
+                if (!selectedSize || tipo === '') {
                     totalDisplay.textContent = "Total: $0";
                     return;
                 }
-
-                const price = selectedSize.dataset[selectedTipo];
-                if (!price) {
+                let total = 0;
+                if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
+                else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+                else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
+                if (isNaN(total) || total === 0) {
                     totalDisplay.textContent = "Total: No disponible";
-                    return;
+                } else {
+                    totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
                 }
-
-                totalDisplay.textContent = `Total: $${(cantidad * Number(price)).toLocaleString('es-AR')}`;
             }
 
             sizeBtn.addEventListener('click', () => {
                 sizeMenu.classList.toggle('active');
+                sizeBtn.classList.toggle('active');
             });
 
             sizeItems.forEach(item => {
                 item.addEventListener('click', () => {
                     sizeItems.forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
+                    sizeBtn.querySelector('.text').textContent = item.textContent;
                     selectedSize = item;
                     productoImg.src = item.dataset.img;
-                    sizeBtn.querySelector('.text').textContent = item.textContent;
                     tipoDropdown.style.display = 'block';
-                    selectedTipo = null;
-                    tipoBtn.querySelector('.text').textContent = "Seleccioná la presentación";
+                    tipo = '';
+                    tipoItems.forEach(i => i.classList.remove('selected'));
+                    tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
                     updateTotal();
                     sizeMenu.classList.remove('active');
+                    sizeBtn.classList.remove('active');
                 });
             });
 
             tipoBtn.addEventListener('click', () => {
                 tipoMenu.classList.toggle('active');
+                tipoBtn.classList.toggle('active');
             });
 
             tipoItems.forEach(item => {
                 item.addEventListener('click', () => {
                     tipoItems.forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
-                    selectedTipo = item.dataset.type;
                     tipoBtn.querySelector('.text').textContent = item.textContent;
+                    tipo = item.dataset.type;
                     updateTotal();
                     tipoMenu.classList.remove('active');
+                    tipoBtn.classList.remove('active');
                 });
             });
 
@@ -168,6 +180,17 @@
                 if (cantidad > 1) cantidad--;
                 cantidadVisual.textContent = cantidad;
                 updateTotal();
+            });
+
+            document.addEventListener('click', e => {
+                if (!sizeDropdown.contains(e.target)) {
+                    sizeMenu.classList.remove('active');
+                    sizeBtn.classList.remove('active');
+                }
+                if (!tipoDropdown.contains(e.target)) {
+                    tipoMenu.classList.remove('active');
+                    tipoBtn.classList.remove('active');
+                }
             });
         });
     </script>
