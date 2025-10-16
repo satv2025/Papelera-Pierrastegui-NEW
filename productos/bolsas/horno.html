@@ -4,40 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Bolsas de Horno</title>
+  <title>Bolsas De Horno x10u - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-
-  <style>
-    #contenedor {
-      width: 20em;
-      height: 20em;
-      position: relative;
-      margin-bottom: 3em !important;
-    }
-
-    #contenedor img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      display: block;
-      /* siempre block para que esté en flujo */
-      pointer-events: none;
-      /* para que no interfiera */
-    }
-
-    #contenedor img.visible {
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 1;
-    }
-  </style>
 </head>
 
 <body>
@@ -53,86 +22,68 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Bolsas de Horno</h2>
-      <div class="producto-detalle">
-        <div id="contenedor">
-          <img
-            src="https://media.istockphoto.com/id/148157090/es/foto/bolsa-de-horno.jpg?s=612x612&w=0&k=20&c=mMx0JZc2bdplKFz4VyIuXVyabZED3vFFLOuPvWsvSUc="
-            class="visible" alt="Bolsas de Horno">
-          <img src="https://www.papelerajb.com/wp-content/uploads/2023/06/Bolsas-para-horno.jpeg"
-            alt="Bolsas para horno">
-        </div>
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
+          src="https://acdn-us.mitiendanube.com/stores/001/132/714/products/bolsa-de-horno-1-768x1024-cb1ce08ed7ce3f4bdd17065297222094-640-0.jpeg"
+          alt="Bolsas De Horno x10u">
+
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h2>Bolsas De Horno x10u</h2>
           <ul>
-            <li>
-              <p id="desc-p">Bolsas de horno resistentes y aptas para uso alimenticio.</p>
-            </li>
-            <li>
-              <p id="desc-p">Son paquetes por 10 unidades.</p>
-            </li>
+            <li>Bolsas resistentes al calor, ideales para cocinar carnes, aves y verduras al horno.</li>
+            <li>Ayudan a conservar el sabor y los jugos de los alimentos durante la cocción.</li>
+            <li>Evitan ensuciar bandejas y fuentes.</li>
+            <li>Presentación: paquete por 10 unidades.</li>
           </ul>
-          <p class="precio">Por 10 Unidades: $2.500 ARS</p>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
+          </div>
+
+          <p class="total">Total: $3.000</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-
-  <script src="../../assets/js/dropdown.js"></script>
   <script>
-    const imgs = document.querySelectorAll('#contenedor img');
-    let index = 0;
-    let direccion = 1;
+    document.addEventListener('DOMContentLoaded', () => {
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const precioUnitario = 3000;
+      let cantidad = 1;
 
-    // Mostrar la primera imagen desde el inicio
-    imgs[index].classList.add('visible');
+      function updateTotal() {
+        const total = cantidad * precioUnitario;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
 
-    // Esperar 3 segundos antes de comenzar el ciclo
-    setTimeout(() => {
-      setInterval(() => {
-        imgs[index].classList.remove('visible');
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
 
-        index += direccion;
-
-        // Cambiar dirección si estamos al final o al inicio
-        if (index === imgs.length - 1 || index === 0) {
-          direccion *= -1;
-        }
-
-        imgs[index].classList.add('visible');
-      }, 1500);
-    }, 1500); // <- este es el periodo de gracia inicial en milisegundos
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+    });
   </script>
 </body>
 
