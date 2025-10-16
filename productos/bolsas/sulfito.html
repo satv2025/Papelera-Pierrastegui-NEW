@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Bolsas de Factura</title>
+  <title>Bolsas Sulfito - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/dropdownsul.css">
 </head>
 
 <body>
@@ -24,83 +22,184 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Bolsas de papel sulfito</h2>
-      <div class="producto-detalle">
-        <img
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg"
-          alt="Bolsas Camiseta">
+          alt="Bolsas Sulfito">
+
         <div class="producto-info">
-          <div class="producto-info">
-            <h3 id="hidden-title">Descripción del producto</h3>
-            <ul>
-              <li>
-                <p id="desc-p">Bolsas de papel sulfito 100% reciclado. Aptas para estar en contacto con alimentos.</p>
-              </li>
-            </ul>
-            <div class="dropdown">
-              <button class="dropdown-btn">Seleccionar tamaño</button>
-              <ul class="dropdown-menu">
-                <li data-size="N3">N°3 (11x23,5)</li>
-                <li data-size="N4A">N°4 A (15x23,5)</li>
-                <li data-size="N6L">N°6 L (15,5x35,5)</li>
-                <li data-size="N7">N°7 (19x35)</li>
-                <li data-size="N8">N°8 (24,5x41,5)</li>
-              </ul>
+          <h2>Bolsas Sulfito</h2>
+          <ul>
+            <li>Bolsas de papel ideales para panaderías y confiterías.</li>
+            <li>Diseñadas para mantener la presentación y frescura de productos de pastelería.</li>
+            <li>Disponibles en medidas N°2, N°3, N°4, N°6, N°7 y N°8.</li>
+            <li>Venta únicamente por paquete.</li>
+          </ul>
+
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+
+              <div class="dropdown-item" data-size="N°2" data-price-pack="1500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg">
+                N°2</div>
+
+              <div class="dropdown-item" data-size="N°3" data-price-pack="1600"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg">
+                N°3</div>
+
+              <div class="dropdown-item" data-size="N°4" data-price-pack="1900"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg">
+                N°4</div>
+
+              <div class="dropdown-item" data-size="N°6" data-price-pack="2500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg">
+                N°6</div>
+
+              <div class="dropdown-item" data-size="N°7" data-price-pack="2800"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg">
+                N°7</div>
+
+              <div class="dropdown-item" data-size="N°8" data-price-pack="3800"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20DE%20SULFITO/bolsa%20sulfito%201.jpg">
+                N°8</div>
+
             </div>
-            <div id="uni" style="display: none;">
-              <p class="precio">
-                Precio por paquete:
-                <span id="precio-paquete"></span>
-                <span id="precio-paquete-moneda"></span>
-              </p>
-              <p class="precio">
-                Precio por bulto
-                <span id="precio-bulto-cantidad"></span>:
-                <span id="precio-bulto"></span>
-                <span id="precio-bulto-moneda"></span>
-              </p>
-            </div>
-            <button class="agregar-carrito">Agregar al carrito</button>
           </div>
+
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown" style="display:none;">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="pack">Por Paquete</div>
+            </div>
+          </div>
+
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
+      let selectedSize = null;
+      let tipo = '';
+      let cantidad = 1;
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-bolsassulfito.js"></script>
+      tipoDropdown.style.display = 'none';
+
+      function updateTotal() {
+        if (!selectedSize || tipo === '') {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+
+        const total = cantidad * Number(selectedSize.dataset.pricePack);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
