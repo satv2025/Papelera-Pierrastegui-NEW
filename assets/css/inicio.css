@@ -45,7 +45,7 @@ button.btn-registro,
   background: #fff;
   cursor: pointer;
   font-size: 16px;
-  width: 10em;
+  width: 8em;
   transition: background 0.3s ease, color 0.3s ease;
   text-align: center;
 }
@@ -723,7 +723,7 @@ select:-webkit-autofill:focus {
   align-items: center;
   gap: 2rem;
   flex-wrap: nowrap;
-  margin-right: -6em;
+  margin-right: 11em;
 }
 
 /* Enlaces con iconos */
@@ -748,7 +748,7 @@ select:-webkit-autofill:focus {
 .mi-cuenta img.icon-right {
   position: absolute;
   top: 1.8em;
-  margin-left: 0.6em;
+  margin-left: 8.6em;
 }
 
 .casa {
@@ -772,6 +772,7 @@ select:-webkit-autofill:focus {
 
 .mi-cuenta {
   margin-left: -1em;
+  width: 1em;
 }
 
 .icon-right img:hover {
@@ -939,4 +940,19 @@ img.icon-right:Hover {
 .ig:hover,
 .carrito-pro:hover {
   filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%) !important;
+}
+
+@media (max-width: 600px) {
+
+  /* 🔧 FIX posición ícono Mi Cuenta en responsive */
+  .mi-cuenta img.icon-right {
+    position: relative !important;
+    top: -1.12em !important;
+    margin-left: 8.3em;
+  }
+
+  .btn-login {
+    position: relative;
+    top: 0.9em !important;
+  }
 }
