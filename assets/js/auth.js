@@ -51,7 +51,6 @@ export const handleRegister = async () => {
             if (profileError) throw profileError;
         }
 
-        alert("Registro exitoso. ¡Bienvenido!");
         window.location.href = ROOT_HOME;
 
     } catch (err) {
