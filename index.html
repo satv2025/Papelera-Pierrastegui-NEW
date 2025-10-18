@@ -828,76 +828,62 @@
             </div>
             <div class="mi-cuenta">
                 <div id="mi-cuenta-container">
-                    <!-- Aquí se inyecta dinámicamente -->
+                    <!-- Se inyecta dinámicamente -->
                 </div>
                 <img alt="Mi Cuenta" class="icon-right"
                     src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" />
             </div>
+
             <script type="module">
-                import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-                import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+                import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
-                const firebaseConfig = {
-                    apiKey: "AIzaSyD9T9Y34jeQUtscNdjn-aZ54B4kEisNk3c",
-                    authDomain: "papelera-pie.firebaseapp.com",
-                    projectId: "papelera-pie",
-                    storageBucket: "papelera-pie.firebasestorage.app",
-                    messagingSenderId: "407925272882",
-                    appId: "1:407925272882:web:4ce4347c5cba2e95b4a72b",
-                    measurementId: "G-YXB9F6CTN0"
-                };
-
-                const app = initializeApp(firebaseConfig);
-                const auth = getAuth();
                 const container = document.getElementById("mi-cuenta-container");
 
-                onAuthStateChanged(auth, (user) => {
-                    container.innerHTML = ""; // Limpiar contenido previo
+                // Obtener sesión actual
+                const { data: { user } } = await supabase.auth.getUser();
+                container.innerHTML = "";
 
-                    if (user) {
-                        // Usuario logueado → Dropdown con Cerrar Sesión
-                        const dropdown = document.createElement("div");
-                        dropdown.classList.add("dropdown");
+                if (user) {
+                    // ✅ Usuario logueado → mostrar nombre completo
+                    const nombre = user.user_metadata?.nombre_completo || user.user_metadata?.username || user.email;
 
-                        const btn = document.createElement("button");
-                        btn.textContent = user.displayName || "Mi Cuenta";
-                        btn.onclick = () => dropdown.classList.toggle("show");
+                    const dropdown = document.createElement("div");
+                    dropdown.classList.add("dropdown");
 
-                        const content = document.createElement("div");
-                        content.classList.add("dropdown-content");
+                    const btn = document.createElement("button");
+                    btn.textContent = nombre;
+                    btn.classList.add("btn-cuenta");
+                    btn.onclick = () => dropdown.classList.toggle("show");
 
-                        const logoutBtn = document.createElement("button");
-                        logoutBtn.textContent = "Cerrar Sesión";
-                        logoutBtn.onclick = async () => {
-                            await signOut(auth);
-                            dropdown.classList.remove("show");
-                            window.location.reload(); // Refrescar para mostrar botones de login/registro
-                        };
+                    const content = document.createElement("div");
+                    content.classList.add("dropdown-content");
 
-                        content.appendChild(logoutBtn);
-                        dropdown.appendChild(btn);
-                        dropdown.appendChild(content);
-                        container.appendChild(dropdown);
+                    const logoutBtn = document.createElement("button");
+                    logoutBtn.textContent = "Cerrar Sesión";
+                    logoutBtn.onclick = async () => {
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    };
 
-                        // Cerrar dropdown si hace clic fuera
-                        window.addEventListener("click", (e) => {
-                            if (!dropdown.contains(e.target)) {
-                                dropdown.classList.remove("show");
-                            }
-                        });
+                    content.appendChild(logoutBtn);
+                    dropdown.appendChild(btn);
+                    dropdown.appendChild(content);
+                    container.appendChild(dropdown);
 
-                    } else {
-                        // Usuario no logueado → botones
-                        const btnLogin = document.createElement("button");
-                        btnLogin.textContent = "Iniciar Sesión";
-                        btnLogin.onclick = () => window.location.href = "/logueo";
-                        btnLogin.classList.add("btn-login");
+                    // Cierra el menú si se hace clic fuera
+                    window.addEventListener("click", (e) => {
+                        if (!dropdown.contains(e.target)) dropdown.classList.remove("show");
+                    });
 
-                        container.appendChild(btnLogin);
-                        container.appendChild(document.createElement("br"));
-                        container.appendChild(btnRegistro);
-                    }
-                });
+                } else {
+                    // 🚪 Usuario no logueado → solo botón "Acceder"
+                    const btnAcceder = document.createElement("button");
+                    btnAcceder.textContent = "Acceder";
+                    btnAcceder.classList.add("btn-acceder");
+                    btnAcceder.onclick = () => window.location.href = "/logueo";
+
+                    container.appendChild(btnAcceder);
+                }
             </script>
         </div>
     </header>
