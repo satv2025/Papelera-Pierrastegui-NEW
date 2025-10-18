@@ -955,4 +955,9 @@ img.icon-right:Hover {
     position: relative;
     top: 0.9em !important;
   }
+
+  .nav-links {
+    gap: 1.3em;
+    margin-left: 1em;
+  }
 }
