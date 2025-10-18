@@ -854,7 +854,7 @@
 
                         const btn = document.createElement("button");
                         btn.textContent = nombre;
-                        btn.classList.add("btn-cuenta");
+                        btn.classList.add("btn-login");
                         btn.onclick = () => dropdown.classList.toggle("show");
 
                         const content = document.createElement("div");
@@ -879,7 +879,7 @@
                         // 🚪 Usuario no logueado → solo botón "Acceder"
                         const btnAcceder = document.createElement("button");
                         btnAcceder.textContent = "Acceder";
-                        btnAcceder.classList.add("btn-acceder");
+                        btnAcceder.classList.add("btn-login");
                         btnAcceder.onclick = () => (window.location.href = "/login");
                         container.appendChild(btnAcceder);
                     }
