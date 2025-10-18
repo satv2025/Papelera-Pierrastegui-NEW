@@ -1,28 +1,23 @@
-// ==============================
-// auth.js — Manejo completo de Login / Registro con Supabase
-// ==============================
-
+// Importar Supabase Client
 import { supabase } from "./supabaseClient.js";
+
 const ROOT_HOME = "https://papelerapierrastegui.com.ar/";
 
-// Utilidad para leer los valores de los <div contenteditable>
-const getInputValue = (id) => document.getElementById(id)?.textContent.trim();
-
 /* ==============================
-   🔹 REGISTRO
+   🔹 REGISTRO con Email y Password
    ============================== */
 export const handleRegister = async () => {
-    const username = getInputValue("username");
-    const nombre = getInputValue("nombre");
-    const email = getInputValue("email");
-    const password = getInputValue("password");
+    const username = document.getElementById("username")?.value.trim();
+    const nombre = document.getElementById("nombre")?.value.trim();
+    const email = document.getElementById("email")?.value.trim();
+    const password = document.getElementById("password")?.value;
 
     if (!username || !nombre || !email || !password) {
         alert("Por favor completa todos los campos.");
         return;
     }
 
-    // Crear usuario en Supabase Auth (sin verificación de correo)
+    // Crear usuario en Supabase Auth (sin confirmación de correo)
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -37,6 +32,7 @@ export const handleRegister = async () => {
         return;
     }
 
+    // Crear perfil adicional en la tabla profiles
     if (data.user) {
         const { error: profileError } = await supabase.from("profiles").insert({
             id: data.user.id,
@@ -56,18 +52,21 @@ export const handleRegister = async () => {
 };
 
 /* ==============================
-   🔹 LOGIN
+   🔹 LOGIN con Email y Password
    ============================== */
 export const handleLogin = async () => {
-    const email = getInputValue("email");
-    const password = getInputValue("password");
+    const email = document.getElementById("email")?.value.trim();
+    const password = document.getElementById("password")?.value;
 
     if (!email || !password) {
         alert("Por favor completa ambos campos.");
         return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+    });
 
     if (error) {
         alert("Error al iniciar sesión: " + error.message);
@@ -77,7 +76,7 @@ export const handleLogin = async () => {
 };
 
 /* ==============================
-   🔹 GOOGLE AUTH
+   🔹 LOGIN / REGISTRO con Google
    ============================== */
 export const googleHandler = async () => {
     try {
@@ -100,7 +99,7 @@ export const googleHandler = async () => {
    🔹 AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO
    ============================== */
 const checkAuthState = async () => {
-    const { data } = await supabase.auth.getUser();
+    const { data, error } = await supabase.auth.getUser();
     if (data?.user) {
         window.location.replace(ROOT_HOME);
     }
