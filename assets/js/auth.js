@@ -20,31 +20,27 @@ export const handleRegister = async () => {
     }
 
     try {
-        // 1️⃣ Crear usuario
+        // 1️⃣ Crear usuario (Supabase Auth crea y autentica automáticamente)
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
             email,
             password,
             options: { data: { username, nombre_completo: nombre } },
         });
+
         if (signUpError) throw signUpError;
+        const user = signUpData?.user;
+        if (!user) throw new Error("No se pudo crear el usuario.");
 
-        // 2️⃣ Iniciar sesión inmediatamente (obliga a tener sesión activa)
-        const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        });
-        if (loginError) throw loginError;
+        console.log("🟢 Usuario creado y logueado:", user.email);
 
-        const user = loginData.user;
-        if (!user) throw new Error("No se pudo obtener el usuario autenticado después del registro.");
-
-        // 3️⃣ Crear perfil (solo si no existe)
+        // 2️⃣ Verificar si el perfil ya existe
         const { data: existingProfile } = await supabase
             .from("profiles")
             .select("id")
             .eq("id", user.id)
-            .single();
+            .maybeSingle();
 
+        // 3️⃣ Insertar perfil solo si no existe
         if (!existingProfile) {
             const { error: profileError } = await supabase.from("profiles").insert({
                 id: user.id,
