@@ -838,12 +838,13 @@
                 import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
                 const container = document.getElementById("mi-cuenta-container");
+                const icon = document.querySelector(".mi-cuenta img.icon-right");
 
                 const renderCuenta = (user) => {
                     container.innerHTML = "";
 
                     if (user) {
-                        // ✅ Usuario logueado → mostrar nombre completo o email
+                        // ✅ Usuario logueado → mostrar menú con nombre
                         const nombre =
                             user.user_metadata?.nombre_completo ||
                             user.user_metadata?.username ||
@@ -875,17 +876,23 @@
                         window.addEventListener("click", (e) => {
                             if (!dropdown.contains(e.target)) dropdown.classList.remove("show");
                         });
+
+                        // 👇 Hacer que el icono redirija al perfil
+                        icon.onclick = () => (window.location.href = "/perfil");
                     } else {
-                        // 🚪 Usuario no logueado → solo botón "Acceder"
+                        // 🚪 Usuario no logueado → botón Acceder
                         const btnAcceder = document.createElement("button");
                         btnAcceder.textContent = "Acceder";
                         btnAcceder.classList.add("btn-login");
                         btnAcceder.onclick = () => (window.location.href = "/login");
                         container.appendChild(btnAcceder);
+
+                        // 👇 Si no está logueado, el icono lleva al login
+                        icon.onclick = () => (window.location.href = "/login");
                     }
                 };
 
-                // 🧠 Detectar sesión actual y cambios de estado
+                // 🧠 Detectar sesión actual y cambios
                 const { data: session } = await supabase.auth.getSession();
                 renderCuenta(session?.session?.user);
 

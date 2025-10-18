@@ -943,22 +943,21 @@ img.icon-right:Hover {
 }
 
 @media (max-width: 600px) {
-
-  /* 🔧 FIX posición ícono Mi Cuenta en responsive */
   .mi-cuenta img.icon-right {
     position: relative !important;
-    top: -1.12em !important;
-    margin-left: 8.3em;
+    top: -0.2em;
+    margin-left: 0.3em;
+    cursor: pointer;
+    /* ✅ hace clickeable el icono */
   }
 
   .nav-links {
-    gap: 1.3em;
     left: 1em;
     position: relative;
   }
 
   .btn-login {
-    position: relative;
-    top: 0.9em !important;
+    display: none !important;
+    /* ✅ oculta el botón en móviles */
   }
 }
