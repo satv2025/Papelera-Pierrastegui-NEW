@@ -1,4 +1,6 @@
-// Importar Supabase Client
+// ==============================
+// 🔹 Importar Supabase Client
+// ==============================
 import { supabase } from "./supabaseClient.js";
 
 const ROOT_HOME = "https://papelerapierrastegui.com.ar/";
@@ -17,37 +19,41 @@ export const handleRegister = async () => {
         return;
     }
 
-    // Crear usuario en Supabase Auth (sin confirmación de correo)
-    const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-            emailRedirectTo: ROOT_HOME,
-            data: { username, nombre_completo: nombre },
-        },
-    });
-
-    if (error) {
-        alert("Error: " + error.message);
-        return;
-    }
-
-    // Crear perfil adicional en la tabla profiles
-    if (data.user) {
-        const { error: profileError } = await supabase.from("profiles").insert({
-            id: data.user.id,
-            username,
-            nombre_completo: nombre,
+    try {
+        // Crear usuario en Supabase Auth
+        const { data, error } = await supabase.auth.signUp({
             email,
+            password,
+            options: {
+                emailRedirectTo: ROOT_HOME,
+                data: { username, nombre_completo: nombre },
+            },
         });
 
-        if (profileError) {
-            console.error(profileError);
-            alert("Hubo un problema al guardar tu perfil.");
-        } else {
+        if (error) throw error;
+
+        // Crear o actualizar perfil en la tabla profiles
+        if (data.user) {
+            const { error: profileError } = await supabase
+                .from("profiles")
+                .upsert(
+                    {
+                        id: data.user.id,
+                        username,
+                        nombre_completo: nombre,
+                        email,
+                    },
+                    { onConflict: "id" } // ✅ evita duplicados 409
+                );
+
+            if (profileError) throw profileError;
+
             alert("Registro exitoso. ¡Bienvenido!");
             window.location.href = ROOT_HOME;
         }
+    } catch (err) {
+        console.error("Error en registro:", err);
+        alert("Error: " + (err.message || "No se pudo completar el registro."));
     }
 };
 
@@ -63,15 +69,18 @@ export const handleLogin = async () => {
         return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-    });
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
 
-    if (error) {
-        alert("Error al iniciar sesión: " + error.message);
-    } else {
+        if (error) throw error;
+
         window.location.href = ROOT_HOME;
+    } catch (err) {
+        console.error("Error en login:", err);
+        alert("Error al iniciar sesión: " + (err.message || "Intenta nuevamente."));
     }
 };
 
@@ -85,13 +94,10 @@ export const googleHandler = async () => {
             options: { redirectTo: ROOT_HOME },
         });
 
-        if (error) {
-            console.error("Error en Google Sign-In:", error.message);
-            alert("Error: " + error.message);
-        }
+        if (error) throw error;
     } catch (err) {
         console.error("Error general en Google Sign-In:", err);
-        alert(err.message || "Error en Google Sign-In.");
+        alert(err.message || "Error en inicio con Google.");
     }
 };
 
@@ -99,7 +105,7 @@ export const googleHandler = async () => {
    🔹 AUTO-REDIRECCIÓN SI YA ESTÁ LOGUEADO
    ============================== */
 const checkAuthState = async () => {
-    const { data, error } = await supabase.auth.getUser();
+    const { data } = await supabase.auth.getUser();
     if (data?.user) {
         window.location.replace(ROOT_HOME);
     }
