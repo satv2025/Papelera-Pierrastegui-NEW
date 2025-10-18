@@ -32,25 +32,41 @@ export const handleRegister = async () => {
 
         if (error) throw error;
 
-        // Crear o actualizar perfil en la tabla profiles
-        if (data.user) {
-            const { error: profileError } = await supabase
-                .from("profiles")
-                .upsert(
-                    {
-                        id: data.user.id,
-                        username,
-                        nombre_completo: nombre,
-                        email,
-                    },
-                    { onConflict: "id" } // ✅ evita duplicados 409
-                );
+        // 🧠 Esperar a que el token se propague antes de insertar en profiles
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Obtener sesión actual (ya con token válido)
+        const {
+            data: { user },
+            error: sessionError,
+        } = await supabase.auth.getUser();
+
+        if (sessionError || !user) {
+            throw new Error("No se pudo obtener el usuario autenticado después del registro.");
+        }
+
+        // Comprobar si el perfil ya existe
+        const { data: existingProfile } = await supabase
+            .from("profiles")
+            .select("id")
+            .eq("id", user.id)
+            .single();
+
+        // Crear perfil solo si no existe
+        if (!existingProfile) {
+            const { error: profileError } = await supabase.from("profiles").insert({
+                id: user.id,
+                username,
+                nombre_completo: nombre,
+                email,
+            });
 
             if (profileError) throw profileError;
-
-            alert("Registro exitoso. ¡Bienvenido!");
-            window.location.href = ROOT_HOME;
         }
+
+        alert("Registro exitoso. ¡Bienvenido!");
+        window.location.href = ROOT_HOME;
+
     } catch (err) {
         console.error("Error en registro:", err);
         alert("Error: " + (err.message || "No se pudo completar el registro."));
@@ -77,7 +93,9 @@ export const handleLogin = async () => {
 
         if (error) throw error;
 
+        alert("Inicio de sesión exitoso.");
         window.location.href = ROOT_HOME;
+
     } catch (err) {
         console.error("Error en login:", err);
         alert("Error al iniciar sesión: " + (err.message || "Intenta nuevamente."));
