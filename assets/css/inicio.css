@@ -951,13 +951,14 @@ img.icon-right:Hover {
     margin-left: 8.3em;
   }
 
+  .nav-links {
+    gap: 1.3em;
+    left: 1em;
+    position: relative;
+  }
+
   .btn-login {
     position: relative;
     top: 0.9em !important;
-  }
-
-  .nav-links {
-    gap: 1.3em;
-    margin-left: 1em;
   }
 }
