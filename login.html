@@ -4,28 +4,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Login - Papelería Pierrastegui</title>
+    <title>Iniciar sesión - Papelería Pierrastegui</title>
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/reg_logueo_pp.css">
 </head>
 
 <body>
-    <div class="form-container">
-        <h2>INICIA SESIÓN</h2>
+    <div class="auth-page">
+        <div class="form-container">
+            <h2>INICIA SESIÓN</h2>
 
-        <input id="email" type="email" placeholder="Correo electrónico" required />
-        <input id="password" type="password" placeholder="Contraseña" required />
-        <button id="btn-login" type="button">Iniciar Sesión</button>
+            <!-- Campos personalizados -->
+            <div id="email" class="custom-input" contenteditable="true" data-placeholder="Correo electrónico"
+                tabindex="0"></div>
+            <div id="password" class="custom-input" contenteditable="true" data-placeholder="Contraseña" tabindex="0">
+            </div>
 
-        <div class="separator">o</div>
+            <button id="btn-login" type="button">Iniciar sesión</button>
 
-        <button id="btn-login-google" type="button" class="google-btn">
-            Iniciar sesión con Google
-        </button>
+            <div class="form-divider"></div>
 
-        <p>¿No tienes cuenta? <a href="/register">Regístrate</a></p>
+            <button id="btn-login-google" type="button" class="btn-ghost">
+                Iniciar sesión con Google
+            </button>
+
+            <p>¿No tienes cuenta? <a href="/register">Regístrate</a></p>
+        </div>
     </div>
 
-    <!-- Script de autenticación -->
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/auth.js"></script>
 </body>
 

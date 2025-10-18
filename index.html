@@ -839,51 +839,59 @@
 
                 const container = document.getElementById("mi-cuenta-container");
 
-                // Obtener sesión actual
-                const { data: { user } } = await supabase.auth.getUser();
-                container.innerHTML = "";
+                const renderCuenta = (user) => {
+                    container.innerHTML = "";
 
-                if (user) {
-                    // ✅ Usuario logueado → mostrar nombre completo
-                    const nombre = user.user_metadata?.nombre_completo || user.user_metadata?.username || user.email;
+                    if (user) {
+                        // ✅ Usuario logueado → mostrar nombre completo o email
+                        const nombre =
+                            user.user_metadata?.nombre_completo ||
+                            user.user_metadata?.username ||
+                            user.email;
 
-                    const dropdown = document.createElement("div");
-                    dropdown.classList.add("dropdown");
+                        const dropdown = document.createElement("div");
+                        dropdown.classList.add("dropdown");
 
-                    const btn = document.createElement("button");
-                    btn.textContent = nombre;
-                    btn.classList.add("btn-cuenta");
-                    btn.onclick = () => dropdown.classList.toggle("show");
+                        const btn = document.createElement("button");
+                        btn.textContent = nombre;
+                        btn.classList.add("btn-cuenta");
+                        btn.onclick = () => dropdown.classList.toggle("show");
 
-                    const content = document.createElement("div");
-                    content.classList.add("dropdown-content");
+                        const content = document.createElement("div");
+                        content.classList.add("dropdown-content");
 
-                    const logoutBtn = document.createElement("button");
-                    logoutBtn.textContent = "Cerrar Sesión";
-                    logoutBtn.onclick = async () => {
-                        await supabase.auth.signOut();
-                        window.location.reload();
-                    };
+                        const logoutBtn = document.createElement("button");
+                        logoutBtn.textContent = "Cerrar Sesión";
+                        logoutBtn.onclick = async () => {
+                            await supabase.auth.signOut();
+                            window.location.reload();
+                        };
 
-                    content.appendChild(logoutBtn);
-                    dropdown.appendChild(btn);
-                    dropdown.appendChild(content);
-                    container.appendChild(dropdown);
+                        content.appendChild(logoutBtn);
+                        dropdown.appendChild(btn);
+                        dropdown.appendChild(content);
+                        container.appendChild(dropdown);
 
-                    // Cierra el menú si se hace clic fuera
-                    window.addEventListener("click", (e) => {
-                        if (!dropdown.contains(e.target)) dropdown.classList.remove("show");
-                    });
+                        window.addEventListener("click", (e) => {
+                            if (!dropdown.contains(e.target)) dropdown.classList.remove("show");
+                        });
+                    } else {
+                        // 🚪 Usuario no logueado → solo botón "Acceder"
+                        const btnAcceder = document.createElement("button");
+                        btnAcceder.textContent = "Acceder";
+                        btnAcceder.classList.add("btn-acceder");
+                        btnAcceder.onclick = () => (window.location.href = "/login");
+                        container.appendChild(btnAcceder);
+                    }
+                };
 
-                } else {
-                    // 🚪 Usuario no logueado → solo botón "Acceder"
-                    const btnAcceder = document.createElement("button");
-                    btnAcceder.textContent = "Acceder";
-                    btnAcceder.classList.add("btn-acceder");
-                    btnAcceder.onclick = () => window.location.href = "/logueo";
+                // 🧠 Detectar sesión actual y cambios de estado
+                const { data: session } = await supabase.auth.getSession();
+                renderCuenta(session?.session?.user);
 
-                    container.appendChild(btnAcceder);
-                }
+                supabase.auth.onAuthStateChange((_event, session) => {
+                    renderCuenta(session?.user);
+                });
             </script>
         </div>
     </header>
