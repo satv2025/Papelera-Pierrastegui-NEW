@@ -20,39 +20,31 @@ export const handleRegister = async () => {
     }
 
     try {
-        // Crear usuario en Supabase Auth
-        const { data, error } = await supabase.auth.signUp({
+        // 1️⃣ Crear usuario
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
             email,
             password,
-            options: {
-                emailRedirectTo: ROOT_HOME,
-                data: { username, nombre_completo: nombre },
-            },
+            options: { data: { username, nombre_completo: nombre } },
         });
+        if (signUpError) throw signUpError;
 
-        if (error) throw error;
+        // 2️⃣ Iniciar sesión inmediatamente (obliga a tener sesión activa)
+        const { data: loginData, error: loginError } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+        if (loginError) throw loginError;
 
-        // 🧠 Esperar a que el token se propague antes de insertar en profiles
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        const user = loginData.user;
+        if (!user) throw new Error("No se pudo obtener el usuario autenticado después del registro.");
 
-        // Obtener sesión actual (ya con token válido)
-        const {
-            data: { user },
-            error: sessionError,
-        } = await supabase.auth.getUser();
-
-        if (sessionError || !user) {
-            throw new Error("No se pudo obtener el usuario autenticado después del registro.");
-        }
-
-        // Comprobar si el perfil ya existe
+        // 3️⃣ Crear perfil (solo si no existe)
         const { data: existingProfile } = await supabase
             .from("profiles")
             .select("id")
             .eq("id", user.id)
             .single();
 
-        // Crear perfil solo si no existe
         if (!existingProfile) {
             const { error: profileError } = await supabase.from("profiles").insert({
                 id: user.id,
@@ -60,7 +52,6 @@ export const handleRegister = async () => {
                 nombre_completo: nombre,
                 email,
             });
-
             if (profileError) throw profileError;
         }
 
