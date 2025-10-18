@@ -45,8 +45,6 @@ body {
     box-shadow: var(--shadow);
     text-align: center;
     position: relative;
-    left: 40%;
-    top: 17%;
 }
 
 .form-container h2 {

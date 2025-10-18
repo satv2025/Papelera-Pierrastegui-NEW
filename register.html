@@ -9,22 +9,26 @@
 </head>
 
 <body>
-    <div class="form-container">
-        <h2>REGÍSTRATE</h2>
+    <!-- 🔹 ESTE DIV ES EL QUE CENTRA TODO -->
+    <div class="auth-page">
+        <div class="form-container">
+            <h2>REGÍSTRATE</h2>
 
-        <input id="username" type="text" placeholder="Nombre de usuario" required />
-        <input id="nombre" type="text" placeholder="Nombre completo" required />
-        <input id="email" type="email" placeholder="Correo electrónico" required />
-        <input id="password" type="password" placeholder="Contraseña" required />
-        <button id="btn-register" type="button">Registrarse</button>
+            <input id="username" type="text" placeholder="Nombre de usuario" required />
+            <input id="nombre" type="text" placeholder="Nombre completo" required />
+            <input id="email" type="email" placeholder="Correo electrónico" required />
+            <input id="password" type="password" placeholder="Contraseña" required />
 
-        <div class="separator">o</div>
+            <button id="btn-register" type="button">Registrarse</button>
 
-        <button id="btn-register-google" type="button" class="google-btn">
-            Registrarse con Google
-        </button>
+            <div class="separator">o</div>
 
-        <p>¿Ya tienes una cuenta? <a href="/logueo">Inicia sesión</a></p>
+            <button id="btn-register-google" type="button" class="google-btn">
+                Registrarse con Google
+            </button>
+
+            <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+        </div>
     </div>
 
     <!-- Script de autenticación -->
