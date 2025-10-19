@@ -11,21 +11,26 @@
 
 <body>
     <div class="profile-container">
+        <!-- 🧑‍🦰 Encabezado del perfil -->
         <div class="profile-header">
             <div class="profile-avatar" id="profile-avatar">👤</div>
             <h2 id="profile-name">Cargando...</h2>
             <p id="profile-email"></p>
         </div>
 
+        <!-- 📣 Contenedor de mensajes dinámicos -->
+        <div id="profile-message" class="profile-message"></div>
+
+        <!-- 📝 Formulario de edición -->
         <form id="profile-form">
             <div class="profile-field">
                 <label for="nombre">Nombre completo</label>
-                <input type="text" id="nombre" name="nombre" />
+                <input type="text" id="nombre" name="nombre" autocomplete="name" />
             </div>
 
             <div class="profile-field">
                 <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" name="usuario" />
+                <input type="text" id="usuario" name="usuario" autocomplete="username" />
             </div>
 
             <div class="profile-field">

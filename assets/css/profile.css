@@ -14,7 +14,7 @@
     --brillo-pierrastegui: rgba(255, 118, 0, 0.6);
 
     /* 🖋️ Tipografía */
-    --letra-pierrastegui: 'Gilroy', sans-serif;
+    --letra-pierrastegui: 'Gilroy';
     --tamano-letra-pierrastegui: 16px;
     --peso-normal-pierrastegui: 500;
     --peso-fuerte-pierrastegui: 800;
@@ -34,10 +34,13 @@
     --transicion-lenta-pierrastegui: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+* {
+    font-family: var(--letra-pierrastegui);
+}
+
 /* 🌍 Estructura base */
 body {
     background: var(--gris-pierrastegui);
-    font-family: var(--letra-pierrastegui);
     font-size: var(--tamano-letra-pierrastegui);
     color: var(--negro-pierrastegui);
     margin: 0;
@@ -58,10 +61,6 @@ body {
     max-width: 480px;
     text-align: center;
     transition: transform var(--transicion-media-pierrastegui);
-}
-
-.profile-container:hover {
-    transform: translateY(-3px);
 }
 
 /* 🧑 Encabezado del perfil */
@@ -96,17 +95,19 @@ body {
 }
 
 .profile-field input {
-    width: 100%;
+    width: 93%;
     border: 2px solid var(--naranja-pierrastegui);
     border-radius: var(--borde-suave-pierrastegui);
     padding: 0.8rem 1rem;
     font-size: 1rem;
-    color: var(--negro-pierrastegui);
+    color: var(--naranja-pierrastegui);
     outline: none;
     background: var(--blanco-pierrastegui);
-    transition: border-color var(--transicion-media-pierrastegui),
-        box-shadow var(--transicion-media-pierrastegui);
+    transition: border-color var(--transicion-media-pierrastegui);
+    box-shadow var(--transicion-media-pierrastegui);
 }
+
+::placeholder {}
 
 .profile-field input:focus {
     border-color: var(--naranja-oscuro-pierrastegui);

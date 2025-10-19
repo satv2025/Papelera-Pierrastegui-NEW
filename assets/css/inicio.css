@@ -12,7 +12,7 @@
 }
 
 * {
-  font-family: 'Gilroy';
+  font-family: 'Gilroy' !important;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -971,4 +971,30 @@ img.icon-right:Hover {
   .btn-login {
     display: none !important;
   }
+}
+
+.profile-message {
+  display: none;
+  text-align: center;
+  padding: 0.8em 1em;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 1em;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.profile-message.show {
+  display: block;
+  opacity: 1;
+}
+
+.profile-message.success {
+  background-color: var(--verde-pierrastegui);
+  color: #fff;
+}
+
+.profile-message.error {
+  background-color: var(--rojo-pierrastegui);
+  color: #fff;
 }
