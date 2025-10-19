@@ -902,7 +902,7 @@ img.icon-right:Hover {
   min-width: 120px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  border-radius: 6px;
+  border-radius: 0.3em;
   overflow: hidden;
   border: 2px solid #ff7600;
   margin-top: 0.2em;
