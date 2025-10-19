@@ -1013,3 +1013,10 @@ img.icon-right:Hover {
 .dropdown-content button:hover img.icon-dropdown {
   filter: brightness(0) invert(1);
 }
+
+/* 🧭 Cuando el menú de usuario está abierto, mantener el estado hover */
+.dropdown.show .btn-login {
+  color: #000 !important;
+  background: #fff !important;
+  border: 2px solid #000 !important;
+}

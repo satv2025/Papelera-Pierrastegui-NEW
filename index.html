@@ -856,7 +856,25 @@
                         const btn = document.createElement("button");
                         btn.textContent = nombre;
                         btn.classList.add("btn-login");
-                        btn.onclick = () => dropdown.classList.toggle("show");
+
+                        // 🎯 Toggle menú + cambiar color del icono
+                        btn.onclick = () => {
+                            dropdown.classList.toggle("show");
+
+                            if (dropdown.classList.contains("show")) {
+                                // 👉 Menú abierto → icono negro
+                                icon.style.filter =
+                                    "brightness(0) saturate(100%) invert(0%) sepia(32%) saturate(0%) hue-rotate(339deg) brightness(95%) contrast(101%)";
+                                btn.style.color = "#000";
+                                btn.style.background = "#fff";
+                                btn.style.border = "2px solid #000";
+                            } else {
+                                // 👉 Menú cerrado → icono vuelve al naranja original
+                                icon.style.filter =
+                                    "brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%)";
+                                btn.removeAttribute("style");
+                            }
+                        };
 
                         const content = document.createElement("div");
                         content.classList.add("dropdown-content");
@@ -890,7 +908,12 @@
 
                         // 🔒 Cierra el menú si clickeás afuera
                         window.addEventListener("click", (e) => {
-                            if (!dropdown.contains(e.target)) dropdown.classList.remove("show");
+                            if (!dropdown.contains(e.target)) {
+                                dropdown.classList.remove("show");
+                                icon.style.filter =
+                                    "brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%)";
+                                btn.removeAttribute("style");
+                            }
                         });
 
                         // 👇 Icono también abre perfil
