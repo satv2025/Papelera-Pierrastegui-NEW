@@ -1014,8 +1014,19 @@ img.icon-right:Hover {
   filter: brightness(0) invert(1);
 }
 
-/* 🧭 Cuando el menú de usuario está abierto, mantener el estado hover */
-.dropdown.show .btn-login {
+/* 🧭 Estilo normal */
+.mi-cuenta img.icon-right {
+  filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
+  transition: filter 0.1s ease-in-out;
+}
+
+/* 🟠 Cuando el menú está abierto */
+.mi-cuenta.open img.icon-right {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(32%) saturate(0%) hue-rotate(339deg) brightness(95%) contrast(101%) !important;
+}
+
+/* 🟠 Cuando el menú está abierto, también invertimos botón */
+.mi-cuenta.open .btn-login {
   color: #000 !important;
   background: #fff !important;
   border: 2px solid #000 !important;

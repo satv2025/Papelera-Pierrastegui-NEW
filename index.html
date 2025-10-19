@@ -827,9 +827,7 @@
                 </a>
             </div>
             <div class="mi-cuenta">
-                <div id="mi-cuenta-container">
-                    <!-- Se inyecta dinámicamente -->
-                </div>
+                <div id="mi-cuenta-container"></div>
                 <img alt="Mi Cuenta" class="icon-right"
                     src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" />
             </div>
@@ -838,13 +836,13 @@
                 import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
                 const container = document.getElementById("mi-cuenta-container");
-                const icon = document.querySelector(".mi-cuenta img.icon-right");
+                const miCuenta = document.querySelector(".mi-cuenta");
+                const icon = miCuenta.querySelector(".icon-right");
 
                 const renderCuenta = (user) => {
                     container.innerHTML = "";
 
                     if (user) {
-                        // ✅ Usuario logueado → menú desplegable con nombre
                         const nombre =
                             user.user_metadata?.nombre_completo ||
                             user.user_metadata?.username ||
@@ -856,25 +854,6 @@
                         const btn = document.createElement("button");
                         btn.textContent = nombre;
                         btn.classList.add("btn-login");
-
-                        // 🎯 Toggle menú + cambiar color del icono
-                        btn.onclick = () => {
-                            dropdown.classList.toggle("show");
-
-                            if (dropdown.classList.contains("show")) {
-                                // 👉 Menú abierto → icono negro
-                                icon.style.filter =
-                                    "brightness(0) saturate(100%) invert(0%) sepia(32%) saturate(0%) hue-rotate(339deg) brightness(95%) contrast(101%)";
-                                btn.style.color = "#000";
-                                btn.style.background = "#fff";
-                                btn.style.border = "2px solid #000";
-                            } else {
-                                // 👉 Menú cerrado → icono vuelve al naranja original
-                                icon.style.filter =
-                                    "brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%)";
-                                btn.removeAttribute("style");
-                            }
-                        };
 
                         const content = document.createElement("div");
                         content.classList.add("dropdown-content");
@@ -898,40 +877,46 @@
                             window.location.reload();
                         };
 
-                        // 📦 Orden correcto
                         content.appendChild(perfilBtn);
                         content.appendChild(logoutBtn);
-
                         dropdown.appendChild(btn);
                         dropdown.appendChild(content);
                         container.appendChild(dropdown);
 
-                        // 🔒 Cierra el menú si clickeás afuera
+                        // 🎯 Toggle del menú
+                        btn.onclick = (e) => {
+                            e.stopPropagation();
+                            const isOpen = dropdown.classList.toggle("show");
+
+                            // ✅ Manejamos el estado visual en el contenedor principal
+                            if (isOpen) {
+                                miCuenta.classList.add("open");
+                            } else {
+                                miCuenta.classList.remove("open");
+                            }
+                        };
+
+                        // 🔒 Cierra si clickeás fuera
                         window.addEventListener("click", (e) => {
                             if (!dropdown.contains(e.target)) {
                                 dropdown.classList.remove("show");
-                                icon.style.filter =
-                                    "brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%)";
-                                btn.removeAttribute("style");
+                                miCuenta.classList.remove("open");
                             }
                         });
 
                         // 👇 Icono también abre perfil
                         icon.onclick = () => (window.location.href = "/profile");
                     } else {
-                        // 🚪 Usuario no logueado → botón Acceder
                         const btnAcceder = document.createElement("button");
                         btnAcceder.textContent = "Acceder";
                         btnAcceder.classList.add("btn-login");
                         btnAcceder.onclick = () => (window.location.href = "/login");
                         container.appendChild(btnAcceder);
 
-                        // 👇 Icono lleva al login
                         icon.onclick = () => (window.location.href = "/login");
                     }
                 };
 
-                // 🧠 Detectar sesión actual y cambios
                 const { data: session } = await supabase.auth.getSession();
                 renderCuenta(session?.session?.user);
 
