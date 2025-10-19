@@ -108,10 +108,7 @@ body {
     outline: none;
     background: var(--blanco-pierrastegui);
     transition: border-color var(--transicion-media-pierrastegui);
-    box-shadow: var(--transicion-media-pierrastegui);
 }
-
-::placeholder {}
 
 .profile-field input:focus {
     border-color: var(--naranja-oscuro-pierrastegui);
@@ -198,27 +195,30 @@ button {
     }
 }
 
-/* 💬 Campo de cambio de contraseña (con animación suave) */
+/* 💬 Campo de cambio de contraseña con animación tipo "slide natural" */
 .password-field {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
+    max-height: 0;
     opacity: 0;
+    overflow: hidden;
     transform: translateY(-10px);
+    transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
     pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* 🟠 Visible con animación */
+/* 🟠 Visible */
 .password-field.show {
+    max-height: 300px;
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
 }
 
-/* 🔴 Oculto (sin ocupar espacio) */
+/* 🔴 Oculto (sin ocupar espacio visualmente) */
 .password-field.hidden {
-    display: none !important;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
 }
 
 .password-field input {

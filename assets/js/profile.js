@@ -80,17 +80,17 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-/* 🔑 Mostrar / ocultar campo de nueva contraseña con animación */
+/* 🔑 Mostrar / ocultar campo de nueva contraseña (animación slide + display:none) */
 passBtn.addEventListener("click", () => {
     const isHidden = passwordField.classList.contains("hidden");
 
     if (isHidden) {
         passwordField.classList.remove("hidden");
-        void passwordField.offsetWidth; // 🔄 fuerza reflow para activar animación
+        void passwordField.offsetWidth; // 🔄 reflow para activar transición
         passwordField.classList.add("show");
     } else {
         passwordField.classList.remove("show");
-        setTimeout(() => passwordField.classList.add("hidden"), 300);
+        setTimeout(() => passwordField.classList.add("hidden"), 400);
     }
 
     newPasswordInput.value = "";
@@ -113,7 +113,7 @@ guardarPassBtn.addEventListener("click", async () => {
     } else {
         showMessage("🔑 Contraseña actualizada correctamente 🔑", "success");
         passwordField.classList.remove("show");
-        setTimeout(() => passwordField.classList.add("hidden"), 300);
+        setTimeout(() => passwordField.classList.add("hidden"), 400);
         newPasswordInput.value = "";
     }
 });
@@ -121,7 +121,7 @@ guardarPassBtn.addEventListener("click", async () => {
 /* ❌ Cancelar cambio de contraseña */
 cancelarPassBtn.addEventListener("click", () => {
     passwordField.classList.remove("show");
-    setTimeout(() => passwordField.classList.add("hidden"), 300);
+    setTimeout(() => passwordField.classList.add("hidden"), 400);
     newPasswordInput.value = "";
 });
 
