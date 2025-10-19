@@ -45,9 +45,10 @@ button.btn-registro,
   background: #fff;
   cursor: pointer;
   font-size: 16px;
-  width: 8em;
+  width: 13em;
   transition: background 0.3s ease, color 0.3s ease;
   text-align: center;
+  margin-left: 0.78em;
 }
 
 /* Hover de todos los botones */
@@ -721,9 +722,9 @@ select:-webkit-autofill:focus {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.9rem;
   flex-wrap: nowrap;
-  margin-right: 11em;
+  margin-right: 19em;
 }
 
 /* Enlaces con iconos */
@@ -748,7 +749,7 @@ select:-webkit-autofill:focus {
 .mi-cuenta img.icon-right {
   position: absolute;
   top: 1.8em;
-  margin-left: 8.6em;
+  margin-left: 13.6em;
 }
 
 .casa {
@@ -890,12 +891,13 @@ img.icon-right:Hover {
   position: relative;
   display: inline-block;
   font-weight: 700 !important;
+  width: 13em;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  right: 0;
+  right: -12px;
   background-color: #fff;
   min-width: 120px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
