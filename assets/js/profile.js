@@ -10,22 +10,34 @@ const logoutBtn = document.getElementById("cerrar-sesion");
 const passBtn = document.getElementById("cambiar-pass");
 const messageBox = document.getElementById("profile-message");
 
-/* 🎨 Toma los colores desde las variables CSS */
-const getCSSColor = (variable) =>
-    getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+/* 🎨 Función para obtener colores o filtros CSS */
+const getCSSVar = (variable) =>
+    getComputedStyle(document.documentElement)
+        .getPropertyValue(variable)
+        .trim();
 
-/* 📣 Muestra mensajes con colores Pierrastegui */
+/* 📣 Mostrar mensajes con estilo Pierrastegui */
 const showMessage = (text, type = "success") => {
-    const color =
+    const colorVar =
         type === "error"
-            ? getCSSColor("--rojo-pierrastegui")
-            : getCSSColor("--verde-pierrastegui");
+            ? "--rojo-pierrastegui"
+            : "--verde-pierrastegui";
+    const filterVar =
+        type === "error"
+            ? "--filtro-rojo-pierrastegui"
+            : "--filtro-verde-pierrastegui";
 
+    // Reset
+    messageBox.style.background = "transparent";
+    messageBox.style.border = "none";
+    messageBox.style.filter = "none";
+
+    // Aplicar color o filtro según tipo
+    messageBox.style.color = getCSSVar(colorVar);
+    messageBox.style.filter = getCSSVar(filterVar);
     messageBox.textContent = text;
-    messageBox.style.backgroundColor = color;
-    messageBox.style.color = "#ffffff"; // texto blanco siempre
-    messageBox.className = `profile-message show ${type}`;
 
+    messageBox.className = `profile-message show ${type}`;
     setTimeout(() => {
         messageBox.classList.remove("show");
     }, 3000);
@@ -59,9 +71,9 @@ form.addEventListener("submit", async (e) => {
     });
 
     if (error) {
-        showMessage("⚠️ Error al actualizar perfil: " + error.message, "error" ⚠️);
+        showMessage("Error al actualizar el perfil: " + error.message, "error");
     } else {
-        showMessage("✔️ Perfil actualizado correctamente.", "success" ✔️);
+        showMessage("Perfil actualizado correctamente.", "success");
         setTimeout(() => window.location.reload(), 1500);
     }
 });
@@ -76,9 +88,9 @@ passBtn.addEventListener("click", async () => {
     });
 
     if (error) {
-        showMessage("⚠️ Error al cambiar la contraseña: " + error.message, "error");
+        showMessage("Error al cambiar la contraseña: " + error.message, "error");
     } else {
-        showMessage("🔒 Contraseña actualizada correctamente.", "success");
+        showMessage("Contraseña actualizada correctamente.", "success");
     }
 });
 
