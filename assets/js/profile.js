@@ -59,9 +59,9 @@ form.addEventListener("submit", async (e) => {
     });
 
     if (error) {
-        showMessage("⚠️ Error al actualizar perfil: " + error.message, "error");
+        showMessage("⚠️ Error al actualizar perfil: " + error.message, "error" ⚠️);
     } else {
-        showMessage("✅ Perfil actualizado correctamente.", "success");
+        showMessage("✔️ Perfil actualizado correctamente.", "success" ✔️);
         setTimeout(() => window.location.reload(), 1500);
     }
 });

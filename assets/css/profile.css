@@ -13,6 +13,10 @@
     --rojo-pierrastegui: #ff3b30;
     --brillo-pierrastegui: rgba(255, 118, 0, 0.6);
 
+    /* ✨ Forzados de Color */
+    --filtro-verde-pierrastegui: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(366%) hue-rotate(109deg) brightness(102%) contrast(97%) !important;
+    --filtro-rojo-pierrastegui: brightness(0) saturate(100%) invert(35%) sepia(69%) saturate(6581%) hue-rotate(6deg) brightness(108%) contrast(105%) !important;
+
     /* 🖋️ Tipografía */
     --letra-pierrastegui: 'Gilroy';
     --tamano-letra-pierrastegui: 16px;
@@ -104,7 +108,7 @@ body {
     outline: none;
     background: var(--blanco-pierrastegui);
     transition: border-color var(--transicion-media-pierrastegui);
-    box-shadow var(--transicion-media-pierrastegui);
+    box-shadow: var(--transicion-media-pierrastegui);
 }
 
 ::placeholder {}
