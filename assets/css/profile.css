@@ -198,17 +198,25 @@ button {
     }
 }
 
-/* 💬 Campo de cambio de contraseña */
+/* 💬 Campo de cambio de contraseña (con animación suave) */
 .password-field {
-    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    transition: all 0.3s ease;
-    opacity: 1;
-    max-height: 200px;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* 🟠 Visible con animación */
+.password-field.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* 🔴 Oculto (sin ocupar espacio) */
 .password-field.hidden {
     display: none !important;
 }
@@ -224,6 +232,10 @@ button {
 
 input {
     font-weight: 700;
+}
+
+::placeholder {
+    color: var(--naranja-pierrastegui);
 }
 
 .password-buttons {
