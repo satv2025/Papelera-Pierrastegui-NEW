@@ -13,6 +13,10 @@
     --rojo-pierrastegui: #ff3b30;
     --brillo-pierrastegui: rgba(255, 118, 0, 0.6);
 
+    /* ✨ Forzados de Color */
+    --filtro-verde-pierrastegui: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(366%) hue-rotate(109deg) brightness(102%) contrast(97%) !important;
+    --filtro-rojo-pierrastegui: brightness(0) saturate(100%) invert(35%) sepia(69%) saturate(6581%) hue-rotate(6deg) brightness(108%) contrast(105%) !important;
+
     /* 🖋️ Tipografía */
     --letra-pierrastegui: 'Gilroy';
     --tamano-letra-pierrastegui: 16px;
@@ -34,10 +38,8 @@
     --transicion-lenta-pierrastegui: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* 🖋️ Fuente global */
 * {
     font-family: var(--letra-pierrastegui);
-    box-sizing: border-box;
 }
 
 /* 🌍 Estructura base */
@@ -65,7 +67,7 @@ body {
     transition: transform var(--transicion-media-pierrastegui);
 }
 
-/* 🧑 Encabezado */
+/* 🧑 Encabezado del perfil */
 .profile-header {
     margin-bottom: 2rem;
 }
@@ -177,13 +179,6 @@ button {
     box-shadow: var(--sombra-suave-pierrastegui);
 }
 
-/* 💬 Mensaje */
-#profile-message {
-    min-height: 1.2rem;
-    font-weight: var(--peso-fuerte-pierrastegui);
-    transition: opacity 0.3s ease;
-}
-
 /* 📱 Responsive */
 @media (max-width: 600px) {
     .profile-container {
@@ -200,42 +195,10 @@ button {
     }
 }
 
-/* 🔑 Campo de contraseña animado (integrado con React) */
-.password-field {
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    display: none;
-    /* React la alterna */
-}
-
-.password-field.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-    display: block;
-}
-
-.password-field input {
-    border: 2px solid var(--naranja-pierrastegui);
-    border-radius: var(--borde-suave-pierrastegui);
-    padding: 0.8rem;
-    font-size: 1rem;
-    width: 94%;
-    color: var(--naranja-pierrastegui);
-}
-
 input {
     font-weight: 700;
 }
 
 ::placeholder {
     color: var(--naranja-pierrastegui);
-}
-
-.password-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.6rem;
 }

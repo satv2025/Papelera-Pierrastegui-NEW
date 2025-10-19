@@ -38,20 +38,16 @@
                 <input type="email" id="email" name="email" disabled />
             </div>
 
+            <div class="profile-field">
+                <label for="new-password">Nueva contraseña (opcional)</label>
+                <input type="password" id="new-password" placeholder="Dejar vacío si no querés cambiarla" />
+            </div>
+
             <div class="profile-actions">
                 <button type="submit" class="btn-guardar">Guardar cambios</button>
-                <button type="button" id="cambiar-pass" class="btn-password">Cambiar contraseña</button>
-
-                <!-- 🔑 Campo desplegable para nueva contraseña -->
-                <div id="password-field" class="password-field hidden">
-                    <input type="password" id="new-password" placeholder="Nueva contraseña" />
-                    <div class="password-buttons">
-                        <button type="button" id="guardar-pass" class="btn-guardar">Guardar contraseña</button>
-                        <button type="button" id="cancelar-pass" class="btn-salir">Cancelar</button>
-                    </div>
-                </div>
-
-                <button type="button" id="cerrar-sesion" class="btn-salir">Cerrar sesión</button>
+                <button type="button" id="cerrar-sesion" class="btn-salir">
+                    Cerrar sesión
+                </button>
             </div>
         </form>
     </div>
