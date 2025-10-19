@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Perfil | Papelería Pierrastegui</title>
+
+    <link rel="stylesheet" href="/assets/css/profile.css" />
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar" id="profile-avatar">👤</div>
+            <h2 id="profile-name">Cargando...</h2>
+            <p id="profile-email"></p>
+        </div>
+
+        <form id="profile-form">
+            <div class="profile-field">
+                <label for="nombre">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" />
+            </div>
+
+            <div class="profile-field">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" name="usuario" />
+            </div>
+
+            <div class="profile-field">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" disabled />
+            </div>
+
+            <div class="profile-actions">
+                <button type="submit" class="btn-guardar">Guardar cambios</button>
+                <button type="button" id="cambiar-pass" class="btn-password">
+                    Cambiar contraseña
+                </button>
+                <button type="button" id="cerrar-sesion" class="btn-salir">
+                    Cerrar sesión
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="/assets/js/profile.js"></script>
+</body>
+
+</html>

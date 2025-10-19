@@ -844,7 +844,7 @@
                     container.innerHTML = "";
 
                     if (user) {
-                        // ✅ Usuario logueado → mostrar menú con nombre
+                        // ✅ Usuario logueado → menú desplegable con nombre
                         const nombre =
                             user.user_metadata?.nombre_completo ||
                             user.user_metadata?.username ||
@@ -861,6 +861,12 @@
                         const content = document.createElement("div");
                         content.classList.add("dropdown-content");
 
+                        // 🧩 Editar perfil
+                        const perfilBtn = document.createElement("button");
+                        perfilBtn.textContent = "Editar Perfil";
+                        perfilBtn.onclick = () => (window.location.href = "/profile");
+
+                        // 🚪 Cerrar sesión
                         const logoutBtn = document.createElement("button");
                         logoutBtn.textContent = "Cerrar Sesión";
                         logoutBtn.onclick = async () => {
@@ -868,17 +874,21 @@
                             window.location.reload();
                         };
 
+                        // 📦 Orden correcto
+                        content.appendChild(perfilBtn);
                         content.appendChild(logoutBtn);
+
                         dropdown.appendChild(btn);
                         dropdown.appendChild(content);
                         container.appendChild(dropdown);
 
+                        // 🔒 Cierra el menú si clickeás afuera
                         window.addEventListener("click", (e) => {
                             if (!dropdown.contains(e.target)) dropdown.classList.remove("show");
                         });
 
-                        // 👇 Hacer que el icono redirija al perfil
-                        icon.onclick = () => (window.location.href = "/perfil");
+                        // 👇 Icono también abre perfil
+                        icon.onclick = () => (window.location.href = "/profile");
                     } else {
                         // 🚪 Usuario no logueado → botón Acceder
                         const btnAcceder = document.createElement("button");
@@ -887,7 +897,7 @@
                         btnAcceder.onclick = () => (window.location.href = "/login");
                         container.appendChild(btnAcceder);
 
-                        // 👇 Si no está logueado, el icono lleva al login
+                        // 👇 Icono lleva al login
                         icon.onclick = () => (window.location.href = "/login");
                     }
                 };
