@@ -975,7 +975,7 @@ img.icon-right:Hover {
   width: 18px;
   height: 18px;
   filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%) !important;
-  transition: filter 0.25s ease !important;
+  transition: none !important;
   pointer-events: none;
 }
 
