@@ -969,3 +969,47 @@ img.icon-right:Hover {
     display: none !important;
   }
 }
+
+/* 🎨 Estado base de los íconos en el dropdown */
+.dropdown-content button img.icon-dropdown {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%) !important;
+  transition: filter 0.25s ease !important;
+  pointer-events: none;
+}
+
+/* 🌀 Rotación horizontal solo para el ícono de salida */
+.icon-logout {
+  transform: scaleX(-1) !important;
+}
+
+/* ✨ Efecto hover solo cuando el usuario pasa sobre el botón correspondiente */
+.dropdown-content button:hover img.icon-dropdown {
+  filter: brightness(0) saturate(100%) invert(95%) sepia(72%) saturate(2%) hue-rotate(291deg) brightness(111%) contrast(101%) !important;
+}
+
+/* 🎨 Estilos de íconos dentro del dropdown */
+.dropdown-content button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+.dropdown-content button img.icon-dropdown {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* 🌀 Rotación horizontal del ícono de salida */
+.icon-logout {
+  transform: scaleX(-1);
+}
+
+/* Hover: íconos blancos al pasar */
+.dropdown-content button:hover img.icon-dropdown {
+  filter: brightness(0) invert(1);
+}
