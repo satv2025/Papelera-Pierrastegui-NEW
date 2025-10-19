@@ -10,7 +10,7 @@
 
 /* Reset */
 * {
-    font-family: 'Gilroy', 'Segoe UI';
+    font-family: 'Gilroy';
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -21,34 +21,28 @@
     font-family: 'GilroyMonoNums';
 }
 
+/* Botón agregar carrito */
 .agregar-carrito {
     background: #ff7600;
     color: #fff;
     padding: 0.8em 1.2em;
     border: none;
     border-radius: 0.3em;
-    font-size: 18px;
+    font-size: 1rem;
     font-weight: 700;
     cursor: pointer;
     position: relative;
     z-index: 1;
-    transform-origin: center;
     transform: scale(1);
-    /* estado normal */
     transition: transform 0.3s ease-out;
-    /* transición suave de la escala */
     margin-top: 1.3em;
 }
 
 .agregar-carrito:hover {
     transform: scale(1.1);
-    /* agranda el botón */
-
-    /* efecto tipo “halo” */
-    /* ligero fade */
 }
 
-/* Body y estructura */
+/* Estructura base */
 html,
 body {
     height: 100%;
@@ -83,7 +77,7 @@ header {
 }
 
 header h1 {
-    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
     color: #ff7600;
     margin-bottom: 10px;
 }
@@ -112,45 +106,44 @@ nav ul li a:hover {
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    padding: 1rem;
 }
 
 .producto-contenido {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 25px;
     padding: 25px;
     border: 3px solid #ff7600;
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 37em;
     width: 100%;
+    max-width: 1200px;
 }
 
 .producto-contenido h2 {
     width: 100%;
     text-align: center;
     color: #ff7600;
-    font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
     margin-bottom: 15px;
 }
 
 .producto-contenido img {
-    flex: 1 1 300px;
+    flex: 1 1 350px;
     border-radius: 0.3em;
     object-fit: contain;
+    width: 100%;
+    max-width: 400px;
+    height: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
-    background: none;
-    width: 23em;
-    height: 33.56em;
 }
 
 .producto-info {
     flex: 1 1 350px;
-    max-height: 80vh;
     overflow-y: auto;
     padding-right: 10px;
     width: 100%;
@@ -165,7 +158,8 @@ nav ul li a:hover {
 }
 
 .dropdown-btn {
-    width: 14em;
+    width: 100%;
+    max-width: 14em;
     background-color: #fff;
     border: 2px solid #ff7600;
     padding: 12px 16px;
@@ -189,37 +183,16 @@ nav ul li a:hover {
     position: absolute;
     top: 110%;
     left: 0;
-    width: 14em;
+    width: 100%;
+    max-width: 14em;
     max-height: 200px;
     overflow-y: auto;
-    /* scroll nativo */
     background-color: #fff;
     border: 2px solid #ff7600;
     border-radius: 0.3em;
     display: none;
     z-index: 10;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Scrollbar nativa para dropdown */
-.dropdown-menu::-webkit-scrollbar {
-    width: 8px;
-}
-
-.dropdown-menu::-webkit-scrollbar-track {
-    background: #fff;
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb {
-    background-color: #ff7600;
-
-}
-
-@-moz-document url-prefix() {
-    .dropdown-menu {
-        scrollbar-width: thin;
-        scrollbar-color: #ff7600 #fff;
-    }
 }
 
 .dropdown-menu.active {
@@ -231,8 +204,8 @@ nav ul li a:hover {
     cursor: pointer;
     color: #ff7600;
     font-weight: 600;
-    transition: all 0.3s ease;
     text-align: center;
+    transition: all 0.3s ease;
 }
 
 .dropdown-item:hover,
@@ -277,7 +250,7 @@ nav ul li a:hover {
     color: #ff7600;
 }
 
-/* Cantidad visual */
+/* Visualización cantidad */
 #cantidad-visual {
     font-weight: 700;
     font-size: 1.3rem;
@@ -318,28 +291,42 @@ footer {
     font-weight: 600;
 }
 
-/* Scrollbar nativa para info del producto */
-.producto-info::-webkit-scrollbar {
+/* Scrollbars */
+.producto-info::-webkit-scrollbar,
+.dropdown-menu::-webkit-scrollbar {
     width: 8px;
 }
 
-.producto-info::-webkit-scrollbar-track {
-    background: #fff;
-}
-
-.producto-info::-webkit-scrollbar-thumb {
+.producto-info::-webkit-scrollbar-thumb,
+.dropdown-menu::-webkit-scrollbar-thumb {
     background-color: #ff7600;
-    border-radius: 0;
 }
 
 @-moz-document url-prefix() {
-    .producto-info {
+
+    .producto-info,
+    .dropdown-menu {
         scrollbar-width: thin;
         scrollbar-color: #ff7600 #fff;
     }
 }
 
-/* Responsivo */
+/* Flecha */
+.dropdown-btn .arrow {
+    display: inline-block;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-btn.active .arrow {
+    transform: rotate(180deg);
+}
+
+#tipo-dropdown {
+    display: none;
+}
+
+/* --- RESPONSIVIDAD --- */
 @media (max-width: 1024px) {
     .producto-contenido {
         flex-direction: column;
@@ -348,8 +335,8 @@ footer {
     }
 
     .producto-info {
-        max-height: none;
         width: 100%;
+        max-height: none;
     }
 }
 
@@ -362,22 +349,35 @@ footer {
     .cantidad-container,
     .agregar-carrito-cantidad {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        width: 100%;
     }
 
     .cantidad-container button,
     .agregar-carrito-cantidad button {
         width: 100%;
     }
+
+    .dropdown-btn {
+        width: 100%;
+    }
+
+    .producto-contenido img {
+        max-width: 90%;
+    }
 }
 
 @media (max-width: 480px) {
     header h1 {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
+    }
+
+    .producto-contenido {
+        padding: 15px;
     }
 
     .producto-contenido h2 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .dropdown-btn {
@@ -386,22 +386,15 @@ footer {
     }
 
     .total {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
-}
 
-.dropdown-btn .arrow {
-    display: inline-block;
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-}
+    .agregar-carrito {
+        width: 100%;
+        text-align: center;
+    }
 
-/* Solo gira la flecha del botón que tiene active */
-.dropdown-btn.active .arrow {
-    transform: rotate(180deg);
-}
-
-#tipo-dropdown {
-    display: none;
-    /* oculto por defecto */
+    .producto-info {
+        padding-left: 0;
+    }
 }
