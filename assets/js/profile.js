@@ -10,6 +10,11 @@ const logoutBtn = document.getElementById("cerrar-sesion");
 const passBtn = document.getElementById("cambiar-pass");
 const messageBox = document.getElementById("profile-message");
 
+const passwordField = document.getElementById("password-field");
+const newPasswordInput = document.getElementById("new-password");
+const guardarPassBtn = document.getElementById("guardar-pass");
+const cancelarPassBtn = document.getElementById("cancelar-pass");
+
 /* 🎨 Obtener variables CSS */
 const getCSSVar = (variable) =>
     getComputedStyle(document.documentElement)
@@ -25,17 +30,14 @@ const showMessage = (text, type = "success") => {
             ? "--filtro-rojo-pierrastegui"
             : "--filtro-verde-pierrastegui";
 
-    // Reset
     messageBox.style.background = "transparent";
     messageBox.style.border = "none";
     messageBox.style.filter = "none";
 
-    // Aplicar color / filtro
     messageBox.style.color = getCSSVar(colorVar);
     messageBox.style.filter = getCSSVar(filterVar);
     messageBox.textContent = text;
 
-    // Animación
     messageBox.classList.add("show");
     clearTimeout(messageBox.hideTimeout);
     messageBox.hideTimeout = setTimeout(() => {
@@ -78,10 +80,19 @@ form.addEventListener("submit", async (e) => {
     }
 });
 
-/* 🔑 Cambiar contraseña */
-passBtn.addEventListener("click", async () => {
-    const newPassword = prompt("Escribí tu nueva contraseña:");
-    if (!newPassword) return;
+/* 🔑 Mostrar / ocultar campo de nueva contraseña */
+passBtn.addEventListener("click", () => {
+    passwordField.classList.toggle("hidden");
+    newPasswordInput.value = "";
+});
+
+/* 💾 Guardar nueva contraseña */
+guardarPassBtn.addEventListener("click", async () => {
+    const newPassword = newPasswordInput.value.trim();
+    if (!newPassword) {
+        showMessage("❌ Ingresá una nueva contraseña ❌", "error");
+        return;
+    }
 
     const { error } = await supabase.auth.updateUser({
         password: newPassword,
@@ -91,7 +102,15 @@ passBtn.addEventListener("click", async () => {
         showMessage("❌ Error al cambiar la contraseña ❌", "error");
     } else {
         showMessage("🔑 Contraseña actualizada correctamente 🔑", "success");
+        passwordField.classList.add("hidden");
+        newPasswordInput.value = "";
     }
+});
+
+/* ❌ Cancelar cambio de contraseña */
+cancelarPassBtn.addEventListener("click", () => {
+    passwordField.classList.add("hidden");
+    newPasswordInput.value = "";
 });
 
 /* 🚪 Cerrar sesión */

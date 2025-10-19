@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Perfil | Papelería Pierrastegui</title>
-    <link href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" rel="icon" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/css/profile.css">
+    <link href="https://papelerapierrastegui.com.ar/assets/images/favicon1.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" href="/assets/css/profile.css" />
 </head>
 
 <body>
@@ -40,12 +40,18 @@
 
             <div class="profile-actions">
                 <button type="submit" class="btn-guardar">Guardar cambios</button>
-                <button type="button" id="cambiar-pass" class="btn-password">
-                    Cambiar contraseña
-                </button>
-                <button type="button" id="cerrar-sesion" class="btn-salir">
-                    Cerrar sesión
-                </button>
+                <button type="button" id="cambiar-pass" class="btn-password">Cambiar contraseña</button>
+
+                <!-- 🔑 Campo desplegable para nueva contraseña -->
+                <div id="password-field" class="password-field hidden">
+                    <input type="password" id="new-password" placeholder="Nueva contraseña" />
+                    <div class="password-buttons">
+                        <button type="button" id="guardar-pass" class="btn-guardar">Guardar contraseña</button>
+                        <button type="button" id="cancelar-pass" class="btn-salir">Cancelar</button>
+                    </div>
+                </div>
+
+                <button type="button" id="cerrar-sesion" class="btn-salir">Cerrar sesión</button>
             </div>
         </form>
     </div>
