@@ -289,6 +289,9 @@ footer {
     text-align: center;
     border-top: 3px solid #ff7600;
     font-weight: 600;
+    top: 90%;
+    position: absolute;
+    width: 100%;
 }
 
 /* Scrollbars */
