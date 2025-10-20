@@ -33,7 +33,7 @@
           <ul>
             <li>Cajas de cartón reforzado ideales para delivery o eventos.</li>
             <li>Diseño resistente al calor, firme y apilable.</li>
-            <li>Disponibles en tamaño Grande, Chica y Por Metro.</li>
+            <li>Disponibles en tamaño Chica, Grande y Por Metro.</li>
           </ul>
 
           <!-- Dropdown Tamaño -->
@@ -43,13 +43,13 @@
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="grande" data-price-x50="7500" data-price-x100="14500"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/caja%20de%20pizzas.jpg">
-                Grande
-              </div>
               <div class="dropdown-item" data-size="chica" data-price-x50="10000" data-price-x100="18600"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/caja%20de%20pizza%20chica.jpeg">
                 Chica
+              </div>
+              <div class="dropdown-item" data-size="grande" data-price-x50="7500" data-price-x100="14500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/caja%20de%20pizzas.jpg">
+                Grande
               </div>
               <div class="dropdown-item" data-size="metro" data-price-x100="36500"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_906373-MLA76769031869_062024-O.webp">
@@ -58,8 +58,8 @@
             </div>
           </div>
 
-          <!-- Dropdown Tipo (visible siempre) -->
-          <div class="dropdown" id="tipo-dropdown">
+          <!-- Dropdown Tipo (oculto al inicio) -->
+          <div class="dropdown" id="tipo-dropdown" style="display: none;">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
@@ -114,15 +114,17 @@
       let tipo = '';
       let cantidad = 1;
 
+      // Actualiza qué opciones de tipo mostrar según el tamaño
       function updateTipoOptions() {
-        tipoItems.forEach(i => i.style.display = 'block');
-        if (selectedSize && selectedSize.dataset.size === 'metro') {
+        tipoItems.forEach(i => i.style.display = 'block'); // reset
+        if (selectedSize.dataset.size === 'metro') {
           tipoItems.forEach(i => {
             if (i.dataset.type !== 'x100') i.style.display = 'none';
           });
         }
       }
 
+      // Calcula el total según tipo y cantidad
       function updateTotal() {
         if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
@@ -136,11 +138,13 @@
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
+      // Dropdown Tamaño
       sizeBtn.addEventListener('click', () => {
         sizeMenu.classList.toggle('active');
         sizeBtn.classList.toggle('active');
       });
 
+      // Selección de tamaño
       sizeItems.forEach(item => {
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
@@ -148,6 +152,7 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block'; // se muestra el tipo
           tipo = '';
           tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTipoOptions();
@@ -157,6 +162,7 @@
         });
       });
 
+      // Dropdown Tipo
       tipoBtn.addEventListener('click', () => {
         tipoMenu.classList.toggle('active');
         tipoBtn.classList.toggle('active');
@@ -174,6 +180,7 @@
         });
       });
 
+      // Cantidad
       incBtn.addEventListener('click', () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
@@ -186,6 +193,7 @@
         updateTotal();
       });
 
+      // Cierra dropdowns al hacer click afuera
       document.addEventListener('click', e => {
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
