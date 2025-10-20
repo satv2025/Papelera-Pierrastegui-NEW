@@ -4,16 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Cinta Scotch</title>
+  <title>Cinta Scotch - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/cinta_scotch.css">
-  <style>
-    .producto-detalle img {
-      height: 18em !important;
-    }
-  </style>
 </head>
 
 <body>
@@ -29,75 +22,174 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Cinta Scotch</h2>
-      <div class="producto-detalle">
+    <section class="producto container">
+      <div class="producto-contenido">
         <img id="producto-img"
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg"
+          src="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg"
           alt="Cinta Scotch">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Cinta adhesiva tipo Scotch, ideal para embalaje y uso general. Disponible en distintas medidas.</p>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar medida</button>
-            <ul class="dropdown-menu">
-              <li data-size="12x25">12x25</li>
-              <li data-size="24x50">24x50</li>
-              <li data-size="48x100">48x100</li>
-            </ul>
+          <h2>Cinta Scotch</h2>
+          <ul>
+            <li>Cinta adhesiva transparente Scotch de alta adherencia.</li>
+            <li>Ideal para oficina, embalaje y uso general.</li>
+            <li>Disponible en tamaños 24x50 y 48x100.</li>
+            <li>Por Unidad o en Bulto (10).</li>
+          </ul>
+
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="24x50" data-price-unit="500" data-price-bulto="4000"
+                data-img="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
+                24x50
+              </div>
+              <div class="dropdown-item" data-size="48x100" data-price-unit="1400" data-price-bulto="11000"
+                data-img="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
+                48x100
+              </div>
+            </div>
           </div>
-          <div id="uni" style="display: none;">
-            <p class="precio">
-              Precio Por Unidad:
-              <span id="precio-unidad"></span>
-              <span id="precio-unidad-moneda"></span>
-            </p>
-            <p class="precio">
-              Precio Por 10 unidades:
-              <span id="precio-10"></span>
-              <span id="precio-10-moneda"></span>
-            </p>
+
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown" style="display: none;">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="unidad">Por Unidad</div>
+              <div class="dropdown-item" data-type="bulto">Bulto (10)</div>
+            </div>
           </div>
-          <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <!-- Total -->
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
+      let selectedSize = null;
+      let tipo = '';
+      let cantidad = 1;
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-cintasc.js"></script>
+      tipoDropdown.style.display = 'none';
+
+      function updateTotal() {
+        if (!selectedSize || tipo === '') {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = 0;
+        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
+        else if (tipo === 'bulto') total = cantidad * Number(selectedSize.dataset.priceBulto);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      // Dropdown Tamaño
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      // Dropdown Tipo
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      // Cantidad
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      // Cerrar dropdowns al hacer click afuera
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
