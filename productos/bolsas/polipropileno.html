@@ -146,4 +146,69 @@
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
-      sizeBtn.addEventListener('click',
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
