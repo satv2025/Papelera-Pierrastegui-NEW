@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cajas de Sándwich - Papelera Pierrastegui</title>
+    <title>Caja de Sándwich (Sarcófago) - Papelera Pierrastegui</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -25,27 +25,42 @@
         <section class="producto container">
             <div class="producto-contenido">
                 <img id="producto-img"
-                    src="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CAJAS/caja%20sandwich.jpg"
-                    alt="Cajas de Sándwich">
+                    src="https://biopackaging.com.ar/wp-content/uploads/2022/01/estuche-mediano-sandwich.jpg"
+                    alt="Caja de Sándwich (Sarcófago)">
 
                 <div class="producto-info">
                     <h2>Caja de Sándwich (Sarcófago)</h2>
                     <ul>
                         <li>Caja de cartón tipo sarcófago, ideal para sándwiches o comidas para llevar.</li>
-                        <li>Diseño firme, seguro y reutilizable.</li>
+                        <li>Diseño firme, seguro y apilable, con cierre fácil y resistente.</li>
                         <li>Disponible por unidad o en packs de 50 y 100 unidades.</li>
                     </ul>
 
-                    <!-- Tipo -->
+                    <!-- Dropdown Tamaño -->
+                    <div class="dropdown" id="size-dropdown">
+                        <button class="dropdown-btn">
+                            <span class="text">Seleccioná La Presentación</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item" data-size="Unidad" data-price-unit="550" data-price-x50="14000"
+                                data-price-x100="27000"
+                                data-img="https://biopackaging.com.ar/wp-content/uploads/2022/01/estuche-mediano-sandwich.jpg">
+                                Unidad
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Tipo -->
                     <div class="dropdown" id="tipo-dropdown">
                         <button class="dropdown-btn">
                             <span class="text">Seleccioná El Tipo</span>
                             <span class="arrow">▼</span>
                         </button>
                         <div class="dropdown-menu">
-                            <div class="dropdown-item" data-type="unidad" data-price="550">Por Unidad</div>
-                            <div class="dropdown-item" data-type="x50" data-price="14000">x50</div>
-                            <div class="dropdown-item" data-type="x100" data-price="27000">x100</div>
+                            <div class="dropdown-item" data-type="unidad">Por Unidad</div>
+                            <div class="dropdown-item" data-type="x50">x50</div>
+                            <div class="dropdown-item" data-type="x100">x100</div>
                         </div>
                     </div>
 
@@ -73,6 +88,11 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const sizeDropdown = document.getElementById('size-dropdown');
+            const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+            const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+            const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
             const tipoDropdown = document.getElementById('tipo-dropdown');
             const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
             const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
@@ -82,18 +102,47 @@
             const decBtn = document.getElementById('decrementar');
             const incBtn = document.getElementById('incrementar');
             const totalDisplay = document.querySelector('.total');
+            const productoImg = document.getElementById('producto-img');
 
-            let selectedTipo = null;
+            let selectedSize = null;
+            let tipo = '';
             let cantidad = 1;
 
+            tipoDropdown.style.display = 'none';
+
             function updateTotal() {
-                if (!selectedTipo) {
+                if (!selectedSize || tipo === '') {
                     totalDisplay.textContent = "Total: $0";
                     return;
                 }
-                const total = cantidad * Number(selectedTipo.dataset.price);
+                let total = 0;
+                if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
+                else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+                else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
                 totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
             }
+
+            sizeBtn.addEventListener('click', () => {
+                sizeMenu.classList.toggle('active');
+                sizeBtn.classList.toggle('active');
+            });
+
+            sizeItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    sizeItems.forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    sizeBtn.querySelector('.text').textContent = item.textContent;
+                    selectedSize = item;
+                    productoImg.src = item.dataset.img;
+                    tipoDropdown.style.display = 'block';
+                    tipo = '';
+                    tipoItems.forEach(i => i.classList.remove('selected'));
+                    tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+                    updateTotal();
+                    sizeMenu.classList.remove('active');
+                    sizeBtn.classList.remove('active');
+                });
+            });
 
             tipoBtn.addEventListener('click', () => {
                 tipoMenu.classList.toggle('active');
@@ -105,7 +154,7 @@
                     tipoItems.forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     tipoBtn.querySelector('.text').textContent = item.textContent;
-                    selectedTipo = item;
+                    tipo = item.dataset.type;
                     updateTotal();
                     tipoMenu.classList.remove('active');
                     tipoBtn.classList.remove('active');
@@ -125,6 +174,10 @@
             });
 
             document.addEventListener('click', e => {
+                if (!sizeDropdown.contains(e.target)) {
+                    sizeMenu.classList.remove('active');
+                    sizeBtn.classList.remove('active');
+                }
                 if (!tipoDropdown.contains(e.target)) {
                     tipoMenu.classList.remove('active');
                     tipoBtn.classList.remove('active');

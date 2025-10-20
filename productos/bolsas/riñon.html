@@ -25,14 +25,15 @@
     <section class="producto container">
       <div class="producto-contenido">
         <img id="producto-img"
-          src="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg"
+          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg"
           alt="Bolsas Riñón">
 
         <div class="producto-info">
           <h2>Bolsas Riñón</h2>
           <ul>
-            <li>Bolsas plásticas tipo riñón, resistentes y prácticas.</li>
-            <li>Ideales para locales, comercios o eventos.</li>
+            <li>Bolsas tipo riñón resistentes y reutilizables.</li>
+            <li>Ideales para locales, ferias y comercios.</li>
+            <li>Disponibles en distintos tamaños.</li>
             <li>Se venden por paquete.</li>
           </ul>
 
@@ -43,29 +44,43 @@
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="15x20" data-price="2100"
-                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg">
-                15x20</div>
-              <div class="dropdown-item" data-size="20x30" data-price="2600"
-                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg">
-                20x30</div>
-              <div class="dropdown-item" data-size="25x35" data-price="3600"
-                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg">
-                25x35</div>
-              <div class="dropdown-item" data-size="30x40" data-price="4500"
-                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg">
-                30x40</div>
-              <div class="dropdown-item" data-size="35x45" data-price="5800"
-                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg">
-                35x45</div>
-              <div class="dropdown-item" data-size="40x50" data-price="7000"
-                data-img="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS/bolsa%20rinon.jpg">
-                40x50</div>
+              <div class="dropdown-item" data-size="15x20" data-price-paquete="2100"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg">
+                15x20
+              </div>
+              <div class="dropdown-item" data-size="20x30" data-price-paquete="2600"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg">
+                20x30
+              </div>
+              <div class="dropdown-item" data-size="25x35" data-price-paquete="3600"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg">
+                25x35
+              </div>
+              <div class="dropdown-item" data-size="30x40" data-price-paquete="4500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg">
+                30x40
+              </div>
+              <div class="dropdown-item" data-size="35x45" data-price-paquete="5800"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg">
+                35x45
+              </div>
+              <div class="dropdown-item" data-size="40x50" data-price-paquete="7000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20RI%C3%91%C3%93N/bolsas-rinon-todoplastic.jpg">
+                40x50
+              </div>
             </div>
           </div>
 
-          <!-- Tipo fijo -->
-          <p style="margin-top: 10px; font-weight: bold;">Tipo: Por Paquete</p>
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="paquete">Por Paquete</div>
+            </div>
+          </div>
 
           <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
@@ -96,6 +111,11 @@
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -103,14 +123,17 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
+      let tipo = '';
       let cantidad = 1;
 
+      tipoDropdown.style.display = 'none';
+
       function updateTotal() {
-        if (!selectedSize) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        const total = cantidad * Number(selectedSize.dataset.price);
+        const total = cantidad * Number(selectedSize.dataset.pricePaquete);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
@@ -126,9 +149,30 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         });
       });
 
@@ -148,6 +192,10 @@
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         }
       });
     });
