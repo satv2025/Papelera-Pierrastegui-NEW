@@ -49,8 +49,13 @@ body {
     background-color: #fff;
     color: #333;
     overflow-x: hidden;
+
+    /* --- NUEVO --- */
+    display: flex;
+    flex-direction: column;
 }
 
+/* Asegura que el contenido principal crezca y empuje el footer hacia abajo */
 main {
     flex: 1 0 auto;
     padding: 2rem 0;
@@ -281,7 +286,7 @@ ul {
     margin-bottom: 20px;
 }
 
-/* Footer */
+/* Footer fijo al final pero responsivo */
 footer {
     background-color: #fff;
     color: #ff7600;
@@ -289,9 +294,15 @@ footer {
     text-align: center;
     border-top: 3px solid #ff7600;
     font-weight: 600;
-    top: 90%;
+
+    /* --- ELIMINADO ---
     position: absolute;
+    top: 90%;
+    */
+
     width: 100%;
+    flex-shrink: 0;
+    /* evita que el footer se colapse */
 }
 
 /* Scrollbars */
