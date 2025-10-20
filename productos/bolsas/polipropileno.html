@@ -33,7 +33,7 @@
           <ul>
             <li>Bolsas transparentes, resistentes y de alta calidad.</li>
             <li>Ideales para panadería, confitería, bazar o uso general.</li>
-            <li>Se venden por paquete.</li>
+            <li>Disponibles en múltiples medidas, se venden por paquete.</li>
           </ul>
 
           <!-- Dropdown Tamaño -->
@@ -43,45 +43,45 @@
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="6x30" data-price-unit="600"
+              <div class="dropdown-item" data-size="6x30" data-price="600"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 6x30</div>
-              <div class="dropdown-item" data-size="8x10" data-price-unit="500"
+              <div class="dropdown-item" data-size="8x10" data-price="500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 8x10</div>
-              <div class="dropdown-item" data-size="10x20" data-price-unit="770"
+              <div class="dropdown-item" data-size="10x20" data-price="770"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 10x20</div>
-              <div class="dropdown-item" data-size="12x25" data-price-unit="1000"
+              <div class="dropdown-item" data-size="12x25" data-price="1000"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 12x25</div>
-              <div class="dropdown-item" data-size="15x25" data-price-unit="1200"
+              <div class="dropdown-item" data-size="15x25" data-price="1200"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 15x25</div>
-              <div class="dropdown-item" data-size="15x35" data-price-unit="1500"
+              <div class="dropdown-item" data-size="15x35" data-price="1500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 15x35</div>
-              <div class="dropdown-item" data-size="20x30" data-price-unit="2000"
+              <div class="dropdown-item" data-size="20x30" data-price="2000"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 20x30</div>
-              <div class="dropdown-item" data-size="25x35" data-price-unit="2500"
+              <div class="dropdown-item" data-size="25x35" data-price="2500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 25x35</div>
-              <div class="dropdown-item" data-size="30x40" data-price-unit="3500"
+              <div class="dropdown-item" data-size="30x40" data-price="3500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 30x40</div>
-              <div class="dropdown-item" data-size="35x45" data-price-unit="4800"
+              <div class="dropdown-item" data-size="35x45" data-price="4800"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 35x45</div>
-              <div class="dropdown-item" data-size="40x50" data-price-unit="6400"
+              <div class="dropdown-item" data-size="40x50" data-price="6400"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20POLPROPILENO/SOBRES%20POLIPROPILENO.jpg">
                 40x50</div>
             </div>
           </div>
 
-          <!-- Tipo (único: Por paquete) -->
-          <div class="dropdown" id="tipo-dropdown" style="display:block;">
-            <button class="dropdown-btn">
+          <!-- Tipo fijo -->
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn" disabled>
               <span class="text">Tipo: Por Paquete</span>
             </button>
           </div>
@@ -129,7 +129,7 @@
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        const total = cantidad * Number(selectedSize.dataset.price);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
