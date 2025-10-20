@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cinta Scotch - Papelera Pierrastegui</title>
+  <title>Cinta Adhesiva - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -25,15 +25,14 @@
     <section class="producto container">
       <div class="producto-contenido">
         <img id="producto-img"
-          src="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg"
-          alt="Cinta Scotch">
+          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg"
+          alt="Cintas Adhesivas">
 
         <div class="producto-info">
-          <h2>Cinta Scotch</h2>
+          <h2>Cintas Adhesivas</h2>
           <ul>
-            <li>Cinta adhesiva transparente Scotch de alta adherencia.</li>
-            <li>Ideal para oficina, embalaje y uso general.</li>
-            <li>Disponible en tamaños 24x50 y 48x100.</li>
+            <li>Cintas adhesivas de alta adherencia, ideales para oficina, embalaje o uso escolar.</li>
+            <li>Disponibles en diferentes medidas y presentaciones.</li>
             <li>Por Unidad o en Bulto (10).</li>
           </ul>
 
@@ -44,12 +43,16 @@
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="12x25" data-price-unit="400" data-price-bulto="0"
+                data-img="https://jazznube.com.ar/elamaneceronline/images/productos/CINTA%20ESCOLAR%20CHICA.jpg">
+                12x25
+              </div>
               <div class="dropdown-item" data-size="24x50" data-price-unit="500" data-price-bulto="4000"
-                data-img="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
                 24x50
               </div>
               <div class="dropdown-item" data-size="48x100" data-price-unit="1400" data-price-bulto="11000"
-                data-img="https://papelerapierrastegui.com.ar//assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
                 48x100
               </div>
             </div>
@@ -137,8 +140,15 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
-          tipoDropdown.style.display = 'block';
-          tipo = '';
+
+          // Mostrar "Seleccioná El Tipo" solo si tiene precio de bulto
+          if (Number(selectedSize.dataset.priceBulto) > 0) {
+            tipoDropdown.style.display = 'block';
+          } else {
+            tipoDropdown.style.display = 'none';
+            tipo = 'unidad';
+          }
+
           tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');

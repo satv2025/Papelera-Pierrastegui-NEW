@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinta Escolar 12x25 - Papelera Pierrastegui</title>
+    <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="../../assets/css/productos.css">
+</head>
+
+<body>
+    <header>
+        <h1>Papelera Pierrastegui</h1>
+        <nav>
+            <ul>
+                <li><a href="../../index">Inicio</a></li>
+                <li><a href="../../catalogo">Catálogo</a></li>
+                <li><a href="../../contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="producto container">
+            <div class="producto-contenido">
+                <img id="producto-img"
+                    src="https://jazznube.com.ar/elamaneceronline/images/productos/CINTA%20ESCOLAR%20CHICA.jpg"
+                    alt="Cinta Escolar 12x25">
+
+                <div class="producto-info">
+                    <h2>Cinta Escolar 12x25</h2>
+                    <ul>
+                        <li>Cinta adhesiva escolar transparente de 12 mm x 25 m.</li>
+                        <li>Ideal para uso escolar, oficina o tareas diarias.</li>
+                        <li>Venta por unidad.</li>
+                    </ul>
+
+                    <!-- Cantidad -->
+                    <div class="agregar-carrito-cantidad">
+                        <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+                        <span id="cantidad-visual">1</span>
+                        <button id="incrementar" aria-label="Aumentar cantidad">+</button>
+                    </div>
+
+                    <p class="total">Total: $400</p>
+                    <button class="agregar-carrito">Agregar al Carrito</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container-footer">
+            <p>2025 © Papelera Pierrastegui</p>
+            <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cantidadVisual = document.getElementById('cantidad-visual');
+            const decBtn = document.getElementById('decrementar');
+            const incBtn = document.getElementById('incrementar');
+            const totalDisplay = document.querySelector('.total');
+            const precioUnitario = 400;
+            let cantidad = 1;
+
+            function updateTotal() {
+                const total = cantidad * precioUnitario;
+                totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+            }
+
+            incBtn.addEventListener('click', () => {
+                cantidad++;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            });
+
+            decBtn.addEventListener('click', () => {
+                if (cantidad > 1) cantidad--;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            });
+        });
+    </script>
+</body>
+
+</html>
