@@ -4,57 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelera Pierrastegui - Caja De Sandwich</title>
+    <title>Cajas de Sándwich - Papelera Pierrastegui</title>
     <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../../assets/css/productos.css">
-    <link rel="stylesheet" href="../../assets/css/dropdown.css">
-    <style>
-        #contenedor {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            /* ajusta según tamaño de las imágenes */
-        }
-
-        #contenedor img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            object-fit: cover;
-            transition: opacity 1s ease-in-out;
-            opacity: 0;
-            margin-left: -37em !important;
-        }
-
-        .agregar-carrito {
-            margin-top: -0.5em;
-        }
-
-        .producto-detalle #contenedor img {
-            width: 132% !important;
-        }
-
-        #contenedor img.visible {
-            opacity: 1;
-        }
-
-        .producto-info p {
-            margin-bottom: 0.96em !important;
-        }
-
-        .producto-info {
-            margin-top: -24em !important;
-        }
-
-        .precio {
-            margin-top: 10.4em !important;
-            margin-bottom: -4em !important;
-        }
-
-        .precioo {
-            font-weight: 700 !important;
-        }
-    </style>
 </head>
 
 <body>
@@ -70,96 +22,116 @@
     </header>
 
     <main>
-        <section id="producto-detalle">
-            <h2>Caja De Sandwich</h2>
-            <div class="producto-detalle">
-                <div id="contenedor">
-                    <img src="https://biopackaging.com.ar/wp-content/uploads/2022/01/estuche-mediano-sandwich.jpg"
-                        class="visible" alt="Caja de Sandwich">
-                    <img src="https://biopackaging.com.ar/wp-content/uploads/2022/12/IMG_1768-copy-scaled.jpg"
-                        alt="Caja de Sandwich">
-                </div>
+        <section class="producto container">
+            <div class="producto-contenido">
+                <img id="producto-img"
+                    src="../../assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CAJAS/caja%20sandwich.jpg"
+                    alt="Cajas de Sándwich">
+
                 <div class="producto-info">
-                    <h3 id="hidden-title">Descripción del producto</h3>
+                    <h2>Caja de Sándwich (Sarcófago)</h2>
                     <ul>
-                        <li>
-                            <p id="desc-p">Caja de cartón microcorrugado. Medida ideal para sandwich.</p>
-                        </li>
-                        <li>
-                            <p id="desc-p">Color marrón por dentro y marrón por fuera.</p>
-                        </li>
+                        <li>Caja de cartón tipo sarcófago, ideal para sándwiches o comidas para llevar.</li>
+                        <li>Diseño firme, seguro y reutilizable.</li>
+                        <li>Disponible por unidad o en packs de 50 y 100 unidades.</li>
                     </ul>
-                    <div class="dropdown" style="opacity: 0;">
-                        <button class="dropdown-btn">Seleccionar tamaño</button>
-                        <ul class="dropdown-menu">
-                            <li data-size="15x20">15x20</li>
-                            <li data-size="20x30">20x30</li>
-                            <li data-size="25x35">25x35</li>
-                            <li data-size="30x40">30x40</li>
-                            <li data-size="35x45">35x45</li>
-                            <li data-size="40x50">40x50</li>
-                            <li data-size="50x60">50x60</li>
-                            <li data-size="vino">Vino</li>
-                        </ul>
+
+                    <!-- Tipo -->
+                    <div class="dropdown" id="tipo-dropdown">
+                        <button class="dropdown-btn">
+                            <span class="text">Seleccioná El Tipo</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item" data-type="unidad" data-price="550">Por Unidad</div>
+                            <div class="dropdown-item" data-type="x50" data-price="14000">x50</div>
+                            <div class="dropdown-item" data-type="x100" data-price="27000">x100</div>
+                        </div>
                     </div>
-                    <div id="uni" style="display: none;">
-                        <p></p>
+
+                    <!-- Cantidad -->
+                    <div class="agregar-carrito-cantidad">
+                        <button id="decrementar">-</button>
+                        <span id="cantidad-visual">1</span>
+                        <button id="incrementar">+</button>
                     </div>
-                    <p class="precio">Por 50 Unidades: $14.000 ARS</p>
-                    <p class="precioo">Por 100 Unidades: $27.000 ARS</p>
-                    <button class="agregar-carrito">Agregar al carrito</button>
+
+                    <!-- Total -->
+                    <p class="total">Total: $0</p>
+                    <button class="agregar-carrito">Agregar al Carrito</button>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>2025 © Papelera Pierrastegui</p>
-        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-        <div class="social-icons">
-            <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-                rel="noopener noreferrer">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-            </a>
-
-            <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-                rel="noopener noreferrer">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-            </a>
-
-            <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-            </a>
-
-            <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-            </a>
+        <div class="container-footer">
+            <p>2025 © Papelera Pierrastegui</p>
+            <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
         </div>
     </footer>
-    <!-- Script para reemplazar dinámicamente los href -->
-    <script src="../../assets/js/social-links.js"></script>
+
     <script>
-        const imgs = document.querySelectorAll('#contenedor img');
-        let index = 0;
-        let direccion = 1; // 1 para avanzar, -1 para retroceder
+        document.addEventListener('DOMContentLoaded', () => {
+            const tipoDropdown = document.getElementById('tipo-dropdown');
+            const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+            const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+            const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
-        setInterval(() => {
-            imgs[index].classList.remove('visible');
+            const cantidadVisual = document.getElementById('cantidad-visual');
+            const decBtn = document.getElementById('decrementar');
+            const incBtn = document.getElementById('incrementar');
+            const totalDisplay = document.querySelector('.total');
 
-            // Actualizar índice según dirección
-            index += direccion;
+            let selectedTipo = null;
+            let cantidad = 1;
 
-            // Si llegamos al final, invertimos la dirección
-            if (index === imgs.length - 1 || index === 0) {
-                direccion *= -1;
+            function updateTotal() {
+                if (!selectedTipo) {
+                    totalDisplay.textContent = "Total: $0";
+                    return;
+                }
+                const total = cantidad * Number(selectedTipo.dataset.price);
+                totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
             }
 
-            imgs[index].classList.add('visible');
-        }, 3000);
+            tipoBtn.addEventListener('click', () => {
+                tipoMenu.classList.toggle('active');
+                tipoBtn.classList.toggle('active');
+            });
+
+            tipoItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    tipoItems.forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    tipoBtn.querySelector('.text').textContent = item.textContent;
+                    selectedTipo = item;
+                    updateTotal();
+                    tipoMenu.classList.remove('active');
+                    tipoBtn.classList.remove('active');
+                });
+            });
+
+            incBtn.addEventListener('click', () => {
+                cantidad++;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            });
+
+            decBtn.addEventListener('click', () => {
+                if (cantidad > 1) cantidad--;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            });
+
+            document.addEventListener('click', e => {
+                if (!tipoDropdown.contains(e.target)) {
+                    tipoMenu.classList.remove('active');
+                    tipoBtn.classList.remove('active');
+                }
+            });
+        });
     </script>
-    <script src="../../assets/js/dropdown.js"></script>
-    <script src="../../assets/js/preciosdrop-bolsasrinon.js"></script>
 </body>
 
 </html>
