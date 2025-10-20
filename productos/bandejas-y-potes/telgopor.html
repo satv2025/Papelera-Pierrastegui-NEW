@@ -32,7 +32,7 @@
           <ul>
             <li>Bandejas de telgopor resistentes y livianas.</li>
             <li>Ideales para rotisería, carnicería o panadería.</li>
-            <li>Disponibles por unidad, en packs de 50 y 100 unidades.</li>
+            <li>Disponibles en packs de 50 y 100 unidades.</li>
           </ul>
 
           <!-- Dropdown Tamaño -->
@@ -42,39 +42,28 @@
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="615" data-price-unit="6700" data-price-x50="3200"
-                data-price-x100="6000"
+              <div class="dropdown-item" data-size="615" data-price-x50="3200" data-price-x100="6000"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_929302-MLA69787242788_062023-O.webp">N° 615</div>
-
-              <div class="dropdown-item" data-size="617" data-price-unit="4500" data-price-x50="2500"
-                data-price-x100="4800"
+              <div class="dropdown-item" data-size="617" data-price-x50="2500" data-price-x100="4800"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_929302-MLA69787242788_062023-O.webp">N° 617</div>
-
-              <div class="dropdown-item" data-size="618" data-price-unit="6700" data-price-x50="3500"
-                data-price-x100="6700"
+              <div class="dropdown-item" data-size="618" data-price-x50="3500" data-price-x100="6700"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_929302-MLA69787242788_062023-O.webp">N° 618</div>
-
-              <div class="dropdown-item" data-size="619" data-price-unit="6500" data-price-x50="3400"
-                data-price-x100="6600"
+              <div class="dropdown-item" data-size="619" data-price-x50="3400" data-price-x100="6600"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_929302-MLA69787242788_062023-O.webp">N° 619</div>
-
-              <div class="dropdown-item" data-size="625" data-price-unit="0" data-price-x50="0" data-price-x100="0"
+              <div class="dropdown-item" data-size="625" data-price-x50="0" data-price-x100="0"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_929302-MLA69787242788_062023-O.webp">N° 625</div>
-
-              <div class="dropdown-item" data-size="628" data-price-unit="18000" data-price-x50="9300"
-                data-price-x100="17600"
+              <div class="dropdown-item" data-size="628" data-price-x50="9300" data-price-x100="17600"
                 data-img="https://http2.mlstatic.com/D_NQ_NP_929302-MLA69787242788_062023-O.webp">N° 628</div>
             </div>
           </div>
 
-          <!-- Dropdown Tipo -->
+          <!-- Dropdown Tipo (solo x50 y x100) -->
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-type="unidad">Unidad</div>
               <div class="dropdown-item" data-type="x50">x50</div>
               <div class="dropdown-item" data-type="x100">x100</div>
             </div>
@@ -132,8 +121,7 @@
           return;
         }
         let total = 0;
-        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
-        else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+        if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
         else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }

@@ -126,6 +126,7 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 1200px;
+    height: 29em;
 }
 
 .producto-contenido h2 {
