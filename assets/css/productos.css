@@ -33,13 +33,13 @@
     cursor: pointer;
     position: relative;
     z-index: 1;
-    transform: scale(1);
-    transition: transform 0.3s ease-out;
     margin-top: 1.3em;
+    transition: all 0.3s ease-out;
 }
 
 .agregar-carrito:hover {
-    transform: scale(1.1);
+    background: #ffc52f;
+    color: #000;
 }
 
 /* Estructura base */
@@ -126,7 +126,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 1200px;
-    height: 29em;
 }
 
 .producto-contenido h2 {
