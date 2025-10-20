@@ -114,9 +114,9 @@
       let tipo = '';
       let cantidad = 1;
 
-      // Actualiza qué opciones de tipo mostrar según el tamaño
+      // Mostrar solo los tipos válidos según tamaño
       function updateTipoOptions() {
-        tipoItems.forEach(i => i.style.display = 'block'); // reset
+        tipoItems.forEach(i => i.style.display = 'block');
         if (selectedSize.dataset.size === 'metro') {
           tipoItems.forEach(i => {
             if (i.dataset.type !== 'x100') i.style.display = 'none';
@@ -124,7 +124,7 @@
         }
       }
 
-      // Calcula el total según tipo y cantidad
+      // Calcular total
       function updateTotal() {
         if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
@@ -152,9 +152,13 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
-          tipoDropdown.style.display = 'block'; // se muestra el tipo
+
+          // Mostrar el selector de tipo y resetearlo
+          tipoDropdown.style.display = 'block';
           tipo = '';
           tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          tipoItems.forEach(i => i.classList.remove('selected')); // 👈 asegura que ninguna quede marcada
+
           updateTipoOptions();
           updateTotal();
           sizeMenu.classList.remove('active');
