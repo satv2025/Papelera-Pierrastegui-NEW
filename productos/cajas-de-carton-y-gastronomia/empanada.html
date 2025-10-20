@@ -4,16 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Cajas de Empanada 1 Docena</title>
+  <title>Cajas de Empanada - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/c_e_main.css">
-  <style>
-    .dropdown-btn {
-      margin-top: 9.6em !important;
-    }
-  </style>
 </head>
 
 <body>
@@ -29,68 +22,177 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Cajas de Empanada</h2>
-      <div class="producto-detalle">
-        <img
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp"
           alt="Cajas de Empanada">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Cajas para empanadas de excelente calidad, disponibles en distintos tamaños según tus necesidades.</p>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="media-docena">Media Docena</li>
-              <li data-size="docena">Docena</li>
-              <li data-size="docena-y-media">Docena y Media</li>
-            </ul>
+          <h2>Cajas de Empanada</h2>
+          <ul>
+            <li>Cajas de cartón reforzado ideales para delivery o take away de empanadas.</li>
+            <li>Diseño resistente, apilable y con buena ventilación.</li>
+            <li>Disponibles para media docena, una docena y docena y media.</li>
+          </ul>
+
+          <!-- Dropdown Tamaño -->
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="media" data-price-x50="12500" data-price-x100="21700"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp">
+                Media Docena
+              </div>
+              <div class="dropdown-item" data-size="docena" data-price-x50="13000" data-price-x100="23100"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp">
+                1 Docena
+              </div>
+              <div class="dropdown-item" data-size="docenaYmedia" data-price-x50="14000" data-price-x100="27500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/D_NQ_NP_786174-MLA73101670159_112023-O.webp">
+                1,5 Docena
+              </div>
+            </div>
           </div>
-          <div id="uni" style="display: none;">
-            <p class="precio">
-              Precio por 50 unidades:
-              <span id="precio-50"></span>
-              <span id="precio-50-moneda"></span>
-            </p>
-            <p class="precio">
-              Precio por 100 unidades:
-              <span id="precio-100"></span>
-              <span id="precio-100-moneda"></span>
-            </p>
+
+          <!-- Dropdown Tipo (oculto al inicio) -->
+          <div class="dropdown" id="tipo-dropdown" style="display: none;">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu" id="tipo-menu">
+              <div class="dropdown-item" data-type="x50">x50</div>
+              <div class="dropdown-item" data-type="x100">x100</div>
+            </div>
           </div>
-          <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <!-- Total -->
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-empanadas.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
+
+      let selectedSize = null;
+      let tipo = '';
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize || tipo === '') {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = 0;
+        if (tipo === 'x50' && selectedSize.dataset.priceX50)
+          total = cantidad * Number(selectedSize.dataset.priceX50);
+        else if (tipo === 'x100' && selectedSize.dataset.priceX100)
+          total = cantidad * Number(selectedSize.dataset.priceX100);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      // Mostrar/Ocultar menús
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          tipoItems.forEach(i => i.classList.remove('selected'));
+
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
