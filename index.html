@@ -339,9 +339,8 @@
         .maintenance-box {
             background: #fff;
             color: #ff7600;
-            border-radius: 10px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
-            width: 340px;
+            border-radius: 0.3em;
+            width: 389px;
             padding: 1.2em 1.5em;
             position: relative;
             font-size: 14px;
@@ -349,19 +348,24 @@
             pointer-events: auto;
             /* permite interacción dentro del modal */
             animation: fadeInUp 0.6s ease forwards;
+            text-align: justify;
+            border: 2px solid #ff7600;
+            padding-top: 1.6em;
+            padding-bottom: 0.6em;
         }
 
         /* Botón cerrar */
         .close-btn {
             position: absolute;
-            top: 10px;
-            right: 12px;
+            top: 6px;
+            right: 18px;
             background: transparent;
             border: none;
             color: #ff7600;
             font-size: 20px;
             cursor: pointer;
             transition: opacity 0.3s;
+            font-size: 2.5em;
         }
 
         .close-btn:hover {
@@ -370,14 +374,15 @@
 
         /* Títulos y enlaces */
         .maintenance-content h3 {
-            margin-top: 0;
+            margin-top: -14px;
             margin-bottom: 10px;
-            font-size: 16px;
+            font-size: 23px;
             font-weight: 600;
         }
 
         .maintenance-content p {
             margin: 6px 0;
+            font-size: 16px;
         }
 
         .maintenance-content a {
