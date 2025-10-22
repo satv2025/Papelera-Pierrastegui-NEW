@@ -641,7 +641,7 @@ header {
 #pp-logo span {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-top: -0.6em;
+  margin-top: -0.9em;
 }
 
 /* Buscador */
@@ -849,8 +849,8 @@ img.icon-right:Hover {
 #pp-logo img {
   border: 2px solid #ff760000;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 65px;
+  height: 65px;
   transition: border-color 0.3s ease;
   position: relative;
   top: 2.9em;

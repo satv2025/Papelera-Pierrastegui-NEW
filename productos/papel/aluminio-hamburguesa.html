@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papel de Aluminio para Hamburguesa 30x40 - Papelera Pierrastegui</title>
+    <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+</head>
+
+<body>
+    <header>
+        <h1>Papelera Pierrastegui</h1>
+        <nav>
+            <ul>
+                <li><a href="https://papelerapierrastegui.com.ar/">Inicio</a></li>
+                <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+                <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="producto container">
+            <div class="producto-contenido">
+                <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/burguerpaper1.jpg"
+                    alt="Papel de Aluminio para Hamburguesa 30x40">
+
+                <div class="producto-info">
+                    <h2>Papel de Aluminio para Hamburguesa 30x40</h2>
+                    <ul>
+                        <li>Papel de aluminio de alta calidad para envolver hamburguesas y alimentos calientes.</li>
+                        <li>Medida estándar de 30x40 cm, resistente al calor y fácil de manejar.</li>
+                        <li>Ideal para locales gastronómicos, rotiserías y food trucks.</li>
+                    </ul>
+
+                    <div class="dropdown" id="size-dropdown">
+                        <button class="dropdown-btn">
+                            <span class="text">Seleccioná El Tamaño</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item" data-size="30x40" data-price-x100="14400"
+                                data-img="https://papelerapierrastegui.com.ar/assets/images/burguerpaper1.jpg">
+                                30x40</div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown" id="tipo-dropdown">
+                        <button class="dropdown-btn">
+                            <span class="text">Seleccioná El Tipo</span>
+                            <span class="arrow">▼</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item" data-type="x100">x100</div>
+                        </div>
+                    </div>
+
+                    <div class="agregar-carrito-cantidad">
+                        <button id="decrementar">-</button>
+                        <span id="cantidad-visual">1</span>
+                        <button id="incrementar">+</button>
+                    </div>
+
+                    <p class="total">Total: $0</p>
+                    <button class="agregar-carrito">Agregar al Carrito</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container-footer">
+            <p>2025 © Papelera Pierrastegui</p>
+            <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sizeDropdown = document.getElementById('size-dropdown');
+            const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+            const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+            const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+            const tipoDropdown = document.getElementById('tipo-dropdown');
+            const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+            const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+            const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+            const cantidadVisual = document.getElementById('cantidad-visual');
+            const decBtn = document.getElementById('decrementar');
+            const incBtn = document.getElementById('incrementar');
+            const totalDisplay = document.querySelector('.total');
+            const productoImg = document.getElementById('producto-img');
+
+            let selectedSize = null;
+            let tipo = '';
+            let cantidad = 1;
+
+            tipoDropdown.style.display = 'none';
+
+            function updateTotal() {
+                if (!selectedSize || tipo === '') {
+                    totalDisplay.textContent = "Total: $0";
+                    return;
+                }
+                let total = 0;
+                if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
+                totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+            }
+
+            sizeBtn.addEventListener('click', () => {
+                sizeMenu.classList.toggle('active');
+                sizeBtn.classList.toggle('active');
+            });
+
+            sizeItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    sizeItems.forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    sizeBtn.querySelector('.text').textContent = item.textContent;
+                    selectedSize = item;
+                    productoImg.src = item.dataset.img;
+                    tipoDropdown.style.display = 'block';
+                    tipo = '';
+                    tipoItems.forEach(i => i.classList.remove('selected'));
+                    tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+                    updateTotal();
+                    sizeMenu.classList.remove('active');
+                    sizeBtn.classList.remove('active');
+                });
+            });
+
+            tipoBtn.addEventListener('click', () => {
+                tipoMenu.classList.toggle('active');
+                tipoBtn.classList.toggle('active');
+            });
+
+            tipoItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    tipoItems.forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    tipoBtn.querySelector('.text').textContent = item.textContent;
+                    tipo = item.dataset.type;
+                    updateTotal();
+                    tipoMenu.classList.remove('active');
+                    tipoBtn.classList.remove('active');
+                });
+            });
+
+            incBtn.addEventListener('click', () => {
+                cantidad++;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            });
+
+            decBtn.addEventListener('click', () => {
+                if (cantidad > 1) cantidad--;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            });
+
+            document.addEventListener('click', e => {
+                if (!sizeDropdown.contains(e.target)) {
+                    sizeMenu.classList.remove('active');
+                    sizeBtn.classList.remove('active');
+                }
+                if (!tipoDropdown.contains(e.target)) {
+                    tipoMenu.classList.remove('active');
+                    tipoBtn.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
