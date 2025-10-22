@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Biromes</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/dropbiromes.css">
+  <title>Birome - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -16,79 +14,167 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Biromes</h2>
-      <div class="producto-detalle">
-        <img src="../../assets/images/biromes.jpg" alt="Biromes">
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/birome.jpg" alt="Birome">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Biromes de calidad superior disponibles en azul, negro y rojo.</p>
+          <h2>Birome</h2>
+          <ul>
+            <li>Birome de escritura suave y trazo uniforme.</li>
+            <li>Colores disponibles: rojo, negro y azul.</li>
+            <li>Ideal para uso escolar, oficina o comercial.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar color</button>
-            <ul class="dropdown-menu">
-              <li data-color="azul">Azul</li>
-              <li data-color="negra">Negra</li>
-              <li data-color="roja">Roja</li>
-            </ul>
+          <div class="dropdown" id="color-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Color</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-color="Rojo" data-price-unit="750"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/birome.jpg">Rojo</div>
+              <div class="dropdown-item" data-color="Negro" data-price-unit="750"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/birome.jpg">Negro</div>
+              <div class="dropdown-item" data-color="Azul" data-price-unit="750"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/birome.jpg">Azul</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio">
-              Precio por unidad:
-              <span id="precio-unidad"></span>
-              <span id="precio-unidad-moneda"></span>
-            </p>
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="unidad">Por Unidad</div>
+            </div>
           </div>
 
-          <div id="sin-stock" style="display: none;">
-            <p>Sin stock</p>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const colorDropdown = document.getElementById('color-dropdown');
+      const colorBtn = colorDropdown.querySelector('.dropdown-btn');
+      const colorMenu = colorDropdown.querySelector('.dropdown-menu');
+      const colorItems = colorMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-biromes.js"></script>
+      let selectedColor = null;
+      let tipo = '';
+      let cantidad = 1;
+
+      tipoDropdown.style.display = 'none';
+
+      function updateTotal() {
+        if (!selectedColor || tipo === '') {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedColor.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      colorBtn.addEventListener('click', () => {
+        colorMenu.classList.toggle('active');
+        colorBtn.classList.toggle('active');
+      });
+
+      colorItems.forEach(item => {
+        item.addEventListener('click', () => {
+          colorItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          colorBtn.querySelector('.text').textContent = item.textContent;
+          selectedColor = item;
+          productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          updateTotal();
+          colorMenu.classList.remove('active');
+          colorBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!colorDropdown.contains(e.target)) {
+          colorMenu.classList.remove('active');
+          colorBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
