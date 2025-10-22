@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Tenedor Blanco</title>
+  <title>Tenedor blanco - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
 </head>
 
 <body>
@@ -23,63 +22,115 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Tenedor Blanco</h2>
-      <div class="producto-detalle">
-        <img
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CUBIERTOS-PLATOS/D_NQ_NP_2X_835147-MLU78458236278_082024-F.webp"
-          alt="Tenedor">
-        <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Tenedor de plástico descartable, ideal para uso diario y eventos.</p>
+          alt="Tenedor blanco">
 
-          <div id="uni">
-            <p class="precio">
-              Por 50 unidades:
-              <span id="precio-50">$800</span>
-              <span id="precio-50-moneda">ARS</span>
-            </p>
-            <p class="precio">
-              Por 100 unidades:
-              <span id="precio-100">$1.300</span>
-              <span id="precio-100-moneda">ARS</span>
-            </p>
+        <div class="producto-info">
+          <h2>Tenedor blanco</h2>
+          <ul>
+            <li>Tenedor plástico blanco descartable de alta resistencia.</li>
+            <li>Ideal para eventos, catering o uso diario.</li>
+            <li>Disponible en presentaciones de x50 y x100 unidades.</li>
+          </ul>
+
+          <!-- Dropdown Tipo -->
+          <div class="dropdown" id="tipo-dropdown" style="display: block;">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="x50" data-price="1000">x50</div>
+              <div class="dropdown-item" data-type="x100" data-price="1900">x100</div>
+            </div>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <!-- Total -->
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../../assets/js/social-links.js"></script>
-  <script src="../.././../assets/js/dropdown.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+
+      let selectedTipo = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedTipo) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedTipo.dataset.price);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          selectedTipo = item;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
