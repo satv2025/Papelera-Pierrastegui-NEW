@@ -325,156 +325,87 @@
             }
         }
 
-        /* Fondo modal */
-        .modal {
+        /* Modal no bloqueante, discreto y fijo abajo a la derecha */
+        .maintenance-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000c9;
-            /* Fondo estilo Netflix */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            bottom: 20px;
+            right: 20px;
             z-index: 9999;
-            overflow: hidden;
-            overflow-y: hidden;
-            /* bloquea scroll */
-        }
-
-        /* Cuando modal está activo, bloquea scroll del body */
-        body.modal-open {
-            overflow-y: hidden;
-        }
-
-        /* Caja central del modal */
-        .modal-box {
-            width: 47%;
-            max-width: 70em;
-            background-color: #181818;
-            border-radius: 8px;
-            position: relative;
-            overflow: hidden;
-            color: #fff;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-            margin-top: 2em;
-            height: 100%;
-            font-size: 18px !important;
-        }
-
-        /* Imagen con overlay */
-        .modal-image {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-        }
-
-        .modal-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* Overlay gradiente sobre la imagen */
-        .modal-image::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(0deg, #181818, transparent 50%);
             pointer-events: none;
+            /* no bloquea la interacción general */
         }
 
-        /* Contenido */
-        .modal-content {
-            padding: 20px;
-            font-size: 28px;
-            padding-left: 4em !important;
-            padding-right: 4em !important;
+        /* Contenedor */
+        .maintenance-box {
+            background: #fff;
+            color: #ff7600;
+            border-radius: 10px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+            width: 340px;
+            padding: 1.2em 1.5em;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.5;
+            pointer-events: auto;
+            /* permite interacción dentro del modal */
+            animation: fadeInUp 0.6s ease forwards;
         }
 
-        .modal-content h2 {
-            margin-bottom: 10px;
-            font-size: 30px;
-        }
-
-        /* Botón cerrar circular */
+        /* Botón cerrar */
         .close-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            top: 10px;
+            right: 12px;
+            background: transparent;
             border: none;
-            background-color: #1818187c;
-            color: #fff;
-            font-size: 22px;
+            color: #ff7600;
+            font-size: 20px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s;
-            z-index: 1000;
+            transition: opacity 0.3s;
         }
 
-        .modal-content a {
-            color: #1da1f2;
+        .close-btn:hover {
+            opacity: 0.6;
+        }
+
+        /* Títulos y enlaces */
+        .maintenance-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .maintenance-content p {
+            margin: 6px 0;
+        }
+
+        .maintenance-content a {
+            color: #ff7600;
             text-decoration: underline;
         }
 
-        .modal-box::selection {
-            color: #181818;
-            background-color: #fff;
-        }
-
-        /* 📱 Responsividad */
-
-        /* Tablets (≤ 1024px) */
-        @media (max-width: 1024px) {
-            .modal-box {
-                width: 90%;
-                height: auto;
-                margin-top: 1em;
-                font-size: 16px !important;
+        /* Animación de entrada suave */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
             }
 
-            .modal-content {
-                padding-left: 2em !important;
-                padding-right: 2em !important;
-                font-size: 20px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Móviles (≤ 768px) */
+        /* Responsivo */
         @media (max-width: 768px) {
-            .modal {
-                align-items: center;
-                /* centra en móviles */
-            }
-
-            .modal-box {
-                width: 100%;
-                height: 100%;
-                border-radius: 0;
-                margin: 0;
-                font-size: 16px !important;
-            }
-
-            .modal-content {
-                padding: 1em !important;
-                font-size: 18px;
-            }
-
-            .modal-content h2 {
-                font-size: 22px;
-            }
-
-            .close-btn {
-                top: 10px;
-                right: 10px;
+            .maintenance-box {
+                width: 90%;
+                right: 5%;
+                bottom: 10px;
+                font-size: 13px;
+                padding: 1em;
             }
         }
 
@@ -522,23 +453,18 @@
 <body>
     <!-- Botón menú hamburguesa -->
     <div class="menu-toggle" id="menu-toggle">☰</div>
-    <div class="modal" id="maintenance-modal">
-        <div class="modal-box">
+    <div class="maintenance-modal" id="maintenance-modal">
+        <div class="maintenance-box">
             <button class="close-btn">×</button>
-            <!-- Imagen principal -->
-            <div class="modal-image">
-                <img alt="Imagen Modal" src="https://papelerapierrastegui.com.ar/assets/images/fondosn.jpg" />
-            </div>
-            <!-- Contenido -->
-            <div class="modal-content">
-                <h2>PÁGINA EN MANTENIMIENTO</h2>
-                <p>La opción de compra no está disponible en este momento.</p>
-                <p>Por el momento esta página funcionará como
-                    catálogo de consulta.</p>
-                <p>Más info en:
+            <div class="maintenance-content">
+                <h3>Tienda online en desarrollo</h3>
+                <p>Estamos implementando nuestra plataforma digital para ofrecer una experiencia de compra más ágil y
+                    cómoda.</p>
+                <p>Actualmente, el sitio funciona como catálogo de productos disponible para consulta.</p>
+                <p>Para realizar pedidos o recibir asistencia, podés contactarnos a través de
                     <a href="https://www.instagram.com/pierrastegui.papelera" target="_blank">
-                        instagram.com/pierrastegui.papelera
-                    </a>
+                        Instagram
+                    </a>.
                 </p>
             </div>
         </div>
@@ -2761,19 +2687,11 @@
                 // 5. Modal de mantenimiento
                 // =========================
                 const modal = document.getElementById("maintenance-modal");
-                const closeModalBtn = document.querySelector(".close-btn");
-                if (modal && closeModalBtn) {
-                    document.body.classList.add("modal-open");
-                    closeModalBtn.addEventListener("click", () => {
+                const closeBtn = modal.querySelector(".close-btn");
+
+                if (modal && closeBtn) {
+                    closeBtn.addEventListener("click", () => {
                         modal.style.display = "none";
-                        document.body.classList.remove("modal-open");
-                    });
-                    // Click fuera del modal también lo cierra
-                    modal.addEventListener("click", (e) => {
-                        if (e.target === modal) {
-                            modal.style.display = "none";
-                            document.body.classList.remove("modal-open");
-                        }
                     });
                 }
 
