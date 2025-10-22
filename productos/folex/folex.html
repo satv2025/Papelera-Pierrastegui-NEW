@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fólex - Papelera Pierrastegui</title>
-  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
 
 <body>
@@ -14,9 +14,9 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="https://papelerapierrastegui.com.ar/">Inicio</a></li>
-        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
-        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
@@ -24,35 +24,31 @@
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-
-        <!-- Imágenes normales -->
-        <div class="producto-imagenes">
-          <img class="visible" src="https://papelerapierrastegui.com.ar/assets/images/folex1.png" alt="Fólex 20x25">
-          <img src="https://papelerapierrastegui.com.ar/assets/images/folex2.png" alt="Fólex Hamburguesa">
-        </div>
+        <img id="producto-img" src="../../assets/images/folex1.png" alt="Fólex">
 
         <div class="producto-info">
           <h2>Fólex</h2>
           <ul>
-            <li>Papel Fólex de alta calidad, resistente a la grasa y al calor.</li>
+            <li>Papel Fólex resistente a la grasa y al calor.</li>
             <li>Ideal para envolver alimentos, hamburguesas, empanadas y panificados.</li>
             <li>Disponible en tamaños 20x25 y 13x13 (Hamburguesa).</li>
           </ul>
 
-          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="20x25" data-price-unit="4200">20x25</div>
-              <div class="dropdown-item" data-size="13x13 (Hamburguesa)" data-price-unit="7000">13x13 (Hamburguesa)
-              </div>
+              <div class="dropdown-item" data-size="20x25" data-price-unit="4200"
+                data-img="../../assets/images/folex1.png">
+                20x25</div>
+              <div class="dropdown-item" data-size="13x13 (Hamburguesa)" data-price-unit="7000"
+                data-img="../../assets/images/folex2.png">
+                13x13 (Hamburguesa)</div>
             </div>
           </div>
 
-          <!-- Dropdown Tipo -->
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
@@ -63,14 +59,12 @@
             </div>
           </div>
 
-          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
             <button id="decrementar">-</button>
             <span id="cantidad-visual">1</span>
             <button id="incrementar">+</button>
           </div>
 
-          <!-- Total -->
           <p class="total">Total: $0</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
@@ -87,41 +81,74 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const sizeItems = document.querySelectorAll('.dropdown-item[data-size]');
-      const tipoItems = document.querySelectorAll('.dropdown-item[data-type]');
-      const totalDisplay = document.querySelector('.total');
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
       let tipo = '';
       let cantidad = 1;
 
+      tipoDropdown.style.display = 'none';
+
       function updateTotal() {
-        if (!selectedSize || !tipo) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        let total = 0;
+        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
 
       sizeItems.forEach(item => {
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
+          productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
         });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
       });
 
       tipoItems.forEach(item => {
         item.addEventListener('click', () => {
           tipoItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
           tipo = item.dataset.type;
           updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         });
       });
 
@@ -135,6 +162,17 @@
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
         updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
       });
     });
   </script>
