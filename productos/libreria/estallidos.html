@@ -41,19 +41,26 @@
             </button>
             <div class="dropdown-menu">
               <div class="dropdown-item" data-size="N°2" data-price-unit="470"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°2</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°2</div>
               <div class="dropdown-item" data-size="N°3" data-price-unit="550"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°3</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°3</div>
               <div class="dropdown-item" data-size="N°4" data-price-unit="600"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°4</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°4</div>
               <div class="dropdown-item" data-size="N°5" data-price-unit="900"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°5</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°5</div>
               <div class="dropdown-item" data-size="N°6" data-price-unit="1000"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°6</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°6</div>
               <div class="dropdown-item" data-size="N°7" data-price-unit="1400"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°7</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°7</div>
               <div class="dropdown-item" data-size="N°8" data-price-unit="1500"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°8</div>
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">
+                Estallidos N°8</div>
             </div>
           </div>
 
@@ -94,6 +101,11 @@
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -101,6 +113,7 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
+      let tipo = 'unidad';
       let cantidad = 1;
 
       function updateTotal() {
