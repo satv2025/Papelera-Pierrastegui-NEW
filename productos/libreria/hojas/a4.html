@@ -37,21 +37,7 @@
                         <li>Precio: unidad $6300 — caja (10 unidades) $60000.</li>
                     </ul>
 
-                    <div class="dropdown" id="size-dropdown" style="display: none;">
-                        <button class="dropdown-btn">
-                            <span class="text">Seleccioná El Tamaño</span>
-                            <span class="arrow">▼</span>
-                        </button>
-                        <div class="dropdown-menu">
-                            <div class="dropdown-item" data-size="Unidad" data-price-unit="6300" data-price-x50="0"
-                                data-price-x100="0" data-img="https://www.paperone.com/images/products/a4.png">
-                                Unidad</div>
-                            <div class="dropdown-item" data-size="Caja (10 Unidades)" data-price-unit="60000"
-                                data-price-x50="0" data-price-x100="0"
-                                data-img="https://www.paperone.com/images/products/a4.png">
-                                Caja (10 Unidades)</div>
-                        </div>
-                    </div>
+                    <div class="dropdown" id="size-dropdown" style="display: none;"></div>
 
                     <div class="dropdown" id="tipo-dropdown" style="display: block;">
                         <button class="dropdown-btn">
@@ -86,57 +72,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const sizeDropdown = document.getElementById('size-dropdown');
-            const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
-            const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
-            const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
-
             const tipoDropdown = document.getElementById('tipo-dropdown');
             const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
             const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
             const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
-
             const cantidadVisual = document.getElementById('cantidad-visual');
             const decBtn = document.getElementById('decrementar');
             const incBtn = document.getElementById('incrementar');
             const totalDisplay = document.querySelector('.total');
-            const productoImg = document.getElementById('producto-img');
 
-            let selectedSize = null;
-            let tipo = '';
             let cantidad = 1;
+            let tipo = '';
 
             function updateTotal() {
-                if (!selectedSize || tipo === '') {
+                const selected = tipoDropdown.querySelector('.dropdown-item.selected');
+                if (!selected) {
                     totalDisplay.textContent = "Total: $0";
                     return;
                 }
-                let total = 0;
-                total = cantidad * Number(selectedSize.dataset.priceUnit);
+                const total = cantidad * Number(selected.dataset.priceUnit);
                 totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
             }
-
-            sizeBtn.addEventListener('click', () => {
-                sizeMenu.classList.toggle('active');
-                sizeBtn.classList.toggle('active');
-            });
-
-            sizeItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    sizeItems.forEach(i => i.classList.remove('selected'));
-                    item.classList.add('selected');
-                    sizeBtn.querySelector('.text').textContent = item.textContent;
-                    selectedSize = item;
-                    productoImg.src = item.dataset.img;
-                    tipoDropdown.style.display = 'block';
-                    tipo = '';
-                    tipoItems.forEach(i => i.classList.remove('selected'));
-                    tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
-                    updateTotal();
-                    sizeMenu.classList.remove('active');
-                    sizeBtn.classList.remove('active');
-                });
-            });
 
             tipoBtn.addEventListener('click', () => {
                 tipoMenu.classList.toggle('active');
@@ -165,17 +121,6 @@
                 if (cantidad > 1) cantidad--;
                 cantidadVisual.textContent = cantidad;
                 updateTotal();
-            });
-
-            document.addEventListener('click', e => {
-                if (!sizeDropdown.contains(e.target)) {
-                    sizeMenu.classList.remove('active');
-                    sizeBtn.classList.remove('active');
-                }
-                if (!tipoDropdown.contains(e.target)) {
-                    tipoMenu.classList.remove('active');
-                    tipoBtn.classList.remove('active');
-                }
             });
         });
     </script>
