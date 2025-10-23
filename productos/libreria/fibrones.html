@@ -4,12 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Fibrones</title>
+  <title>Fibron Librería - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/tipopunta.css">
-  <link rel="stylesheet" href="../../assets/css/dropfolex.css">
 </head>
 
 <body>
@@ -17,86 +14,190 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Fibrones</h2>
-      <div class="producto-detalle">
-        <img
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
           src="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png"
-          alt="Fibrones">
+          alt="Fibron Librería">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Fibrones de alta calidad con punta chata y punta redonda disponibles en diferentes colores.</p>
+          <h2>Fibron Librería</h2>
+          <ul>
+            <li>Fibron permanente ideal para uso escolar, de oficina o artístico.</li>
+            <li>Disponible en colores: rojo, negro, azul y verde.</li>
+            <li>Punta resistente, de trazo parejo y tinta duradera.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar color</button>
-            <ul class="dropdown-menu">
-              <!-- Negra -->
-              <li data-color="cnegra" class="color">Negro<span class="tipopunta pchata"> (chata)</span></li>
-              <li data-color="rnegra" class="color">Negro<span class="tipopunta predonda"> (redonda)</span></li>
-              <!-- Roja -->
-              <li data-color="crojo" class="color">Rojo<span class="tipopunta pchata"> (chata)</span></li>
-              <li data-color="rrojo" class="color">Rojo<span class="tipopunta predonda"> (redonda)</span></li>
-              <!-- Azul -->
-              <li data-color="cazul" class="color">Azul<span class="tipopunta pchata"> (chata)</span></li>
-              <li data-color="razul" class="color">Azul<span class="tipopunta predonda"> (redonda)</span></li>
-              <!-- Verde -->
-              <li data-color="cverde" class="color">Verde<span class="tipopunta pchata"> (chata)</span></li>
-              <li data-color="rverde" class="color">Verde<span class="tipopunta predonda"> (redonda)</span></li>
-            </ul>
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Color</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="Rojo" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Rojo</div>
+              <div class="dropdown-item" data-size="Negro" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Negro</div>
+              <div class="dropdown-item" data-size="Azul" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Azul</div>
+              <div class="dropdown-item" data-size="Verde" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Verde</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio">
-              Precio por unidad:
-              <span id="precio-unidad"></span>
-              <span id="precio-unidad-moneda"></span>
-            </p>
+          <div class="dropdown" id="punta-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná La Punta</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-punta="Redonda">Redonda</div>
+              <div class="dropdown-item" data-punta="Chata">Chata</div>
+            </div>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Por Unidad</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item selected" data-type="unidad">Por Unidad</div>
+            </div>
+          </div>
+
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
+      const puntaDropdown = document.getElementById('punta-dropdown');
+      const puntaBtn = puntaDropdown.querySelector('.dropdown-btn');
+      const puntaMenu = puntaDropdown.querySelector('.dropdown-menu');
+      const puntaItems = puntaMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-fibrones.js"></script>
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
+
+      let selectedSize = null;
+      let selectedPunta = null;
+      let tipo = 'unidad';
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      // Dropdown color
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      // Dropdown punta
+      puntaBtn.addEventListener('click', () => {
+        puntaMenu.classList.toggle('active');
+        puntaBtn.classList.toggle('active');
+      });
+      puntaItems.forEach(item => {
+        item.addEventListener('click', () => {
+          puntaItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          puntaBtn.querySelector('.text').textContent = item.textContent;
+          selectedPunta = item.dataset.punta;
+          puntaMenu.classList.remove('active');
+          puntaBtn.classList.remove('active');
+        });
+      });
+
+      // Cantidad
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      // Cierre de menús
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!puntaDropdown.contains(e.target)) {
+          puntaMenu.classList.remove('active');
+          puntaBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
