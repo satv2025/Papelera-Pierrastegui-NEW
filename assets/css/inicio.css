@@ -275,13 +275,9 @@ body::selection {
   text-transform: capitalize;
 }
 
-.producto:hover {}
-
-.producto:hover:not(.no-hover) {}
-
 .btn:hover {
-  background-color: #fff;
-  color: #ff7600;
+  background: #ffc52f;
+  color: #000;
 }
 
 /* Imagen contenedor para posicionar badge y tamaño fijo */
@@ -377,7 +373,6 @@ body::selection {
   font-size: 1em;
   transition: background-color 0.3s ease;
   margin-top: auto;
-  box-shadow: 0 0 10px rgb(0 0 0 / 52%);
 }
 
 .tamanos {
