@@ -106,10 +106,10 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
-      let tipo = 'unidad';
+      let tipo = '';
       let cantidad = 1;
 
-      tipoDropdown.style.display = 'block';
+      tipoDropdown.style.display = 'none';
 
       function updateTotal() {
         if (!selectedSize || tipo === '') {
@@ -118,6 +118,8 @@
         }
         let total = 0;
         if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
+        else if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
+        else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
@@ -134,10 +136,9 @@
           selectedSize = item;
           productoImg.src = item.dataset.img;
           tipoDropdown.style.display = 'block';
-          tipo = 'unidad';
+          tipo = '';
           tipoItems.forEach(i => i.classList.remove('selected'));
-          tipoItems[0].classList.add('selected');
-          tipoBtn.querySelector('.text').textContent = "Por Unidad";
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
@@ -147,6 +148,18 @@
       tipoBtn.addEventListener('click', () => {
         tipoMenu.classList.toggle('active');
         tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        });
       });
 
       incBtn.addEventListener('click', () => {
