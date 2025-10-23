@@ -4,10 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Estallidos</title>
+  <title>Estallidos - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
 </head>
 
 <body>
@@ -15,86 +14,139 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Estallidos</h2>
-      <div class="producto-detalle">
-        <img src="../../assets/images/estallidos.jpg" alt="Estallidos">
-        <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Carteles para precios disponibles en diferentes tamaños. Paquete por 25 unidades</p>
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg" alt="Estallidos">
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-tamaño="n1" data-precio="400">N°1</li>
-              <li data-tamaño="n2" data-precio="500">N°2</li>
-              <li data-tamaño="n3" data-precio="650">N°3</li>
-              <li data-tamaño="n4" data-precio="700">N°4</li>
-              <li data-tamaño="n5" data-precio="950">N°5</li>
-              <li data-tamaño="n6" data-precio="1.000">N°6</li>
-              <li data-tamaño="n8" data-precio="1.500">N°8</li>
-              <li data-tamaño="n9" data-precio="3.100">N°9</li>
-              <li data-tamaño="n10" data-precio="4.100">N°10</li>
-            </ul>
+        <div class="producto-info">
+          <h2>Estallidos</h2>
+          <ul>
+            <li>Estallidos para uso escolar o de librería.</li>
+            <li>Fabricados con materiales de calidad, ideales para actividades educativas y artísticas.</li>
+            <li>Disponibles en varios tamaños numerados.</li>
+          </ul>
+
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Modelo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="N°2" data-price-unit="470"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°2</div>
+              <div class="dropdown-item" data-size="N°3" data-price-unit="550"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°3</div>
+              <div class="dropdown-item" data-size="N°4" data-price-unit="600"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°4</div>
+              <div class="dropdown-item" data-size="N°5" data-price-unit="900"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°5</div>
+              <div class="dropdown-item" data-size="N°6" data-price-unit="1000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°6</div>
+              <div class="dropdown-item" data-size="N°7" data-price-unit="1400"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°7</div>
+              <div class="dropdown-item" data-size="N°8" data-price-unit="1500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°8</div>
+            </div>
           </div>
 
-          <!-- Lugar para mostrar el precio -->
-          <p id="precio-mostrado" style="font-weight: 700;"></p>
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Por Unidad</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item selected" data-type="unidad">Por Unidad</div>
+            </div>
+          </div>
+
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
   <script>
-    const items = document.querySelectorAll('.dropdown-menu li');
-    const dropdownButton = document.querySelector('.dropdown-btn');
-    const precioDisplay = document.getElementById('precio-mostrado');
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-    items.forEach(item => {
-      item.addEventListener('click', () => {
-        const tamaño = item.getAttribute('data-tamaño');
-        const precioNumero = item.getAttribute('data-precio');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
-        // Actualizar solo el botón con el tamaño
-        dropdownButton.textContent = tamaño;
+      let selectedSize = null;
+      let cantidad = 1;
 
-        // Mostrar el precio exactamente como está en data-precio
-        precioDisplay.textContent = `Precio (25 unidades): ${precioNumero} ARS`;
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
       });
     });
   </script>
