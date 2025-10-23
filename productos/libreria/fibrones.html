@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hilo - Papelera Pierrastegui</title>
+  <title>Fibron Librería - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -25,51 +25,46 @@
     <section class="producto container">
       <div class="producto-contenido">
         <img id="producto-img"
-          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/hilo/hilo.png"
-          alt="Hilo">
+          src="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png"
+          alt="Fibron Librería">
 
         <div class="producto-info">
-          <h2>Hilo</h2>
+          <h2>Fibron Librería</h2>
           <ul>
-            <li>Hilo resistente y de excelente calidad, ideal para costura, tapicería y manualidades.</li>
-            <li>Disponible en modelos: Hilo Blanco, Hilo Blanco Ovillo Chico, Hilo Amarillo y Hilo Amarillo Ovillo
-              Chico.</li>
-            <li>Venta por unidad.</li>
+            <li>Fibron permanente ideal para uso escolar, de oficina o artístico.</li>
+            <li>Disponible en colores: rojo, negro, azul y verde.</li>
+            <li>Punta resistente, de trazo parejo y tinta duradera.</li>
           </ul>
 
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Modelo</span>
+              <span class="text">Seleccioná El Color</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="Hilo Blanco" data-price-unit="2500" data-price-x50="0"
-                data-price-x100="0"
-                data-img="https://malano.com.ar/2988-large_default/hilo-lonero-blanco-50grs-x10u.jpg">
-                Hilo Blanco</div>
-              <div class="dropdown-item" data-size="Hilo Blanco Ovillo Chico" data-price-unit="500" data-price-x50="0"
-                data-price-x100="0"
-                data-img="https://www.smpdescartables.com/cdn/shop/products/HiloChoricero-chico.jpg?v=1584757803">
-                Hilo Blanco Ovillo Chico</div>
-              <div class="dropdown-item" data-size="Hilo Amarillo" data-price-unit="1800" data-price-x50="0"
-                data-price-x100="0"
-                data-img="https://www.smpdescartables.com/cdn/shop/products/Hilo-Algodon-Grande1.jpg?v=1584757427">
-                Hilo Amarillo</div>
-              <div class="dropdown-item" data-size="Hilo Amarillo Ovillo Chico" data-price-unit="400" data-price-x50="0"
-                data-price-x100="0"
-                data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTAy0KmBvM4wUBgtBQgXGg_qSQPXwfeyGj-A&s">
-                Hilo Amarillo Ovillo Chico</div>
+              <div class="dropdown-item" data-size="Rojo" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Rojo</div>
+              <div class="dropdown-item" data-size="Negro" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Negro</div>
+              <div class="dropdown-item" data-size="Azul" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Azul</div>
+              <div class="dropdown-item" data-size="Verde" data-price-unit="850" data-price-x50="0" data-price-x100="0"
+                data-img="https://acdn-us.mitiendanube.com/stores/001/742/756/products/marcador-permanente-trabi-4111-56f06651a99c1c173f16318334158928-480-01-c2808f7eef67b9e80416483309573122-640-0.png">
+                Verde</div>
             </div>
           </div>
 
           <div class="dropdown" id="punta-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Tipo de Hilo</span>
+              <span class="text">Seleccioná La Punta</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-punta="Grueso">Grueso</div>
-              <div class="dropdown-item" data-punta="Fino">Fino</div>
+              <div class="dropdown-item" data-punta="Redonda">Redonda</div>
+              <div class="dropdown-item" data-punta="Chata">Chata</div>
             </div>
           </div>
 
@@ -140,7 +135,7 @@
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
-      // Dropdown modelo
+      // Dropdown color
       sizeBtn.addEventListener('click', () => {
         sizeMenu.classList.toggle('active');
         sizeBtn.classList.toggle('active');
@@ -158,7 +153,7 @@
         });
       });
 
-      // Dropdown tipo de hilo
+      // Dropdown punta
       puntaBtn.addEventListener('click', () => {
         puntaMenu.classList.toggle('active');
         puntaBtn.classList.toggle('active');
