@@ -30,40 +30,41 @@
         <div class="producto-info">
           <h2>Hilo</h2>
           <ul>
-            <li>Hilos resistentes y de alta calidad, ideales para costura, tapicería y manualidades.</li>
-            <li>Disponibles en modelos: Hilo Blanco, Hilo Blanco Ovillo Chico, Hilo Amarillo y Hilo Amarillo Ovillo
-              Chico.</li>
+            <li>Hilo resistente y duradero, ideal para costura, tapicería o manualidades.</li>
+            <li>Disponible en colores blanco y amarillo.</li>
+            <li>Tipos: Chico u Ovillo grande.</li>
             <li>Venta por unidad.</li>
           </ul>
 
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Modelo</span>
+              <span class="text">Seleccioná El Color</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="Hilo Blanco" data-price-unit="2500"
+              <div class="dropdown-item" data-size="Blanco" data-price-unit="2500" data-price-x50="0"
+                data-price-x100="0"
                 data-img="https://malano.com.ar/2988-large_default/hilo-lonero-blanco-50grs-x10u.jpg">
-                Hilo Blanco</div>
-              <div class="dropdown-item" data-size="Hilo Blanco Ovillo Chico" data-price-unit="500"
-                data-img="https://www.smpdescartables.com/cdn/shop/products/HiloChoricero-chico.jpg?v=1584757803">
-                Hilo Blanco Ovillo Chico</div>
-              <div class="dropdown-item" data-size="Hilo Amarillo" data-price-unit="1800"
+                Blanco</div>
+              <div class="dropdown-item" data-size="Amarillo" data-price-unit="1800" data-price-x50="0"
+                data-price-x100="0"
                 data-img="https://www.smpdescartables.com/cdn/shop/products/Hilo-Algodon-Grande1.jpg?v=1584757427">
-                Hilo Amarillo</div>
-              <div class="dropdown-item" data-size="Hilo Amarillo Ovillo Chico" data-price-unit="400"
-                data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTAy0KmBvM4wUBgtBQgXGg_qSQPXwfeyGj-A&s">
-                Hilo Amarillo Ovillo Chico</div>
+                Amarillo</div>
             </div>
           </div>
 
           <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Por Unidad</span>
+              <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item selected" data-type="unidad">Por Unidad</div>
+              <div class="dropdown-item" data-type="chico" data-price-unit="500"
+                data-img="https://www.smpdescartables.com/cdn/shop/products/HiloChoricero-chico.jpg?v=1584757803">
+                Chico</div>
+              <div class="dropdown-item" data-type="ovillo" data-price-unit="2500"
+                data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTAy0KmBvM4wUBgtBQgXGg_qSQPXwfeyGj-A&s">
+                Ovillo</div>
             </div>
           </div>
 
@@ -106,17 +107,22 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
-      let tipo = 'unidad';
+      let tipo = '';
       let cantidad = 1;
 
-      tipoDropdown.style.display = 'block';
+      tipoDropdown.style.display = 'none';
 
       function updateTotal() {
-        if (!selectedSize) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        let total = cantidad * Number(selectedSize.dataset.priceUnit);
+        let total = 0;
+        // Precio base por color
+        let basePrice = Number(selectedSize.dataset.priceUnit);
+        // Ajuste por tipo
+        if (tipo === 'chico') total = cantidad * 500;
+        else if (tipo === 'ovillo') total = cantidad * basePrice;
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
@@ -132,9 +138,31 @@
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
           productoImg.src = item.dataset.img;
+          tipoDropdown.style.display = 'block';
+          tipo = '';
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
           updateTotal();
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
+        });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      tipoItems.forEach(item => {
+        item.addEventListener('click', () => {
+          tipoItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = item.textContent;
+          tipo = item.dataset.type;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
         });
       });
 
