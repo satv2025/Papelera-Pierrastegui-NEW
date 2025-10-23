@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Hilos</title>
+  <title>Hilo - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/hilo.css">
 </head>
 
 <body>
@@ -24,68 +22,149 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Hilos</h2>
-      <div class="producto-detalle">
-        <img id="producto-img"
-          src="https://www.smpdescartables.com/cdn/shop/products/HiloChoricero-chico_1000x1000@2x.progressive.jpg?v=1584757803"
-          alt="Hilos de algodón y choricero">
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://malano.com.ar/2988-large_default/hilo-lonero-blanco-50grs-x10u.jpg"
+          alt="Hilo">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Hilos resistentes de algodón blanco y choricero amarillo, ideales para embalaje, atado y otros usos
-            industriales o domésticos.</p>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tipo y tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="amarillo-chico">Amarillo Chico</li>
-              <li data-size="amarillo-grande">Amarillo Grande</li>
-              <li data-size="blanco-chico">Blanco Chico</li>
-              <li data-size="blanco-grande">Blanco Grande</li>
-            </ul>
+          <h2>Hilo</h2>
+          <ul>
+            <li>Hilos resistentes y de alta calidad, ideales para costura, tapicería y manualidades.</li>
+            <li>Disponibles en colores y presentaciones variadas según el tipo de trabajo.</li>
+            <li>Modelos: Hilo Amarillo, Hilo Amarillo Ovillo Chico, Hilo Blanco, Hilo Blanco Ovillo Chico.</li>
+          </ul>
+
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Modelo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="Hilo Amarillo" data-price-unit="2500" data-price-x50="0"
+                data-price-x100="0"
+                data-img="https://malano.com.ar/2988-large_default/hilo-lonero-blanco-50grs-x10u.jpg">
+                Hilo Amarillo</div>
+              <div class="dropdown-item" data-size="Hilo Amarillo Ovillo Chico" data-price-unit="500" data-price-x50="0"
+                data-price-x100="0"
+                data-img="https://www.smpdescartables.com/cdn/shop/products/Hilo-Algodon-Grande1.jpg?v=1584757427">
+                Hilo Amarillo Ovillo Chico</div>
+              <div class="dropdown-item" data-size="Hilo Blanco" data-price-unit="1800" data-price-x50="0"
+                data-price-x100="0"
+                data-img="https://www.smpdescartables.com/cdn/shop/products/HiloChoricero-chico.jpg?v=1584757803">
+                Hilo Blanco</div>
+              <div class="dropdown-item" data-size="Hilo Blanco Ovillo Chico" data-price-unit="400" data-price-x50="0"
+                data-price-x100="0"
+                data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTAy0KmBvM4wUBgtBQgXGg_qSQPXwfeyGj-A&s">
+                Hilo Blanco Ovillo Chico</div>
+            </div>
           </div>
-          <div id="uni" style="display: none;">
-            <p class="precio">
-              <span id="precio-unidad"></span>
-              <span id="precio-unidad-moneda"></span>
-            </p>
+
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Por Unidad</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item selected" data-type="unidad">Por Unidad</div>
+            </div>
           </div>
-          <p id="sin-stock" class="precio" style="display: none; font-weight: 700;">SIN STOCK</p>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
 
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-hilos.js"></script>
+      let selectedSize = null;
+      let tipo = 'unidad';
+      let cantidad = 1;
+
+      tipoDropdown.style.display = 'block';
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        let total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
