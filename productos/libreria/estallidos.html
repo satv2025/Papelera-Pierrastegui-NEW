@@ -31,29 +31,29 @@
           <ul>
             <li>Estallidos para uso escolar o de librería.</li>
             <li>Fabricados con materiales de calidad, ideales para actividades educativas y artísticas.</li>
-            <li>Disponibles en varios tamaños numerados del N°2 al N°8.</li>
+            <li>Disponibles en modelos N°2, N°3, N°4, N°5, N°6, N°7 y N°8.</li>
           </ul>
 
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná El Modelo</span>
+              <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="N°2" data-price-unit="470"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°2</div>
-              <div class="dropdown-item" data-size="N°3" data-price-unit="550"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°3</div>
-              <div class="dropdown-item" data-size="N°4" data-price-unit="600"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°4</div>
-              <div class="dropdown-item" data-size="N°5" data-price-unit="900"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°5</div>
-              <div class="dropdown-item" data-size="N°6" data-price-unit="1000"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°6</div>
-              <div class="dropdown-item" data-size="N°7" data-price-unit="1400"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°7</div>
-              <div class="dropdown-item" data-size="N°8" data-price-unit="1500"
-                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">Estallidos N°8</div>
+              <div class="dropdown-item" data-size="N°2" data-price-unit="470" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°2</div>
+              <div class="dropdown-item" data-size="N°3" data-price-unit="550" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°3</div>
+              <div class="dropdown-item" data-size="N°4" data-price-unit="600" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°4</div>
+              <div class="dropdown-item" data-size="N°5" data-price-unit="900" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°5</div>
+              <div class="dropdown-item" data-size="N°6" data-price-unit="1000" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°6</div>
+              <div class="dropdown-item" data-size="N°7" data-price-unit="1400" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°7</div>
+              <div class="dropdown-item" data-size="N°8" data-price-unit="1500" data-price-x50="0" data-price-x100="0"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/estallidos.jpg">N°8</div>
             </div>
           </div>
 
@@ -116,7 +116,8 @@
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        let total = cantidad * Number(selectedSize.dataset.priceUnit);
+        let total = 0;
+        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
@@ -141,6 +142,11 @@
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
         });
+      });
+
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
       });
 
       incBtn.addEventListener('click', () => {
