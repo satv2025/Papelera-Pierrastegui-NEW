@@ -4,15 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Cuadernos Universitarios</title>
+  <title>Cuadernos Universitarios - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <style>
-    .dropdown-menu {
-      height: 5.57em !important;
-    }
-  </style>
 </head>
 
 <body>
@@ -20,63 +14,74 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Cuadernos Universitarios</h2>
-      <div class="producto-detalle">
-        <img src="https://www.planetoffice.com.ar/images_prg/cuadernos/avon/00002335-1372699040_gde.jpg"
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
+          src="https://www.planetoffice.com.ar/images_prg/cuadernos/avon/00002335-1372699040_gde.jpg"
           alt="Cuadernos Universitarios">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Cuadernos universitarios de alta calidad, ideales para estudiantes y profesionales.</p>
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tipo</button>
-            <ul class="dropdown-menu">
-              <li data-pattern="Cuadriculado">Cuadriculado</li>
-              <li data-pattern="Rayado">Rayado</li>
-            </ul>
+          <h2>Cuadernos Universitarios</h2>
+          <ul>
+            <li>Rollo de Pluribol para embalaje y protección de productos delicados.</li>
+          </ul>
+
+          <!-- Cantidad -->
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
           </div>
-          <p class="precio">Por unidad: ARS$ 3.500</p>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <p class="total">Total: $3.500</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script srf="../../assets/js/preciosdrop-cuadernos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const precioUnitario = 9500;
+      let cantidad = 1;
+
+      function updateTotal() {
+        const total = cantidad * precioUnitario;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+    });
+  </script>
 </body>
 
 </html>
