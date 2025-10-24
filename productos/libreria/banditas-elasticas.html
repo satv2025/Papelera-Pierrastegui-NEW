@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Banditas Elásticas</title>
+  <title>Regalería / Librería – Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/preciosdrop.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
 </head>
 
 <body>
@@ -24,71 +22,214 @@
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Banditas Elásticas</h2>
-      <div class="producto-detalle">
-        <img id="producto-img" src="../../assets/images/banditas-elasticas.jpg" alt="Arranque Rendidor">
-
+    <!-- Banditas elásticas -->
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/banditas-elasticas.jpg"
+          alt="Banditas elásticas">
         <div class="producto-info">
-          <h3 id="hidden-title">Descripción del producto</h3>
+          <h2>Banditas elásticas</h2>
           <ul>
-            <li>
-              <p id="desc-p">Lazos de goma, generalmente con forma circular que se utilizan para sujetar diversos
-                objetos.</p>
-            </li>
+            <li>Paquete de 100 g – categoría Librería – $1.500,00</li>
+            <li>Paquete de 500 g – categoría Librería – $6.800,00</li>
           </ul>
-          <div class="dropdown" style="display: none;">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="F75" data-price-unit="2.500" data-price-bulk="12.000" data-bulto="20000">F75 (con tapa)
-              </li>
-              <li data-size="F100" data-price-unit="2.600" data-price-bulk="13.000" data-bulto="22.000">F100 (con tapa)
-              </li>
-              <li data-size="P12" data-price-unit="1.900" data-price-bulk="7.500" data-bulto="14.500">P12
-              </li>
-            </ul>
+
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná el tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="100g" data-price-unit="1500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/banditas-elasticas.jpg">
+                100 g – $1.500
+              </div>
+              <div class="dropdown-item" data-size="500g" data-price-unit="6800"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/banditas-elasticas.jpg">
+                500 g – $6.800
+              </div>
+            </div>
           </div>
 
-          <div id="uni">
-            <p class="precio preciob">500 Grs (½ Kg): $<span id="precio-10">6.800</span> ARS</p>
-            <p class="precio preciob">1 Kg: $<span id="precio-10">13.800</span> ARS</p>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
+
+    <!-- Mini-rollos -->
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img-minirollos" src="https://papelerapierrastegui.com.ar/assets/images/mini-rollos.jpg"
+          alt="Mini-rollos">
+        <div class="producto-info">
+          <h2>Mini-rollos</h2>
+          <ul>
+            <li>Unidad – categoría Regalería – $350,00</li>
+            <li>Pack x10 – categoría Regalería – $3.000,00</li>
+          </ul>
+
+          <div class="dropdown" id="size-dropdown-minirollos">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná el tipo de pack</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="unidad" data-price-unit="350"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/mini-rollos.jpg">
+                Unidad – $350
+              </div>
+              <div class="dropdown-item" data-size="x10" data-price-unit="3000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/mini-rollos.jpg">
+                Pack x10 – $3.000
+              </div>
+            </div>
+          </div>
+
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar-mini">-</button>
+            <span id="cantidad-visual-mini">1</span>
+            <button id="incrementar-mini">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Moño Fácil -->
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img-mono" src="https://papelerapierrastegui.com.ar/assets/images/mo%C3%B1o-facil.jpg"
+          alt="Moño Fácil">
+        <div class="producto-info">
+          <h2>Moño Fácil</h2>
+          <ul>
+            <li>Large x50 – categoría Regalería – $3.500,00</li>
+            <li>Medium x50 – categoría Regalería – $2.600,00</li>
+            <li>Mini x100 – categoría Regalería – $2.200,00</li>
+          </ul>
+
+          <div class="dropdown" id="size-dropdown-mono">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná el tamaño del moño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="large-x50" data-price-unit="3500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/mo%C3%B1o-facil.jpg">
+                Large x50 – $3.500
+              </div>
+              <div class="dropdown-item" data-size="medium-x50" data-price-unit="2600"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/mo%C3%B1o-facil.jpg">
+                Medium x50 – $2.600
+              </div>
+              <div class="dropdown-item" data-size="mini-x100" data-price-unit="2200"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/mo%C3%B1o-facil.jpg">
+                Mini x100 – $2.200
+              </div>
+            </div>
+          </div>
+
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar-mono">-</button>
+            <span id="cantidad-visual-mono">1</span>
+            <button id="incrementar-mono">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      function initDropdown(sectionId, imgId, priceDataAttr) {
+        const dropdown = document.getElementById(sectionId);
+        const btn = dropdown.querySelector('.dropdown-btn');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        const items = menu.querySelectorAll('.dropdown-item');
+        const imgEl = document.getElementById(imgId);
+        const cantidadVisual = dropdown.parentElement.querySelector('.cantidad-visual') || dropdown.parentElement.querySelector('span[id^="cantidad-visual"]');
+        const decBtn = dropdown.parentElement.querySelector('button[id^="decrementar"]');
+        const incBtn = dropdown.parentElement.querySelector('button[id^="incrementar"]');
+        const totalDisplay = dropdown.parentElement.querySelector('.total');
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop2.js"></script>
+        let selected = null;
+        let cantidad = 1;
+
+        function updateTotal() {
+          if (!selected) {
+            totalDisplay.textContent = "Total: $0";
+            return;
+          }
+          const total = cantidad * Number(selected.dataset[priceDataAttr]);
+          totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+        }
+
+        btn.addEventListener('click', () => {
+          menu.classList.toggle('active');
+          btn.classList.toggle('active');
+        });
+
+        items.forEach(item => {
+          item.addEventListener('click', () => {
+            items.forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+            btn.querySelector('.text').textContent = item.textContent;
+            selected = item;
+            imgEl.src = item.dataset.img;
+            cantidad = 1;
+            if (cantidadVisual) cantidadVisual.textContent = cantidad;
+            updateTotal();
+            menu.classList.remove('active');
+            btn.classList.remove('active');
+          });
+        });
+
+        incBtn.addEventListener('click', () => {
+          cantidad++;
+          if (cantidadVisual) cantidadVisual.textContent = cantidad;
+          updateTotal();
+        });
+
+        decBtn.addEventListener('click', () => {
+          if (cantidad > 1) cantidad--;
+          if (cantidadVisual) cantidadVisual.textContent = cantidad;
+          updateTotal();
+        });
+
+        document.addEventListener('click', e => {
+          if (!dropdown.contains(e.target)) {
+            menu.classList.remove('active');
+            btn.classList.remove('active');
+          }
+        });
+      }
+
+      // Inicializar dropdowns
+      initDropdown('size-dropdown', 'producto-img', 'priceUnit');
+      initDropdown('size-dropdown-minirollos', 'producto-img-minirollos', 'priceUnit');
+      initDropdown('size-dropdown-mono', 'producto-img-mono', 'priceUnit');
+    });
+  </script>
 </body>
 
 </html>
