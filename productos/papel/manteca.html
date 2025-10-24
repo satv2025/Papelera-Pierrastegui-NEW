@@ -4,43 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Papel Manteca</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <style>
-    .dropdown-menu {
-      height: 5.5em !important;
-    }
-
-    #contenedor {
-      width: 20em;
-      height: 20em;
-      position: relative;
-      margin-bottom: 3em !important;
-    }
-
-    #contenedor img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      display: block;
-      /* siempre block para que esté en flujo */
-      pointer-events: none;
-      /* para que no interfiera */
-    }
-
-    #contenedor img.visible {
-      opacity: 1;
-      pointer-events: auto;
-      z-index: 1;
-    }
-  </style>
+  <title>Papel Manteca - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -48,103 +14,122 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Papel Manteca</h2>
-      <div class="producto-detalle">
-        <div id="contenedor">
-          <img
-            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp"
-            alt="Papel Manteca">
-          <img src="https://papelerapierrastegui.com.ar/assets/images/manteca1.jpg" alt="Papel Aluminio">
-        </div>
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
+          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp"
+          alt="Papel Manteca">
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Papel manteca ideal para envolver alimentos, resistente a la grasa y de fácil manipulación.</p>
+          <h2>Papel Manteca</h2>
+          <ul>
+            <li>Papel manteca apto contacto con alimentos.</li>
+            <li>Opciones: Chico y 1 Kg.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar Tamaño</button>
-            <ul class="dropdown-menu" style="height: 5.5em;">
-              <li data-medida="chico">5Mts</li>
-              <li data-medida="kg">1Kg</li>
-            </ul>
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="chico" data-price-unit="2300"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp">
+                Chico</div>
+              <div class="dropdown-item" data-size="1kg" data-price-unit="13000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20MANTECA/Papel%20manteca.webp">
+                1 Kg</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio">
-              <span id="precio-unidad"></span> <span id="precio-unidad-moneda"></span>
-            </p>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
 
-          <p id="sin-stock" class="precio" style="display: none; font-weight: 700;"></p>
-
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
+
+      let selectedSize = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
-
-
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-manteca.js"></script>
-  <script>
-    const imgs = document.querySelectorAll('#contenedor img');
-    let index = 0;
-    let direccion = 1;
-
-    // Mostrar la primera imagen desde el inicio
-    imgs[index].classList.add('visible');
-
-    // Esperar 3 segundos antes de comenzar el ciclo
-    setTimeout(() => {
-      setInterval(() => {
-        imgs[index].classList.remove('visible');
-
-        index += direccion;
-
-        // Cambiar dirección si estamos al final o al inicio
-        if (index === imgs.length - 1 || index === 0) {
-          direccion *= -1;
-        }
-
-        imgs[index].classList.add('visible');
-      }, 1500);
-    }, 1500); // <- este es el periodo de gracia inicial en milisegundos
-  </script>
 </body>
 
 </html>

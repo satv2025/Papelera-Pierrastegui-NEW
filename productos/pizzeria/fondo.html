@@ -2,43 +2,11 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Papelera Pierrastegui - Fondo</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon" />
-  <link rel="stylesheet" href="../../assets/css/productos.css" />
-  <link rel="stylesheet" href="../../assets/css/dropdown.css" />
-  <style>
-    .dropdown-btn,
-    .dropdown-menu {
-      width: 133% !important;
-    }
-
-    #contenedor {
-      position: relative;
-      width: 100%;
-      height: 21em;
-      overflow: hidden;
-    }
-
-    #contenedor img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      z-index: 0;
-    }
-
-    #contenedor img.visible {
-      opacity: 1;
-      z-index: 1;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fondo de Pizza - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -46,100 +14,128 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Fondo</h2>
-      <div class="producto-detalle">
-        <div id="contenedor">
-          <img
-            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
-            alt="bg-id:1483456">
-          <img src="https://papelerapierrastegui.com.ar/assets/images/papelfondo1.jpg" alt="bg-id:148356">
-        </div>
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img"
+          src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg"
+          alt="Fondo de Pizza">
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Bases de cartón para pizzas chicas, resistentes y de calidad gastronómica.</p>
+          <h2>Fondo de Pizza</h2>
+          <ul>
+            <li>Papel fondo para pizza.</li>
+            <li>Presentaciones: Chico / Chico Bulto / Grande / Grande Bulto.</li>
+            <li>Bultos: Fondo de Pizza 10 kg.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-size="Pizza (chico)" data-price-1kg="2.600" data-price-10kg="23.000">Pizza (chico)</li>
-              <li data-size="Pizza (grande)" data-price-1kg="2.600" data-price-10kg="23.000">Pizza (grande)</li>
-              <li data-size="Ravioles" data-price-1kg="3.500" data-price-10kg="32.000">Ravioles</li>
-            </ul>
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="chico" data-price-unit="2800"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/papelfondo1.jpg">Chico</div>
+              <div class="dropdown-item" data-size="chico_bulto" data-price-unit="25000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg">
+                Chico (Bulto)</div>
+              <div class="dropdown-item" data-size="grande" data-price-unit="2800"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg">
+                Grande</div>
+              <div class="dropdown-item" data-size="grande_bulto" data-price-unit="25000"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/ART%C3%8DCULOS%20DE%20PIZZER%C3%8DA/papel%20fondo%20para%20pizza.jpg">
+                Grande (Bulto)</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio preciob">Por 1 Kg: $<span id="precio-1kg"></span> ARS</p>
-            <p class="precio preciob">Por 10 Kg: $<span id="precio-10kg"></span> ARS</p>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
+
+      let selectedSize = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook" />
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram" />
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter" />
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp" />
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
-
-  <!-- Scripts -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
-  <script src="../../assets/js/preciosdrop-fondo.js"></script>
-  <script>
-    const imgs = document.querySelectorAll('#contenedor img');
-    let index = 0;
-    let direccion = 1;
-
-    // Mostrar la primera imagen desde el inicio
-    imgs[index].classList.add('visible');
-
-    // Esperar 3 segundos antes de comenzar el ciclo
-    setTimeout(() => {
-      setInterval(() => {
-        imgs[index].classList.remove('visible');
-
-        index += direccion;
-
-        // Cambiar dirección si estamos al final o al inicio
-        if (index === imgs.length - 1 || index === 0) {
-          direccion *= -1;
-        }
-
-        imgs[index].classList.add('visible');
-      }, 1500);
-    }, 1500); // <- este es el periodo de gracia inicial en milisegundos
-  </script>
 </body>
 
 </html>

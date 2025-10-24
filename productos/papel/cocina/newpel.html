@@ -2,12 +2,11 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rollo de Cocina - NEW PEL - Papelera Pierrastegui</title>
-  <link rel="icon" href="../../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../../assets/css/productos.css" />
-  <link rel="stylesheet" href="../../../assets/css/dropdown.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rollo de Cocina New Pel - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -15,64 +14,119 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../../index.html">Inicio</a></li>
-        <li><a href="../../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../../contacto.html">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Rollo de Cocina - NEW PEL</h2>
-      <div class="producto-detalle">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/cocinanp1.jpg" alt="NEW PEL x8 rollos" />
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://http2.mlstatic.com/D_NQ_NP_747603-MLA80019915704_102024-O.webp"
+          alt="Rollo de Cocina New Pel">
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Rollo de cocina color blanco marca New Pel muy económicos y rendidores. Los paños son doble hoja, de 23cm
-            de alto y 16cm de ancho x 200paños cada rollo.
-          </p>
+          <h2>Rollo de Cocina New Pel</h2>
+          <ul>
+            <li>Rollo de cocina New Pel.</li>
+            <li>Presentaciones: Unidad y Bulto (8 rollos).</li>
+          </ul>
 
-          <div id="uni">
-            <p class="precio">Por Unidad: $1.550 ARS</p>
-            <p class="precio">Por Bulto: $11.200 ARS</p>
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tamaño</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="unidad" data-price-unit="1760"
+                data-img="https://http2.mlstatic.com/D_NQ_NP_747603-MLA80019915704_102024-O.webp">Unidad</div>
+              <div class="dropdown-item" data-size="bulto" data-price-unit="12700"
+                data-img="https://http2.mlstatic.com/D_NQ_NP_747603-MLA80019915704_102024-O.webp">Bulto (8 rollos)</div>
+            </div>
           </div>
 
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
+          </div>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="../../assets/js/dropdown.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
+      let selectedSize = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
+
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
+      });
+    });
+  </script>
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-        rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
-
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../../assets/js/social-links.js"></script>
 </body>
 
 </html>
