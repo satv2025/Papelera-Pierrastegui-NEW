@@ -4,36 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Tacos de Papel</title>
+  <title>Tacos - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <style>
-    .contenedor {
-      position: relative;
-      width: 100%;
-      height: 21em;
-      overflow: hidden;
-    }
-
-    .contenedor img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      z-index: 0;
-    }
-
-    .contenedor img.visible {
-      opacity: 1;
-      z-index: 1;
-    }
-  </style>
 </head>
 
 <body>
@@ -41,129 +14,127 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="../../index">Inicio</a></li>
+        <li><a href="../../catalogo">Catálogo</a></li>
+        <li><a href="../../contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Tacos de Papel</h2>
-      <div class="producto-detalle">
-        <div class="contenedor">
-          <img class="visible"
-            src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/tacos%20de%20papel.jpg"
-            alt="Tacos de Papel">
-          <img src="../../assets/images/tacos-papel.jpg">
-          <img src="../../assets/images/tacos-autoadhesivo.jpg">
-        </div>
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/tacos-papel.jpg" alt="Tacos">
+
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Tacos de papel de alta calidad, ideales para oficinas y comercios.</p>
-          <p>Medida 9x9 y vienen en packs de 400 unidades.</p>
+          <h2>Tacos</h2>
+          <ul>
+            <li>Tacos de papel ideales para oficina, escuela o uso personal.</li>
+            <li>Disponibles en versiones blancas, de color y autoadhesivas.</li>
+            <li>Alta calidad y excelente presentación para cualquier necesidad de papelería.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar opción</button>
-            <ul class="dropdown-menu">
-              <li data-precio="1500">Color</li>
-              <li data-precio="2300">Blanco</li>
-              <li data-precio="1100">Auto Adhesivo</li>
-            </ul>
+          <div class="dropdown" id="size-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo de Taco</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-size="color" data-price-unit="1500"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/LIBRER%C3%8DA/tacos%20de%20papel.jpg">
+                Tacos de color</div>
+              <div class="dropdown-item" data-size="blanco" data-price-unit="2300"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/tacos-papel.jpg">
+                Tacos blancos</div>
+              <div class="dropdown-item" data-size="autoadhesivo" data-price-unit="1100"
+                data-img="https://papelerapierrastegui.com.ar/assets/images/tacos-autoadhesivo.jpg">
+                Tacos autoadhesivos</div>
+            </div>
           </div>
 
-          <div id="uni" style="display: none;">
-            <p class="precio" id="precio-mostrar"></p>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
     </div>
   </footer>
 
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
   <script>
-    // Función para hacer el ciclo de imágenes de un contenedor dado
-    function cicloImagenes(contenedor) {
-      const imgs = contenedor.querySelectorAll('img');
-      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
+    document.addEventListener('DOMContentLoaded', () => {
+      const sizeDropdown = document.getElementById('size-dropdown');
+      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
+      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
+      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
 
-      let index = 0;
-      let direccion = 1;
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
+      const productoImg = document.getElementById('producto-img');
 
-      // Asegurar que la primera imagen esté visible y las demás no
-      imgs.forEach((img, i) => {
-        img.classList.toggle('visible', i === 0);
+      let selectedSize = null;
+      let cantidad = 1;
+
+      function updateTotal() {
+        if (!selectedSize) {
+          totalDisplay.textContent = "Total: $0";
+          return;
+        }
+        const total = cantidad * Number(selectedSize.dataset.priceUnit);
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      sizeBtn.addEventListener('click', () => {
+        sizeMenu.classList.toggle('active');
+        sizeBtn.classList.toggle('active');
       });
 
-      setTimeout(() => {
-        setInterval(() => {
-          imgs[index].classList.remove('visible');
+      sizeItems.forEach(item => {
+        item.addEventListener('click', () => {
+          sizeItems.forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          sizeBtn.querySelector('.text').textContent = item.textContent;
+          selectedSize = item;
+          productoImg.src = item.dataset.img;
+          updateTotal();
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        });
+      });
 
-          index += direccion;
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
 
-          if (index === imgs.length - 1 || index === 0) {
-            direccion *= -1;
-          }
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
+      });
 
-          imgs[index].classList.add('visible');
-        }, 1500);
-      }, 1500);
-    }
-
-    // Ejecutar para todos los contenedores que están dentro de producto-img-container
-    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
-
-    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
-    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
-  </script>
-  <script>
-    const dropdownBtn = document.querySelector('.dropdown-btn');
-    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
-    const precioBox = document.getElementById('uni');
-    const precioMostrar = document.getElementById('precio-mostrar');
-
-    dropdownItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const opcion = item.textContent;
-        const precio = parseFloat(item.getAttribute('data-precio'));
-
-        dropdownBtn.textContent = `Seleccionado: ${opcion}`;
-
-        // Formatear número con punto como miles
-        const precioFormateado = precio.toLocaleString('es-AR');
-
-        precioMostrar.textContent = `Precio: ${precioFormateado} ARS`;
-        precioBox.style.display = 'block';
+      document.addEventListener('click', e => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove('active');
+          sizeBtn.classList.remove('active');
+        }
       });
     });
   </script>
-  <script src="../../assets/js/dropdown.js"></script>
 </body>
 
 </html>
