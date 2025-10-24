@@ -121,14 +121,16 @@ button[type="button"]:active {
     border: 2px solid var(--orange);
 }
 
-button#btn-login-google {
+#btn-login-google,
+#btn-register-google {
     background: #fff;
     color: #ff7600;
     border: 2px solid #ff7600;
     height: 3.6em;
 }
 
-button#btn-login-google:hover {
+#btn-login-google:hover,
+#btn-register-google:hover {
     color: #fff;
     background: #ff7600;
     border: 2px solid #ff7600;
