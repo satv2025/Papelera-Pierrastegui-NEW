@@ -172,3 +172,13 @@ a:hover {
         padding: 0.85rem;
     }
 }
+
+#btn-login-google img,
+#btn-register-google img {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    /* separa el ícono del texto */
+}
