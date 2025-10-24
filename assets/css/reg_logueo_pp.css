@@ -79,7 +79,7 @@ input[type="password"] {
 }
 
 input::placeholder {
-    color: rgba(255, 118, 0, 0.6);
+    color: #ff7600;
     font-weight: 700;
 }
 
