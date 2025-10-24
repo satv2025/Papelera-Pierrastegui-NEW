@@ -4,37 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Papelera Pierrastegui - Cinta Bifaz</title>
-  <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="../../assets/css/productos.css">
-  <link rel="stylesheet" href="../../assets/css/dropdown.css">
-  <link rel="stylesheet" href="../../assets/css/dropfolex.css">
-  <style>
-    .contenedor {
-      position: relative;
-      width: 100%;
-      height: 21em;
-      overflow: hidden;
-    }
-
-    .contenedor img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      z-index: 0;
-    }
-
-    .contenedor img.visible {
-      opacity: 1;
-      z-index: 1;
-    }
-  </style>
+  <title>Cinta Bifaz 24 - Papelera Pierrastegui</title>
+  <link rel="icon" href="https://papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
 </head>
 
 <body>
@@ -42,117 +14,75 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="../../index.html">Inicio</a></li>
-        <li><a href="../../catalogo.html">Catálogo</a></li>
-        <li><a href="../../contacto.html">Contacto</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section id="producto-detalle">
-      <h2>Cinta Bifaz</h2>
-      <div class="producto-detalle">
-        <img src="../../assets/images/cinta-bifaz.jpg">
+    <section class="producto container">
+      <div class="producto-contenido">
+        <img id="producto-img" src="https://papelerapierrastegui.com.ar/assets/images/cinta-bifaz.jpg"
+          alt="Cinta Bifaz 24">
         <div class="producto-info">
-          <h3>Descripción del Producto</h3>
-          <p>Cinta bifaz para manualidades. Disponible en dos medidas.</p>
+          <h2>Cinta Bifaz 24</h2>
+          <ul>
+            <li>Cinta doble faz de 24 mm.</li>
+            <li>Alta adhesión para manualidades y fijaciones.</li>
+            <li>Uso en oficina, hogar y escuela.</li>
+          </ul>
 
-          <div class="dropdown">
-            <button class="dropdown-btn">Seleccionar Tamaño</button>
-            <ul class="dropdown-menu">
-              <li data-name="1810" data-price="350">18x10</li>
-              <li data-name="2410" data-price="1.200">24x10</li>
-            </ul>
+          <div class="agregar-carrito-cantidad">
+            <button id="decrementar">-</button>
+            <span id="cantidad-visual">1</span>
+            <button id="incrementar">+</button>
           </div>
 
-          <div id="precio-container" style="display: none;">
-            <p class="precio">Precio: $<span id="precio"></span> ARS</p>
-          </div>
-          <button class="agregar-carrito">Agregar al carrito</button>
+          <p class="total">Total: $0</p>
+          <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
-    <p>2025 © Papelera Pierrastegui</p>
-    <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-    <div class="social-icons">
-      <a href="#" target="_blank" aria-label="Facebook" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/facebook.svg" alt="Facebook">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Instagram" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/instagram.svg" alt="Instagram">
-      </a>
-
-      <a href="#" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/twitter.svg" alt="Twitter">
-      </a>
-
-      <a href="#" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
-        <img src="../../../assets/images/svg/social/whatsapp.svg" alt="WhatsApp">
-      </a>
-    </div>
-  </footer>
-
-  <!-- Script para reemplazar dinámicamente los href -->
-  <script src="../../assets/js/social-links.js"></script>
-  <script src="../../assets/js/dropdown.js"></script>
   <script>
-    // Función para hacer el ciclo de imágenes de un contenedor dado
-    function cicloImagenes(contenedor) {
-      const imgs = contenedor.querySelectorAll('img');
-      if (imgs.length < 2) return; // No tiene sentido si hay menos de 2 imágenes
+    document.addEventListener('DOMContentLoaded', () => {
+      const cantidadVisual = document.getElementById('cantidad-visual');
+      const decBtn = document.getElementById('decrementar');
+      const incBtn = document.getElementById('incrementar');
+      const totalDisplay = document.querySelector('.total');
 
-      let index = 0;
-      let direccion = 1;
+      const precioUnitario = 3000;
+      let cantidad = 1;
 
-      // Asegurar que la primera imagen esté visible y las demás no
-      imgs.forEach((img, i) => {
-        img.classList.toggle('visible', i === 0);
+      function updateTotal() {
+        const total = cantidad * precioUnitario;
+        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+      }
+
+      incBtn.addEventListener('click', () => {
+        cantidad++;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
       });
 
-      setTimeout(() => {
-        setInterval(() => {
-          imgs[index].classList.remove('visible');
-
-          index += direccion;
-
-          if (index === imgs.length - 1 || index === 0) {
-            direccion *= -1;
-          }
-
-          imgs[index].classList.add('visible');
-        }, 1500);
-      }, 1500);
-    }
-
-    // Ejecutar para todos los contenedores que están dentro de producto-img-container
-    document.querySelectorAll('.producto-img-container .contenedor').forEach(cicloImagenes);
-
-    // Ejecutar para todos los contenedores que NO están dentro de producto-img-container
-    document.querySelectorAll('.contenedor:not(.producto-img-container .contenedor)').forEach(cicloImagenes);
-  </script>
-  <script>
-    const dropdownItems = document.querySelectorAll('.dropdown-menu li');
-    const precioSpan = document.getElementById('precio');
-    const precioContainer = document.getElementById('precio-container');
-    const dropdownBtn = document.querySelector('.dropdown-btn');
-
-    dropdownItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const nombre = item.getAttribute('data-name');
-        const precio = item.getAttribute('data-price');
-
-        dropdownBtn.textContent = `Seleccionado: ${nombre}`;
-        precioSpan.textContent = precio;
-        precioContainer.style.display = 'block';
+      decBtn.addEventListener('click', () => {
+        if (cantidad > 1) cantidad--;
+        cantidadVisual.textContent = cantidad;
+        updateTotal();
       });
+
+      updateTotal();
     });
   </script>
+  <footer>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+    </div>
+  </footer>
 </body>
 
 </html>
