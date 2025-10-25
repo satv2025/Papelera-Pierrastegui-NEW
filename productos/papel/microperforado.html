@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marcadores Tiza al Agua x6 - Papelera Pierrastegui</title>
+  <title>Papel MicroPerforado Para Bondiola - Papelera Pierrastegui</title>
   <link rel="icon" href="../../assets/images/favicon.png" type="image/x-icon">
   <link rel="stylesheet" href="../../assets/css/productos.css">
 </head>
@@ -24,24 +24,22 @@
   <main>
     <section class="producto container">
       <div class="producto-contenido">
-        <img id="producto-img" src="https://http2.mlstatic.com/D_NQ_NP_2X_678075-MLU71393606932_082023-F.webp"
-          alt="Marcadores Tiza al Agua x6">
+        <img id="producto-img" src="../../assets/images/microperforado.jpg" alt="Papel MicroPerforado Para Bondiola">
 
         <div class="producto-info">
-          <h2>Marcadores Tiza al Agua x6</h2>
+          <h2>Papel MicroPerforado Para Bondiola</h2>
           <ul>
-            <li>Set de 6 marcadores tipo tiza al agua.</li>
-            <li>Colores intensos, ideales para pizarras negras, vidrios y superficies no porosas.</li>
-            <li>Fáciles de borrar con un paño húmedo.</li>
+            <li>Papel microperforado ideal para envolver bondiola y otros productos alimenticios.</li>
           </ul>
 
+          <!-- Cantidad -->
           <div class="agregar-carrito-cantidad">
-            <button id="decrementar">-</button>
+            <button id="decrementar" aria-label="Disminuir cantidad">-</button>
             <span id="cantidad-visual">1</span>
-            <button id="incrementar">+</button>
+            <button id="incrementar" aria-label="Aumentar cantidad">+</button>
           </div>
 
-          <p class="total">Total: $0</p>
+          <p class="total">Total: $600</p>
           <button class="agregar-carrito">Agregar al Carrito</button>
         </div>
       </div>
@@ -61,8 +59,7 @@
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
       const totalDisplay = document.querySelector('.total');
-
-      const precioUnitario = 24000;
+      const precioUnitario = 600;
       let cantidad = 1;
 
       function updateTotal() {
@@ -81,8 +78,6 @@
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
-
-      updateTotal();
     });
   </script>
 </body>
