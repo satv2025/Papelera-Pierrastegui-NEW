@@ -78,7 +78,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-      // 📦 Datos del producto (con precioPaquete y precioBulto incluidos)
+      // 📦 Datos del producto
       const productos = [
         { size: "(E) 30x40", precioPaquete: 750, paquetesPorBulto: 20, precioBulto: 12600, img: "bolsa%20camiseta%20foto.jpg" },
         { size: "(E) 40x50", precioPaquete: 1200, paquetesPorBulto: 20, precioBulto: 21900, img: "bolsa%20camiseta%20foto.jpg" },
@@ -127,20 +127,26 @@
           tipoDropdown.style.display = "block";
           tipoBtn.querySelector(".text").textContent = "Seleccioná el Tipo";
           tipoMenu.innerHTML = `
-            <div class="dropdown-item" data-type="paquete">
-              Por Paquete (x100) — $${p.precioPaquete.toLocaleString("es-AR")}
-            </div>
-            <div class="dropdown-item" data-type="bulto">
-              Por Bulto (${p.paquetesPorBulto} paquetes) — $${p.precioBulto.toLocaleString("es-AR")}
-            </div>
-          `;
+          <div class="dropdown-item" data-type="paquete">
+            Por Paquete $${p.precioPaquete.toLocaleString("es-AR")}
+          </div>
+          <div class="dropdown-item" data-type="bulto">
+            Bulto (${p.paquetesPorBulto}) $${p.precioBulto.toLocaleString("es-AR")}
+          </div>
+        `;
           totalDisplay.textContent = "Total: $0";
+
+          // cerrar menú tamaño al elegir opción
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
 
           tipoMenu.querySelectorAll(".dropdown-item").forEach(op => {
             op.addEventListener("click", () => {
               tipo = op.dataset.type;
               tipoBtn.querySelector(".text").textContent = op.textContent.split("—")[0].trim();
               actualizarTotal();
+              tipoMenu.classList.remove("active");
+              tipoBtn.classList.remove("active");
             });
           });
         });
@@ -170,13 +176,35 @@
         actualizarTotal();
       });
 
-      // 🎛️ Mostrar/Ocultar menús
-      sizeBtn.addEventListener("click", () => sizeMenu.classList.toggle("active"));
-      tipoBtn.addEventListener("click", () => tipoMenu.classList.toggle("active"));
+      // 🎛️ Dropdowns con flechas independientes
+      sizeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isActive = sizeMenu.classList.toggle("active");
+        sizeBtn.classList.toggle("active", isActive);
+        // Cerrar el otro
+        tipoMenu.classList.remove("active");
+        tipoBtn.classList.remove("active");
+      });
 
-      document.addEventListener("click", e => {
-        if (!sizeDropdown.contains(e.target)) sizeMenu.classList.remove("active");
-        if (!tipoDropdown.contains(e.target)) tipoMenu.classList.remove("active");
+      tipoBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isActive = tipoMenu.classList.toggle("active");
+        tipoBtn.classList.toggle("active", isActive);
+        // Cerrar el otro
+        sizeMenu.classList.remove("active");
+        sizeBtn.classList.remove("active");
+      });
+
+      // 🖱️ Cerrar ambos al hacer clic fuera
+      document.addEventListener("click", (e) => {
+        if (!sizeDropdown.contains(e.target)) {
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
+        }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove("active");
+          tipoBtn.classList.remove("active");
+        }
       });
     });
   </script>
