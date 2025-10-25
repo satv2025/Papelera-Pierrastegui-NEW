@@ -190,7 +190,7 @@ nav ul li a:hover {
     left: 0;
     width: 100%;
     max-width: 14em;
-    max-height: 11em;
+    max-height: 12em;
     overflow-y: auto;
     background-color: #fff;
     border: 2px solid #ff7600;
@@ -382,49 +382,50 @@ footer {
 }
 
 @media (max-width: 480px) {
-  header h1 {
-    font-size: 1.2rem;
-  }
+    header h1 {
+        font-size: 1.2rem;
+    }
 
-  .producto-contenido {
-    padding: 15px;
-  }
+    .producto-contenido {
+        padding: 15px;
+    }
 
-  .producto-contenido h2 {
-    font-size: 1.3rem;
-  }
+    .producto-contenido h2 {
+        font-size: 1.3rem;
+    }
 
-  .dropdown-btn {
-    font-size: 0.9rem;
-    padding: 10px 12px;
-  }
+    .dropdown-btn {
+        font-size: 0.9rem;
+        padding: 10px 12px;
+    }
 
-  .total {
-    font-size: 1.1rem;
-  }
+    .total {
+        font-size: 1.1rem;
+    }
 
-  .agregar-carrito {
-    width: 100%;
-    text-align: center;
-  }
+    .agregar-carrito {
+        width: 100%;
+        text-align: center;
+    }
 
-  .producto-info {
-    padding-left: 0;
-  }
+    .producto-info {
+        padding-left: 0;
+    }
 
-  /* 🔧 Ajuste para nav */
-  nav ul {
-    display: flex;
-    flex-direction: row; /* ← aquí el cambio clave */
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 15px;
-    margin-top: 0em;
-    margin-bottom: 0em;
-  }
+    /* 🔧 Ajuste para nav */
+    nav ul {
+        display: flex;
+        flex-direction: row;
+        /* ← aquí el cambio clave */
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 15px;
+        margin-top: 0em;
+        margin-bottom: 0em;
+    }
 
-  nav li {
-    display: inline-block;
-    margin: 0 5px;
-  }
+    nav li {
+        display: inline-block;
+        margin: 0 5px;
+    }
 }
