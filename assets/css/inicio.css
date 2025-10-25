@@ -1060,8 +1060,8 @@ img.icon-right:Hover {
 /* Botón de cierre */
 .close-btn {
   position: absolute;
-  top: 50%;
-  right: 15px;
+  top: 21%;
+  right: -14em;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -1148,7 +1148,8 @@ img.icon-right:Hover {
   }
 
   .close-btn {
-    font-size: 1.2em;
-    right: 8px;
+    font-size: 3em;
+    right: 12px;
+    top: 0.5em;
   }
 }
