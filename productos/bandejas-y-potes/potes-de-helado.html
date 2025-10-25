@@ -117,41 +117,72 @@
         totalDisplay.textContent = `Total: $${(cantidad * Number(price)).toLocaleString('es-AR')}`;
       }
 
-      sizeBtn.addEventListener('click', () => {
-        sizeMenu.classList.toggle('active');
-        sizeBtn.classList.toggle('active');
+      // Helpers para abrir/cerrar con sincronía de clase .active en el botón (flecha)
+      function toggleDropdown(btn, menu) {
+        const isOpen = menu.classList.toggle('active');
+        btn.classList.toggle('active', isOpen);
+        btn.setAttribute('aria-expanded', String(isOpen));
+      }
+      function closeDropdown(btn, menu) {
+        menu.classList.remove('active');
+        btn.classList.remove('active');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+
+      // Tamaño
+      sizeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // al abrir uno, cerramos el otro
+        closeDropdown(tipoBtn, tipoMenu);
+        toggleDropdown(sizeBtn, sizeMenu);
       });
 
       sizeItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // seleccionar tamaño
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           selectedSize = item;
+
           productoImg.src = item.dataset.img;
           sizeBtn.querySelector('.text').textContent = item.textContent;
+
+          // mostrar dropdown Tipo y resetear selección
           tipoDropdown.style.display = 'block';
           selectedTipo = null;
           tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+
           updateTotal();
-          sizeMenu.classList.remove('active');
+
+          // cerrar menú y “desgirar” flecha
+          closeDropdown(sizeBtn, sizeMenu);
         });
       });
 
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
+      // Tipo
+      tipoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // al abrir uno, cerramos el otro
+        closeDropdown(sizeBtn, sizeMenu);
+        toggleDropdown(tipoBtn, tipoMenu); // << antes no marcabas el botón como activo
       });
 
       tipoItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
           tipoItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
           selectedTipo = item.dataset.type;
           tipoBtn.querySelector('.text').textContent = item.textContent;
           updateTotal();
-          tipoMenu.classList.remove('active');
+
+          // cerrar menú y “desgirar” flecha
+          closeDropdown(tipoBtn, tipoMenu);
         });
       });
 
+      // Cantidad
       incBtn.addEventListener('click', () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
@@ -162,6 +193,12 @@
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
         updateTotal();
+      });
+
+      // Cerrar dropdowns al hacer click fuera
+      document.addEventListener('click', () => {
+        closeDropdown(sizeBtn, sizeMenu);
+        closeDropdown(tipoBtn, tipoMenu);
       });
     });
   </script>
