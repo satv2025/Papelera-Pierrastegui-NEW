@@ -1026,3 +1026,129 @@ img.icon-right:Hover {
   background: #fff !important;
   border: 2px solid #000 !important;
 }
+
+/* Banner de mantenimiento - ocupa todo el ancho */
+.maintenance-modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #fff;
+  border-top: 3px solid #ff7600;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+  /* permite clics en los enlaces */
+  animation: slideUp 0.5s ease-out forwards;
+  display: flex;
+  justify-content: center;
+}
+
+/* Contenedor interno del texto */
+.maintenance-box {
+  color: #ff7600;
+  font-family: 'Gilroy', sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: center;
+  padding: 0.8em 1em;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+}
+
+/* Botón de cierre */
+.close-btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #ff7600;
+  font-size: 1.6em;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  opacity: 0.6;
+}
+
+/* Texto y enlaces */
+.maintenance-content h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3em;
+  font-weight: 700;
+}
+
+.maintenance-content p {
+  font-size: 0.9rem;
+  margin: 0.2em 0;
+  display: inline;
+}
+
+.maintenance-content a {
+  color: #ff7600;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.maintenance-content a:hover {
+  color: #d75a00;
+}
+
+/* Animación suave */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 768px) {
+  .maintenance-box {
+    font-size: 14px;
+    padding: 0.8em 2.5em 0.8em 1em;
+  }
+
+  .maintenance-content h3 {
+    font-size: 0.95rem;
+  }
+
+  .maintenance-content p {
+    font-size: 0.85rem;
+  }
+
+  .close-btn {
+    font-size: 1.4em;
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .maintenance-box {
+    font-size: 13px;
+    padding: 0.9em 2.3em 0.9em 1em;
+  }
+
+  .maintenance-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .maintenance-content p {
+    font-size: 0.8rem;
+  }
+
+  .close-btn {
+    font-size: 1.2em;
+    right: 8px;
+  }
+}
