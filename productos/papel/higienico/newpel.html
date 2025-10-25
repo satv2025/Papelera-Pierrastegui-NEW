@@ -14,7 +14,7 @@
     <h1>Papelera Pierrastegui</h1>
     <nav>
       <ul>
-        <li><a href="https://papelerapierrastegui.com.ar/index">Inicio</a></li>
+        <li><a href="https://papelerapierrastegui.com.ar/">Inicio</a></li>
         <li><a href="https://papelerapierrastegui.com.ar/catalogo">Catálogo</a></li>
         <li><a href="https://papelerapierrastegui.com.ar/contacto">Contacto</a></li>
       </ul>
@@ -27,6 +27,7 @@
         <img id="producto-img"
           src="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGI%C3%89NICO%20-%20ROLLO%20DE%20COCINA/Higi%C3%A9nico%20new%20pel%20l%C3%ADnea%20premium%20triple%20hoja.jpg"
           alt="Papel Higiénico New Pel">
+
         <div class="producto-info">
           <h2>Papel Higiénico New Pel</h2>
           <ul>
@@ -34,24 +35,38 @@
             <li>Presentaciones: Económico, Premium Doble Hoja y Premium Triple Hoja.</li>
           </ul>
 
+          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="economico_bulto" data-price-unit="13500"
+              <div class="dropdown-item" data-size="economico" data-pack="30 Rollos" data-price-unit="13500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGI%C3%89NICO%20-%20ROLLO%20DE%20COCINA/Higi%C3%A9nico%20new%20pel%20l%C3%ADnea%20premium%20triple%20hoja.jpg">
-                Económico (Bulto: 30 Rollos)
+                Económico
               </div>
-              <div class="dropdown-item" data-size="premium_doble_bulto" data-price-unit="9500"
+
+              <div class="dropdown-item" data-size="premium_doble" data-pack="10 Rollos" data-price-unit="9500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGI%C3%89NICO%20-%20ROLLO%20DE%20COCINA/Higi%C3%A9nico%20new%20pel%20l%C3%ADnea%20premium%20triple%20hoja.jpg">
-                Premium Doble Hoja (Bulto: 10 Rollos)
+                Premium Doble Hoja
               </div>
-              <div class="dropdown-item" data-size="premium_triple_bulto" data-price-unit="12500"
+
+              <div class="dropdown-item" data-size="premium_triple" data-pack="10 Rollos" data-price-unit="12500"
                 data-img="https://papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/PAPEL%20HIGI%C3%89NICO%20-%20ROLLO%20DE%20COCINA/Higi%C3%A9nico%20new%20pel%20l%C3%ADnea%20premium%20triple%20hoja.jpg">
-                Premium Triple Hoja (Bulto: 10 Rollos)
+                Premium Triple Hoja
               </div>
+            </div>
+          </div>
+
+          <!-- Dropdown Tipo (solo Bulto, autoseleccionado) -->
+          <div class="dropdown" id="tipo-dropdown">
+            <button class="dropdown-btn">
+              <span class="text">Seleccioná El Tipo</span>
+              <span class="arrow">▼</span>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" data-type="bulto">Bulto</div>
             </div>
           </div>
 
@@ -68,12 +83,25 @@
     </section>
   </main>
 
+  <footer>
+    <div class="container-footer">
+      <p>2025 © Papelera Pierrastegui</p>
+      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
+    </div>
+  </footer>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const sizeDropdown = document.getElementById('size-dropdown');
       const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
       const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
       const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+
+      const tipoDropdown = document.getElementById('tipo-dropdown');
+      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
+      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
+      const tipoItem = tipoMenu.querySelector('.dropdown-item'); // único ítem: Bulto
+
       const cantidadVisual = document.getElementById('cantidad-visual');
       const decBtn = document.getElementById('decrementar');
       const incBtn = document.getElementById('incrementar');
@@ -81,35 +109,74 @@
       const productoImg = document.getElementById('producto-img');
 
       let selectedSize = null;
+      let tipo = '';
       let cantidad = 1;
 
+      // Oculto hasta elegir tamaño
+      tipoDropdown.style.display = 'none';
+
       function updateTotal() {
-        if (!selectedSize) {
+        if (!selectedSize || tipo === '') {
           totalDisplay.textContent = "Total: $0";
           return;
         }
+        // Precio por "Bulto" en data-price-unit
         const total = cantidad * Number(selectedSize.dataset.priceUnit);
         totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
       }
 
+      // Toggle menús
       sizeBtn.addEventListener('click', () => {
         sizeMenu.classList.toggle('active');
         sizeBtn.classList.toggle('active');
       });
 
+      tipoBtn.addEventListener('click', () => {
+        tipoMenu.classList.toggle('active');
+        tipoBtn.classList.toggle('active');
+      });
+
+      // Selección de tamaño
       sizeItems.forEach(item => {
         item.addEventListener('click', () => {
           sizeItems.forEach(i => i.classList.remove('selected'));
           item.classList.add('selected');
+
+          // Actualizo botón de tamaño
           sizeBtn.querySelector('.text').textContent = item.textContent;
           selectedSize = item;
+
+          // Cambio imagen
           productoImg.src = item.dataset.img;
+
+          // Muestro dropdown de Tipo y AUTOCOMPLETO "Bulto ({paquetesocantidadporbulto})"
+          const packText = item.dataset.pack || '';
+          tipoDropdown.style.display = 'block';
+
+          // Autoselecciono "Bulto" y actualizo etiquetas
+          tipo = 'bulto';
+          tipoItem.classList.add('selected');
+          tipoBtn.querySelector('.text').textContent = `Bulto (${packText})`;
+          tipoItem.textContent = `Bulto (${packText})`;
+
           updateTotal();
+
+          // Cierro menú de tamaño
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
         });
       });
 
+      // (Si el usuario reabre el dropdown de tipo y toca el mismo ítem)
+      tipoItem.addEventListener('click', () => {
+        tipo = 'bulto';
+        // Mantengo el texto con el pack ya seteado
+        tipoMenu.classList.remove('active');
+        tipoBtn.classList.remove('active');
+        updateTotal();
+      });
+
+      // Cantidad
       incBtn.addEventListener('click', () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
@@ -122,21 +189,19 @@
         updateTotal();
       });
 
+      // Cerrar menús al click afuera
       document.addEventListener('click', e => {
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove('active');
           sizeBtn.classList.remove('active');
         }
+        if (!tipoDropdown.contains(e.target)) {
+          tipoMenu.classList.remove('active');
+          tipoBtn.classList.remove('active');
+        }
       });
     });
   </script>
-
-  <footer>
-    <div class="container-footer">
-      <p>2025 © Papelera Pierrastegui</p>
-      <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-    </div>
-  </footer>
 </body>
 
 </html>
