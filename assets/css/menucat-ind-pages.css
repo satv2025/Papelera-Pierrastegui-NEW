@@ -160,7 +160,6 @@
     .wp:hover img,
     .mail:hover img,
     .ig:hover img,
-    .carrito-pro:hover img,
     .mi-cuenta:hover img {
         filter: brightness(0) saturate(100%) invert(0%) sepia(30%) saturate(7%) hue-rotate(151deg) brightness(105%) contrast(101%);
     }
@@ -1429,7 +1428,6 @@
     .wp:hover img,
     .mail:hover img,
     .ig:hover img,
-    .carrito-pro:hover img,
     .mi-cuenta:hover img {
         filter: brightness(0) saturate(100%) invert(0%) sepia(30%) saturate(7%) hue-rotate(151deg) brightness(105%) contrast(101%);
     }
