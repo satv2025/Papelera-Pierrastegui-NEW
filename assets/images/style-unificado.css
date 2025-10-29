@@ -1,0 +1,365 @@
+/* =============================
+   1️⃣ IMPORTS Y VARIABLES GLOBALES
+   ============================= */
+@import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #ff7600;
+  --text-color: #ff7600;
+  --background-color: #fff;
+}
+
+/* =============================
+   2️⃣ RESET Y BASE TIPOGRÁFICA
+   ============================= */
+* {
+  font-family: 'Gilroy', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1em;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::placeholder {
+  color: var(--primary-color);
+  opacity: 1;
+}
+
+/* =============================
+   3️⃣ HEADER GENERAL
+   ============================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background-color: #fff;
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+/* --- LOGO Y NOMBRE --- */
+#pp-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: -2.6em;
+}
+
+#pp-logo img {
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  transition: border-color 0.3s ease;
+  position: relative;
+  top: 2.9em;
+  left: -3.8em;
+}
+
+#pp-logo:hover img {
+  border-color: #000;
+}
+
+#pp-logo span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: -0.9em;
+  color: var(--primary-color);
+}
+
+/* =============================
+   4️⃣ BUSCADOR
+   ============================= */
+.search-bar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 53em;
+  margin: 0 2rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.4em;
+  padding: 0.2em 0.5em;
+  background: #fff;
+}
+
+.search-bar input {
+  flex-grow: 1;
+  border: none;
+  font-size: 1rem;
+  padding: 1em 0.8rem;
+  outline: none;
+  background: #fff;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.search-bar img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  user-select: none;
+  filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%);
+}
+
+/* =============================
+   5️⃣ ICONOS Y ENLACES DE USUARIO
+   ============================= */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.9rem;
+  flex-wrap: nowrap;
+  margin-right: 19em;
+}
+
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.icon-text:hover {
+  color: #000;
+}
+
+.icon-right,
+.mail-icon,
+.cart-icon {
+  width: 36px;
+  height: auto;
+  filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%);
+  transition: filter 0.3s ease;
+}
+
+/* =============================
+   6️⃣ BOTONES Y DROPDOWNS
+   ============================= */
+button.btn-login {
+  color: var(--primary-color);
+  font-weight: 700;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.3em;
+  padding: 0.2em 0.6em;
+  background: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  width: 13em;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+button.btn-login:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width: 13em;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: -12px;
+  background-color: #fff;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.3em;
+  min-width: 100%;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  margin-top: 0.2em;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.dropdown.show .dropdown-content {
+  display: block;
+}
+
+.dropdown-content button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.dropdown-content button:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+/* =============================
+   7️⃣ NAVBAR PRINCIPAL
+   ============================= */
+.main-navbar {
+  position: relative;
+  width: 100%;
+  color: var(--primary-color);
+  text-transform: capitalize;
+  font-size: 1.3em;
+  border-bottom: 3px solid var(--primary-color);
+  box-shadow: 0 4px 10px var(--primary-color);
+  background-color: #fff;
+  padding: 0.4em 4em;
+}
+
+.nav-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  position: relative;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.nav-item>a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.nav-item:hover>a {
+  color: #000;
+}
+
+/* =============================
+   8️⃣ MENÚ DE CATEGORÍAS (Horizontal)
+   ============================= */
+.category-menu {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-left: 2em;
+  margin-bottom: 1.8em;
+  font-size: 1.1em;
+  border-radius: 0.3em;
+  scrollbar-width: none;
+}
+
+.category-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.category-menu>span,
+.more-dropdown>.more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.8em;
+  min-width: 4.5em;
+  cursor: pointer;
+  padding: 0 0.8em;
+  border: 3px solid var(--primary-color);
+  background: #fff;
+  color: var(--primary-color);
+  font-weight: 700;
+  transition: all 0.3s ease;
+  user-select: none;
+  text-align: center;
+}
+
+.category-menu>span:hover,
+.more-dropdown>.more-btn:hover,
+.category-menu>span.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* =============================
+   9️⃣ SIDEBAR MÓVIL Y MENU HAMBURGUESA
+   ============================= */
+.menu-toggle {
+  display: none;
+}
+
+#pp-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: #ccc;
+  color: #3b2d00;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 1500;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+  display: none;
+}
+
+#pp-sidebar.open {
+  left: 0;
+  display: block;
+}
+
+/* =============================
+   🔟 MEDIA QUERIES
+   ============================= */
+@media (max-width: 992px) {
+  .menu-toggle {
+    display: block;
+    position: relative;
+    top: 1rem;
+    left: 2rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3b2d00;
+    z-index: 2001;
+  }
+
+  .main-navbar,
+  .search-bar,
+  .pp-nav-links {
+    display: none !important;
+  }
+
+  #pp-sidebar {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 600px) {
+  header {
+    display: block;
+    text-align: center;
+  }
+
+  .btn-login {
+    display: none !important;
+  }
+
+  .nav-links {
+    width: 7em;
+    justify-content: center;
+    margin: 0 auto;
+  }
+}

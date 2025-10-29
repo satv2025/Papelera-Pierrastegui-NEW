@@ -55,14 +55,6 @@
         color: var(--primary-color);
     }
 
-    #pp-logo span:hover {
-        color: #000;
-    }
-
-    header a:hover {
-        color: #000;
-    }
-
     .pp-logo:hover a,
     .pp-logo:hover span {
         color: #000;
@@ -112,7 +104,7 @@
         align-items: center;
         gap: 1.9rem;
         flex-wrap: nowrap;
-        margin-right: 5em;
+        margin-right: 19em;
     }
 
     .icon-text {
@@ -134,21 +126,8 @@
     .cart-icon {
         width: 36px;
         height: auto;
-        filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%) !important;
+        filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%);
         transition: filter 0.3s ease;
-    }
-
-    #mi-cuenta-container img {
-        position: relative;
-        left: 39em;
-    }
-
-    img.icon-right {}
-
-    .mi-cuenta img {
-        position: relative;
-        left: 9em;
-        top: -0.7em;
     }
 
     .mail-icon {
@@ -177,8 +156,6 @@
         width: 13em;
         transition: background 0.3s ease, color 0.3s ease;
         text-align: center;
-        top: 1.4em;
-        position: relative;
     }
 
     button.btn-login:hover {
@@ -268,7 +245,6 @@
         box-shadow: 0 4px 10px var(--primary-color);
         background-color: #fff;
         padding: 0.4em 4em;
-        height: 3.86em;
     }
 
     .nav-items {
@@ -295,17 +271,16 @@
 
     /* --- MENÚS DESPLEGABLES --- */
     .dropdown-menu {
+        display: none;
         position: absolute;
         top: 100%;
         left: 0;
-        background: #fff;
+        background-color: #fff;
         border: 3px solid var(--primary-color);
         border-radius: 0.3em;
         min-width: 250px;
-        z-index: 9999;
-        /* Asegura visibilidad */
-        overflow: visible !important;
-        /* Muy importante */
+        z-index: 1000;
+        font-weight: 700;
     }
 
     .dropdown:hover .dropdown-menu {
@@ -316,8 +291,6 @@
         position: relative;
     }
 
-    .dropdown-submenu {}
-
     .dropdown-submenu>a {
         display: block;
         padding: 0.5rem 1rem;
@@ -326,27 +299,8 @@
     }
 
     .dropdown-submenu>a:hover {
-        background-color: var(--primary-color) !important;
-        color: #fff !important;
-    }
-
-    .menuheight {
-        max-height: unset;
-    }
-
-    .dropdown-submenu .submenu {
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 100%;
-        /* Hace que salga al costado derecho */
-        background: #fff;
-        border: 3px solid var(--primary-color);
-        border-radius: 0.3em;
-        min-width: 220px;
-        z-index: 10000;
-        /* Más alto que el menú padre */
-        overflow: visible;
+        background-color: var(--primary-color);
+        color: #fff;
     }
 
     .submenu {
@@ -359,11 +313,8 @@
         border-radius: 0.3em;
         min-width: 220px;
         text-transform: capitalize;
-        z-index: 4000000;
-        z-index: 600000000000000;
     }
 
-    /* Mostrar submenu al pasar el mouse */
     .dropdown-submenu:hover .submenu {
         display: block;
     }
@@ -374,7 +325,6 @@
         color: var(--primary-color);
         transition: background-color 0.2s, color 0.2s;
         text-decoration: none;
-        width: 16em;
     }
 
     .submenu a:hover {
@@ -987,10 +937,6 @@
         }
     }
 
-    .menuheight {
-        font-weight: 700;
-    }
-
     /* Grandes pantallas 1400px - 1800px */
     @media (max-width: 1800px) and (min-width: 1401px) {
         .category-menu {
@@ -1064,50 +1010,4 @@
         display: flex;
         flex-direction: column;
         z-index: 2000;
-    }
-
-    /* Quita cualquier subrayado o color azul de los enlaces dentro del header */
-    header a {
-        text-decoration: none !important;
-        text-decoration-line: none !important;
-        text-decoration-color: transparent !important;
-        color: inherit !important;
-    }
-
-    /* Asegura que en hover no vuelva el subrayado azul */
-    header a:hover {
-        text-decoration: none;
-        color: #000;
-    }
-
-    /* --- FIX COMPLETO PARA HOVER EN SUBMENÚ --- */
-
-    /* Asegura que el enlace padre esté por encima del submenú */
-    .main-navbar .dropdown-submenu>a {
-        position: relative;
-        z-index: 20000;
-        /* Más alto que la capa del submenu */
-        display: block;
-        padding: 0.6rem 1rem;
-        color: var(--primary-color);
-        background-color: #fff;
-        transition: background-color 0.2s, color 0.2s;
-    }
-
-    /* Color en hover (aunque se superponga el submenu) */
-    .main-navbar .dropdown-submenu:hover>a,
-    .main-navbar .dropdown-submenu>a:hover {
-        background-color: var(--primary-color) !important;
-        color: #fff !important;
-    }
-
-    /* Opcional: mejorar contraste de submenú */
-    .main-navbar .submenu a:hover {
-        background-color: var(--primary-color);
-        color: #fff;
-    }
-
-    /* Corrige interferencia del header global */
-    header a:hover {
-        text-decoration: none;
     }

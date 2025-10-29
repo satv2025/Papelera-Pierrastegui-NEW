@@ -1,0 +1,110 @@
+@import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #ff7600;
+}
+
+/* Reset general */
+* {
+    font-family: 'Gilroy', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- HEADER GENERAL --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    flex-wrap: wrap;
+    background-color: #fff;
+    border-bottom: 3px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+/* --- LOGO Y NOMBRE --- */
+#pp-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: -2.6em;
+}
+
+#pp-logo img {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    width: 65px;
+    height: 65px;
+    transition: border-color 0.3s ease;
+    position: relative;
+    top: 2.9em;
+    left: -3.8em;
+}
+
+#pp-logo:hover img {
+    border-color: #000;
+}
+
+#pp-logo span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: -0.9em;
+    color: var(--primary-color);
+}
+
+.pp-logo:hover a,
+.pp-logo:hover span {
+    color: #000;
+}
+
+/* --- BUSCADOR --- */
+.search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 53em;
+    margin: 0 2rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 0.4em;
+    padding: 0.2em 0.5em;
+    background: #fff;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    border: none;
+    font-size: 1rem;
+    padding: 1em 0.8rem;
+    outline: none;
+    background: #fff;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.search-bar img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    user-select: none;
+    filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%);
+}
+
+/* Placeholder */
+::placeholder {
+    color: var(--primary-color);
+    opacity: 1;
+}
+
+/* --- NAV LINKS (Mail, IG, WP, Carrito, Cuenta) --- */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.9rem;
+    flex-wrap: nowrap;
+    margin-right: 19em;
+}
+
+/* ... resto del código completo ... */
