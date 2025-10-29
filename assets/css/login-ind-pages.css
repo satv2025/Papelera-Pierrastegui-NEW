@@ -1,66 +1,4 @@
-/* ===============================
-   🔸 ESTRUCTURA BASE
-================================ */
-.mi-cuenta {
-    margin-left: -1em;
-    width: 1em;
-}
-
-/* Ícono de usuario (SVG de cuenta) */
-.mi-cuenta img.icon-right {
-    position: absolute;
-    top: 1.8em;
-    margin-left: 13.6em;
-    filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
-    transition: filter 0.1s ease-in-out;
-}
-
-/* Hover sobre ícono */
-.mi-cuenta:hover img {
-    filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
-}
-
-/* Cuando el menú está abierto */
-.mi-cuenta.open img.icon-right {
-    filter: brightness(0) saturate(100%) invert(0%) sepia(32%) saturate(0%) hue-rotate(339deg) brightness(95%) contrast(101%) !important;
-}
-
-/* ===============================
-   🔸 CONTENEDOR
-================================ */
-#mi-cuenta-container {
-    position: relative;
-    top: 0em;
-    margin-right: 10em;
-}
-
-/* ===============================
-   🔸 BOTONES (login / droplogin)
-================================ */
-button.btn-login {
-    color: #ff7600;
-    font-weight: 700;
-    border: 2px solid #ff7600;
-    border-radius: 0.3em;
-    padding: 0.2em 0.6em;
-    background: #fff;
-    cursor: pointer;
-    font-size: 16px;
-    width: 13em;
-    transition: background 0.3s ease, color 0.3s ease;
-    text-align: center;
-    margin-left: 0.78em;
-}
-
-button.btn-login:hover {
-    color: #000 !important;
-    background: #fff !important;
-    border: 2px solid #000 !important;
-}
-
-/* ===============================
-   🔸 DROPLOGIN
-================================ */
+/* Dropdown estilo simple — versión personalizada para login */
 .droplogin {
     position: relative;
     display: inline-block;
@@ -75,32 +13,23 @@ button.btn-login:hover {
     background-color: #fff;
     min-width: 120px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    border: 2px solid #ff7600;
-    border-radius: 0.3em;
     z-index: 10;
-    margin-top: 0.2em;
+    border-radius: 0.3em;
     overflow: hidden;
+    border: 2px solid #ff7600;
+    margin-top: 0.2em;
     width: 100%;
 }
 
-.droplogin.show .droplogin-content {
-    display: block;
-}
-
-/* ===============================
-   🔸 BOTONES DENTRO DEL DROPLOGIN
-================================ */
+/* Botones dentro del droplogin */
 .droplogin-content button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    justify-content: flex-start;
     width: 100%;
+    background: none;
     padding: 8px 12px;
     border: none;
-    background: none;
     cursor: pointer;
     text-align: center;
+    shape-rendering: geometricprecision;
 }
 
 .droplogin-content button:hover {
@@ -108,39 +37,60 @@ button.btn-login:hover {
     background-color: #ff7600;
 }
 
-/* ===============================
-   🔸 ÍCONOS DENTRO DEL DROPLOGIN
-================================ */
+/* Mostrar el contenido cuando está activo */
+.droplogin.show .droplogin-content {
+    display: block;
+}
+
+/* Íconos dentro del dropdown */
+.droplogin-content button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
 .droplogin-content button img.icon-dropdown {
     width: 18px;
     height: 18px;
     filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
     transition: transform 0.3s ease, filter 0.3s ease;
-    pointer-events: none;
 }
 
-/* Ícono de salida girado */
+/* Rotación horizontal del ícono de salida */
 .icon-logout {
     transform: scaleX(-1);
 }
 
-/* Hover sobre íconos del droplogin */
+/* Hover: íconos blancos al pasar */
 .droplogin-content button:hover img.icon-dropdown {
     filter: brightness(0) invert(1);
 }
 
-/* ===============================
-   🔸 RESPONSIVE
-================================ */
+/* Estado normal del icono principal */
+.mi-cuenta img.icon-right {
+    filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
+    transition: filter 0.1s ease-in-out;
+}
+
+/* Cuando el menú está abierto */
+.mi-cuenta.open img.icon-right {
+    filter: brightness(0) saturate(100%) invert(0%) sepia(32%) saturate(0%) hue-rotate(339deg) brightness(95%) contrast(101%) !important;
+}
+
+/* Cuando el menú está abierto, también cambia el botón */
+.mi-cuenta.open .btn-login {
+    color: #000 !important;
+    background: #fff !important;
+    border: 2px solid #000 !important;
+}
+
+/* Responsivo */
 @media (max-width: 600px) {
     .mi-cuenta img.icon-right {
         position: relative !important;
         top: -0.2em;
         margin-left: 0.3em;
         cursor: pointer;
-    }
-
-    .btn-login {
-        display: none !important;
     }
 }
