@@ -9,7 +9,7 @@
 .droplogin-content {
     display: none;
     position: absolute;
-    right: -12px;
+    right: 0px;
     background-color: #fff;
     min-width: 120px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -17,7 +17,8 @@
     border-radius: 0.3em;
     overflow: hidden;
     border: 2px solid #ff7600;
-    margin-top: 0.2em;
+    margin-top: 1.6em;
+    color: #ff7600;
     width: 100%;
 }
 
@@ -30,6 +31,8 @@
     cursor: pointer;
     text-align: center;
     shape-rendering: geometricprecision;
+    color: #ff7600;
+    font-weight: 700;
 }
 
 .droplogin-content button:hover {
