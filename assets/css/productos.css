@@ -235,6 +235,10 @@ nav ul li a:hover {
     color: #ff7600;
 }
 
+.dropdown-btn:hover .arrow {
+    color: white;
+}
+
 .cantidad-container button,
 .agregar-carrito-cantidad button {
     background-color: #ff7600;
