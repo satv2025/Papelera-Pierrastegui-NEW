@@ -136,6 +136,7 @@
         height: auto;
         filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%) !important;
         transition: filter 0.3s ease;
+        cursor: pointer
     }
 
     #mi-cuenta-container img {
