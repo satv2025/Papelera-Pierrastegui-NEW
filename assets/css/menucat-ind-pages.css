@@ -1254,6 +1254,29 @@
         padding: 0;
     }
 
+    .dropcart-remove,
+    .dropcart-add,
+    .dropcart-rest {
+        color: #ff7600;
+        border: 2px solid #ff7600;
+        padding-top: 0.1em;
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+        padding-bottom: 0.1em;
+        font-weight: 700;
+        border-radius: 0.3em;
+        background: #fff;
+        cursor: pointer;
+    }
+
+    .dropcart-remove:hover,
+    .dropcart-add:hover,
+    .dropcart-rest:hover {
+        background: #ff7600;
+        color: #fff;
+        border: 2px solid #ff7600;
+    }
+
     button#dropcart-close {
         color: #ff7600;
         font-family: 'Gilroy';
