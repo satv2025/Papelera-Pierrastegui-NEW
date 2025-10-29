@@ -288,59 +288,75 @@ span.more-btn {
 }
 
 
-/* CARRITO */
-/* --- Dropcart --- */
-.carrito-pro {
+.dropcart-container {
+    position: relative;
+}
+
+.cart-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
     position: relative;
 }
 
 .cart-badge {
     position: absolute;
     top: -6px;
-    right: -6px;
+    right: -8px;
     background: #e53935;
     color: #fff;
     font-size: 12px;
     line-height: 1;
     padding: 3px 6px;
-    border-radius: 999px;
-    min-width: 18px;
-    text-align: center;
-    transform: translate(-20%, 20%);
+    border-radius: 50%;
 }
 
 .dropcart {
     position: absolute;
+    top: 130%;
     right: 0;
-    top: 120%;
-    width: 340px;
-    max-height: 70vh;
     background: #fff;
-    border: 1px solid #eee;
     border-radius: 12px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, .12);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    width: 340px;
     display: none;
+    flex-direction: column;
     overflow: hidden;
-    z-index: 1000;
+    animation: fadeDown 0.2s ease-out;
+    z-index: 9999;
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .dropcart.show {
     display: flex;
-    flex-direction: column;
 }
 
 .dropcart-header,
 .dropcart-footer {
-    padding: 12px 14px;
+    padding: 10px 14px;
     background: #fafafa;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
 }
 
 .dropcart-items {
-    padding: 8px 14px;
+    max-height: 260px;
     overflow-y: auto;
+    padding: 10px 14px;
 }
 
 .dropcart-item {
@@ -348,8 +364,8 @@ span.more-btn {
     grid-template-columns: 48px 1fr auto;
     gap: 10px;
     align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
 }
 
 .dropcart-item:last-child {
@@ -359,13 +375,13 @@ span.more-btn {
 .dropcart-item img {
     width: 48px;
     height: 48px;
-    object-fit: cover;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .dropcart-title {
-    font-size: 14px;
     font-weight: 600;
+    font-size: 14px;
 }
 
 .dropcart-sub {
@@ -378,51 +394,21 @@ span.more-btn {
     font-size: 14px;
 }
 
-.dropcart-qty {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.dropcart-qty button {
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
-    border: 1px solid #ddd;
-    background: #fff;
-    cursor: pointer;
-}
-
-.dropcart-remove {
-    background: none;
-    border: none;
-    color: #d32f2f;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 0;
-}
-
-.dropcart-close {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-}
-
+.btn-ghost,
 .btn-primary {
-    display: inline-block;
-    text-align: center;
-    padding: 10px 12px;
+    font-size: 13px;
     border-radius: 8px;
-    background: #111;
-    color: #fff;
-    text-decoration: none;
+    padding: 6px 10px;
+    cursor: pointer;
 }
 
 .btn-ghost {
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     background: #fff;
-    cursor: pointer;
+}
+
+.btn-primary {
+    background: #e53935;
+    color: #fff;
+    border: none;
 }

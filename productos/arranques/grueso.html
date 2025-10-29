@@ -51,33 +51,32 @@
             src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg">
         </a>
       </div>
-      <div class="carrito-pro">
-        <a aria-label="Carrito" class="icon-text" id="cart-toggle" href="javascript:void(0)">
+      <div class="carrito-pro dropcart-container">
+        <div class="icon-text cart-trigger" id="cart-toggle">
           <span id="red">Carrito</span>
           <img alt="Carrito" class="cart-icon"
             src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg">
           <span class="cart-badge" id="cart-badge">0</span>
-        </a>
+        </div>
 
         <!-- Dropdown del carrito -->
         <div class="dropcart" id="dropcart">
           <div class="dropcart-header">
             <strong>Tu Carrito</strong>
-            <button class="dropcart-close" id="dropcart-close" aria-label="Cerrar">✕</button>
+            <button class="dropcart-close" id="dropcart-close">✕</button>
           </div>
 
           <div class="dropcart-items" id="dropcart-items">
-            <!-- Items dinamicos -->
+            <p class="empty">Tu carrito está vacío</p>
           </div>
 
           <div class="dropcart-footer">
             <div class="dropcart-total">
-              <span>Total:</span>
-              <strong id="dropcart-total">$0</strong>
+              <span>Total:</span><strong id="dropcart-total">$0</strong>
             </div>
             <div class="dropcart-actions">
               <button id="dropcart-empty" class="btn-ghost">Vaciar</button>
-              <a id="dropcart-checkout" class="btn-primary" href="/checkout">Finalizar compra</a>
+              <a id="dropcart-checkout" class="btn-primary" href="/checkout">Finalizar</a>
             </div>
           </div>
         </div>
@@ -600,51 +599,53 @@
     });
   </script>
   <script>
-    // ====== Utilidades de formato ======
-    const toARS = (n) => n.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+    document.addEventListener('DOMContentLoaded', () => {
 
-    // ====== Storage ======
-    const CART_KEY = 'pp_cart';
-    const readCart = () => {
-      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-      catch { return []; }
-    };
-    const writeCart = (cart) => localStorage.setItem(CART_KEY, JSON.stringify(cart));
+      // =============================
+      // 📦 VARIABLES Y UTILIDADES
+      // =============================
 
-    // ====== Estado UI ======
-    const els = {};
-    function cacheCartEls() {
-      els.dropcart = document.getElementById('dropcart');
-      els.cartToggle = document.getElementById('cart-toggle');
-      els.cartBadge = document.getElementById('cart-badge');
-      els.items = document.getElementById('dropcart-items');
-      els.total = document.getElementById('dropcart-total');
-      els.btnEmpty = document.getElementById('dropcart-empty');
-      els.btnClose = document.getElementById('dropcart-close');
-    }
+      const CART_KEY = 'pp_cart';
+      const toARS = (n) => n.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
+      const readCart = () => JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      const writeCart = (cart) => localStorage.setItem(CART_KEY, JSON.stringify(cart));
 
-    // ====== Render ======
-    function calcTotals(cart) {
-      return cart.reduce((acc, it) => acc + it.subtotal, 0);
-    }
+      const els = {
+        cartToggle: document.getElementById('cart-toggle'),
+        dropcart: document.getElementById('dropcart'),
+        cartBadge: document.getElementById('cart-badge'),
+        items: document.getElementById('dropcart-items'),
+        total: document.getElementById('dropcart-total'),
+        btnEmpty: document.getElementById('dropcart-empty'),
+        btnClose: document.getElementById('dropcart-close'),
+        btnAdd: document.querySelector('.agregar-carrito')
+      };
 
-    function renderCart() {
-      const cart = readCart();
+      // =============================
+      // 💰 RENDER DEL CARRITO
+      // =============================
 
-      // Badge
-      const qtySum = cart.reduce((acc, it) => acc + it.cantidad, 0);
-      if (els.cartBadge) els.cartBadge.textContent = qtySum;
+      function calcTotal(cart) {
+        return cart.reduce((acc, it) => acc + it.subtotal, 0);
+      }
 
-      // Lista
-      if (!els.items) return;
-      els.items.innerHTML = '';
-      if (cart.length === 0) {
-        els.items.innerHTML = '<p style="padding:8px 0; color:#666">Tu carrito está vacío.</p>';
-      } else {
-        cart.forEach((it, idx) => {
-          const row = document.createElement('div');
-          row.className = 'dropcart-item';
-          row.innerHTML = `
+      function renderCart() {
+        const cart = readCart();
+        const total = calcTotal(cart);
+        const count = cart.reduce((acc, it) => acc + it.cantidad, 0);
+
+        // badge
+        els.cartBadge.textContent = count;
+
+        // items
+        if (cart.length === 0) {
+          els.items.innerHTML = '<p class="empty">Tu carrito está vacío</p>';
+        } else {
+          els.items.innerHTML = '';
+          cart.forEach((it, idx) => {
+            const div = document.createElement('div');
+            div.className = 'dropcart-item';
+            div.innerHTML = `
           <img src="${it.img}" alt="${it.nombre}">
           <div>
             <div class="dropcart-title">${it.nombre}</div>
@@ -658,128 +659,139 @@
           </div>
           <div class="dropcart-price">${toARS(it.subtotal)}</div>
         `;
-          els.items.appendChild(row);
-        });
-      }
-
-      // Total
-      if (els.total) els.total.textContent = toARS(calcTotals(cart));
-    }
-
-    // ====== Lógica de cambios dentro del dropdown ======
-    function handleDropcartClick(e) {
-      const btn = e.target.closest('button');
-      if (!btn) return;
-      const i = Number(btn.dataset.i);
-      const act = btn.dataset.act;
-      const cart = readCart();
-      if (Number.isNaN(i) || !cart[i]) return;
-
-      if (act === 'inc') cart[i].cantidad += 1;
-      if (act === 'dec') cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
-      if (act === 'rm') cart.splice(i, 1);
-
-      cart.forEach(it => it.subtotal = it.precioUnit * it.cantidad); // recomputa
-      writeCart(cart);
-      renderCart();
-    }
-
-    // ====== Toggle de dropdown ======
-    function openCart() { els.dropcart?.classList.add('show'); }
-    function closeCart() { els.dropcart?.classList.remove('show'); }
-
-    // ====== Agregar al carrito desde la ficha ======
-    function setupAddToCart() {
-      const btnAdd = document.querySelector('.agregar-carrito');
-      if (!btnAdd) return;
-
-      btnAdd.addEventListener('click', () => {
-        // Tomamos tu estado ya existente:
-        const sizeDropdown = document.getElementById('size-dropdown');
-        const tipoDropdown = document.getElementById('tipo-dropdown');
-        const sizeSelected = sizeDropdown?.querySelector('.dropdown-item.selected');
-        const tipoSelected = tipoDropdown?.querySelector('.dropdown-item.selected');
-        const cantidadVisual = document.getElementById('cantidad-visual');
-        const productoImg = document.getElementById('producto-img');
-        const titulo = document.querySelector('.producto-info h2')?.textContent?.trim() || 'Producto';
-
-        // Validaciones simples
-        if (!sizeSelected) { alert('Elegí un tamaño.'); return; }
-        if (!tipoSelected) { alert('Elegí unidad o bulto.'); return; }
-
-        const size = sizeSelected.dataset.size;
-        const tipo = tipoSelected.dataset.type; // "unidad" | "bulto"
-        const tipoLabel = tipo === 'unidad'
-          ? 'Unidad (1)'
-          : `Bulto (${sizeSelected.dataset.bultoCant})`;
-
-        const cantidad = Number(cantidadVisual?.textContent || '1');
-        const precioUnit =
-          tipo === 'unidad'
-            ? Number(sizeSelected.dataset.priceUnit)
-            : Number(sizeSelected.dataset.priceBulto);
-
-        const img = sizeSelected.dataset.img || productoImg?.src || '';
-
-        // Definimos una "clave" de item (mismo producto + mismas variantes se mergean)
-        const key = `${titulo}|${size}|${tipo}`;
-
-        const cart = readCart();
-        const found = cart.find(it => it.key === key);
-
-        if (found) {
-          found.cantidad += cantidad;
-          found.subtotal = found.precioUnit * found.cantidad;
-        } else {
-          cart.push({
-            key,
-            nombre: titulo,
-            size,
-            tipo,        // unidad/bulto
-            tipoLabel,   // etiqueta legible
-            cantidad,
-            precioUnit,
-            subtotal: precioUnit * cantidad,
-            img
+            els.items.appendChild(div);
           });
         }
 
+        // total
+        els.total.textContent = toARS(total);
+      }
+
+      // =============================
+      // 🧩 AGREGAR AL CARRITO
+      // =============================
+
+      function setupAddToCart() {
+        const btnAdd = els.btnAdd;
+        if (!btnAdd) return;
+
+        btnAdd.addEventListener('click', () => {
+          const sizeDropdown = document.getElementById('size-dropdown');
+          const tipoDropdown = document.getElementById('tipo-dropdown');
+          const sizeSelected = sizeDropdown?.querySelector('.dropdown-item.selected');
+          const tipoSelected = tipoDropdown?.querySelector('.dropdown-item.selected');
+          const cantidadVisual = document.getElementById('cantidad-visual');
+          const productoImg = document.getElementById('producto-img');
+          const titulo = document.querySelector('.producto-info h2')?.textContent?.trim() || 'Producto';
+
+          if (!sizeSelected) return alert('Elegí un tamaño.');
+          if (!tipoSelected) return alert('Elegí tipo: unidad o bulto.');
+
+          const size = sizeSelected.dataset.size;
+          const tipo = tipoSelected.dataset.type;
+          const tipoLabel = tipo === 'unidad'
+            ? 'Unidad (1)'
+            : `Bulto (${sizeSelected.dataset.bultoCant})`;
+          const cantidad = Number(cantidadVisual.textContent);
+          const precioUnit = tipo === 'unidad'
+            ? Number(sizeSelected.dataset.priceUnit)
+            : Number(sizeSelected.dataset.priceBulto);
+          const img = sizeSelected.dataset.img || productoImg.src;
+
+          const key = `${titulo}|${size}|${tipo}`;
+          const cart = readCart();
+          const found = cart.find(it => it.key === key);
+
+          if (found) {
+            found.cantidad += cantidad;
+            found.subtotal = found.precioUnit * found.cantidad;
+          } else {
+            cart.push({
+              key,
+              nombre: titulo,
+              size,
+              tipo,
+              tipoLabel,
+              cantidad,
+              precioUnit,
+              subtotal: precioUnit * cantidad,
+              img
+            });
+          }
+
+          writeCart(cart);
+          renderCart();
+          openCart();
+        });
+      }
+
+      // =============================
+      // 🧮 INTERACCIONES DENTRO DEL DROPCART
+      // =============================
+
+      function handleCartClick(e) {
+        const btn = e.target.closest('button');
+        if (!btn) return;
+        const act = btn.dataset.act;
+        const idx = Number(btn.dataset.i);
+        const cart = readCart();
+        if (!cart[idx]) return;
+
+        if (act === 'inc') cart[idx].cantidad++;
+        if (act === 'dec') cart[idx].cantidad = Math.max(1, cart[idx].cantidad - 1);
+        if (act === 'rm') cart.splice(idx, 1);
+
+        cart.forEach(it => it.subtotal = it.precioUnit * it.cantidad);
         writeCart(cart);
         renderCart();
-        openCart(); // lo mostramos para feedback
-      });
-    }
+      }
 
-    // ====== Inicialización ======
-    document.addEventListener('DOMContentLoaded', () => {
-      cacheCartEls();
-      renderCart();
-      setupAddToCart();
+      els.items?.addEventListener('click', handleCartClick);
 
-      // Toggle abrir/cerrar
+      // =============================
+      // 🪄 TOGGLE DROPCART
+      // =============================
+
+      function openCart() {
+        els.dropcart.classList.add('show');
+      }
+      function closeCart() {
+        els.dropcart.classList.remove('show');
+      }
+
       els.cartToggle?.addEventListener('click', (e) => {
-        e.preventDefault();
+        e.stopPropagation();
         els.dropcart.classList.toggle('show');
       });
-      els.btnClose?.addEventListener('click', closeCart);
 
-      // Vaciar
+      document.addEventListener('click', (e) => {
+        if (!els.dropcart.contains(e.target) && !els.cartToggle.contains(e.target)) {
+          closeCart();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeCart();
+      });
+
+      // =============================
+      // 🗑️ BOTONES EXTRA
+      // =============================
+
       els.btnEmpty?.addEventListener('click', () => {
         writeCart([]);
         renderCart();
       });
 
-      // Delegación para + / − / Eliminar
-      els.items?.addEventListener('click', handleDropcartClick);
+      els.btnClose?.addEventListener('click', closeCart);
 
-      // Cerrar al click fuera
-      document.addEventListener('click', (e) => {
-        const inCart = e.target.closest('#dropcart') || e.target.closest('#cart-toggle');
-        if (!inCart) closeCart();
-      });
+      // =============================
+      // 🚀 INICIALIZAR
+      // =============================
 
-      // Cerrar con Esc
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
+      renderCart();
+      setupAddToCart();
+
     });
   </script>
 </body>
