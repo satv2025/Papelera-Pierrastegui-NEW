@@ -135,7 +135,7 @@
         width: 36px;
         height: auto;
         filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%) !important;
-        transition: filter 0.3s ease;
+        transition: none !important;
         cursor: pointer
     }
 
@@ -236,7 +236,7 @@
         width: 18px;
         height: 18px;
         filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
-        transition: filter 0.3s ease;
+        transition: none !important;
     }
 
     .dropnav-content button:hover img.icon-dropdown {
@@ -1404,7 +1404,7 @@
         width: 36px;
         height: auto;
         filter: brightness(0) saturate(100%) invert(46%) sepia(79%) saturate(875%) hue-rotate(355deg) brightness(98%) contrast(110%) !important;
-        transition: filter 0.3s ease;
+        transition: none !important;
         cursor: pointer
     }
 
@@ -1505,7 +1505,7 @@
         width: 18px;
         height: 18px;
         filter: brightness(0) saturate(100%) invert(56%) sepia(75%) saturate(4013%) hue-rotate(1deg) brightness(104%) contrast(105%);
-        transition: filter 0.3s ease;
+        transition: none !important;
     }
 
     .dropnav-content button:hover img.icon-dropdown {
@@ -2536,4 +2536,19 @@
     .dropcart.show img {
         filter: none !important;
         pointer-events: none !important;
+    }
+
+    .wp:hover img,
+    .ig:hover img,
+    .mail:hover img,
+    .cart-trigger:hover .cart-icon {
+        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) hue-rotate(0deg) brightness(100%) contrast(100%) !important;
+        transition: none !important;
+        /* elimina el destello rosado */
+    }
+
+    .dropcart:hover .cart-icon,
+    .dropcart.show .cart-icon {
+        filter: none !important;
+        transition: none !important;
     }
