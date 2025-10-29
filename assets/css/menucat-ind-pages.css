@@ -1238,3 +1238,16 @@
         color: #fff;
         border: none;
     }
+
+    /* 🔒 Desactiva cualquier efecto hover sobre imágenes del carrito 
+   cuando el menú dropcart está visible o hovered */
+    .dropcart.show img:hover,
+    .dropcart:hover img:hover {
+        pointer-events: none;
+        transform: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+        transition: none !important;
+        border-color: transparent !important;
+        /* evita que se marque borde */
+    }
