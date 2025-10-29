@@ -1254,9 +1254,7 @@
         padding: 0;
     }
 
-    .dropcart-remove,
-    .dropcart-add,
-    .dropcart-rest {
+    .dropcart-remove {
         color: #ff7600;
         border: 2px solid #ff7600;
         padding-top: 0.1em;
@@ -1269,9 +1267,7 @@
         cursor: pointer;
     }
 
-    .dropcart-remove:hover,
-    .dropcart-add:hover,
-    .dropcart-rest:hover {
+    .dropcart-remove:hover {
         background: #ff7600;
         color: #fff;
         border: 2px solid #ff7600;
@@ -2417,7 +2413,7 @@
         top: 130%;
         right: -7em;
         background: #fff;
-        border-radius: 12px;
+        border-radius: 0.3em;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         width: 340px;
         display: none;
