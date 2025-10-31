@@ -687,6 +687,7 @@
       function handleCartClick(e) {
         const btn = e.target.closest('.cart-action');
         if (!btn) return;
+
         const act = btn.dataset.act;
         const idx = Number(btn.dataset.i);
         const cart = readCart();
@@ -711,10 +712,13 @@
         els.dropcart.classList.toggle('show');
       });
 
-      document.addEventListener('click', (e) => {
-        if (!els.dropcart.contains(e.target) && !els.cartToggle.contains(e.target)) {
-          closeCart();
-        }
+      // Previene cierre al hacer click DENTRO del carrito
+      els.dropcart?.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+
+      document.addEventListener('click', () => {
+        closeCart();
       });
 
       document.addEventListener('keydown', (e) => {
