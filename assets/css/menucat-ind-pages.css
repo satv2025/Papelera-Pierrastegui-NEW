@@ -15,7 +15,32 @@
 
     .dropcart span {
         font-family: 'GilroyMonoNums' !important;
-        text-align: ll;
+        border: ll;
+    }
+
+    .cart-action[data-act="inc"],
+    .cart-action[data-act="dec"] {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+
+    span.cart-action {
+        border: 2px solid #ff7600;
+        padding-left: 0.2em;
+        padding-right: 0.2em;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .cart-action[data-act="rm"] {
+        padding-left: 0.3em;
+        padding-right: 0.3em;
+    }
+
+    .cart-action:hover {
+        border: 2px solid #ff7600;
+        background: #ff7600;
+        color: #fff;
     }
 
     span {}
