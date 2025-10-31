@@ -762,6 +762,11 @@
         els.panel.classList.toggle("show");
       });
 
+      /* NUEVO: evita que +, -, eliminar cierren el carrito */
+      els.panel.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+
       els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
       document.addEventListener("click", () => els.panel.classList.remove("show"));
       els.btnEmpty.addEventListener("click", async () => {

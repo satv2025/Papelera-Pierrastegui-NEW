@@ -20,8 +20,11 @@
 
     .cart-action[data-act="inc"],
     .cart-action[data-act="dec"] {
+        width: 1.43em;
         padding-left: 0.3em;
         padding-right: 0.3em;
+        height: 1.43em;
+        text-align: center;
     }
 
     span.cart-action {
