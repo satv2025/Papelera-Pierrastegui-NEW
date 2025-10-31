@@ -573,37 +573,7 @@
   </script>
 
   <script>
-    // =========================
-    // 4. Menú lateral y dropdown
-    // =========================
-    const menuToggle = document.querySelector('.menu-toggle');
-    const sidebar = document.getElementById('pp-sidebar');
-    const closeBtn = document.getElementById('pp-close-btn');
-    const dropdownTriggers = document.querySelectorAll('.pp-dropdown-trigger');
-
-    if (menuToggle && sidebar && closeBtn) {
-      menuToggle.addEventListener('click', () => { sidebar.style.display = 'block'; });
-      closeBtn.addEventListener('click', () => { sidebar.style.display = 'none'; });
-      document.addEventListener('click', (e) => {
-        if (!sidebar.contains(e.target) && !e.target.matches('.menu-toggle')) {
-          sidebar.style.display = 'none';
-        }
-      });
-    }
-
-    dropdownTriggers.forEach(trigger => {
-      trigger.addEventListener('click', () => {
-        const submenu = trigger.nextElementSibling;
-        if (submenu) submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-      });
-    });
-  </script>
-  <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-      // =============================
-      // 📦 VARIABLES Y UTILIDADES
-      // =============================
 
       const CART_KEY = 'pp_cart';
       const toARS = (n) => n.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
@@ -621,10 +591,6 @@
         btnAdd: document.querySelector('.agregar-carrito')
       };
 
-      // =============================
-      // 💰 RENDER DEL CARRITO
-      // =============================
-
       function calcTotal(cart) {
         return cart.reduce((acc, it) => acc + it.subtotal, 0);
       }
@@ -634,10 +600,8 @@
         const total = calcTotal(cart);
         const count = cart.reduce((acc, it) => acc + it.cantidad, 0);
 
-        // badge
         els.cartBadge.textContent = count;
 
-        // items
         if (cart.length === 0) {
           els.items.innerHTML = '<p class="empty">Tu carrito está vacío</p>';
         } else {
@@ -652,9 +616,9 @@
             <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
             <div class="dropcart-qty">
               <span class="dropcart-rest cart-action" data-act="dec" data-i="${idx}">−</span>
-<span>${it.cantidad}</span>
-<span class="dropcart-add cart-action" data-act="inc" data-i="${idx}">+</span>
-              <button class="dropcart-remove" data-act="rm" data-i="${idx}">Eliminar</button>
+              <span>${it.cantidad}</span>
+              <span class="dropcart-add cart-action" data-act="inc" data-i="${idx}">+</span>
+              <span class="dropcart-remove cart-action" data-act="rm" data-i="${idx}">Eliminar</span>
             </div>
           </div>
           <div class="dropcart-price">${toARS(it.subtotal)}</div>
@@ -663,13 +627,8 @@
           });
         }
 
-        // total
         els.total.textContent = toARS(total);
       }
-
-      // =============================
-      // 🧩 AGREGAR AL CARRITO
-      // =============================
 
       function setupAddToCart() {
         const btnAdd = els.btnAdd;
@@ -725,12 +684,8 @@
         });
       }
 
-      // =============================
-      // 🧮 INTERACCIONES DENTRO DEL DROPCART
-      // =============================
-
       function handleCartClick(e) {
-        const btn = e.target.closest('button');
+        const btn = e.target.closest('.cart-action');
         if (!btn) return;
         const act = btn.dataset.act;
         const idx = Number(btn.dataset.i);
@@ -748,16 +703,8 @@
 
       els.items?.addEventListener('click', handleCartClick);
 
-      // =============================
-      // 🪄 TOGGLE DROPCART
-      // =============================
-
-      function openCart() {
-        els.dropcart.classList.add('show');
-      }
-      function closeCart() {
-        els.dropcart.classList.remove('show');
-      }
+      function openCart() { els.dropcart.classList.add('show'); }
+      function closeCart() { els.dropcart.classList.remove('show'); }
 
       els.cartToggle?.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -774,20 +721,12 @@
         if (e.key === 'Escape') closeCart();
       });
 
-      // =============================
-      // 🗑️ BOTONES EXTRA
-      // =============================
-
       els.btnEmpty?.addEventListener('click', () => {
         writeCart([]);
         renderCart();
       });
 
       els.btnClose?.addEventListener('click', closeCart);
-
-      // =============================
-      // 🚀 INICIALIZAR
-      // =============================
 
       renderCart();
       setupAddToCart();
