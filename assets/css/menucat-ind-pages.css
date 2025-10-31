@@ -13,6 +13,13 @@
         padding: 0;
     }
 
+    .dropcart span {
+        font-family: 'GilroyMonoNums' !important;
+        text-align: ll;
+    }
+
+    span {}
+
     /* --- HEADER GENERAL --- */
     header {
         display: flex;
