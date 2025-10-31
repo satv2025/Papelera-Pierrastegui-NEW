@@ -640,7 +640,6 @@
       await dbSaveCart(cart);
     }
 
-    // merge local->db on login
     supabase.auth.onAuthStateChange(async (_ev, session) => {
       if (session?.user) {
         const local = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -720,21 +719,36 @@
         const productoImg = document.getElementById("producto-img");
         const titulo = document.querySelector(".producto-info h2")?.textContent?.trim() || "Producto";
 
-        if (!sizeSelected) return alert("Elegí un tamaño.");
-        if (!tipoSelected) return alert("Elegí tipo.");
+        if (!sizeSelected) {
+          alert("Elegí un tamaño.");
+          return;
+        }
+
+        if (!tipoDropdown || tipoDropdown.classList.contains("disabled")) {
+          alert("Elegí un tamaño primero.");
+          return;
+        }
+
+        if (!tipoSelected) {
+          alert("Elegí tipo: unidad o bulto.");
+          return;
+        }
 
         const size = sizeSelected.dataset.size;
         const tipo = tipoSelected.dataset.type;
         const tipoLabel = tipo === "unidad"
           ? "Unidad (1)"
           : `Bulto (${sizeSelected.dataset.bultoCant})`;
+
         const cantidad = Number(cantidadVisual.textContent);
         const precioUnit = tipo === "unidad"
           ? Number(sizeSelected.dataset.priceUnit)
           : Number(sizeSelected.dataset.priceBulto);
+
         const img = sizeSelected.dataset.img || productoImg.src;
 
         const key = `${titulo}|${size}|${tipo}`;
+
         const cart = await readCart();
         const found = cart.find(it => it.key === key);
 
@@ -755,9 +769,10 @@
     }
 
     // -----------------------
-    // Update buttons
+    // Update / remove items
     // -----------------------
     els.items?.addEventListener("click", async (e) => {
+      e.stopPropagation();
       const btn = e.target.closest(".cart-action");
       if (!btn) return;
 
@@ -776,7 +791,7 @@
     });
 
     // -----------------------
-    // Toggle
+    // Toggle cart
     // -----------------------
     function openCart() { els.dropcart.classList.add("show"); }
     function closeCart() { els.dropcart.classList.remove("show"); }
@@ -791,7 +806,7 @@
     document.addEventListener("keydown", (e) => e.key === "Escape" && closeCart());
 
     // -----------------------
-    // Empty + close
+    // Empty cart
     // -----------------------
     els.btnEmpty?.addEventListener("click", async () => {
       await writeCart([]);
@@ -823,7 +838,6 @@
     // -----------------------
     renderCart();
     setupAddToCart();
-
   </script>
 </body>
 
