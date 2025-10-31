@@ -1,10 +1,11 @@
 .cart-action[data-act="inc"],
 .cart-action[data-act="dec"] {
-    width: 1.43em !important;
+    width: 1.95em !important;
     padding-left: 0.3em !important;
-    padding-right: 0.3em !important;
-    height: 1.43em !important;
+    padding-right: 0.35em !important;
+    height: 1.95em !important;
     text-align: center !important;
+    padding-top: 0.05em;
 }
 
 span.cart-action {
