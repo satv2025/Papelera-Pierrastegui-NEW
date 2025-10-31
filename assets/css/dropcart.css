@@ -13,41 +13,38 @@
         padding: 0;
     }
 
-    .dropcart span {
-        font-family: 'GilroyMonoNums' !important;
-        border: ll;
-    }
-
-    .cart-action[data-act="inc"],
-    .cart-action[data-act="dec"] {
-        width: 1.43em;
+    .dropcart-remove,
+    .dropcart-add,
+    .dropcart-rest {
+        color: #ff7600;
+        border: 2px solid #ff7600;
+        padding-top: 0.1em;
         padding-left: 0.3em;
         padding-right: 0.3em;
-        height: 1.43em;
-        text-align: center;
-    }
-
-    span.cart-action {
-        border: 2px solid #ff7600;
-        padding-left: 0.2em;
-        padding-right: 0.2em;
-        display: inline-block;
-        cursor: pointer;
+        padding-bottom: 0.1em;
+        font-weight: 700;
         border-radius: 0.3em;
+        background: #fff;
+        cursor: pointer;
     }
 
-    .cart-action[data-act="rm"] {
-        padding-left: 0.3em;
-        padding-right: 0.3em;
-    }
-
-    .cart-action:hover {
-        border: 2px solid #ff7600;
+    .dropcart-remove:hover,
+    .dropcart-add:hover,
+    .dropcart-rest:hover {
         background: #ff7600;
         color: #fff;
+        border: 2px solid #ff7600;
     }
 
-    span {}
+    button#dropcart-close {
+        color: #ff7600;
+        font-family: 'Gilroy';
+        font-weight: 700;
+        border: none;
+        outline: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
 
     /* --- HEADER GENERAL --- */
     header {
@@ -1165,20 +1162,21 @@
         position: absolute;
         top: -6px;
         right: -8px;
-        background: #e53935;
-        color: #fff;
+        background: #ffff;
+        color: #ff7600;
         font-size: 12px;
         line-height: 1;
         padding: 3px 6px;
         border-radius: 50%;
+        border: 2px solid;
     }
 
     .dropcart {
         position: absolute;
         top: 130%;
-        right: 0;
+        right: -7em;
         background: #fff;
-        border-radius: 12px;
+        border-radius: 0.3em;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         width: 340px;
         display: none;
@@ -1186,6 +1184,7 @@
         overflow: hidden;
         animation: fadeDown 0.2s ease-out;
         z-index: 9999;
+        border: 2px solid #ff7600;
     }
 
     @keyframes fadeDown {
@@ -1264,12 +1263,55 @@
     }
 
     .btn-ghost {
-        border: 1px solid #ccc;
-        background: #fff;
+        border: none;
+        background: #ff7600;
+        color: #fff;
     }
 
     .btn-primary {
-        background: #e53935;
-        color: #fff;
+        background: #ff7600;
+        color: #fff !important;
         border: none;
+    }
+
+    .dropcart.show img:hover {
+        pointer-events: none;
+        transform: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    .dropcart:hover img:hover {
+        pointer-events: none;
+        transform: none !important;
+        filter: none !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    /* 🔥 FIX FINAL: anula el efecto hover oscuro del icono del carrito 
+   cuando el dropcart está abierto o hovered */
+    .carrito-pro:hover img,
+    .dropcart:hover .cart-icon,
+    .dropcart.show .cart-icon,
+    .dropcart:hover img,
+    .dropcart.show img {
+        filter: none !important;
+        pointer-events: none !important;
+    }
+
+    .wp:hover img,
+    .ig:hover img,
+    .mail:hover img,
+    .cart-trigger:hover .cart-icon {
+        filter: brightness(0) saturate(100%) invert(0%) sepia(0%) hue-rotate(0deg) brightness(100%) contrast(100%) !important;
+        transition: none !important;
+        /* elimina el destello rosado */
+    }
+
+    .dropcart:hover .cart-icon,
+    .dropcart.show .cart-icon {
+        filter: none !important;
+        transition: none !important;
     }
