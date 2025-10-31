@@ -267,13 +267,10 @@ span.more-btn {
     z-index: 2000;
 }
 
-.carrito-pro:hover img,
-.dropcart:hover .cart-icon,
-.dropcart.show .cart-icon,
-.dropcart:hover img,
-.dropcart.show img {
-    filter: none !important;
-    pointer-events: none !important;
+.cart-trigger:hover .cart-icon,
+.cart-trigger:hover #red {
+    filter: brightness(0) saturate(100%) invert(0%) sepia(0%) hue-rotate(0deg) brightness(100%) contrast(100%) !important;
+    color: var(--primary-color);
 }
 
 .dropcart-container {
