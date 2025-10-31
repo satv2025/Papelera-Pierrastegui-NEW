@@ -694,9 +694,8 @@
     // ----------------------- Add to cart -----------------------
     document.body.addEventListener("click", async (e) => {
       if (!e.target.classList.contains("agregar-carrito")) return;
-
-      const size = $(".dropdown-item.size.selected")?.dataset.size;
-      const tipo = $(".dropdown-item.tipo.selected")?.dataset.type;
+      const size = document.querySelector("#size-dropdown .dropdown-item.selected")?.dataset.size;
+      const tipo = document.querySelector("#tipo-dropdown .dropdown-item.selected")?.dataset.type;
       const cantidad = Number($("#cantidad-visual")?.textContent || 1);
       const titulo = $(".producto-info h2")?.textContent.trim();
       const img = $("#producto-img")?.src;
@@ -704,7 +703,7 @@
       if (!size) return alert("Elegí un tamaño.");
       if (!tipo) return alert("Elegí tipo.");
 
-      const sizeEl = $(`.dropdown-item.size.selected`);
+      const sizeEl = document.querySelector("#size-dropdown .dropdown-item.selected");
       const precioUnit = tipo === "unidad"
         ? Number(sizeEl.dataset.priceUnit)
         : Number(sizeEl.dataset.priceBulto);
