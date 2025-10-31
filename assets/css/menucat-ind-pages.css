@@ -1253,7 +1253,9 @@
         padding: 0;
     }
 
-    .dropcart-remove {
+    .dropcart-remove,
+    .dropcart-add,
+    .dropcart-rest {
         color: #ff7600;
         border: 2px solid #ff7600;
         padding-top: 0.1em;
@@ -1266,7 +1268,9 @@
         cursor: pointer;
     }
 
-    .dropcart-remove:hover {
+    .dropcart-remove:hover,
+    .dropcart-add:hover,
+    .dropcart-rest:hover {
         background: #ff7600;
         color: #fff;
         border: 2px solid #ff7600;
@@ -1279,6 +1283,7 @@
         border: none;
         outline: none;
         font-size: 16px;
+        cursor: pointer;
     }
 
     /* --- HEADER GENERAL --- */

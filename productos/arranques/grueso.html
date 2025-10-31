@@ -651,9 +651,9 @@
             <div class="dropcart-title">${it.nombre}</div>
             <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
             <div class="dropcart-qty">
-              <button class="dropcart-rest" data-act="dec" data-i="${idx}">−</button>
-              <span>${it.cantidad}</span>
-              <button class="dropcart-add" data-act="inc" data-i="${idx}">+</button>
+              <span class="dropcart-rest cart-action" data-act="dec" data-i="${idx}">−</span>
+<span>${it.cantidad}</span>
+<span class="dropcart-add cart-action" data-act="inc" data-i="${idx}">+</span>
               <button class="dropcart-remove" data-act="rm" data-i="${idx}">Eliminar</button>
             </div>
           </div>
