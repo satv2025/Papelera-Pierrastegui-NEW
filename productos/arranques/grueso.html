@@ -577,42 +577,38 @@
 
     const CART_KEY = "pp_cart";
 
-    // -----------------------
-    // Helpers
-    // -----------------------
-    const toARS = (n) =>
-      n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+    // ----------------------- Utils -----------------------
+    const $ = (s) => document.querySelector(s);
+    const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
 
     async function getUser() {
       const { data: { session } } = await supabase.auth.getSession();
       return session?.user || null;
     }
 
-    // -----------------------
-    // DB Cart
-    // -----------------------
+    // ----------------------- DB -----------------------
     async function dbGetCart() {
       const user = await getUser();
       if (!user) return null;
 
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from("carts")
         .select("*")
         .eq("user_id", user.id)
         .eq("status", "active")
-        .single();
+        .maybeSingle(); // evita 406
 
       return data || null;
     }
 
     async function dbSaveCart(items) {
       const user = await getUser();
+      const total = items.reduce((a, b) => a + b.subtotal, 0);
+
       if (!user) {
         localStorage.setItem(CART_KEY, JSON.stringify(items));
         return;
       }
-
-      const total = items.reduce((a, b) => a + b.subtotal, 0);
 
       await supabase.from("carts").upsert({
         user_id: user.id,
@@ -620,20 +616,16 @@
         total,
         status: "active",
         updated_at: new Date()
-      }, { onConflict: "user_id" });
+      });
     }
 
-    // -----------------------
-    // Local + sync
-    // -----------------------
+    // ----------------------- Storage Sync -----------------------
     async function readCart() {
       const user = await getUser();
-      if (!user) {
-        return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-      }
+      if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
 
-      const data = await dbGetCart();
-      return data?.items || [];
+      const db = await dbGetCart();
+      return db?.items || [];
     }
 
     async function writeCart(cart) {
@@ -643,201 +635,161 @@
     supabase.auth.onAuthStateChange(async (_ev, session) => {
       if (session?.user) {
         const local = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-        if (local.length > 0) {
+        if (local.length) {
           await dbSaveCart(local);
           localStorage.removeItem(CART_KEY);
         }
-        renderCart();
       }
+      renderCart();
     });
 
-    // -----------------------
-    // Elements
-    // -----------------------
+    // ----------------------- UI elements -----------------------
     const els = {
-      cartToggle: document.getElementById("cart-toggle"),
-      dropcart: document.getElementById("dropcart"),
-      cartBadge: document.getElementById("cart-badge"),
-      items: document.getElementById("dropcart-items"),
-      total: document.getElementById("dropcart-total"),
-      btnEmpty: document.getElementById("dropcart-empty"),
-      btnClose: document.getElementById("dropcart-close"),
-      btnAdd: document.querySelector(".agregar-carrito"),
+      toggle: $("#cart-toggle"),
+      panel: $("#dropcart"),
+      badge: $("#cart-badge"),
+      items: $("#dropcart-items"),
+      total: $("#dropcart-total"),
+      btnEmpty: $("#dropcart-empty"),
+      btnClose: $("#dropcart-close"),
     };
 
-    // -----------------------
-    // Render
-    // -----------------------
+    // ----------------------- Render -----------------------
     async function renderCart() {
       const cart = await readCart();
       const total = cart.reduce((a, b) => a + b.subtotal, 0);
       const count = cart.reduce((a, b) => a + b.cantidad, 0);
 
-      els.cartBadge.textContent = count;
+      els.badge.textContent = count;
 
-      if (cart.length === 0) {
-        els.items.innerHTML = '<p class="empty">Tu carrito está vacío</p>';
-      } else {
-        els.items.innerHTML = "";
-        cart.forEach((it, idx) => {
-          const div = document.createElement("div");
-          div.className = "dropcart-item";
-          div.innerHTML = `
-        <img src="${it.img}" alt="${it.nombre}">
+      if (!cart.length) {
+        els.items.innerHTML = `<p class="empty">Tu carrito está vacío</p>`;
+        els.total.textContent = "$0";
+        return;
+      }
+
+      els.items.innerHTML = "";
+      cart.forEach((it, i) => {
+        els.items.innerHTML += `
+      <div class="dropcart-item">
+        <img src="${it.img}">
         <div>
           <div class="dropcart-title">${it.nombre}</div>
           <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
           <div class="dropcart-qty">
-            <span class="dropcart-rest cart-action" data-act="dec" data-i="${idx}">−</span>
+            <span class="cart-action" data-act="dec" data-i="${i}">−</span>
             <span>${it.cantidad}</span>
-            <span class="dropcart-add cart-action" data-act="inc" data-i="${idx}">+</span>
-            <span class="dropcart-remove cart-action" data-act="rm" data-i="${idx}">Eliminar</span>
+            <span class="cart-action" data-act="inc" data-i="${i}">+</span>
+            <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
           </div>
         </div>
         <div class="dropcart-price">${toARS(it.subtotal)}</div>
-      `;
-          els.items.appendChild(div);
-        });
-      }
+      </div>
+    `;
+      });
 
       els.total.textContent = toARS(total);
     }
 
-    // -----------------------
-    // Add to Cart
-    // -----------------------
-    function setupAddToCart() {
-      const btnAdd = els.btnAdd;
-      if (!btnAdd) return;
+    // ----------------------- Add to cart -----------------------
+    document.body.addEventListener("click", async (e) => {
+      if (!e.target.classList.contains("agregar-carrito")) return;
 
-      btnAdd.addEventListener("click", async () => {
-        const sizeDropdown = document.getElementById("size-dropdown");
-        const tipoDropdown = document.getElementById("tipo-dropdown");
-        const sizeSelected = sizeDropdown?.querySelector(".dropdown-item.selected");
-        const tipoSelected = tipoDropdown?.querySelector(".dropdown-item.selected");
-        const cantidadVisual = document.getElementById("cantidad-visual");
-        const productoImg = document.getElementById("producto-img");
-        const titulo = document.querySelector(".producto-info h2")?.textContent?.trim() || "Producto";
+      const size = $(".dropdown-item.size.selected")?.dataset.size;
+      const tipo = $(".dropdown-item.tipo.selected")?.dataset.type;
+      const cantidad = Number($("#cantidad-visual")?.textContent || 1);
+      const titulo = $(".producto-info h2")?.textContent.trim();
+      const img = $("#producto-img")?.src;
 
-        if (!sizeSelected) {
-          alert("Elegí un tamaño.");
-          return;
-        }
+      if (!size) return alert("Elegí un tamaño.");
+      if (!tipo) return alert("Elegí tipo.");
 
-        if (!tipoDropdown || tipoDropdown.classList.contains("disabled")) {
-          alert("Elegí un tamaño primero.");
-          return;
-        }
+      const sizeEl = $(`.dropdown-item.size.selected`);
+      const precioUnit = tipo === "unidad"
+        ? Number(sizeEl.dataset.priceUnit)
+        : Number(sizeEl.dataset.priceBulto);
 
-        if (!tipoSelected) {
-          alert("Elegí tipo: unidad o bulto.");
-          return;
-        }
-
-        const size = sizeSelected.dataset.size;
-        const tipo = tipoSelected.dataset.type;
-        const tipoLabel = tipo === "unidad"
+      const tipoLabel =
+        tipo === "unidad"
           ? "Unidad (1)"
-          : `Bulto (${sizeSelected.dataset.bultoCant})`;
+          : `Bulto (${sizeEl.dataset.bultoCant})`;
 
-        const cantidad = Number(cantidadVisual.textContent);
-        const precioUnit = tipo === "unidad"
-          ? Number(sizeSelected.dataset.priceUnit)
-          : Number(sizeSelected.dataset.priceBulto);
+      const key = `${titulo}|${size}|${tipo}`;
 
-        const img = sizeSelected.dataset.img || productoImg.src;
+      const cart = await readCart();
+      const f = cart.find((it) => it.key === key);
 
-        const key = `${titulo}|${size}|${tipo}`;
+      if (f) {
+        f.cantidad += cantidad;
+        f.subtotal = f.precioUnit * f.cantidad;
+      } else {
+        cart.push({
+          key,
+          nombre: titulo,
+          size,
+          tipo,
+          tipoLabel,
+          cantidad,
+          precioUnit,
+          subtotal: precioUnit * cantidad,
+          img
+        });
+      }
 
-        const cart = await readCart();
-        const found = cart.find(it => it.key === key);
+      await writeCart(cart);
+      await renderCart();
+      els.panel.classList.add("show");
+    });
 
-        if (found) {
-          found.cantidad += cantidad;
-          found.subtotal = found.precioUnit * found.cantidad;
-        } else {
-          cart.push({
-            key, nombre: titulo, size, tipo, tipoLabel,
-            cantidad, precioUnit, subtotal: precioUnit * cantidad, img
-          });
-        }
-
-        await writeCart(cart);
-        await renderCart();
-        openCart();
-      });
-    }
-
-    // -----------------------
-    // Update / remove items
-    // -----------------------
-    els.items?.addEventListener("click", async (e) => {
-      e.stopPropagation();
+    // ----------------------- Edit Qty -----------------------
+    els.items.addEventListener("click", async (e) => {
       const btn = e.target.closest(".cart-action");
       if (!btn) return;
 
+      const i = Number(btn.dataset.i);
       const act = btn.dataset.act;
-      const idx = Number(btn.dataset.i);
-      const cart = await readCart();
-      if (!cart[idx]) return;
 
-      if (act === "inc") cart[idx].cantidad++;
-      if (act === "dec") cart[idx].cantidad = Math.max(1, cart[idx].cantidad - 1);
-      if (act === "rm") cart.splice(idx, 1);
+      const cart = await readCart();
+      if (!cart[i]) return;
+
+      if (act === "inc") cart[i].cantidad++;
+      if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
+      if (act === "rm") cart.splice(i, 1);
 
       cart.forEach(it => it.subtotal = it.precioUnit * it.cantidad);
       await writeCart(cart);
-      await renderCart();
+      renderCart();
     });
 
-    // -----------------------
-    // Toggle cart
-    // -----------------------
-    function openCart() { els.dropcart.classList.add("show"); }
-    function closeCart() { els.dropcart.classList.remove("show"); }
-
-    els.cartToggle?.addEventListener("click", (e) => {
+    // ----------------------- Toggle -----------------------
+    els.toggle.addEventListener("click", (e) => {
       e.stopPropagation();
-      els.dropcart.classList.toggle("show");
+      els.panel.classList.toggle("show");
     });
-
-    els.dropcart?.addEventListener("click", (e) => e.stopPropagation());
-    document.addEventListener("click", () => closeCart());
-    document.addEventListener("keydown", (e) => e.key === "Escape" && closeCart());
-
-    // -----------------------
-    // Empty cart
-    // -----------------------
-    els.btnEmpty?.addEventListener("click", async () => {
+    els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
+    document.addEventListener("click", () => els.panel.classList.remove("show"));
+    els.btnEmpty.addEventListener("click", async () => {
       await writeCart([]);
-      await renderCart();
+      renderCart();
     });
 
-    els.btnClose?.addEventListener("click", closeCart);
-
-    // -----------------------
-    // Checkout
-    // -----------------------
+    // ----------------------- Checkout redirect -----------------------
     window.createOrderAndGoToCheckout = async () => {
       const user = await getUser();
-      if (!user) return window.location = "/login";
+      if (!user) return (window.location = "/login");
 
-      const cartDB = await dbGetCart();
-      if (!cartDB) return;
+      const cart = await dbGetCart();
+      if (!cart) return;
 
-      await supabase
-        .from("carts")
+      await supabase.from("carts")
         .update({ status: "ordered" })
-        .eq("id", cartDB.id);
+        .eq("id", cart.id);
 
-      window.location = `/checkout/${cartDB.id}`;
+      window.location = `/checkout/${cart.id}`;
     };
 
-    // -----------------------
     // Init
-    // -----------------------
     renderCart();
-    setupAddToCart();
   </script>
 </body>
 
