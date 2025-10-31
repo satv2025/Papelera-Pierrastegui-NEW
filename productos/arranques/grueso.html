@@ -576,10 +576,16 @@
     import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
     document.addEventListener("DOMContentLoaded", () => {
+
       const CART_KEY = "pp_cart";
 
       const $ = (s) => document.querySelector(s);
-      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+      const toARS = (n) =>
+        n.toLocaleString("es-AR", {
+          style: "currency",
+          currency: "ARS",
+          maximumFractionDigits: 0
+        });
 
       async function getUser() {
         const { data: { session } } = await supabase.auth.getSession();
@@ -609,13 +615,19 @@
           return;
         }
 
-        await supabase.from("carts").upsert({
-          user_id: user.id,
-          items,
-          total,
-          status: "active",
-          updated_at: new Date()
-        });
+        await supabase
+          .from("carts")
+          .upsert(
+            {
+              user_id: user.id,
+              items,
+              total,
+              status: "active",
+              updated_at: new Date()
+            },
+            { onConflict: "user_id" }
+          )
+          .select();
       }
 
       async function readCart() {
@@ -689,6 +701,7 @@
 
       document.body.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("agregar-carrito")) return;
+
         const size = document.querySelector("#size-dropdown .dropdown-item.selected")?.dataset.size;
         const tipo = document.querySelector("#tipo-dropdown .dropdown-item.selected")?.dataset.type;
         const cantidad = Number($("#cantidad-visual")?.textContent || 1);
@@ -703,9 +716,10 @@
           ? Number(sizeEl.dataset.priceUnit)
           : Number(sizeEl.dataset.priceBulto);
 
-        const tipoLabel = tipo === "unidad"
-          ? "Unidad (1)"
-          : `Bulto (${sizeEl.dataset.bultoCant})`;
+        const tipoLabel =
+          tipo === "unidad"
+            ? "Unidad (1)"
+            : `Bulto (${sizeEl.dataset.bultoCant})`;
 
         const key = `${titulo}|${size}|${tipo}`;
 
@@ -772,7 +786,8 @@
         const cart = await dbGetCart();
         if (!cart) return;
 
-        await supabase.from("carts")
+        await supabase
+          .from("carts")
           .update({ status: "ordered" })
           .eq("id", cart.id);
 
