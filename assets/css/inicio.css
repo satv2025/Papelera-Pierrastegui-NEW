@@ -146,7 +146,7 @@ header {
 .wp:hover,
 .mail:hover,
 .ig:hover,
-.cart-trigger:hover imge {
+.cart-trigger:hover img {
   filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
 }
 
@@ -930,7 +930,7 @@ img.icon-right:Hover {
 .wp:hover,
 .mail:hover,
 .ig:hover,
-.cart-trigger:hover imge {
+.cart-trigger:hover img {
   filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%) !important;
 }
 
