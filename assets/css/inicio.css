@@ -802,7 +802,6 @@ span#red:hover img {
 }
 
 /* Hover en imágenes — excluye pp-logo */
-.carrito-pro:hover img,
 .mail:hover img,
 .ig:hover img,
 .wp:hover img,
@@ -818,8 +817,6 @@ img.icon-right:Hover {
 }
 
 /* Hover en texto */
-.carrito-pro:hover a,
-.carrito-pro:hover span,
 .mail:hover a,
 .mail:hover span,
 .ig:hover a,
