@@ -589,8 +589,7 @@
         .pp-nav-links,
         .main-navbar,
         .search-bar,
-        #red,
-        footer {
+        #red {
             display: none !important;
         }
 

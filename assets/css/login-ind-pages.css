@@ -92,8 +92,27 @@
 @media (max-width: 600px) {
     .mi-cuenta img.icon-right {
         position: relative !important;
-        top: -0.2em;
-        margin-left: 0.3em;
+        top: -0.6em;
+        margin-left: -28.7em;
         cursor: pointer;
     }
+
+    .pp-logo {
+        margin-top: -16em !important;
+    }
+
+    .pp-logo-svg {
+        margin-top: 16.2em;
+        display: block !important;
+    }
+
+    .mail-icon {
+        margin-left: 11em;
+    }
+
+    #cart-toggle {
+        margin-top: -0.3em;
+    }
+
+    .cart-icon {}
 }

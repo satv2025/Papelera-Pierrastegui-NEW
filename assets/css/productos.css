@@ -42,15 +42,9 @@
     color: #000;
 }
 
-/* Estructura base */
 html,
 body {
     height: 100%;
-    background-color: #fff;
-    color: #333;
-    overflow-x: hidden;
-
-    /* --- NUEVO --- */
     display: flex;
     flex-direction: column;
 }
@@ -58,7 +52,11 @@ body {
 /* Asegura que el contenido principal crezca y empuje el footer hacia abajo */
 main {
     flex: 1 0 auto;
-    padding: 2rem 0;
+    /* mantiene el footer al fondo */
+}
+
+footer {
+    flex-shrink: 0;
 }
 
 /* Contenedores */
@@ -126,6 +124,7 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 1200px;
+    margin-top: 2em;
 }
 
 .producto-contenido h2 {
@@ -141,7 +140,7 @@ nav ul li a:hover {
     border-radius: 0.3em;
     object-fit: contain;
     width: 100%;
-    max-width: 400px;
+    max-width: 485px;
     height: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease;
@@ -364,24 +363,42 @@ footer {
         gap: 15px;
     }
 
-    .cantidad-container,
     .agregar-carrito-cantidad {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
+        flex-direction: row;
+        /* ← lo importante */
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
     }
 
-    .cantidad-container button,
     .agregar-carrito-cantidad button {
-        width: 100%;
+        width: auto;
+        /* evita que ocupen todo el ancho */
     }
 
     .dropdown-btn {
         width: 100%;
     }
 
+    .producto-contenido {
+        align-items: center;
+    }
+
     .producto-contenido img {
-        max-width: 90%;
+        flex: none;
+        /* evita que el flexbox altere su tamaño */
+        width: auto;
+        /* que se ajuste proporcionalmente */
+        height: 19em !important;
+        /* ← tu altura custom (ajustá libremente) */
+        max-height: none;
+        /* elimina límites heredados */
+        object-fit: contain;
+        box-shadow: none;
+        display: block;
+        margin: 0 auto;
+        /* centrado horizontal */
+        background: #000;
     }
 }
 
@@ -431,5 +448,35 @@ footer {
     nav li {
         display: inline-block;
         margin: 0 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .producto-info {
+        overflow-y: visible;
+        /* elimina el scroll */
+        max-height: none;
+        /* permite que crezca naturalmente */
+    }
+}
+
+@media (min-width: 1025px) {
+    .producto-contenido {
+        min-height: 59vh;
+        /* ocupa el 80% del alto de la pantalla */
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        position: relative;
+        display: block !important;
+        bottom: -4.8em;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        position: relative;
     }
 }
