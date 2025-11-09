@@ -399,6 +399,7 @@ footer {
         margin: 0 auto;
         /* centrado horizontal */
         background: #000;
+        margin-left: -0.0em;
     }
 }
 
@@ -457,6 +458,7 @@ footer {
         /* elimina el scroll */
         max-height: none;
         /* permite que crezca naturalmente */
+        width: 19.7em;
     }
 }
 
@@ -471,7 +473,7 @@ footer {
     footer {
         position: relative;
         display: block !important;
-        bottom: -4.8em;
+        bottom: -2em;
     }
 }
 
