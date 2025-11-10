@@ -53,26 +53,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         const dir = $("#chk-direccion").value.trim();
         const loc = $("#chk-localidad").value.trim();
 
-        if (!nombre || !tel || !dir || !loc) return alert("Completá todos los datos de entrega.");
+        if (!nombre || !tel || !dir || !loc) {
+            alert("Completá todos los datos de entrega.");
+            return;
+        }
 
         $("#checkout-loader").style.display = "block";
 
         const user = await getUser();
 
-        const res = await fetch("https://pkptcnxgetrvmblphucg.supabase.co/functions/v1/create-preference", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ total, items: cart, user, nombre, tel, dir, loc }),
-        });
+        try {
+            const res = await fetch("https://pkptcnxgetrvmblphucg.supabase.co/functions/v1/create-preference", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrcHRjbnhnZXRydm1ibHBidWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMjI1NjAsImV4cCI6MjA0NjU5ODU2MH0.8ZkKjDgoOqNa_v8y0Zt6YQ2YyGb0hms6uKT3ffSh3nQ",
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrcHRjbnhnZXRydm1ibHBidWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMjI1NjAsImV4cCI6MjA0NjU5ODU2MH0.8ZkKjDgoOqNa_v8y0Zt6YQ2YyGb0hms6uKT3ffSh3nQ"
+                },
+                body: JSON.stringify({ total, items: cart, user, nombre, tel, dir, loc }),
+            });
 
-        const data = await res.json();
+            const data = await res.json();
 
-        if (data.init_point) {
-            window.location.href = data.init_point; // redirige al checkout de MercadoPago
-        } else {
-            alert("Error al generar el pago: " + (data.message || "Intentá nuevamente"));
+            if (data.init_point) {
+                window.location.href = data.init_point; // redirige al checkout de MercadoPago
+            } else {
+                console.error("Respuesta:", data);
+                alert("Error al generar el pago: " + (data.error || data.message || "Intentá nuevamente"));
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Error de conexión con el servidor.");
+        } finally {
+            $("#checkout-loader").style.display = "none";
         }
-
-        $("#checkout-loader").style.display = "none";
     });
 });
