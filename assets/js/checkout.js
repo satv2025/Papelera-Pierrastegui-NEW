@@ -3,13 +3,11 @@ import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabase
 const $ = (s) => document.querySelector(s);
 const CART_KEY = "pp_cart";
 
-// === 1️⃣ Obtener usuario actual ===
 async function getUser() {
     const { data: { session } } = await supabase.auth.getSession();
     return session?.user || null;
 }
 
-// === 2️⃣ Leer carrito desde localStorage o Supabase ===
 async function readCart() {
     const user = await getUser();
     if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -24,7 +22,6 @@ async function readCart() {
     return data?.items || [];
 }
 
-// === 3️⃣ Renderizar carrito ===
 function renderItems(cart) {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
@@ -32,7 +29,7 @@ function renderItems(cart) {
     cont.innerHTML = "";
     let total = 0;
 
-    cart.forEach(it => {
+    cart.forEach((it) => {
         total += it.subtotal;
         cont.innerHTML += `
       <div class="checkout-item">
@@ -42,11 +39,14 @@ function renderItems(cart) {
       </div>`;
     });
 
-    totals.innerHTML = `<div><span>Total:</span><span>${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span></div>`;
+    totals.innerHTML = `<div><span>Total:</span><span>${total.toLocaleString("es-AR", {
+        style: "currency",
+        currency: "ARS",
+    })}</span></div>`;
+
     return total;
 }
 
-// === 4️⃣ Evento principal ===
 document.addEventListener("DOMContentLoaded", async () => {
     const cart = await readCart();
     const total = renderItems(cart);
@@ -68,18 +68,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             const res = await fetch("https://pkptcnxgetrvmblphucg.supabase.co/functions/v1/create-preference", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    // ✅ Solo una clave: Authorization con tu anon key pública
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrcHRjbnhnZXRydm1ibHBidWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMjI1NjAsImV4cCI6MjA0NjU5ODU2MH0.8ZkKjDgoOqNa_v8y0Zt6YQ2YyGb0hms6uKT3ffSh3nQ"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ total, items: cart, user, nombre, tel, dir, loc }),
             });
 
             const data = await res.json();
 
             if (data.init_point) {
-                window.location.href = data.init_point; // 🔁 Redirige al checkout de MP
+                window.location.href = data.init_point; // Redirige al checkout de MP
             } else {
                 console.error("Respuesta:", data);
                 alert("Error al generar el pago: " + (data.error || data.message || "Intentá nuevamente"));
