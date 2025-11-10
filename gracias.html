@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracias por tu compra — Papelera Pierrastegui</title>
+
+    <!-- CSS Base de la tienda -->
+    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/inicio.css">
+
+    <style>
+        /* ---- Página de Gracias ---- */
+        body.page-gracias {
+            background-color: #fff;
+            color: #ff7600;
+            font-family: 'Gilroy', sans-serif;
+            text-align: center;
+            padding: 3em 1em;
+        }
+
+        .gracias-container {
+            max-width: 600px;
+            margin: 5em auto;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 3px solid #ff7600;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .gracias-container h1 {
+            color: #ff7600;
+            font-weight: 800;
+            font-size: 2em;
+            margin-bottom: 0.5em;
+        }
+
+        .gracias-container p {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 1.2em 0;
+            color: #000;
+        }
+
+        .gracias-container .btn {
+            background: #ff7600;
+            color: #fff;
+            padding: 0.9em 1.6em;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin-top: 1em;
+        }
+
+        .gracias-container .btn:hover {
+            background: #ffc52f;
+            color: #000;
+        }
+
+        .status-icon {
+            font-size: 3em;
+            margin-bottom: 0.2em;
+            display: block;
+        }
+
+        .status-success {
+            color: #37ff14;
+        }
+
+        .status-pending {
+            color: #ffcc00;
+        }
+
+        .status-failure {
+            color: #e60000;
+        }
+
+        footer {
+            margin-top: 6em;
+            padding: 1.5em;
+            border-top: 3px solid #ff7600;
+            color: #ff7600;
+            font-weight: 700;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body class="page-gracias">
+
+    <header>
+        <div id="pp-logo">
+            <a href="/">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/logo.svg"
+                    alt="Papelera Pierrastegui">
+            </a>
+            <span>Papelera Pierrastegui</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="gracias-container" id="gracias-box">
+            <span class="status-icon">🕒</span>
+            <h1>Procesando pago...</h1>
+            <p id="status-text">Verificando estado de tu compra...</p>
+            <a href="/" class="btn">Volver a la tienda</a>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Papelera Pierrastegui — Todos los derechos reservados
+    </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get("status") || "pending";
+        const box = document.getElementById("gracias-box");
+        const text = document.getElementById("status-text");
+        const icon = box.querySelector(".status-icon");
+        const title = box.querySelector("h1");
+
+        if (status === "approved") {
+            icon.textContent = "✅";
+            icon.className = "status-icon status-success";
+            title.textContent = "¡Pago aprobado!";
+            text.textContent = "Tu compra fue realizada con éxito. Pronto recibirás tu confirmación por correo.";
+        }
+        else if (status === "pending") {
+            icon.textContent = "🕒";
+            icon.className = "status-icon status-pending";
+            title.textContent = "Pago pendiente";
+            text.textContent = "Tu pago está en revisión. Te notificaremos por email una vez se confirme.";
+        }
+        else if (status === "failure") {
+            icon.textContent = "❌";
+            icon.className = "status-icon status-failure";
+            title.textContent = "Error en el pago";
+            text.textContent = "Hubo un problema al procesar tu pago. Por favor, intentá nuevamente.";
+        }
+    </script>
+
+</body>
+
+</html>
