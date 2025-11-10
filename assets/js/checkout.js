@@ -3,11 +3,13 @@ import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabase
 const $ = (s) => document.querySelector(s);
 const CART_KEY = "pp_cart";
 
+// === 1️⃣ Obtener usuario actual ===
 async function getUser() {
     const { data: { session } } = await supabase.auth.getSession();
     return session?.user || null;
 }
 
+// === 2️⃣ Leer carrito desde localStorage o Supabase ===
 async function readCart() {
     const user = await getUser();
     if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -22,6 +24,7 @@ async function readCart() {
     return data?.items || [];
 }
 
+// === 3️⃣ Renderizar carrito ===
 function renderItems(cart) {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
@@ -43,6 +46,7 @@ function renderItems(cart) {
     return total;
 }
 
+// === 4️⃣ Evento principal ===
 document.addEventListener("DOMContentLoaded", async () => {
     const cart = await readCart();
     const total = renderItems(cart);
@@ -59,7 +63,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         $("#checkout-loader").style.display = "block";
-
         const user = await getUser();
 
         try {
@@ -67,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "apikey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrcHRjbnhnZXRydm1ibHBidWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMjI1NjAsImV4cCI6MjA0NjU5ODU2MH0.8ZkKjDgoOqNa_v8y0Zt6YQ2YyGb0hms6uKT3ffSh3nQ",
+                    // ✅ Solo una clave: Authorization con tu anon key pública
                     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBrcHRjbnhnZXRydm1ibHBidWNnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzEwMjI1NjAsImV4cCI6MjA0NjU5ODU2MH0.8ZkKjDgoOqNa_v8y0Zt6YQ2YyGb0hms6uKT3ffSh3nQ"
                 },
                 body: JSON.stringify({ total, items: cart, user, nombre, tel, dir, loc }),
@@ -76,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await res.json();
 
             if (data.init_point) {
-                window.location.href = data.init_point; // redirige al checkout de MercadoPago
+                window.location.href = data.init_point; // 🔁 Redirige al checkout de MP
             } else {
                 console.error("Respuesta:", data);
                 alert("Error al generar el pago: " + (data.error || data.message || "Intentá nuevamente"));
