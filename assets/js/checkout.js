@@ -11,7 +11,14 @@ async function getUser() {
 async function readCart() {
     const user = await getUser();
     if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-    const { data } = await supabase.from("carts").select("*").eq("user_id", user.id).eq("status", "active").maybeSingle();
+
+    const { data } = await supabase
+        .from("carts")
+        .select("*")
+        .eq("user_id", user.id)
+        .eq("status", "active")
+        .maybeSingle();
+
     return data?.items || [];
 }
 
@@ -21,6 +28,7 @@ function renderItems(cart) {
 
     cont.innerHTML = "";
     let total = 0;
+
     cart.forEach(it => {
         total += it.subtotal;
         cont.innerHTML += `
@@ -31,7 +39,7 @@ function renderItems(cart) {
       </div>`;
     });
 
-    totals.innerHTML = `<div><span>Total:</span><span>$${total.toLocaleString("es-AR")}</span></div>`;
+    totals.innerHTML = `<div><span>Total:</span><span>${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span></div>`;
     return total;
 }
 
@@ -51,14 +59,20 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const user = await getUser();
 
-        const res = await fetch("https://<tu-proyecto>.functions.supabase.co/create-preference", {
+        const res = await fetch("https://pkptcnxgetrvmblphucg.supabase.co/functions/v1/create-preference", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ total, items: cart, user }),
+            body: JSON.stringify({ total, items: cart, user, nombre, tel, dir, loc }),
         });
 
-        const { init_point } = await res.json();
+        const data = await res.json();
 
-        window.location.href = init_point; // redirige al checkout de MP
+        if (data.init_point) {
+            window.location.href = data.init_point; // redirige al checkout de MercadoPago
+        } else {
+            alert("Error al generar el pago: " + (data.message || "Intentá nuevamente"));
+        }
+
+        $("#checkout-loader").style.display = "none";
     });
 });
