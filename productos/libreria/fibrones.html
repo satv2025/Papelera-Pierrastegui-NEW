@@ -786,6 +786,226 @@
       renderCart();
     });
   </script>
+  <script type="module">
+    import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const CART_KEY = "pp_cart";
+      const $ = (s) => document.querySelector(s);
+      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+
+      async function getUser() {
+        const { data: { session } } = await supabase.auth.getSession();
+        return session?.user || null;
+      }
+
+      async function dbGetCart() {
+        const user = await getUser();
+        if (!user) return null;
+
+        const { data } = await supabase
+          .from("carts")
+          .select("*")
+          .eq("user_id", user.id)
+          .eq("status", "active")
+          .maybeSingle();
+
+        return data || null;
+      }
+
+      async function dbSaveCart(items) {
+        const user = await getUser();
+        const total = items.reduce((a, b) => a + b.subtotal, 0);
+
+        if (!user) {
+          localStorage.setItem(CART_KEY, JSON.stringify(items));
+          return;
+        }
+
+        await supabase
+          .from("carts")
+          .upsert(
+            {
+              user_id: user.id,
+              items,
+              total,
+              status: "active",
+              updated_at: new Date()
+            },
+            { onConflict: "user_id,status" }
+          )
+          .select();
+      }
+
+      async function readCart() {
+        const user = await getUser();
+        if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        const db = await dbGetCart();
+        return db?.items || [];
+      }
+
+      async function writeCart(cart) {
+        await dbSaveCart(cart);
+      }
+
+      supabase.auth.onAuthStateChange(async (_ev, session) => {
+        if (session?.user) {
+          const local = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+          if (local.length) {
+            await dbSaveCart(local);
+            localStorage.removeItem(CART_KEY);
+          }
+        }
+        renderCart();
+      });
+
+      const els = {
+        toggle: $("#cart-toggle"),
+        panel: $("#dropcart"),
+        badge: $("#cart-badge"),
+        items: $("#dropcart-items"),
+        total: $("#dropcart-total"),
+        btnEmpty: $("#dropcart-empty"),
+        btnClose: $("#dropcart-close"),
+      };
+
+      async function renderCart() {
+        const cart = await readCart();
+        const total = cart.reduce((a, b) => a + b.subtotal, 0);
+        const count = cart.reduce((a, b) => a + b.cantidad, 0);
+
+        els.badge.textContent = count;
+
+        if (!cart.length) {
+          els.items.innerHTML = `<p class="empty">Tu carrito está vacío</p>`;
+          els.total.textContent = "$0";
+          return;
+        }
+
+        els.items.innerHTML = "";
+        cart.forEach((it, i) => {
+          els.items.innerHTML += `
+        <div class="dropcart-item">
+          <img src="${it.img}">
+          <div>
+            <div class="dropcart-title">${it.nombre}</div>
+            <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
+            <div class="dropcart-qty">
+              <span class="cart-action" data-act="dec" data-i="${i}">−</span>
+              <span>${it.cantidad}</span>
+              <span class="cart-action" data-act="inc" data-i="${i}">+</span>
+              <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
+            </div>
+          </div>
+          <div class="dropcart-price">${toARS(it.subtotal)}</div>
+        </div>
+      `;
+        });
+
+        els.total.textContent = toARS(total);
+      }
+
+      document.body.addEventListener("click", async (e) => {
+        if (!e.target.classList.contains("agregar-carrito")) return;
+
+        const size = document.querySelector("#size-dropdown .dropdown-item.selected")?.dataset.size;
+        const tipo = document.querySelector("#tipo-dropdown .dropdown-item.selected")?.dataset.type;
+        const cantidad = Number($("#cantidad-visual")?.textContent || 1);
+        const titulo = $(".producto-info h2")?.textContent.trim();
+        const img = $("#producto-img")?.src;
+
+        if (!size) return alert("Elegí un tamaño.");
+        if (!tipo) return alert("Elegí tipo.");
+
+        const sizeEl = document.querySelector("#size-dropdown .dropdown-item.selected");
+        const precioUnit = tipo === "unidad"
+          ? Number(sizeEl.dataset.priceUnit)
+          : Number(sizeEl.dataset.priceBulto);
+
+        const tipoLabel = tipo === "unidad"
+          ? "Unidad (1)"
+          : `Bulto (${sizeEl.dataset.bultoCant})`;
+
+        const key = `${titulo}|${size}|${tipo}`;
+        const cart = await readCart();
+        const f = cart.find((it) => it.key === key);
+
+        if (f) {
+          f.cantidad += cantidad;
+          f.subtotal = f.precioUnit * f.cantidad;
+        } else {
+          cart.push({
+            key,
+            nombre: titulo,
+            size,
+            tipo,
+            tipoLabel,
+            cantidad,
+            precioUnit,
+            subtotal: precioUnit * cantidad,
+            img
+          });
+        }
+
+        await writeCart(cart);
+        await renderCart();
+        els.panel.classList.add("show");
+      });
+
+      els.items.addEventListener("click", async (e) => {
+        const btn = e.target.closest(".cart-action");
+        if (!btn) return;
+
+        const i = Number(btn.dataset.i);
+        const act = btn.dataset.act;
+
+        const cart = await readCart();
+        if (!cart[i]) return;
+
+        if (act === "inc") cart[i].cantidad++;
+        if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
+        if (act === "rm") cart.splice(i, 1);
+
+        cart.forEach((it) => it.subtotal = it.precioUnit * it.cantidad);
+        await writeCart(cart);
+        renderCart();
+      });
+
+      els.toggle.addEventListener("click", (e) => {
+        e.stopPropagation();
+        els.panel.classList.toggle("show");
+      });
+
+      /* NUEVO: evita que +, -, eliminar cierren el carrito */
+      els.panel.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+
+      els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
+      document.addEventListener("click", () => els.panel.classList.remove("show"));
+      els.btnEmpty.addEventListener("click", async () => {
+        await writeCart([]);
+        renderCart();
+      });
+
+      window.createOrderAndGoToCheckout = async () => {
+        const user = await getUser();
+        if (!user) return (window.location = "/login");
+
+        const cart = await dbGetCart();
+        if (!cart) return;
+
+        await supabase
+          .from("carts")
+          .update({ status: "ordered" })
+          .eq("id", cart.id);
+
+        window.location = `/checkout/${cart.id}`;
+      };
+
+      renderCart();
+    });
+  </script>
 </body>
 
 </html>
