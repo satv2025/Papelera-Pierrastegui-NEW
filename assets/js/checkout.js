@@ -3,14 +3,18 @@ import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabase
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 const CART_KEY = "pp_cart";
-const GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY";
-const TIENDA_DIRECCION = "Av. Pierrastegui 123, Concordia, Entre Ríos";
 
+// 📍 Coordenadas de tu tienda en Morón (desde Street View)
+const TIENDA_LAT = -34.6841658;
+const TIENDA_LON = -58.6357296;
+
+// 🔐 Verifica usuario logueado
 async function getUser() {
     const { data: { session } } = await supabase.auth.getSession();
     return session?.user || null;
 }
 
+// 🛒 Leer carrito
 async function readCart() {
     const user = await getUser();
     if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -25,6 +29,7 @@ async function readCart() {
     return data?.items || [];
 }
 
+// 🧹 Vaciar carrito
 async function clearCart() {
     const user = await getUser();
     if (!user) localStorage.removeItem(CART_KEY);
@@ -35,20 +40,27 @@ async function clearCart() {
     }
 }
 
-// 🧮 Calcula el costo de envío según distancia
+// 🚚 Calcular costo de envío usando OpenStreetMap (GRATIS)
 async function calcularEnvio(direccionCliente) {
     if (!direccionCliente) return 0;
-    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(TIENDA_DIRECCION)}&destinations=${encodeURIComponent(direccionCliente)}&key=${GOOGLE_API_KEY}&region=ar&language=es`;
 
-    const proxy = "https://api.allorigins.win/get?url=" + encodeURIComponent(url); // evitar CORS
     try {
-        const res = await fetch(proxy);
-        const dataRaw = await res.json();
-        const data = JSON.parse(dataRaw.contents);
+        // 1️⃣ Obtener coordenadas del cliente con Nominatim
+        const clienteRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccionCliente + ", Argentina")}`);
+        const clienteData = await clienteRes.json();
+        if (!clienteData.length) return 0;
 
-        const distanciaM = data.rows[0].elements[0].distance?.value || 0;
+        const clienteLat = clienteData[0].lat;
+        const clienteLon = clienteData[0].lon;
+
+        // 2️⃣ Calcular distancia con OSRM
+        const routeRes = await fetch(`https://router.project-osrm.org/route/v1/driving/${TIENDA_LON},${TIENDA_LAT};${clienteLon},${clienteLat}?overview=false`);
+        const routeData = await routeRes.json();
+        const distanciaM = routeData.routes?.[0]?.distance || 0;
+
+        // 💰 Costo = $300 base + $100 por km
         const km = distanciaM / 1000;
-        const costo = Math.round(300 + km * 100); // $300 base + $100 por km
+        const costo = Math.round(300 + km * 100);
         return costo;
     } catch (err) {
         console.error("Error calculando envío:", err);
@@ -56,6 +68,7 @@ async function calcularEnvio(direccionCliente) {
     }
 }
 
+// 💵 Render totales
 function renderItems(cart, envioCosto = 0) {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
@@ -82,6 +95,7 @@ function renderItems(cart, envioCosto = 0) {
     return total;
 }
 
+// ⚙️ Inicialización principal
 document.addEventListener("DOMContentLoaded", async () => {
     const cart = await readCart();
     if (cart.length === 0) {
@@ -94,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto);
 
-    // seleccionar método de envío
+    // 🟧 Selección del método de envío
     $$(".envio-opcion").forEach((op) => {
         op.addEventListener("click", async () => {
             $$(".envio-opcion").forEach((x) => x.classList.remove("activa"));
@@ -108,14 +122,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 $("#envio-costo-texto").textContent = "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
             } else {
                 envioCosto = 0;
-                $("#envio-costo-texto").textContent = "+ $0";
+                $("#envio-costo-texto").textContent = "Gratis";
             }
 
             total = renderItems(cart, envioCosto);
         });
     });
 
-    // recalcular envío si el usuario cambia dirección
+    // 🏠 Recalcular si cambia la dirección
     $("#chk-direccion").addEventListener("blur", async () => {
         if (metodoEnvio === "envio") {
             $("#envio-costo-texto").textContent = "Calculando...";
@@ -125,11 +139,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // botón de pago
+    // 💳 Pago con MercadoPago
     $("#btn-pagar").addEventListener("click", async () => {
         const user = await getUser();
 
-        // 🚫 si no hay usuario logueado, bloquea pago
+        // 🚫 Bloquear si no hay usuario logueado
         if (!user) {
             alert("Debes iniciar sesión o registrarte para continuar con el pago.");
             window.location.href = "/login";
