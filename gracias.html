@@ -1,277 +1,208 @@
-<!DOCTYPE html>
-<html lang="es">
+<script type="module">
+    import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gracias por tu compra — Papelera Pierrastegui</title>
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get("status") || "pending";
+    const orderId = params.get("order_id") || null;
 
-    <!-- CSS Base de la tienda -->
-    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/inicio.css">
+    const box = document.getElementById("gracias-box");
+    const text = document.getElementById("status-text");
+    const icon = box.querySelector(".status-icon");
+    const title = box.querySelector("h1");
 
-    <style>
-        /* ---- Página de Gracias ---- */
-        body.page-gracias {
-            background-color: #fff;
-            color: #ff7600;
-            font-family: 'Gilroy', sans-serif;
-            text-align: center;
-            padding: 3em 1em;
-        }
+    // 🟠 Mostrar estado de pago
+    if (status === "approved") {
+        icon.textContent = "✅";
+        icon.className = "status-icon status-success";
+        title.textContent = "¡Pago aprobado!";
+        text.textContent = "Tu compra fue realizada con éxito. A continuación, tu comprobante.";
+    } else if (status === "pending") {
+        icon.textContent = "🕒";
+        icon.className = "status-icon status-pending";
+        title.textContent = "Pago pendiente";
+        text.textContent = "Tu pago está en revisión. Te notificaremos por email una vez se confirme.";
+    } else {
+        icon.textContent = "❌";
+        icon.className = "status-icon status-failure";
+        title.textContent = "Error en el pago";
+        text.textContent = "Hubo un problema al procesar tu pago. Por favor, intentá nuevamente.";
+    }
 
-        .gracias-container {
-            max-width: 600px;
-            margin: 5em auto;
-            background: #fff;
-            padding: 40px 30px;
-            border-radius: 12px;
-            border: 3px solid #ff7600;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
+    // 🧾 Render del comprobante
+    function renderReceipt(order) {
+        const cont = document.createElement("div");
+        cont.id = "comprobante";
+        cont.style.textAlign = "left";
+        cont.style.marginTop = "2em";
+        cont.style.color = "#000";
+        cont.style.fontFamily = "Arial, sans-serif";
 
-        .gracias-container h1 {
-            color: #ff7600;
-            font-weight: 800;
-            font-size: 2em;
-            margin-bottom: 0.5em;
-        }
+        const totalARS = order.total.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
 
-        .gracias-container p {
-            font-size: 1.2em;
-            font-weight: 600;
-            margin: 1.2em 0;
-            color: #000;
-        }
+        cont.innerHTML = `
+    <div style="border:2px solid #ff7600;padding:20px;border-radius:10px;">
+      <h2 style="color:#ff7600;text-align:center;">Comprobante de Compra</h2>
+      <p><strong>Número de pedido:</strong> #${order.id}</p>
+      <p><strong>Cliente:</strong> ${order.nombre || "No especificado"}</p>
+      <p><strong>Teléfono:</strong> ${order.tel || "-"}</p>
+      <p><strong>Dirección:</strong> ${order.dir || "-"}</p>
+      <p><strong>Localidad:</strong> ${order.loc || "-"}</p>
 
-        .gracias-container .btn {
-            background: #ff7600;
-            color: #fff;
-            padding: 0.9em 1.6em;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-block;
-            transition: all 0.3s ease;
-            margin-top: 1em;
-        }
+      <h3 style="margin-top:1em;color:#ff7600;">Productos</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:0.95em;margin-top:0.5em;">
+        <thead>
+          <tr style="border-bottom:2px solid #ff7600;">
+            <th align="left">Producto</th>
+            <th align="center">Cant.</th>
+            <th align="right">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${order.items
+                .map(
+                    (it) => `
+              <tr style="border-bottom:1px solid #eee;">
+                <td>${it.nombre} (${it.size})</td>
+                <td align="center">${it.cantidad}</td>
+                <td align="right">$${it.subtotal.toLocaleString("es-AR")}</td>
+              </tr>`
+                )
+                .join("")}
+        </tbody>
+      </table>
 
-        .gracias-container .btn:hover {
-            background: #ffc52f;
-            color: #000;
-        }
+      <p style="text-align:right;margin-top:1em;font-weight:700;">
+        Total: ${totalARS}
+      </p>
 
-        .status-icon {
-            font-size: 3em;
-            margin-bottom: 0.2em;
-            display: block;
-        }
-
-        .status-success {
-            color: #37ff14;
-        }
-
-        .status-pending {
-            color: #ffcc00;
-        }
-
-        .status-failure {
-            color: #e60000;
-        }
-
-        footer {
-            margin-top: 6em;
-            padding: 1.5em;
-            border-top: 3px solid #ff7600;
-            color: #ff7600;
-            font-weight: 700;
-            background: #fff;
-        }
-    </style>
-</head>
-
-<body class="page-gracias">
-
-    <header>
-        <div id="pp-logo">
-            <a href="/">
-                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/logo.svg"
-                    alt="Papelera Pierrastegui">
-            </a>
-            <span>Papelera Pierrastegui</span>
-        </div>
-    </header>
-
-    <main>
-        <div class="gracias-container" id="gracias-box">
-            <span class="status-icon">🕒</span>
-            <h1>Procesando pago...</h1>
-            <p id="status-text">Verificando estado de tu compra...</p>
-            <a href="/" class="btn">Volver a la tienda</a>
-        </div>
-    </main>
-
-    <footer>
-        © 2025 Papelera Pierrastegui — Todos los derechos reservados
-    </footer>
-
-    <script type="module">
-        import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
-
-        const params = new URLSearchParams(window.location.search);
-        const status = params.get("status") || "pending";
-        const orderId = params.get("order_id") || null;
-
-        const box = document.getElementById("gracias-box");
-        const text = document.getElementById("status-text");
-        const icon = box.querySelector(".status-icon");
-        const title = box.querySelector("h1");
-
-        // 🟠 Mensaje por estado
-        if (status === "approved") {
-            icon.textContent = "✅";
-            icon.className = "status-icon status-success";
-            title.textContent = "¡Pago aprobado!";
-            text.textContent = "Tu compra fue realizada con éxito. A continuación, tu comprobante.";
-        } else if (status === "pending") {
-            icon.textContent = "🕒";
-            icon.className = "status-icon status-pending";
-            title.textContent = "Pago pendiente";
-            text.textContent = "Tu pago está en revisión. Te notificaremos por email una vez se confirme.";
-        } else {
-            icon.textContent = "❌";
-            icon.className = "status-icon status-failure";
-            title.textContent = "Error en el pago";
-            text.textContent = "Hubo un problema al procesar tu pago. Por favor, intentá nuevamente.";
-        }
-
-        // 🧾 Función para crear el comprobante visual
-        function renderReceipt(order) {
-            const cont = document.createElement("div");
-            cont.style.textAlign = "left";
-            cont.style.marginTop = "2em";
-            cont.style.color = "#000";
-
-            const totalARS = order.total.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
-
-            cont.innerHTML = `
-    <h2 style="color:#ff7600;">Comprobante de Compra</h2>
-    <p><strong>Número de pedido:</strong> #${order.id}</p>
-    <p><strong>Cliente:</strong> ${order.nombre || "No especificado"}</p>
-    <p><strong>Teléfono:</strong> ${order.tel || "-"}</p>
-    <p><strong>Dirección:</strong> ${order.dir || "-"}</p>
-    <p><strong>Localidad:</strong> ${order.loc || "-"}</p>
-
-    <h3 style="margin-top:1em;color:#ff7600;">Productos</h3>
-    <table style="width:100%;border-collapse:collapse;font-size:0.95em;margin-top:0.5em;">
-      <thead>
-        <tr style="border-bottom:2px solid #ff7600;">
-          <th align="left">Producto</th>
-          <th align="center">Cant.</th>
-          <th align="right">Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${order.items
-                    .map(
-                        (it) => `
-            <tr style="border-bottom:1px solid #eee;">
-              <td>${it.nombre} (${it.size})</td>
-              <td align="center">${it.cantidad}</td>
-              <td align="right">$${it.subtotal.toLocaleString("es-AR")}</td>
-            </tr>`
-                    )
-                    .join("")}
-      </tbody>
-    </table>
-
-    <p style="text-align:right;margin-top:1em;font-weight:700;">
-      Total: ${totalARS}
-    </p>
+      <p style="text-align:center;margin-top:1.5em;font-size:0.9em;color:#555;">
+        Gracias por tu compra 💛 — Papelera Pierrastegui
+      </p>
+    </div>
   `;
 
-            const btnPDF = document.createElement("button");
-            btnPDF.textContent = "📄 Descargar Comprobante (PDF)";
-            btnPDF.style.background = "#ff7600";
-            btnPDF.style.color = "#fff";
-            btnPDF.style.border = "none";
-            btnPDF.style.borderRadius = "6px";
-            btnPDF.style.padding = "0.7em 1.2em";
-            btnPDF.style.fontWeight = "700";
-            btnPDF.style.marginTop = "1.5em";
-            btnPDF.style.cursor = "pointer";
+        const btnBox = document.createElement("div");
+        btnBox.style.display = "flex";
+        btnBox.style.justifyContent = "center";
+        btnBox.style.gap = "1em";
+        btnBox.style.marginTop = "1.5em";
 
-            btnPDF.onclick = () => generarPDF(order);
+        // 📄 Botón PDF
+        const btnPDF = document.createElement("button");
+        btnPDF.textContent = "📄 Descargar PDF";
+        btnPDF.style.background = "#ff7600";
+        btnPDF.style.color = "#fff";
+        btnPDF.style.border = "none";
+        btnPDF.style.borderRadius = "6px";
+        btnPDF.style.padding = "0.7em 1.2em";
+        btnPDF.style.fontWeight = "700";
+        btnPDF.style.cursor = "pointer";
+        btnPDF.onclick = () => generarPDF(order);
 
-            box.appendChild(cont);
-            box.appendChild(btnPDF);
+        // 🖨️ Botón imprimir
+        const btnPrint = document.createElement("button");
+        btnPrint.textContent = "🖨️ Imprimir Comprobante";
+        btnPrint.style.background = "#ffc52f";
+        btnPrint.style.color = "#000";
+        btnPrint.style.border = "none";
+        btnPrint.style.borderRadius = "6px";
+        btnPrint.style.padding = "0.7em 1.2em";
+        btnPrint.style.fontWeight = "700";
+        btnPrint.style.cursor = "pointer";
+        btnPrint.onclick = () => window.print();
+
+        btnBox.appendChild(btnPDF);
+        btnBox.appendChild(btnPrint);
+
+        box.appendChild(cont);
+        box.appendChild(btnBox);
+    }
+
+    // 📄 Generar PDF con jsPDF
+    async function generarPDF(order) {
+        const { jsPDF } = await import("https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.es.min.js");
+        const doc = new jsPDF();
+        let y = 15;
+
+        doc.setFontSize(18);
+        doc.setTextColor(255, 118, 0);
+        doc.text("Papelera Pierrastegui - Comprobante de compra", 14, y);
+        y += 10;
+
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Número de pedido: #${order.id}`, 14, (y += 8));
+        doc.text(`Cliente: ${order.nombre || "-"}`, 14, (y += 7));
+        doc.text(`Teléfono: ${order.tel || "-"}`, 14, (y += 7));
+        doc.text(`Dirección: ${order.dir || "-"}`, 14, (y += 7));
+        doc.text(`Localidad: ${order.loc || "-"}`, 14, (y += 7));
+
+        y += 10;
+        doc.setTextColor(255, 118, 0);
+        doc.text("Productos", 14, y);
+        y += 5;
+
+        doc.setTextColor(0, 0, 0);
+        order.items.forEach((it) => {
+            doc.text(`${it.nombre} (${it.size}) ×${it.cantidad}`, 14, (y += 7));
+            doc.text(`$${it.subtotal.toLocaleString("es-AR")}`, 170, y, { align: "right" });
+        });
+
+        y += 10;
+        doc.setTextColor(255, 118, 0);
+        doc.text(`Total: $${order.total.toLocaleString("es-AR")}`, 170, y, { align: "right" });
+
+        doc.save(`comprobante_pedido_${order.id}.pdf`);
+    }
+
+    // 🔍 Cargar pedido desde Supabase
+    (async () => {
+        if (!orderId) return;
+
+        const { data: order, error } = await supabase
+            .from("carts")
+            .select("*")
+            .eq("id", orderId)
+            .maybeSingle();
+
+        if (error || !order) {
+            text.textContent = "No se pudo encontrar tu pedido.";
+            console.error(error);
+            return;
         }
 
-        // 📄 Generar PDF usando jsPDF
-        async function generarPDF(order) {
-            const { jsPDF } = await import("https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.es.min.js");
-            const doc = new jsPDF();
-            let y = 15;
+        // Mostrar comprobante
+        renderReceipt(order);
 
-            doc.setFontSize(18);
-            doc.setTextColor(255, 118, 0);
-            doc.text("Papelera Pierrastegui - Comprobante de compra", 14, y);
-            y += 10;
-
-            doc.setFontSize(12);
-            doc.setTextColor(0, 0, 0);
-            doc.text(`Número de pedido: #${order.id}`, 14, (y += 8));
-            doc.text(`Cliente: ${order.nombre || "-"}`, 14, (y += 7));
-            doc.text(`Teléfono: ${order.tel || "-"}`, 14, (y += 7));
-            doc.text(`Dirección: ${order.dir || "-"}`, 14, (y += 7));
-            doc.text(`Localidad: ${order.loc || "-"}`, 14, (y += 7));
-
-            y += 10;
-            doc.setTextColor(255, 118, 0);
-            doc.text("Productos", 14, y);
-            y += 5;
-
-            doc.setTextColor(0, 0, 0);
-            order.items.forEach((it) => {
-                doc.text(`${it.nombre} (${it.size}) ×${it.cantidad}`, 14, (y += 7));
-                doc.text(`$${it.subtotal.toLocaleString("es-AR")}`, 170, y, { align: "right" });
-            });
-
-            y += 10;
-            doc.setTextColor(255, 118, 0);
-            doc.text(`Total: $${order.total.toLocaleString("es-AR")}`, 170, y, { align: "right" });
-
-            doc.save(`comprobante_pedido_${order.id}.pdf`);
-        }
-
-        // 🔍 Cargar datos del pedido
-        (async () => {
-            if (!orderId) return;
-
-            const { data: order, error } = await supabase
+        // Si fue aprobado, actualizar estado
+        if (status === "approved") {
+            await supabase
                 .from("carts")
-                .select("*")
-                .eq("id", orderId)
-                .maybeSingle();
+                .update({ status: "completed" })
+                .eq("id", order.id);
+        }
+    })();
 
-            if (error || !order) {
-                text.textContent = "No se pudo encontrar tu pedido.";
-                console.error(error);
-                return;
-            }
-
-            // Mostrar comprobante
-            renderReceipt(order);
-
-            // Si fue aprobado, marcamos el carrito como completado
-            if (status === "approved") {
-                await supabase
-                    .from("carts")
-                    .update({ status: "completed" })
-                    .eq("id", order.id);
-            }
-        })();
-    </script>
-
-</body>
-
-</html>
+    // 🖨️ Estilos para impresión: solo el comprobante
+    const stylePrint = document.createElement("style");
+    stylePrint.textContent = `
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #comprobante, #comprobante * {
+      visibility: visible;
+    }
+    #comprobante {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .btn, .status-icon, footer {
+      display: none !important;
+    }
+  }
+`;
+    document.head.appendChild(stylePrint);
+</script>
