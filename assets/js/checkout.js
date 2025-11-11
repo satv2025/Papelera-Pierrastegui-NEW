@@ -22,6 +22,20 @@ async function readCart() {
     return data?.items || [];
 }
 
+// 🧹 NUEVO: función para vaciar el carrito
+async function clearCart() {
+    const user = await getUser();
+    if (!user) {
+        localStorage.removeItem(CART_KEY);
+    } else {
+        await supabase
+            .from("carts")
+            .update({ items: [], total: 0 })
+            .eq("user_id", user.id)
+            .eq("status", "active");
+    }
+}
+
 function renderItems(cart) {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
@@ -75,7 +89,11 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await res.json();
 
             if (data.init_point) {
-                window.location.href = data.init_point; // Redirige al checkout de MP
+                // 🧹 Vacía el carrito antes de redirigir al pago
+                await clearCart();
+
+                // Redirige al checkout de MercadoPago
+                window.location.href = data.init_point;
             } else {
                 console.error("Respuesta:", data);
                 alert("Error al generar el pago: " + (data.error || data.message || "Intentá nuevamente"));

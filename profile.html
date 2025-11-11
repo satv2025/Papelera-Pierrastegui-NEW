@@ -5,52 +5,133 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Perfil | Papelería Pierrastegui</title>
-    <link href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" rel="icon"
+    <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico"
         type="image/x-icon" />
     <link rel="stylesheet" href="/assets/css/profile.css" />
+
+    <style>
+        /* ---- NUEVO: Tabs ---- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5em;
+            gap: 1em;
+        }
+
+        .tab-btn {
+            background: #ff7600;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.6em 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #ffc52f;
+            color: #000;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Historial de compras */
+        .orders-list {
+            margin-top: 1em;
+        }
+
+        .order-card {
+            border: 2px solid #ff7600;
+            border-radius: 8px;
+            padding: 1em;
+            margin-bottom: 1em;
+            background: #fff;
+        }
+
+        .order-card h4 {
+            color: #ff7600;
+            margin-bottom: 0.5em;
+        }
+
+        .order-items {
+            margin-top: 0.5em;
+            border-top: 1px solid #ddd;
+            padding-top: 0.5em;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95em;
+            padding: 0.3em 0;
+        }
+
+        .no-orders {
+            text-align: center;
+            font-weight: 600;
+            color: #888;
+            margin-top: 2em;
+        }
+    </style>
 </head>
 
 <body>
     <div class="profile-container">
-        <!-- 🧑‍🦰 Encabezado del perfil -->
         <div class="profile-header">
             <div class="profile-avatar" id="profile-avatar">👤</div>
             <h2 id="profile-name">Cargando...</h2>
             <p id="profile-email"></p>
         </div>
 
-        <!-- 📣 Contenedor de mensajes dinámicos -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="perfil">Mis datos</button>
+            <button class="tab-btn" data-tab="historial">Historial de compras</button>
+        </div>
+
+        <!-- 📋 Mensajes -->
         <div id="profile-message" class="profile-message"></div>
 
-        <!-- 📝 Formulario de edición -->
-        <form id="profile-form">
-            <div class="profile-field">
-                <label for="nombre">Nombre completo</label>
-                <input type="text" id="nombre" name="nombre" autocomplete="name" />
-            </div>
+        <!-- 🧍 Sección Datos personales -->
+        <div id="tab-perfil" class="tab-content active">
+            <form id="profile-form">
+                <div class="profile-field">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" autocomplete="name" />
+                </div>
 
-            <div class="profile-field">
-                <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" name="usuario" autocomplete="username" />
-            </div>
+                <div class="profile-field">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" autocomplete="username" />
+                </div>
 
-            <div class="profile-field">
-                <label for="email">Correo electrónico</label>
-                <input type="email" id="email" name="email" disabled />
-            </div>
+                <div class="profile-field">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" disabled />
+                </div>
 
-            <div class="profile-field">
-                <label for="new-password">Nueva contraseña (opcional)</label>
-                <input type="password" id="new-password" placeholder="Dejar vacío si no querés cambiarla" />
-            </div>
+                <div class="profile-field">
+                    <label for="new-password">Nueva contraseña (opcional)</label>
+                    <input type="password" id="new-password" placeholder="Dejar vacío si no querés cambiarla" />
+                </div>
 
-            <div class="profile-actions">
-                <button type="submit" class="btn-guardar">Guardar cambios</button>
-                <button type="button" id="cerrar-sesion" class="btn-salir">
-                    Cerrar sesión
-                </button>
-            </div>
-        </form>
+                <div class="profile-actions">
+                    <button type="submit" class="btn-guardar">Guardar cambios</button>
+                    <button type="button" id="cerrar-sesion" class="btn-salir">Cerrar sesión</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 🧾 Sección Historial de compras -->
+        <div id="tab-historial" class="tab-content">
+            <div id="orders-container" class="orders-list"></div>
+        </div>
     </div>
 
     <script type="module" src="/assets/js/profile.js"></script>
