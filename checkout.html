@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/inicio.css">
 
     <style>
+        body {
+            background: #fff;
+            font-family: "Poppins", sans-serif;
+        }
+
         .checkout-container {
             max-width: 1000px;
             margin: 3em auto;
@@ -23,6 +28,7 @@
             font-weight: 700;
             margin-bottom: 1em;
             color: #ff7600;
+            text-align: center;
         }
 
         .checkout-grid {
@@ -114,11 +120,51 @@
             margin-top: 1em;
             font-weight: 700;
         }
+
+        .envio-opciones {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin-bottom: 1.5em;
+        }
+
+        .envio-opcion {
+            border: 3px solid #ff7600;
+            border-radius: 12px;
+            padding: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.2s ease;
+        }
+
+        .envio-opcion.activa {
+            background: #fff5eb;
+            box-shadow: 0 0 10px rgba(255, 118, 0, 0.3);
+        }
+
+        .envio-opcion span.retiro {
+            color: #ff7600;
+        }
+
+        .envio-opcion span.gratis {
+            color: #28a745;
+        }
+
+        .envio-opcion span.envio {
+            color: #007bff;
+        }
+
+        .envio-opcion span.costo {
+            color: #000;
+        }
     </style>
 </head>
 
 <body>
-
     <header>
         <div id="pp-logo">
             <a href="/"><img src="https://papelerapierrastegui.com.ar/assets/images/logo.webp"></a>
@@ -130,30 +176,38 @@
     </header>
 
     <div class="checkout-container">
-
         <div class="checkout-title">Finalizar compra</div>
 
         <div id="checkout-error" style="color:red;font-weight:700;margin-bottom:1em;"></div>
 
         <div class="checkout-grid">
-
             <!-- LISTA ITEMS -->
             <div class="checkout-box">
                 <h3>Tu pedido</h3>
                 <div class="checkout-items" id="checkout-items"></div>
             </div>
 
-            <!-- RESUMEN -->
+            <!-- DATOS -->
             <div class="checkout-box">
                 <h3>Datos para la entrega</h3>
-
                 <input class="checkout-input" id="chk-nombre" placeholder="Nombre y apellido">
                 <input class="checkout-input" id="chk-telefono" placeholder="Teléfono">
                 <input class="checkout-input" id="chk-direccion" placeholder="Dirección">
                 <input class="checkout-input" id="chk-localidad" placeholder="Localidad">
 
-                <hr style="margin:1em 0;border-color:#ff7600">
+                <h3>Método de entrega</h3>
+                <div class="envio-opciones">
+                    <div class="envio-opcion activa" data-metodo="retiro">
+                        <span class="retiro">Retiro En Tienda</span>
+                        <span class="gratis">Gratis</span>
+                    </div>
+                    <div class="envio-opcion" data-metodo="envio">
+                        <span class="envio">Envío a Domicilio</span>
+                        <span class="costo" id="envio-costo-texto">Calculando...</span>
+                    </div>
+                </div>
 
+                <hr style="margin:1em 0;border-color:#ff7600">
                 <div id="checkout-totals" class="checkout-totals"></div>
 
                 <button class="checkout-btn" id="btn-pagar">Pagar con MercadoPago</button>
@@ -162,8 +216,7 @@
         </div>
     </div>
 
-    <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/checkout.js"></script>
-
+    <script type="module" src="./checkout.js"></script>
 </body>
 
 </html>
