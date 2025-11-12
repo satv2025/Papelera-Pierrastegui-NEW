@@ -11,6 +11,27 @@
     padding: 0;
 }
 
+li div div div {
+    color: #ff7600;
+}
+
+ul {
+    1px: ;
+    1px: unset;
+    1px: unset;
+    1px: s;
+    1px: so;
+    1px: sol;
+    1px: soli;
+    1px: solid;
+    1px: soli;
+    1px: sol;
+    1px: so;
+    1px: unset;
+    1px: unset;
+    1px: s;
+}
+
 body {
     background: #fff;
     margin: 0;
@@ -153,6 +174,7 @@ header {
 .checkout-items {
     max-height: 400px;
     overflow-y: auto;
+    border-radius: .25em;
 }
 
 .checkout-item {
@@ -165,6 +187,9 @@ header {
     cursor: pointer;
     padding-left: 1em;
     padding-right: 1em;
+    border-radius: .25em;
+    border-bottom: 1px solid #ff7600;
+    color: #ff7600;
 }
 
 .checkout-item img {

@@ -33,14 +33,14 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
         cont.innerHTML += `
         <ul style="padding: 0; margin: 0;">
           <li class="checkout-item" ${isFirstItem}>
-            <div style="display: flex; gap: 10px;">
-              <img src="${it.img}" alt="${it.nombre}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
-              <div>
-                <div style="font-weight: bold;">${it.nombre} (${it.size}) ×${it.cantidad}</div>
-                <div style="font-size: 12px; color: #555;">${it.desc || "Sin descripción"}</div>
+            <div class="checkout-item-info" style="display: flex; gap: 10px;">
+              <img src="${it.img}" alt="${it.nombre}" class="checkout-item-img" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
+              <div class="checkout-item-details">
+                <div class="checkout-item-title" style="font-weight: bold;">${it.nombre} (${it.size}) ×${it.cantidad}</div>
+                <div class="checkout-item-desc" style="font-size: 12px; color: #555;">${it.desc || "Sin descripción"}</div>
               </div>
             </div>
-            <span>${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
+            <span class="checkout-item-subtotal">${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
           </li>
         </ul>`;
     });
