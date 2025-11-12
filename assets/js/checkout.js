@@ -4,7 +4,7 @@ const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 const CART_KEY = "pp_cart";
 
-// 📍 Coordenadas de tu tienda en Morón (desde Street View)
+// 📍 Coordenadas de tu tienda en Morón
 const TIENDA_LAT = -34.6841658;
 const TIENDA_LON = -58.6357296;
 
@@ -40,34 +40,6 @@ async function clearCart() {
     }
 }
 
-// 🚚 Calcular costo de envío usando OpenStreetMap (GRATIS)
-async function calcularEnvio(direccionCliente) {
-    if (!direccionCliente) return 0;
-
-    try {
-        // 1️⃣ Obtener coordenadas del cliente con Nominatim
-        const clienteRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(direccionCliente + ", Argentina")}`);
-        const clienteData = await clienteRes.json();
-        if (!clienteData.length) return 0;
-
-        const clienteLat = clienteData[0].lat;
-        const clienteLon = clienteData[0].lon;
-
-        // 2️⃣ Calcular distancia con OSRM
-        const routeRes = await fetch(`https://router.project-osrm.org/route/v1/driving/${TIENDA_LON},${TIENDA_LAT};${clienteLon},${clienteLat}?overview=false`);
-        const routeData = await routeRes.json();
-        const distanciaM = routeData.routes?.[0]?.distance || 0;
-
-        // 💰 Costo = $300 base + $100 por km
-        const km = distanciaM / 1000;
-        const costo = Math.round(300 + km * 100);
-        return costo;
-    } catch (err) {
-        console.error("Error calculando envío:", err);
-        return 0;
-    }
-}
-
 // 💵 Render totales
 function renderItems(cart, envioCosto = 0) {
     const cont = $("#checkout-items");
@@ -75,7 +47,7 @@ function renderItems(cart, envioCosto = 0) {
     cont.innerHTML = "";
     let subtotal = 0;
 
-    cart.forEach((it) => {
+    cart.forEach(it => {
         subtotal += it.subtotal;
         cont.innerHTML += `
       <div class="checkout-item">
@@ -95,6 +67,22 @@ function renderItems(cart, envioCosto = 0) {
     return total;
 }
 
+// 🚚 Calcular costo de envío (Leaflet + OSRM)
+async function calcularEnvio(lat, lon) {
+    try {
+        const routeRes = await fetch(
+            `https://router.project-osrm.org/route/v1/driving/${TIENDA_LON},${TIENDA_LAT};${lon},${lat}?overview=false`
+        );
+        const routeData = await routeRes.json();
+        const distanciaM = routeData.routes?.[0]?.distance || 0;
+        const km = distanciaM / 1000;
+        return Math.round(300 + km * 100); // $300 base + $100/km
+    } catch (err) {
+        console.error("Error al calcular envío:", err);
+        return 0;
+    }
+}
+
 // ⚙️ Inicialización principal
 document.addEventListener("DOMContentLoaded", async () => {
     const cart = await readCart();
@@ -107,55 +95,79 @@ document.addEventListener("DOMContentLoaded", async () => {
     let metodoEnvio = "retiro";
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto);
+    $("#envio-costo-texto").textContent = "Gratis";
+
+    let userMarker = null;
+    let map;
+
+    // 🟩 Mostrar marcador fijo de la tienda
+    function addTiendaMarker(map) {
+        L.marker([TIENDA_LAT, TIENDA_LON])
+            .addTo(map)
+            .bindPopup("<b>Papelera Pierrastegui</b><br>Morón")
+            .openPopup();
+    }
 
     // 🟧 Selección del método de envío
-    $$(".envio-opcion").forEach((op) => {
-        op.addEventListener("click", async () => {
-            $$(".envio-opcion").forEach((x) => x.classList.remove("activa"));
+    $$(".envio-opcion").forEach(op => {
+        op.addEventListener("click", () => {
+            $$(".envio-opcion").forEach(x => x.classList.remove("activa"));
             op.classList.add("activa");
             metodoEnvio = op.dataset.metodo;
 
             if (metodoEnvio === "envio") {
-                const direccionCliente = $("#chk-direccion").value.trim();
-                $("#envio-costo-texto").textContent = "Calculando...";
-                envioCosto = await calcularEnvio(direccionCliente);
-                $("#envio-costo-texto").textContent = "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
+                $("#map-container").style.display = "block";
+
+                if (!map) {
+                    map = L.map("map").setView([TIENDA_LAT, TIENDA_LON], 12);
+                    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                        attribution: "&copy; OpenStreetMap",
+                    }).addTo(map);
+                    addTiendaMarker(map);
+
+                    // Usuario selecciona ubicación
+                    map.on("click", async (e) => {
+                        if (userMarker) userMarker.remove();
+                        userMarker = L.marker(e.latlng).addTo(map);
+
+                        $("#envio-costo-texto").textContent = "Calculando...";
+                        envioCosto = await calcularEnvio(e.latlng.lat, e.latlng.lng);
+                        $("#envio-costo-texto").textContent =
+                            "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
+                        total = renderItems(cart, envioCosto);
+                    });
+                }
             } else {
+                // 🟩 Retiro en tienda
+                $("#map-container").style.display = "none";
                 envioCosto = 0;
                 $("#envio-costo-texto").textContent = "Gratis";
+                total = renderItems(cart, envioCosto);
             }
-
-            total = renderItems(cart, envioCosto);
         });
-    });
-
-    // 🏠 Recalcular si cambia la dirección
-    $("#chk-direccion").addEventListener("blur", async () => {
-        if (metodoEnvio === "envio") {
-            $("#envio-costo-texto").textContent = "Calculando...";
-            envioCosto = await calcularEnvio($("#chk-direccion").value.trim());
-            $("#envio-costo-texto").textContent = "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
-            total = renderItems(cart, envioCosto);
-        }
     });
 
     // 💳 Pago con MercadoPago
     $("#btn-pagar").addEventListener("click", async () => {
         const user = await getUser();
-
-        // 🚫 Bloquear si no hay usuario logueado
         if (!user) {
-            alert("Debes iniciar sesión o registrarte para continuar con el pago.");
+            alert("Debes iniciar sesión para continuar con el pago.");
             window.location.href = "/login";
             return;
         }
 
         const nombre = $("#chk-nombre").value.trim();
+        const email = $("#chk-email").value.trim(); // 🟩 Nuevo campo
         const tel = $("#chk-telefono").value.trim();
-        const dir = $("#chk-direccion").value.trim();
-        const loc = $("#chk-localidad").value.trim();
-        if (!nombre || !tel || !dir || !loc) {
-            alert("Completá todos los datos de entrega.");
+
+        // 🟩 Validación
+        if (!nombre || !email || !tel) {
+            alert("Completá nombre, correo y teléfono.");
+            return;
+        }
+        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Ingresá un correo electrónico válido.");
             return;
         }
 
@@ -170,9 +182,8 @@ document.addEventListener("DOMContentLoaded", async () => {
                     items: cart,
                     user,
                     nombre,
+                    email, // 🟩 Enviado al servidor
                     tel,
-                    dir,
-                    loc,
                     envio: metodoEnvio,
                     costoEnvio: envioCosto
                 }),
@@ -193,4 +204,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             $("#checkout-loader").style.display = "none";
         }
     });
+
+    // 🟩 Si el usuario está logueado, autocompleta su email
+    const user = await getUser();
+    if (user?.email) $("#chk-email").value = user.email;
 });

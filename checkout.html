@@ -4,57 +4,61 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checkout — Papelería Pierrastegui</title>
-    <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png">
-    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/inicio.css">
-    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/checkout.css">
+    <title>Checkout — Papelera Pierrastegui</title>
+    <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/checkout.css" />
 </head>
 
 <body>
     <header>
         <div id="pp-logo">
-            <a href="/"><img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png"></a> <span
-                class="pp-title">Papelera<br>Pierrastegui</span>
+            <a href="/"><img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" /></a>
+            <span class="pp-title">Papelera<br />Pierrastegui</span>
         </div>
         <nav class="nav-links">
             <a href="/">Inicio</a>
-            <a href="/productos">Productos</a>
         </nav>
     </header>
 
     <div class="checkout-container">
         <div class="checkout-title">Finalizar compra</div>
-
         <div id="checkout-error" style="color:red;font-weight:700;margin-bottom:1em;"></div>
 
         <div class="checkout-grid">
-            <!-- LISTA ITEMS -->
+            <!-- LISTA DE ITEMS -->
             <div class="checkout-box">
                 <h3>Tu pedido</h3>
                 <div class="checkout-items" id="checkout-items"></div>
             </div>
 
-            <!-- DATOS -->
+            <!-- DATOS DE ENTREGA -->
             <div class="checkout-box">
-                <h3>Datos para la entrega</h3>
-                <input class="checkout-input" id="chk-nombre" placeholder="Nombre y apellido">
-                <input class="checkout-input" id="chk-telefono" placeholder="Teléfono">
-                <input class="checkout-input" id="chk-direccion" placeholder="Dirección">
-                <input class="checkout-input" id="chk-localidad" placeholder="Localidad">
+                <h3>Datos del comprador</h3>
+                <input class="checkout-input" id="chk-nombre" placeholder="Nombre y apellido" />
+                <input class="checkout-input" id="chk-email" placeholder="Correo electrónico" type="email" />
+                <input class="checkout-input" id="chk-telefono" placeholder="Teléfono" />
 
                 <h3>Método de entrega</h3>
                 <div class="envio-opciones">
                     <div class="envio-opcion activa" data-metodo="retiro">
-                        <span class="retiro">Retiro En Tienda</span>
+                        <span class="retiro">Retiro en Tienda</span>
                         <span class="gratis">Gratis</span>
                     </div>
                     <div class="envio-opcion" data-metodo="envio">
                         <span class="envio">Envío a Domicilio</span>
-                        <span class="costo" id="envio-costo-texto">Calculando...</span>
+                        <span class="costo" id="envio-costo-texto">Seleccioná ubicación</span>
                     </div>
                 </div>
 
-                <hr style="margin:1em 0;border-color:#ff7600">
+                <!-- Mapa -->
+                <div id="map-container" style="display:none;">
+                    <div id="map" style="height: 250px; border-radius: 8px; margin-bottom: 1em;"></div>
+                    <p style="font-size:.9em; color:#555;">📍 Hacé clic en tu ubicación para calcular el costo de envío.
+                    </p>
+                </div>
+
+                <hr style="margin:1em 0;border-color:#ff7600" />
                 <div id="checkout-totals" class="checkout-totals"></div>
 
                 <button class="checkout-btn" id="btn-pagar">Pagar con MercadoPago</button>
@@ -63,7 +67,8 @@
         </div>
     </div>
 
-    <script type="module" src="assets/js/checkout.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/checkout.js"></script>
 </body>
 
 </html>
