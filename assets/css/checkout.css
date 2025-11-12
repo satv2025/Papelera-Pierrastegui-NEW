@@ -7,7 +7,6 @@
 * {
     font-family: 'Gilroy';
     box-sizing: border-box;
-    border-radius: 0.3em !important;
     margin: 0;
     padding: 0;
 }
@@ -160,10 +159,28 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #bcbcbc;
     padding: 1em 0;
     flex-wrap: nowrap;
     gap: 0.8em;
+    border-radius: 0 !important;
+    cursor: pointer;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.checkout-item img {
+    border: none;
+    outline: none !important;
+}
+
+.checkout-item:hover {
+    background: #bcbcbc;
+    border-radius: 0 !important;
+}
+
+.checkout-item:hover img {
+    background: #fff;
 }
 
 .checkout-item img {
