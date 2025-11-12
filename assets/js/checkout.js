@@ -1,4 +1,3 @@
-// 📦 checkout.js
 import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
 const $ = (s) => document.querySelector(s);
@@ -21,7 +20,7 @@ function getCartIdFromQuery() {
     return params.get("id");
 }
 
-// 💵 Render totales
+// 💵 Render totales y productos en el carrito
 function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
@@ -31,13 +30,18 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     cart.forEach((it, i) => {
         subtotal += it.subtotal;
         cont.innerHTML += `
-      <div class="checkout-item">
-        <img src="${it.img}" alt="">
-        <div class="checkout-item-info">${it.nombre} (${it.size}) ×${it.cantidad}</div>
-        <div class="checkout-item-precio" id="precio-item-${i}">
-          ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-        </div>
-      </div>`;
+        <ul style="padding: 0; margin: 0;">
+          <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; list-style: none; border-bottom: 1px solid #ff7600;">
+            <div style="display: flex; gap: 10px;">
+              <img src="${it.img}" alt="${it.nombre}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
+              <div>
+                <div style="font-weight: bold;">${it.nombre} (${it.size}) ×${it.cantidad}</div>
+                <div style="font-size: 12px; color: #555;">${it.desc || "Sin descripción"}</div>
+              </div>
+            </div>
+            <span>${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
+          </li>
+        </ul>`;
     });
 
     const total = subtotal + envioCosto;

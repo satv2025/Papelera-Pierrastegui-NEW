@@ -159,11 +159,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid #bcbcbc;
     padding: 1em 0;
     flex-wrap: nowrap;
     gap: 0.8em;
-    border-radius: 0 !important;
     cursor: pointer;
     padding-left: 1em;
     padding-right: 1em;
@@ -175,8 +173,7 @@ header {
 }
 
 .checkout-item:hover {
-    background: #bcbcbc;
-    border-radius: 0 !important;
+    background: #ff7600;
 }
 
 .checkout-item:hover img {
