@@ -226,7 +226,8 @@ input:focus-visible {
     color: #fff;
 }
 
-.envio-opcion.activa {
+.envio-opcion.activa,
+.envio-opcion.activa span.retiro {
     background: #ff7600;
     color: #fff !important;
 }
