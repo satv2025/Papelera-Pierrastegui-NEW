@@ -98,34 +98,86 @@ async function buscarDirecciones(q) {
 
 // ⚙️ Principal
 document.addEventListener("DOMContentLoaded", async () => {
-    const cartId = getCartIdFromQuery();
     const user = await getUser();
-
-    if (!cartId || !user) {
-        alert("Pedido no encontrado o usuario no autenticado.");
+    if (!user) {
+        alert("Usuario no autenticado. Iniciá sesión para continuar.");
         window.location.href = "/productos";
         return;
     }
 
-    // 🔹 Cargar pedido desde Supabase
-    const { data: pedido, error } = await supabase
-        .from("carts")
-        .select("*")
-        .eq("id", cartId)
-        .eq("user_id", user.id)
-        .maybeSingle();
+    let cartId = getCartIdFromQuery();
+    let pedido = null;
 
-    if (error || !pedido) {
-        alert("No se pudo cargar el pedido.");
-        window.location.href = "/productos";
-        return;
+    // 🧾 Buscar carrito activo o crear uno nuevo si no hay id
+    if (!cartId) {
+        const { data: existing, error: existingErr } = await supabase
+            .from("carts")
+            .select("*")
+            .eq("user_id", user.id)
+            .in("status", ["active", "pending"])
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+        if (existing && !existingErr) {
+            pedido = existing;
+            cartId = existing.id;
+            console.log("🔁 Carrito existente detectado:", cartId);
+        } else {
+            // 🆕 Crear un carrito nuevo vacío
+            const { data: nuevo, error: newErr } = await supabase
+                .from("carts")
+                .insert([{ user_id: user.id, items: [], status: "active" }])
+                .select()
+                .single();
+
+            if (newErr || !nuevo) {
+                console.error("Error creando carrito:", newErr);
+                alert("No se pudo iniciar tu carrito. Intentá nuevamente.");
+                window.location.href = "/productos";
+                return;
+            }
+
+            pedido = nuevo;
+            cartId = nuevo.id;
+            console.log("🆕 Nuevo carrito creado:", cartId);
+        }
+
+        // 🔗 Actualizar la URL sin recargar
+        const url = new URL(window.location);
+        url.searchParams.set("id", cartId);
+        window.history.replaceState({}, "", url);
+    } else {
+        // 🔹 Cargar pedido desde Supabase
+        const { data: cartData, error: loadErr } = await supabase
+            .from("carts")
+            .select("*")
+            .eq("id", cartId)
+            .eq("user_id", user.id)
+            .maybeSingle();
+
+        if (loadErr || !cartData) {
+            alert("No se pudo cargar el pedido.");
+            window.location.href = "/productos";
+            return;
+        }
+
+        pedido = cartData;
     }
 
-    const cart = pedido.items || [];
+    // 📦 Si el carrito está vacío, intentar traer del localStorage
+    let cart = pedido.items || [];
     if (!cart.length) {
-        alert("El pedido está vacío.");
-        window.location.href = "/productos";
-        return;
+        const localCart = JSON.parse(localStorage.getItem("cart") || "[]");
+        if (localCart.length) {
+            await supabase.from("carts").update({ items: localCart }).eq("id", cartId);
+            cart = localCart;
+            console.log("🛒 Carrito sincronizado desde localStorage.");
+        } else {
+            alert("Tu carrito está vacío.");
+            window.location.href = "/productos";
+            return;
+        }
     }
 
     let metodoEnvio = "retiro";
