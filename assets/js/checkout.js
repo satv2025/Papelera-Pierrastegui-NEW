@@ -22,7 +22,7 @@ function getCartIdFromQuery() {
 }
 
 // 💵 Render totales
-function renderItems(cart, envioCosto = 0) {
+function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
     cont.innerHTML = "";
@@ -41,24 +41,36 @@ function renderItems(cart, envioCosto = 0) {
     });
 
     const total = subtotal + envioCosto;
-    totals.innerHTML = `
-    <div><span>Subtotal:</span>
-      <span class="precio-subtotal" id="precio-subtotal">
-        ${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-      </span>
-    </div>
-    <div><span>Envío:</span>
-      <span class="precio-envio" id="precio-envio">
-        ${envioCosto > 0 ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
-      </span>
-    </div>
-    <hr style="margin:.5em 0;border-color:#ff7600;">
-    <div><span>Total:</span>
-      <span class="precio-total" id="precio-total">
-        ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-      </span>
-    </div>
-  `;
+
+    // 👇 Si es retiro, solo mostrar total
+    if (metodoEnvio === "retiro") {
+        totals.innerHTML = `
+        <div><span>Total:</span>
+          <span class="precio-total" id="precio-total">
+            ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+          </span>
+        </div>`;
+    } else {
+        // 👇 Si es envío, mostrar todo
+        totals.innerHTML = `
+        <div><span>Subtotal:</span>
+          <span class="precio-subtotal" id="precio-subtotal">
+            ${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+          </span>
+        </div>
+        <div><span>Envío:</span>
+          <span class="precio-envio" id="precio-envio">
+            ${envioCosto > 0 ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
+          </span>
+        </div>
+        <hr style="margin:.5em 0;border-color:#ff7600;">
+        <div><span>Total:</span>
+          <span class="precio-total" id="precio-total">
+            ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+          </span>
+        </div>`;
+    }
+
     return total;
 }
 
@@ -118,7 +130,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let metodoEnvio = "retiro";
     let envioCosto = 0;
-    let total = renderItems(cart, envioCosto);
+    let total = renderItems(cart, envioCosto, metodoEnvio);
     $("#envio-costo-texto").textContent = "Ingresá tu dirección";
 
     // 🟧 Método de envío
@@ -135,8 +147,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 $("#direccion-container").style.display = "none";
                 envioCosto = 0;
                 $("#envio-costo-texto").textContent = "Gratis";
-                total = renderItems(cart, envioCosto);
             }
+
+            total = renderItems(cart, envioCosto, metodoEnvio);
         });
     });
 
@@ -168,7 +181,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     $("#envio-costo-texto").textContent = "Calculando...";
                     envioCosto = await calcularEnvio(d.lat, d.lon);
                     $("#envio-costo-texto").textContent = envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
-                    total = renderItems(cart, envioCosto);
+                    total = renderItems(cart, envioCosto, metodoEnvio);
                 });
                 sugBox.appendChild(div);
             });

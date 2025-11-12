@@ -596,13 +596,16 @@
     document.addEventListener("DOMContentLoaded", () => {
       const CART_KEY = "pp_cart";
       const $ = (s) => document.querySelector(s);
-      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+      const toARS = (n) =>
+        n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
 
+      /* 🔐 Usuario actual */
       async function getUser() {
         const { data: { session } } = await supabase.auth.getSession();
         return session?.user || null;
       }
 
+      /* 📦 Leer carrito desde la base o localStorage */
       async function dbGetCart() {
         const user = await getUser();
         if (!user) return null;
@@ -617,6 +620,7 @@
         return data || null;
       }
 
+      /* 💾 Guardar carrito (DB o local) */
       async function dbSaveCart(items) {
         const user = await getUser();
         const total = items.reduce((a, b) => a + b.subtotal, 0);
@@ -652,6 +656,7 @@
         await dbSaveCart(cart);
       }
 
+      /* 🔄 Sincronización local→DB si inicia sesión */
       supabase.auth.onAuthStateChange(async (_ev, session) => {
         if (session?.user) {
           const local = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -663,6 +668,7 @@
         renderCart();
       });
 
+      /* 🧩 Elementos del carrito */
       const els = {
         toggle: $("#cart-toggle"),
         panel: $("#dropcart"),
@@ -673,6 +679,7 @@
         btnClose: $("#dropcart-close"),
       };
 
+      /* 🧮 Renderizar carrito */
       async function renderCart() {
         const cart = await readCart();
         const total = cart.reduce((a, b) => a + b.subtotal, 0);
@@ -709,6 +716,7 @@
         els.total.textContent = toARS(total);
       }
 
+      /* 🛒 Agregar al carrito */
       document.body.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("agregar-carrito")) return;
 
@@ -719,24 +727,32 @@
         const img = $("#producto-img")?.src;
 
         if (!size) return alert("Elegí un tamaño.");
-        if (!tipo) return alert("Elegí tipo.");
+        if (!tipo) return alert("Elegí tipo (x50 o x100).");
 
         const sizeEl = document.querySelector("#size-dropdown .dropdown-item.selected");
-        const precioUnit = tipo === "unidad"
-          ? Number(sizeEl.dataset.priceUnit)
-          : Number(sizeEl.dataset.priceBulto);
+        let precioUnit = 0;
+        let tipoLabel = "";
 
-        const tipoLabel = tipo === "unidad"
-          ? "Unidad (1)"
-          : `Bulto (${sizeEl.dataset.bultoCant})`;
+        if (tipo === "x50") {
+          precioUnit = Number(sizeEl.dataset.priceX50);
+          tipoLabel = "Pack x50";
+        } else if (tipo === "x100") {
+          precioUnit = Number(sizeEl.dataset.priceX100);
+          tipoLabel = "Pack x100";
+        }
+
+        if (!precioUnit || isNaN(precioUnit)) {
+          alert("Error al calcular el precio. Revisá los datos del producto.");
+          return;
+        }
 
         const key = `${titulo}|${size}|${tipo}`;
         const cart = await readCart();
-        const f = cart.find((it) => it.key === key);
+        const existing = cart.find((it) => it.key === key);
 
-        if (f) {
-          f.cantidad += cantidad;
-          f.subtotal = f.precioUnit * f.cantidad;
+        if (existing) {
+          existing.cantidad += cantidad;
+          existing.subtotal = existing.precioUnit * existing.cantidad;
         } else {
           cart.push({
             key,
@@ -756,6 +772,7 @@
         els.panel.classList.add("show");
       });
 
+      /* ⚙️ Botones de cantidad dentro del carrito */
       els.items.addEventListener("click", async (e) => {
         const btn = e.target.closest(".cart-action");
         if (!btn) return;
@@ -770,28 +787,28 @@
         if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
         if (act === "rm") cart.splice(i, 1);
 
-        cart.forEach((it) => it.subtotal = it.precioUnit * it.cantidad);
+        cart.forEach((it) => (it.subtotal = it.precioUnit * it.cantidad));
         await writeCart(cart);
         renderCart();
       });
 
+      /* 🎛️ Mostrar/Ocultar carrito */
       els.toggle.addEventListener("click", (e) => {
         e.stopPropagation();
         els.panel.classList.toggle("show");
       });
 
-      /* NUEVO: evita que +, -, eliminar cierren el carrito */
-      els.panel.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-
+      els.panel.addEventListener("click", (e) => e.stopPropagation());
       els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
       document.addEventListener("click", () => els.panel.classList.remove("show"));
+
+      /* 🧹 Vaciar carrito */
       els.btnEmpty.addEventListener("click", async () => {
         await writeCart([]);
         renderCart();
       });
 
+      /* 💳 Checkout */
       window.createOrderAndGoToCheckout = async () => {
         const user = await getUser();
         if (!user) return (window.location = "/login");
