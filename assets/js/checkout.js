@@ -4,17 +4,18 @@ const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 const CART_KEY = "pp_cart";
 
-// 📍 Coordenadas de tu tienda en Morón
-const TIENDA_LAT = -34.6841658;
-const TIENDA_LON = -58.6357296;
+// 📍 Dirección real de la tienda
+const TIENDA_LAT = -34.661435;
+const TIENDA_LON = -58.617912;
+const TIENDA_DIRECCION = "Anunciación 3796, Morón, Buenos Aires, Argentina";
 
-// 🔐 Verifica usuario logueado
+// 🔐 Usuario
 async function getUser() {
     const { data: { session } } = await supabase.auth.getSession();
     return session?.user || null;
 }
 
-// 🛒 Leer carrito
+// 🛒 Carrito
 async function readCart() {
     const user = await getUser();
     if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
@@ -29,7 +30,6 @@ async function readCart() {
     return data?.items || [];
 }
 
-// 🧹 Vaciar carrito
 async function clearCart() {
     const user = await getUser();
     if (!user) localStorage.removeItem(CART_KEY);
@@ -67,7 +67,7 @@ function renderItems(cart, envioCosto = 0) {
     return total;
 }
 
-// 🚚 Calcular costo de envío (Leaflet + OSRM)
+// 🚚 Calcular costo de envío
 async function calcularEnvio(lat, lon) {
     try {
         const routeRes = await fetch(
@@ -76,14 +76,20 @@ async function calcularEnvio(lat, lon) {
         const routeData = await routeRes.json();
         const distanciaM = routeData.routes?.[0]?.distance || 0;
         const km = distanciaM / 1000;
-        return Math.round(300 + km * 100); // $300 base + $100/km
+        return Math.round(300 + km * 100);
     } catch (err) {
         console.error("Error al calcular envío:", err);
         return 0;
     }
 }
 
-// ⚙️ Inicialización principal
+// 📍 Autocompletado (Argentina)
+async function buscarDirecciones(q) {
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=ar&limit=5&q=${encodeURIComponent(q)}`);
+    return await res.json();
+}
+
+// ⚙️ Principal
 document.addEventListener("DOMContentLoaded", async () => {
     const cart = await readCart();
     if (cart.length === 0) {
@@ -97,18 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let total = renderItems(cart, envioCosto);
     $("#envio-costo-texto").textContent = "Gratis";
 
-    let userMarker = null;
-    let map;
-
-    // 🟩 Mostrar marcador fijo de la tienda
-    function addTiendaMarker(map) {
-        L.marker([TIENDA_LAT, TIENDA_LON])
-            .addTo(map)
-            .bindPopup("<b>Papelera Pierrastegui</b><br>Morón")
-            .openPopup();
-    }
-
-    // 🟧 Selección del método de envío
+    // 🟧 Método de envío
     $$(".envio-opcion").forEach(op => {
         op.addEventListener("click", () => {
             $$(".envio-opcion").forEach(x => x.classList.remove("activa"));
@@ -116,30 +111,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             metodoEnvio = op.dataset.metodo;
 
             if (metodoEnvio === "envio") {
-                $("#map-container").style.display = "block";
-
-                if (!map) {
-                    map = L.map("map").setView([TIENDA_LAT, TIENDA_LON], 12);
-                    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                        attribution: "&copy; OpenStreetMap",
-                    }).addTo(map);
-                    addTiendaMarker(map);
-
-                    // Usuario selecciona ubicación
-                    map.on("click", async (e) => {
-                        if (userMarker) userMarker.remove();
-                        userMarker = L.marker(e.latlng).addTo(map);
-
-                        $("#envio-costo-texto").textContent = "Calculando...";
-                        envioCosto = await calcularEnvio(e.latlng.lat, e.latlng.lng);
-                        $("#envio-costo-texto").textContent =
-                            "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
-                        total = renderItems(cart, envioCosto);
-                    });
-                }
+                $("#direccion-container").style.display = "block";
+                $("#envio-costo-texto").textContent = "Ingresá tu dirección";
             } else {
-                // 🟩 Retiro en tienda
-                $("#map-container").style.display = "none";
+                $("#direccion-container").style.display = "none";
                 envioCosto = 0;
                 $("#envio-costo-texto").textContent = "Gratis";
                 total = renderItems(cart, envioCosto);
@@ -147,7 +122,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    // 💳 Pago con MercadoPago
+    // 🔎 Autocompletado direcciones
+    const dirInput = $("#chk-direccion");
+    const sugBox = $("#direccion-sugerencias");
+    let timer;
+
+    dirInput?.addEventListener("input", () => {
+        clearTimeout(timer);
+        const q = dirInput.value.trim();
+        if (q.length < 4) {
+            sugBox.style.display = "none";
+            return;
+        }
+        timer = setTimeout(async () => {
+            const data = await buscarDirecciones(`${q}, Argentina`);
+            sugBox.innerHTML = "";
+            if (data.length === 0) {
+                sugBox.style.display = "none";
+                return;
+            }
+            data.forEach(d => {
+                const div = document.createElement("div");
+                div.textContent = d.display_name;
+                div.addEventListener("click", async () => {
+                    dirInput.value = d.display_name;
+                    sugBox.style.display = "none";
+                    $("#envio-costo-texto").textContent = "Calculando...";
+                    envioCosto = await calcularEnvio(d.lat, d.lon);
+                    $("#envio-costo-texto").textContent = "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
+                    total = renderItems(cart, envioCosto);
+                });
+                sugBox.appendChild(div);
+            });
+            sugBox.style.display = "block";
+        }, 400);
+    });
+
+    // 💳 Pago
     $("#btn-pagar").addEventListener("click", async () => {
         const user = await getUser();
         if (!user) {
@@ -157,15 +168,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         const nombre = $("#chk-nombre").value.trim();
-        const email = $("#chk-email").value.trim(); // 🟩 Nuevo campo
+        const email = $("#chk-email").value.trim();
         const tel = $("#chk-telefono").value.trim();
+        const direccion = $("#chk-direccion")?.value.trim() || "";
 
-        // 🟩 Validación
         if (!nombre || !email || !tel) {
             alert("Completá nombre, correo y teléfono.");
             return;
         }
-        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        if (metodoEnvio === "envio" && !direccion) {
+            alert("Ingresá tu dirección para el envío.");
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert("Ingresá un correo electrónico válido.");
             return;
@@ -182,8 +198,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     items: cart,
                     user,
                     nombre,
-                    email, // 🟩 Enviado al servidor
+                    email,
                     tel,
+                    direccion,
                     envio: metodoEnvio,
                     costoEnvio: envioCosto
                 }),
@@ -205,7 +222,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // 🟩 Si el usuario está logueado, autocompleta su email
+    // Autocompletar email si el usuario está logueado
     const user = await getUser();
     if (user?.email) $("#chk-email").value = user.email;
 });

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Checkout — Papelera Pierrastegui</title>
     <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/checkout.css" />
 </head>
 
@@ -23,6 +22,8 @@
 
     <div class="checkout-container">
         <div class="checkout-title">Finalizar compra</div>
+        <div class="aviso-arg">🚚 Envíos disponibles únicamente dentro de <b>Argentina</b>.</div>
+
         <div id="checkout-error" style="color:red;font-weight:700;margin-bottom:1em;"></div>
 
         <div class="checkout-grid">
@@ -47,26 +48,28 @@
                     </div>
                     <div class="envio-opcion" data-metodo="envio">
                         <span class="envio">Envío a Domicilio</span>
-                        <span class="costo" id="envio-costo-texto">Seleccioná ubicación</span>
+                        <span class="costo" id="envio-costo-texto">Ingresá tu dirección</span>
                     </div>
                 </div>
 
-                <!-- Mapa -->
-                <div id="map-container" style="display:none;">
-                    <div id="map" style="height: 250px; border-radius: 8px; margin-bottom: 1em;"></div>
-                    <p style="font-size:.9em; color:#555;">📍 Hacé clic en tu ubicación para calcular el costo de envío.
-                    </p>
+                <!-- Campo Dirección con sugerencias -->
+                <div id="direccion-container" style="display:none;">
+                    <div class="direccion-wrapper">
+                        <input class="checkout-input" id="chk-direccion"
+                            placeholder="Ejemplo: Av. Rivadavia 1234, Morón" />
+                        <div id="direccion-sugerencias"></div>
+                    </div>
                 </div>
 
                 <hr style="margin:1em 0;border-color:#ff7600" />
                 <div id="checkout-totals" class="checkout-totals"></div>
 
                 <button class="checkout-btn" id="btn-pagar">Pagar con MercadoPago</button>
+                <div id="checkout-loader" class="loader">Procesando pago...</div>
             </div>
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/checkout.js"></script>
 </body>
 

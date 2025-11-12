@@ -169,6 +169,11 @@ input.checkout-input {
     background: #fff;
 }
 
+input:focus,
+input:focus-visible {
+    outline: none;
+}
+
 * {
     border-radius: 0.3em !important;
 }
@@ -254,4 +259,42 @@ input.checkout-input {
     #pp-logo img {
         display: none;
     }
+}
+
+#direccion-sugerencias {
+    border: 2px solid #ff7600;
+    border-radius: 8px;
+    margin-top: .3em;
+    background: #fff;
+    max-height: 180px;
+    overflow-y: auto;
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+#direccion-sugerencias div {
+    padding: .5em .7em;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#direccion-sugerencias div:hover {
+    background: #fff5eb;
+}
+
+.aviso-arg {
+    background: #fff8ef;
+    border: 2px solid #ff7600;
+    padding: .7em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    color: #000;
+    font-weight: 700;
+    text-align: center;
+}
+
+.direccion-wrapper {
+    position: relative;
 }
