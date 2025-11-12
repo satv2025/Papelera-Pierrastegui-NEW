@@ -20,7 +20,7 @@ function getCartIdFromQuery() {
     return params.get("id");
 }
 
-// 💵 Render totales y productos en el carrito
+// 💵 Render totales
 function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
@@ -29,9 +29,10 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
 
     cart.forEach((it, i) => {
         subtotal += it.subtotal;
+        const isFirstItem = i === 0 ? 'style="border-top: 1px solid #ff7600;"' : ''; // Borde superior solo en el primer item
         cont.innerHTML += `
         <ul style="padding: 0; margin: 0;">
-          <li style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; list-style: none; border-bottom: 1px solid #ff7600;">
+          <li class="checkout-item" ${isFirstItem}>
             <div style="display: flex; gap: 10px;">
               <img src="${it.img}" alt="${it.nombre}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
               <div>
