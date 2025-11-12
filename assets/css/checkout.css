@@ -1,27 +1,37 @@
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100..900&family=Inter:wght@100..900&family=Poppins:wght@100..900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+/* ========================= */
+/* 🔸 GLOBAL 🔸 */
+/* ========================= */
 * {
     font-family: 'Gilroy';
+    box-sizing: border-box;
+    border-radius: 0.3em !important;
+    margin: 0;
+    padding: 0;
 }
-
-div#direccion-container {
-    margin-top: 1em;
-}
-
-div {}
 
 div#checkout-totals {
     color: #ff7600;
     font-weight: 700;
-    line-height: 1.4;
-    margin-top: -0.42em;
-    margin-bottom: 0.4em;
+    line-height: 1.5;
+    margin-top: -0.6em;
+    margin-bottom: 0.5em;
 }
 
-div#map-container {
-    margin-top: 1em;
+div#checkout-loader {
+    color: #ff7600;
+    font-weight: 700;
+    margin-top: 0.7em;
+    margin-bottom: -0.8em;
+}
+
+body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 /* ========================= */
@@ -33,7 +43,7 @@ header {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 0em 1em;
+    padding: 1em;
     background: #fff;
     color: #ff7600 !important;
     border-bottom: 3px solid #ff7600;
@@ -44,8 +54,8 @@ header {
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    margin-bottom: 0.8em;
-    margin-top: 0.8em;
+    margin: 0.8em 0;
+    flex-wrap: wrap;
 }
 
 #pp-logo img {
@@ -54,16 +64,17 @@ header {
     border-radius: 8px;
     padding: 0.2em;
     background: #fff;
+    transition: all 0.3s ease;
 }
 
 #pp-logo:hover img {
-    border: 2px solid #000;
-    border-radius: 50% !important;
-    outline: 2px solid;
+    outline: 3px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 .pp-title {
-    font-size: 1.8em;
+    font-size: clamp(1.5rem, 2vw + 1rem, 2.2rem);
     font-weight: 800;
     color: #ff7600;
     line-height: 1.1;
@@ -72,7 +83,9 @@ header {
 .nav-links {
     display: flex;
     justify-content: center;
-    gap: 2em;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-top: 0.5em;
 }
 
 .nav-links a {
@@ -83,6 +96,7 @@ header {
     padding: 0.4em 0.8em;
     border-radius: 8px;
     transition: all 0.2s ease;
+    font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem);
 }
 
 .nav-links a:hover {
@@ -93,23 +107,19 @@ header {
 /* ========================= */
 /* 🔸 CHECKOUT 🔸 */
 /* ========================= */
-body {
-    background: #fff;
-    margin: 0;
-}
-
 .checkout-container {
+    width: 95%;
     max-width: 1000px;
-    margin: 4em auto;
+    margin: 3em auto;
     background: #fff;
     border: 3px solid #ff7600;
-    padding: 2.5em;
+    padding: 2em;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(255, 118, 0, 0.1);
 }
 
 .checkout-title {
-    font-size: 2em;
+    font-size: clamp(1.5rem, 1vw + 1.2rem, 2rem);
     font-weight: 800;
     text-align: center;
     color: #ff7600;
@@ -126,7 +136,7 @@ body {
 .checkout-box {
     border: 2px solid #ff7600;
     border-radius: 10px;
-    padding: 1.8em;
+    padding: 1.5em;
     background: #fff;
     transition: box-shadow 0.2s ease;
 }
@@ -136,7 +146,7 @@ body {
 }
 
 .checkout-box h3 {
-    font-size: 1.3em;
+    font-size: clamp(1.1rem, 0.8vw + 0.8rem, 1.4rem);
     color: #ff7600;
     margin-bottom: 1em;
 }
@@ -147,11 +157,12 @@ body {
 }
 
 .checkout-item {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     padding: 1em 0;
+    flex-wrap: wrap;
+    gap: 0.8em;
 }
 
 .checkout-item img {
@@ -164,11 +175,12 @@ body {
 
 .checkout-item-info {
     flex: 1;
+    min-width: 150px;
     margin-left: 1em;
 }
 
 input.checkout-input {
-    width: 93.5%;
+    width: 100%;
     border: 2px solid #ff7600;
     padding: 0.7em;
     border-radius: 6px;
@@ -178,28 +190,8 @@ input.checkout-input {
     background: #fff;
 }
 
-input::placeholder {}
-
-input:focus,
-input:focus-visible {
-    outline: none;
-}
-
-* {
-    border-radius: 0.3em !important;
-}
-
-#pp-logo:hover img {
-    border-radius: 50% !important;
-    outline-offset: -0.432em;
-    border: none;
-    outline: 3px solid #000;
-    cursor: pointer;
-}
-
-#pp-logo:hover span {
-    color: #000;
-    cursor: pointer;
+#direccion-container {
+    margin-top: 1em;
 }
 
 .checkout-input::placeholder {
@@ -223,23 +215,28 @@ input:focus-visible {
     color: #000;
 }
 
+/* ========================= */
+/* 🔸 ENVÍO 🔸 */
+/* ========================= */
 .envio-opciones {
     display: flex;
     flex-direction: column;
     gap: 1em;
+    align-items: start;
 }
 
 .envio-opcion {
     border: 3px solid #ff7600;
     border-radius: 12px;
-    padding: 1.2em;
+    padding: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.2s ease;
-    width: 17em;
+    width: 100%;
+    max-width: 350px;
 }
 
 .envio-opcion:hover {
@@ -270,23 +267,8 @@ input:focus-visible {
 }
 
 /* ========================= */
-/* 🔸 RESPONSIVE 🔸 */
+/* 🔸 OTROS 🔸 */
 /* ========================= */
-@media (max-width: 768px) {
-    .checkout-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .checkout-container {
-        margin: 1em;
-        padding: 1.5em;
-    }
-
-    #pp-logo img {
-        display: none;
-    }
-}
-
 #direccion-sugerencias {
     border: 2px solid #ff7600;
     border-radius: 8px;
@@ -323,4 +305,91 @@ input:focus-visible {
 
 .direccion-wrapper {
     position: relative;
+}
+
+/* ========================= */
+/* 🔸 RESPONSIVE 🔸 */
+/* ========================= */
+@media (max-width: 1024px) {
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-container {
+        margin: 2em 1em;
+        padding: 1.5em;
+    }
+
+    .envio-opcion {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 1em 0.5em;
+    }
+
+    #pp-logo img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .nav-links {
+        gap: 0.5em;
+    }
+
+    .checkout-container {
+        padding: 1em;
+    }
+
+    .checkout-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .checkout-item img {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pp-title {
+        font-size: 1.4rem;
+    }
+
+    .nav-links a {
+        padding: 0.3em 0.6em;
+    }
+
+    .checkout-container {
+        padding: 1em;
+    }
+
+    .checkout-title {
+        font-size: 1.3rem;
+    }
+
+    input.checkout-input {
+        font-size: 0.9rem;
+    }
+
+    input#chk-direccion {}
+
+    .checkout-btn {
+        padding: 0.8em;
+        font-size: 0.9rem;
+    }
+
+    .envio-opcion {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        display: inline;
+    }
+
+    span.gratis {
+        margin-left: 4em;
+    }
 }
