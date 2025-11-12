@@ -1,8 +1,8 @@
+// 📦 checkout.js
 import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
-const CART_KEY = "pp_cart";
 
 // 📍 Dirección real de la tienda
 const TIENDA_LAT = -34.661435;
@@ -15,29 +15,10 @@ async function getUser() {
     return session?.user || null;
 }
 
-// 🛒 Carrito
-async function readCart() {
-    const user = await getUser();
-    if (!user) return JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-
-    const { data } = await supabase
-        .from("carts")
-        .select("*")
-        .eq("user_id", user.id)
-        .eq("status", "active")
-        .maybeSingle();
-
-    return data?.items || [];
-}
-
-async function clearCart() {
-    const user = await getUser();
-    if (!user) localStorage.removeItem(CART_KEY);
-    else {
-        await supabase.from("carts").update({ items: [], total: 0 })
-            .eq("user_id", user.id)
-            .eq("status", "active");
-    }
+// 🆔 Obtener ID del pedido desde ?id=
+function getCartIdFromQuery() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("id");
 }
 
 // 💵 Render totales
@@ -50,34 +31,34 @@ function renderItems(cart, envioCosto = 0) {
     cart.forEach((it, i) => {
         subtotal += it.subtotal;
         cont.innerHTML += `
-        <div class="checkout-item">
-            <img src="${it.img}" alt="">
-            <div class="checkout-item-info">${it.nombre} (${it.size}) ×${it.cantidad}</div>
-            <div class="checkout-item-precio" id="precio-item-${i}">
-                ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-            </div>
-        </div>`;
+      <div class="checkout-item">
+        <img src="${it.img}" alt="">
+        <div class="checkout-item-info">${it.nombre} (${it.size}) ×${it.cantidad}</div>
+        <div class="checkout-item-precio" id="precio-item-${i}">
+          ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+        </div>
+      </div>`;
     });
 
     const total = subtotal + envioCosto;
     totals.innerHTML = `
-        <div><span>Subtotal:</span>
-            <span class="precio-subtotal" id="precio-subtotal">
-                ${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-            </span>
-        </div>
-        <div><span>Envío:</span>
-            <span class="precio-envio" id="precio-envio">
-                ${envioCosto > 0 ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
-            </span>
-        </div>
-        <hr style="margin:.5em 0;border-color:#ff7600;">
-        <div><span>Total:</span>
-            <span class="precio-total" id="precio-total">
-                ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-            </span>
-        </div>
-    `;
+    <div><span>Subtotal:</span>
+      <span class="precio-subtotal" id="precio-subtotal">
+        ${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+      </span>
+    </div>
+    <div><span>Envío:</span>
+      <span class="precio-envio" id="precio-envio">
+        ${envioCosto > 0 ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
+      </span>
+    </div>
+    <hr style="margin:.5em 0;border-color:#ff7600;">
+    <div><span>Total:</span>
+      <span class="precio-total" id="precio-total">
+        ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+      </span>
+    </div>
+  `;
     return total;
 }
 
@@ -105,9 +86,32 @@ async function buscarDirecciones(q) {
 
 // ⚙️ Principal
 document.addEventListener("DOMContentLoaded", async () => {
-    const cart = await readCart();
-    if (cart.length === 0) {
-        alert("Tu carrito está vacío.");
+    const cartId = getCartIdFromQuery();
+    const user = await getUser();
+
+    if (!cartId || !user) {
+        alert("Pedido no encontrado o usuario no autenticado.");
+        window.location.href = "/productos";
+        return;
+    }
+
+    // 🔹 Cargar pedido desde Supabase
+    const { data: pedido, error } = await supabase
+        .from("carts")
+        .select("*")
+        .eq("id", cartId)
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+    if (error || !pedido) {
+        alert("No se pudo cargar el pedido.");
+        window.location.href = "/productos";
+        return;
+    }
+
+    const cart = pedido.items || [];
+    if (!cart.length) {
+        alert("El pedido está vacío.");
         window.location.href = "/productos";
         return;
     }
@@ -115,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let metodoEnvio = "retiro";
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto);
-    $("#envio-costo-texto").textContent = "Ingresá tu dirección"; // 👈 no “Gratis” por defecto
+    $("#envio-costo-texto").textContent = "Ingresá tu dirección";
 
     // 🟧 Método de envío
     $$(".envio-opcion").forEach(op => {
@@ -174,13 +178,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 💳 Pago
     $("#btn-pagar").addEventListener("click", async () => {
-        const user = await getUser();
-        if (!user) {
-            alert("Debes iniciar sesión para continuar con el pago.");
-            window.location.href = "/login";
-            return;
-        }
-
         const nombre = $("#chk-nombre").value.trim();
         const email = $("#chk-email").value.trim();
         const tel = $("#chk-telefono").value.trim();
@@ -222,7 +219,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const data = await res.json();
             if (data.init_point) {
-                await clearCart();
+                await supabase
+                    .from("carts")
+                    .update({ status: "ordered" })
+                    .eq("id", pedido.id);
                 window.location.href = data.init_point;
             } else {
                 console.error("Respuesta:", data);
@@ -237,6 +237,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     // Autocompletar email si el usuario está logueado
-    const user = await getUser();
     if (user?.email) $("#chk-email").value = user.email;
 });
