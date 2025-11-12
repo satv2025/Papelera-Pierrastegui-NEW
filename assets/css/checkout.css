@@ -6,6 +6,10 @@
     font-family: 'Gilroy';
 }
 
+div#direccion-container {
+    margin-top: 1em;
+}
+
 div {}
 
 div#checkout-totals {
@@ -227,7 +231,8 @@ input:focus-visible {
 }
 
 .envio-opcion.activa,
-.envio-opcion.activa span.retiro {
+.envio-opcion.activa span.retiro,
+.envio-opcion.activa span.envio {
     background: #ff7600;
     color: #fff !important;
 }
@@ -286,12 +291,12 @@ input:focus-visible {
 }
 
 .aviso-arg {
-    background: #fff8ef;
+    background: #fff;
     border: 2px solid #ff7600;
     padding: .7em;
     border-radius: 8px;
     margin-bottom: 1em;
-    color: #000;
+    color: #ff7600;
     font-weight: 700;
     text-align: center;
 }

@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let metodoEnvio = "retiro";
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto);
-    $("#envio-costo-texto").textContent = "Gratis";
+    $("#envio-costo-texto").textContent = "Ingresá tu dirección"; // 👈 no “Gratis” por defecto
 
     // 🟧 Método de envío
     $$(".envio-opcion").forEach(op => {
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     sugBox.style.display = "none";
                     $("#envio-costo-texto").textContent = "Calculando...";
                     envioCosto = await calcularEnvio(d.lat, d.lon);
-                    $("#envio-costo-texto").textContent = "+ " + envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
+                    $("#envio-costo-texto").textContent = envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
                     total = renderItems(cart, envioCosto);
                 });
                 sugBox.appendChild(div);
