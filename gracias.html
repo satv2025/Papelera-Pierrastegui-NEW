@@ -1,6 +1,293 @@
-<script type="module">
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gracias por tu compra — Papelera Pierrastegui</title>
+
+  <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/inicio.css">
+
+  <style>
+    /* ---- Página de Gracias ---- */
+    :root {
+      --pp-orange: #ff7600;
+      --pp-yellow: #ffc52f;
+      --pp-green: #37ff14;
+      --pp-red: #e60000;
+      --pp-text: #000;
+    }
+
+    body.page-gracias {
+      background-color: #fff;
+      color: var(--pp-orange);
+      font-family: 'Gilroy', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      text-align: center;
+      padding: 3em 1em;
+    }
+
+    header #pp-logo {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      justify-content: center;
+    }
+
+    header #pp-logo img {
+      height: 42px;
+    }
+
+    header #pp-logo span {
+      font-weight: 800;
+      color: var(--pp-orange);
+      letter-spacing: .2px;
+    }
+
+    .gracias-container {
+      max-width: 720px;
+      margin: 3.5em auto 2em;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 14px;
+      border: 3px solid var(--pp-orange);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .gracias-container h1 {
+      color: var(--pp-orange);
+      font-weight: 900;
+      font-size: 2rem;
+      margin-bottom: .4em;
+    }
+
+    .gracias-container p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.1em 0;
+      color: var(--pp-text);
+    }
+
+    .gracias-container .btn {
+      background: var(--pp-orange);
+      color: #fff;
+      padding: .9em 1.4em;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      display: inline-block;
+      transition: all .25s ease;
+      margin-top: 1em;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .gracias-container .btn:hover {
+      background: var(--pp-yellow);
+      color: #000;
+      transform: translateY(-1px);
+    }
+
+    .status-icon {
+      font-size: 3rem;
+      margin-bottom: .2em;
+      display: block;
+    }
+
+    .status-success {
+      color: var(--pp-green);
+    }
+
+    .status-pending {
+      color: #ffcc00;
+    }
+
+    .status-failure {
+      color: var(--pp-red);
+    }
+
+    #comprobante {
+      text-align: left;
+      margin-top: 1.5em;
+      color: var(--pp-text);
+      font-family: Arial, sans-serif;
+    }
+
+    .recibo-wrapper {
+      border: 2px solid var(--pp-orange);
+      padding: 22px;
+      border-radius: 10px;
+    }
+
+    .recibo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 2px solid var(--pp-orange);
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+    }
+
+    .recibo-header .brand {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .recibo-header img {
+      height: 36px;
+    }
+
+    .recibo-header h2 {
+      color: var(--pp-orange);
+      margin: 0;
+    }
+
+    .recibo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem 1.25rem;
+      margin: .25rem 0 1rem;
+      font-size: .98rem;
+    }
+
+    .recibo-grid p {
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    table.recibo-tabla {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .95rem;
+      margin-top: .25em;
+    }
+
+    table.recibo-tabla thead th {
+      border-bottom: 2px solid var(--pp-orange);
+      padding: .5em .25em;
+      text-align: left;
+    }
+
+    table.recibo-tabla tbody td {
+      border-bottom: 1px solid #eee;
+      padding: .55em .25em;
+      vertical-align: top;
+    }
+
+    .totales {
+      text-align: right;
+      margin-top: 1em;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .acciones {
+      display: flex;
+      justify-content: center;
+      gap: .75em;
+      margin-top: 1.25em;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      margin-top: 4em;
+      padding: 1.2em;
+      border-top: 3px solid var(--pp-orange);
+      color: var(--pp-orange);
+      font-weight: 800;
+      background: #fff;
+    }
+
+    /* 🖨️ Solo imprimir el comprobante */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #comprobante,
+      #comprobante * {
+        visibility: visible;
+      }
+
+      #comprobante {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 0 12mm;
+      }
+
+      .btn,
+      .status-icon,
+      header,
+      footer {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="page-gracias">
+  <header>
+    <div id="pp-logo">
+      <a href="/">
+        <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/logo.svg"
+          alt="Papelera Pierrastegui">
+      </a>
+      <span>Papelera Pierrastegui</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="gracias-container" id="gracias-box">
+      <span class="status-icon">🕒</span>
+      <h1>Procesando pago...</h1>
+      <p id="status-text">Verificando estado de tu compra...</p>
+      <a href="/" class="btn">Volver a la tienda</a>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Papelera Pierrastegui — Todos los derechos reservados
+  </footer>
+
+  <script type="module">
     import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
+    // --------- Helpers ----------
+    const $ = (s) => document.querySelector(s);
+    const toARS = (n) => (Number(n) || 0).toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+
+    // Carga imagen remota como dataURL (para jsPDF.addImage)
+    async function loadImageAsDataUrl(url) {
+      try {
+        const res = await fetch(url, { mode: "cors" });
+        const blob = await res.blob();
+        return await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        });
+      } catch (e) {
+        console.warn("No se pudo cargar la imagen para PDF:", e);
+        return null;
+      }
+    }
+
+    // Paginación simple en jsPDF
+    function ensureRoom(doc, y, extra = 0) {
+      const pageHeight = doc.internal.pageSize.getHeight();
+      if (y + extra >= pageHeight - 15) {
+        doc.addPage();
+        return 20;
+      }
+      return y;
+    }
+
+    // --------- Estado por querystring ----------
     const params = new URLSearchParams(window.location.search);
     const status = params.get("status") || "pending";
     const orderId = params.get("order_id") || null;
@@ -12,197 +299,233 @@
 
     // 🟠 Mostrar estado de pago
     if (status === "approved") {
-        icon.textContent = "✅";
-        icon.className = "status-icon status-success";
-        title.textContent = "¡Pago aprobado!";
-        text.textContent = "Tu compra fue realizada con éxito. A continuación, tu comprobante.";
+      icon.textContent = "✅";
+      icon.className = "status-icon status-success";
+      title.textContent = "¡Pago aprobado!";
+      text.textContent = "Tu compra fue realizada con éxito. A continuación, tu comprobante.";
     } else if (status === "pending") {
-        icon.textContent = "🕒";
-        icon.className = "status-icon status-pending";
-        title.textContent = "Pago pendiente";
-        text.textContent = "Tu pago está en revisión. Te notificaremos por email una vez se confirme.";
+      icon.textContent = "🕒";
+      icon.className = "status-icon status-pending";
+      title.textContent = "Pago pendiente";
+      text.textContent = "Tu pago está en revisión. Te notificaremos por email una vez se confirme.";
     } else {
-        icon.textContent = "❌";
-        icon.className = "status-icon status-failure";
-        title.textContent = "Error en el pago";
-        text.textContent = "Hubo un problema al procesar tu pago. Por favor, intentá nuevamente.";
+      icon.textContent = "❌";
+      icon.className = "status-icon status-failure";
+      title.textContent = "Error en el pago";
+      text.textContent = "Hubo un problema al procesar tu pago. Por favor, intentá nuevamente.";
     }
 
-    // 🧾 Render del comprobante
+    // 🧾 Render del comprobante (HTML)
     function renderReceipt(order) {
-        const cont = document.createElement("div");
-        cont.id = "comprobante";
-        cont.style.textAlign = "left";
-        cont.style.marginTop = "2em";
-        cont.style.color = "#000";
-        cont.style.fontFamily = "Arial, sans-serif";
+      const cont = document.createElement("div");
+      cont.id = "comprobante";
 
-        const totalARS = order.total.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
+      const fecha = new Date(order.created_at || Date.now());
+      const totalARS = toARS(order.total);
 
-        cont.innerHTML = `
-    <div style="border:2px solid #ff7600;padding:20px;border-radius:10px;">
-      <h2 style="color:#ff7600;text-align:center;">Comprobante de Compra</h2>
-      <p><strong>Número de pedido:</strong> #${order.id}</p>
-      <p><strong>Cliente:</strong> ${order.nombre || "No especificado"}</p>
-      <p><strong>Teléfono:</strong> ${order.tel || "-"}</p>
-      <p><strong>Dirección:</strong> ${order.dir || "-"}</p>
-      <p><strong>Localidad:</strong> ${order.loc || "-"}</p>
+      const cliente = order.nombre || "-";
+      const email = order.email || "-";
+      const tel = order.tel || "-";
+      const dir = order.dir || "-";
+      const loc = order.loc || "-";
 
-      <h3 style="margin-top:1em;color:#ff7600;">Productos</h3>
-      <table style="width:100%;border-collapse:collapse;font-size:0.95em;margin-top:0.5em;">
-        <thead>
-          <tr style="border-bottom:2px solid #ff7600;">
-            <th align="left">Producto</th>
-            <th align="center">Cant.</th>
-            <th align="right">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${order.items
-                .map(
-                    (it) => `
-              <tr style="border-bottom:1px solid #eee;">
-                <td>${it.nombre} (${it.size})</td>
-                <td align="center">${it.cantidad}</td>
-                <td align="right">$${it.subtotal.toLocaleString("es-AR")}</td>
-              </tr>`
-                )
-                .join("")}
-        </tbody>
-      </table>
+      const itemsHTML = (order.items || []).map(it => `
+        <tr>
+          <td>${it?.nombre || ""} ${it?.size ? `(${it.size})` : ""}</td>
+          <td align="center">${Number(it?.cantidad) || 0}</td>
+          <td align="right">${toARS(it?.subtotal || 0)}</td>
+        </tr>
+      `).join("");
 
-      <p style="text-align:right;margin-top:1em;font-weight:700;">
-        Total: ${totalARS}
-      </p>
+      cont.innerHTML = `
+        <div class="recibo-wrapper">
+          <div class="recibo-header">
+            <div class="brand">
+              <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" alt="Logo">
+              <h2>Comprobante de Compra</h2>
+            </div>
+            <div>
+              <strong style="color:#888">Fecha:</strong>
+              <div>${fecha.toLocaleDateString("es-AR")} ${fecha.toLocaleTimeString("es-AR", { hour: '2-digit', minute: '2-digit' })}</div>
+            </div>
+          </div>
 
-      <p style="text-align:center;margin-top:1.5em;font-size:0.9em;color:#555;">
-        Gracias por tu compra 💛 — Papelera Pierrastegui
-      </p>
-    </div>
-  `;
+          <div class="recibo-grid">
+            <p><strong style="color:#999">Nro de pedido:</strong> #${order.id}</p>
+            <p><strong style="color:#999">Estado:</strong> ${order.status || (status === "approved" ? "completed" : status)}</p>
+            <p><strong style="color:#999">Cliente:</strong> ${cliente}</p>
+            <p><strong style="color:#999">Email:</strong> ${email}</p>
+            <p><strong style="color:#999">Teléfono:</strong> ${tel}</p>
+            <p><strong style="color:#999">Dirección:</strong> ${dir}</p>
+            <p><strong style="color:#999">Localidad:</strong> ${loc}</p>
+          </div>
 
-        const btnBox = document.createElement("div");
-        btnBox.style.display = "flex";
-        btnBox.style.justifyContent = "center";
-        btnBox.style.gap = "1em";
-        btnBox.style.marginTop = "1.5em";
+          <h3 style="margin:.6em 0;color:#ff7600;">Productos</h3>
+          <table class="recibo-tabla">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th style="text-align:center">Cant.</th>
+                <th style="text-align:right">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${itemsHTML}
+            </tbody>
+          </table>
 
-        // 📄 Botón PDF
-        const btnPDF = document.createElement("button");
-        btnPDF.textContent = "📄 Descargar PDF";
-        btnPDF.style.background = "#ff7600";
-        btnPDF.style.color = "#fff";
-        btnPDF.style.border = "none";
-        btnPDF.style.borderRadius = "6px";
-        btnPDF.style.padding = "0.7em 1.2em";
-        btnPDF.style.fontWeight = "700";
-        btnPDF.style.cursor = "pointer";
-        btnPDF.onclick = () => generarPDF(order);
+          <div class="totales">Total: ${totalARS}</div>
 
-        // 🖨️ Botón imprimir
-        const btnPrint = document.createElement("button");
-        btnPrint.textContent = "🖨️ Imprimir Comprobante";
-        btnPrint.style.background = "#ffc52f";
-        btnPrint.style.color = "#000";
-        btnPrint.style.border = "none";
-        btnPrint.style.borderRadius = "6px";
-        btnPrint.style.padding = "0.7em 1.2em";
-        btnPrint.style.fontWeight = "700";
-        btnPrint.style.cursor = "pointer";
-        btnPrint.onclick = () => window.print();
+          <p style="text-align:center;margin-top:1.1em;font-size:.92rem;color:#555;">
+            ¡Gracias por tu compra! 💛 — Papelera Pierrastegui
+          </p>
+        </div>
 
-        btnBox.appendChild(btnPDF);
-        btnBox.appendChild(btnPrint);
+        <div class="acciones">
+          <button id="btn-pdf" class="btn">📄 Descargar PDF</button>
+          <button id="btn-print" class="btn" style="background:#ffc52f;color:#000;">🖨️ Imprimir</button>
+        </div>
+      `;
 
-        box.appendChild(cont);
-        box.appendChild(btnBox);
+      box.appendChild(cont);
+
+      // Acciones
+      $("#btn-print").onclick = () => window.print();
+      $("#btn-pdf").onclick = () => generarPDF(order);
     }
 
-    // 📄 Generar PDF con jsPDF
+    // 📄 Generar PDF con jsPDF (con logo y paginado simple)
     async function generarPDF(order) {
-        const { jsPDF } = await import("https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.es.min.js");
-        const doc = new jsPDF();
-        let y = 15;
+      const { jsPDF } = await import("https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.es.min.js");
+      const doc = new jsPDF();
 
-        doc.setFontSize(18);
-        doc.setTextColor(255, 118, 0);
-        doc.text("Papelera Pierrastegui - Comprobante de compra", 14, y);
-        y += 10;
+      const logoDataUrl = await loadImageAsDataUrl("https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png");
 
-        doc.setFontSize(12);
-        doc.setTextColor(0, 0, 0);
-        doc.text(`Número de pedido: #${order.id}`, 14, (y += 8));
-        doc.text(`Cliente: ${order.nombre || "-"}`, 14, (y += 7));
-        doc.text(`Teléfono: ${order.tel || "-"}`, 14, (y += 7));
-        doc.text(`Dirección: ${order.dir || "-"}`, 14, (y += 7));
-        doc.text(`Localidad: ${order.loc || "-"}`, 14, (y += 7));
+      let y = 16;
 
-        y += 10;
-        doc.setTextColor(255, 118, 0);
-        doc.text("Productos", 14, y);
-        y += 5;
+      // Encabezado con logo
+      if (logoDataUrl) {
+        try { doc.addImage(logoDataUrl, "PNG", 14, 10, 10, 10); } catch (e) { }
+      }
+      doc.setFontSize(16);
+      doc.setTextColor(255, 118, 0);
+      doc.text("Papelera Pierrastegui — Comprobante de compra", 28, y);
 
-        doc.setTextColor(0, 0, 0);
-        order.items.forEach((it) => {
-            doc.text(`${it.nombre} (${it.size}) ×${it.cantidad}`, 14, (y += 7));
-            doc.text(`$${it.subtotal.toLocaleString("es-AR")}`, 170, y, { align: "right" });
-        });
+      y += 8;
+      doc.setDrawColor(255, 118, 0);
+      doc.line(14, y, 196, y);
 
-        y += 10;
-        doc.setTextColor(255, 118, 0);
-        doc.text(`Total: $${order.total.toLocaleString("es-AR")}`, 170, y, { align: "right" });
+      // Datos generales
+      y += 8;
+      const fecha = new Date(order.created_at || Date.now());
+      doc.setFontSize(11);
+      doc.setTextColor(0, 0, 0);
+      doc.text(`Nro de pedido: #${order.id}`, 14, y); y += 6;
+      doc.text(`Estado: ${order.status || (status === "approved" ? "completed" : status)}`, 14, y); y += 6;
+      doc.text(`Fecha: ${fecha.toLocaleDateString("es-AR")} ${fecha.toLocaleTimeString("es-AR", { hour: '2-digit', minute: '2-digit' })}`, 14, y);
 
-        doc.save(`comprobante_pedido_${order.id}.pdf`);
+      // Datos del comprador
+      y += 10;
+      doc.setTextColor(255, 118, 0);
+      doc.setFontSize(12);
+      doc.text("Datos del comprador", 14, y);
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(11);
+
+      y += 7;
+      y = ensureRoom(doc, y);
+      doc.text(`Cliente: ${order.nombre || "-"}`, 14, y); y += 6;
+      y = ensureRoom(doc, y);
+      doc.text(`Email: ${order.email || "-"}`, 14, y); y += 6;
+      y = ensureRoom(doc, y);
+      doc.text(`Teléfono: ${order.tel || "-"}`, 14, y); y += 6;
+      y = ensureRoom(doc, y);
+      doc.text(`Dirección: ${order.dir || "-"}`, 14, y); y += 6;
+      y = ensureRoom(doc, y);
+      doc.text(`Localidad: ${order.loc || "-"}`, 14, y);
+
+      // Tabla de productos
+      y += 10;
+      y = ensureRoom(doc, y, 10);
+      doc.setTextColor(255, 118, 0);
+      doc.setFontSize(12);
+      doc.text("Productos", 14, y);
+      doc.setTextColor(0, 0, 0);
+      doc.setFontSize(11);
+
+      y += 5;
+      // Encabezados
+      doc.setFont(undefined, "bold");
+      doc.text("Producto", 14, y);
+      doc.text("Cant.", 150, y, { align: "right" });
+      doc.text("Subtotal", 196, y, { align: "right" });
+      doc.setFont(undefined, "normal");
+
+      // Filas
+      const items = Array.isArray(order.items) ? order.items : [];
+      for (const it of items) {
+        const nombre = it?.nombre || "";
+        const size = it?.size ? ` (${it.size})` : "";
+        const linea = `${nombre}${size}`;
+        const cant = String(Number(it?.cantidad) || 0);
+        const sub = (Number(it?.subtotal) || 0).toLocaleString("es-AR");
+
+        y += 7;
+        y = ensureRoom(doc, y, 10);
+        doc.text(linea, 14, y, { maxWidth: 128 });
+        doc.text(cant, 150, y, { align: "right" });
+        doc.text(`$${sub}`, 196, y, { align: "right" });
+      }
+
+      // Total
+      y += 10;
+      y = ensureRoom(doc, y, 10);
+      doc.setTextColor(255, 118, 0);
+      doc.setFontSize(12);
+      doc.text(`Total: ${(Number(order.total) || 0).toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 })}`, 196, y, { align: "right" });
+
+      // Pie
+      y += 12;
+      y = ensureRoom(doc, y);
+      doc.setTextColor(120, 120, 120);
+      doc.setFontSize(10);
+      doc.text("¡Gracias por tu compra! — Papelera Pierrastegui", 14, y);
+
+      doc.save(`comprobante_pedido_${order.id}.pdf`);
     }
 
-    // 🔍 Cargar pedido desde Supabase
+    // 🔍 Cargar pedido desde Supabase y mostrar
     (async () => {
-        if (!orderId) return;
+      if (!orderId) return;
 
-        const { data: order, error } = await supabase
+      const { data: order, error } = await supabase
+        .from("carts")
+        .select("*")
+        .eq("id", orderId)
+        .maybeSingle();
+
+      if (error || !order) {
+        text.textContent = "No se pudo encontrar tu pedido.";
+        console.error(error);
+        return;
+      }
+
+      // Render comprobante
+      renderReceipt(order);
+
+      // Si fue aprobado, actualizar estado a completed
+      try {
+        if (status === "approved" && order.status !== "completed") {
+          await supabase
             .from("carts")
-            .select("*")
-            .eq("id", orderId)
-            .maybeSingle();
-
-        if (error || !order) {
-            text.textContent = "No se pudo encontrar tu pedido.";
-            console.error(error);
-            return;
+            .update({ status: "completed" })
+            .eq("id", order.id);
         }
-
-        // Mostrar comprobante
-        renderReceipt(order);
-
-        // Si fue aprobado, actualizar estado
-        if (status === "approved") {
-            await supabase
-                .from("carts")
-                .update({ status: "completed" })
-                .eq("id", order.id);
-        }
+      } catch (e) {
+        console.warn("No se pudo actualizar el estado:", e);
+      }
     })();
+  </script>
+</body>
 
-    // 🖨️ Estilos para impresión: solo el comprobante
-    const stylePrint = document.createElement("style");
-    stylePrint.textContent = `
-  @media print {
-    body * {
-      visibility: hidden;
-    }
-    #comprobante, #comprobante * {
-      visibility: visible;
-    }
-    #comprobante {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
-    .btn, .status-icon, footer {
-      display: none !important;
-    }
-  }
-`;
-    document.head.appendChild(stylePrint);
-</script>
+</html>
