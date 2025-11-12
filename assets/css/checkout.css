@@ -159,7 +159,7 @@ body {
 }
 
 input.checkout-input {
-    width: 100%;
+    width: 93.5%;
     border: 2px solid #ff7600;
     padding: 0.7em;
     border-radius: 6px;
@@ -167,6 +167,10 @@ input.checkout-input {
     font-weight: 700;
     color: #ff7600;
     background: #fff;
+}
+
+* {
+    border-radius: 0.3em !important;
 }
 
 .checkout-input::placeholder {
