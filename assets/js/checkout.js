@@ -47,23 +47,37 @@ function renderItems(cart, envioCosto = 0) {
     cont.innerHTML = "";
     let subtotal = 0;
 
-    cart.forEach(it => {
+    cart.forEach((it, i) => {
         subtotal += it.subtotal;
         cont.innerHTML += `
-      <div class="checkout-item">
-        <img src="${it.img}" alt="">
-        <div class="checkout-item-info">${it.nombre} (${it.size}) ×${it.cantidad}</div>
-        <div>${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</div>
-      </div>`;
+        <div class="checkout-item">
+            <img src="${it.img}" alt="">
+            <div class="checkout-item-info">${it.nombre} (${it.size}) ×${it.cantidad}</div>
+            <div class="checkout-item-precio" id="precio-item-${i}">
+                ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+            </div>
+        </div>`;
     });
 
     const total = subtotal + envioCosto;
     totals.innerHTML = `
-    <div><span>Subtotal:</span><span>${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span></div>
-    <div><span>Envío:</span><span>${envioCosto > 0 ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}</span></div>
-    <hr style="margin:.5em 0;border-color:#ff7600;">
-    <div><span>Total:</span><span>${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span></div>
-  `;
+        <div><span>Subtotal:</span>
+            <span class="precio-subtotal" id="precio-subtotal">
+                ${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+            </span>
+        </div>
+        <div><span>Envío:</span>
+            <span class="precio-envio" id="precio-envio">
+                ${envioCosto > 0 ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
+            </span>
+        </div>
+        <hr style="margin:.5em 0;border-color:#ff7600;">
+        <div><span>Total:</span>
+            <span class="precio-total" id="precio-total">
+                ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+            </span>
+        </div>
+    `;
     return total;
 }
 

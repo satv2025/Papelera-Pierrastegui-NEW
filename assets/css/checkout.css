@@ -12,6 +12,13 @@
     padding: 0;
 }
 
+body {
+    background: #fff;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 div#checkout-totals {
     color: #ff7600;
     font-weight: 700;
@@ -25,13 +32,6 @@ div#checkout-loader {
     font-weight: 700;
     margin-top: 0.7em;
     margin-bottom: -0.8em;
-}
-
-body {
-    background: #fff;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
 }
 
 /* ========================= */
@@ -190,12 +190,12 @@ input.checkout-input {
     background: #fff;
 }
 
-#direccion-container {
-    margin-top: 1em;
-}
-
 .checkout-input::placeholder {
     color: #ff7600;
+}
+
+#direccion-container {
+    margin-top: 1em;
 }
 
 .checkout-btn {
@@ -269,6 +269,21 @@ input.checkout-input {
 /* ========================= */
 /* 🔸 OTROS 🔸 */
 /* ========================= */
+.aviso-arg {
+    background: #fff;
+    border: 2px solid #ff7600;
+    padding: .7em;
+    border-radius: 8px;
+    margin-bottom: 1em;
+    color: #ff7600;
+    font-weight: 700;
+    text-align: center;
+}
+
+.direccion-wrapper {
+    position: relative;
+}
+
 #direccion-sugerencias {
     border: 2px solid #ff7600;
     border-radius: 8px;
@@ -290,21 +305,6 @@ input.checkout-input {
 
 #direccion-sugerencias div:hover {
     background: #fff5eb;
-}
-
-.aviso-arg {
-    background: #fff;
-    border: 2px solid #ff7600;
-    padding: .7em;
-    border-radius: 8px;
-    margin-bottom: 1em;
-    color: #ff7600;
-    font-weight: 700;
-    text-align: center;
-}
-
-.direccion-wrapper {
-    position: relative;
 }
 
 /* ========================= */
@@ -374,8 +374,6 @@ input.checkout-input {
     input.checkout-input {
         font-size: 0.9rem;
     }
-
-    input#chk-direccion {}
 
     .checkout-btn {
         padding: 0.8em;
