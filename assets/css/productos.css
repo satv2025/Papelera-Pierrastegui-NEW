@@ -483,3 +483,24 @@ footer {
         position: relative;
     }
 }
+
+/* Todos los items: borde inferior */
+.checkout-item {
+    border-bottom: 1px solid #ff7600;
+}
+
+/* El primero mantiene siempre borde superior */
+.checkout-item:first-child {
+    border-top: 1px solid #ff7600;
+}
+
+/* El item anterior al hover pierde border-bottom */
+.checkout-item:hover.prev {
+    border-bottom: none;
+}
+
+/* El item en hover gana borde superior */
+.checkout-item:hover {
+    border-top: 1px solid #ff7600;
+    color: #fff
+}
