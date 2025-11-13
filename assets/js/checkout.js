@@ -31,7 +31,7 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
         subtotal += it.subtotal;
         const isFirstItem = i === 0 ? 'style="border-top: 1px solid #ff7600;"' : ''; // Borde superior solo en el primer item
         cont.innerHTML += `
-        <ul style="padding: 0; margin: 0;">
+        <ul class="checkout-item-list" style="padding: 0; margin: 0;">
           <li class="checkout-item" ${isFirstItem}>
             <div class="checkout-item-info" style="display: flex; gap: 10px;">
               <img src="${it.img}" alt="${it.nombre}" class="checkout-item-img" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
