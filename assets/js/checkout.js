@@ -24,39 +24,45 @@ function getCartIdFromQuery() {
 function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
-    cont.innerHTML = "";
+
+    cont.innerHTML = `
+        <ul class="checkout-ul" style="padding:0;margin:0;"></ul>
+    `;
+
+    const ul = cont.querySelector(".checkout-ul");
+
     let subtotal = 0;
 
     cart.forEach((it, i) => {
         subtotal += it.subtotal;
-
         const firstBorder = i === 0 ? 'style="border-top:1px solid #ff7600;"' : "";
 
-        cont.innerHTML += `
-        <ul class="checkout-ul">
-          <li class="checkout-item" ${firstBorder}>
-            <div class="checkout-item-info">
-              <img src="${it.img}" alt="${it.nombre}" class="checkout-item-img">
-              <div class="checkout-item-details">
-                <div class="checkout-item-title">${it.nombre} (${it.size}) ×${it.cantidad}</div>
-                <div class="checkout-item-desc">${it.desc || "Sin descripción"}</div>
-              </div>
-            </div>
-            <span class="checkout-item-subtotal">
-              ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-            </span>
-          </li>
-        </ul>`;
+        ul.innerHTML += `
+            <li class="checkout-item" ${firstBorder}>
+                <div class="checkout-item-info">
+                    <img src="${it.img}" alt="${it.nombre}" class="checkout-item-img">
+                    <div class="checkout-item-details">
+                        <div class="checkout-item-title">${it.nombre} (${it.size}) ×${it.cantidad}</div>
+                        <div class="checkout-item-desc">${it.desc || "Sin descripción"}</div>
+                    </div>
+                </div>
+                <span class="checkout-item-subtotal">
+                    ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+                </span>
+            </li>
+        `;
     });
 
-    // efecto hover avanzado
+    // sistema hover bordes
     setTimeout(() => {
         const items = document.querySelectorAll(".checkout-item");
+
         items.forEach((item, i) => {
             item.addEventListener("mouseenter", () => {
                 items.forEach(x => x.classList.remove("prev"));
                 if (i > 0) items[i - 1].classList.add("prev");
             });
+
             item.addEventListener("mouseleave", () => {
                 items.forEach(x => x.classList.remove("prev"));
             });
@@ -67,25 +73,30 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
 
     if (metodoEnvio === "retiro") {
         totals.innerHTML = `
-        <div><span>Total:</span>
-          <span class="precio-total" id="precio-total">
-            ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-          </span>
-        </div>`;
+            <div><span>Total:</span>
+            <span class="precio-total" id="precio-total">
+                ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+            </span></div>
+        `;
     } else {
         totals.innerHTML = `
-        <div><span>Subtotal:</span>
-          <span class="precio-subtotal">${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
-        </div>
-        <div><span>Envío:</span>
-          <span class="precio-envio">
-            ${envioCosto ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
-          </span>
-        </div>
-        <hr style="margin:.5em 0;border-color:#ff7600;">
-        <div><span>Total:</span>
-          <span class="precio-total">${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
-        </div>`;
+            <div><span>Subtotal:</span>
+                <span class="precio-subtotal">
+                    ${subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+                </span>
+            </div>
+            <div><span>Envío:</span>
+                <span class="precio-envio">
+                    ${envioCosto ? envioCosto.toLocaleString("es-AR", { style: "currency", currency: "ARS" }) : "Gratis"}
+                </span>
+            </div>
+            <hr style="margin:.5em 0;border-color:#ff7600;">
+            <div><span>Total:</span>
+                <span class="precio-total">
+                    ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+                </span>
+            </div>
+        `;
     }
 
     return total;
@@ -94,12 +105,13 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
 // 🚚 Calcular envío
 async function calcularEnvio(lat, lon) {
     try {
-        const routeRes = await fetch(
+        const res = await fetch(
             `https://router.project-osrm.org/route/v1/driving/${TIENDA_LON},${TIENDA_LAT};${lon},${lat}?overview=false`
         );
-        const routeData = await routeRes.json();
-        const distanciaM = routeData.routes?.[0]?.distance || 0;
+        const data = await res.json();
+        const distanciaM = data.routes?.[0]?.distance || 0;
         const km = distanciaM / 1000;
+
         return Math.round(300 + km * 100);
     } catch {
         return 0;
@@ -108,7 +120,9 @@ async function calcularEnvio(lat, lon) {
 
 // Autocompletado
 async function buscarDirecciones(q) {
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&countrycodes=ar&limit=5&q=${encodeURIComponent(q)}`);
+    const res = await fetch(
+        `https://nominatim.openstreetmap.org/search?format=json&countrycodes=ar&limit=5&q=${encodeURIComponent(q)}`
+    );
     return await res.json();
 }
 
@@ -125,7 +139,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let pedido = null;
 
     // ============================
-    //  🔥 SI NO HAY CARTID → CREAR UNO
+    //  SI NO HAY CARTID → CREAR UNO NUEVO
     // ============================
     if (!cartId) {
         const { data: nuevo } = await supabase
@@ -134,19 +148,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             .select()
             .single();
 
-        if (!nuevo) {
-            alert("No se pudo crear un carrito.");
-            return;
-        }
-
         cartId = nuevo.id;
         pedido = nuevo;
 
-        // Actualiza URL recién acá
+        // poner id en URL recién ahora
         const url = new URL(window.location);
         url.searchParams.set("id", cartId);
         window.history.replaceState({}, "", url);
-
     } else {
         const { data: cartData } = await supabase
             .from("carts")
@@ -164,16 +172,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // ============================
-    //  🛒 CARRITO VACÍO → CREAR NUEVO SIEMPRE
+    // CARRITO VACÍO → CREAR UNO NUEVO (URL NUEVA)
     // ============================
-
     let cart = pedido.items || [];
 
     if (!cart.length) {
-        // eliminar el carrito vacío
         await supabase.from("carts").delete().eq("id", cartId);
 
-        // crear uno nuevo
         const { data: nuevoCart } = await supabase
             .from("carts")
             .insert([{ user_id: user.id, items: [], status: "active" }])
@@ -183,13 +188,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         cartId = nuevoCart.id;
         pedido = nuevoCart;
 
-        // actualizar URL
         const url = new URL(window.location);
         url.searchParams.set("id", cartId);
         window.history.replaceState({}, "", url);
 
-        // intentar traer localstorage
         const localCart = JSON.parse(localStorage.getItem("cart") || "[]");
+
         if (localCart.length) {
             await supabase.from("carts").update({ items: localCart }).eq("id", cartId);
             cart = localCart;
@@ -204,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto, metodoEnvio);
 
-    // opciones de envío
+    // opciones envío
     $$(".envio-opcion").forEach(op => {
         op.addEventListener("click", () => {
             $$(".envio-opcion").forEach(x => x.classList.remove("activa"));
@@ -223,7 +227,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    // Autocompletado
+    // Autocompletado direcciones
     const dirInput = $("#chk-direccion");
     const sugBox = $("#direccion-sugerencias");
     let timer;
@@ -231,13 +235,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     dirInput?.addEventListener("input", () => {
         clearTimeout(timer);
         const q = dirInput.value.trim();
-        if (q.length < 4) return sugBox.style.display = "none";
+
+        if (q.length < 4) return (sugBox.style.display = "none");
 
         timer = setTimeout(async () => {
             const data = await buscarDirecciones(`${q}, Argentina`);
             sugBox.innerHTML = "";
 
-            if (!data.length) return sugBox.style.display = "none";
+            if (!data.length) return (sugBox.style.display = "none");
 
             data.forEach(d => {
                 const div = document.createElement("div");
@@ -266,29 +271,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         const direccion = $("#chk-direccion")?.value.trim() || "";
 
         if (!nombre || !email || !tel) return alert("Completá nombre, correo y teléfono.");
-        if (metodoEnvio === "envio" && !direccion) return alert("Ingresá la dirección.");
+        if (metodoEnvio === "envio" && !direccion) return alert("Ingresá tu dirección.");
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert("Correo inválido.");
 
         $("#checkout-loader").style.display = "block";
 
         try {
-            const res = await fetch("https://pkptcnxgetrvmblphucg.supabase.co/functions/v1/create-preference", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    total,
-                    items: cart,
-                    user,
-                    nombre,
-                    email,
-                    tel,
-                    direccion,
-                    envio: metodoEnvio,
-                    costoEnvio: envioCosto
-                }),
-            });
+            const res = await fetch(
+                "https://pkptcnxgetrvmblphucg.supabase.co/functions/v1/create-preference",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        total,
+                        items: cart,
+                        user,
+                        nombre,
+                        email,
+                        tel,
+                        direccion,
+                        envio: metodoEnvio,
+                        costoEnvio: envioCosto,
+                    }),
+                }
+            );
 
             const data = await res.json();
+
             if (data.init_point) {
                 await supabase.from("carts").update({ status: "ordered" }).eq("id", pedido.id);
                 window.location.href = data.init_point;

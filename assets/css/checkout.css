@@ -432,40 +432,61 @@ input.checkout-input {
     }
 }
 
-/* Todos los items: borde inferior */
+/* ===========================================
+   ESTILO BASE DE LOS ITEMS DEL CHECKOUT
+   =========================================== */
+
+/* Cada <li> del carrito tiene borde inferior */
 .checkout-item {
     border-bottom: 1px solid #ff7600;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* El primero mantiene siempre borde superior */
+/* El primer item siempre tiene borde superior */
 .checkout-item:first-child {
     border-top: 1px solid #ff7600;
 }
 
-/* El item anterior al hover pierde border-bottom */
-.checkout-item:hover.prev {
-    border-bottom: none;
-}
-
-/* El item en hover gana borde superior */
+/* Estilo al hacer hover sobre el item */
 .checkout-item:hover {
-    border-top: 1px solid #ff7600;
-    color: #fff
-}
-
-.checkout-item:hover .checkout-item-title,
-.checkout-item:hover checkout-item-desc {
+    border-top: 1px solid #ff7600 !important;
+    /* se lo agregamos */
+    background: #ff7600;
     color: #fff;
 }
 
-.checkout-item:hover checkout-item-desc {
-    color: #fff;
+/* El item anterior al hover pierde su borde inferior */
+.checkout-item.prev {
+    border-bottom: none !important;
 }
 
+/* Título dentro del ítem */
+.checkout-item:hover .checkout-item-title {
+    color: #fff !important;
+}
+
+/* Descripción dentro del ítem */
 .checkout-item:hover .checkout-item-desc {
-    color: #ffff !important;
+    color: #fff !important;
 }
 
-.checkout-item:hover checkout-item-info {
-    color: #ffff;
+/* Contenedor de la info (imagen + textos) */
+.checkout-item:hover .checkout-item-info {
+    color: #fff !important;
+}
+
+/* Asegurar que subtotales también queden blancos */
+.checkout-item:hover .checkout-item-subtotal {
+    color: #fff !important;
+}
+
+/* Imágenes dentro del item */
+.checkout-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
 }
