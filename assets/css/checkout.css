@@ -72,9 +72,16 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.8rem;
-    margin: 0.8em 0;
+    gap: 0.3rem;
     flex-wrap: wrap;
+    margin-left: -66em;
+    margin-bottom: -3em;
+    position: relative;
+    cursor: pointer;
+}
+
+#pp-logo:hover span {
+    color: #000;
 }
 
 #pp-logo img {
@@ -82,21 +89,21 @@ header {
     height: 60px;
     border-radius: 8px;
     padding: 0.2em;
-    background: #fff;
-    transition: all 0.3s ease;
+    background: #fff0;
 }
 
 #pp-logo:hover img {
     outline: 3px solid #000;
     border-radius: 50%;
     cursor: pointer;
+    outline-offset: -0.4em;
 }
 
 .pp-title {
-    font-size: clamp(1.5rem, 2vw + 1rem, 2.2rem);
+    font-size: 1.3em;
     font-weight: 800;
     color: #ff7600;
-    line-height: 1.1;
+    line-height: 0.9;
 }
 
 .nav-links {
@@ -116,6 +123,8 @@ header {
     border-radius: 0.3em;
     transition: all 0.2s ease;
     font-size: clamp(0.9rem, 1vw + 0.5rem, 1rem);
+    position: relative;
+    top: -0.7em;
 }
 
 .nav-links a:hover {
@@ -135,6 +144,7 @@ header {
     padding: 2em;
     border-radius: 0.3em;
     box-shadow: 0 8px 20px rgba(255, 118, 0, 0.1);
+    margin-top: 2em;
 }
 
 .checkout-title {
@@ -347,7 +357,7 @@ input.checkout-input {
 }
 
 /* ========================= */
-/* 🔸 RESPONSIVE 🔸 */
+/* 🔸 RESPONSIVE ORIGINAL TUYO 🔸 */
 /* ========================= */
 @media (max-width: 1024px) {
     .checkout-grid {
@@ -431,11 +441,9 @@ input.checkout-input {
     }
 }
 
-/* ===========================================
-   ESTILO BASE DE LOS ITEMS DEL CHECKOUT
-   =========================================== */
-
-/* Cada <li> del carrito tiene borde inferior */
+/* ========================= */
+/* 🔸 ITEMS BASE 🔸 */
+/* ========================= */
 .checkout-item {
     border-bottom: 1px solid #ff7600;
     padding: 22px 0;
@@ -447,48 +455,80 @@ input.checkout-input {
     padding-bottom: 2em;
 }
 
-/* El primer item siempre tiene borde superior */
 .checkout-item:first-child {
     border-top: 1px solid #ff7600;
 }
 
-/* Estilo al hacer hover sobre el item */
 .checkout-item:hover {
     border-top: 1px solid #ff7600 !important;
-    /* se lo agregamos */
     background: #ff7600;
     color: #fff;
 }
 
-/* El item anterior al hover pierde su borde inferior */
 .checkout-item.prev {
     border-bottom: none !important;
 }
 
-/* Título dentro del ítem */
 .checkout-item:hover .checkout-item-title {
     color: #fff !important;
 }
 
-/* Descripción dentro del ítem */
 .checkout-item:hover .checkout-item-desc {
     color: #fff !important;
 }
 
-/* Contenedor de la info (imagen + textos) */
 .checkout-item:hover .checkout-item-info {
     color: #fff !important;
 }
 
-/* Asegurar que subtotales también queden blancos */
 .checkout-item:hover .checkout-item-subtotal {
     color: #fff !important;
 }
 
-/* Imágenes dentro del item */
 .checkout-item-img {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 0.3em;
+}
+
+/* ==================================================
+   🔥🔥🔥 FIX RESPONSIVE FINAL (NO MODIFICA TU CSS) 🔥🔥🔥
+   ================================================== */
+
+/* Evita que el header explote por el margin-left gigante */
+@media (max-width: 1400px) {
+    #pp-logo {
+        margin-left: 0 !important;
+        margin-bottom: 0 !important;
+        justify-content: center !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #pp-logo {
+        flex-direction: column;
+        margin-bottom: 0 !important;
+    }
+
+    #pp-logo img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    #pp-logo img {
+        width: 45px !important;
+        height: 45px !important;
+    }
+
+    .pp-title {
+        font-size: 1.2rem;
+    }
+
+    body,
+    html {
+        overflow-x: hidden !important;
+    }
 }
