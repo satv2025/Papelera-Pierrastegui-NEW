@@ -1,3 +1,6 @@
+/* Importar CSS de FontAwesome */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css");
+
 /* Importar fuente Gilroy */
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
