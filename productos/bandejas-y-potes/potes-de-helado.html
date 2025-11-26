@@ -575,7 +575,12 @@
     document.addEventListener("DOMContentLoaded", () => {
       const CART_KEY = "pp_cart";
       const $ = (s) => document.querySelector(s);
-      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+      const toARS = (n) =>
+        n.toLocaleString("es-AR", {
+          style: "currency",
+          currency: "ARS",
+          maximumFractionDigits: 0,
+        });
 
       async function getUser() {
         const { data: { session } } = await supabase.auth.getSession();
@@ -613,7 +618,7 @@
               items,
               total,
               status: "active",
-              updated_at: new Date()
+              updated_at: new Date(),
             },
             { onConflict: "user_id,status" }
           )
@@ -668,54 +673,76 @@
         els.items.innerHTML = "";
         cart.forEach((it, i) => {
           els.items.innerHTML += `
-        <div class="dropcart-item">
-          <img src="${it.img}">
-          <div>
-            <div class="dropcart-title">${it.nombre}</div>
-            <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
-            <div class="dropcart-qty">
-              <span class="cart-action" data-act="dec" data-i="${i}">−</span>
-              <span>${it.cantidad}</span>
-              <span class="cart-action" data-act="inc" data-i="${i}">+</span>
-              <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
+          <div class="dropcart-item">
+            <img src="${it.img}">
+            <div>
+              <div class="dropcart-title">${it.nombre}</div>
+              <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
+              <div class="dropcart-qty">
+                <span class="cart-action" data-act="dec" data-i="${i}">−</span>
+                <span>${it.cantidad}</span>
+                <span class="cart-action" data-act="inc" data-i="${i}">+</span>
+                <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
+              </div>
             </div>
+            <div class="dropcart-price">${toARS(it.subtotal)}</div>
           </div>
-          <div class="dropcart-price">${toARS(it.subtotal)}</div>
-        </div>
-      `;
+        `;
         });
 
         els.total.textContent = toARS(total);
       }
 
+      // ============================================================
+      //         UNIVERSAL: FUNCIONA CON TIPO / TAMAÑO / AMBOS
+      // ============================================================
+
       document.body.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("agregar-carrito")) return;
 
-        const size = document.querySelector("#size-dropdown .dropdown-item.selected")?.dataset.size;
-        const tipo = document.querySelector("#tipo-dropdown .dropdown-item.selected")?.dataset.type;
+        const sizeItem = document.querySelector("#size-dropdown .dropdown-item.selected");
+        const tipoItem = document.querySelector("#tipo-dropdown .dropdown-item.selected");
+
+        const hasSize = !!document.querySelector("#size-dropdown");
+        const hasTipo = !!document.querySelector("#tipo-dropdown");
+
         const cantidad = Number($("#cantidad-visual")?.textContent || 1);
         const titulo = $(".producto-info h2")?.textContent.trim();
         const img = $("#producto-img")?.src;
 
-        if (!size) return alert("Elegí un tamaño.");
-        if (!tipo) return alert("Elegí tipo.");
+        // Variables finales
+        let size = "N/A";
+        let tipo = "unidad";
+        let precioUnit = 0;
+        let tipoLabel = "Unidad (1)";
 
-        const sizeEl = document.querySelector("#size-dropdown .dropdown-item.selected");
-        const precioUnit = tipo === "unidad"
-          ? Number(sizeEl.dataset.priceUnit)
-          : Number(sizeEl.dataset.priceBulto);
+        // Validaciones automáticas
+        if (hasSize && !sizeItem) return alert("Elegí un tamaño.");
+        if (hasTipo && !tipoItem) return alert("Elegí un tipo.");
 
-        const tipoLabel = tipo === "unidad"
-          ? "Unidad (1)"
-          : `Bulto (${sizeEl.dataset.bultoCant})`;
+        // Si tiene tamaño
+        if (hasSize) {
+          size = sizeItem.dataset.size ?? "N/A";
+        }
 
+        // Si tiene tipo
+        if (hasTipo) {
+          tipo = tipoItem.dataset.type;
+          precioUnit = Number(tipoItem.dataset.price);
+          tipoLabel = tipoItem.textContent.trim();
+        } else {
+          // Producto SIN tipo → usar priceUnit del size si existe
+          precioUnit = Number(sizeItem?.dataset.priceUnit || 0);
+        }
+
+        // Key única
         const key = `${titulo}|${size}|${tipo}`;
         const cart = await readCart();
-        const f = cart.find((it) => it.key === key);
+        const existing = cart.find((it) => it.key === key);
 
-        if (f) {
-          f.cantidad += cantidad;
-          f.subtotal = f.precioUnit * f.cantidad;
+        if (existing) {
+          existing.cantidad += cantidad;
+          existing.subtotal = existing.cantidad * existing.precioUnit;
         } else {
           cart.push({
             key,
@@ -726,7 +753,7 @@
             cantidad,
             precioUnit,
             subtotal: precioUnit * cantidad,
-            img
+            img,
           });
         }
 
@@ -734,6 +761,8 @@
         await renderCart();
         els.panel.classList.add("show");
       });
+
+      // ============================================================
 
       els.items.addEventListener("click", async (e) => {
         const btn = e.target.closest(".cart-action");
@@ -749,7 +778,7 @@
         if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
         if (act === "rm") cart.splice(i, 1);
 
-        cart.forEach((it) => it.subtotal = it.precioUnit * it.cantidad);
+        cart.forEach((it) => (it.subtotal = it.precioUnit * it.cantidad));
         await writeCart(cart);
         renderCart();
       });
@@ -759,13 +788,10 @@
         els.panel.classList.toggle("show");
       });
 
-      /* NUEVO: evita que +, -, eliminar cierren el carrito */
-      els.panel.addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
-
+      els.panel.addEventListener("click", (e) => e.stopPropagation());
       els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
       document.addEventListener("click", () => els.panel.classList.remove("show"));
+
       els.btnEmpty.addEventListener("click", async () => {
         await writeCart([]);
         renderCart();
@@ -789,6 +815,7 @@
       renderCart();
     });
   </script>
+
 </body>
 
 </html>
