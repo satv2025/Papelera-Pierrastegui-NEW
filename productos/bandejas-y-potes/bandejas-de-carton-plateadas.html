@@ -514,15 +514,12 @@
     import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
     document.addEventListener("DOMContentLoaded", () => {
+
       const CART_KEY = "pp_cart";
       const $ = (s) => document.querySelector(s);
-      const toARS = (n) =>
-        n.toLocaleString("es-AR", {
-          style: "currency",
-          currency: "ARS",
-          maximumFractionDigits: 0,
-        });
+      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
 
+      /* --- SUPABASE USER --- */
       async function getUser() {
         const { data: { session } } = await supabase.auth.getSession();
         return session?.user || null;
@@ -553,17 +550,13 @@
 
         await supabase
           .from("carts")
-          .upsert(
-            {
-              user_id: user.id,
-              items,
-              total,
-              status: "active",
-              updated_at: new Date(),
-            },
-            { onConflict: "user_id,status" }
-          )
-          .select();
+          .upsert({
+            user_id: user.id,
+            items,
+            total,
+            status: "active",
+            updated_at: new Date()
+          }, { onConflict: "user_id,status" });
       }
 
       async function readCart() {
@@ -577,17 +570,7 @@
         await dbSaveCart(cart);
       }
 
-      supabase.auth.onAuthStateChange(async (_ev, session) => {
-        if (session?.user) {
-          const local = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-          if (local.length) {
-            await dbSaveCart(local);
-            localStorage.removeItem(CART_KEY);
-          }
-        }
-        renderCart();
-      });
-
+      /* --- RENDER CARRITO --- */
       const els = {
         toggle: $("#cart-toggle"),
         panel: $("#dropcart"),
@@ -595,7 +578,7 @@
         items: $("#dropcart-items"),
         total: $("#dropcart-total"),
         btnEmpty: $("#dropcart-empty"),
-        btnClose: $("#dropcart-close"),
+        btnClose: $("#dropcart-close")
       };
 
       async function renderCart() {
@@ -612,83 +595,84 @@
         }
 
         els.items.innerHTML = "";
+
         cart.forEach((it, i) => {
           els.items.innerHTML += `
-          <div class="dropcart-item">
-            <img src="${it.img}">
-            <div>
-              <div class="dropcart-title">${it.nombre}</div>
-              <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
-              <div class="dropcart-qty">
-                <span class="cart-action" data-act="dec" data-i="${i}">−</span>
-                <span>${it.cantidad}</span>
-                <span class="cart-action" data-act="inc" data-i="${i}">+</span>
-                <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
-              </div>
+        <div class="dropcart-item">
+          <img src="${it.img}">
+          <div>
+            <div class="dropcart-title">${it.nombre}</div>
+            <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
+            <div class="dropcart-qty">
+              <span class="cart-action" data-act="dec" data-i="${i}">−</span>
+              <span>${it.cantidad}</span>
+              <span class="cart-action" data-act="inc" data-i="${i}">+</span>
+              <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
             </div>
-            <div class="dropcart-price">${toARS(it.subtotal)}</div>
           </div>
-        `;
+          <div class="dropcart-price">${toARS(it.subtotal)}</div>
+        </div>
+      `;
         });
 
         els.total.textContent = toARS(total);
       }
 
-      // ---------------------------------------------------
-      //   FIX UNIVERSAL PARA PRODUCTOS CON / SIN TIPO
-      // ---------------------------------------------------
+      /* --- UNIVERSAL ADD TO CART --- */
       document.body.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("agregar-carrito")) return;
 
-        const sizeItem = document.querySelector(
-          "#size-dropdown .dropdown-item.selected"
-        );
-        const tipoItem = document.querySelector(
-          "#tipo-dropdown .dropdown-item.selected"
-        );
-
-        const cantidad = Number($("#cantidad-visual")?.textContent || 1);
         const titulo = $(".producto-info h2")?.textContent.trim();
+        const cantidad = Number($("#cantidad-visual")?.textContent || 1);
         const img = $("#producto-img")?.src;
 
-        // --- VALIDACIONES DINÁMICAS ---
-        if (!sizeItem) return alert("Elegí un tamaño.");
+        /* Detecta sistema de variante */
+        const sizeItem = document.querySelector("#size-dropdown .dropdown-item.selected");
+        const tipoItem = document.querySelector("#tipo-dropdown .dropdown-item.selected");
 
-        const hasTipo = !!document.querySelector("#tipo-dropdown");
+        let size = "N/A";
+        let tipo = "paquete";
+        let precioUnit = 0;
+        let tipoLabel = "";
 
-        let size = sizeItem.dataset.size;
-        let tipo, precioUnit, tipoLabel;
+        /* SI EXISTE DROP TAMAÑO */
+        if (sizeItem) {
+          size = sizeItem.dataset.size || sizeItem.textContent.trim();
 
-        if (hasTipo) {
-          if (!tipoItem) return alert("Elegí tipo.");
-
-          tipo = tipoItem.dataset.type;
-
-          precioUnit =
-            tipo === "unidad"
-              ? Number(sizeItem.dataset.priceUnit)
-              : Number(sizeItem.dataset.priceBulto);
-
-          tipoLabel =
-            tipo === "unidad"
-              ? "Unidad (1)"
-              : `Bulto (${sizeItem.dataset.bultoCant})`;
-
-        } else {
-          // PRODUCTO SIN TIPO
-          tipo = "unidad";
-          tipoLabel = "Unidad (1)";
-          precioUnit = Number(sizeItem.dataset.priceUnit);
+          // obtiene "selected" del script del producto
+          const selected = window.selectedProducto || null;
+          if (selected) window._selected = selected; // respaldo
         }
 
-        // --- ARMADO DE ITEM ---
+        /* SI EXISTE DROP TIPO */
+        if (tipoItem) {
+          tipo = tipoItem.dataset.type;
+          tipoLabel = tipoItem.textContent.trim();
+
+          const selected = window.selectedProducto || window._selected;
+          precioUnit = tipo === "paquete"
+            ? selected.precioPaquete
+            : selected.precioBulto;
+        } else {
+          // productos sin tipo
+          const selected = window.selectedProducto || window._selected;
+          precioUnit = selected?.precioPaquete || selected?.precio || 0;
+          tipoLabel = "Paquete";
+        }
+
+        if (precioUnit === 0) {
+          alert("Error: el producto no tiene precio asignado.");
+          return;
+        }
+
+        /* KEY DEL ITEM */
         const key = `${titulo}|${size}|${tipo}`;
         const cart = await readCart();
-        const f = cart.find((it) => it.key === key);
+        const f = cart.find(i => i.key === key);
 
         if (f) {
           f.cantidad += cantidad;
-          f.subtotal = f.precioUnit * f.cantidad;
+          f.subtotal = f.cantidad * f.precioUnit;
         } else {
           cart.push({
             key,
@@ -698,8 +682,8 @@
             tipoLabel,
             cantidad,
             precioUnit,
-            subtotal: precioUnit * cantidad,
-            img,
+            subtotal: cantidad * precioUnit,
+            img
           });
         }
 
@@ -708,8 +692,7 @@
         els.panel.classList.add("show");
       });
 
-      // ---------------------------------------------------
-
+      /* --- ACCIONES --- */
       els.items.addEventListener("click", async (e) => {
         const btn = e.target.closest(".cart-action");
         if (!btn) return;
@@ -724,7 +707,8 @@
         if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
         if (act === "rm") cart.splice(i, 1);
 
-        cart.forEach((it) => (it.subtotal = it.precioUnit * it.cantidad));
+        cart.forEach(it => it.subtotal = it.precioUnit * it.cantidad);
+
         await writeCart(cart);
         renderCart();
       });
@@ -733,7 +717,6 @@
         e.stopPropagation();
         els.panel.classList.toggle("show");
       });
-
       els.panel.addEventListener("click", (e) => e.stopPropagation());
       els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
       document.addEventListener("click", () => els.panel.classList.remove("show"));

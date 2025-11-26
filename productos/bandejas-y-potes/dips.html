@@ -474,15 +474,12 @@
     import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
     document.addEventListener("DOMContentLoaded", () => {
+
       const CART_KEY = "pp_cart";
       const $ = (s) => document.querySelector(s);
-      const toARS = (n) =>
-        n.toLocaleString("es-AR", {
-          style: "currency",
-          currency: "ARS",
-          maximumFractionDigits: 0,
-        });
+      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
 
+      /* --- SUPABASE USER --- */
       async function getUser() {
         const { data: { session } } = await supabase.auth.getSession();
         return session?.user || null;
@@ -513,17 +510,13 @@
 
         await supabase
           .from("carts")
-          .upsert(
-            {
-              user_id: user.id,
-              items,
-              total,
-              status: "active",
-              updated_at: new Date(),
-            },
-            { onConflict: "user_id,status" }
-          )
-          .select();
+          .upsert({
+            user_id: user.id,
+            items,
+            total,
+            status: "active",
+            updated_at: new Date()
+          }, { onConflict: "user_id,status" });
       }
 
       async function readCart() {
@@ -537,17 +530,7 @@
         await dbSaveCart(cart);
       }
 
-      supabase.auth.onAuthStateChange(async (_ev, session) => {
-        if (session?.user) {
-          const local = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-          if (local.length) {
-            await dbSaveCart(local);
-            localStorage.removeItem(CART_KEY);
-          }
-        }
-        renderCart();
-      });
-
+      /* --- RENDER CARRITO --- */
       const els = {
         toggle: $("#cart-toggle"),
         panel: $("#dropcart"),
@@ -555,7 +538,7 @@
         items: $("#dropcart-items"),
         total: $("#dropcart-total"),
         btnEmpty: $("#dropcart-empty"),
-        btnClose: $("#dropcart-close"),
+        btnClose: $("#dropcart-close")
       };
 
       async function renderCart() {
@@ -572,78 +555,84 @@
         }
 
         els.items.innerHTML = "";
+
         cart.forEach((it, i) => {
           els.items.innerHTML += `
-          <div class="dropcart-item">
-            <img src="${it.img}">
-            <div>
-              <div class="dropcart-title">${it.nombre}</div>
-              <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
-              <div class="dropcart-qty">
-                <span class="cart-action" data-act="dec" data-i="${i}">−</span>
-                <span>${it.cantidad}</span>
-                <span class="cart-action" data-act="inc" data-i="${i}">+</span>
-                <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
-              </div>
+        <div class="dropcart-item">
+          <img src="${it.img}">
+          <div>
+            <div class="dropcart-title">${it.nombre}</div>
+            <div class="dropcart-sub">${it.size} • ${it.tipoLabel}</div>
+            <div class="dropcart-qty">
+              <span class="cart-action" data-act="dec" data-i="${i}">−</span>
+              <span>${it.cantidad}</span>
+              <span class="cart-action" data-act="inc" data-i="${i}">+</span>
+              <span class="cart-action" data-act="rm" data-i="${i}">Eliminar</span>
             </div>
-            <div class="dropcart-price">${toARS(it.subtotal)}</div>
           </div>
-        `;
+          <div class="dropcart-price">${toARS(it.subtotal)}</div>
+        </div>
+      `;
         });
 
         els.total.textContent = toARS(total);
       }
 
-      // ============================================================
-      //         UNIVERSAL: FUNCIONA CON TIPO / TAMAÑO / AMBOS
-      // ============================================================
-
+      /* --- UNIVERSAL ADD TO CART --- */
       document.body.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("agregar-carrito")) return;
 
+        const titulo = $(".producto-info h2")?.textContent.trim();
+        const cantidad = Number($("#cantidad-visual")?.textContent || 1);
+        const img = $("#producto-img")?.src;
+
+        /* Detecta sistema de variante */
         const sizeItem = document.querySelector("#size-dropdown .dropdown-item.selected");
         const tipoItem = document.querySelector("#tipo-dropdown .dropdown-item.selected");
 
-        const hasSize = !!document.querySelector("#size-dropdown");
-        const hasTipo = !!document.querySelector("#tipo-dropdown");
-
-        const cantidad = Number($("#cantidad-visual")?.textContent || 1);
-        const titulo = $(".producto-info h2")?.textContent.trim();
-        const img = $("#producto-img")?.src;
-
-        // Variables finales
         let size = "N/A";
-        let tipo = "unidad";
+        let tipo = "paquete";
         let precioUnit = 0;
-        let tipoLabel = "Unidad (1)";
+        let tipoLabel = "";
 
-        // Validaciones automáticas
-        if (hasSize && !sizeItem) return alert("Elegí un tamaño.");
-        if (hasTipo && !tipoItem) return alert("Elegí un tipo.");
+        /* SI EXISTE DROP TAMAÑO */
+        if (sizeItem) {
+          size = sizeItem.dataset.size || sizeItem.textContent.trim();
 
-        // Si tiene tamaño
-        if (hasSize) {
-          size = sizeItem.dataset.size ?? "N/A";
+          // obtiene "selected" del script del producto
+          const selected = window.selectedProducto || null;
+          if (selected) window._selected = selected; // respaldo
         }
 
-        // Si tiene tipo
-        if (hasTipo) {
+        /* SI EXISTE DROP TIPO */
+        if (tipoItem) {
           tipo = tipoItem.dataset.type;
-          precioUnit = Number(tipoItem.dataset.price);
           tipoLabel = tipoItem.textContent.trim();
+
+          const selected = window.selectedProducto || window._selected;
+          precioUnit = tipo === "paquete"
+            ? selected.precioPaquete
+            : selected.precioBulto;
         } else {
-          // Producto SIN tipo → usar priceUnit del size si existe
-          precioUnit = Number(sizeItem?.dataset.priceUnit || 0);
+          // productos sin tipo
+          const selected = window.selectedProducto || window._selected;
+          precioUnit = selected?.precioPaquete || selected?.precio || 0;
+          tipoLabel = "Paquete";
         }
 
-        // Key única
+        if (precioUnit === 0) {
+          alert("Error: el producto no tiene precio asignado.");
+          return;
+        }
+
+        /* KEY DEL ITEM */
         const key = `${titulo}|${size}|${tipo}`;
         const cart = await readCart();
-        const existing = cart.find((it) => it.key === key);
+        const f = cart.find(i => i.key === key);
 
-        if (existing) {
-          existing.cantidad += cantidad;
-          existing.subtotal = existing.cantidad * existing.precioUnit;
+        if (f) {
+          f.cantidad += cantidad;
+          f.subtotal = f.cantidad * f.precioUnit;
         } else {
           cart.push({
             key,
@@ -653,8 +642,8 @@
             tipoLabel,
             cantidad,
             precioUnit,
-            subtotal: precioUnit * cantidad,
-            img,
+            subtotal: cantidad * precioUnit,
+            img
           });
         }
 
@@ -663,8 +652,7 @@
         els.panel.classList.add("show");
       });
 
-      // ============================================================
-
+      /* --- ACCIONES --- */
       els.items.addEventListener("click", async (e) => {
         const btn = e.target.closest(".cart-action");
         if (!btn) return;
@@ -679,7 +667,8 @@
         if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
         if (act === "rm") cart.splice(i, 1);
 
-        cart.forEach((it) => (it.subtotal = it.precioUnit * it.cantidad));
+        cart.forEach(it => it.subtotal = it.precioUnit * it.cantidad);
+
         await writeCart(cart);
         renderCart();
       });
@@ -688,7 +677,6 @@
         e.stopPropagation();
         els.panel.classList.toggle("show");
       });
-
       els.panel.addEventListener("click", (e) => e.stopPropagation());
       els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
       document.addEventListener("click", () => els.panel.classList.remove("show"));
@@ -697,21 +685,6 @@
         await writeCart([]);
         renderCart();
       });
-
-      window.createOrderAndGoToCheckout = async () => {
-        const user = await getUser();
-        if (!user) return (window.location = "/login");
-
-        const cart = await dbGetCart();
-        if (!cart) return;
-
-        await supabase
-          .from("carts")
-          .update({ status: "ordered" })
-          .eq("id", cart.id);
-
-        window.location = `/checkout/${cart.id}`;
-      };
 
       renderCart();
     });

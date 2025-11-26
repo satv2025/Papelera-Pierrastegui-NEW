@@ -574,153 +574,6 @@
       });
     });
   </script>
-  <script>
-    // ============================================
-    //   GENERACIÓN DE TAMAÑOS Y TIPOS (BOLSAS)
-    // ============================================
-    document.addEventListener("DOMContentLoaded", () => {
-
-      // 📦 Datos del producto
-      const productos = [
-        { size: "(E) 30x40", precioPaquete: 750, paquetesPorBulto: 20, precioBulto: 12600, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(E) 40x50", precioPaquete: 1200, paquetesPorBulto: 20, precioBulto: 21900, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 20x30", precioPaquete: 900, paquetesPorBulto: 20, precioBulto: 17000, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 30x40", precioPaquete: 1200, paquetesPorBulto: 20, precioBulto: 21500, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 40x50", precioPaquete: 1350, paquetesPorBulto: 20, precioBulto: 23500, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 45x60", precioPaquete: 2500, paquetesPorBulto: 20, precioBulto: 42000, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 45x60 Ciudad Negra", precioPaquete: 3100, paquetesPorBulto: 10, precioBulto: 27000, img: "bolsas%20ciudad.jpg" },
-        { size: "(R) 50x60", precioPaquete: 2700, paquetesPorBulto: 20, precioBulto: 46600, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 50x70", precioPaquete: 3900, paquetesPorBulto: 10, precioBulto: 33000, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 60x80", precioPaquete: 5800, paquetesPorBulto: 5, precioBulto: 25900, img: "bolsa%20camiseta%20foto.jpg" },
-      ];
-
-      const baseURL = "https://mediastatic.papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20CAMISETA/";
-
-      // 🔗 Elementos
-      const sizeDropdown = document.getElementById("size-dropdown");
-      const sizeBtn = sizeDropdown.querySelector(".dropdown-btn");
-      const sizeMenu = sizeDropdown.querySelector(".dropdown-menu");
-
-      const tipoDropdown = document.getElementById("tipo-dropdown");
-      const tipoBtn = tipoDropdown.querySelector(".dropdown-btn");
-      const tipoMenu = tipoDropdown.querySelector(".dropdown-menu");
-
-      const productoImg = document.getElementById("producto-img");
-      const cantidadVisual = document.getElementById("cantidad-visual");
-      const totalDisplay = document.querySelector(".total");
-
-      let selected = null;
-      let tipo = "";
-      let cantidad = 1;
-
-      // ============================
-      //   GENERAR TAMAÑOS CORRECTOS
-      // ============================
-      productos.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "dropdown-item";
-        item.textContent = p.size;
-
-        // 🔥 DATA CORRECTA PARA CARRITO UNIVERSAL
-        item.dataset.size = p.size;
-        item.dataset.priceUnit = p.precioPaquete;
-        item.dataset.priceBulto = p.precioBulto;
-        item.dataset.bultoCant = p.paquetesPorBulto;
-        item.dataset.img = p.img;
-
-        item.addEventListener("click", () => {
-          selected = p;
-          tipo = "";
-          cantidad = 1;
-
-          cantidadVisual.textContent = 1;
-          productoImg.src = baseURL + p.img;
-          sizeBtn.querySelector(".text").textContent = p.size;
-
-          // Mostrar dropdown tipo
-          tipoDropdown.style.display = "block";
-          tipoBtn.querySelector(".text").textContent = "Seleccioná el Tipo";
-
-          tipoMenu.innerHTML = `
-        <div class="dropdown-item" data-type="paquete" data-price="${p.precioPaquete}">
-          Paquete (x100)
-        </div>
-        <div class="dropdown-item" data-type="bulto" data-price="${p.precioBulto}">
-          Bulto (${p.paquetesPorBulto})
-        </div>
-      `;
-
-          totalDisplay.textContent = "Total: $0";
-
-          sizeMenu.classList.remove("active");
-          sizeBtn.classList.remove("active");
-
-          // Activar selección de tipo
-          tipoMenu.querySelectorAll(".dropdown-item").forEach(op => {
-            op.addEventListener("click", () => {
-              tipo = op.dataset.type;
-              tipoBtn.querySelector(".text").textContent = op.textContent;
-
-              actualizarTotal();
-
-              tipoMenu.classList.remove("active");
-              tipoBtn.classList.remove("active");
-            });
-          });
-        });
-
-        sizeMenu.appendChild(item);
-      });
-
-      // Calcular total
-      function actualizarTotal() {
-        if (!selected || !tipo) {
-          totalDisplay.textContent = "Total: $0";
-          return;
-        }
-        const precio = tipo === "paquete" ? selected.precioPaquete : selected.precioBulto;
-        totalDisplay.textContent = `Total: $${(precio * cantidad).toLocaleString("es-AR")}`;
-      }
-
-      // Cantidad
-      document.getElementById("incrementar").addEventListener("click", () => {
-        cantidad++;
-        cantidadVisual.textContent = cantidad;
-        actualizarTotal();
-      });
-
-      document.getElementById("decrementar").addEventListener("click", () => {
-        if (cantidad > 1) cantidad--;
-        cantidadVisual.textContent = cantidad;
-        actualizarTotal();
-      });
-
-      // Dropdowns correctos
-      sizeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        sizeMenu.classList.toggle("active");
-        sizeBtn.classList.toggle("active");
-        tipoMenu.classList.remove("active");
-        tipoBtn.classList.remove("active");
-      });
-
-      tipoBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        tipoMenu.classList.toggle("active");
-        tipoBtn.classList.toggle("active");
-        sizeMenu.classList.remove("active");
-        sizeBtn.classList.remove("active");
-      });
-
-      document.addEventListener("click", () => {
-        sizeMenu.classList.remove("active");
-        tipoMenu.classList.remove("active");
-        sizeBtn.classList.remove("active");
-        tipoBtn.classList.remove("active");
-      });
-    });
-  </script>
-
   <script type="module">
     import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
@@ -728,8 +581,9 @@
 
       const CART_KEY = "pp_cart";
       const $ = (s) => document.querySelector(s);
-      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+      const toARS = (n) => n.toLocaleString("es-AR", { style: "currency", currency: "ARS" });
 
+      /* --- SUPABASE USER --- */
       async function getUser() {
         const { data: { session } } = await supabase.auth.getSession();
         return session?.user || null;
@@ -765,9 +619,8 @@
             items,
             total,
             status: "active",
-            updated_at: new Date(),
-          }, { onConflict: "user_id,status" })
-          .select();
+            updated_at: new Date()
+          }, { onConflict: "user_id,status" });
       }
 
       async function readCart() {
@@ -781,6 +634,7 @@
         await dbSaveCart(cart);
       }
 
+      /* --- RENDER CARRITO --- */
       const els = {
         toggle: $("#cart-toggle"),
         panel: $("#dropcart"),
@@ -788,7 +642,7 @@
         items: $("#dropcart-items"),
         total: $("#dropcart-total"),
         btnEmpty: $("#dropcart-empty"),
-        btnClose: $("#dropcart-close"),
+        btnClose: $("#dropcart-close")
       };
 
       async function renderCart() {
@@ -805,6 +659,7 @@
         }
 
         els.items.innerHTML = "";
+
         cart.forEach((it, i) => {
           els.items.innerHTML += `
         <div class="dropcart-item">
@@ -827,48 +682,61 @@
         els.total.textContent = toARS(total);
       }
 
-      // ============================================================
-      //                 UNIVERSAL: AGREGAR AL CARRITO
-      // ============================================================
-
+      /* --- UNIVERSAL ADD TO CART --- */
       document.body.addEventListener("click", async (e) => {
         if (!e.target.classList.contains("agregar-carrito")) return;
 
+        const titulo = $(".producto-info h2")?.textContent.trim();
+        const cantidad = Number($("#cantidad-visual")?.textContent || 1);
+        const img = $("#producto-img")?.src;
+
+        /* Detecta sistema de variante */
         const sizeItem = document.querySelector("#size-dropdown .dropdown-item.selected");
         const tipoItem = document.querySelector("#tipo-dropdown .dropdown-item.selected");
 
-        const hasSize = !!document.querySelector("#size-dropdown .dropdown-item");
-        const hasTipo = !!document.querySelector("#tipo-dropdown .dropdown-item");
-
-        const cantidad = Number($("#cantidad-visual").textContent || 1);
-        const titulo = $(".producto-info h2")?.textContent.trim();
-        const img = $("#producto-img")?.src;
-
         let size = "N/A";
-        let tipo = "unidad";
+        let tipo = "paquete";
         let precioUnit = 0;
-        let tipoLabel = "Unidad (1)";
+        let tipoLabel = "";
 
-        if (hasSize && !sizeItem) return alert("Elegí un tamaño.");
-        if (hasTipo && !tipoItem) return alert("Elegí un tipo.");
+        /* SI EXISTE DROP TAMAÑO */
+        if (sizeItem) {
+          size = sizeItem.dataset.size || sizeItem.textContent.trim();
 
-        if (hasSize) size = sizeItem.dataset.size;
-
-        if (hasTipo) {
-          tipo = tipoItem.dataset.type;
-          precioUnit = Number(tipoItem.dataset.price);
-          tipoLabel = tipoItem.textContent.trim();
-        } else {
-          precioUnit = Number(sizeItem?.dataset.priceUnit || 0);
+          // obtiene "selected" del script del producto
+          const selected = window.selectedProducto || null;
+          if (selected) window._selected = selected; // respaldo
         }
 
+        /* SI EXISTE DROP TIPO */
+        if (tipoItem) {
+          tipo = tipoItem.dataset.type;
+          tipoLabel = tipoItem.textContent.trim();
+
+          const selected = window.selectedProducto || window._selected;
+          precioUnit = tipo === "paquete"
+            ? selected.precioPaquete
+            : selected.precioBulto;
+        } else {
+          // productos sin tipo
+          const selected = window.selectedProducto || window._selected;
+          precioUnit = selected?.precioPaquete || selected?.precio || 0;
+          tipoLabel = "Paquete";
+        }
+
+        if (precioUnit === 0) {
+          alert("Error: el producto no tiene precio asignado.");
+          return;
+        }
+
+        /* KEY DEL ITEM */
         const key = `${titulo}|${size}|${tipo}`;
         const cart = await readCart();
-        const existing = cart.find((p) => p.key === key);
+        const f = cart.find(i => i.key === key);
 
-        if (existing) {
-          existing.cantidad += cantidad;
-          existing.subtotal = existing.cantidad * existing.precioUnit;
+        if (f) {
+          f.cantidad += cantidad;
+          f.subtotal = f.cantidad * f.precioUnit;
         } else {
           cart.push({
             key,
@@ -878,8 +746,8 @@
             tipoLabel,
             cantidad,
             precioUnit,
-            subtotal: precioUnit * cantidad,
-            img,
+            subtotal: cantidad * precioUnit,
+            img
           });
         }
 
@@ -888,8 +756,7 @@
         els.panel.classList.add("show");
       });
 
-      // ============================================================
-
+      /* --- ACCIONES --- */
       els.items.addEventListener("click", async (e) => {
         const btn = e.target.closest(".cart-action");
         if (!btn) return;
@@ -904,7 +771,8 @@
         if (act === "dec") cart[i].cantidad = Math.max(1, cart[i].cantidad - 1);
         if (act === "rm") cart.splice(i, 1);
 
-        cart.forEach((it) => (it.subtotal = it.precioUnit * it.cantidad));
+        cart.forEach(it => it.subtotal = it.precioUnit * it.cantidad);
+
         await writeCart(cart);
         renderCart();
       });
@@ -913,7 +781,6 @@
         e.stopPropagation();
         els.panel.classList.toggle("show");
       });
-
       els.panel.addEventListener("click", (e) => e.stopPropagation());
       els.btnClose.addEventListener("click", () => els.panel.classList.remove("show"));
       document.addEventListener("click", () => els.panel.classList.remove("show"));
