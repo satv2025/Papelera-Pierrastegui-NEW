@@ -1,86 +1,97 @@
-// 📦 checkout.js
+// 📦 checkout.js FINAL COMPATIBLE CON UNIVERSAL CART v4
 import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => document.querySelectorAll(s);
 
-// 📍 Tienda
+// 📍 Ubicación de la tienda
 const TIENDA_LAT = -34.661435;
 const TIENDA_LON = -58.617912;
 
-// 🔐 Usuario
+// ============================================================
+// 🔐 SESIÓN DE USUARIO
+// ============================================================
 async function getUser() {
     const { data: { session } } = await supabase.auth.getSession();
     return session?.user || null;
 }
 
-// Obtener ID del pedido desde ?id=
+// ============================================================
+// 🔎 CART ID DESDE URL
+// ============================================================
 function getCartIdFromQuery() {
     const params = new URLSearchParams(window.location.search);
     return params.get("id");
 }
 
-// 💵 Render items
+// ============================================================
+// 🛒 LEER CARRITO ACTIVO DESDE SUPABASE
+// ============================================================
+async function loadActiveCart(userId) {
+    const { data } = await supabase
+        .from("carts")
+        .select("*")
+        .eq("user_id", userId)
+        .eq("status", "active")
+        .maybeSingle();
+
+    return data || null;
+}
+
+// ============================================================
+// 🛒 GUARDA CARRITO (ACTUALIZA ITEMS)
+// ============================================================
+async function saveCart(cartId, items) {
+    const total = items.reduce((a, b) => a + b.subtotal, 0);
+
+    await supabase
+        .from("carts")
+        .update({
+            items,
+            total,
+            updated_at: new Date()
+        })
+        .eq("id", cartId);
+}
+
+// ============================================================
+// 💵 RENDER ITEMS
+// ============================================================
 function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     const cont = $("#checkout-items");
     const totals = $("#checkout-totals");
-
-    cont.innerHTML = `
-        <ul class="checkout-ul" style="padding:0;margin:0;"></ul>
-    `;
-
+    cont.innerHTML = `<ul class="checkout-ul" style="padding:0;margin:0;"></ul>`;
     const ul = cont.querySelector(".checkout-ul");
 
     let subtotal = 0;
 
     cart.forEach((it, i) => {
-
-        // 🔥 FIX SUBTOTAL SEGURO
-        const safeSubtotal = Number(it.subtotal) || 0;
-        subtotal += safeSubtotal;
-
-        const firstBorder = i === 0 ? 'style="border-top:1px solid #ff7600;"' : "";
+        subtotal += it.subtotal;
 
         ul.innerHTML += `
-            <li class="checkout-item" ${firstBorder}>
+            <li class="checkout-item">
                 <div class="checkout-item-info">
-                    <img src="${it.img}" alt="${it.nombre}" class="checkout-item-img">
+                    <img src="${it.img}" class="checkout-item-img">
                     <div class="checkout-item-details">
                         <div class="checkout-item-title">${it.nombre} (${it.size}) ×${it.cantidad}</div>
-                        <div class="checkout-item-desc">${it.desc || "Sin descripción"}</div>
+                        <div class="checkout-item-desc">${it.tipoLabel || ""}</div>
                     </div>
                 </div>
                 <span class="checkout-item-subtotal">
-                    ${safeSubtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+                    ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
                 </span>
             </li>
         `;
     });
 
-    // sistema hover bordes
-    setTimeout(() => {
-        const items = document.querySelectorAll(".checkout-item");
-
-        items.forEach((item, i) => {
-            item.addEventListener("mouseenter", () => {
-                items.forEach(x => x.classList.remove("prev"));
-                if (i > 0) items[i - 1].classList.add("prev");
-            });
-
-            item.addEventListener("mouseleave", () => {
-                items.forEach(x => x.classList.remove("prev"));
-            });
-        });
-    }, 20);
-
     const total = subtotal + envioCosto;
 
     if (metodoEnvio === "retiro") {
         totals.innerHTML = `
-            <div><span>Total:</span>
-            <span class="precio-total" id="precio-total">
-                ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
-            </span></div>
+            <div>
+                <span>Total:</span>
+                <span class="precio-total">${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</span>
+            </div>
         `;
     } else {
         totals.innerHTML = `
@@ -106,15 +117,18 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     return total;
 }
 
-// 🚚 Calcular envío
+// ============================================================
+// 🚚 CÁLCULO DE ENVÍO (OSRM)
+// ============================================================
 async function calcularEnvio(lat, lon) {
     try {
         const res = await fetch(
             `https://router.project-osrm.org/route/v1/driving/${TIENDA_LON},${TIENDA_LAT};${lon},${lat}?overview=false`
         );
+
         const data = await res.json();
-        const distanciaM = data.routes?.[0]?.distance || 0;
-        const km = distanciaM / 1000;
+        const dist = data.routes?.[0]?.distance || 0;
+        const km = dist / 1000;
 
         return Math.round(300 + km * 100);
     } catch {
@@ -122,83 +136,98 @@ async function calcularEnvio(lat, lon) {
     }
 }
 
-// Autocompletado
+// ============================================================
+// 📍 AUTOCOMPLETADO DIRECCIONES
+// ============================================================
 async function buscarDirecciones(q) {
     const res = await fetch(
         `https://nominatim.openstreetmap.org/search?format=json&countrycodes=ar&limit=5&q=${encodeURIComponent(q)}`
     );
+
     return await res.json();
 }
 
-// ⚙️ Principal
+// ============================================================
+// 🚀 MAIN
+// ============================================================
 document.addEventListener("DOMContentLoaded", async () => {
 
+    // --- 1) Usuario ---
     const user = await getUser();
     if (!user) {
-        alert("Usuario no autenticado.");
-        window.location.href = "/productos";
-        return;
+        alert("Debés iniciar sesión para continuar.");
+        return window.location.href = "/login";
     }
 
     let cartId = getCartIdFromQuery();
-    let pedido = null;
+    let activeCart = await loadActiveCart(user.id);
 
-    // =====================================================
-    // SI NO HAY CARTID → CREAR UNO NUEVO
-    // =====================================================
-    if (!cartId) {
+    // ------------------------------------------------------------
+    // 2) SI HAY CARTID EN URL PERO NO EXISTE → CREAR UNO NUEVO
+    // ------------------------------------------------------------
+    if (cartId && !activeCart) {
         const { data: nuevo } = await supabase
             .from("carts")
             .insert([{ user_id: user.id, items: [], status: "active" }])
             .select()
             .single();
 
+        activeCart = nuevo;
         cartId = nuevo.id;
-        pedido = nuevo;
 
         const url = new URL(window.location);
         url.searchParams.set("id", cartId);
         window.history.replaceState({}, "", url);
-    } else {
+    }
 
-        // =====================================================
-        // CARGAR CARRITO EXISTENTE (EVITAR ERROR 409)
-        // =====================================================
-        const { data: cartData, error } = await supabase
-            .from("carts")
-            .select("*")
-            .eq("id", cartId)
-            .eq("user_id", user.id)
-            .maybeSingle();
+    // ------------------------------------------------------------
+    // 3) SI NO HAY CARTID EN URL → USAR EL ACTIVO O CREAR NUEVO
+    // ------------------------------------------------------------
+    if (!cartId) {
+        if (!activeCart) {
+            const { data: nuevo } = await supabase
+                .from("carts")
+                .insert([{ user_id: user.id, items: [], status: "active" }])
+                .select()
+                .single();
 
-        if (error || !cartData) {
-            console.error("Cart error:", error);
-            alert("Carrito inválido. Se generará uno nuevo.");
-            window.location.href = "/productos";
-            return;
+            activeCart = nuevo;
         }
 
-        pedido = cartData;
+        cartId = activeCart.id;
+
+        const url = new URL(window.location);
+        url.searchParams.set("id", cartId);
+        window.history.replaceState({}, "", url);
     }
 
-    // =====================================================
-    // VALIDAR ITEMS
-    // =====================================================
-    let cart = pedido.items || [];
+    // ------------------------------------------------------------
+    // 4) UNIFICAR CARRITO: SI ACTIVE CART VACÍO → MIGRAR LOCALSTORAGE
+    // ------------------------------------------------------------
+    let cart = activeCart.items || [];
 
-    if (!Array.isArray(cart)) cart = [];
+    if (!cart.length) {
+        const local = JSON.parse(localStorage.getItem("pp_cart") || "[]");
 
-    if (cart.length === 0) {
-        alert("Tu carrito está vacío.");
-        window.location.href = "/productos";
-        return;
+        if (local.length) {
+            cart = local;
+            await saveCart(cartId, cart);
+        } else {
+            alert("Tu carrito está vacío.");
+            return window.location.href = "/productos";
+        }
     }
 
+    // ------------------------------------------------------------
+    // 5) RENDER INICIAL
+    // ------------------------------------------------------------
     let metodoEnvio = "retiro";
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto, metodoEnvio);
 
-    // opciones envío
+    // ------------------------------------------------------------
+    // 6) CAMBIO DE MÉTODO DE ENVÍO
+    // ------------------------------------------------------------
     $$(".envio-opcion").forEach(op => {
         op.addEventListener("click", () => {
             $$(".envio-opcion").forEach(x => x.classList.remove("activa"));
@@ -217,22 +246,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    // Autocompletado direcciones
+    // ------------------------------------------------------------
+    // 7) AUTOCOMPLETE DIRECCIONES
+    // ------------------------------------------------------------
     const dirInput = $("#chk-direccion");
-    const sugBox = $("#direccion-sugerencias");
+    const sug = $("#direccion-sugerencias");
     let timer;
 
     dirInput?.addEventListener("input", () => {
         clearTimeout(timer);
         const q = dirInput.value.trim();
 
-        if (q.length < 4) return (sugBox.style.display = "none");
+        if (q.length < 4) return (sug.style.display = "none");
 
         timer = setTimeout(async () => {
             const data = await buscarDirecciones(`${q}, Argentina`);
-            sugBox.innerHTML = "";
+            sug.innerHTML = "";
 
-            if (!data.length) return (sugBox.style.display = "none");
+            if (!data.length) return (sug.style.display = "none");
 
             data.forEach(d => {
                 const div = document.createElement("div");
@@ -240,29 +271,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 div.addEventListener("click", async () => {
                     dirInput.value = d.display_name;
-                    sugBox.style.display = "none";
+                    sug.style.display = "none";
 
                     envioCosto = await calcularEnvio(d.lat, d.lon);
                     total = renderItems(cart, envioCosto, metodoEnvio);
                 });
 
-                sugBox.appendChild(div);
+                sug.appendChild(div);
             });
 
-            sugBox.style.display = "block";
+            sug.style.display = "block";
         }, 400);
     });
 
-    // Pago
+    // ------------------------------------------------------------
+    // 8) MERCADOPAGO
+    // ------------------------------------------------------------
     $("#btn-pagar").addEventListener("click", async () => {
         const nombre = $("#chk-nombre").value.trim();
         const email = $("#chk-email").value.trim();
         const tel = $("#chk-telefono").value.trim();
         const direccion = $("#chk-direccion")?.value.trim() || "";
 
-        if (!nombre || !email || !tel) return alert("Completá nombre, correo y teléfono.");
-        if (metodoEnvio === "envio" && !direccion) return alert("Ingresá tu dirección.");
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert("Correo inválido.");
+        if (!nombre || !email || !tel)
+            return alert("Completá nombre, correo y teléfono.");
+
+        if (metodoEnvio === "envio" && !direccion)
+            return alert("Ingresá tu dirección.");
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+            return alert("Correo inválido.");
 
         $("#checkout-loader").style.display = "block";
 
@@ -281,23 +319,16 @@ document.addEventListener("DOMContentLoaded", async () => {
                         tel,
                         direccion,
                         envio: metodoEnvio,
-                        costoEnvio: envioCosto,
-                    }),
+                        costoEnvio: envioCosto
+                    })
                 }
             );
 
             const data = await res.json();
 
             if (data.init_point) {
-
-                if (!pedido?.id) {
-                    alert("Error interno: carrito sin ID.");
-                    return;
-                }
-
-                await supabase.from("carts").update({ status: "ordered" }).eq("id", pedido.id);
+                await supabase.from("carts").update({ status: "ordered" }).eq("id", cartId);
                 window.location.href = data.init_point;
-
             } else {
                 alert("Error al generar pago.");
             }
@@ -306,5 +337,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
+    // Autofill email si viene del usuario
     if (user?.email) $("#chk-email").value = user.email;
 });
