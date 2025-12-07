@@ -404,38 +404,38 @@
             <li>Por Unidad o en Bulto (10).</li>
           </ul>
 
-          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
+
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="12x25" data-price-unit="400" data-price-bulto="0"
-                data-img="https://jazznube.com.ar/elamaneceronline/images/productos/CINTA%20ESCOLAR%20CHICA.jpg">
+
+              <div class="dropdown-item" data-size="12x25" data-price-paquete="400" data-price-bulto="0"
+                data-img="https://jazznube.com.ar/elamaneceronline/images/productos/CINTA ESCOLAR CHICA.jpg">
                 12x25
               </div>
-              <div class="dropdown-item" data-size="24x50" data-price-unit="500" data-price-bulto="4000"
-                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
+
+              <div class="dropdown-item" data-size="24x50" data-price-paquete="500" data-price-bulto="4000"
+                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/CINTAS ADHESIVAS/cintas de embalaje.jpg">
                 24x50
               </div>
-              <div class="dropdown-item" data-size="48x100" data-price-unit="1400" data-price-bulto="11000"
-                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/CINTAS%20ADHESIVAS/cintas%20de%20embalaje.jpg">
+
+              <div class="dropdown-item" data-size="48x100" data-price-paquete="1400" data-price-bulto="11000"
+                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/Fotos productos papelera para catálogo/CINTAS ADHESIVAS/cintas de embalaje.jpg">
                 48x100
               </div>
+
             </div>
           </div>
 
-          <!-- Dropdown Tipo -->
-          <div class="dropdown" id="tipo-dropdown" style="display: none;">
+          <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
               <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
-            <div class="dropdown-menu">
-              <div class="dropdown-item" data-type="unidad">Por Unidad</div>
-              <div class="dropdown-item" data-type="bulto">Bulto (10)</div>
-            </div>
+            <div class="dropdown-menu"></div>
           </div>
 
           <!-- Cantidad -->
@@ -461,113 +461,125 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sizeDropdown = document.getElementById('size-dropdown');
-      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
-      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
-      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+    document.addEventListener("DOMContentLoaded", () => {
 
-      const tipoDropdown = document.getElementById('tipo-dropdown');
-      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
-      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
-      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+      const sizeDropdown = document.getElementById("size-dropdown");
+      const sizeBtn = sizeDropdown.querySelector(".dropdown-btn");
+      const sizeMenu = sizeDropdown.querySelector(".dropdown-menu");
+      const sizeItems = sizeMenu.querySelectorAll(".dropdown-item");
 
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const decBtn = document.getElementById('decrementar');
-      const incBtn = document.getElementById('incrementar');
-      const totalDisplay = document.querySelector('.total');
-      const productoImg = document.getElementById('producto-img');
+      const tipoDropdown = document.getElementById("tipo-dropdown");
+      const tipoBtn = tipoDropdown.querySelector(".dropdown-btn");
+      const tipoMenu = tipoDropdown.querySelector(".dropdown-menu");
+
+      const cantidadVisual = document.getElementById("cantidad-visual");
+      const decBtn = document.getElementById("decrementar");
+      const incBtn = document.getElementById("incrementar");
+      const totalDisplay = document.querySelector(".total");
+      const productoImg = document.getElementById("producto-img");
 
       let selectedSize = null;
-      let tipo = '';
       let cantidad = 1;
+      let selectedType = "";
 
-      tipoDropdown.style.display = 'none';
+      tipoDropdown.style.display = "none";
 
       function updateTotal() {
-        if (!selectedSize || tipo === '') {
+        if (!selectedSize || !selectedType) {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        let total = 0;
-        if (tipo === 'unidad') total = cantidad * Number(selectedSize.dataset.priceUnit);
-        else if (tipo === 'bulto') total = cantidad * Number(selectedSize.dataset.priceBulto);
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+
+        const price =
+          selectedType === "paquete"
+            ? Number(selectedSize.dataset.pricePaquete)
+            : Number(selectedSize.dataset.priceBulto);
+
+        const total = cantidad * price;
+        totalDisplay.textContent = `Total: $${total.toLocaleString("es-AR")}`;
       }
 
-      // Dropdown Tamaño
-      sizeBtn.addEventListener('click', () => {
-        sizeMenu.classList.toggle('active');
-        sizeBtn.classList.toggle('active');
+      sizeBtn.addEventListener("click", () => {
+        sizeMenu.classList.toggle("active");
+        sizeBtn.classList.toggle("active");
       });
 
       sizeItems.forEach(item => {
-        item.addEventListener('click', () => {
-          sizeItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          sizeBtn.querySelector('.text').textContent = item.textContent;
-          selectedSize = item;
-          productoImg.src = item.dataset.img;
+        item.addEventListener("click", () => {
+          sizeItems.forEach(i => i.classList.remove("selected"));
+          item.classList.add("selected");
 
-          // Mostrar "Seleccioná El Tipo" solo si tiene precio de bulto
-          if (Number(selectedSize.dataset.priceBulto) > 0) {
-            tipoDropdown.style.display = 'block';
-          } else {
-            tipoDropdown.style.display = 'none';
-            tipo = 'unidad';
+          selectedSize = item;
+          sizeBtn.querySelector(".text").textContent = item.textContent;
+
+          if (item.dataset.img) productoImg.src = item.dataset.img;
+
+          selectedType = "";
+          tipoBtn.querySelector(".text").textContent = "Seleccioná El Tipo";
+
+          tipoDropdown.style.display = "block";
+
+          tipoMenu.innerHTML = "";
+
+          const pricePaquete = Number(item.dataset.pricePaquete || 0);
+          const priceBulto = Number(item.dataset.priceBulto || 0);
+
+          if (pricePaquete > 0) {
+            tipoMenu.innerHTML += `<div class="dropdown-item" data-type="paquete">Paquete</div>`;
           }
 
-          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          if (priceBulto > 0) {
+            tipoMenu.innerHTML += `<div class="dropdown-item" data-type="bulto">Bulto</div>`;
+          }
+
+          tipoMenu.querySelectorAll(".dropdown-item").forEach(t => {
+            t.addEventListener("click", () => {
+              tipoMenu.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+              t.classList.add("selected");
+              selectedType = t.dataset.type;
+              tipoBtn.querySelector(".text").textContent = t.textContent;
+              tipoMenu.classList.remove("active");
+              tipoBtn.classList.remove("active");
+              updateTotal();
+            });
+          });
+
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
           updateTotal();
-          sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active');
         });
       });
 
-      // Dropdown Tipo
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
-        tipoBtn.classList.toggle('active');
+      tipoBtn.addEventListener("click", () => {
+        tipoMenu.classList.toggle("active");
+        tipoBtn.classList.toggle("active");
       });
 
-      tipoItems.forEach(item => {
-        item.addEventListener('click', () => {
-          tipoItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          tipoBtn.querySelector('.text').textContent = item.textContent;
-          tipo = item.dataset.type;
-          updateTotal();
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
-        });
-      });
-
-      // Cantidad
-      incBtn.addEventListener('click', () => {
+      incBtn.addEventListener("click", () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
 
-      decBtn.addEventListener('click', () => {
+      decBtn.addEventListener("click", () => {
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
 
-      // Cerrar dropdowns al hacer click afuera
-      document.addEventListener('click', e => {
+      document.addEventListener("click", e => {
         if (!sizeDropdown.contains(e.target)) {
-          sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active');
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
         }
         if (!tipoDropdown.contains(e.target)) {
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
+          tipoMenu.classList.remove("active");
+          tipoBtn.classList.remove("active");
         }
       });
     });
   </script>
+
   <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/ppUniversalCart.js"></script>
 
 

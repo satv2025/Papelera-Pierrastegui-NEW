@@ -408,13 +408,24 @@
               <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
+
             <div class="dropdown-menu">
-              <div class="dropdown-item" data-size="120ml" data-price-x50="2700" data-price-x100="5100"
-                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/vasost2.jpg">120ml</div>
-              <div class="dropdown-item" data-size="180ml" data-price-x50="3500" data-price-x100="6800"
-                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/vasost2.jpg">180ml</div>
-              <div class="dropdown-item" data-size="240ml" data-price-x50="4100" data-price-x100="7500"
-                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/vasost2.jpg">240ml</div>
+
+              <div class="dropdown-item" data-size="120ml" data-price-paquete="2700" data-price-bulto="5100"
+                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/vasost2.jpg">
+                120ml
+              </div>
+
+              <div class="dropdown-item" data-size="180ml" data-price-paquete="3500" data-price-bulto="6800"
+                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/vasost2.jpg">
+                180ml
+              </div>
+
+              <div class="dropdown-item" data-size="240ml" data-price-paquete="4100" data-price-bulto="7500"
+                data-img="https://mediastatic.papelerapierrastegui.com.ar/assets/images/vasost2.jpg">
+                240ml
+              </div>
+
             </div>
           </div>
 
@@ -423,10 +434,7 @@
               <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
-            <div class="dropdown-menu">
-              <div class="dropdown-item" data-type="x50">x50</div>
-              <div class="dropdown-item" data-type="x100">x100</div>
-            </div>
+            <div class="dropdown-menu"></div>
           </div>
 
           <div class="agregar-carrito-cantidad">
@@ -450,103 +458,125 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sizeDropdown = document.getElementById('size-dropdown');
-      const sizeBtn = sizeDropdown.querySelector('.dropdown-btn');
-      const sizeMenu = sizeDropdown.querySelector('.dropdown-menu');
-      const sizeItems = sizeMenu.querySelectorAll('.dropdown-item');
+    document.addEventListener("DOMContentLoaded", () => {
 
-      const tipoDropdown = document.getElementById('tipo-dropdown');
-      const tipoBtn = tipoDropdown.querySelector('.dropdown-btn');
-      const tipoMenu = tipoDropdown.querySelector('.dropdown-menu');
-      const tipoItems = tipoMenu.querySelectorAll('.dropdown-item');
+      const sizeDropdown = document.getElementById("size-dropdown");
+      const sizeBtn = sizeDropdown.querySelector(".dropdown-btn");
+      const sizeMenu = sizeDropdown.querySelector(".dropdown-menu");
+      const sizeItems = sizeMenu.querySelectorAll(".dropdown-item");
 
-      const cantidadVisual = document.getElementById('cantidad-visual');
-      const decBtn = document.getElementById('decrementar');
-      const incBtn = document.getElementById('incrementar');
-      const totalDisplay = document.querySelector('.total');
-      const productoImg = document.getElementById('producto-img');
+      const tipoDropdown = document.getElementById("tipo-dropdown");
+      const tipoBtn = tipoDropdown.querySelector(".dropdown-btn");
+      const tipoMenu = tipoDropdown.querySelector(".dropdown-menu");
+
+      const cantidadVisual = document.getElementById("cantidad-visual");
+      const decBtn = document.getElementById("decrementar");
+      const incBtn = document.getElementById("incrementar");
+      const totalDisplay = document.querySelector(".total");
+      const productoImg = document.getElementById("producto-img");
 
       let selectedSize = null;
-      let tipo = '';
       let cantidad = 1;
+      let selectedType = "";
 
-      tipoDropdown.style.display = 'none';
+      tipoDropdown.style.display = "none";
 
       function updateTotal() {
-        if (!selectedSize || tipo === '') {
+        if (!selectedSize || !selectedType) {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        let total = 0;
-        if (tipo === 'x50') total = cantidad * Number(selectedSize.dataset.priceX50);
-        else if (tipo === 'x100') total = cantidad * Number(selectedSize.dataset.priceX100);
-        totalDisplay.textContent = `Total: $${total.toLocaleString('es-AR')}`;
+
+        const price =
+          selectedType === "paquete"
+            ? Number(selectedSize.dataset.pricePaquete)
+            : Number(selectedSize.dataset.priceBulto);
+
+        const total = cantidad * price;
+        totalDisplay.textContent = `Total: $${total.toLocaleString("es-AR")}`;
       }
 
-      sizeBtn.addEventListener('click', () => {
-        sizeMenu.classList.toggle('active');
-        sizeBtn.classList.toggle('active');
+      sizeBtn.addEventListener("click", () => {
+        sizeMenu.classList.toggle("active");
+        sizeBtn.classList.toggle("active");
       });
 
       sizeItems.forEach(item => {
-        item.addEventListener('click', () => {
-          sizeItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          sizeBtn.querySelector('.text').textContent = item.textContent;
+        item.addEventListener("click", () => {
+          sizeItems.forEach(i => i.classList.remove("selected"));
+          item.classList.add("selected");
+
           selectedSize = item;
-          productoImg.src = item.dataset.img;
-          tipoDropdown.style.display = 'block';
-          tipo = '';
-          tipoItems.forEach(i => i.classList.remove('selected'));
-          tipoBtn.querySelector('.text').textContent = "Seleccioná El Tipo";
+          sizeBtn.querySelector(".text").textContent = item.textContent;
+
+          if (item.dataset.img) productoImg.src = item.dataset.img;
+
+          selectedType = "";
+          tipoBtn.querySelector(".text").textContent = "Seleccioná El Tipo";
+
+          tipoDropdown.style.display = "block";
+
+          tipoMenu.innerHTML = "";
+
+          const pricePaquete = Number(item.dataset.pricePaquete || 0);
+          const priceBulto = Number(item.dataset.priceBulto || 0);
+
+          if (pricePaquete > 0) {
+            tipoMenu.innerHTML += `<div class="dropdown-item" data-type="paquete">Paquete</div>`;
+          }
+
+          if (priceBulto > 0) {
+            tipoMenu.innerHTML += `<div class="dropdown-item" data-type="bulto">Bulto</div>`;
+          }
+
+          tipoMenu.querySelectorAll(".dropdown-item").forEach(t => {
+            t.addEventListener("click", () => {
+              tipoMenu.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+              t.classList.add("selected");
+              selectedType = t.dataset.type;
+              tipoBtn.querySelector(".text").textContent = t.textContent;
+              tipoMenu.classList.remove("active");
+              tipoBtn.classList.remove("active");
+              updateTotal();
+            });
+          });
+
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
           updateTotal();
-          sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active');
         });
       });
 
-      tipoBtn.addEventListener('click', () => {
-        tipoMenu.classList.toggle('active');
-        tipoBtn.classList.toggle('active');
+      tipoBtn.addEventListener("click", () => {
+        tipoMenu.classList.toggle("active");
+        tipoBtn.classList.toggle("active");
       });
 
-      tipoItems.forEach(item => {
-        item.addEventListener('click', () => {
-          tipoItems.forEach(i => i.classList.remove('selected'));
-          item.classList.add('selected');
-          tipoBtn.querySelector('.text').textContent = item.textContent;
-          tipo = item.dataset.type;
-          updateTotal();
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
-        });
-      });
-
-      incBtn.addEventListener('click', () => {
+      incBtn.addEventListener("click", () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
 
-      decBtn.addEventListener('click', () => {
+      decBtn.addEventListener("click", () => {
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
         updateTotal();
       });
 
-      document.addEventListener('click', e => {
+      document.addEventListener("click", e => {
         if (!sizeDropdown.contains(e.target)) {
-          sizeMenu.classList.remove('active');
-          sizeBtn.classList.remove('active');
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
         }
         if (!tipoDropdown.contains(e.target)) {
-          tipoMenu.classList.remove('active');
-          tipoBtn.classList.remove('active');
+          tipoMenu.classList.remove("active");
+          tipoBtn.classList.remove("active");
         }
       });
     });
   </script>
+
   <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/ppUniversalCart.js"></script>
 
 

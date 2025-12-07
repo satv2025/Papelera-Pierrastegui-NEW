@@ -404,19 +404,51 @@
             <li>Presentaciones: por paquete (x100) o por bulto según el tamaño.</li>
           </ul>
 
-          <!-- Dropdown Tamaño -->
           <div class="dropdown" id="size-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná el Tamaño</span>
+              <span class="text">Seleccioná El Tamaño</span>
               <span class="arrow">▼</span>
             </button>
-            <div class="dropdown-menu"></div>
+
+            <div class="dropdown-menu">
+
+              <div class="dropdown-item" data-size="(E) 30x40" data-price-paquete="750" data-price-bulto="12600"
+                data-img="bolsa camiseta foto.jpg">(E) 30x40</div>
+
+              <div class="dropdown-item" data-size="(E) 40x50" data-price-paquete="1200" data-price-bulto="21900"
+                data-img="bolsa camiseta foto.jpg">(E) 40x50</div>
+
+              <div class="dropdown-item" data-size="(R) 20x30" data-price-paquete="900" data-price-bulto="17000"
+                data-img="bolsa camiseta foto.jpg">(R) 20x30</div>
+
+              <div class="dropdown-item" data-size="(R) 30x40" data-price-paquete="1200" data-price-bulto="21500"
+                data-img="bolsa camiseta foto.jpg">(R) 30x40</div>
+
+              <div class="dropdown-item" data-size="(R) 40x50" data-price-paquete="1350" data-price-bulto="23500"
+                data-img="bolsa camiseta foto.jpg">(R) 40x50</div>
+
+              <div class="dropdown-item" data-size="(R) 45x60" data-price-paquete="2500" data-price-bulto="42000"
+                data-img="bolsa camiseta foto.jpg">(R) 45x60</div>
+
+              <div class="dropdown-item" data-size="(R) 45x60 Ciudad Negra" data-price-paquete="3100"
+                data-price-bulto="27000" data-img="bolsas ciudad.jpg">(R) 45x60 Ciudad Negra</div>
+
+              <div class="dropdown-item" data-size="(R) 50x60" data-price-paquete="2700" data-price-bulto="46600"
+                data-img="bolsa camiseta foto.jpg">(R) 50x60</div>
+
+              <div class="dropdown-item" data-size="(R) 50x70" data-price-paquete="3900" data-price-bulto="33000"
+                data-img="bolsa camiseta foto.jpg">(R) 50x70</div>
+
+              <div class="dropdown-item" data-size="(R) 60x80" data-price-paquete="5800" data-price-bulto="25900"
+                data-img="bolsa camiseta foto.jpg">(R) 60x80</div>
+
+            </div>
           </div>
 
-          <!-- Dropdown Tipo -->
-          <div class="dropdown" id="tipo-dropdown" style="display:none;">
+          <!-- Tipo -->
+          <div class="dropdown" id="tipo-dropdown">
             <button class="dropdown-btn">
-              <span class="text">Seleccioná el Tipo</span>
+              <span class="text">Seleccioná El Tipo</span>
               <span class="arrow">▼</span>
             </button>
             <div class="dropdown-menu"></div>
@@ -446,123 +478,111 @@
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
-      // 📦 Datos del producto
-      const productos = [
-        { size: "(E) 30x40", precioPaquete: 750, paquetesPorBulto: 20, precioBulto: 12600, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(E) 40x50", precioPaquete: 1200, paquetesPorBulto: 20, precioBulto: 21900, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 20x30", precioPaquete: 900, paquetesPorBulto: 20, precioBulto: 17000, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 30x40", precioPaquete: 1200, paquetesPorBulto: 20, precioBulto: 21500, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 40x50", precioPaquete: 1350, paquetesPorBulto: 20, precioBulto: 23500, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 45x60", precioPaquete: 2500, paquetesPorBulto: 20, precioBulto: 42000, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 45x60 Ciudad Negra", precioPaquete: 3100, paquetesPorBulto: 10, precioBulto: 27000, img: "bolsas%20ciudad.jpg" },
-        { size: "(R) 50x60", precioPaquete: 2700, paquetesPorBulto: 20, precioBulto: 46600, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 50x70", precioPaquete: 3900, paquetesPorBulto: 10, precioBulto: 33000, img: "bolsa%20camiseta%20foto.jpg" },
-        { size: "(R) 60x80", precioPaquete: 5800, paquetesPorBulto: 5, precioBulto: 25900, img: "bolsa%20camiseta%20foto.jpg" },
-      ];
-
-      const baseURL = "https://mediastatic.papelerapierrastegui.com.ar/assets/images/Fotos%20productos%20papelera%20para%20cat%C3%A1logo/BOLSAS%20CAMISETA/";
-
-      // 🔗 Elementos del DOM
       const sizeDropdown = document.getElementById("size-dropdown");
       const sizeBtn = sizeDropdown.querySelector(".dropdown-btn");
       const sizeMenu = sizeDropdown.querySelector(".dropdown-menu");
+      const sizeItems = sizeMenu.querySelectorAll(".dropdown-item");
 
       const tipoDropdown = document.getElementById("tipo-dropdown");
       const tipoBtn = tipoDropdown.querySelector(".dropdown-btn");
       const tipoMenu = tipoDropdown.querySelector(".dropdown-menu");
 
-      const productoImg = document.getElementById("producto-img");
       const cantidadVisual = document.getElementById("cantidad-visual");
+      const decBtn = document.getElementById("decrementar");
+      const incBtn = document.getElementById("incrementar");
       const totalDisplay = document.querySelector(".total");
+      const productoImg = document.getElementById("producto-img");
 
-      let selected = null;
-      let tipo = "";
+      let selectedSize = null;
       let cantidad = 1;
+      let selectedType = "";
 
-      // 🧩 Generar lista de tamaños dinámicamente
-      productos.forEach(p => {
-        const item = document.createElement("div");
-        item.className = "dropdown-item";
-        item.textContent = p.size;
-        item.addEventListener("click", () => {
-          selected = p;
-          tipo = "";
-          cantidad = 1;
-          cantidadVisual.textContent = 1;
-          productoImg.src = baseURL + p.img;
-          sizeBtn.querySelector(".text").textContent = p.size;
+      tipoDropdown.style.display = "none";
 
-          tipoDropdown.style.display = "block";
-          tipoBtn.querySelector(".text").textContent = "Seleccioná el Tipo";
-          tipoMenu.innerHTML = `
-          <div class="dropdown-item" data-type="paquete">
-            Por Paquete</div>
-          <div class="dropdown-item" data-type="bulto">
-            Bulto (${p.paquetesPorBulto})</div>
-        `;
-          totalDisplay.textContent = "Total: $0";
-
-          // cerrar menú tamaño al elegir opción
-          sizeMenu.classList.remove("active");
-          sizeBtn.classList.remove("active");
-
-          tipoMenu.querySelectorAll(".dropdown-item").forEach(op => {
-            op.addEventListener("click", () => {
-              tipo = op.dataset.type;
-              tipoBtn.querySelector(".text").textContent = op.textContent.split("—")[0].trim();
-              actualizarTotal();
-              tipoMenu.classList.remove("active");
-              tipoBtn.classList.remove("active");
-            });
-          });
-        });
-        sizeMenu.appendChild(item);
-      });
-
-      // 💰 Cálculo del total
-      function actualizarTotal() {
-        if (!selected || !tipo) {
+      function updateTotal() {
+        if (!selectedSize || !selectedType) {
           totalDisplay.textContent = "Total: $0";
           return;
         }
-        const precio = tipo === "paquete" ? selected.precioPaquete : selected.precioBulto;
-        const total = precio * cantidad;
+
+        const price =
+          selectedType === "paquete"
+            ? Number(selectedSize.dataset.pricePaquete)
+            : Number(selectedSize.dataset.priceBulto);
+
+        const total = cantidad * price;
         totalDisplay.textContent = `Total: $${total.toLocaleString("es-AR")}`;
       }
 
-      // ➕➖ Control de cantidad
-      document.getElementById("incrementar").addEventListener("click", () => {
+      sizeBtn.addEventListener("click", () => {
+        sizeMenu.classList.toggle("active");
+        sizeBtn.classList.toggle("active");
+      });
+
+      sizeItems.forEach(item => {
+        item.addEventListener("click", () => {
+          sizeItems.forEach(i => i.classList.remove("selected"));
+          item.classList.add("selected");
+
+          selectedSize = item;
+          sizeBtn.querySelector(".text").textContent = item.textContent;
+
+          if (item.dataset.img) productoImg.src = item.dataset.img;
+
+          selectedType = "";
+          tipoBtn.querySelector(".text").textContent = "Seleccioná El Tipo";
+
+          tipoDropdown.style.display = "block";
+
+          tipoMenu.innerHTML = "";
+
+          const pricePaquete = Number(item.dataset.pricePaquete || 0);
+          const priceBulto = Number(item.dataset.priceBulto || 0);
+
+          if (pricePaquete > 0) {
+            tipoMenu.innerHTML += `<div class="dropdown-item" data-type="paquete">Paquete</div>`;
+          }
+
+          if (priceBulto > 0) {
+            tipoMenu.innerHTML += `<div class="dropdown-item" data-type="bulto">Bulto</div>`;
+          }
+
+          tipoMenu.querySelectorAll(".dropdown-item").forEach(t => {
+            t.addEventListener("click", () => {
+              tipoMenu.querySelectorAll(".dropdown-item").forEach(i => i.classList.remove("selected"));
+              t.classList.add("selected");
+              selectedType = t.dataset.type;
+              tipoBtn.querySelector(".text").textContent = t.textContent;
+              tipoMenu.classList.remove("active");
+              tipoBtn.classList.remove("active");
+              updateTotal();
+            });
+          });
+
+          sizeMenu.classList.remove("active");
+          sizeBtn.classList.remove("active");
+          updateTotal();
+        });
+      });
+
+      tipoBtn.addEventListener("click", () => {
+        tipoMenu.classList.toggle("active");
+        tipoBtn.classList.toggle("active");
+      });
+
+      incBtn.addEventListener("click", () => {
         cantidad++;
         cantidadVisual.textContent = cantidad;
-        actualizarTotal();
+        updateTotal();
       });
-      document.getElementById("decrementar").addEventListener("click", () => {
+
+      decBtn.addEventListener("click", () => {
         if (cantidad > 1) cantidad--;
         cantidadVisual.textContent = cantidad;
-        actualizarTotal();
+        updateTotal();
       });
 
-      // 🎛️ Dropdowns con flechas independientes
-      sizeBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isActive = sizeMenu.classList.toggle("active");
-        sizeBtn.classList.toggle("active", isActive);
-        // Cerrar el otro
-        tipoMenu.classList.remove("active");
-        tipoBtn.classList.remove("active");
-      });
-
-      tipoBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const isActive = tipoMenu.classList.toggle("active");
-        tipoBtn.classList.toggle("active", isActive);
-        // Cerrar el otro
-        sizeMenu.classList.remove("active");
-        sizeBtn.classList.remove("active");
-      });
-
-      // 🖱️ Cerrar ambos al hacer clic fuera
-      document.addEventListener("click", (e) => {
+      document.addEventListener("click", e => {
         if (!sizeDropdown.contains(e.target)) {
           sizeMenu.classList.remove("active");
           sizeBtn.classList.remove("active");
