@@ -34,7 +34,11 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
     let subtotal = 0;
 
     cart.forEach((it, i) => {
-        subtotal += it.subtotal;
+
+        // 🔥 FIX SUBTOTAL SEGURO
+        const safeSubtotal = Number(it.subtotal) || 0;
+        subtotal += safeSubtotal;
+
         const firstBorder = i === 0 ? 'style="border-top:1px solid #ff7600;"' : "";
 
         ul.innerHTML += `
@@ -47,7 +51,7 @@ function renderItems(cart, envioCosto = 0, metodoEnvio = "retiro") {
                     </div>
                 </div>
                 <span class="checkout-item-subtotal">
-                    ${it.subtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
+                    ${safeSubtotal.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}
                 </span>
             </li>
         `;
@@ -138,9 +142,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let cartId = getCartIdFromQuery();
     let pedido = null;
 
-    // ============================
-    //  SI NO HAY CARTID → CREAR UNO NUEVO
-    // ============================
+    // SI NO HAY CART ID → CREAR UNO NUEVO
     if (!cartId) {
         const { data: nuevo } = await supabase
             .from("carts")
@@ -151,7 +153,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         cartId = nuevo.id;
         pedido = nuevo;
 
-        // poner id en URL recién ahora
         const url = new URL(window.location);
         url.searchParams.set("id", cartId);
         window.history.replaceState({}, "", url);
@@ -171,37 +172,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         pedido = cartData;
     }
 
-    // ============================
-    // CARRITO VACÍO → CREAR UNO NUEVO (URL NUEVA)
-    // ============================
     let cart = pedido.items || [];
 
     if (!cart.length) {
-        await supabase.from("carts").delete().eq("id", cartId);
-
-        const { data: nuevoCart } = await supabase
-            .from("carts")
-            .insert([{ user_id: user.id, items: [], status: "active" }])
-            .select()
-            .single();
-
-        cartId = nuevoCart.id;
-        pedido = nuevoCart;
-
-        const url = new URL(window.location);
-        url.searchParams.set("id", cartId);
-        window.history.replaceState({}, "", url);
-
-        const localCart = JSON.parse(localStorage.getItem("cart") || "[]");
-
-        if (localCart.length) {
-            await supabase.from("carts").update({ items: localCart }).eq("id", cartId);
-            cart = localCart;
-        } else {
-            alert("Tu carrito está vacío.");
-            window.location.href = "/productos";
-            return;
-        }
+        alert("Tu carrito está vacío.");
+        window.location.href = "/productos";
+        return;
     }
 
     let metodoEnvio = "retiro";
