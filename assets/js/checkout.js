@@ -132,6 +132,7 @@ async function buscarDirecciones(q) {
 
 // ⚙️ Principal
 document.addEventListener("DOMContentLoaded", async () => {
+
     const user = await getUser();
     if (!user) {
         alert("Usuario no autenticado.");
@@ -142,7 +143,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     let cartId = getCartIdFromQuery();
     let pedido = null;
 
-    // SI NO HAY CART ID → CREAR UNO NUEVO
+    // =====================================================
+    // SI NO HAY CARTID → CREAR UNO NUEVO
+    // =====================================================
     if (!cartId) {
         const { data: nuevo } = await supabase
             .from("carts")
@@ -157,24 +160,35 @@ document.addEventListener("DOMContentLoaded", async () => {
         url.searchParams.set("id", cartId);
         window.history.replaceState({}, "", url);
     } else {
-        const { data: cartData } = await supabase
+
+        // =====================================================
+        // CARGAR CARRITO EXISTENTE (EVITAR ERROR 409)
+        // =====================================================
+        const { data: cartData, error } = await supabase
             .from("carts")
             .select("*")
             .eq("id", cartId)
             .eq("user_id", user.id)
-            .single();
+            .maybeSingle();
 
-        if (!cartData) {
-            alert("Carrito inválido.");
+        if (error || !cartData) {
+            console.error("Cart error:", error);
+            alert("Carrito inválido. Se generará uno nuevo.");
+            window.location.href = "/productos";
             return;
         }
 
         pedido = cartData;
     }
 
+    // =====================================================
+    // VALIDAR ITEMS
+    // =====================================================
     let cart = pedido.items || [];
 
-    if (!cart.length) {
+    if (!Array.isArray(cart)) cart = [];
+
+    if (cart.length === 0) {
         alert("Tu carrito está vacío.");
         window.location.href = "/productos";
         return;
@@ -275,8 +289,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             const data = await res.json();
 
             if (data.init_point) {
+
+                if (!pedido?.id) {
+                    alert("Error interno: carrito sin ID.");
+                    return;
+                }
+
                 await supabase.from("carts").update({ status: "ordered" }).eq("id", pedido.id);
                 window.location.href = data.init_point;
+
             } else {
                 alert("Error al generar pago.");
             }
