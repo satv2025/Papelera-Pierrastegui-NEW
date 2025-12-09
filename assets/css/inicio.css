@@ -18,6 +18,10 @@
   padding: 0;
 }
 
+div#todos {
+  margin-top: 9em;
+}
+
 .wp:hover {
   filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
 }
@@ -470,7 +474,7 @@ body::selection {
 
 /* Nuevo panel de categorías */
 .main-navbar {
-  background-color: #ffffff00;
+  background-color: #ffffff;
   position: relative;
   margin: 2em 0 2em 31em;
   width: 100%;
@@ -484,11 +488,13 @@ body::selection {
   margin-top: 0em;
   border-bottom: 3px solid #ff7600;
   box-shadow: 0 4px 10px #ff7600;
+  z-index: 1000;
 }
 
 .nav-items {
   display: flex;
   flex-wrap: wrap;
+  z-index: 100000000;
 }
 
 .nav-item {
