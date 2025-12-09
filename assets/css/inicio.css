@@ -851,8 +851,9 @@ img.icon-right:Hover {
   height: 65px;
   transition: border-color 0.3s ease;
   position: relative;
-  top: 2.9em;
+  top: 2.6em;
   left: -3.8em;
+  overflow: visible;
 }
 
 /* Hover en el contenedor para cambiar borde de la imagen */
