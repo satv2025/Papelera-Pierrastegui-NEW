@@ -186,54 +186,174 @@ header {
     border-radius: 0.3em;
 }
 
-/* ========================= */
-/* 🔸 ITEMS BASE 🔸 */
-/* ========================= */
-
 .checkout-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em 0;
+    flex-wrap: nowrap;
+    gap: 0.8em;
+    cursor: pointer;
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 0.3em;
     border-bottom: 1px solid #ff7600;
-    padding: 22px 0;
+    color: #ff7600;
+}
+
+.checkout-item img {
+    border: none;
+    outline: none !important;
+}
+
+.checkout-item:hover {
+    background: #ff7600;
+}
+
+.checkout-item:hover img {
+    background: #fff;
+}
+
+.checkout-item img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 0.3em;
+}
+
+.checkout-item-info {
+    flex: 1;
+    min-width: 150px;
+    margin-left: 1em;
+}
+
+input.checkout-input {
+    width: 100%;
+    border: 2px solid #ff7600;
+    padding: 0.7em;
+    border-radius: 0.3em;
+    margin-bottom: 0.8em;
+    font-weight: 700;
+    color: #ff7600;
+    background: #fff;
+}
+
+.checkout-input::placeholder {
+    color: #ff7600;
+}
+
+#direccion-container {
+    margin-top: 1em;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 1em;
+    background: #ff7600;
+    color: #fff;
+    border: none;
+    border-radius: 0.3em;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.checkout-btn:hover {
+    background: #ffc52f;
+    color: #000;
+}
+
+/* ========================= */
+/* 🔸 ENVÍO 🔸 */
+/* ========================= */
+.envio-opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: start;
+}
+
+.envio-opcion {
+    border: 3px solid #ff7600;
+    border-radius: 0.3em;
+    padding: 1em;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: 1em;
-    padding-right: 2em;
-    padding-bottom: 2em;
-    position: relative;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    width: 100%;
+    max-width: 350px;
 }
 
-/* Primer item con borde superior */
-.checkout-item:first-child {
-    border-top: 1px solid #ff7600;
-}
-
-/* 🔥 EFECTO HOVER SIN BORDES DOBLES 🔥 */
-.checkout-item:hover {
+.envio-opcion:hover {
     background: #ff7600;
+}
+
+.envio-opcion:hover span.retiro {
     color: #fff;
-    border-top: 1px solid #ff7600 !important;
-    border-bottom: none !important;
 }
 
-/* El ítem anterior pierde border-bottom mientras el siguiente está en hover */
-.previous-active {
-    border-bottom: none !important;
-}
-
-/* Colores al hacer hover */
-.checkout-item:hover .checkout-item-title,
-.checkout-item:hover .checkout-item-desc,
-.checkout-item:hover .checkout-item-info,
-.checkout-item:hover .checkout-item-subtotal {
+.envio-opcion.activa,
+.envio-opcion.activa span.retiro,
+.envio-opcion.activa span.envio {
+    background: #ff7600;
     color: #fff !important;
 }
 
-/* Imagen */
-.checkout-item-img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
+.envio-opcion span.retiro {
+    color: #ff7600;
+}
+
+.envio-opcion span.envio {
+    color: #007bff;
+}
+
+.envio-opcion span.gratis {
+    color: #28a745;
+}
+
+/* ========================= */
+/* 🔸 OTROS 🔸 */
+/* ========================= */
+.aviso-arg {
+    background: #fff;
+    border: 2px solid #ff7600;
+    padding: .7em;
     border-radius: 0.3em;
+    margin-bottom: 1em;
+    color: #ff7600;
+    font-weight: 700;
+    text-align: center;
+}
+
+.direccion-wrapper {
+    position: relative;
+}
+
+#direccion-sugerencias {
+    border: 2px solid #ff7600;
+    border-radius: 0.3em;
+    margin-top: .3em;
+    background: #fff;
+    max-height: 180px;
+    overflow-y: auto;
+    display: none;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+#direccion-sugerencias div {
+    padding: .5em .7em;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#direccion-sugerencias div:hover {
+    background: #fff5eb;
 }
 
 /* ========================= */
@@ -321,10 +441,62 @@ header {
     }
 }
 
-/* =============================================== */
-/* 🔥🔥🔥 FIX RESPONSIVE FINAL (NO MODIFICA TU CSS) 🔥🔥🔥 */
-/* =============================================== */
+/* ========================= */
+/* 🔸 ITEMS BASE 🔸 */
+/* ========================= */
+.checkout-item {
+    border-bottom: 1px solid #ff7600;
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1em;
+    padding-right: 2em;
+    padding-bottom: 2em;
+}
 
+.checkout-item:first-child {
+    border-top: 1px solid #ff7600;
+}
+
+.checkout-item:hover {
+    border-top: 1px solid #ff7600 !important;
+    background: #ff7600;
+    color: #fff;
+}
+
+.checkout-item.prev {
+    border-bottom: none !important;
+}
+
+.checkout-item:hover .checkout-item-title {
+    color: #fff !important;
+}
+
+.checkout-item:hover .checkout-item-desc {
+    color: #fff !important;
+}
+
+.checkout-item:hover .checkout-item-info {
+    color: #fff !important;
+}
+
+.checkout-item:hover .checkout-item-subtotal {
+    color: #fff !important;
+}
+
+.checkout-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 0.3em;
+}
+
+/* ==================================================
+   🔥🔥🔥 FIX RESPONSIVE FINAL (NO MODIFICA TU CSS) 🔥🔥🔥
+   ================================================== */
+
+/* Evita que el header explote por el margin-left gigante */
 @media (max-width: 1400px) {
     #pp-logo {
         margin-left: 0 !important;
@@ -359,4 +531,29 @@ header {
     html {
         overflow-x: hidden !important;
     }
+}
+
+/* ========================= */
+/* 🔥 FIX HOVER ITEMS SIN BORDES DOBLES 🔥 */
+/* ========================= */
+
+/* El ítem anterior al hover pierde el borde */
+.previous-active {
+    border-bottom: none !important;
+}
+
+/* El ítem en hover gana top border y no muestra bottom */
+.checkout-item:hover {
+    border-top: 1px solid #ff7600 !important;
+    border-bottom: none !important;
+    background: #ff7600;
+    color: #fff;
+}
+
+/* Colorear contenido al hacer hover */
+.checkout-item:hover .checkout-item-title,
+.checkout-item:hover .checkout-item-desc,
+.checkout-item:hover .checkout-item-info,
+.checkout-item:hover .checkout-item-subtotal {
+    color: #fff !important;
 }
