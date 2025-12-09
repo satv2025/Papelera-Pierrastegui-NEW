@@ -152,7 +152,6 @@ async function buscarDirecciones(q) {
 // ============================================================
 document.addEventListener("DOMContentLoaded", async () => {
 
-    // --- 1) Usuario ---
     const user = await getUser();
     if (!user) {
         alert("Debés iniciar sesión para continuar.");
@@ -162,9 +161,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     let cartId = getCartIdFromQuery();
     let activeCart = await loadActiveCart(user.id);
 
-    // ------------------------------------------------------------
-    // 2) SI HAY CARTID EN URL PERO NO EXISTE → CREAR UNO NUEVO
-    // ------------------------------------------------------------
     if (cartId && !activeCart) {
         const { data: nuevo } = await supabase
             .from("carts")
@@ -180,9 +176,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.history.replaceState({}, "", url);
     }
 
-    // ------------------------------------------------------------
-    // 3) SI NO HAY CARTID EN URL → USAR EL ACTIVO O CREAR NUEVO
-    // ------------------------------------------------------------
     if (!cartId) {
         if (!activeCart) {
             const { data: nuevo } = await supabase
@@ -201,9 +194,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.history.replaceState({}, "", url);
     }
 
-    // ------------------------------------------------------------
-    // 4) UNIFICAR CARRITO: SI ACTIVE CART VACÍO → MIGRAR LOCALSTORAGE
-    // ------------------------------------------------------------
     let cart = activeCart.items || [];
 
     if (!cart.length) {
@@ -218,16 +208,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // ------------------------------------------------------------
-    // 5) RENDER INICIAL
-    // ------------------------------------------------------------
     let metodoEnvio = "retiro";
     let envioCosto = 0;
     let total = renderItems(cart, envioCosto, metodoEnvio);
 
-    // ------------------------------------------------------------
-    // 6) CAMBIO DE MÉTODO DE ENVÍO
-    // ------------------------------------------------------------
     $$(".envio-opcion").forEach(op => {
         op.addEventListener("click", () => {
             $$(".envio-opcion").forEach(x => x.classList.remove("activa"));
@@ -246,9 +230,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     });
 
-    // ------------------------------------------------------------
-    // 7) AUTOCOMPLETE DIRECCIONES
-    // ------------------------------------------------------------
     const dirInput = $("#chk-direccion");
     const sug = $("#direccion-sugerencias");
     let timer;
@@ -284,9 +265,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }, 400);
     });
 
-    // ------------------------------------------------------------
-    // 8) MERCADOPAGO
-    // ------------------------------------------------------------
     $("#btn-pagar").addEventListener("click", async () => {
         const nombre = $("#chk-nombre").value.trim();
         const email = $("#chk-email").value.trim();
@@ -337,6 +315,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Autofill email si viene del usuario
     if (user?.email) $("#chk-email").value = user.email;
+
+    // ------------------------------------------------------------
+    // 9) FIX DE BORDES ENTRE ITEMS (EFECTO SUAVE)
+    // ------------------------------------------------------------
+    setTimeout(() => {
+        const items = document.querySelectorAll(".checkout-item");
+
+        items.forEach((li, i, arr) => {
+            li.addEventListener("mouseenter", () => {
+                if (i > 0) arr[i - 1].classList.add("previous-active");
+            });
+
+            li.addEventListener("mouseleave", () => {
+                if (i > 0) arr[i - 1].classList.remove("previous-active");
+            });
+        });
+    }, 300);
 });
