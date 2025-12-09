@@ -18,8 +18,19 @@
   padding: 0;
 }
 
-div#todos {
-  margin-top: 9em;
+.christmas-container {
+  margin-top: 6.8em;
+  position: absolute;
+  margin-left: 38em;
+  z-index: 2000;
+}
+
+.christmas-container iconify-icon {
+  font-size: 4em !important;
+}
+
+iconify-icon.santa {
+  margin-left: 0.8em;
 }
 
 .wp:hover {
