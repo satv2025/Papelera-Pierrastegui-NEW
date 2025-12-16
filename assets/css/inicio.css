@@ -19,18 +19,18 @@
 }
 
 .christmas-container {
-  margin-top: 6.8em;
   position: absolute;
-  margin-left: 38em;
   z-index: 2000;
+  margin-top: -0.6em;
+  margin-left: -4em;
 }
 
 .christmas-container iconify-icon {
-  font-size: 4em !important;
+  font-size: 3.2em !important;
 }
 
 iconify-icon.santa {
-  margin-left: 0.8em;
+  margin-left: 0.3em;
 }
 
 .wp:hover {
