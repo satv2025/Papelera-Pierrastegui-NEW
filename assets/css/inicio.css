@@ -572,7 +572,14 @@ body::selection {
   min-width: 220px;
   text-transform: capitalize;
   border: 3px solid #ff7600;
+
+  /* Ajuste automático + límite */
+  max-height: 12em;
+  /* límite superior */
+  overflow-y: auto;
+  /* solo aparece scroll si el contenido supera el max-height */
 }
+
 
 .dropdown-submenu:hover .submenu {
   display: block;
@@ -1167,4 +1174,1009 @@ img.icon-right:Hover {
     right: 12px;
     top: 0.5em;
   }
+}
+
+/* --- Nuevo --- */
+/* ===== Estilos Generales - Desktop ===== */
+.pp-main-navbar,
+.pp-search-bar,
+.pp-nav-links {
+  display: flex;
+  /* visibles en desktop */
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Estilos base para desktop */
+.pp-name {
+  display: block;
+  text-align: center;
+  margin-left: 4em;
+  /* válido en desktop */
+  margin-top: 0;
+  /* opcional */
+  margin-bottom: 0;
+  /* opcional */
+}
+
+/* Sidebar - oculto por defecto en desktop */
+#pp-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100vh;
+  background-color: #ccc;
+  color: #3b2d00;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 1500;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+  display: none;
+  /* oculto en desktop */
+}
+
+/* Mostrar sidebar cuando tenga la clase 'open' */
+#pp-sidebar.open {
+  left: 0;
+  display: block;
+  /* visible en móvil */
+}
+
+#pp-sidebar.open~#page-scroll {
+  overflow: hidden !important;
+}
+
+/* Botón cerrar */
+#pp-close-btn {
+  font-size: 28px;
+  cursor: pointer;
+  color: #3b2d00;
+  margin-bottom: 20px;
+  user-select: none;
+  text-align: right;
+}
+
+/* Links del menú */
+.pp-nav-items a {
+  color: #3b2d00;
+  text-decoration: none;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+}
+
+/* Hover en enlaces */
+.pp-nav-items a:hover {
+  background-color: #e0d9b8;
+}
+
+/* Dropdown y submenús en móvil */
+.pp-dropdown-menu,
+.pp-submenu {
+  display: none;
+  padding-left: 15px;
+  border-left: 2px solid #c9c18a;
+  margin-top: 5px;
+}
+
+/* Mostrar en mobile cuando tengan la clase 'open' */
+.pp-dropdown-menu.open,
+.pp-submenu.open {
+  display: block;
+}
+
+/* Estilo para triggers de dropdown en móvil */
+.pp-nav-items .pp-dropdown-trigger {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 8px 10px;
+  user-select: none;
+}
+
+/* Opcionales: iconos o flechas en triggers */
+.pp-dropdown-trigger span {
+  font-size: 1em;
+}
+
+/* Estilos para enlaces en submenús en móvil */
+.pp-submenu a {
+  display: block;
+  padding: 0.3rem 0.7rem;
+  color: #3b2d00;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+/* Hover en submenús en móvil */
+.pp-submenu a:hover {
+  background-color: #e0d9b8;
+}
+
+/* Responsivo - para pantallas <= 992px */
+@media (max-width: 992px) {
+
+  /* Ocultar navbar, barra de búsqueda, etc. */
+  .pp-main-navbar,
+  .pp-search-bar,
+  .pp-nav-links,
+  .main-navbar,
+  .search-bar,
+  #red,
+  footer {
+    display: none !important;
+  }
+
+  .pp-logo-svg {
+    opacity: 0;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: relative;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3b2d00;
+    padding: 0.3em;
+    width: auto;
+    height: auto;
+  }
+
+
+  /* Estado sticky cuando el sidebar está abierto */
+  .menu-toggle.sticky-mode {
+    position: sticky;
+    top: 1rem;
+  }
+
+  #pp-logo span {
+    margin-top: -2.5em;
+    margin-bottom: 0.7em;
+    margin-left: 4.8em;
+  }
+
+  /* Sidebar en móvil */
+  /* Sidebar - oculto por defecto en desktop */
+  #pp-sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: #ccc;
+    color: #3b2d00;
+    overflow-y: auto;
+    transition: left 0.3s ease;
+    z-index: 1500;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+    font-family: Arial, sans-serif;
+    display: none;
+  }
+
+  /* Mostrar sidebar cuando tenga la clase 'open' */
+  #pp-sidebar.open {
+    left: 0;
+    display: block;
+  }
+
+
+  /* Botón cerrar en móvil */
+  #pp-close-btn {
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #3b2d00;
+    text-align: right;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+
+  /* Estilos para los submenús en móvil */
+  .dropdown-submenu {
+    margin-bottom: 1rem;
+  }
+
+  /* Trigger para submenús en móvil */
+  .dropdown-submenu>a.submenu-toggle {
+    display: block;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem 0.7rem;
+    border-radius: 4px;
+    user-select: none;
+  }
+
+  /* Hover en trigger de submenús */
+  .dropdown-submenu>a.submenu-toggle:hover {
+    background-color: #e0d9b8;
+  }
+
+  /* Submenús en móvil */
+  .submenu {
+    display: none;
+    padding-left: 15px;
+    margin-top: 0.5rem;
+    border-left: 2px solid #c9c18a;
+  }
+
+  /* Mostrar submenús cuando tengan la clase 'open' */
+  .submenu.open {
+    display: block;
+  }
+
+
+  /* Buscador */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    max-width: 300px;
+    margin: 0 0 1.5rem 0;
+    padding: 0.2em 0.5em;
+    border: 2px solid #3b2d00;
+    border-radius: 0.4em;
+    background-color: #ccc;
+  }
+
+  .search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 1em 0.8rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #3b2d00;
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+
+  .search-bar img {
+    width: 30px;
+    height: 30px;
+    margin-left: -0.7em;
+    cursor: pointer;
+    user-select: none;
+    filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+    opacity: 0.5;
+    position: relative;
+    left: 0;
+    background: transparent;
+  }
+}
+
+/* Sidebar abierto */
+#pp-sidebar {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  /* oculto por defecto */
+  width: 300px;
+  height: 100vh;
+  transition: left 0.3s ease;
+  display: none;
+  /* oculto por defecto */
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#pp-sidebar.open {
+  left: 0;
+  display: block;
+}
+
+/* Bloqueo scroll body y html */
+.scroll-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+/* Responsive para max-width 992px */
+@media (max-width: 992px) {
+  #pp-sidebar {
+    left: -100%;
+    width: 80vw;
+    display: none;
+  }
+
+  #pp-sidebar.open {
+    left: 0;
+    display: block;
+  }
+}
+
+.producto-img-container .contenedor {
+  position: relative;
+  overflow: hidden;
+}
+
+.producto-img-container .contenedor img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* asegura que todas las imágenes encajen */
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.producto-img-container .contenedor img.visible {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Textos al pasar el mouse */
+#red:hover,
+#mi-cuenta-text:hover {
+  color: #000;
+}
+
+/* Imágenes/íconos al pasar el mouse */
+.icon-right:hover img,
+.casa:hover img,
+.mail-icon:hover img,
+.cart-icon:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+/* En caso de que la propia imagen tenga la clase directamente */
+span#red:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+#Christmas_Lights {
+  height: 85%;
+  margin: 0;
+  position: absolute;
+  width: 103%;
+  margin-top: 10.7em;
+  z-index: 999;
+  margin-left: -4em;
+}
+
+div#todos {
+  margin-top: 8em;
+}
+
+.light_cord {
+  fill: none;
+  stroke: #174700;
+}
+
+.light_fixture {
+  fill: #134413;
+}
+
+.red_bulb {
+  fill: #CA2128;
+  stroke: #6D6D6D;
+  stroke-miterlimit: 10;
+}
+
+.green_bulb {
+  fill: #2D754A;
+  stroke: #6D6D6D;
+  stroke-miterlimit: 10;
+}
+
+.blue_bulb {
+  fill: #2C3EA8;
+  stroke: #6D6D6D;
+  stroke-miterlimit: 10;
+}
+
+.white_bulb {
+  fill: #F5EED7;
+  stroke: #6D6D6D;
+  stroke-miterlimit: 10;
+}
+
+.gold_bulb {
+  fill: #ffcc5e;
+  stroke: #6D6D6D;
+  stroke-miterlimit: 10;
+}
+
+.bulb {
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-name: glow;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+  animation-name: glow;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@-webkit-keyframes glow {
+  0% {
+    fill-opacity: 0.25;
+  }
+
+  100% {
+    fill-opacity: 1
+  }
+}
+
+@keyframes glow {
+  0% {
+    fill-opacity: 0.25;
+  }
+
+  100% {
+    fill-opacity: 1.0
+  }
+}
+
+.blink-1 {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+.blink-2 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+
+.blink-3 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+
+.blink-4 {
+  -webkit-animation-delay: 6s;
+  animation-delay: 6s;
+}
+
+.blink-5 {
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
+.blink-6 {
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+}
+
+.blink-7 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+
+.blink-8 {
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+}
+
+.blink-9 {
+  -webkit-animation-delay: 0.95s;
+  animation-delay: 0.95s;
+}
+
+.blink-10 {
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+#snowflakes {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.snowflake {
+  position: absolute;
+  font-size: 40px;
+  /* tamaño del copo */
+  color: white;
+  opacity: 0.9;
+}
+
+/* --- Nuevo --- */
+/* ===== Estilos Generales - Desktop ===== */
+.pp-main-navbar,
+.pp-search-bar,
+.pp-nav-links {
+  display: flex;
+  /* visibles en desktop */
+}
+
+.menu-toggle {
+  display: none;
+}
+
+/* Estilos base para desktop */
+.pp-name {
+  display: block;
+  text-align: center;
+  margin-left: 4em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* ========================================================= */
+/* ========  SIDEBAR DESKTOP (OCULTO POR DEFECTO)  ========= */
+/* ========================================================= */
+
+#pp-sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  /* ← corregido */
+  width: 300px;
+  height: 100vh;
+  background-color: #ccc;
+  color: #3b2d00;
+  overflow-y: auto;
+  transition: left 0.3s ease;
+  z-index: 1500;
+  padding: 15px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.15);
+  font-family: Arial, sans-serif;
+  display: none;
+  /* Desktop = oculto */
+}
+
+#pp-sidebar.open {
+  left: 0;
+  display: block;
+}
+
+#pp-sidebar.open~#page-scroll {
+  overflow: hidden !important;
+}
+
+/* Botón cerrar */
+#pp-close-btn {
+  font-size: 28px;
+  cursor: pointer;
+  color: #3b2d00;
+  margin-bottom: 20px;
+  user-select: none;
+  text-align: right;
+}
+
+/* Links del menú */
+.pp-nav-items a {
+  color: #3b2d00;
+  text-decoration: none;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  font-weight: 500;
+}
+
+/* Hover en enlaces */
+.pp-nav-items a:hover {
+  background-color: #e0d9b8;
+}
+
+/* Dropdown y submenús */
+.pp-dropdown-menu,
+.pp-submenu {
+  display: none;
+  padding-left: 15px;
+  border-left: 2px solid #c9c18a;
+  margin-top: 5px;
+}
+
+.pp-dropdown-menu.open,
+.pp-submenu.open {
+  display: block;
+}
+
+.pp-nav-items .pp-dropdown-trigger {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  padding: 8px 10px;
+  user-select: none;
+}
+
+.pp-dropdown-trigger span {
+  font-size: 1em;
+}
+
+.pp-submenu a {
+  display: block;
+  padding: 0.3rem 0.7rem;
+  color: #3b2d00;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.pp-submenu a:hover {
+  background-color: #e0d9b8;
+}
+
+/* ========================================================= */
+/* =================== MOBILE <= 992PX ====================== */
+/* ========================================================= */
+
+@media (max-width: 992px) {
+
+  /* Ocultar elementos desktop */
+  .pp-main-navbar,
+  .pp-search-bar,
+  .pp-nav-links,
+  .main-navbar,
+  .search-bar,
+  #red,
+  footer {
+    display: none !important;
+  }
+
+  .pp-logo-svg {
+    opacity: 0;
+  }
+
+  /* BOTÓN HAMBURGUESA */
+  .menu-toggle {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #3b2d00;
+    padding: 0.3em;
+    z-index: 3000;
+  }
+
+  .menu-toggle.sticky-mode {
+    position: sticky;
+    top: 1rem;
+  }
+
+  #pp-logo span {
+    margin-top: -2.5em;
+    margin-bottom: 0.7em;
+    margin-left: 4.8em;
+  }
+
+  /* ========================================================= */
+  /* ====================== SIDEBAR MOBILE ==================== */
+  /* ========================================================= */
+
+  #pp-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* oculto */
+    width: 80vw;
+    height: 100vh;
+    background-color: #ccc;
+    color: #3b2d00;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, .2);
+    z-index: 1500;
+    padding: 1.2rem;
+    display: block;
+    /* presente siempre en mobile */
+    transition: left .3s ease;
+  }
+
+  #pp-sidebar.open {
+    left: 0;
+  }
+
+  #pp-close-btn {
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #3b2d00;
+    text-align: right;
+    margin-bottom: 1rem;
+    user-select: none;
+  }
+
+  /* Submenús */
+  .dropdown-submenu {
+    margin-bottom: 1rem;
+  }
+
+  .dropdown-submenu>a.submenu-toggle {
+    display: block;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem 0.7rem;
+    border-radius: 4px;
+    user-select: none;
+  }
+
+  .dropdown-submenu>a.submenu-toggle:hover {
+    background-color: #e0d9b8;
+  }
+
+  .submenu {
+    display: none;
+    padding-left: 15px;
+    margin-top: 0.5rem;
+    border-left: 2px solid #c9c18a;
+  }
+
+  .submenu.open {
+    display: block;
+  }
+
+  /* ---------------- BUSCADOR MOBILE ---------------- */
+  #pp-sidebar .search-bar {
+    display: flex !important;
+    align-items: center;
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+    padding: 0.2em 0.5em;
+    border: 2px solid #3b2d00;
+    border-radius: 0.4em;
+    background-color: #ccc !important;
+  }
+
+  #pp-sidebar .search-bar input[type="text"] {
+    flex-grow: 1;
+    padding: 1em 0.8rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #3b2d00;
+    border: none;
+    outline: none;
+    background: transparent !important;
+  }
+
+  #pp-sidebar .search-bar img {
+    width: 30px;
+    height: 30px;
+    margin-left: -0.7em;
+    cursor: pointer;
+    user-select: none;
+    filter: brightness(0) saturate(100%) invert(17%) sepia(36%) saturate(1888%) hue-rotate(22deg) brightness(94%) contrast(101%);
+    opacity: 0.5;
+  }
+}
+
+/* ========================================================= */
+/* =============== SIDEBAR GLOBAL FALLBACK ================= */
+/* ========================================================= */
+
+#pp-sidebar {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 300px;
+  height: 100vh;
+  transition: left 0.3s ease;
+  display: none;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#pp-sidebar.open {
+  left: 0;
+  display: block;
+}
+
+/* Bloqueo scroll body */
+.scroll-locked {
+  overflow: hidden !important;
+  height: 100vh !important;
+}
+
+/* ====================================================================== */
+/* =========================  BLOQUE 2 / 2  ============================= */
+/* ====================================================================== */
+
+.producto-img-container .contenedor {
+  position: relative;
+  overflow: hidden;
+}
+
+.producto-img-container .contenedor img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.producto-img-container .contenedor img.visible {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Textos al pasar el mouse */
+#red:hover,
+#mi-cuenta-text:hover {
+  color: #000;
+}
+
+/* Imágenes/íconos al pasar el mouse */
+.icon-right:hover img,
+.casa:hover img,
+.mail-icon:hover img,
+.cart-icon:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+/* En caso de que la propia imagen tenga la clase directamente */
+span#red:hover img {
+  filter: brightness(0) saturate(100%) invert(0%) sepia(95%) saturate(21%) hue-rotate(2deg) brightness(101%) contrast(107%);
+}
+
+#Christmas_Lights {
+  height: 85%;
+  margin: 0;
+  position: absolute;
+  width: 103%;
+  margin-top: 10.7em;
+  z-index: 999;
+  margin-left: -4em;
+}
+
+div#todos {
+  margin-top: 8em;
+}
+
+.light_cord {
+  fill: none;
+  stroke: #174700;
+}
+
+.light_fixture {
+  fill: #134413;
+}
+
+.red_bulb {
+  fill: #ca2128;
+  stroke: #6d6d6d;
+  stroke-miterlimit: 10;
+}
+
+.green_bulb {
+  fill: #2d754a;
+  stroke: #6d6d6d;
+  stroke-miterlimit: 10;
+}
+
+.blue_bulb {
+  fill: #2c3ea8;
+  stroke: #6d6d6d;
+  stroke-miterlimit: 10;
+}
+
+.white_bulb {
+  fill: #f5eed7;
+  stroke: #6d6d6d;
+  stroke-miterlimit: 10;
+}
+
+.gold_bulb {
+  fill: #ffcc5e;
+  stroke: #6d6d6d;
+  stroke-miterlimit: 10;
+}
+
+.bulb {
+  -webkit-animation-duration: 0.5s;
+  -webkit-animation-name: glow;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+  -webkit-animation-direction: alternate;
+  animation-name: glow;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+}
+
+@-webkit-keyframes glow {
+  0% {
+    fill-opacity: 0.25;
+  }
+
+  100% {
+    fill-opacity: 1;
+  }
+}
+
+@keyframes glow {
+  0% {
+    fill-opacity: 0.25;
+  }
+
+  100% {
+    fill-opacity: 1;
+  }
+}
+
+.blink-1 {
+  -webkit-animation-delay: 0.6s;
+  animation-delay: 0.6s;
+}
+
+.blink-2 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+
+.blink-3 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+
+.blink-4 {
+  -webkit-animation-delay: 6s;
+  animation-delay: 6s;
+}
+
+.blink-5 {
+  -webkit-animation-delay: 2.5s;
+  animation-delay: 2.5s;
+}
+
+.blink-6 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+
+.blink-7 {
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+}
+
+.blink-8 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.blink-9 {
+  -webkit-animation-delay: 0.95s;
+  animation-delay: 0.95s;
+}
+
+.blink-10 {
+  -webkit-animation-delay: 1.2s;
+  animation-delay: 1.2s;
+}
+
+/* Copos de nieve */
+#snowflakes {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.snowflake {
+  position: absolute;
+  font-size: 40px;
+  color: white;
+  opacity: 0.9;
 }
