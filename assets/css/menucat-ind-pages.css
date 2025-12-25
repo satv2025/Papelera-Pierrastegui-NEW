@@ -2594,3 +2594,8 @@
         filter: none !important;
         transition: none !important;
     }
+
+    .mobile-menu-header span {
+        color: #ff7600;
+        font-weight: 700;
+    }
