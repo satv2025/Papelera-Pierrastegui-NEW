@@ -518,9 +518,9 @@ footer {
     }
 
     header #pp-logo {
-        margin-top: 3.5em;
+        margin-top: -16.5em !important;
         pointer-events: none;
-        margin-bottom: -3em;
+        margin-bottom: -2em;
     }
 
     header img {
