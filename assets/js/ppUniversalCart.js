@@ -38,8 +38,8 @@ style.innerHTML = `
   height:18px;
   padding:0 5px;
   border-radius:999px;
-  background:#fff;
-  color:#ff7600;
+  background:#ff7600;
+  color:#fff;
   font-size:12px;
   font-weight:700;
   display:flex;
