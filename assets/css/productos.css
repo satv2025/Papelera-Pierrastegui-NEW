@@ -527,7 +527,7 @@ footer {
         display: none;
     }
 
-    header .cart-badge {
+    .mobile-cart-badge {
         width: 2em;
         margin-top: 62.4em;
         z-index: 10000;
@@ -535,6 +535,10 @@ footer {
         color: #fff !important;
         position: relative;
         left: -14.5em;
+    }
+
+    header .cart-badge {
+        display: none !important;
     }
 }
 
