@@ -1288,6 +1288,12 @@
         padding: 0;
     }
 
+    div#mobile-menu-btn {
+        color: #fff;
+        font-size: 22px;
+        margin-top: -0.3em;
+    }
+
     .dropcart-remove,
     .dropcart-add,
     .dropcart-rest {
