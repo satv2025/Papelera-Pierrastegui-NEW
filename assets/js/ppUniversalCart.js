@@ -30,21 +30,22 @@ style.innerHTML = `
 #mobile-menu-btn{ color:#fff; font-size:22px; line-height:1; user-select:none; }
 
 /* badge mobile */
-.mobile-cart-badge{
-  position:absolute;
-  top:-6px;
-  right:-10px;
-  min-width:18px;
-  height:18px;
-  padding:0 5px;
-  border-radius:999px;
-  background:#ff7600;
-  color:#fff;
-  font-size:12px;
-  font-weight:700;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.mobile-cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 1em;
+    height: 1.7em;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #ff7600;
+    border: 2px solid;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* --- menu overlay --- */
