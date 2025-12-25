@@ -546,3 +546,7 @@ button#closeMobileMenu {
     font-size: 19px;
     margin-top: -1em;
 }
+
+footer {
+    display: none !important;
+}
