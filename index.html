@@ -37,10 +37,70 @@
     }
 </style>
 
-<div id="snowflakes"></div>
 
-<script>
-    function crearCopo() {
+<style>
+    .mobile-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #ff7600;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0;
+        z-index: 9999;
+    }
+
+    .mobile-item img {
+        width: 26px;
+        filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(193deg) brightness(107%) contrast(101%);
+    }
+
+    .mobile-menu {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        transform: translateY(100%);
+        transition: 0.35s ease;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-menu.active {
+        transform: translateY(0);
+    }
+
+    .mobile-menu-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 16px;
+        font-size: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .mobile-search {
+        padding: 15px;
+    }
+
+    .mobile-search input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    @media (min-width: 769px) {
+
+        .mobile-bottom-bar,
+        .mobile-menu {
+            display: none;
+        }
+    }
+</style>
+
+<div id="snowflakes"></div>
+<script>function crearCopo() {
         const copo = document.createElement("iconify-icon");
         copo.className = "snowflake";
         copo.setAttribute("icon", "twemoji:snowflake");
@@ -64,8 +124,7 @@
     setInterval(crearCopo, 200);
 </script>
 
-<body>
-    <svg id="Christmas_Lights" viewBox="0 0 612 792">
+<body><svg id="Christmas_Lights" viewBox="0 0 612 792">
         <path class="light_cord"
             d="M-673.8-29.1c17.3 23.7 38.1 34.3 63.6 48.8 45.4 25.7 93.4 39.1 145.4 44.4 58 6 112.1 6.2 164-9 64.2-18.8 113.7-51 113.7-51 13.3 17.3 28.1 25.3 50.1 34.5 20.3 8.5 43.8 17 66.1 23 30.1 8.1 67.1 8.4 99.1 8.3 66.5-0.1 134-3.3 197.4-17.8 30.3-6.9 76-24 89.3-32 9.3 4.7 22.4 16.1 34.7 22.8 34 18.6 73.2 33.8 111 42.8 46.1 11 93.6 5.6 137-12.8 14.4-6.1 56.6-26.1 65.7-38.5 8.8 15.1 102.8 33.1 151.5 32.5 68.4-0.8 142.2-10.5 196.7-55.9 9.7 11.9 28.3 20 42.5 25.2 35.5 12.9 76.3 22 113.9 24.9 50.2 3.9 100.3 3.9 150.1-5.3 25.6-4.7 50.6-14.2 74.4-24.8 6.7-3 36.4-14.8 43.1-20.1" />
         <path class="red_bulb bulb blink-1"
@@ -213,243 +272,52 @@
         <path class="light_fixture"
             d="M-611 26.9c-0.5-0.2-0.7-0.8-0.5-1.3l0 0c0.2-0.5 0.3-0.9 0.3-1.3l0 0c0-1.5-1.4-2.7-2.2-3.6l0 0c-0.5-0.6-0.7-1.5-0.8-2.4l0 0c-0.1-1.5 1-3.4 3.3-3.6l0 0 0.1 0 0.1 0c1.2 0 2.2 0.3 2.9 1l0 0c0.7 0.6 1 1.5 1 2.3l0 0c0 1.3-0.6 2.4-1.2 3.4l0 0c-0.4 0.6-0.9 1.1-1.4 1.5l0 0c0.2 0.5 0.3 1 0.3 1.5l0 0c0 0.6-0.1 1.3-0.4 2.1l0 0h0c-0.2 0.4-0.5 0.6-0.9 0.6l0 0C-610.7 27-610.9 26.9-611 26.9L-611 26.9zM-612.3 18.3c0 0.5 0.2 1.1 0.3 1.2l0 0c0.2 0.3 0.8 0.8 1.4 1.6l0 0c0.2-0.2 0.5-0.5 0.8-0.9l0 0c0.5-0.7 0.9-1.7 0.9-2.3l0 0c-0.1-0.7 0-1-1.9-1.2l0 0C-612.1 16.9-612.2 17.5-612.3 18.3L-612.3 18.3z" />
     </svg>
-    <!-- Botón menú hamburguesa -->
-    <div class="menu-toggle" id="menu-toggle">☰</div>
-    <!-- Sidebar -->
-    <div id="pp-sidebar">
-        <div id="pp-page-scroll">
-            <div id="pp-close-btn">×</div>
-            <div class="pp-nav-items">
-                <!-- Buscador -->
-                <div class="search-bar">
-                    <input id="search-input" placeholder="Buscar productos..." type="text" />
-                    <img alt="Lupa"
-                        src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" />
-                </div>
-                <!-- Menú principal -->
-                <a class="pp-link" href="#">Todos los productos</a>
-                <div class="pp-dropdown-menu">
-                    <!-- Artículos de Embalaje -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Artículos de Embalaje <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/articulos-de-embajale-y-proteccion/rollo-pluribol">Rollo
-                            Pluribol</a>
-                    </div>
-                    <!-- Bandejas y Potes -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Bandejas y Potes <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/bandejas-de-carton-plateadas">Bandejas
-                            de cartón plateadas</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/aluminio">Bandejas de
-                            aluminio</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/telgopor">Bandejas de
-                            telgopor</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plastico">Bandejas
-                            plásticas</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/bisagra">Potes
-                            bisagra</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/potes-de-helado">Pote
-                            de helado</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/dips">Potes DIPS</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/ensaladafruta">Potes
-                            ensalada de fruta</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/ensaladera-con-tapa">Ensaladera
-                            con tapa</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/plato-marmita">Plato
-                            marmita</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/carton">Cartón
-                            corrugado</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/bandejas-y-potes/blonda">Blonda</a>
-                    </div>
-                    <!-- Bolsas y Sobres -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Bolsas y Sobres <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/arranques/grueso">Arranques Grueso</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/arranques/rendidor">Arranques
-                            Rendidor</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bolsas/camiseta">Camiseta</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bolsas/residuo">Residuos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bolsas/horno">Horno</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/bolsas/polipropileno">Polipropileno</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bolsas/riñon">Riñón</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bolsas/ziploc">Ziploc</a>
-                    </div>
-                    <!-- Cajas de Cartón -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Cajas de Cartón <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/pizza">Pizza</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/empanada">Empanadas</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/hamburguesa">Hamburguesa</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/sandwich">Sándwich</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/ravioles">Ravioles</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/cajas-de-carton-y-gastronomia/desayuno">Desayuno</a>
-                    </div>
-                    <!-- Cubiertos y Sorbetes -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Cubiertos y Sorbetes <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cucharasopera">Cuchara
-                            sopera</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/cubiertos/cucharita">Cucharita</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/cuchillos/blanco">Cuchillo
-                            Blanco</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/tenedor/blanco">Tenedor
-                            Blanco</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/remos">Remos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/cubiertos/platotorta">Platos de torta</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/sorbetes/comun">Sorbetes</a>
-                    </div>
-                    <!-- Guantes -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Guantes <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/guantes/nitrilo">Nitrilo</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/guantes/polietileno">Polietileno</a>
-                    </div>
-                    <!-- Higiénicos -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Higiénicos <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/elegante">Papel higiénico
-                            elegante</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/newpel">Papel higiénico
-                            económico</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/higienico/premium">Papel higiénico
-                            premium</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/elegante">Rollo de cocina
-                            elegante</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/cocina/newpel">Rollo de cocina new
-                            pel</a>
-                    </div>
-                    <!-- Librería y Cotillón -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Librería y Cotillón <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/libreria/abrochadora">Abrochadora</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/banditas-elasticas">Bandas
-                            elásticas</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/biromes">Birome</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/boligoma">Boligoma</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/libreria/ganchos-de-abrochadora">Ganchos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/calcos">Calcos</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/libreria/cuadernosuniv">Cuadernos</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/libreria/estallidos">Estallidos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/fibrones">Fibrones</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/hojas/a4">Hojas A4</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/liquidpaper">Liquid paper</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/maquinamotex">Máquina de
-                            motex</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/rollos-motex">Rollos motex</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/remitos">Remitos</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/libreria/resaltadores">Resaltadores</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/tacospapel">Tacos de papel</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/globos">Globos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/vela">Vela / Velón</a>
-                    </div>
-                    <!-- Moldes Gastronomía -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Moldes Gastronomía <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/budinera/aluminio">Budineras</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/moldes-gastronomia/pascua/caja">Rosca de
-                            pascua</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/moldes-gastronomia/pirotines">Pirotines</a>
-                    </div>
-                    <!-- Papel -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Papel <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/aluminio">Papel aluminio</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/manteca">Papel manteca</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/folex">Fólex</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/bobina">Bobina sulfito</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/papel-cortado">Papel sulfito
-                            cortado</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/papel/parafinado">Papel
-                            parafinado</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/bandejas-y-potes/blonda">Blondas de
-                            papel</a>
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/papel/servilletas">Servilletas</a>
-                    </div>
-                    <!-- Regalería -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Regalería <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a
-                            href="https://papelerapierrastegui.com.ar/productos/productos/libreria/mini-rollos">Minirollos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/libreria/mono-facil">Moño fácil</a>
-                    </div>
-                    <!-- Vasos -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Vasos <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/vasos/plastico">Plásticos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/vasos/termicos">Telgopor</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/vasos/vasos-carton">Cartón</a>
-                    </div>
-                    <!-- Cartón -->
-                    <div class="pp-dropdown-trigger" tabindex="0">
-                        Cartón <span>▸</span>
-                    </div>
-                    <div class="pp-submenu">
-                        <a href="https://papelerapierrastegui.com.ar/productos/carton/corrugado">Trípode</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/conopapas">Cono de fritas</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/pizzeria/portapanchos">Porta panchos</a>
-                        <a href="https://papelerapierrastegui.com.ar/productos/carton/tirascs">Tiras satinadas</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="pp-link" href="nosotros">¿Quiénes
-            somos?</a>
 
-        <hr />
-        <a class="copyr copyr-responsive">2025 © Papelera Pierrastegui</a><br />
-        <a class="copyp copyp-responsive">2025 © Sol Argentino TV Group</a>
-        <!-- CENTRO: Buscador -->
-        <div class="search-bar">
-            <input id="search-input" placeholder="Buscar productos..." type="text" />
-            <img alt="Lupa" src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/lupa2.svg" />
+
+    <!-- ================= MOBILE BOTTOM BAR ================= -->
+    <div class="mobile-bottom-bar">
+
+        <!-- CARRITO -->
+        <div class="mobile-item" id="mobile-cart">
+            <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" />
+        </div>
+
+        <!-- INSTAGRAM -->
+        <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank">
+            <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" />
+        </a>
+
+        <!-- WHATSAPP -->
+        <a class="mobile-item" href="https://wa.me/541123054613" target="_blank">
+            <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" />
+        </a>
+
+        <!-- MI CUENTA -->
+        <div class="mobile-item" id="mobile-account">
+            <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" />
+        </div>
+
+        <!-- MENU -->
+        <div class="mobile-item" id="mobile-menu-btn">
+            ☰
         </div>
     </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span>Menú</span>
+            <button id="closeMobileMenu">✕</button>
+        </div>
+
+        <!-- BUSCADOR -->
+        <div class="mobile-search">
+            <input id="search-input" type="text" placeholder="Buscar productos..." />
+        </div>
+
+        <!-- AQUÍ SE INYECTA TU MENÚ REAL -->
+        <div id="mobileMenuContent"></div>
+    </div>
+
     <header>
         <!-- IZQUIERDA: Logo + Nombre -->
         <div class="pp-logo" id="pp-logo">
@@ -2700,6 +2568,34 @@
             g.id = "pp-navidad-guirnalda";
             document.body.prepend(g);
         });
+    </script>
+    <script>
+        // MENU MOBILE
+        const openMenu = document.getElementById("mobile-menu-btn");
+        const closeMenu = document.getElementById("closeMobileMenu");
+        const mobileMenu = document.getElementById("mobileMenu");
+
+        openMenu.onclick = () => mobileMenu.classList.add("active");
+        closeMenu.onclick = () => mobileMenu.classList.remove("active");
+
+        // CLONAR MENÚ PRINCIPAL
+        const desktopMenu = document.querySelector(".nav-items");
+        const mobileMenuContent = document.getElementById("mobileMenuContent");
+        if (desktopMenu && mobileMenuContent) {
+            mobileMenuContent.innerHTML = desktopMenu.innerHTML;
+        }
+
+        // CARRITO
+        document.getElementById("mobile-cart").onclick = () => {
+            document.getElementById("cart-toggle")?.click();
+        };
+
+        // MI CUENTA
+        document.getElementById("mobile-account").onclick = () => {
+            const btn = document.querySelector(".mi-cuenta .btn-login")
+                || document.querySelector(".mi-cuenta img");
+            if (btn) btn.click();
+        };
     </script>
 
 </body>

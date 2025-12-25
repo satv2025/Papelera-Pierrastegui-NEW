@@ -18,6 +18,12 @@
   padding: 0;
 }
 
+div#mobile-menu-btn {
+  color: #fff;
+  font-size: 25px;
+  margin-top: -0.32em;
+}
+
 .christmas-container {
   position: absolute;
   z-index: 2000;
@@ -649,6 +655,8 @@ header {
   flex-wrap: wrap;
 }
 
+header .cart-badge {}
+
 /* Logo y nombre */
 #pp-logo {
   display: flex;
@@ -981,6 +989,38 @@ img.icon-right:Hover {
     text-align: center;
     /* ✅ centra todo dentro */
   }
+
+  header {}
+
+  :before {
+    display: none;
+  }
+
+  header ::before {
+    display: none;
+  }
+
+  header #pp-logo {
+    margin-top: 3.5em;
+    pointer-events: none;
+    margin-bottom: -3em;
+  }
+
+  header img {
+    display: none;
+  }
+
+  header .cart-badge {
+    width: 2em;
+    margin-top: 62.4em;
+    z-index: 10000;
+    background: #ff7600 !important;
+    color: #fff !important;
+    position: relative;
+    left: -14.5em;
+  }
+
+  header img {}
 
   .btn-login {
     display: none !important;
