@@ -49,11 +49,6 @@
 
     span {}
 
-    .mobile-menu-header span {
-        color: #ff7600;
-        font-weight: 700;
-    }
-
     /* --- HEADER GENERAL --- */
     header {
         display: flex;
@@ -1296,7 +1291,6 @@
     div#mobile-menu-btn {
         color: #fff;
         font-size: 22px;
-        margin-top: -0.3em;
     }
 
     .dropcart-remove,
