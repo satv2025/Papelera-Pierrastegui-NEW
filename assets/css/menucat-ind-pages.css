@@ -49,6 +49,11 @@
 
     span {}
 
+    .mobile-menu-header span {
+        color: #ff7600;
+        font-weight: 700;
+    }
+
     /* --- HEADER GENERAL --- */
     header {
         display: flex;
