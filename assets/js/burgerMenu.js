@@ -1,6 +1,65 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ==============================
+       DATA DEL MENÚ
+    =============================== */
+    const categorias = [
+        {
+            titulo: "Artículos de Embalaje",
+            links: [
+                ["Bandejas de cartón", "/productos/bandejas-y-potes"],
+                ["Bandejas aluminio", "/productos/bandejas-y-potes/aluminio"],
+                ["Bandejas telgopor", "/productos/bandejas-y-potes/telgopor"],
+                ["Bandejas plásticas", "/productos/bandejas-y-potes/plastico"],
+                ["Potes", "/productos/bandejas-y-potes/bisagra"]
+            ]
+        },
+        {
+            titulo: "Bolsas",
+            links: [
+                ["Arranques", "/productos/arranques"],
+                ["Bolsas camiseta", "/productos/bolsas/camiseta"],
+                ["Bolsas residuo", "/productos/bolsas/residuo"],
+                ["Bolsas horno", "/productos/bolsas/horno"],
+                ["Bolsas ziploc", "/productos/bolsas/ziploc"]
+            ]
+        },
+        {
+            titulo: "Cajas de Cartón",
+            links: [
+                ["Pizza", "/productos/cajas-de-carton/pizza"],
+                ["Empanadas", "/productos/cajas-de-carton/empanada"],
+                ["Hamburguesas", "/productos/cajas-de-carton/hamburguesa"],
+                ["Sandwich", "/productos/cajas-de-carton/sandwich"]
+            ]
+        },
+        {
+            titulo: "Cubiertos",
+            links: [
+                ["Cucharas", "/productos/cubiertos/cucharas"],
+                ["Tenedores", "/productos/cubiertos/tenedor"],
+                ["Cuchillos", "/productos/cubiertos/cuchillos"]
+            ]
+        },
+        {
+            titulo: "Librería",
+            links: [
+                ["Biromes", "/productos/libreria/biromes"],
+                ["Cuadernos", "/productos/libreria/cuadernos"],
+                ["Resaltadores", "/productos/libreria/resaltadores"]
+            ]
+        },
+        {
+            titulo: "Papel",
+            links: [
+                ["Papel higiénico", "/productos/papel/higienico"],
+                ["Rollo cocina", "/productos/papel/cocina"],
+                ["Servilletas", "/productos/papel/servilletas"]
+            ]
+        }
+    ];
+
+    /* ==============================
        BARRA INFERIOR
     =============================== */
     const bar = document.createElement("div");
@@ -14,47 +73,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const menu = document.createElement("div");
     menu.className = "mobile-menu";
 
-    menu.innerHTML = `
+    let menuHTML = `
     <div class="mobile-menu-header">
       <span>Menú</span>
       <button id="closeMenu">✕</button>
     </div>
-
     <div class="mobile-menu-body">
-      ${document.querySelector(".dropdown-menu")?.innerHTML || ""}
-    </div>
   `;
-    document.body.appendChild(menu);
 
-    /* ==============================
-       CONVERTIR SUBMENÚS EXISTENTES
-    =============================== */
-    document.querySelectorAll(".mobile-menu .dropdown-submenu").forEach(sub => {
-        const trigger = sub.querySelector("a");
-        const content = sub.querySelector(".submenu");
-
-        if (!trigger || !content) return;
-
-        sub.classList.add("mobile-submenu");
-        content.classList.add("mobile-submenu-content");
-
-        content.style.display = "none";
-
-        trigger.addEventListener("click", e => {
-            e.preventDefault();
-
-            document.querySelectorAll(".mobile-submenu").forEach(s => {
-                if (s !== sub) {
-                    s.classList.remove("active");
-                    const c = s.querySelector(".mobile-submenu-content");
-                    if (c) c.style.display = "none";
-                }
-            });
-
-            const open = sub.classList.toggle("active");
-            content.style.display = open ? "block" : "none";
-        });
+    categorias.forEach(cat => {
+        menuHTML += `
+      <div class="mobile-dropnav-submenu">
+        <a href="#">${cat.titulo}</a>
+        <div class="mobile-submenu">
+          ${cat.links.map(l => `<a href="${l[1]}">${l[0]}</a>`).join("")}
+        </div>
+      </div>
+    `;
     });
+
+    menuHTML += `</div>`;
+    menu.innerHTML = menuHTML;
+    document.body.appendChild(menu);
 
     /* ==============================
        ESTILOS
@@ -66,8 +106,9 @@ document.addEventListener("DOMContentLoaded", () => {
       bottom: 0;
       width: 100%;
       background: #ff7600;
+      display: flex;
+      justify-content: center;
       padding: 10px;
-      text-align: center;
       z-index: 9999;
     }
 
@@ -89,30 +130,31 @@ document.addEventListener("DOMContentLoaded", () => {
       padding: 16px;
       font-size: 20px;
       font-weight: bold;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid #eee;
       display: flex;
       justify-content: space-between;
     }
 
-    .mobile-submenu > a {
+    .mobile-dropnav-submenu > a {
       display: block;
       padding: 16px;
       font-weight: 600;
-      border-bottom: 1px solid #eee;
+      background: #f7f7f7;
       cursor: pointer;
-    }
-
-    .mobile-submenu-content {
-      display: none;
-      background: #fafafa;
-    }
-
-    .mobile-submenu-content a {
-      display: block;
-      padding: 12px 18px;
       border-bottom: 1px solid #eee;
-      text-decoration: none;
+    }
+
+    .mobile-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .mobile-submenu a {
+      display: block;
+      padding: 12px 16px;
       color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #eee;
     }
   `;
     document.head.appendChild(style);
@@ -125,5 +167,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("closeMenu").onclick = () =>
         menu.classList.remove("active");
+
+    /* ==============================
+       CONVERSIÓN dropnav → mobile
+    =============================== */
+    document.querySelectorAll(".mobile-dropnav-submenu").forEach(sub => {
+        const title = sub.querySelector("a");
+        const content = sub.querySelector(".mobile-submenu");
+
+        if (!title || !content) return;
+
+        content.style.display = "none";
+
+        title.addEventListener("click", e => {
+            e.preventDefault();
+
+            document.querySelectorAll(".mobile-dropnav-submenu").forEach(s => {
+                if (s !== sub) {
+                    s.classList.remove("active");
+                    const c = s.querySelector(".mobile-submenu");
+                    if (c) c.style.display = "none";
+                }
+            });
+
+            const abierto = sub.classList.toggle("active");
+            content.style.display = abierto ? "block" : "none";
+        });
+    });
 
 });
