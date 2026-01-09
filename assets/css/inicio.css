@@ -925,8 +925,8 @@ img.icon-right:Hover {
   right: -12px;
   background-color: #fff;
   min-width: 120px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 10;
+  box-shadow: 0px 8px 16px rgb(0 0 0 / 43%);
+  z-index: 5000;
   border-radius: 0.3em;
   overflow: hidden;
   border: 2px solid #ff7600;
