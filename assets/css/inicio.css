@@ -30,6 +30,13 @@
   font-family: Gilroy;
 }
 
+button.carousel-prev,
+button.carousel-next {
+  top: 28% !important;
+  color: #ff7600 !important;
+  background: none !important;
+}
+
 html,
 body {
   height: 100%;
@@ -55,7 +62,7 @@ button {
   font: inherit;
 }
 
-/* Bloqueo scroll cuando se abre menú */
+/* Bloqueo scroll cuando se abre menÃº */
 .scroll-locked {
   overflow: hidden !important;
   height: 100vh !important;
@@ -388,7 +395,7 @@ header {
 }
 
 /* =========================
-   NAVBAR (categorías)
+   NAVBAR (categorÃ­as)
    ========================= */
 .main-navbar {
   position: sticky;
@@ -467,7 +474,7 @@ header {
   color: #fff;
 }
 
-/* submenú a la derecha */
+/* submenÃº a la derecha */
 .submenu {
   position: absolute;
   left: calc(100% + 8px);
@@ -540,11 +547,6 @@ header {
   min-height: 420px;
 }
 
-.producto:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, .06), 0 18px 35px rgba(0, 0, 0, .14);
-}
-
 .producto-img-container {
   position: relative;
   border-bottom: 1px solid var(--border);
@@ -604,7 +606,7 @@ header {
   line-height: 1.35;
 }
 
-/* botón */
+/* botÃ³n */
 .btn {
   margin-top: auto;
   border: 0;
@@ -623,7 +625,7 @@ header {
 }
 
 /* =========================
-   MOBILE BOTTOM BAR + MENÚ
+   MOBILE BOTTOM BAR + MENÃš
    ========================= */
 .mobile-bottom-bar {
   position: fixed;
@@ -666,7 +668,7 @@ header {
   line-height: 1;
 }
 
-/* menú pantalla completa */
+/* menÃº pantalla completa */
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -806,7 +808,7 @@ header {
 }
 
 /* =========================
-   FOOTER (si lo usás)
+   FOOTER (si lo usÃ¡s)
    ========================= */
 footer {
   border-top: 3px solid var(--brand);
@@ -818,4 +820,8 @@ footer {
 
 .tamanos {
   display: none;
+}
+
+header img {
+  filter: brightness(0) saturate(100%) invert(54%) sepia(27%) saturate(6096%) hue-rotate(359deg) brightness(102%) contrast(105%);
 }
