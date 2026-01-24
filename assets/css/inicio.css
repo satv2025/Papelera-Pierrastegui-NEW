@@ -62,7 +62,7 @@ button {
   font: inherit;
 }
 
-/* Bloqueo scroll cuando se abre menÃº */
+/* Bloqueo scroll cuando se abre menÃƒÂº */
 .scroll-locked {
   overflow: hidden !important;
   height: 100vh !important;
@@ -395,7 +395,7 @@ header {
 }
 
 /* =========================
-   NAVBAR (categorÃ­as)
+   NAVBAR (categorÃƒÂ­as)
    ========================= */
 .main-navbar {
   position: sticky;
@@ -474,7 +474,7 @@ header {
   color: #fff;
 }
 
-/* submenÃº a la derecha */
+/* submenÃƒÂº a la derecha */
 .submenu {
   position: absolute;
   left: calc(100% + 8px);
@@ -549,17 +549,15 @@ header {
 
 .producto-img-container {
   position: relative;
-  border-bottom: 1px solid var(--border);
   display: grid;
   place-items: center;
   padding: 10px;
-  min-height: 220px;
 }
 
 .producto img {
   width: 100%;
   height: 240px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 /* badge */
@@ -606,7 +604,7 @@ header {
   line-height: 1.35;
 }
 
-/* botÃ³n */
+/* botÃƒÂ³n */
 .btn {
   margin-top: auto;
   border: 0;
@@ -625,7 +623,7 @@ header {
 }
 
 /* =========================
-   MOBILE BOTTOM BAR + MENÃš
+   MOBILE BOTTOM BAR + MENÃƒÅ¡
    ========================= */
 .mobile-bottom-bar {
   position: fixed;
@@ -668,7 +666,7 @@ header {
   line-height: 1;
 }
 
-/* menÃº pantalla completa */
+/* menÃƒÂº pantalla completa */
 .mobile-menu {
   position: fixed;
   inset: 0;
@@ -808,7 +806,7 @@ header {
 }
 
 /* =========================
-   FOOTER (si lo usÃ¡s)
+   FOOTER (si lo usÃƒÂ¡s)
    ========================= */
 footer {
   border-top: 3px solid var(--brand);
