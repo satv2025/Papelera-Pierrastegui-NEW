@@ -441,7 +441,7 @@ header {
 .dropdown-menu {
   position: absolute;
   left: 0;
-  top: calc(100% + 8px);
+  top: 100%;
   min-width: 260px;
   background: #fff;
   border: 3px solid var(--brand);
@@ -477,7 +477,7 @@ header {
 /* submenÃƒÂº a la derecha */
 .submenu {
   position: absolute;
-  left: calc(100% + 8px);
+  left: 100%;
   top: 0;
   min-width: 240px;
   background: #fff;
@@ -833,4 +833,61 @@ header img {
 
 .pp-logo-svg {
   filter: none !important;
+}
+
+/* =========================
+   Scrollbar naranja #ff7600
+   Track transparente (sin fondo)
+   Firefox + WebKit/Blink
+   ========================= */
+
+/* Chrome / Edge / Safari / Opera */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  /* sin fondo */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ff7600;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  /* mantiene track “vacío” */
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff8a33;
+  /* opcional hover */
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+@media (max-width: 780px) {
+
+  .dropdown-menu {
+    position: static;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .submenu {
+    position: static;
+    border: 0;
+    box-shadow: none;
+    margin-left: 14px;
+    display: none;
+  }
+
+  .dropdown-submenu:hover .submenu {
+    display: block;
+  }
+
 }
