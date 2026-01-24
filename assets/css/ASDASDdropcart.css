@@ -1,0 +1,103 @@
+/* ========================================
+   DROPCART.CSS – carrito desplegable limpio
+   ======================================== */
+
+:root {
+    --brand: #ff7600;
+    --border: rgba(0, 0, 0, .1);
+    --shadow: 0 10px 25px rgba(0, 0, 0, .15);
+    --radius: 14px;
+}
+
+/* contenedor */
+.dropcart-container {
+    position: relative;
+}
+
+/* badge */
+.cart-badge {
+    background: #111;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 999px;
+    padding: 2px 7px;
+}
+
+/* panel */
+.dropcart {
+    position: absolute;
+    right: 0;
+    top: 120%;
+
+    width: 360px;
+
+    background: #fff;
+    border: 2px solid var(--brand);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    display: none;
+    z-index: 6000;
+}
+
+.dropcart.open {
+    display: block;
+}
+
+/* header/footer */
+.dropcart-header,
+.dropcart-footer {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+}
+
+.dropcart-items {
+    max-height: 300px;
+    overflow: auto;
+    padding: 12px;
+}
+
+/* botones cantidad */
+.dropcart-add,
+.dropcart-rest,
+.dropcart-remove {
+    border: 2px solid var(--brand);
+    background: #fff;
+    color: var(--brand);
+
+    font-weight: 800;
+    border-radius: 8px;
+
+    padding: 2px 7px;
+    cursor: pointer;
+}
+
+.dropcart-add:hover,
+.dropcart-rest:hover,
+.dropcart-remove:hover {
+    background: var(--brand);
+    color: #fff;
+}
+
+/* acciones */
+.btn-primary,
+.btn-ghost {
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-weight: 800;
+    border: 2px solid var(--brand);
+}
+
+.btn-primary {
+    background: var(--brand);
+    color: #fff;
+}
+
+.btn-ghost {
+    background: #fff;
+    color: var(--brand);
+}

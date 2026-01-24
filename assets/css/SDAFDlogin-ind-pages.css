@@ -1,0 +1,65 @@
+/* ========================================
+   LOGIN-IND-PAGES.CSS – dropdown cuenta
+   ======================================== */
+
+:root {
+    --brand: #ff7600;
+    --radius: 12px;
+    --shadow: 0 10px 25px rgba(0, 0, 0, .15);
+}
+
+.btn-login {
+    border: 2px solid var(--brand);
+    background: #fff;
+    color: var(--brand);
+
+    padding: 6px 12px;
+    font-weight: 800;
+    border-radius: var(--radius);
+}
+
+.btn-login:hover {
+    background: var(--brand);
+    color: #fff;
+}
+
+/* dropdown */
+.droplogin {
+    position: relative;
+    display: inline-block;
+}
+
+.droplogin-content {
+    position: absolute;
+    top: 110%;
+    right: 0;
+
+    min-width: 180px;
+
+    background: #fff;
+    border: 2px solid var(--brand);
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+
+    display: none;
+    overflow: hidden;
+}
+
+.droplogin.show .droplogin-content {
+    display: block;
+}
+
+.droplogin-content button {
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    border: none;
+    font-weight: 700;
+    text-align: left;
+}
+
+.droplogin-content button:hover {
+    background: var(--brand);
+    color: #fff;
+}
