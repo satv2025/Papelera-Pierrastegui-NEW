@@ -719,6 +719,8 @@ header {
   padding: 10px 14px 90px;
   /* deja aire para la bottom bar */
   overflow: auto;
+  z-index: 50000;
+  height: 100%;
 }
 
 /* Desktop: ocultar elementos mobile */
@@ -799,6 +801,10 @@ header {
 @media (max-width: 420px) {
   .productos-grid {
     gap: 12px;
+  }
+
+  .dropdown-submenu {
+    overflow-y: auto;
   }
 
   .producto {
