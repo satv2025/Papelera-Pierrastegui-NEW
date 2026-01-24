@@ -549,14 +549,15 @@ header {
 
 .producto-img-container {
   position: relative;
-  display: grid;
-  place-items: center;
-  padding: 10px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  /* cuadradas */
+  overflow: hidden;
 }
 
 .producto img {
   width: 100%;
-  height: 240px;
+  height: 16em;
   object-fit: cover;
 }
 
