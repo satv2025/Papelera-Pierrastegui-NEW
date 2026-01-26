@@ -6,14 +6,102 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Producto | Papelera Pierrastegui</title>
 
-    <!-- tus css -->
-    <link rel="stylesheet" href="/assets/css/productos.css">
-    <link rel="stylesheet" href="/assets/css/dropcart.css">
+    <!-- ================= FUENTES ================= -->
+    <style>
+        @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
-    <!-- SUPABASE GLOBAL -->
+        * {
+            font-family: Gilroy !important;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f6f7f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .producto-wrap {
+            display: grid;
+            grid-template-columns: 520px 1fr;
+            gap: 40px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+        }
+
+        @media(max-width:900px) {
+            .producto-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        img {
+            width: 100%;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            color: #ff7600;
+        }
+
+        p {
+            color: #555;
+        }
+
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+
+        button {
+            background: #ff7600;
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            filter: brightness(.95);
+        }
+
+        .qty {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 14px 0;
+        }
+
+        .qty button {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+        }
+
+        .total {
+            font-weight: 800;
+            font-size: 20px;
+            margin: 12px 0;
+        }
+    </style>
+
+    <!-- ================= SUPABASE ================= -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.7"></script>
 
-    <!-- TU SB -->
     <script>
         window.sb = supabase.createClient(
             "https://moacgzwrvegpoatwjqto.supabase.co",
@@ -24,79 +112,76 @@
 
 <body>
 
-    <!-- ================= PRODUCTO ================= -->
+    <!-- =================================================
+   TU HEADER REAL VA ACÁ (pegalo sin tocar clases)
+================================================= -->
 
-    <main>
-        <section class="producto container">
+    <main class="container">
 
-            <div class="producto-contenido">
+        <div class="producto-wrap">
 
-                <img id="producto-img">
+            <img id="img">
 
-                <div class="producto-info">
+            <div>
+                <h1 id="nombre"></h1>
+                <p id="desc"></p>
 
-                    <h2 id="producto-nombre"></h2>
-                    <p id="producto-desc"></p>
+                <div id="drops"></div>
 
-                    <div id="drops-zone"></div>
-
-                    <div class="agregar-carrito-cantidad">
-                        <button id="menos">-</button>
-                        <span id="cantidad">1</span>
-                        <button id="mas">+</button>
-                    </div>
-
-                    <p id="totalText">Total: $0</p>
-
-                    <button id="btnAdd" class="agregar-carrito">
-                        Agregar al carrito
-                    </button>
-
+                <div class="qty">
+                    <button id="menos">-</button>
+                    <span id="cantidad">1</span>
+                    <button id="mas">+</button>
                 </div>
+
+                <div class="total" id="total">$0</div>
+
+                <button id="add">Agregar al carrito</button>
             </div>
-        </section>
+
+        </div>
+
     </main>
 
 
-    <!-- ================= JS ================= -->
+    <!-- =================================================
+   JS SIMPLE Y CLARO
+================================================= -->
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
 
             const sb = window.sb;
 
-            const img = document.getElementById("producto-img");
-            const nombre = document.getElementById("producto-nombre");
-            const desc = document.getElementById("producto-desc");
-            const zone = document.getElementById("drops-zone");
-            const totalText = document.getElementById("totalText");
-            const btnAdd = document.getElementById("btnAdd");
+            const img = document.getElementById("img");
+            const nombre = document.getElementById("nombre");
+            const desc = document.getElementById("desc");
+            const drops = document.getElementById("drops");
+            const total = document.getElementById("total");
 
-            const btnMas = document.getElementById("mas");
-            const btnMenos = document.getElementById("menos");
+            const mas = document.getElementById("mas");
+            const menos = document.getElementById("menos");
             const cantidadEl = document.getElementById("cantidad");
+            const add = document.getElementById("add");
 
-            const params = new URLSearchParams(location.search);
-            const id = params.get("id");
-
-            if (!id) return alert("Producto sin ID");
+            const id = new URLSearchParams(location.search).get("id");
+            if (!id) return alert("Falta ID");
 
             const { data: p } = await sb.from("productos").select("*").eq("id", id).single();
+            if (!p) return alert("No encontrado");
 
-            if (!p) return alert("No existe");
-
-            // ================= render base
-            img.src = p.imagen || "";
+            // render base
             nombre.textContent = p.nombre;
             desc.textContent = p.descripcion;
+            img.src = p.imagen || "";
 
             let cantidad = 1;
             let tipo = "unidad";
             let opt1 = null;
             let opt2 = null;
 
-            const fmt = n => "$" + Number(n).toLocaleString("es-AR");
+            const money = n => "$" + Number(n || 0).toLocaleString("es-AR");
 
-            function precioActual() {
+            function precio() {
                 const baseU = p.precio_unidad || 0;
                 const baseB = p.precio_bulto || 0;
 
@@ -107,82 +192,53 @@
             }
 
             function update() {
-                totalText.textContent = "Total: " + fmt(precioActual() * cantidad);
+                total.textContent = "Total: " + money(precio() * cantidad);
             }
 
-            // ================= dropdown builder
-            function createDropdown(title, options, onSelect) {
-                const wrap = document.createElement("select");
-                wrap.className = "pp-select";
-
-                wrap.innerHTML = `<option value="">${title}</option>`;
+            function makeSelect(title, options, cb) {
+                const s = document.createElement("select");
+                s.innerHTML = `<option value="">${title}</option>`;
 
                 options.forEach(o => {
                     const op = document.createElement("option");
-                    op.textContent = o.label;
                     op.value = JSON.stringify(o);
-                    wrap.appendChild(op);
+                    op.textContent = o.label;
+                    s.appendChild(op);
                 });
 
-                wrap.onchange = () => {
-                    const val = wrap.value;
-                    if (!val) return;
-                    onSelect(JSON.parse(val));
+                s.onchange = () => {
+                    if (!s.value) return;
+                    cb(JSON.parse(s.value));
                     update();
                 };
 
-                zone.appendChild(wrap);
+                drops.appendChild(s);
             }
 
             // dropdown 1
-            if (p.dropdown1_options?.length) {
-                createDropdown(
-                    p.dropdown1_placeholder || "Seleccionar",
-                    p.dropdown1_options,
-                    o => {
-                        opt1 = o;
-                        if (o.img) img.src = o.img;
-                    }
-                );
-            }
+            if (p.dropdown1_options?.length)
+                makeSelect(p.dropdown1_placeholder || "Elegir opción", p.dropdown1_options, o => {
+                    opt1 = o;
+                    if (o.img) img.src = o.img;
+                });
 
             // dropdown 2
-            if (p.dropdown2_options?.length) {
-                createDropdown(
-                    p.dropdown2_placeholder || "Seleccionar",
-                    p.dropdown2_options,
-                    o => opt2 = o
-                );
-            }
+            if (p.dropdown2_options?.length)
+                makeSelect(p.dropdown2_placeholder || "Elegir opción", p.dropdown2_options, o => opt2 = o);
 
             // tipo unidad/bulto
-            if (p.precio_unidad || p.precio_bulto) {
-                createDropdown(
-                    "Tipo",
-                    [
-                        { label: "Unidad (1)", t: "unidad" },
-                        { label: `Bulto (${p.bulto_cant || 1})`, t: "bulto" }
-                    ],
-                    o => tipo = o.t
-                );
-            }
+            if (p.precio_unidad || p.precio_bulto)
+                makeSelect("Tipo", [
+                    { label: "Unidad (1)", t: "unidad" },
+                    { label: `Bulto (${p.bulto_cant || 1})`, t: "bulto" }
+                ], o => tipo = o.t);
 
-            // ================= cantidad
-            btnMas.onclick = () => {
-                cantidad++;
-                cantidadEl.textContent = cantidad;
-                update();
-            };
+            // cantidad
+            mas.onclick = () => { cantidad++; cantidadEl.textContent = cantidad; update(); };
+            menos.onclick = () => { if (cantidad > 1) cantidad--; cantidadEl.textContent = cantidad; update(); };
 
-            btnMenos.onclick = () => {
-                if (cantidad > 1) cantidad--;
-                cantidadEl.textContent = cantidad;
-                update();
-            };
-
-            // ================= carrito localStorage
-            btnAdd.onclick = () => {
-
+            // carrito
+            add.onclick = () => {
                 const item = {
                     id: p.id,
                     nombre: p.nombre,
@@ -191,7 +247,7 @@
                     tipo,
                     opt1: opt1?.label || null,
                     opt2: opt2?.label || null,
-                    precio: precioActual()
+                    precio: precio()
                 };
 
                 const cart = JSON.parse(localStorage.getItem("cart") || "[]");
