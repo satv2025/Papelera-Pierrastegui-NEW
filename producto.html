@@ -3,74 +3,29 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Producto | Papelera Pierrastegui</title>
 
-    <!-- estilos tuyos -->
+    <!-- tus css -->
     <link rel="stylesheet" href="/assets/css/productos.css">
     <link rel="stylesheet" href="/assets/css/dropcart.css">
-    <link rel="stylesheet" href="/assets/css/menucat-ind-pages.css">
-    <link rel="stylesheet" href="/assets/css/login-ind-pages.css">
 
-    <!-- supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="/assets/js/sb.js"></script>
+    <!-- SUPABASE GLOBAL -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.7"></script>
+
+    <!-- TU SB -->
+    <script>
+        window.sb = supabase.createClient(
+            "https://moacgzwrvegpoatwjqto.supabase.co",
+            "TU_PUBLIC_KEY"
+        );
+    </script>
 </head>
-
 
 <body>
 
+    <!-- ================= PRODUCTO ================= -->
 
-    <!-- =================================================
-  HEADER (MISMO EXACTO QUE TU INDEX)
-================================================= -->
-    <header>
-        <div class="pp-logo">
-            <a href="/">
-                <img class="pp-logo-svg"
-                    src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico">
-                <span class="pp-name">Papelera<br>Pierrastegui</span>
-            </a>
-        </div>
-
-        <div class="search-bar">
-            <input placeholder="Buscar productos..." id="search-input">
-        </div>
-
-        <div class="nav-links">
-
-            <!-- carrito -->
-            <div class="carrito-pro dropcart-container">
-                <div class="icon-text cart-trigger" id="cart-toggle">
-                    <span id="red">Carrito</span>
-                    <span class="cart-badge" id="cart-badge">0</span>
-                </div>
-
-                <div class="dropcart" id="dropcart">
-                    <div class="dropcart-header">
-                        <strong>Tu Carrito</strong>
-                        <button id="dropcart-close">✕</button>
-                    </div>
-                    <div class="dropcart-items" id="dropcart-items"></div>
-                    <div class="dropcart-footer">
-                        <strong id="dropcart-total">$0</strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mi-cuenta">
-                <div id="mi-cuenta-container"></div>
-            </div>
-
-        </div>
-    </header>
-
-
-
-    <!-- =================================================
-  PRODUCTO
-================================================= -->
     <main>
         <section class="producto container">
 
@@ -83,20 +38,18 @@
                     <h2 id="producto-nombre"></h2>
                     <p id="producto-desc"></p>
 
-                    <!-- dropdowns dinámicos -->
-                    <div id="dropdowns"></div>
+                    <div id="drops-zone"></div>
 
-                    <!-- cantidad -->
                     <div class="agregar-carrito-cantidad">
-                        <button id="dec">-</button>
-                        <span id="cant">1</span>
-                        <button id="inc">+</button>
+                        <button id="menos">-</button>
+                        <span id="cantidad">1</span>
+                        <button id="mas">+</button>
                     </div>
 
-                    <p class="total" id="total">$0</p>
+                    <p id="totalText">Total: $0</p>
 
-                    <button id="addCart" class="agregar-carrito">
-                        Agregar al Carrito
+                    <button id="btnAdd" class="agregar-carrito">
+                        Agregar al carrito
                     </button>
 
                 </div>
@@ -105,122 +58,152 @@
     </main>
 
 
-
-    <!-- =================================================
-  JS
-================================================= -->
+    <!-- ================= JS ================= -->
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
 
             const sb = window.sb;
 
+            const img = document.getElementById("producto-img");
+            const nombre = document.getElementById("producto-nombre");
+            const desc = document.getElementById("producto-desc");
+            const zone = document.getElementById("drops-zone");
+            const totalText = document.getElementById("totalText");
+            const btnAdd = document.getElementById("btnAdd");
+
+            const btnMas = document.getElementById("mas");
+            const btnMenos = document.getElementById("menos");
+            const cantidadEl = document.getElementById("cantidad");
+
             const params = new URLSearchParams(location.search);
             const id = params.get("id");
 
-            if (!id) return alert("Producto inválido");
+            if (!id) return alert("Producto sin ID");
 
-            const { data: producto } =
-                await sb.from("productos").select("*").eq("id", id).single();
+            const { data: p } = await sb.from("productos").select("*").eq("id", id).single();
 
-            if (!producto) return alert("No encontrado");
+            if (!p) return alert("No existe");
 
-
-            /* ========= RENDER ========= */
-
-            productoNombre.textContent = producto.nombre;
-            productoDesc.textContent = producto.descripcion || "";
-            productoImg.src = producto.imagen || "";
-
-
-            /* ========= DROPDOWNS ========= */
-
-            const drops = document.getElementById("dropdowns");
-
-            let selectedVariante = null;
-
-            if (producto.variantes?.length) {
-
-                const box = document.createElement("div");
-                box.className = "dropdown";
-
-                const select = document.createElement("select");
-
-                select.innerHTML = `
-      <option value="">Seleccioná opción</option>
-    `;
-
-                producto.variantes.forEach(v => {
-                    const opt = document.createElement("option");
-                    opt.value = v.precio;
-                    opt.textContent = `${v.label} - $${v.precio}`;
-                    select.appendChild(opt);
-                });
-
-                select.onchange = () => {
-                    selectedVariante = Number(select.value);
-                    updateTotal();
-                };
-
-                box.appendChild(select);
-                drops.appendChild(box);
-            }
-
-
-            /* ========= CANTIDAD ========= */
+            // ================= render base
+            img.src = p.imagen || "";
+            nombre.textContent = p.nombre;
+            desc.textContent = p.descripcion;
 
             let cantidad = 1;
+            let tipo = "unidad";
+            let opt1 = null;
+            let opt2 = null;
 
-            inc.onclick = () => {
-                cantidad++;
-                cant.textContent = cantidad;
-                updateTotal();
+            const fmt = n => "$" + Number(n).toLocaleString("es-AR");
+
+            function precioActual() {
+                const baseU = p.precio_unidad || 0;
+                const baseB = p.precio_bulto || 0;
+
+                const u = opt1?.precio_unidad || baseU;
+                const b = opt1?.precio_bulto || baseB;
+
+                return tipo === "bulto" ? b : u;
             }
 
-            dec.onclick = () => {
-                if (cantidad > 1) cantidad--;
-                cant.textContent = cantidad;
-                updateTotal();
+            function update() {
+                totalText.textContent = "Total: " + fmt(precioActual() * cantidad);
             }
 
+            // ================= dropdown builder
+            function createDropdown(title, options, onSelect) {
+                const wrap = document.createElement("select");
+                wrap.className = "pp-select";
 
-            /* ========= TOTAL ========= */
+                wrap.innerHTML = `<option value="">${title}</option>`;
 
-            function updateTotal() {
-                if (!selectedVariante) {
-                    total.textContent = "$0";
-                    return;
-                }
-                total.textContent = "$" + (cantidad * selectedVariante).toLocaleString("es-AR");
-            }
+                options.forEach(o => {
+                    const op = document.createElement("option");
+                    op.textContent = o.label;
+                    op.value = JSON.stringify(o);
+                    wrap.appendChild(op);
+                });
 
-
-            /* ========= CARRITO (simple) ========= */
-
-            addCart.onclick = () => {
-                if (!selectedVariante) return alert("Elegí opción");
-
-                const item = {
-                    id: producto.id,
-                    nombre: producto.nombre,
-                    precio: selectedVariante,
-                    cantidad,
-                    imagen: producto.imagen
+                wrap.onchange = () => {
+                    const val = wrap.value;
+                    if (!val) return;
+                    onSelect(JSON.parse(val));
+                    update();
                 };
 
-                let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+                zone.appendChild(wrap);
+            }
 
+            // dropdown 1
+            if (p.dropdown1_options?.length) {
+                createDropdown(
+                    p.dropdown1_placeholder || "Seleccionar",
+                    p.dropdown1_options,
+                    o => {
+                        opt1 = o;
+                        if (o.img) img.src = o.img;
+                    }
+                );
+            }
+
+            // dropdown 2
+            if (p.dropdown2_options?.length) {
+                createDropdown(
+                    p.dropdown2_placeholder || "Seleccionar",
+                    p.dropdown2_options,
+                    o => opt2 = o
+                );
+            }
+
+            // tipo unidad/bulto
+            if (p.precio_unidad || p.precio_bulto) {
+                createDropdown(
+                    "Tipo",
+                    [
+                        { label: "Unidad (1)", t: "unidad" },
+                        { label: `Bulto (${p.bulto_cant || 1})`, t: "bulto" }
+                    ],
+                    o => tipo = o.t
+                );
+            }
+
+            // ================= cantidad
+            btnMas.onclick = () => {
+                cantidad++;
+                cantidadEl.textContent = cantidad;
+                update();
+            };
+
+            btnMenos.onclick = () => {
+                if (cantidad > 1) cantidad--;
+                cantidadEl.textContent = cantidad;
+                update();
+            };
+
+            // ================= carrito localStorage
+            btnAdd.onclick = () => {
+
+                const item = {
+                    id: p.id,
+                    nombre: p.nombre,
+                    imagen: img.src,
+                    cantidad,
+                    tipo,
+                    opt1: opt1?.label || null,
+                    opt2: opt2?.label || null,
+                    precio: precioActual()
+                };
+
+                const cart = JSON.parse(localStorage.getItem("cart") || "[]");
                 cart.push(item);
-
                 localStorage.setItem("cart", JSON.stringify(cart));
 
                 alert("Agregado al carrito");
             };
 
-
+            update();
         });
     </script>
-
-    <script type="module" src="/assets/js/ppUniversalCart.js"></script>
 
 </body>
 
