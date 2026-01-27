@@ -3,109 +3,22 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Producto | Papelera Pierrastegui</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ================= FUENTES ================= -->
-    <style>
-        @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
+    <!-- 🔥 mismos links que tus estáticos -->
+    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/productos.css">
+    <link rel="stylesheet" href="https://papelerapierrastegui.com.ar/assets/css/dropcart.css">
+    <link href="https://papelerapierrastegui.com.ar/assets/css/menucat-ind-pages.css" rel="stylesheet">
+    <link href="https://papelerapierrastegui.com.ar/assets/css/login-ind-pages.css" rel="stylesheet">
 
-        * {
-            font-family: Gilroy !important;
-            box-sizing: border-box;
-        }
+    <title id="page-title">Producto | Papelera Pierrastegui</title>
 
-        body {
-            margin: 0;
-            background: #f6f7f9;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-
-        .producto-wrap {
-            display: grid;
-            grid-template-columns: 520px 1fr;
-            gap: 40px;
-            background: #fff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
-        }
-
-        @media(max-width:900px) {
-            .producto-wrap {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        img {
-            width: 100%;
-            border-radius: 16px;
-            object-fit: cover;
-        }
-
-        h1 {
-            margin: 0 0 10px;
-            color: #ff7600;
-        }
-
-        p {
-            color: #555;
-        }
-
-        select,
-        button {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 12px;
-            font-size: 15px;
-        }
-
-        button {
-            background: #ff7600;
-            color: #fff;
-            border: none;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        button:hover {
-            filter: brightness(.95);
-        }
-
-        .qty {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin: 14px 0;
-        }
-
-        .qty button {
-            width: 42px;
-            height: 42px;
-            padding: 0;
-        }
-
-        .total {
-            font-weight: 800;
-            font-size: 20px;
-            margin: 12px 0;
-        }
-    </style>
-
-    <!-- ================= SUPABASE ================= -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.7"></script>
 
     <script>
         window.sb = supabase.createClient(
             "https://moacgzwrvegpoatwjqto.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vYWNnendydmVncG9hdHdqcXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyOTM5MDQsImV4cCI6MjA4NDg2OTkwNH0.WGzWhO1KYKTXKLaIXIpE1OLs6o4BJK-Q4JLK_RPZkGM"
+            "TU_ANON_KEY"
         );
     </script>
 </head>
@@ -113,65 +26,70 @@
 <body>
 
     <!-- =================================================
-   TU HEADER REAL VA ACÁ (pegalo sin tocar clases)
-================================================= -->
+       🔥 TU HEADER REAL VA ACÁ (PEGALO IGUAL)
+  ================================================= -->
 
-    <main class="container">
+    <main>
+        <section class="producto container">
 
-        <div class="producto-wrap">
+            <div class="producto-contenido">
 
-            <img id="img">
+                <!-- 🔥 mismos IDs/clases -->
+                <img id="producto-img">
 
-            <div>
-                <h1 id="nombre"></h1>
-                <p id="desc"></p>
+                <div class="producto-info">
 
-                <div id="drops"></div>
+                    <h2 id="producto-nombre"></h2>
+                    <div id="producto-desc"></div>
 
-                <div class="qty">
-                    <button id="menos">-</button>
-                    <span id="cantidad">1</span>
-                    <button id="mas">+</button>
+                    <!-- dropdowns dinámicos -->
+                    <div id="dynamic-dropdowns"></div>
+
+                    <!-- cantidad (MISMO markup) -->
+                    <div class="agregar-carrito-cantidad">
+                        <button id="decrementar">-</button>
+                        <span id="cantidad-visual">1</span>
+                        <button id="incrementar">+</button>
+                    </div>
+
+                    <p class="total">Total: $0</p>
+
+                    <button class="agregar-carrito">Agregar al Carrito</button>
+
                 </div>
-
-                <div class="total" id="total">$0</div>
-
-                <button id="add">Agregar al carrito</button>
             </div>
-
-        </div>
-
+        </section>
     </main>
 
 
     <!-- =================================================
-   JS SIMPLE Y CLARO
-================================================= -->
+       🔥 JS UNIVERSAL DINÁMICO
+  ================================================= -->
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
 
             const sb = window.sb;
 
-            const img = document.getElementById("img");
-            const nombre = document.getElementById("nombre");
-            const desc = document.getElementById("desc");
-            const drops = document.getElementById("drops");
-            const total = document.getElementById("total");
+            const img = document.getElementById("producto-img");
+            const nombre = document.getElementById("producto-nombre");
+            const desc = document.getElementById("producto-desc");
+            const drops = document.getElementById("dynamic-dropdowns");
 
-            const mas = document.getElementById("mas");
-            const menos = document.getElementById("menos");
-            const cantidadEl = document.getElementById("cantidad");
-            const add = document.getElementById("add");
+            const decBtn = document.getElementById("decrementar");
+            const incBtn = document.getElementById("incrementar");
+            const cantidadVisual = document.getElementById("cantidad-visual");
+            const totalDisplay = document.querySelector(".total");
+            const addBtn = document.querySelector(".agregar-carrito");
 
             const id = new URLSearchParams(location.search).get("id");
-            if (!id) return alert("Falta ID");
+            if (!id) return alert("Falta ID de producto");
 
             const { data: p } = await sb.from("productos").select("*").eq("id", id).single();
-            if (!p) return alert("No encontrado");
+            if (!p) return alert("Producto no encontrado");
 
-            // render base
+            document.title = p.nombre + " | Papelera Pierrastegui";
             nombre.textContent = p.nombre;
-            desc.textContent = p.descripcion;
+            desc.textContent = p.descripcion || "";
             img.src = p.imagen || "";
 
             let cantidad = 1;
@@ -181,64 +99,117 @@
 
             const money = n => "$" + Number(n || 0).toLocaleString("es-AR");
 
-            function precio() {
-                const baseU = p.precio_unidad || 0;
-                const baseB = p.precio_bulto || 0;
+            // =========================
+            // PRECIO UNIVERSAL
+            // =========================
+            function getPrecio() {
 
-                const u = opt1?.precio_unidad || baseU;
-                const b = opt1?.precio_bulto || baseB;
+                // si hay variante elegida
+                if (opt1?.precio_unidad || opt1?.precio_bulto) {
+                    return tipo === "bulto"
+                        ? opt1.precio_bulto
+                        : opt1.precio_unidad;
+                }
 
-                return tipo === "bulto" ? b : u;
+                // fallback simple
+                return tipo === "bulto"
+                    ? (p.precio_bulto || 0)
+                    : (p.precio_unidad || 0);
             }
 
-            function update() {
-                total.textContent = "Total: " + money(precio() * cantidad);
+            function updateTotal() {
+                totalDisplay.textContent = "Total: " + money(getPrecio() * cantidad);
             }
 
-            function makeSelect(title, options, cb) {
-                const s = document.createElement("select");
-                s.innerHTML = `<option value="">${title}</option>`;
+            // =========================
+            // DROPDOWN DINÁMICO (MISMO CSS)
+            // =========================
+            function crearDropdown({ placeholder, opciones, onSelect }) {
 
-                options.forEach(o => {
-                    const op = document.createElement("option");
-                    op.value = JSON.stringify(o);
-                    op.textContent = o.label;
-                    s.appendChild(op);
+                const wrap = document.createElement("div");
+                wrap.className = "dropdown";
+
+                wrap.innerHTML = `
+          <button class="dropdown-btn">
+            <span class="text">${placeholder}</span>
+            <span class="arrow">▼</span>
+          </button>
+          <div class="dropdown-menu"></div>
+        `;
+
+                const btn = wrap.querySelector(".dropdown-btn");
+                const menu = wrap.querySelector(".dropdown-menu");
+
+                btn.onclick = () => menu.classList.toggle("active");
+
+                opciones.forEach(o => {
+                    const item = document.createElement("div");
+                    item.className = "dropdown-item";
+                    item.textContent = o.label;
+
+                    item.onclick = () => {
+                        btn.querySelector(".text").textContent = o.label;
+                        menu.classList.remove("active");
+                        onSelect(o);
+                        updateTotal();
+                    };
+
+                    menu.appendChild(item);
                 });
 
-                s.onchange = () => {
-                    if (!s.value) return;
-                    cb(JSON.parse(s.value));
-                    update();
-                };
-
-                drops.appendChild(s);
+                return wrap;
             }
 
-            // dropdown 1
-            if (p.dropdown1_options?.length)
-                makeSelect(p.dropdown1_placeholder || "Elegir opción", p.dropdown1_options, o => {
-                    opt1 = o;
-                    if (o.img) img.src = o.img;
-                });
+            // =========================
+            // RENDER VARIANTES
+            // =========================
+            const v = p.variantes || {};
 
-            // dropdown 2
-            if (p.dropdown2_options?.length)
-                makeSelect(p.dropdown2_placeholder || "Elegir opción", p.dropdown2_options, o => opt2 = o);
+            // DROP1 (tamaño/color/etc)
+            if (v.dropdowns?.drop1?.options?.length) {
+                drops.appendChild(
+                    crearDropdown({
+                        placeholder: v.dropdowns.drop1.placeholder || "Seleccionar",
+                        opciones: v.dropdowns.drop1.options,
+                        onSelect: o => {
+                            opt1 = o;
+                            if (o.img) img.src = o.img;
+                        }
+                    })
+                );
+            }
 
-            // tipo unidad/bulto
-            if (p.precio_unidad || p.precio_bulto)
-                makeSelect("Tipo", [
-                    { label: "Unidad (1)", t: "unidad" },
-                    { label: `Bulto (${p.bulto_cant || 1})`, t: "bulto" }
-                ], o => tipo = o.t);
+            // DROP2 (tipo unidad/bulto)
+            if (v.dropdowns?.drop2?.options?.length) {
+                drops.appendChild(
+                    crearDropdown({
+                        placeholder: v.dropdowns.drop2.placeholder || "Tipo",
+                        opciones: v.dropdowns.drop2.options,
+                        onSelect: o => tipo = o.meta || "unidad"
+                    })
+                );
+            }
 
-            // cantidad
-            mas.onclick = () => { cantidad++; cantidadEl.textContent = cantidad; update(); };
-            menos.onclick = () => { if (cantidad > 1) cantidad--; cantidadEl.textContent = cantidad; update(); };
+            // =========================
+            // CANTIDAD
+            // =========================
+            incBtn.onclick = () => {
+                cantidad++;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            };
 
-            // carrito
-            add.onclick = () => {
+            decBtn.onclick = () => {
+                if (cantidad > 1) cantidad--;
+                cantidadVisual.textContent = cantidad;
+                updateTotal();
+            };
+
+            // =========================
+            // CARRITO
+            // =========================
+            addBtn.onclick = () => {
+
                 const item = {
                     id: p.id,
                     nombre: p.nombre,
@@ -247,7 +218,7 @@
                     tipo,
                     opt1: opt1?.label || null,
                     opt2: opt2?.label || null,
-                    precio: precio()
+                    precio: getPrecio()
                 };
 
                 const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -257,9 +228,11 @@
                 alert("Agregado al carrito");
             };
 
-            update();
+            updateTotal();
         });
     </script>
+
+    <script type="module" src="https://papelerapierrastegui.com.ar/assets/js/ppUniversalCart.js"></script>
 
 </body>
 
