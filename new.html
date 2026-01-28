@@ -20,28 +20,33 @@
 <body>
     <!-- ================= MOBILE BOTTOM BAR ================= -->
     <div class="mobile-bottom-bar">
-        <div class="mobile-item" id="mobile-cart" title="Carrito">🛒</div>
+
+        <div class="mobile-item" id="mobile-cart" title="Carrito">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito">
+        </div>
+
         <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
-            rel="noopener noreferrer" title="Instagram">📷</a>
+            rel="noopener noreferrer" title="Instagram">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
+        </a>
+
         <a class="mobile-item" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
-            title="Whatsapp">💬</a>
-        <div class="mobile-item" id="mobile-account" title="Mi cuenta">👤</div>
-        <div class="mobile-item" id="mobile-menu-btn" title="Menú">☰</div>
-    </div>
+            title="Whatsapp">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="Whatsapp">
+        </a>
 
-    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-        <div class="mobile-menu-header">
-            <span>Menú</span>
-            <button id="closeMobileMenu" type="button" aria-label="Cerrar">✕</button>
+        <div class="mobile-item" id="mobile-account" title="Mi cuenta">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Cuenta">
         </div>
-        <div class="mobile-search">
-            <input id="mobile-search-input" type="text" placeholder="Buscar productos..." />
-        </div>
-        <div id="mobileMenuContent"></div>
-    </div>
 
+        <div class="mobile-item" id="mobile-menu-btn" title="Menú">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/edit.svg" alt="Menú">
+        </div>
+
+    </div>
     <!-- ================= HEADER ================= -->
     <header class="pp-header">
+
         <div class="pp-logo" id="pp-logo">
             <a href="/" class="pp-logo-link">
                 <img alt="Logo Papelera Pierrastegui" class="pp-logo-img"
@@ -49,45 +54,61 @@
                 <span class="pp-name">Papelera<br />Pierrastegui</span>
             </a>
         </div>
+
+        <!-- SEARCH -->
         <div class="pp-search-bar">
             <input id="search-input" placeholder="Buscar productos..." type="text" />
             <button class="pp-search-btn" type="button" aria-label="Buscar">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/edit.svg" alt="Buscar">
             </button>
         </div>
+
         <div class="pp-nav-links">
+
+            <!-- MAIL -->
             <a class="pp-link" href="mailto:info@papelerapierrastegui.com.ar" title="Mail">
                 <span class="pp-link-text">Contactános<br />Por Mail</span>
-                <i class="fa-regular fa-envelope"></i>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/email.svg" alt="Mail">
             </a>
+
+            <!-- INSTAGRAM -->
             <a class="pp-link" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
                 rel="noopener noreferrer" title="Instagram">
                 <span class="pp-link-text">Seguinos<br />En Instagram</span>
-                <i class="fa-brands fa-instagram"></i>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
             </a>
+
+            <!-- WHATSAPP -->
             <a class="pp-link" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
                 title="WhatsApp">
                 <span class="pp-link-text">Contactános<br />Por Whatsapp</span>
-                <i class="fa-brands fa-whatsapp"></i>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="Whatsapp">
             </a>
+
+            <!-- CARRITO -->
             <div class="pp-cart dropcart-container">
                 <button class="pp-cart-trigger" id="cart-toggle" type="button" aria-label="Abrir carrito">
                     <span>Carrito</span>
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito">
                     <span class="cart-badge" id="cart-badge">0</span>
                 </button>
+
                 <div class="dropcart" id="dropcart" aria-hidden="true">
                     <div class="dropcart-header">
                         <strong>Tu Carrito</strong>
                         <button class="dropcart-close" id="dropcart-close" type="button" aria-label="Cerrar">✕</button>
                     </div>
+
                     <div class="dropcart-items" id="dropcart-items">
                         <p class="empty">Tu carrito está vacío</p>
                     </div>
+
                     <div class="dropcart-footer">
                         <div class="dropcart-total">
-                            <span>Total:</span><strong id="dropcart-total">$0</strong>
+                            <span>Total:</span>
+                            <strong id="dropcart-total">$0</strong>
                         </div>
+
                         <div class="dropcart-actions">
                             <button id="dropcart-empty" class="btn-ghost" type="button">Vaciar</button>
                             <a id="dropcart-checkout" class="btn-primary" href="/checkout">Finalizar</a>
@@ -95,9 +116,15 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ACCOUNT -->
             <div class="pp-account">
-                <a class="btn-login" href="/login" id="account-btn">Acceder</a>
+                <a class="btn-login" href="/login" id="account-btn">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Cuenta">
+                    Acceder
+                </a>
             </div>
+
         </div>
     </header>
 
