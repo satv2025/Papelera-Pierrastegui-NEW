@@ -357,6 +357,7 @@ span.more-btn {
     height: 48px;
     border-radius: 8px;
     object-fit: cover;
+    filter: none !important;
 }
 
 .dropcart-title {
