@@ -977,3 +977,43 @@ a {
     transform: translateY(-1px);
     box-shadow: 0 6px 14px rgba(255, 118, 0, .25);
 }
+
+/* =========================
+   PRODUCTO PAGE
+   ========================= */
+
+.producto-page {
+    padding: 40px 0;
+}
+
+.producto-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.producto-media img {
+    width: 100%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: #fff;
+    padding: 20px;
+}
+
+.producto-info h1 {
+    font-size: 28px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.producto-info p {
+    color: var(--muted);
+    margin-bottom: 22px;
+}
+
+@media (max-width: 900px) {
+    .producto-layout {
+        grid-template-columns: 1fr;
+    }
+}
