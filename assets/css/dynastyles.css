@@ -23,7 +23,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Gilroy, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-family: 'Gilroy';
 }
 
 .producto {
@@ -65,10 +65,22 @@ button.btn:hover {
     color: #ff7600;
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     background: var(--bg);
     color: var(--text);
+
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
+}
+
+main {
+    flex: 1;
 }
 
 a {
@@ -119,6 +131,7 @@ a {
     line-height: 1.05;
     letter-spacing: .2px;
     font-size: 1.2em;
+    color: #ff7600;
 }
 
 .pp-search-bar {
@@ -132,6 +145,7 @@ a {
     width: 100%;
     max-width: 68em;
     margin: 0 auto;
+    margin-left: -5.4em;
 }
 
 @media (max-width: 600px) {
@@ -139,6 +153,8 @@ a {
         flex-wrap: wrap;
         gap: 8px;
         padding: 6px;
+        margin-left: 0em !important;
+        width: 100% !important;
     }
 }
 
@@ -149,7 +165,12 @@ a {
     width: 100%;
     font-weight: 700;
     font-size: 15px;
-    color: var(--text);
+    color: #ff7600;
+}
+
+::placeholder {
+    color: #ff7600;
+    background: #ffff;
 }
 
 .pp-search-btn {
@@ -180,13 +201,16 @@ a {
 
 .pp-link:hover {
     background: rgba(0, 0, 0, .04);
+    color: #000;
 }
 
 .pp-link-text {
     font-weight: 800;
     font-size: 12px;
-    color: #3b2d00;
+    color: #ff7600;
     line-height: 1.1;
+    text-align: center;
+    margin-left: -1.6em;
 }
 
 .pp-link i {
@@ -236,10 +260,12 @@ a {
     padding: 10px 12px;
     border-radius: 12px;
     font-size: 15px;
+    color: #ff7600;
 }
 
 .nav-item>a:hover {
     background: rgba(0, 0, 0, .05);
+    color: #000;
 }
 
 .dropdown {
@@ -258,6 +284,7 @@ a {
     padding: 10px;
     z-index: 30;
     margin-top: 4px;
+    color: #ff7600 !important;
 }
 
 .nav-item.dropdown:hover>.dropdown-menu,
@@ -272,13 +299,12 @@ a {
     padding: 10px 10px;
     border-radius: 12px;
     cursor: pointer;
-    color: var(--text);
     font-size: 14px;
 }
 
 .dropdown-submenu>a:hover {
     background: rgba(0, 0, 0, .04);
-    color: var(--brand);
+    color: #000;
 }
 
 .submenu {
@@ -295,7 +321,6 @@ a {
     display: block;
     padding: 8px 10px;
     border-radius: 12px;
-    color: var(--muted);
     font-weight: 800;
     font-size: 13px;
     margin-bottom: 1px;
@@ -303,7 +328,18 @@ a {
 
 .submenu a:hover {
     background: rgba(0, 0, 0, .04);
-    color: var(--brand);
+    color: #000;
+}
+
+.dropdown-submenu:hover>a {
+    color: #000;
+}
+
+/* "Todos los productos" activo cuando el dropdown está abierto */
+.nav-item.dropdown:hover>a,
+.nav-item.dropdown:focus-within>a {
+    background: rgba(0, 0, 0, .05);
+    color: #000;
 }
 
 /* =========================
@@ -401,15 +437,16 @@ a {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-weight: 950;
-    font-size: 15px;
+    font-weight: 700;
+    margin-left: -1.5em;
+    color: #ff7600;
 }
 
 .cart-badge {
     background: var(--brand);
     color: #fff;
-    border-radius: 999px;
-    padding: 2px 8px;
+    border-radius: 1000px;
+    padding: 3.5px 8px;
     font-size: 12px;
     font-weight: 900;
 }
@@ -753,15 +790,17 @@ a {
     width: 22px;
     height: 22px;
     object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(53%) sepia(51%) saturate(3605%) hue-rotate(359deg) brightness(100%) contrast(110%);
 }
 
-/* mobile más grandes (mejor touch UX) */
+/* mobile mÃƒÆ’Ã‚Â¡s grandes (mejor touch UX) */
 .mobile-item img {
     width: 26px;
     height: 26px;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(36%) saturate(0%) hue-rotate(309deg) brightness(106%) contrast(102%);
 }
 
-/* separación texto + icono */
+/* separaciÃƒÆ’Ã‚Â³n texto + icono */
 .pp-link,
 .pp-cart-trigger,
 .btn-login {
@@ -770,7 +809,7 @@ a {
     gap: 8px;
 }
 
-/* área táctil */
+/* ÃƒÆ’Ã‚Â¡rea tÃƒÆ’Ã‚Â¡ctil */
 .mobile-item {
     display: flex;
     align-items: center;
@@ -781,4 +820,160 @@ a {
 /* efecto touch */
 .mobile-item:active {
     transform: scale(0.92);
+}
+
+/* ===== ACCOUNT DROPDOWN ===== */
+
+.account-dropdown {
+    position: relative;
+}
+
+.account-trigger {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #ff7600;
+    font-weight: 700;
+    margin-right: 1em;
+    margin-left: -0.6em;
+}
+
+.account-trigger img {
+    width: 22px;
+    height: 22px;
+    filter: brightness(0) saturate(100%) invert(53%) sepia(51%) saturate(3605%) hue-rotate(359deg) brightness(100%) contrast(110%);
+}
+
+.account-menu {
+    position: absolute;
+    top: 104%;
+    right: 4px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .15);
+    min-width: 180px;
+    display: none;
+    flex-direction: column;
+    padding: 8px 0;
+    z-index: 50;
+    border: 2px solid #ff7600;
+    color: #ff7600;
+    font-weight: 700;
+}
+
+.account-dropdown:hover .account-menu {
+    display: flex;
+}
+
+.account-menu a,
+.account-menu button {
+    background: none;
+    border: none;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    width: 100%;
+    color: #ff7600;
+}
+
+.account-menu img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) saturate(100%) invert(53%) sepia(51%) saturate(3605%) hue-rotate(359deg) brightness(100%) contrast(110%);
+}
+
+
+/* hover del contenedor */
+.account-menu a:hover,
+.account-menu button:hover {
+    background: #ff7600;
+    color: #fff;
+}
+
+/* 👇 CAMBIO DEL IMG EN HOVER */
+.account-menu a:hover img,
+.account-menu button:hover img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(2%) hue-rotate(159deg) brightness(105%) contrast(100%);
+}
+
+.account-trigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.account-trigger img {
+    order: 2;
+}
+
+.account-trigger:hover {
+    color: #000 !important;
+}
+
+.account-dropdown:hover .account-trigger {
+    color: #000 !important;
+}
+
+.pp-link:hover .pp-link-text {
+    color: #000 !important;
+}
+
+.pp-cart-trigger:hover>span:first-child {
+    color: #000 !important;
+}
+
+/* =========================
+   FOOTER PRO ECOM
+   ========================= */
+.pp-footer {
+    margin-top: auto;
+    /* 🔥 clave sticky */
+    text-align: center;
+    padding: 28px 16px;
+    background: #fff;
+    border-top: 3px solid var(--brand);
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.pp-footer p {
+    margin: 6px 0;
+}
+
+/* contenedor botones */
+.footer-links {
+    margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* botones marca */
+.footer-btn {
+    padding: 8px 16px;
+    border: 2px solid var(--brand);
+    border-radius: var(--radius-sm);
+    background: #fff;
+    color: var(--brand);
+    font-weight: 800;
+    text-decoration: none;
+    transition: all .18s ease;
+}
+
+/* hover premium */
+.footer-btn:hover {
+    background: var(--brand);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(255, 118, 0, .25);
 }
