@@ -3,142 +3,188 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Producto | Papelera Pierrastegui</title>
-
     <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico">
+    <link rel="stylesheet" href="assets/css/todo-en-uno.css">
 
-    <!-- ✅ MISMO CSS DEL INDEX -->
-    <link rel="stylesheet" href="assets/css/dynastyles.css">
-
-    <!-- SUPABASE (NO TOCAR) -->
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.35.7"></script>
     <script>
         window.sb = supabase.createClient(
-            "https://moacgzwrvegpoatwjqto.supabase.co",
+            "https://cdnstatic.papelerapierrastegui.com.ar",
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vYWNnendydmVncG9hdHdqcXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyOTM5MDQsImV4cCI6MjA4NDg2OTkwNH0.WGzWhO1KYKTXKLaIXIpE1OLs6o4BJK-Q4JLK_RPZkGM"
         );
     </script>
 </head>
 
 <body>
-
-    <!-- ================= MOBILE BAR ================= -->
+    <!-- ============ MOBILE BOTTOM BAR ============= -->
     <div class="mobile-bottom-bar">
-
-        <div class="mobile-item" id="mobile-cart">
-            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg">
+        <div class="mobile-item" id="mobile-cart" title="Carrito">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito">
         </div>
-
-        <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank">
-            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg">
+        <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+            rel="noopener noreferrer" title="Instagram">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
         </a>
-
-        <a class="mobile-item" href="https://wa.me/541123054613" target="_blank">
-            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg">
+        <a class="mobile-item" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+            title="Whatsapp">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="Whatsapp">
         </a>
-
-        <div class="mobile-item" id="mobile-account">
-            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg">
+        <div class="mobile-item" id="mobile-account" title="Mi cuenta">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Cuenta">
         </div>
-
-        <div class="mobile-item" id="mobile-menu-btn">
-            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg">
+        <div class="mobile-item" id="mobile-menu-btn" title="Menú">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg" alt="Menú">
         </div>
-
     </div>
 
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-header">
+            <span>Menú</span>
+            <button id="closeMobileMenu" type="button" aria-label="Cerrar">✕</button>
+        </div>
+        <div class="mobile-search">
+            <input id="mobile-search-input" type="text" placeholder="Buscar productos..." />
+        </div>
+        <div id="mobileMenuContent"></div>
+    </div>
 
-    <!-- ================= HEADER ================= -->
+    <!-- ============ HEADER ============= -->
     <header class="pp-header">
+        <div class="pp-logo" id="pp-logo">
+            <a href="/" class="pp-logo-link">
+                <img alt="Logo Papelera Pierrastegui" class="pp-logo-img"
+                    src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" />
+                <span class="pp-name">Papelera<br />Pierrastegui</span>
+            </a>
+        </div>
 
-        <a href="/" class="pp-logo-link">
-            <img class="pp-logo-img" src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico">
-            <span class="pp-name">Papelera<br>Pierrastegui</span>
-        </a>
-
+        <!-- SEARCH -->
         <div class="pp-search-bar">
-            <input id="search-input" placeholder="Buscar productos...">
-            <button class="pp-search-btn">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg">
+            <input id="search-input" placeholder="Buscar productos..." type="text" />
+            <button class="pp-search-btn" type="button" aria-label="Buscar">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg" alt="Buscar">
             </button>
         </div>
 
         <div class="pp-nav-links">
-
+            <a class="pp-link" href="mailto:info@papelerapierrastegui.com.ar" title="Mail">
+                <span class="pp-link-text">Contactános<br />Por Mail</span>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/email.svg" alt="Mail">
+            </a>
+            <a class="pp-link" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+                rel="noopener noreferrer" title="Instagram">
+                <span class="pp-link-text">Seguinos<br />En Instagram</span>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
+            </a>
+            <a class="pp-link" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+                title="WhatsApp">
+                <span class="pp-link-text">Contactános<br />Por Whatsapp</span>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="Whatsapp">
+            </a>
             <!-- CARRITO -->
             <div class="pp-cart dropcart-container">
-                <button class="pp-cart-trigger" id="cart-toggle">
+                <button class="pp-cart-trigger" id="cart-toggle" type="button" aria-label="Abrir carrito">
                     <span>Carrito</span>
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg">
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito">
                     <span class="cart-badge" id="cart-badge">0</span>
                 </button>
-
-                <div class="dropcart" id="dropcart">
+                <div class="dropcart" id="dropcart" aria-hidden="true">
                     <div class="dropcart-header">
                         <strong>Tu Carrito</strong>
-                        <button class="dropcart-close" id="dropcart-close">✕</button>
+                        <button class="dropcart-close" id="dropcart-close" type="button" aria-label="Cerrar">✕</button>
                     </div>
-                    <div class="dropcart-items" id="dropcart-items"></div>
+                    <div class="dropcart-items" id="dropcart-items">
+                        <p class="empty">Tu carrito está vacío</p>
+                    </div>
                     <div class="dropcart-footer">
                         <div class="dropcart-total">
                             <span>Total:</span>
                             <strong id="dropcart-total">$0</strong>
                         </div>
+                        <div class="dropcart-actions">
+                            <button id="dropcart-empty" class="btn-ghost" type="button">Vaciar</button>
+                            <a id="dropcart-checkout" class="btn-primary" href="/checkout">Finalizar</a>
+                        </div>
                     </div>
                 </div>
             </div>
-
             <!-- ACCOUNT -->
-            <div id="account-container"></div>
-
+            <div class="pp-account" id="account-container"></div>
         </div>
     </header>
 
-
-    <!-- ================= NAV ================= -->
+    <!-- ============ NAV DINÁMICO (EJEMPLO, cambiá según tu menú) ============= -->
     <nav class="main-navbar">
-        <div class="nav-items" id="desktopMenu"></div>
+        <div class="nav-items" id="desktopMenu">
+            <div class="nav-item dropdown">
+                <a href="javascript:void(0)">Todos los productos <span class="arrow"><i
+                            class="fa-solid fa-chevron-down"></i></span></a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-submenu">
+                        <a href="#">Arranques</a>
+                        <div class="submenu">
+                            <a href="#">Arranque grueso</a>
+                            <a href="#">Arranque rendidor</a>
+                        </div>
+                    </div>
+                    <div class="dropdown-submenu">
+                        <a href="#">Bandejas y Potes</a>
+                        <div class="submenu">
+                            <a href="#">Aluminio</a>
+                            <a href="#">Telgopor</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="/nosotros">¿Quiénes somos?</a>
+            </div>
+        </div>
     </nav>
 
-
-    <!-- ================= PRODUCTO ================= -->
+    <!-- ============ PRODUCTO FICHA ============= -->
     <main class="container producto-page">
-
-        <div class="producto-layout">
-
-            <div class="producto-media">
-                <img id="producto-img">
+        <section class="producto">
+            <div class="producto-contenido">
+                <div class="producto-media">
+                    <img id="producto-img" alt="Imagen del producto" src="" />
+                </div>
+                <div class="producto-info">
+                    <h2 id="producto-nombre">Nombre del producto</h2>
+                    <div id="producto-desc">Descripción del producto...</div>
+                    <div id="dynamic-dropdowns"></div>
+                    <div class="agregar-carrito-cantidad">
+                        <button id="decrementar" type="button">-</button>
+                        <span id="cantidad-visual">1</span>
+                        <button id="incrementar" type="button">+</button>
+                    </div>
+                    <p class="total" id="totalDisplay">Total: $0</p>
+                    <button class="agregar-carrito" id="addToCartBtn" type="button">Agregar al Carrito</button>
+                </div>
             </div>
-
-            <div class="producto-info">
-                <h1 id="producto-nombre"></h1>
-                <p id="producto-desc"></p>
-
-                <button class="btn" id="addToCartBtn">
-                    Agregar al carrito
-                </button>
-            </div>
-
-        </div>
-
+        </section>
     </main>
 
-
-    <!-- ================= FOOTER ================= -->
     <footer class="pp-footer">
-        <p>© 2026 Papelera Pierrastegui · Todos los derechos reservados</p>
-        <p>Desarrollo y tecnología por Sol Argentino TV Developers</p>
-
+        <p class="copyr">
+            © 2026 Papelera Pierrastegui · Todos los derechos reservados
+        </p>
+        <p class="copyp">
+            Desarrollo y tecnología por Sol Argentino TV Developers
+        </p>
         <div class="footer-links">
             <a class="footer-btn" href="https://solargentinotv.com.ar/contacto" target="_blank">Contacto</a>
             <a class="footer-btn" href="https://solargentinotv.com.ar" target="_blank">Sitio web</a>
         </div>
     </footer>
 
-
+    <!-- Tu JS de producto, dropcart, y menú móvil va al final igual que en index.html -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="assets/js/catalogo.js"></script>
-
+    <!-- ...más JS que necesites... -->
 </body>
 
 </html>
