@@ -23,7 +23,7 @@
     <script>
         // ✅ NO SACAR APIKEY (tal cual pediste)
         window.sb = supabase.createClient(
-            "https://moacgzwrvegpoatwjqto.supabase.co",
+            "https://cdnstatic.papelerapierrastegui.com.ar",
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vYWNnendydmVncG9hdHdqcXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkyOTM5MDQsImV4cCI6MjA4NDg2OTkwNH0.WGzWhO1KYKTXKLaIXIpE1OLs6o4BJK-Q4JLK_RPZkGM"
         );
     </script>
@@ -539,6 +539,79 @@
         });
     </script>
 
+    <script type="module">
+        import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
+
+        const accountBox = document.querySelector(".pp-account");
+
+        function renderCuenta(user) {
+
+            // limpiamos SOLO contenido
+            accountBox.innerHTML = "";
+
+
+            /* ================= LOGUEADO ================= */
+            if (user) {
+
+                const nombre =
+                    user.user_metadata?.nombre_completo ||
+                    user.user_metadata?.username ||
+                    user.email;
+
+                const dropdown = document.createElement("div");
+                dropdown.className = "dropdown";
+
+                dropdown.innerHTML = `
+<button class="btn-login">${nombre} ▾</button>
+<div class="dropdown-content">
+<button class="dd-perfil">Editar perfil</button>
+<button class="dd-logout">Cerrar sesión</button>
+</div>
+`;
+
+                accountBox.appendChild(dropdown);
+
+                const btn = dropdown.querySelector(".btn-login");
+                const menu = dropdown.querySelector(".dropdown-content");
+
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    menu.classList.toggle("show");
+                };
+
+                dropdown.querySelector(".dd-perfil").onclick =
+                    () => location.href = "/profile";
+
+                dropdown.querySelector(".dd-logout").onclick = async () => {
+                    await supabase.auth.signOut();
+                    location.reload();
+                };
+
+                window.addEventListener("click", () => menu.classList.remove("show"));
+
+            }
+
+
+            /* ================= NO LOGUEADO ================= */
+            else {
+
+                accountBox.innerHTML = `
+<a href="/login" class="btn-login">Acceder</a>
+`;
+
+            }
+
+        }
+
+
+        /* INIT */
+        const { data } = await supabase.auth.getSession();
+        renderCuenta(data.session?.user);
+
+        supabase.auth.onAuthStateChange((_e, session) => {
+            renderCuenta(session?.user);
+        });
+    </script>
 </body>
 
 </html>
