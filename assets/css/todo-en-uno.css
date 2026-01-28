@@ -200,7 +200,6 @@ a {
 .dropdown-menu {
     display: none;
     position: absolute;
-    top: 54px;
     left: 0;
     width: 340px;
     background: #fff;
@@ -334,7 +333,7 @@ main {
 
 .dropdown-menu {
     margin-top: 8px;
-    border: 1px solid var(--border);
+    border: 2px solid #ff7600;
     border-radius: 14px;
     overflow: hidden;
     background: #fff;
