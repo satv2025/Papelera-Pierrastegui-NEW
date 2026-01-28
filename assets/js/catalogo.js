@@ -1,6 +1,18 @@
+/* =====================================================
+   CLIENTES
+===================================================== */
+
+import { supabase as auth } from "/assets/js/supabaseClient.js"; // 🔵 login
+const db = window.sb; // 🟢 productos
+
+
+
+
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const sb = window.sb;
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
 
     const grid = document.getElementById("productos-grid");
     const loader = document.getElementById("loader");
@@ -15,6 +27,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const mobileAccountBtn = document.getElementById("mobile-account");
 
     let productos = [];
+
+
 
     /* =====================================================
        MENU AUTO POR CATEGORÍA
@@ -35,9 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         mainDropdown.className = "nav-item dropdown";
 
         mainDropdown.innerHTML = `
-            <a href="javascript:void(0)">
-                Todos los productos
-            </a>
+            <a href="javascript:void(0)">Todos los productos</a>
             <div class="dropdown-menu"></div>
         `;
 
@@ -50,41 +62,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             submenu.innerHTML = `<a href="/?cat=${encodeURIComponent(cat)}">${cat}</a>`;
 
-            if (productos.length) {
+            const subList = document.createElement("div");
+            subList.className = "submenu";
 
-                const subList = document.createElement("div");
-                subList.className = "submenu";
+            productos.forEach(prod => {
+                subList.insertAdjacentHTML(
+                    "beforeend",
+                    `<a href="/producto?id=${prod.id}&slug=${prod.slug || ""}">${prod.nombre}</a>`
+                );
+            });
 
-                productos.forEach(prod => {
-                    const prodA = document.createElement("a");
-                    prodA.href = `/producto?id=${prod.id}&slug=${prod.slug || ""}`;
-                    prodA.textContent = prod.nombre;
-                    subList.appendChild(prodA);
-                });
-
-                submenu.appendChild(subList);
-            }
-
+            submenu.appendChild(subList);
             dropdownMenu.appendChild(submenu);
         });
 
         mainDropdown.appendChild(dropdownMenu);
         desktopMenu.appendChild(mainDropdown);
 
-        desktopMenu.insertAdjacentHTML(
-            "beforeend",
-            `<div class="nav-item"><a href="/nosotros">¿Quiénes somos?</a></div>`
-        );
-
         if (mobileMenuContent)
             mobileMenuContent.innerHTML = desktopMenu.innerHTML;
     }
 
+
+
     /* =====================================================
-       GRID PRODUCTOS
+       GRID
     ===================================================== */
 
     function render(list) {
+
+        if (!grid) return;
 
         grid.innerHTML = "";
 
@@ -95,13 +102,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         list.forEach(p => {
 
-            const slug =
-                p.slug ||
-                (p.nombre || "").toLowerCase().replace(/\s+/g, "-");
-
             grid.insertAdjacentHTML("beforeend", `
-                <div class="card" onclick="location.href='/producto?id=${p.id}&slug=${slug}'">
+                <div class="card"
+                     onclick="location.href='/producto?id=${p.id}&slug=${p.slug || ""}'">
+
                     <img src="${p.imagen || 'https://via.placeholder.com/300'}">
+
                     <div class="info">
                         <div class="nombre">${p.nombre}</div>
                         <div class="desc">${p.descripcion || ''}</div>
@@ -112,15 +118,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
+
+
     /* =====================================================
-       CARGAR PRODUCTOS
+       CARGAR PRODUCTOS (USA DB 🟢)
     ===================================================== */
 
     async function cargarProductos() {
 
         loader.style.display = "block";
 
-        const { data, error } = await sb
+        const { data, error } = await db
             .from("productos")
             .select("*")
             .eq("activo", true)
@@ -139,11 +147,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         render(productos);
     }
 
+    await cargarProductos();
+
+
+
     /* =====================================================
        BUSCADOR
     ===================================================== */
 
     function filtrar(q) {
+
         q = q.toLowerCase();
 
         render(productos.filter(p =>
@@ -159,10 +172,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (mobileSearchInput)
         mobileSearchInput.oninput = () => filtrar(mobileSearchInput.value);
 
-    await cargarProductos();
+
 
     /* =====================================================
-       ACCOUNT / AUTH UI (SUPABASE)
+       AUTH UI (USA AUTH 🔵)
     ===================================================== */
 
     function renderLoggedOut() {
@@ -170,10 +183,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!accountContainer) return;
 
         accountContainer.innerHTML = `
-            <a class="btn-login" href="/login">
-                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg">
-                Acceder
-            </a>
+            <a class="btn-login" href="/login">Acceder</a>
         `;
     }
 
@@ -183,51 +193,43 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         accountContainer.innerHTML = `
             <div class="account-dropdown">
-
-                <button class="account-trigger">
-                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg">
-                    Mi cuenta
-                </button>
-
+                <button class="account-trigger">Mi cuenta</button>
                 <div class="account-menu">
-
-                    <a href="/perfil">
-                        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/edit.svg">
-                        Editar perfil
-                    </a>
-
-                    <button id="logout-btn">
-                        <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/exit.svg">
-                        Cerrar sesión
-                    </button>
-
+                    <a href="/perfil">Perfil</a>
+                    <button id="logout-btn">Cerrar sesión</button>
                 </div>
             </div>
         `;
 
         document.getElementById("logout-btn").onclick = async () => {
-            await sb.auth.signOut();
+            await auth.auth.signOut(); // 🔵 LOGIN CLIENT
             location.href = "/";
         };
     }
 
-    function checkAuth() {
-        const user = sb.auth.user();
-        user ? renderLoggedIn(user) : renderLoggedOut();
+
+
+    async function checkAuth() {
+        const { data } = await auth.auth.getSession(); // 🔵 LOGIN CLIENT
+        data.session?.user ? renderLoggedIn(data.session.user) : renderLoggedOut();
     }
 
-    checkAuth();
+    await checkAuth();
 
-    sb.auth.onAuthStateChange(() => checkAuth());
+    auth.auth.onAuthStateChange((_e, s) => {
+        s?.user ? renderLoggedIn(s.user) : renderLoggedOut();
+    });
+
+
 
     /* =====================================================
        MOBILE ACCOUNT CLICK
     ===================================================== */
 
     if (mobileAccountBtn) {
-        mobileAccountBtn.onclick = () => {
-            const user = sb.auth.user();
-            location.href = user ? "/perfil" : "/login";
+        mobileAccountBtn.onclick = async () => {
+            const { data } = await auth.auth.getSession();
+            location.href = data.session ? "/perfil" : "/login";
         };
     }
 
