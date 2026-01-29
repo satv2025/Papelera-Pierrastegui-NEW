@@ -1,12 +1,4 @@
-/* =====================================================
-   CLIENTES
-===================================================== */
-
-import { supabase as auth } from "/assets/js/supabaseClient.js"; // 🔵 login
-const db = window.sb; // 🟢 productos
-
-
-
+import { auth, db } from "/assets/js/supabaseClient.js"; // 🔵 login + 🟢 productos
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -28,14 +20,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     let productos = [];
 
-
-
     /* =====================================================
        MENU AUTO POR CATEGORÍA
     ===================================================== */
 
     function renderMenu(productos) {
-
         const cats = {};
 
         productos.forEach(p => {
@@ -56,7 +45,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const dropdownMenu = mainDropdown.querySelector(".dropdown-menu");
 
         Object.entries(cats).forEach(([cat, productos]) => {
-
             const submenu = document.createElement("div");
             submenu.className = "dropdown-submenu";
 
@@ -82,8 +70,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (mobileMenuContent)
             mobileMenuContent.innerHTML = desktopMenu.innerHTML;
     }
-
-
 
     /* =====================================================
        GRID
@@ -118,8 +104,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-
-
     /* =====================================================
        CARGAR PRODUCTOS (USA DB 🟢)
     ===================================================== */
@@ -149,8 +133,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await cargarProductos();
 
-
-
     /* =====================================================
        BUSCADOR
     ===================================================== */
@@ -171,8 +153,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (mobileSearchInput)
         mobileSearchInput.oninput = () => filtrar(mobileSearchInput.value);
-
-
 
     /* =====================================================
        AUTH UI (USA AUTH 🔵)
@@ -207,8 +187,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
 
-
-
     async function checkAuth() {
         const { data } = await auth.auth.getSession(); // 🔵 LOGIN CLIENT
         data.session?.user ? renderLoggedIn(data.session.user) : renderLoggedOut();
@@ -219,8 +197,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     auth.auth.onAuthStateChange((_e, s) => {
         s?.user ? renderLoggedIn(s.user) : renderLoggedOut();
     });
-
-
 
     /* =====================================================
        MOBILE ACCOUNT CLICK

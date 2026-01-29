@@ -5,9 +5,6 @@
 import { supabase as auth } from "/assets/js/supabaseClient.js"; // login
 const db = window.sb; // productos
 
-
-
-
 /* =====================================================
    CSS DINÁMICO
 ===================================================== */
@@ -23,16 +20,11 @@ const db = window.sb; // productos
     }
 })();
 
-
-
-
 /* =====================================================
    TODO UNIFICADO
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", async () => {
-
-
 
     /* =====================================================
        ========= PRODUCTO (DB)
@@ -57,16 +49,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (error || !p) return;
 
-
-
     /* ===== RENDER BASICO ===== */
 
     document.title = `${p.nombre} | Papelera Pierrastegui`;
     if (nombre) nombre.textContent = p.nombre;
     if (desc) desc.textContent = p.descripcion || "";
     if (img) img.src = p.imagen || "";
-
-
 
     /* =====================================================
        ========= PRECIO + CANTIDAD (RESTORE COMPLETO)
@@ -108,9 +96,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     updateTotal(); // 🔥 IMPORTANTE — pinta precio inicial
 
-
-
-
     /* =====================================================
        ========= AUTH (LOGIN PROJECT)
     ===================================================== */
@@ -121,7 +106,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const mobileAccountBtn =
         document.getElementById("mobile-account");
-
 
     function renderLoggedOut() {
         if (!accountContainer) return;
@@ -169,24 +153,5 @@ document.addEventListener("DOMContentLoaded", async () => {
             location.href = data.session ? "/perfil" : "/login";
         };
     }
-
-
-
-
-    /* =====================================================
-       ========= MOBILE MENU
-    ===================================================== */
-
-    const openMenu = document.getElementById("mobile-menu-btn");
-    const closeMenu = document.getElementById("closeMobileMenu");
-    const mobileMenu = document.getElementById("mobileMenu");
-    const mobileMenuContent = document.getElementById("mobileMenuContent");
-    const desktopMenu = document.getElementById("desktopMenu");
-
-    if (openMenu) openMenu.onclick = () => mobileMenu.classList.add("active");
-    if (closeMenu) closeMenu.onclick = () => mobileMenu.classList.remove("active");
-
-    if (desktopMenu && mobileMenuContent)
-        mobileMenuContent.innerHTML = desktopMenu.innerHTML;
 
 });
