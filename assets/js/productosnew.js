@@ -1,9 +1,4 @@
-/* =====================================================
-   CLIENTES
-===================================================== */
-
-import { supabase as auth } from "/assets/js/supabaseClient.js"; // login
-const db = window.sb; // productos
+import { auth, db } from "/assets/js/supabaseClient.js"; // 🔵 login + 🟢 productos
 
 /* =====================================================
    CSS DINÁMICO
