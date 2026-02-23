@@ -111,8 +111,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function renderLoggedIn(user) {
-        if (!accountContainer) return;
+        if (!accountContainer || !user) return;
 
+        // Only generate dropdown if user is logged in
         accountContainer.innerHTML = `
             <div class="account-dropdown">
                 <button class="account-trigger">${user.email}</button>
