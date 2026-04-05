@@ -512,14 +512,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!accountContainer || !user) return;
 
         accountContainer.innerHTML = `
-            <div class="account-dropdown">
-                <button class="account-trigger">${escapeHtml(user.email || "Mi cuenta")}</button>
-                <div class="account-menu">
-                    <a href="/profile">Editar perfil</a>
-                    <button id="logout-btn">Cerrar sesión</button>
-                </div>
+        <div class="account-dropdown">
+            <button class="account-trigger">Mi Cuenta</button>
+            <div class="account-menu">
+                <a href="/profile">Editar perfil</a>
+                <button id="logout-btn">Cerrar sesión</button>
             </div>
-        `;
+        </div>
+    `;
 
         document.getElementById("logout-btn").onclick = async () => {
             await auth.auth.signOut();
