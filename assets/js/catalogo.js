@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="account-dropdown">
                 <button class="account-trigger">Mi cuenta</button>
                 <div class="account-menu">
-                    <a href="/perfil">Perfil</a>
+                    <a href="/profile">Perfil</a>
                     <button id="logout-btn">Cerrar sesión</button>
                 </div>
             </div>
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (mobileAccountBtn) {
         mobileAccountBtn.onclick = async () => {
             const { data } = await auth.auth.getSession();
-            location.href = data.session ? "/perfil" : "/login";
+            location.href = data.session ? "/profile" : "/login";
         };
     }
 

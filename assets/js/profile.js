@@ -1,4 +1,4 @@
-import { supabase } from "https://papelerapierrastegui.com.ar/assets/js/supabaseClient.js";
+import { auth as supabase } from "supabaseClient.js";
 
 const nombreInput = document.getElementById("nombre");
 const usuarioInput = document.getElementById("usuario");

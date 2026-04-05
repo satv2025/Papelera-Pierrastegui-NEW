@@ -515,7 +515,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="account-dropdown">
                 <button class="account-trigger">${escapeHtml(user.email || "Mi cuenta")}</button>
                 <div class="account-menu">
-                    <a href="/perfil">Editar perfil</a>
+                    <a href="/profile">Editar perfil</a>
                     <button id="logout-btn">Cerrar sesión</button>
                 </div>
             </div>
