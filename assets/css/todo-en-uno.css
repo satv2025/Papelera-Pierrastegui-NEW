@@ -232,7 +232,7 @@ a {
 }
 
 .nav-items {
-    max-width: var(--container);
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 18px;
     display: flex;
@@ -833,8 +833,8 @@ a {
    FICHA PRODUCTO (DETAIL PAGE)
    ========================= */
 .producto {
-    margin: 69px auto 36px;
-    padding: 26px;
+    margin: 36px auto;
+    padding: 38px;
     align-items: center;
 }
 
