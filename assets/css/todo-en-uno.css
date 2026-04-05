@@ -833,15 +833,16 @@ a {
    FICHA PRODUCTO (DETAIL PAGE)
    ========================= */
 .producto {
-    margin: 36px auto;
+    margin: 69px auto 36px;
     padding: 26px;
+    align-items: center;
 }
 
 .producto-contenido {
     display: grid;
     grid-template-columns: 1fr 1.1fr;
     gap: 40px;
-    align-items: start;
+    align-items: center;
 }
 
 .producto-media {
@@ -908,8 +909,10 @@ a {
 
 #dynamic-dropdowns .dropdown-menu {
     width: 100%;
-    position: relative;
-    margin-top: 6px;
+    position: absolute;
+    margin-top: 2px;
+    height: auto;
+    overflow: auto;
 }
 
 .agregar-carrito-cantidad {
