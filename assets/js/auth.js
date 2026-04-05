@@ -1,9 +1,9 @@
 // ==============================
 // 🔹 Importar Supabase Client
 // ==============================
-import { supabase } from "./supabaseClient.js";
+import { auth as supabase } from "./supabaseClient.js";
 
-const ROOT_HOME = "https://papelerapierrastegui.com.ar/";
+const ROOT_HOME = "../../index.html";
 
 /* ==============================
    🔹 REGISTRO con Email y Password

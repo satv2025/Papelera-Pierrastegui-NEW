@@ -1,100 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelera Pierrastegui</title>
+    <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico">
+    <link rel="stylesheet" href="assets/css/dynastyles.css">
+</head>
 
-        <title>Nos estamos renovando</title>
+<body>
+    <!-- ================= MOBILE BOTTOM BAR ================= -->
+    <div class="mobile-bottom-bar">
 
-        <style>
-            @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
-
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: Gilroy;
-            }
-
-            body {
-                background: #fff;
-                height: 100vh;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-            }
-
-            /* TEXTOS */
-            h1 {
-                font-size: 3rem;
-                color: #ff7600;
-                font-weight: 900;
-                text-align: center;
-            }
-
-            .subtitle {
-                margin-top: 10px;
-                opacity: 0.6;
-                text-align: center;
-            }
-
-            .small {
-                margin-top: 10px;
-                font-size: 0.9rem;
-                opacity: 0.5;
-                text-align: center;
-            }
-
-            /* ANIMACION */
-            #animation {
-                width: 360px;
-                height: 360px;
-                margin: 20px 0;
-            }
-
-            /* FOOTER */
-            .footer {
-                position: absolute;
-                bottom: 10px;
-                text-align: center;
-                font-size: 0.75rem;
-                opacity: 0.6;
-            }
-        </style>
-    </head>
-
-    <body>
-
-        <h1>Nos estamos renovando</h1>
-        <div class="subtitle">En mantenimiento</div>
-
-        <div id="animation"></div>
-
-        <div class="small">Reapertura: Pronto</div>
-
-        <div class="footer">
-            Papelera Pierrastegui © 2026<br>
-            Sol Argentino TV Group 2020–2026
+        <div class="mobile-item" id="mobile-cart" title="Carrito">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito">
         </div>
 
-        <!-- LOTTIE -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+        <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+            rel="noopener noreferrer" title="Instagram">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
+        </a>
 
-        <script>
-            lottie.loadAnimation({
-                container: document.getElementById('animation'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
+        <a class="mobile-item" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+            title="Whatsapp">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="Whatsapp">
+        </a>
 
-                /* ESTA SÍ es de construcción */
-                path: 'https://assets1.lottiefiles.com/packages/lf20_0yfsb3a1.json'
-            });
-        </script>
+        <div class="mobile-item" id="mobile-account" title="Mi cuenta">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/account.svg" alt="Cuenta">
+        </div>
 
-    </body>
+        <div class="mobile-item" id="mobile-menu-btn" title="Menú">
+            <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/menu.svg" alt="Menú">
+        </div>
+
+    </div>
+    <!-- ================= HEADER ================= -->
+    <header class="pp-header">
+
+        <div class="pp-logo" id="pp-logo">
+            <a href="/" class="pp-logo-link">
+                <img alt="Logo Papelera Pierrastegui" class="pp-logo-img"
+                    src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" />
+                <span class="pp-name">Papelera<br />Pierrastegui</span>
+            </a>
+        </div>
+
+        <!-- SEARCH -->
+        <div class="pp-search-bar">
+            <input id="search-input" placeholder="Buscar productos..." type="text" />
+            <button class="pp-search-btn" type="button" aria-label="Buscar">
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg" alt="Buscar">
+            </button>
+        </div>
+
+        <div class="pp-nav-links">
+
+            <!-- MAIL -->
+            <a class="pp-link" href="mailto:info@papelerapierrastegui.com.ar" title="Mail">
+                <span class="pp-link-text">Contactános<br />Por Mail</span>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/email.svg" alt="Mail">
+            </a>
+
+            <!-- INSTAGRAM -->
+            <a class="pp-link" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+                rel="noopener noreferrer" title="Instagram">
+                <span class="pp-link-text">Seguinos<br />En Instagram</span>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg" alt="Instagram">
+            </a>
+
+            <!-- WHATSAPP -->
+            <a class="pp-link" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+                title="WhatsApp">
+                <span class="pp-link-text">Contactános<br />Por Whatsapp</span>
+                <img src="https://papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg" alt="Whatsapp">
+            </a>
+
+            <!-- CARRITO -->
+            <div class="pp-cart dropcart-container">
+                <button class="pp-cart-trigger" id="cart-toggle" type="button" aria-label="Abrir carrito">
+                    <span>Carrito</span>
+                    <img src="https://papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg" alt="Carrito">
+                    <span class="cart-badge" id="cart-badge">0</span>
+                </button>
+
+                <div class="dropcart" id="dropcart" aria-hidden="true">
+                    <div class="dropcart-header">
+                        <strong>Tu Carrito</strong>
+                        <button class="dropcart-close" id="dropcart-close" type="button" aria-label="Cerrar">✕</button>
+                    </div>
+
+                    <div class="dropcart-items" id="dropcart-items">
+                        <p class="empty">Tu carrito está vacío</p>
+                    </div>
+
+                    <div class="dropcart-footer">
+                        <div class="dropcart-total">
+                            <span>Total:</span>
+                            <strong id="dropcart-total">$0</strong>
+                        </div>
+
+                        <div class="dropcart-actions">
+                            <button id="dropcart-empty" class="btn-ghost" type="button">Vaciar</button>
+                            <a id="dropcart-checkout" class="btn-primary" href="/checkout">Finalizar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCOUNT -->
+            <div class="pp-account" id="account-container"></div>
+
+        </div>
+    </header>
+
+    <!-- ================= NAV DINÁMICO ================= -->
+    <nav class="main-navbar">
+        <div class="nav-items" id="desktopMenu">
+            <!-- Aquí se renderiza el menú dinámico -->
+        </div>
+    </nav>
+
+    <!-- ================= CATÁLOGO ================= -->
+    <main class="container" style="padding:30px 0;">
+        <div id="productos-grid" class="productos-grid"></div>
+        <div id="loader">Cargando productos...</div>
+    </main>
+
+    <footer class="pp-footer">
+        <p class="copyr">
+            © 2026 Papelera Pierrastegui · Todos los derechos reservados
+        </p>
+
+        <p class="copyp">
+            Desarrollo y tecnología por Sol Argentino TV Developers
+        </p>
+
+        <div class="footer-links">
+            <a class="footer-btn" href="https://solargentinotv.com.ar/contacto" target="_blank">
+                Contacto
+            </a>
+
+            <a class="footer-btn" href="https://solargentinotv.com.ar" target="_blank">
+                Sitio web
+            </a>
+        </div>
+    </footer>
+
+    <script type="module" src="assets/js/supabaseClient.js"></script>
+    <script type="module" src="assets/js/catalogo.js"></script>
+</body>
 
 </html>
