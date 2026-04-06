@@ -371,7 +371,7 @@ button.btn:hover {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    height: auto;
+    height: 100%;
     outline: .25px solid var(--brand);
 }
 
@@ -401,7 +401,7 @@ button.btn:hover {
     gap: 6px;
     min-width: 0;
     flex: 1;
-    height: auto;
+    height: 100%;
     text-align: justify;
 }
 
@@ -1323,13 +1323,17 @@ button.btn:hover {
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 14px;
+    padding: 10px;
     font-weight: 900;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     transition: .18s;
     width: 100%;
     box-shadow: 0 8px 18px rgba(255, 118, 0, .25);
+    order: 4;
+    margin-top: auto;
+    align-self: center;
+    text-align: center;
 }
 
 .verproducto-btn:hover {
