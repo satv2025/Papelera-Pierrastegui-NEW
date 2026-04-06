@@ -1,9 +1,6 @@
 import { auth, db } from "/assets/js/supabaseClient.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
-    const grid = document.getElementById("productos-grid");
-    const loader = document.getElementById("loader");
-
     const searchInput = document.getElementById("search-input");
     const mobileSearchInput = document.getElementById("mobile-search-input");
 
@@ -57,6 +54,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             localStorage.setItem(SESSION_KEY, sessionId);
         }
         return sessionId;
+    }
+
+    function goToCatalogSearch(value) {
+        const term = String(value || "").trim();
+        if (!term) {
+            location.href = "/";
+            return;
+        }
+        location.href = `/?q=${encodeURIComponent(term)}`;
     }
 
     function openMobileMenu() {
@@ -300,7 +306,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    function renderMenu(productosList = [], currentPage = "catalogo") {
+    function renderMenu(productosList = [], currentPage = "nosotros") {
         const cats = {};
 
         productosList.forEach(p => {
@@ -315,7 +321,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <div class="nav-item">
                     <button class="nav-trigger-btn" id="desktopProductsTrigger" type="button">Todos los productos</button>
                 </div>
-                <div class="nav-item ${currentPage === "nosotros" ? "nav-item-about" : ""}">
+                <div class="nav-item nav-item-about">
                     <a href="/nosotros">¿Quiénes somos?</a>
                 </div>
             `;
@@ -343,10 +349,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (mobileMenuContent) {
             mobileMenuContent.innerHTML = `
                 <div class="nav-items">
-                    <div class="nav-item ${currentPage === "catalogo" ? "active" : ""}">
+                    <div class="nav-item">
                         <a href="/">Inicio</a>
                     </div>
-                    <div class="nav-item ${currentPage === "nosotros" ? "nav-item-about" : ""}">
+                    <div class="nav-item nav-item-about">
                         <a href="/nosotros">¿Quiénes somos?</a>
                     </div>
                     ${Object.entries(cats)
@@ -372,88 +378,48 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    function render(list) {
-        if (!grid) return;
-        grid.innerHTML = "";
+    async function cargarProductosParaMenu() {
+        try {
+            const { data, error } = await db
+                .from("productos")
+                .select("id, slug, nombre, categoria, orden")
+                .eq("activo", true)
+                .order("orden");
 
-        if (!list.length) {
-            grid.innerHTML = "<p>No hay productos</p>";
-            return;
-        }
-
-        list.forEach(p => {
-            grid.insertAdjacentHTML("beforeend", `
-                <div class="card" onclick="location.href='${buildProductUrl(p)}'">
-                    <img src="${escapeHtml(p.imagen || "https://via.placeholder.com/300")}" alt="${escapeHtml(p.nombre || "Producto")}">
-                    <div class="info">
-                        <div class="nombre">${escapeHtml(p.nombre || "")}</div>
-                        <div class="desc">${escapeHtml(p.descripcion || "")}</div>
-                        <div class="cat">${escapeHtml(p.categoria || "")}</div>
-                        <button class="verproducto-btn" onclick="event.stopPropagation();location.href='${buildProductUrl(p)}'">Ver producto</button>
-                    </div>
-                </div>
-            `);
-        });
-    }
-
-    async function cargarProductos() {
-        if (loader) loader.style.display = "block";
-
-        const { data, error } = await db
-            .from("productos")
-            .select("*")
-            .eq("activo", true)
-            .order("orden");
-
-        if (loader) loader.style.display = "none";
-
-        if (error) {
-            console.error("Error cargando productos:", error);
-            if (grid) grid.innerHTML = "Error cargando productos";
-            renderMenu([], "catalogo");
-            return;
-        }
-
-        productos = data || [];
-        renderMenu(productos, "catalogo");
-        render(productos);
-    }
-
-    await cargarProductos();
-
-    function filtrar(q) {
-        q = String(q || "").toLowerCase();
-        render(productos.filter(p =>
-            (p.nombre || "").toLowerCase().includes(q) ||
-            (p.descripcion || "").toLowerCase().includes(q) ||
-            (p.categoria || "").toLowerCase().includes(q)
-        ));
-    }
-
-    if (searchInput) {
-        searchInput.oninput = () => filtrar(searchInput.value);
-        searchInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                filtrar(searchInput.value);
+            if (error) {
+                console.error("Error cargando menú:", error);
+                renderMenu([], "nosotros");
+                return;
             }
-        });
+
+            productos = Array.isArray(data) ? data : [];
+            renderMenu(productos, "nosotros");
+        } catch (err) {
+            console.error("Error inesperado cargando menú:", err);
+            renderMenu([], "nosotros");
+        }
     }
 
-    document.querySelector(".pp-search-btn")?.addEventListener("click", () => {
-        filtrar(searchInput?.value || "");
+    await cargarProductosParaMenu();
+
+    searchInput?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            goToCatalogSearch(searchInput.value);
+        }
     });
 
-    if (mobileSearchInput) {
-        mobileSearchInput.oninput = () => filtrar(mobileSearchInput.value);
-        mobileSearchInput.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                filtrar(mobileSearchInput.value);
-                closeMobileMenu();
-            }
-        });
-    }
+    document.querySelector(".pp-search-btn")?.addEventListener("click", () => {
+        goToCatalogSearch(searchInput?.value || "");
+    });
+
+    mobileSearchInput?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            goToCatalogSearch(mobileSearchInput.value);
+            closeMobileMenu();
+        }
+    });
 
     function renderLoggedOut() {
         if (!accountContainer) return;

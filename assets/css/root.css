@@ -1,0 +1,79 @@
+:root {
+    /* =========================
+       🎨 Colores principales
+    ========================= */
+    --brand: #ff7600;
+    --brand-2: #ffc52f;
+    --orange: #ff7600;
+    --dark: #764526;
+
+    --text: #000000;
+    --muted: #666666;
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --surface-soft: #fafafa;
+    --border: rgba(0, 0, 0, 0.10);
+
+    /* =========================
+       🎨 Paleta Pierrastegui
+    ========================= */
+    --naranja-pierrastegui: #ff7600;
+    --naranja-oscuro-pierrastegui: #cc5e00;
+    --blanco-pierrastegui: #ffffff;
+    --gris-pierrastegui: #f5f5f5;
+    --negro-pierrastegui: #000000;
+
+    /* =========================
+       ✨ Estados
+    ========================= */
+    --verde-pierrastegui: #0fca8c;
+    --rojo-pierrastegui: #ff3b30;
+    --brillo-pierrastegui: rgba(255, 118, 0, 0.6);
+
+    /* =========================
+       🎛️ Filtros
+    ========================= */
+    --filtro-verde-pierrastegui: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(366%) hue-rotate(109deg) brightness(102%) contrast(97%);
+    --filtro-rojo-pierrastegui: brightness(0) saturate(100%) invert(35%) sepia(69%) saturate(6581%) hue-rotate(6deg) brightness(108%) contrast(105%);
+
+    /* =========================
+       🖋️ Tipografía
+    ========================= */
+    --letra-pierrastegui: Gilroy;
+    --tamano-letra-pierrastegui: 16px;
+    --peso-normal-pierrastegui: 500;
+    --peso-fuerte-pierrastegui: 800;
+
+    /* =========================
+       📏 Layout
+    ========================= */
+    --header-h: 92px;
+    --container: 1200px;
+    --container-wide: 1760px;
+
+    /* =========================
+       🧱 Bordes y radios
+    ========================= */
+    --radius: 6px;
+    --radius-sm: 6px;
+
+    --borde-suave-pierrastegui: 6px;
+    --borde-medio-pierrastegui: 10px;
+    --borde-redondo-pierrastegui: 20px;
+
+    /* =========================
+       🌫️ Sombras
+    ========================= */
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    --shadow-strong: 0 6px 22px rgb(0 0 0 / 51%);
+
+    --sombra-suave-pierrastegui: 0 4px 14px rgba(0, 0, 0, 0.15);
+    --sombra-naranja-pierrastegui: 0 0 10px var(--brillo-pierrastegui);
+
+    /* =========================
+       ⚡ Transiciones
+    ========================= */
+    --transicion-rapida-pierrastegui: 0.2s ease-in-out;
+    --transicion-media-pierrastegui: 0.3s ease;
+    --transicion-lenta-pierrastegui: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}

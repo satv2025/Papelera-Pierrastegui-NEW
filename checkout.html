@@ -5,41 +5,112 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Checkout — Papelera Pierrastegui</title>
-        <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" />
+        <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" />
         <link rel="stylesheet" href="/assets/css/checkout.css" />
     </head>
 
     <body>
+        <!-- ================= MOBILE BOTTOM BAR ================= -->
+        <div class="mobile-bottom-bar">
+
+            <a class="mobile-item" href="/" title="Inicio">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg" alt="Inicio">
+            </a>
+
+            <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+                rel="noopener noreferrer" title="Instagram">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
+                    alt="Instagram">
+            </a>
+
+            <a class="mobile-item" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+                title="Whatsapp">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg"
+                    alt="Whatsapp">
+            </a>
+
+            <div class="mobile-item" id="mobile-menu-btn" title="Menú">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/menu.svg" alt="Menú">
+            </div>
+
+        </div>
+
+        <!-- ================= HEADER ================= -->
         <header class="pp-header">
+
             <div class="pp-logo" id="pp-logo">
                 <a href="/" class="pp-logo-link">
                     <img alt="Logo Papelera Pierrastegui" class="pp-logo-img"
-                        src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png" />
+                        src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" />
                     <span class="pp-name">Papelera<br />Pierrastegui</span>
                 </a>
             </div>
 
+            <!-- SEARCH -->
             <div class="pp-search-bar pp-search-bar--static" aria-hidden="true">
                 <input type="text" placeholder="Finalizar compra" disabled />
+                <button class="pp-search-btn" type="button" aria-label="Checkout" disabled>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg"
+                        alt="Checkout">
+                </button>
             </div>
 
             <div class="pp-nav-links">
-                <a class="pp-link" href="/">
-                    <span class="pp-link-text">Volver al<br />Catálogo</span>
-                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg"
-                        alt="Inicio">
+
+                <!-- MAIL -->
+                <a class="pp-link" href="mailto:info@papelerapierrastegui.com.ar" title="Mail">
+                    <span class="pp-link-text">Contactános<br />Por Mail</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/email.svg"
+                        alt="Mail">
                 </a>
+
+                <!-- INSTAGRAM -->
+                <a class="pp-link" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+                    rel="noopener noreferrer" title="Instagram">
+                    <span class="pp-link-text">Seguinos<br />En Instagram</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
+                        alt="Instagram">
+                </a>
+
+                <!-- WHATSAPP -->
+                <a class="pp-link" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+                    title="WhatsApp">
+                    <span class="pp-link-text">Contactános<br />Por Whatsapp</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg"
+                        alt="Whatsapp">
+                </a>
+
+                <!-- VOLVER AL CATÁLOGO -->
+                <a class="pp-link" href="/" title="Volver al catálogo">
+                    <span class="pp-link-text">Volver al<br />Catálogo</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/home3.svg"
+                        alt="Volver">
+                </a>
+
             </div>
         </header>
 
+        <!-- ================= NAV DINÁMICO ================= -->
         <nav class="main-navbar">
-            <div class="nav-items">
-                <div class="nav-item"><a href="/">Inicio</a></div>
-                <div class="nav-item"><a href="/nosotros">¿Quiénes somos?</a></div>
-                <div class="nav-item"><a href="/checkout">Checkout</a></div>
+            <div class="nav-items" id="desktopMenu">
+                <!-- Aquí se renderiza el menú dinámico -->
             </div>
         </nav>
 
+        <!-- ================= MOBILE MENU ================= -->
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <div class="mobile-menu-header">
+                <button id="closeMobileMenu" type="button" aria-label="Cerrar menú">✕</button>
+            </div>
+
+            <div class="mobile-menu-search">
+                <input type="text" id="mobile-search-input" placeholder="Buscar productos..." />
+            </div>
+
+            <div id="mobileMenuContent"></div>
+        </div>
+
+        <!-- ================= CHECKOUT ================= -->
         <main class="checkout-main">
             <div class="container">
                 <section class="checkout-hero">
@@ -48,9 +119,11 @@
                     <p class="checkout-subtitle">
                         Revisá tu pedido, completá tus datos y elegí cómo querés recibirlo.
                     </p>
+
                     <div class="aviso-arg">
                         🚚 Envíos disponibles únicamente dentro de <b>Argentina</b>.
                     </div>
+
                     <div id="checkout-error" class="checkout-error"></div>
                 </section>
 
@@ -106,41 +179,36 @@
                             <div class="envio-opcion" data-metodo="envio">
                                 <div class="envio-opcion-main">
                                     <span class="envio">Envío a domicilio</span>
-                                    <small>Se calcula según distancia</small>
+                                    <small>Calculado automáticamente</small>
                                 </div>
-                                <span class="costo" id="envio-costo-texto">Completá los datos</span>
+                                <span class="costo" id="envio-costo-texto">
+                                    El costo de envío se calcula según la distancia
+                                </span>
                             </div>
                         </div>
 
                         <div id="direccion-container" class="direccion-container" style="display:none;">
-                            <div class="direccion-grid">
-                                <div class="checkout-form-block">
-                                    <label class="checkout-label" for="chk-provincia">Provincia</label>
-                                    <input class="checkout-input" id="chk-provincia" placeholder="Ej: Buenos Aires" />
-                                </div>
-
-                                <div class="checkout-form-block">
-                                    <label class="checkout-label" for="chk-localidad">Localidad</label>
-                                    <input class="checkout-input" id="chk-localidad" placeholder="Ej: Morón" />
-                                </div>
-
-                                <div class="checkout-form-block">
-                                    <label class="checkout-label" for="chk-cp">Código postal</label>
-                                    <input class="checkout-input" id="chk-cp" placeholder="Ej: 1708" />
-                                </div>
-
-                                <div class="checkout-form-block checkout-form-block--full">
-                                    <label class="checkout-label" for="chk-direccion">Dirección</label>
-                                    <div class="direccion-wrapper">
-                                        <input class="checkout-input" id="chk-direccion"
-                                            placeholder="Ej: Av. Rivadavia 1234" />
-                                        <div id="direccion-sugerencias"></div>
-                                    </div>
+                            <div class="checkout-form-block">
+                                <label class="checkout-label" for="chk-direccion">Dirección completa</label>
+                                <div class="direccion-wrapper">
+                                    <input class="checkout-input" id="chk-direccion"
+                                        placeholder="Ej: Av. Rivadavia 1234, Morón, Buenos Aires" />
                                 </div>
                             </div>
 
                             <div class="direccion-ayuda">
-                                Origen del envío: <b>Anunciación 3796, Morón, Buenos Aires (CP 1708)</b>
+                                Origen del envío: <b>Anunciación 3796, Morón, Buenos Aires, Argentina</b>
+                            </div>
+
+                            <div id="shipping-info" class="shipping-info" style="display:none;">
+                                <div class="shipping-info-row">
+                                    <span>Distancia</span>
+                                    <strong id="shipping-distance">-</strong>
+                                </div>
+                                <div class="shipping-info-row">
+                                    <span>Duración estimada</span>
+                                    <strong id="shipping-duration">-</strong>
+                                </div>
                             </div>
                         </div>
 
@@ -148,20 +216,36 @@
 
                         <div id="checkout-totals" class="checkout-totals"></div>
 
-                        <button class="checkout-btn" id="btn-pagar" type="button">Pagar con MercadoPago</button>
-                        <div id="checkout-loader" class="loader" style="display:none;">Procesando pago...</div>
+                        <button class="checkout-btn" id="btn-pagar" type="button">
+                            Pagar con MercadoPago
+                        </button>
+
+                        <div id="checkout-loader" class="loader" style="display:none;">
+                            Procesando pago...
+                        </div>
                     </article>
                 </section>
             </div>
         </main>
 
         <footer class="pp-footer">
-            <p class="copyr">© 2026 Papelera Pierrastegui · Todos los derechos reservados</p>
-            <p class="copyp">Desarrollo y tecnología por Sol Argentino TV Developers</p>
+            <p class="copyr">
+                © 2026 Papelera Pierrastegui · Todos los derechos reservados
+            </p>
+
+            <p class="copyp">
+                Desarrollo y tecnología por Sol Argentino TV Developers
+            </p>
 
             <div class="footer-links">
-                <a class="footer-btn" href="https://solargentinotv.com.ar/contacto" target="_blank">Contacto</a>
-                <a class="footer-btn" href="https://solargentinotv.com.ar" target="_blank">Sitio web</a>
+                <a class="footer-btn" href="https://solargentinotv.com.ar/contacto" target="_blank"
+                    rel="noopener noreferrer">
+                    Contacto
+                </a>
+
+                <a class="footer-btn" href="https://solargentinotv.com.ar" target="_blank" rel="noopener noreferrer">
+                    Sitio web
+                </a>
             </div>
         </footer>
 

@@ -1,91 +1,237 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nosotros - Papelera Pierrastegui</title>
-    <link rel="stylesheet" href="assets/css/nosotros.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" type="image/png" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.png">
-    <link rel="icon" type="image/x-icon"
-        href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon.ico">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nosotros | Papelera Pierrastegui</title>
+        <link rel="icon" href="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" />
+        <link rel="stylesheet" href="assets/css/nosotros.css" />
+    </head>
 
-<body>
-    <!-- Encabezado principal -->
-    <header>
-        <h1>Papelera Pierrastegui</h1>
-        <nav>
-            <ul>
-                <li><a href="index">Inicio</a></li>
-                <li><a href="nosotros" class="active">Nosotros</a></li>
-                <li><a href="contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    <body>
+        <!-- ================= MOBILE BOTTOM BAR ================= -->
+        <div class="mobile-bottom-bar">
 
-    <!-- Contenido principal -->
-    <main>
-        <article id="medio-pago-articulo">
-            <header class="articulo-header">
-                <h2>Sobre Nosotros</h2>
-            </header>
+            <div class="mobile-item" id="mobile-cart" title="Carrito">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg"
+                    alt="Carrito">
+            </div>
 
-            <section class="contenido-articulo">
-                <div class="texto">
-                    <p>En Pierrastegui, somos una papelera mayorista y minorista especializada en la comercialización de
-                        envases, descartables, embalajes, packaging, higiene institucional, limpieza y artículos para
-                        locales comerciales y oficinas. Además, fabricamos insumos para floristas y moños de auto.</p>
-
-                    <p class="destacado">Nos comprometemos a ofrecer productos de primera calidad con una amplia
-                        variedad para que encuentres todo en un solo lugar, sin vueltas. Trabajamos con responsabilidad
-                        y cercanía, asegurándonos de brindarte un servicio confiable y eficiente.</p>
-
-                    <p>Realizamos entregas directas en Capital Federal y Conurbano, garantizando rapidez y seguridad en
-                        cada pedido.</p>
-
-                    <p>Si buscás un proveedor que te simplifique el día a día, estamos para ayudarte.</p>
-                </div>
-
-                <img class="fotosn" src="assets/images/fondosn.jpg" alt="Imagen representativa">
-            </section>
-        </article>
-    </main>
-
-    <footer>
-        <p>2025 © Papelera Pierrastegui</p>
-        <p>2025 © Sol Argentino TV | Creado por los desarrolladores de Sol Argentino TV</p>
-
-        <div class="social-icons">
-            <a href="https://www.facebook.com/papelerapierrastegui" target="_blank" aria-label="Facebook"
-                rel="noopener noreferrer">
-                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/facebook.svg"
-                    alt="Facebook">
-            </a>
-
-            <a href="https://www.instagram.com/papelerapierrastegui" target="_blank" aria-label="Instagram"
-                rel="noopener noreferrer">
+            <a class="mobile-item" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+                rel="noopener noreferrer" title="Instagram">
                 <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
                     alt="Instagram">
             </a>
 
-            <a href="https://twitter.com/pierrastegui" target="_blank" aria-label="Twitter" rel="noopener noreferrer">
-                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/twitter.svg"
-                    alt="Twitter">
-            </a>
-
-            <a href="https://wa.me/5491122334455" target="_blank" aria-label="WhatsApp" rel="noopener noreferrer">
+            <a class="mobile-item" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+                title="Whatsapp">
                 <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg"
-                    alt="WhatsApp">
+                    alt="Whatsapp">
             </a>
-        </div>
-    </footer>
 
-    <!-- Script para reemplazar dinámicamente los href -->
-    <script src="assets/js/social-links.js"></script>
-    <!-- Scripts -->
-    <script src="assets/js/satv-scroll-main.js"></script>
-</body>
+            <div class="mobile-item" id="mobile-account" title="Mi cuenta">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/account.svg"
+                    alt="Cuenta">
+            </div>
+
+            <div class="mobile-item" id="mobile-menu-btn" title="Menú">
+                <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/menu.svg" alt="Menú">
+            </div>
+
+        </div>
+
+        <!-- ============ MOBILE MENU ============= -->
+        <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <div class="mobile-menu-header">
+                <span>Menú</span>
+                <button id="closeMobileMenu" type="button" aria-label="Cerrar">✕</button>
+            </div>
+
+            <div class="mobile-search">
+                <input id="mobile-search-input" type="text" placeholder="Buscar productos..." />
+            </div>
+
+            <div id="mobileMenuContent"></div>
+        </div>
+
+        <!-- ================= HEADER ================= -->
+        <header class="pp-header">
+
+            <div class="pp-logo" id="pp-logo">
+                <a href="/" class="pp-logo-link">
+                    <img alt="Logo Papelera Pierrastegui" class="pp-logo-img"
+                        src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/favicon1.ico" />
+                    <span class="pp-name">Papelera<br />Pierrastegui</span>
+                </a>
+            </div>
+
+            <div class="pp-search-bar">
+                <input id="search-input" placeholder="Buscar productos..." type="text" />
+                <button class="pp-search-btn" type="button" aria-label="Buscar">
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/lupa.svg"
+                        alt="Buscar">
+                </button>
+            </div>
+
+            <div class="pp-nav-links">
+
+                <a class="pp-link" href="mailto:info@papelerapierrastegui.com.ar" title="Mail">
+                    <span class="pp-link-text">Contactános<br />Por Mail</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/email.svg"
+                        alt="Mail">
+                </a>
+
+                <a class="pp-link" href="https://www.instagram.com/pierrastegui.papelera" target="_blank"
+                    rel="noopener noreferrer" title="Instagram">
+                    <span class="pp-link-text">Seguinos<br />En Instagram</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/instagram.svg"
+                        alt="Instagram">
+                </a>
+
+                <a class="pp-link" href="https://wa.me/541123054613" target="_blank" rel="noopener noreferrer"
+                    title="WhatsApp">
+                    <span class="pp-link-text">Contactános<br />Por Whatsapp</span>
+                    <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/social/whatsapp.svg"
+                        alt="Whatsapp">
+                </a>
+
+                <div class="pp-cart dropcart-container">
+                    <button class="pp-cart-trigger" id="cart-toggle" type="button" aria-label="Abrir carrito">
+                        <span>Carrito</span>
+                        <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/svg/web/carrito.svg"
+                            alt="Carrito">
+                        <span class="cart-badge" id="cart-badge">0</span>
+                    </button>
+
+                    <div class="dropcart" id="dropcart" aria-hidden="true">
+                        <div class="dropcart-header">
+                            <strong>Tu Carrito</strong>
+                            <button class="dropcart-close" id="dropcart-close" type="button"
+                                aria-label="Cerrar">✕</button>
+                        </div>
+
+                        <div class="dropcart-items" id="dropcart-items">
+                            <p class="empty">Tu carrito está vacío</p>
+                        </div>
+
+                        <div class="dropcart-footer">
+                            <div class="dropcart-total">
+                                <span>Total:</span>
+                                <strong id="dropcart-total">$0</strong>
+                            </div>
+
+                            <div class="dropcart-actions">
+                                <button id="dropcart-empty" class="btn-ghost" type="button">Vaciar</button>
+                                <a id="dropcart-checkout" class="btn-primary">Finalizar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pp-account" id="account-container"></div>
+            </div>
+        </header>
+
+        <!-- ================= NAV DINÁMICO ================= -->
+        <nav class="main-navbar">
+            <div class="nav-items" id="desktopMenu"></div>
+        </nav>
+
+        <!-- ================= NOSOTROS ================= -->
+        <main class="container">
+            <section class="pp-about">
+                <article class="pp-about-card">
+                    <div class="pp-about-hero">
+                        <span class="pp-about-kicker">Nosotros</span>
+                        <h1 class="pp-about-title">Mayorista y minorista en soluciones para tu negocio</h1>
+                        <p class="pp-about-lead">
+                            En Papelera Pierrastegui trabajamos para que encuentres productos de calidad, atención
+                            cercana
+                            y una solución práctica para el día a día de tu comercio, oficina o emprendimiento.
+                        </p>
+                    </div>
+
+                    <div class="pp-about-body">
+                        <div class="pp-about-text">
+                            <p>
+                                Somos una papelera mayorista y minorista especializada en la comercialización de
+                                envases,
+                                descartables, embalajes, packaging, higiene institucional, limpieza y artículos para
+                                locales comerciales y oficinas.
+                            </p>
+
+                            <p>
+                                Además, fabricamos insumos para floristas y moños de auto, ofreciendo una propuesta
+                                amplia
+                                para quienes buscan variedad, practicidad y confianza en un solo lugar.
+                            </p>
+
+                            <p class="destacado">
+                                Nos comprometemos a brindar productos de primera calidad, una atención responsable y un
+                                servicio eficiente, para que cada cliente pueda resolver sus compras sin vueltas.
+                            </p>
+
+                            <p>
+                                Realizamos entregas directas en Capital Federal y Conurbano, priorizando rapidez,
+                                seguridad
+                                y cumplimiento en cada pedido.
+                            </p>
+
+                            <p>
+                                Si buscás un proveedor que te simplifique el trabajo diario y acompañe el crecimiento de
+                                tu
+                                actividad, en Pierrastegui estamos para ayudarte.
+                            </p>
+                        </div>
+
+                        <div class="pp-about-media">
+                            <img src="https://mediastatic.papelerapierrastegui.com.ar/assets/images/fondosn.jpg" alt="Papelera Pierrastegui - Nosotros" />
+                        </div>
+                    </div>
+
+                    <div class="pp-about-features">
+                        <div class="pp-about-feature">
+                            <h3>Variedad</h3>
+                            <p>Todo en un solo lugar: packaging, limpieza, descartables, oficina y más.</p>
+                        </div>
+
+                        <div class="pp-about-feature">
+                            <h3>Calidad</h3>
+                            <p>Productos confiables para responder a las necesidades reales de cada cliente.</p>
+                        </div>
+
+                        <div class="pp-about-feature">
+                            <h3>Entrega</h3>
+                            <p>Distribución directa en Capital Federal y Conurbano con rapidez y seguridad.</p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <footer class="pp-footer">
+            <p class="copyr">
+                © 2026 Papelera Pierrastegui · Todos los derechos reservados
+            </p>
+
+            <p class="copyp">
+                Desarrollo y tecnología por Sol Argentino TV Developers
+            </p>
+
+            <div class="footer-links">
+                <a class="footer-btn" href="https://solargentinotv.com.ar/contacto" target="_blank">
+                    Contacto
+                </a>
+
+                <a class="footer-btn" href="https://solargentinotv.com.ar" target="_blank">
+                    Sitio web
+                </a>
+            </div>
+        </footer>
+
+        <script type="module" src="assets/js/supabaseClient.js"></script>
+        <script type="module" src="assets/js/nosotros.js"></script>
+    </body>
 
 </html>

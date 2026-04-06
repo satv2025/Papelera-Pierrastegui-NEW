@@ -1,18 +1,9 @@
-/* ============================================================
-   reg_logueo_pp.css — versión adaptada a <input> nativos
-   ============================================================ */
+@import url(root.css);
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
-
-:root {
-    --orange: #ff7600;
-    --dark: #764526;
-    --bg: #ffffff;
-    --shadow: 0 6px 22px rgb(0 0 0 / 51%);
-}
 
 * {
     box-sizing: border-box;
-    font-family: 'Gilroy', 'Segoe UI', 'Century Gothic', sans-serif;
+    font-family: var(--letra-pierrastegui) !important;
 }
 
 html,

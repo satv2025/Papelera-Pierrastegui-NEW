@@ -1,27 +1,12 @@
+@import url(root.css);
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
-
-:root {
-    --brand: #ff7600;
-    --brand-2: #ffc52f;
-    --text: #000000;
-    --muted: #666;
-    --bg: #ffffff;
-    --surface: #ffffff;
-    --border: rgba(0, 0, 0, .10);
-    --shadow: 0 10px 25px rgba(0, 0, 0, .12);
-    --radius: 6px;
-    --radius-sm: 6px;
-    --header-h: 92px;
-    --container: 1200px;
-    --container-wide: 1400px;
-}
 
 /* RESET & BASE */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Gilroy', sans-serif;
+    font-family: var(--letra-pierrastegui), sans-serif;
 }
 
 html,
@@ -230,6 +215,8 @@ button.btn:hover {
 .main-navbar {
     background: #f7f7f7;
     border-bottom: 3px solid var(--brand);
+    position: relative;
+    z-index: 40;
 }
 
 .nav-items {
@@ -239,35 +226,54 @@ button.btn:hover {
     display: flex;
     gap: 14px;
     align-items: center;
-    height: 56px;
+    min-height: 56px;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible;
     white-space: nowrap;
 }
 
-.nav-item>a {
+.nav-item {
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.nav-item>a,
+.nav-trigger-btn {
+    display: inline-flex;
+    align-items: center;
     font-weight: 900;
     padding: 10px 12px;
     border-radius: 6px;
     font-size: 15px;
     color: #ff7600;
-    display: inline-flex;
-    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-.nav-item>a:hover {
+.nav-item>a:hover,
+.nav-trigger-btn:hover,
+.nav-item.active>a,
+.nav-trigger-btn.active {
     background: rgba(0, 0, 0, .05);
     color: #000;
 }
 
-.dropdown {
-    position: relative;
+.nav-item-about>a {
+    color: var(--brand-2) !important;
+    font-weight: 900;
 }
 
-.dropdown-menu {
+.nav-item-about>a:hover {
+    background: rgba(255, 197, 47, 0.16);
+    color: var(--brand) !important;
+}
+
+.nav-dropdown-panel {
     display: none;
     position: absolute;
-    left: 0;
+    top: calc(100% + 4px);
+    left: 18px;
     width: 340px;
     max-width: min(340px, calc(100vw - 24px));
     background: #fff;
@@ -275,29 +281,39 @@ button.btn:hover {
     border-radius: 6px;
     box-shadow: var(--shadow);
     padding: 10px;
-    z-index: 30;
-    margin-top: 4px;
-    color: #ff7600 !important;
-    overflow: auto;
+    z-index: 9999;
     height: 379px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.nav-item.dropdown:hover>.dropdown-menu,
-.nav-item.dropdown:focus-within>.dropdown-menu {
+.nav-dropdown-panel.show {
     display: block;
 }
 
-.dropdown-submenu>a {
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>a,
+.dropdown-submenu-trigger {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
     font-weight: 900;
     padding: 10px 10px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
+    color: #ff7600;
+    background: transparent;
+    border: none;
+    text-align: left;
 }
 
-.dropdown-submenu>a:hover {
+.dropdown-submenu>a:hover,
+.dropdown-submenu-trigger:hover {
     background: rgba(0, 0, 0, .04);
     color: #000;
 }
@@ -308,32 +324,37 @@ button.btn:hover {
     margin-bottom: 6px;
 }
 
-.dropdown-submenu:hover .submenu {
+.dropdown-submenu:hover>.submenu,
+.dropdown-submenu.active>.submenu {
     display: block;
 }
 
-.submenu a {
+.submenu a,
+.submenu-all {
     display: block;
     padding: 8px 10px;
     border-radius: 6px;
     font-weight: 800;
     font-size: 13px;
     margin-bottom: 1px;
+    white-space: normal;
 }
 
-.submenu a:hover {
+.submenu a:hover,
+.submenu-all:hover {
     background: rgba(0, 0, 0, .04);
     color: #000;
 }
 
-.dropdown-submenu:hover>a {
-    color: #000;
+.submenu-all {
+    color: var(--brand-2);
+    font-weight: 900;
 }
 
-.nav-item.dropdown:hover>a,
-.nav-item.dropdown:focus-within>a {
-    background: rgba(0, 0, 0, .05);
-    color: #000;
+.submenu-arrow {
+    font-size: 18px;
+    line-height: 1;
+    margin-left: 8px;
 }
 
 /* =========================
@@ -453,7 +474,7 @@ button.btn:hover {
     font-size: 12px;
     line-height: 1;
     font-weight: 700;
-    background: #d62828;
+    background: var(--brand);
     color: #fff;
 }
 
@@ -500,7 +521,7 @@ button.btn:hover {
 .dropcart-header strong {
     font-size: 16px;
     font-weight: 700;
-    color: #111827;
+    color: var(--brand);
 }
 
 .dropcart-close {
@@ -510,9 +531,10 @@ button.btn:hover {
     font-size: 18px;
     line-height: 1;
     cursor: pointer;
-    color: #374151;
+    color: var(--brand);
     padding: 4px 6px;
     border-radius: 8px;
+    font-weight: 900;
 }
 
 .dropcart-close:hover {
@@ -531,7 +553,7 @@ button.btn:hover {
 .dropcart-items .empty {
     margin: 0;
     text-align: center;
-    color: #6b7280;
+    color: var(--brand);
     padding: 28px 10px;
     font-size: 14px;
     font-weight: 800;
@@ -575,7 +597,7 @@ button.btn:hover {
     margin: 0 0 4px;
     font-size: 14px;
     font-weight: 700;
-    color: #111827;
+    color: var(--brand);
     text-decoration: none;
     overflow-wrap: anywhere;
 }
@@ -587,7 +609,7 @@ button.btn:hover {
 .dropcart-sub,
 .dropcart-item-meta {
     margin: 0;
-    color: #6b7280;
+    color: var(--brand);
     font-size: 12px;
     line-height: 1.45;
     font-weight: 800;
@@ -598,7 +620,7 @@ button.btn:hover {
     margin-top: 6px;
     font-size: 13px;
     font-weight: 700;
-    color: #111827;
+    color: var(--brand);
     white-space: nowrap;
 }
 
@@ -652,7 +674,7 @@ button.btn:hover {
     justify-content: space-between;
     gap: 12px;
     margin-bottom: 12px;
-    color: #111827;
+    color: var(--brand);
     font-weight: 950;
 }
 
@@ -690,7 +712,7 @@ button.btn:hover {
 .dropcart-actions .btn-ghost {
     border: 1px solid rgba(0, 0, 0, 0.12);
     background: #fff;
-    color: #111827;
+    color: var(--brand);
 }
 
 .btn-ghost:hover,
@@ -700,7 +722,7 @@ button.btn:hover {
 
 .btn-primary,
 .dropcart-actions .btn-primary {
-    border: 1px solid #111827;
+    border: none;
     background: var(--brand);
     color: #fff;
 }
@@ -824,6 +846,7 @@ button.btn:hover {
     flex-direction: column;
     gap: 7px;
     padding: 0 12px;
+    min-height: auto;
     height: auto;
     align-items: stretch;
     overflow: visible;
@@ -834,7 +857,15 @@ button.btn:hover {
     width: 100%;
 }
 
+#mobileMenuContent .nav-item>a,
+#mobileMenuContent .nav-trigger-btn,
+#mobileMenuContent .dropdown-submenu-trigger {
+    width: 100%;
+    justify-content: space-between;
+}
+
 #mobileMenuContent .dropdown-menu,
+#mobileMenuContent .nav-dropdown-panel,
 #mobileMenuContent .submenu {
     position: static;
     width: 100%;
@@ -845,6 +876,7 @@ button.btn:hover {
     background: transparent;
     padding: 0;
     height: auto;
+    overflow: visible;
 }
 
 #mobileMenuContent .dropdown-submenu:hover .submenu,
@@ -972,9 +1004,7 @@ button.btn:hover {
     border-radius: var(--radius);
     background: #fff;
     box-shadow: 0 2px 6px rgb(0 0 0 / 52%), 0 8px 20px rgba(0, 0, 0, 0.08);
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     align-items: center;
 }
 
@@ -1606,13 +1636,13 @@ button.btn:hover {
 @supports (-moz-appearance: none) {
     * {
         scrollbar-width: thin;
-        scrollbar-color: var(--brand) transparent;
+        scrollbar-color: var(--brand);
     }
 }
 
 @-moz-document url-prefix() {
     * {
         scrollbar-width: thin;
-        scrollbar-color: var(--brand) transparent;
+        scrollbar-color: var(--brand);
     }
 }

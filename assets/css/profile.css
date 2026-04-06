@@ -1,45 +1,8 @@
+@import url(root.css);
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
-:root {
-    /* 🎨 Paleta oficial Pierrastegui */
-    --naranja-pierrastegui: #ff7600;
-    --naranja-oscuro-pierrastegui: #cc5e00;
-    --blanco-pierrastegui: #ffffff;
-    --gris-pierrastegui: #f5f5f5;
-    --negro-pierrastegui: #000000;
-
-    /* ✨ Estados */
-    --verde-pierrastegui: #0fca8c;
-    --rojo-pierrastegui: #ff3b30;
-    --brillo-pierrastegui: rgba(255, 118, 0, 0.6);
-
-    /* ✨ Forzados de Color */
-    --filtro-verde-pierrastegui: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(366%) hue-rotate(109deg) brightness(102%) contrast(97%) !important;
-    --filtro-rojo-pierrastegui: brightness(0) saturate(100%) invert(35%) sepia(69%) saturate(6581%) hue-rotate(6deg) brightness(108%) contrast(105%) !important;
-
-    /* 🖋️ Tipografía */
-    --letra-pierrastegui: 'Gilroy';
-    --tamano-letra-pierrastegui: 16px;
-    --peso-normal-pierrastegui: 500;
-    --peso-fuerte-pierrastegui: 800;
-
-    /* 🧱 Bordes y redondeos */
-    --borde-suave-pierrastegui: 6px;
-    --borde-medio-pierrastegui: 10px;
-    --borde-redondo-pierrastegui: 20px;
-
-    /* 🌫️ Sombras */
-    --sombra-suave-pierrastegui: 0 4px 14px rgba(0, 0, 0, 0.15);
-    --sombra-naranja-pierrastegui: 0 0 10px var(--brillo-pierrastegui);
-
-    /* ⚡ Transiciones */
-    --transicion-rapida-pierrastegui: 0.2s ease-in-out;
-    --transicion-media-pierrastegui: 0.3s ease;
-    --transicion-lenta-pierrastegui: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
 * {
-    font-family: var(--letra-pierrastegui);
+    font-family: var(--letra-pierrastegui) !important;
 }
 
 /* 🌍 Estructura base */

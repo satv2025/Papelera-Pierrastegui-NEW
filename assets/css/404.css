@@ -1,7 +1,8 @@
+@import url(root.css);
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
 * {
-    font-family: Gilroy !important;
+    font-family: var(--letra-pierrastegui) !important;
 }
 
 body {

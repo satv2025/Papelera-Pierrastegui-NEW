@@ -1,29 +1,21 @@
 import { auth, db } from "/assets/js/supabaseClient.js";
 
-/* =====================================================
-   CSS DINÁMICO
-===================================================== */
 (function () {
     const qs = new URLSearchParams(location.search);
     const id = qs.get("id");
     const slug = qs.get("slug") || qs.get("nombre") || "";
-
     const css = document.getElementById("todo-css");
     if (css) {
         css.href = `assets/css/todo-en-uno.css?pid=${encodeURIComponent(id || "")}&slug=${encodeURIComponent(slug || "")}`;
     }
 })();
 
-/* =====================================================
-   HELPERS
-===================================================== */
 function money(n) {
     return "$" + Number(n || 0).toLocaleString("es-AR");
 }
 
 function parseVariantes(raw) {
     if (!raw) return { drop1: [], drop2: [] };
-
     if (typeof raw === "string") {
         try {
             return JSON.parse(raw);
@@ -31,7 +23,6 @@ function parseVariantes(raw) {
             return { drop1: [], drop2: [] };
         }
     }
-
     return raw;
 }
 
@@ -44,10 +35,11 @@ function escapeHtml(str = "") {
         .replaceAll("'", "&#039;");
 }
 
+function buildProductUrl(prod) {
+    return `/producto?id=${encodeURIComponent(prod.id)}&slug=${encodeURIComponent(prod.slug || "")}`;
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
-    /* =====================================================
-       ELEMENTOS
-    ===================================================== */
     const img = document.getElementById("producto-img");
     const nombre = document.getElementById("producto-nombre");
     const desc = document.getElementById("producto-desc");
@@ -82,10 +74,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dropcartEmpty = document.getElementById("dropcart-empty");
     const cartBadge = document.getElementById("cart-badge");
     const mobileCartBtn = document.getElementById("mobile-cart");
+    const checkoutBtn = document.getElementById("dropcart-checkout");
 
     const qs = new URLSearchParams(location.search);
     const id = qs.get("id");
-
     if (!id) return;
 
     let productos = [];
@@ -94,9 +86,39 @@ document.addEventListener("DOMContentLoaded", async () => {
     let selectedType = "";
     let currentProduct = null;
 
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
+    const CART_KEY = "pp_cart";
+    const SESSION_KEY = "pp_session_id";
+
+    function getOrCreateSessionId() {
+        let sessionId = localStorage.getItem(SESSION_KEY);
+        if (!sessionId) {
+            sessionId = crypto.randomUUID();
+            localStorage.setItem(SESSION_KEY, sessionId);
+        }
+        return sessionId;
+    }
+
+    function goToSearchResult(q) {
+        const value = String(q || "").trim().toLowerCase();
+        if (!value) {
+            location.href = "/";
+            return;
+        }
+
+        const first = productos.find(p =>
+            (p.nombre || "").toLowerCase().includes(value) ||
+            (p.descripcion || "").toLowerCase().includes(value) ||
+            (p.categoria || "").toLowerCase().includes(value)
+        );
+
+        if (first) {
+            location.href = buildProductUrl(first);
+            return;
+        }
+
+        location.href = `/?q=${encodeURIComponent(q)}`;
+    }
+
     function openMobileMenu() {
         if (!mobileMenu) return;
         mobileMenu.classList.add("active");
@@ -112,10 +134,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     mobileMenuBtn?.addEventListener("click", openMobileMenu);
     closeMobileMenuBtn?.addEventListener("click", closeMobileMenu);
 
-    /* =====================================================
-       CARRITO
-    ===================================================== */
-    const CART_KEY = "pp_cart";
     let cartPinnedOpen = false;
 
     function getCart() {
@@ -138,9 +156,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function getCartTotal(cart = getCart()) {
-        return cart.reduce((acc, item) => {
-            return acc + Number(item.precio_unitario || 0) * Number(item.cantidad || 0);
-        }, 0);
+        return cart.reduce((acc, item) => acc + Number(item.precio_unitario || 0) * Number(item.cantidad || 0), 0);
     }
 
     function cartLineLabel(item) {
@@ -213,24 +229,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function closeCart(force = false) {
         if (!dropcart) return;
-
         if (!force && cartPinnedOpen) return;
-
         dropcart.classList.remove("active");
         dropcart.setAttribute("aria-hidden", "true");
-
         if (force) cartPinnedOpen = false;
     }
 
     function toggleCart() {
         if (!dropcart) return;
-
         const isOpen = dropcart.classList.contains("active");
         if (isOpen && cartPinnedOpen) {
             closeCart(true);
             return;
         }
-
         openCart(true);
     }
 
@@ -269,15 +280,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     document.addEventListener("click", (e) => {
-        if (!cartContainer?.contains(e.target)) {
-            closeCart(true);
-        }
+        if (!cartContainer?.contains(e.target)) closeCart(true);
     });
 
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") {
             closeCart(true);
             closeMobileMenu();
+            hideDesktopDropdown();
         }
     });
 
@@ -288,12 +298,69 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     renderCart();
 
-    /* =====================================================
-       MENÚ AUTO POR CATEGORÍA
-    ===================================================== */
-    function renderMenu(productosList) {
-        if (!desktopMenu) return;
+    function getOrCreateDesktopDropdownPanel() {
+        const navbar = document.querySelector(".main-navbar");
+        if (!navbar) return null;
 
+        let panel = document.getElementById("desktopProductsDropdown");
+        if (!panel) {
+            panel = document.createElement("div");
+            panel.id = "desktopProductsDropdown";
+            panel.className = "nav-dropdown-panel";
+            navbar.appendChild(panel);
+        }
+        return panel;
+    }
+
+    function hideDesktopDropdown() {
+        const panel = document.getElementById("desktopProductsDropdown");
+        const trigger = document.getElementById("desktopProductsTrigger");
+        panel?.classList.remove("show");
+        trigger?.classList.remove("active");
+    }
+
+    function showDesktopDropdown() {
+        const panel = document.getElementById("desktopProductsDropdown");
+        const trigger = document.getElementById("desktopProductsTrigger");
+        panel?.classList.add("show");
+        trigger?.classList.add("active");
+    }
+
+    function bindDesktopDropdown() {
+        const trigger = document.getElementById("desktopProductsTrigger");
+        const panel = document.getElementById("desktopProductsDropdown");
+        if (!trigger || !panel) return;
+
+        trigger.addEventListener("click", (e) => {
+            e.preventDefault();
+            const willOpen = !panel.classList.contains("show");
+            hideDesktopDropdown();
+            if (willOpen) showDesktopDropdown();
+        });
+
+        trigger.addEventListener("mouseenter", showDesktopDropdown);
+        panel.addEventListener("mouseenter", showDesktopDropdown);
+        panel.addEventListener("mouseleave", hideDesktopDropdown);
+
+        document.addEventListener("click", (e) => {
+            if (!panel.contains(e.target) && !trigger.contains(e.target)) {
+                hideDesktopDropdown();
+            }
+        });
+    }
+
+    function bindMobileDropdowns() {
+        if (!mobileMenuContent) return;
+        mobileMenuContent.querySelectorAll(".dropdown-submenu-trigger").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                const parent = btn.closest(".dropdown-submenu");
+                parent?.classList.toggle("active");
+            });
+        });
+    }
+
+    function renderMenu(productosList = [], currentPage = "producto") {
         const cats = {};
 
         productosList.forEach(p => {
@@ -303,57 +370,68 @@ document.addEventListener("DOMContentLoaded", async () => {
             cats[cat].push(p);
         });
 
-        desktopMenu.innerHTML = "";
+        if (desktopMenu) {
+            desktopMenu.innerHTML = `
+                <div class="nav-item">
+                    <button class="nav-trigger-btn" id="desktopProductsTrigger" type="button">Todos los productos</button>
+                </div>
+                <div class="nav-item ${currentPage === "nosotros" ? "nav-item-about" : ""}">
+                    <a href="/nosotros">¿Quiénes somos?</a>
+                </div>
+            `;
+        }
 
-        const mainDropdown = document.createElement("div");
-        mainDropdown.className = "nav-item dropdown";
+        const panel = getOrCreateDesktopDropdownPanel();
+        if (panel) {
+            panel.innerHTML = Object.entries(cats)
+                .sort(([a], [b]) => a.localeCompare(b, "es"))
+                .map(([cat, items]) => `
+                    <div class="dropdown-submenu">
+                        <a href="/?cat=${encodeURIComponent(cat)}">${escapeHtml(cat)}</a>
+                        <div class="submenu">
+                            ${items
+                        .sort((a, b) => (a.nombre || "").localeCompare(b.nombre || "", "es"))
+                        .map(prod => `<a href="${buildProductUrl(prod)}">${escapeHtml(prod.nombre || "")}</a>`)
+                        .join("")}
+                        </div>
+                    </div>
+                `).join("") || `<a href="/" class="submenu-all">Ver catálogo</a>`;
+        }
 
-        mainDropdown.innerHTML = `
-            <a href="javascript:void(0)">Todos los productos</a>
-            <div class="dropdown-menu"></div>
-        `;
-
-        const dropdownMenu = mainDropdown.querySelector(".dropdown-menu");
-
-        Object.entries(cats)
-            .sort(([a], [b]) => a.localeCompare(b, "es"))
-            .forEach(([cat, prods]) => {
-                const submenu = document.createElement("div");
-                submenu.className = "dropdown-submenu";
-
-                submenu.innerHTML = `<a href="/?cat=${encodeURIComponent(cat)}">${escapeHtml(cat)}</a>`;
-
-                const subList = document.createElement("div");
-                subList.className = "submenu";
-
-                prods
-                    .sort((a, b) => (a.nombre || "").localeCompare(b.nombre || "", "es"))
-                    .forEach(prod => {
-                        subList.insertAdjacentHTML(
-                            "beforeend",
-                            `<a href="/producto?id=${encodeURIComponent(prod.id)}&slug=${encodeURIComponent(prod.slug || "")}">${escapeHtml(prod.nombre || "")}</a>`
-                        );
-                    });
-
-                submenu.appendChild(subList);
-                dropdownMenu.appendChild(submenu);
-            });
-
-        desktopMenu.appendChild(mainDropdown);
-
-        const aboutItem = document.createElement("div");
-        aboutItem.className = "nav-item";
-        aboutItem.innerHTML = `<a href="/nosotros">¿Quiénes somos?</a>`;
-        desktopMenu.appendChild(aboutItem);
+        bindDesktopDropdown();
 
         if (mobileMenuContent) {
-            mobileMenuContent.innerHTML = desktopMenu.innerHTML;
+            mobileMenuContent.innerHTML = `
+                <div class="nav-items">
+                    <div class="nav-item">
+                        <a href="/">Inicio</a>
+                    </div>
+                    <div class="nav-item ${currentPage === "nosotros" ? "nav-item-about" : ""}">
+                        <a href="/nosotros">¿Quiénes somos?</a>
+                    </div>
+                    ${Object.entries(cats)
+                    .sort(([a], [b]) => a.localeCompare(b, "es"))
+                    .map(([cat, items]) => `
+                            <div class="dropdown-submenu">
+                                <button class="dropdown-submenu-trigger" type="button">
+                                    <span>${escapeHtml(cat)}</span>
+                                    <span class="submenu-arrow">›</span>
+                                </button>
+                                <div class="submenu">
+                                    <a href="/?cat=${encodeURIComponent(cat)}" class="submenu-all">Ver todo ${escapeHtml(cat)}</a>
+                                    ${items
+                            .sort((a, b) => (a.nombre || "").localeCompare(b.nombre || "", "es"))
+                            .map(prod => `<a href="${buildProductUrl(prod)}">${escapeHtml(prod.nombre || "")}</a>`)
+                            .join("")}
+                                </div>
+                            </div>
+                        `).join("")}
+                </div>
+            `;
+            bindMobileDropdowns();
         }
     }
 
-    /* =====================================================
-       CARGA GENERAL DE PRODUCTOS
-    ===================================================== */
     async function cargarProductos() {
         const { data, error } = await db
             .from("productos")
@@ -363,36 +441,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (error) {
             console.error("Error cargando productos para menú:", error);
+            renderMenu([], "producto");
             return [];
         }
 
         productos = data || [];
-        renderMenu(productos);
+        renderMenu(productos, "producto");
         return productos;
-    }
-
-    /* =====================================================
-       BÚSQUEDA HEADER
-    ===================================================== */
-    function goToSearchResult(q) {
-        const value = String(q || "").trim().toLowerCase();
-        if (!value) {
-            location.href = "/";
-            return;
-        }
-
-        const first = productos.find(p =>
-            (p.nombre || "").toLowerCase().includes(value) ||
-            (p.descripcion || "").toLowerCase().includes(value) ||
-            (p.categoria || "").toLowerCase().includes(value)
-        );
-
-        if (first) {
-            location.href = `/producto?id=${encodeURIComponent(first.id)}&slug=${encodeURIComponent(first.slug || "")}`;
-            return;
-        }
-
-        location.href = `/?q=${encodeURIComponent(q)}`;
     }
 
     searchInput?.addEventListener("keydown", (e) => {
@@ -414,26 +469,17 @@ document.addEventListener("DOMContentLoaded", async () => {
         goToSearchResult(searchInput?.value || "");
     });
 
-    /* =====================================================
-       CARGAR PRODUCTO ACTUAL
-    ===================================================== */
     const { data: p, error } = await db.from("productos").select("*").eq("id", id).maybeSingle();
     if (error || !p) return;
 
     currentProduct = p;
     await cargarProductos();
 
-    /* =====================================================
-       RENDER BÁSICO PRODUCTO
-    ===================================================== */
     document.title = `${p.nombre} | Papelera Pierrastegui`;
     if (nombre) nombre.textContent = p.nombre || "";
     if (desc) desc.textContent = p.descripcion || "";
     if (img) img.src = p.imagen || "";
 
-    /* =====================================================
-       DROPDOWNS + PRECIO + CANTIDAD
-    ===================================================== */
     const variantes = parseVariantes(p.variantes);
     const modelOptions = Array.isArray(variantes?.drop1) ? variantes.drop1 : [];
     const typeOptionsRaw = Array.isArray(variantes?.drop2) ? variantes.drop2 : [];
@@ -451,16 +497,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function normalizeType(raw) {
         const value = String(raw || "").toLowerCase();
-
-        if (
-            value.includes("bulto") ||
-            value.includes("x mayor") ||
-            value.includes("mayor") ||
-            value.includes("pack")
-        ) {
+        if (value.includes("bulto") || value.includes("x mayor") || value.includes("mayor") || value.includes("pack")) {
             return "bulto";
         }
-
         return "unidad";
     }
 
@@ -478,16 +517,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function getCurrentUnitPrice() {
-        if (!hasAnyOptions) {
-            return Number(p.precio_unidad || 0);
-        }
-
+        if (!hasAnyOptions) return Number(p.precio_unidad || 0);
         if (hasModelOptions && !selectedModel) return 0;
         if (!selectedType) return 0;
 
         const modelPrice = getModelPriceByType(selectedModel, selectedType);
         if (modelPrice > 0) return modelPrice;
-
         return getFallbackPriceByType(selectedType);
     }
 
@@ -574,12 +609,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function closeDropdown(dropdown) {
         if (!dropdown) return;
-
-        const btn = dropdown.querySelector(".dropdown-btn");
-        const menu = dropdown.querySelector(".dropdown-menu");
-
-        btn?.classList.remove("active");
-        menu?.classList.remove("active");
+        dropdown.querySelector(".dropdown-btn")?.classList.remove("active");
+        dropdown.querySelector(".dropdown-menu")?.classList.remove("active");
     }
 
     function bindDropdownToggle(dropdown, onToggle) {
@@ -588,12 +619,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         btn?.addEventListener("click", () => {
             const willOpen = !menu?.classList.contains("active");
-
             if (typeof onToggle === "function") {
                 const allowed = onToggle(willOpen);
                 if (allowed === false) return;
             }
-
             menu?.classList.toggle("active");
             btn.classList.toggle("active");
         });
@@ -601,7 +630,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function renderNoOptionsView() {
         if (!dropdownsWrap) return;
-
         dropdownsWrap.innerHTML = `
             <div class="pp-product-price-info">
                 <p><strong>Precio:</strong> ${money(p.precio_unidad || 0)}</p>
@@ -629,7 +657,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     `).join("")}
                 </div>
             </div>
-
             <div id="dropdown-extra-info" class="pp-dropdown-extra"></div>
         `;
 
@@ -643,10 +670,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             item.addEventListener("click", () => {
                 typeItems.forEach(i => i.classList.remove("selected"));
                 item.classList.add("selected");
-
                 selectedType = normalizeType(item.dataset.type || item.textContent || "");
                 typeBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
-
                 updateExtraInfo();
                 updateTotal();
                 closeDropdown(typeDropdown);
@@ -654,9 +679,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         document.addEventListener("click", (e) => {
-            if (!typeDropdown?.contains(e.target)) {
-                closeDropdown(typeDropdown);
-            }
+            if (!typeDropdown?.contains(e.target)) closeDropdown(typeDropdown);
         });
 
         updateExtraInfo();
@@ -682,7 +705,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     `).join("")}
                 </div>
             </div>
-
             <div id="dropdown-extra-info" class="pp-dropdown-extra"></div>
         `;
 
@@ -696,14 +718,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             item.addEventListener("click", () => {
                 modelItems.forEach(i => i.classList.remove("selected"));
                 item.classList.add("selected");
-
-                const index = Number(item.dataset.index);
-                selectedModel = modelOptions[index] || null;
-
+                selectedModel = modelOptions[Number(item.dataset.index)] || null;
                 modelBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
-
                 selectedType = "unidad";
-
                 updateProductImage();
                 updateExtraInfo();
                 updateTotal();
@@ -712,9 +729,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         document.addEventListener("click", (e) => {
-            if (!modelDropdown?.contains(e.target)) {
-                closeDropdown(modelDropdown);
-            }
+            if (!modelDropdown?.contains(e.target)) closeDropdown(modelDropdown);
         });
 
         updateExtraInfo();
@@ -783,14 +798,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 modelItems.forEach(i => i.classList.remove("selected"));
                 item.classList.add("selected");
 
-                const index = Number(item.dataset.index);
-                selectedModel = modelOptions[index] || null;
-
+                selectedModel = modelOptions[Number(item.dataset.index)] || null;
                 modelBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
 
                 selectedType = "";
                 typeItems.forEach(i => i.classList.remove("selected"));
-
                 if (typeBtn) {
                     typeBtn.querySelector(".text")?.replaceChildren(document.createTextNode(typePlaceholder));
                 }
@@ -799,7 +811,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 updateTypeVisibility();
                 updateExtraInfo();
                 updateTotal();
-
                 closeDropdown(modelDropdown);
             });
         });
@@ -808,10 +819,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             item.addEventListener("click", () => {
                 typeItems.forEach(i => i.classList.remove("selected"));
                 item.classList.add("selected");
-
                 selectedType = normalizeType(item.dataset.type || item.textContent || "");
                 typeBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
-
                 updateExtraInfo();
                 updateTotal();
                 closeDropdown(typeDropdown);
@@ -829,57 +838,33 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function renderDropdowns() {
-        if (!hasAnyOptions) {
-            renderNoOptionsView();
-            return;
-        }
-
-        if (hasModelOptions && hasTypeOptions) {
-            renderModelAndTypeDropdowns();
-            return;
-        }
-
-        if (hasModelOptions && !hasTypeOptions) {
-            renderOnlyModelDropdown();
-            return;
-        }
-
-        if (!hasModelOptions && hasTypeOptions) {
-            renderOnlyTypeDropdown();
-        }
+        if (!hasAnyOptions) return renderNoOptionsView();
+        if (hasModelOptions && hasTypeOptions) return renderModelAndTypeDropdowns();
+        if (hasModelOptions && !hasTypeOptions) return renderOnlyModelDropdown();
+        if (!hasModelOptions && hasTypeOptions) return renderOnlyTypeDropdown();
     }
 
     if (cantidadVisual) cantidadVisual.textContent = cantidad;
 
-    if (incBtn) {
-        incBtn.onclick = () => {
-            cantidad++;
-            if (cantidadVisual) cantidadVisual.textContent = cantidad;
-            updateTotal();
-        };
-    }
+    incBtn?.addEventListener("click", () => {
+        cantidad++;
+        if (cantidadVisual) cantidadVisual.textContent = cantidad;
+        updateTotal();
+    });
 
-    if (decBtn) {
-        decBtn.onclick = () => {
-            if (cantidad > 1) cantidad--;
-            if (cantidadVisual) cantidadVisual.textContent = cantidad;
-            updateTotal();
-        };
-    }
+    decBtn?.addEventListener("click", () => {
+        if (cantidad > 1) cantidad--;
+        if (cantidadVisual) cantidadVisual.textContent = cantidad;
+        updateTotal();
+    });
 
     renderDropdowns();
     updateProductImage();
     updateTotal();
 
-    /* =====================================================
-       AUTH UI
-    ===================================================== */
     function renderLoggedOut() {
         if (!accountContainer) return;
-
-        accountContainer.innerHTML = `
-            <a class="btn-login" href="/login">Acceder</a>
-        `;
+        accountContainer.innerHTML = `<a class="btn-login" href="/login">Acceder</a>`;
     }
 
     function renderLoggedIn(user) {
@@ -887,28 +872,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         accountContainer.innerHTML = `
             <div class="account-dropdown">
-                <button class="account-trigger">Mi Cuenta</button>
+                <button class="account-trigger" type="button">Mi Cuenta</button>
                 <div class="account-menu">
                     <a href="/profile">Editar perfil</a>
-                    <button id="logout-btn">Cerrar sesión</button>
+                    <button id="logout-btn" type="button">Cerrar sesión</button>
                 </div>
             </div>
         `;
 
-        const logoutBtn = document.getElementById("logout-btn");
-        if (logoutBtn) {
-            logoutBtn.onclick = async () => {
-                await auth.auth.signOut();
-                location.href = "/";
-            };
-        }
+        document.getElementById("logout-btn")?.addEventListener("click", async () => {
+            await auth.auth.signOut();
+            location.href = "/";
+        });
     }
 
     async function checkAuth() {
         const { data } = await auth.auth.getSession();
-        data.session?.user
-            ? renderLoggedIn(data.session.user)
-            : renderLoggedOut();
+        data.session?.user ? renderLoggedIn(data.session.user) : renderLoggedOut();
     }
 
     await checkAuth();
@@ -917,16 +897,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         s?.user ? renderLoggedIn(s.user) : renderLoggedOut();
     });
 
-    if (mobileAccountBtn) {
-        mobileAccountBtn.onclick = async () => {
-            const { data } = await auth.auth.getSession();
-            location.href = data.session ? "/profile" : "/login";
-        };
-    }
+    mobileAccountBtn?.addEventListener("click", async () => {
+        const { data } = await auth.auth.getSession();
+        location.href = data.session ? "/profile" : "/login";
+    });
 
-    /* =====================================================
-       ADD TO CART
-    ===================================================== */
     const addToCartBtn = document.getElementById("addToCartBtn");
 
     function mergeCartItem(cart, payload) {
@@ -967,9 +942,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             modelo: hasModelOptions ? (selectedModel?.label || null) : null,
             tipo: hasAnyOptions ? selectedType : "unidad",
             precio_unitario: getCurrentUnitPrice(),
-            bulto_cant: hasAnyOptions
-                ? getCurrentBultoCant()
-                : Number(currentProduct.bulto_cant || 0)
+            bulto_cant: hasAnyOptions ? getCurrentBultoCant() : Number(currentProduct.bulto_cant || 0)
         };
 
         const cart = getCart();
@@ -978,70 +951,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         openCart(true);
         alert("Producto agregado al carrito");
     });
-});
 
-/* =====================================================
-   CHECKOUT
-===================================================== */
-async function goToCheckout() {
-    const CART_KEY = "pp_cart";
+    async function goToCheckout() {
+        let cart;
+        try {
+            cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+        } catch {
+            cart = [];
+        }
 
-    let cart;
-    try {
-        cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
-    } catch {
-        cart = [];
+        if (!cart.length) {
+            alert("El carrito está vacío");
+            return;
+        }
+
+        const subtotal = cart.reduce((acc, item) => acc + Number(item.precio_unitario || 0) * Number(item.cantidad || 0), 0);
+        const total = subtotal;
+
+        const { data } = await auth.auth.getSession();
+        const user = data.session?.user || null;
+        const session_id = getOrCreateSessionId();
+
+        const { data: inserted, error } = await db
+            .from("carritos")
+            .insert({
+                user_id: user?.id || null,
+                session_id: user ? null : session_id,
+                items: cart,
+                subtotal,
+                total,
+                status: "activo"
+            })
+            .select("id")
+            .single();
+
+        if (error || !inserted?.id) {
+            console.error(error);
+            alert("Error creando carrito");
+            return;
+        }
+
+        location.href = `/checkout?cart=${inserted.id}`;
     }
 
-    if (!cart.length) {
-        alert("El carrito está vacío");
-        return;
-    }
-
-    const subtotal = cart.reduce((acc, item) => {
-        return acc + Number(item.precio_unitario || 0) * Number(item.cantidad || 0);
-    }, 0);
-
-    const total = subtotal;
-
-    const { data } = await auth.auth.getSession();
-    const user = data.session?.user || null;
-
-    let session_id = localStorage.getItem("pp_session_id");
-    if (!session_id) {
-        session_id = crypto.randomUUID();
-        localStorage.setItem("pp_session_id", session_id);
-    }
-
-    const { data: inserted, error } = await db
-        .from("carritos")
-        .insert({
-            user_id: user?.id || null,
-            session_id: user ? null : session_id,
-            items: cart,
-            subtotal,
-            total,
-            status: "activo"
-        })
-        .select("id")
-        .single();
-
-    if (error || !inserted) {
-        console.error(error);
-        alert("Error creando carrito");
-        return;
-    }
-
-    if (!inserted?.id) {
-        console.error("Carrito sin ID:", inserted);
-        alert("Error generando carrito");
-        return;
-    }
-
-    location.href = `/checkout?cart=${inserted.id}`;
-}
-
-document.getElementById("dropcart-checkout")?.addEventListener("click", (e) => {
-    e.preventDefault();
-    goToCheckout();
+    checkoutBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        goToCheckout();
+    });
 });
