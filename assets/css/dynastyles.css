@@ -362,7 +362,7 @@ button.btn:hover {
     background: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
+    box-shadow: 0 0px 4px rgb(0 0 0 / 61%);
     transition:
         transform .18s ease,
         border-color .18s ease,
@@ -370,9 +370,9 @@ button.btn:hover {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--border);
     min-width: 0;
     height: auto;
+    outline: .25px solid var(--brand);
 }
 
 .card:hover {
@@ -1316,4 +1316,23 @@ button.btn:hover {
         scrollbar-width: thin;
         scrollbar-color: var(--brand) transparent;
     }
+}
+
+.verproducto-btn {
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .18s;
+    width: 100%;
+    box-shadow: 0 8px 18px rgba(255, 118, 0, .25);
+}
+
+.verproducto-btn:hover {
+    background: var(--brand-2);
+    color: #000;
 }
