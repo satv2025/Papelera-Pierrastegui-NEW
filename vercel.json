@@ -1,4 +1,30 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/:path*/",
+      "destination": "/:path*.html"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/:path*.html"
+    },
+    {
+      "source": "/productos/productos/:slug*",
+      "destination": "/productos/:slug*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*.html",
+      "destination": "/:path*/",
+      "permanent": true
+    },
+    {
+      "source": "/productos/productos/:slug*",
+      "destination": "/productos/:slug*",
+      "permanent": true
+    }
+  ]
 }
