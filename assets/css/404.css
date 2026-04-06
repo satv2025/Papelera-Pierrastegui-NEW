@@ -1,11 +1,14 @@
 @import url('https://solargentinotv.com.ar/assets/fonts/Gilroy/Gilroy.css');
 
+* {
+    font-family: Gilroy !important;
+}
+
 body {
     margin: 0;
     padding: 2rem;
     background-color: #ffffff;
     color: #02a22a;
-    font-family: 'Gilroy', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
