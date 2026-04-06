@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
        CARRITO LOCALSTORAGE + UI
     ===================================================== */
     const CART_KEY = "pp_cart";
+    let cartPinnedOpen = false;
 
     function getCart() {
         try {
@@ -167,27 +168,44 @@ document.addEventListener("DOMContentLoaded", async () => {
         saveCart([]);
     }
 
-    function openCart() {
+    function openCart(pin = false) {
         if (!dropcart) return;
+        if (pin) cartPinnedOpen = true;
         dropcart.classList.add("active");
         dropcart.setAttribute("aria-hidden", "false");
     }
 
-    function closeCart() {
+    function closeCart(force = false) {
         if (!dropcart) return;
+
+        if (!force && cartPinnedOpen) return;
+
         dropcart.classList.remove("active");
         dropcart.setAttribute("aria-hidden", "true");
+
+        if (force) cartPinnedOpen = false;
     }
 
     function toggleCart() {
         if (!dropcart) return;
-        if (dropcart.classList.contains("active")) closeCart();
-        else openCart();
+
+        const isOpen = dropcart.classList.contains("active");
+        if (isOpen && cartPinnedOpen) {
+            closeCart(true);
+            return;
+        }
+
+        openCart(true);
     }
 
     if (cartContainer && dropcart) {
-        cartContainer.addEventListener("mouseenter", openCart);
-        cartContainer.addEventListener("mouseleave", closeCart);
+        cartContainer.addEventListener("mouseenter", () => {
+            if (!cartPinnedOpen) openCart(false);
+        });
+
+        cartContainer.addEventListener("mouseleave", () => {
+            if (!cartPinnedOpen) closeCart(false);
+        });
     }
 
     cartToggle?.addEventListener("click", (e) => {
@@ -205,17 +223,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     dropcartClose?.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        closeCart();
+        closeCart(true);
     });
 
     dropcartEmpty?.addEventListener("click", (e) => {
         e.preventDefault();
+        e.stopPropagation();
         emptyCart();
     });
 
     document.addEventListener("click", (e) => {
         if (!cartContainer?.contains(e.target)) {
-            closeCart();
+            closeCart(true);
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeCart(true);
+            closeMobileMenu();
         }
     });
 

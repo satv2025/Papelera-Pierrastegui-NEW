@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
        CARRITO
     ===================================================== */
     const CART_KEY = "pp_cart";
+    let cartPinnedOpen = false;
 
     function getCart() {
         try {
@@ -203,27 +204,44 @@ document.addEventListener("DOMContentLoaded", async () => {
         saveCart([]);
     }
 
-    function openCart() {
+    function openCart(pin = false) {
         if (!dropcart) return;
+        if (pin) cartPinnedOpen = true;
         dropcart.classList.add("active");
         dropcart.setAttribute("aria-hidden", "false");
     }
 
-    function closeCart() {
+    function closeCart(force = false) {
         if (!dropcart) return;
+
+        if (!force && cartPinnedOpen) return;
+
         dropcart.classList.remove("active");
         dropcart.setAttribute("aria-hidden", "true");
+
+        if (force) cartPinnedOpen = false;
     }
 
     function toggleCart() {
         if (!dropcart) return;
-        if (dropcart.classList.contains("active")) closeCart();
-        else openCart();
+
+        const isOpen = dropcart.classList.contains("active");
+        if (isOpen && cartPinnedOpen) {
+            closeCart(true);
+            return;
+        }
+
+        openCart(true);
     }
 
     if (cartContainer && dropcart) {
-        cartContainer.addEventListener("mouseenter", openCart);
-        cartContainer.addEventListener("mouseleave", closeCart);
+        cartContainer.addEventListener("mouseenter", () => {
+            if (!cartPinnedOpen) openCart(false);
+        });
+
+        cartContainer.addEventListener("mouseleave", () => {
+            if (!cartPinnedOpen) closeCart(false);
+        });
     }
 
     cartToggle?.addEventListener("click", (e) => {
@@ -241,16 +259,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     dropcartClose?.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        closeCart();
+        closeCart(true);
     });
 
     dropcartEmpty?.addEventListener("click", (e) => {
         e.preventDefault();
+        e.stopPropagation();
         emptyCart();
     });
 
     document.addEventListener("click", (e) => {
-        if (!cartContainer?.contains(e.target)) closeCart();
+        if (!cartContainer?.contains(e.target)) {
+            closeCart(true);
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeCart(true);
+            closeMobileMenu();
+        }
     });
 
     window.addEventListener("pp-cart-updated", renderCart);
@@ -438,20 +466,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function getModelPriceByType(model, type) {
         if (!model) return 0;
-
-        if (type === "bulto") {
-            return Number(model.precio_bulto || 0);
-        }
-
-        return Number(model.precio_unidad || 0);
+        return type === "bulto"
+            ? Number(model.precio_bulto || 0)
+            : Number(model.precio_unidad || 0);
     }
 
     function getFallbackPriceByType(type) {
-        if (type === "bulto") {
-            return Number(p.precio_bulto || 0);
-        }
-
-        return Number(p.precio_unidad || 0);
+        return type === "bulto"
+            ? Number(p.precio_bulto || 0)
+            : Number(p.precio_unidad || 0);
     }
 
     function getCurrentUnitPrice() {
@@ -459,13 +482,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             return Number(p.precio_unidad || 0);
         }
 
-        if (hasModelOptions && !selectedModel) {
-            return 0;
-        }
-
-        if (!selectedType) {
-            return 0;
-        }
+        if (hasModelOptions && !selectedModel) return 0;
+        if (!selectedType) return 0;
 
         const modelPrice = getModelPriceByType(selectedModel, selectedType);
         if (modelPrice > 0) return modelPrice;
@@ -474,11 +492,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function getCurrentBultoCant() {
-        return Number(
-            selectedModel?.bulto_cant ||
-            p.bulto_cant ||
-            0
-        );
+        return Number(selectedModel?.bulto_cant || p.bulto_cant || 0);
     }
 
     function updateTotal() {
@@ -796,24 +810,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 item.classList.add("selected");
 
                 selectedType = normalizeType(item.dataset.type || item.textContent || "");
-
                 typeBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
 
                 updateExtraInfo();
                 updateTotal();
-
                 closeDropdown(typeDropdown);
             });
         });
 
         document.addEventListener("click", (e) => {
-            if (!modelDropdown?.contains(e.target)) {
-                closeDropdown(modelDropdown);
-            }
-
-            if (!typeDropdown?.contains(e.target)) {
-                closeDropdown(typeDropdown);
-            }
+            if (!modelDropdown?.contains(e.target)) closeDropdown(modelDropdown);
+            if (!typeDropdown?.contains(e.target)) closeDropdown(typeDropdown);
         });
 
         updateTypeVisibility();
@@ -913,7 +920,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (mobileAccountBtn) {
         mobileAccountBtn.onclick = async () => {
             const { data } = await auth.auth.getSession();
-            location.href = data.session ? "/perfil" : "/login";
+            location.href = data.session ? "/profile" : "/login";
         };
     }
 
@@ -968,7 +975,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const cart = getCart();
         mergeCartItem(cart, payload);
         saveCart(cart);
-        openCart();
+        openCart(true);
         alert("Producto agregado al carrito");
     });
 });
