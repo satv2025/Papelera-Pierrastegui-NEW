@@ -1,11 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/productos/productos/:slug*",
-      "destination": "/productos/:slug*",
-      "permanent": true
-    }
-  ]
+  "trailingSlash": false
 }
