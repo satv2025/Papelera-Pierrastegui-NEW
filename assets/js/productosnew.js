@@ -10,8 +10,7 @@ import { auth, db } from "/assets/js/supabaseClient.js";
 
     const css = document.getElementById("todo-css");
     if (css) {
-        css.href =
-            `assets/css/todo-en-uno.css?pid=${encodeURIComponent(id || "")}&slug=${encodeURIComponent(slug || "")}`;
+        css.href = `assets/css/todo-en-uno.css?pid=${encodeURIComponent(id || "")}&slug=${encodeURIComponent(slug || "")}`;
     }
 })();
 
@@ -45,10 +44,10 @@ function escapeHtml(str = "") {
         .replaceAll("'", "&#039;");
 }
 
-/* =====================================================
-   TODO UNIFICADO
-===================================================== */
 document.addEventListener("DOMContentLoaded", async () => {
+    /* =====================================================
+       ELEMENTOS
+    ===================================================== */
     const img = document.getElementById("producto-img");
     const nombre = document.getElementById("producto-nombre");
     const desc = document.getElementById("producto-desc");
@@ -73,6 +72,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const mobileMenu = document.getElementById("mobileMenu");
     const mobileMenuBtn = document.getElementById("mobile-menu-btn");
     const closeMobileMenuBtn = document.getElementById("closeMobileMenu");
+
+    const cartContainer = document.querySelector(".dropcart-container");
+    const cartToggle = document.getElementById("cart-toggle");
+    const dropcart = document.getElementById("dropcart");
+    const dropcartClose = document.getElementById("dropcart-close");
+    const dropcartItems = document.getElementById("dropcart-items");
+    const dropcartTotal = document.getElementById("dropcart-total");
+    const dropcartEmpty = document.getElementById("dropcart-empty");
+    const cartBadge = document.getElementById("cart-badge");
+    const mobileCartBtn = document.getElementById("mobile-cart");
 
     const qs = new URLSearchParams(location.search);
     const id = qs.get("id");
@@ -104,6 +113,154 @@ document.addEventListener("DOMContentLoaded", async () => {
     closeMobileMenuBtn?.addEventListener("click", closeMobileMenu);
 
     /* =====================================================
+       CARRITO
+    ===================================================== */
+    const CART_KEY = "pp_cart";
+
+    function getCart() {
+        try {
+            const parsed = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+            return Array.isArray(parsed) ? parsed : [];
+        } catch {
+            return [];
+        }
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        renderCart();
+        window.dispatchEvent(new CustomEvent("pp-cart-updated"));
+    }
+
+    function getCartCount(cart = getCart()) {
+        return cart.reduce((acc, item) => acc + Number(item.cantidad || 0), 0);
+    }
+
+    function getCartTotal(cart = getCart()) {
+        return cart.reduce((acc, item) => {
+            return acc + Number(item.precio_unitario || 0) * Number(item.cantidad || 0);
+        }, 0);
+    }
+
+    function cartLineLabel(item) {
+        const extras = [];
+        if (item.modelo) extras.push(item.modelo);
+        if (item.tipo === "bulto") extras.push("Por Bulto");
+        else if (item.tipo === "unidad") extras.push("Por Unidad");
+        return extras.join(" · ");
+    }
+
+    function renderCart() {
+        const cart = getCart();
+
+        if (cartBadge) cartBadge.textContent = String(getCartCount(cart));
+        if (dropcartTotal) dropcartTotal.textContent = money(getCartTotal(cart));
+        if (!dropcartItems) return;
+
+        if (!cart.length) {
+            dropcartItems.innerHTML = `<p class="empty">Tu carrito está vacío</p>`;
+            return;
+        }
+
+        dropcartItems.innerHTML = cart.map((item, index) => {
+            const lineTotal = Number(item.precio_unitario || 0) * Number(item.cantidad || 0);
+            const label = cartLineLabel(item);
+
+            return `
+                <div class="dropcart-item" data-index="${index}">
+                    <div class="dropcart-item-media">
+                        <img src="${escapeHtml(item.imagen || "https://via.placeholder.com/80")}" alt="${escapeHtml(item.nombre || "Producto")}">
+                    </div>
+                    <div class="dropcart-item-info">
+                        <strong>${escapeHtml(item.nombre || "Producto")}</strong>
+                        ${label ? `<small>${escapeHtml(label)}</small>` : ""}
+                        <small>Cantidad: ${Number(item.cantidad || 0)}</small>
+                        <small>Unitario: ${money(item.precio_unitario || 0)}</small>
+                        <strong>${money(lineTotal)}</strong>
+                    </div>
+                    <button class="dropcart-item-remove" type="button" data-remove-index="${index}" aria-label="Eliminar">✕</button>
+                </div>
+            `;
+        }).join("");
+
+        dropcartItems.querySelectorAll("[data-remove-index]").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                removeCartIndex(Number(btn.dataset.removeIndex));
+            });
+        });
+    }
+
+    function removeCartIndex(index) {
+        const cart = getCart();
+        if (index < 0 || index >= cart.length) return;
+        cart.splice(index, 1);
+        saveCart(cart);
+    }
+
+    function emptyCart() {
+        saveCart([]);
+    }
+
+    function openCart() {
+        if (!dropcart) return;
+        dropcart.classList.add("active");
+        dropcart.setAttribute("aria-hidden", "false");
+    }
+
+    function closeCart() {
+        if (!dropcart) return;
+        dropcart.classList.remove("active");
+        dropcart.setAttribute("aria-hidden", "true");
+    }
+
+    function toggleCart() {
+        if (!dropcart) return;
+        if (dropcart.classList.contains("active")) closeCart();
+        else openCart();
+    }
+
+    if (cartContainer && dropcart) {
+        cartContainer.addEventListener("mouseenter", openCart);
+        cartContainer.addEventListener("mouseleave", closeCart);
+    }
+
+    cartToggle?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleCart();
+    });
+
+    mobileCartBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleCart();
+    });
+
+    dropcartClose?.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeCart();
+    });
+
+    dropcartEmpty?.addEventListener("click", (e) => {
+        e.preventDefault();
+        emptyCart();
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!cartContainer?.contains(e.target)) closeCart();
+    });
+
+    window.addEventListener("pp-cart-updated", renderCart);
+    window.addEventListener("storage", (e) => {
+        if (e.key === CART_KEY) renderCart();
+    });
+
+    renderCart();
+
+    /* =====================================================
        MENÚ AUTO POR CATEGORÍA
     ===================================================== */
     function renderMenu(productosList) {
@@ -114,7 +271,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         productosList.forEach(p => {
             const cat = (p.categoria || "").trim();
             if (!cat) return;
-
             if (!cats[cat]) cats[cat] = [];
             cats[cat].push(p);
         });
@@ -147,9 +303,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     .forEach(prod => {
                         subList.insertAdjacentHTML(
                             "beforeend",
-                            `<a href="/producto?id=${prod.id}&slug=${encodeURIComponent(prod.slug || "")}">
-                                ${escapeHtml(prod.nombre || "")}
-                            </a>`
+                            `<a href="/producto?id=${encodeURIComponent(prod.id)}&slug=${encodeURIComponent(prod.slug || "")}">${escapeHtml(prod.nombre || "")}</a>`
                         );
                     });
 
@@ -170,7 +324,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* =====================================================
-       CARGA GENERAL DE PRODUCTOS PARA MENÚ + BÚSQUEDA
+       CARGA GENERAL DE PRODUCTOS
     ===================================================== */
     async function cargarProductos() {
         const { data, error } = await db
@@ -206,7 +360,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         if (first) {
-            location.href = `/producto?id=${first.id}&slug=${encodeURIComponent(first.slug || "")}`;
+            location.href = `/producto?id=${encodeURIComponent(first.id)}&slug=${encodeURIComponent(first.slug || "")}`;
             return;
         }
 
@@ -235,21 +389,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     /* =====================================================
        CARGAR PRODUCTO ACTUAL
     ===================================================== */
-    const { data: p, error } =
-        await db.from("productos").select("*").eq("id", id).maybeSingle();
-
+    const { data: p, error } = await db.from("productos").select("*").eq("id", id).maybeSingle();
     if (error || !p) return;
 
     currentProduct = p;
-
     await cargarProductos();
 
     /* =====================================================
        RENDER BÁSICO PRODUCTO
     ===================================================== */
     document.title = `${p.nombre} | Papelera Pierrastegui`;
-
-    if (nombre) nombre.textContent = p.nombre;
+    if (nombre) nombre.textContent = p.nombre || "";
     if (desc) desc.textContent = p.descripcion || "";
     if (img) img.src = p.imagen || "";
 
@@ -260,12 +410,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     const modelOptions = Array.isArray(variantes?.drop1) ? variantes.drop1 : [];
     const typeOptionsRaw = Array.isArray(variantes?.drop2) ? variantes.drop2 : [];
 
-    const typeOptions = typeOptionsRaw.length
+    const hasModelOptions = modelOptions.length > 0;
+    const hasTypeOptions = typeOptionsRaw.length > 0;
+    const hasAnyOptions = hasModelOptions || hasTypeOptions;
+
+    const typeOptions = hasTypeOptions
         ? typeOptionsRaw
         : [
             { label: "Por Unidad", meta: "unidad" },
             { label: "Por Bulto", meta: "bulto" }
         ];
+
+    function normalizeType(raw) {
+        const value = String(raw || "").toLowerCase();
+
+        if (
+            value.includes("bulto") ||
+            value.includes("x mayor") ||
+            value.includes("mayor") ||
+            value.includes("pack")
+        ) {
+            return "bulto";
+        }
+
+        return "unidad";
+    }
 
     function getModelPriceByType(model, type) {
         if (!model) return 0;
@@ -286,7 +455,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function getCurrentUnitPrice() {
-        if (!selectedType) return 0;
+        if (!hasAnyOptions) {
+            return Number(p.precio_unidad || 0);
+        }
+
+        if (hasModelOptions && !selectedModel) {
+            return 0;
+        }
+
+        if (!selectedType) {
+            return 0;
+        }
 
         const modelPrice = getModelPriceByType(selectedModel, selectedType);
         if (modelPrice > 0) return modelPrice;
@@ -305,7 +484,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     function updateTotal() {
         if (!totalDisplay) return;
 
-        if (!selectedModel || !selectedType) {
+        if (!hasAnyOptions) {
+            const total = Number(p.precio_unidad || 0) * cantidad;
+            totalDisplay.textContent = "Total: " + money(total);
+            return;
+        }
+
+        if (hasModelOptions && !selectedModel) {
+            totalDisplay.textContent = "Total: $0";
+            return;
+        }
+
+        if (!selectedType) {
             totalDisplay.textContent = "Total: $0";
             return;
         }
@@ -323,14 +513,36 @@ document.addEventListener("DOMContentLoaded", async () => {
         const typeDropdown = document.getElementById("pp-type-dropdown");
         if (!typeDropdown) return;
 
-        typeDropdown.style.display = selectedModel ? "block" : "none";
+        if (!hasTypeOptions && !hasModelOptions) {
+            typeDropdown.style.display = "none";
+            return;
+        }
+
+        if (hasModelOptions) {
+            typeDropdown.style.display = selectedModel ? "block" : "none";
+            return;
+        }
+
+        typeDropdown.style.display = "block";
     }
 
     function updateExtraInfo() {
         const extra = document.getElementById("dropdown-extra-info");
         if (!extra) return;
 
-        if (!selectedModel || !selectedType) {
+        if (!hasAnyOptions) {
+            extra.innerHTML = p.bulto_cant
+                ? `<small>Bulto de ${Number(p.bulto_cant)} unidades</small>`
+                : "";
+            return;
+        }
+
+        if (hasModelOptions && !selectedModel) {
+            extra.innerHTML = "";
+            return;
+        }
+
+        if (!selectedType) {
             extra.innerHTML = "";
             return;
         }
@@ -348,6 +560,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     function closeDropdown(dropdown) {
         if (!dropdown) return;
+
         const btn = dropdown.querySelector(".dropdown-btn");
         const menu = dropdown.querySelector(".dropdown-menu");
 
@@ -355,7 +568,146 @@ document.addEventListener("DOMContentLoaded", async () => {
         menu?.classList.remove("active");
     }
 
-    function renderDropdowns() {
+    function bindDropdownToggle(dropdown, onToggle) {
+        const btn = dropdown?.querySelector(".dropdown-btn");
+        const menu = dropdown?.querySelector(".dropdown-menu");
+
+        btn?.addEventListener("click", () => {
+            const willOpen = !menu?.classList.contains("active");
+
+            if (typeof onToggle === "function") {
+                const allowed = onToggle(willOpen);
+                if (allowed === false) return;
+            }
+
+            menu?.classList.toggle("active");
+            btn.classList.toggle("active");
+        });
+    }
+
+    function renderNoOptionsView() {
+        if (!dropdownsWrap) return;
+
+        dropdownsWrap.innerHTML = `
+            <div class="pp-product-price-info">
+                <p><strong>Precio:</strong> ${money(p.precio_unidad || 0)}</p>
+                ${p.bulto_cant ? `<small>Bulto de ${Number(p.bulto_cant)} unidades</small>` : ""}
+            </div>
+        `;
+    }
+
+    function renderOnlyTypeDropdown() {
+        if (!dropdownsWrap) return;
+
+        const typePlaceholder = p.dropdown2_placeholder || "Seleccioná el tipo";
+
+        dropdownsWrap.innerHTML = `
+            <div class="dropdown pp-product-dropdown" id="pp-type-dropdown">
+                <button class="dropdown-btn" type="button">
+                    <span class="text">${escapeHtml(typePlaceholder)}</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    ${typeOptions.map(item => `
+                        <div class="dropdown-item" data-type="${escapeHtml(String(item.meta || item.label || "").toLowerCase())}">
+                            ${escapeHtml(item.label || "")}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div id="dropdown-extra-info" class="pp-dropdown-extra"></div>
+        `;
+
+        const typeDropdown = document.getElementById("pp-type-dropdown");
+        const typeBtn = typeDropdown?.querySelector(".dropdown-btn");
+        const typeItems = typeDropdown?.querySelectorAll(".dropdown-item") || [];
+
+        bindDropdownToggle(typeDropdown);
+
+        typeItems.forEach(item => {
+            item.addEventListener("click", () => {
+                typeItems.forEach(i => i.classList.remove("selected"));
+                item.classList.add("selected");
+
+                selectedType = normalizeType(item.dataset.type || item.textContent || "");
+                typeBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
+
+                updateExtraInfo();
+                updateTotal();
+                closeDropdown(typeDropdown);
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!typeDropdown?.contains(e.target)) {
+                closeDropdown(typeDropdown);
+            }
+        });
+
+        updateExtraInfo();
+        updateTotal();
+    }
+
+    function renderOnlyModelDropdown() {
+        if (!dropdownsWrap) return;
+
+        const modelPlaceholder = p.dropdown1_placeholder || "Seleccioná una opción";
+
+        dropdownsWrap.innerHTML = `
+            <div class="dropdown pp-product-dropdown" id="pp-model-dropdown">
+                <button class="dropdown-btn" type="button">
+                    <span class="text">${escapeHtml(modelPlaceholder)}</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="dropdown-menu">
+                    ${modelOptions.map((item, index) => `
+                        <div class="dropdown-item" data-index="${index}">
+                            ${escapeHtml(item.label || `Opción ${index + 1}`)}
+                        </div>
+                    `).join("")}
+                </div>
+            </div>
+
+            <div id="dropdown-extra-info" class="pp-dropdown-extra"></div>
+        `;
+
+        const modelDropdown = document.getElementById("pp-model-dropdown");
+        const modelBtn = modelDropdown?.querySelector(".dropdown-btn");
+        const modelItems = modelDropdown?.querySelectorAll(".dropdown-item") || [];
+
+        bindDropdownToggle(modelDropdown);
+
+        modelItems.forEach(item => {
+            item.addEventListener("click", () => {
+                modelItems.forEach(i => i.classList.remove("selected"));
+                item.classList.add("selected");
+
+                const index = Number(item.dataset.index);
+                selectedModel = modelOptions[index] || null;
+
+                modelBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
+
+                selectedType = "unidad";
+
+                updateProductImage();
+                updateExtraInfo();
+                updateTotal();
+                closeDropdown(modelDropdown);
+            });
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!modelDropdown?.contains(e.target)) {
+                closeDropdown(modelDropdown);
+            }
+        });
+
+        updateExtraInfo();
+        updateTotal();
+    }
+
+    function renderModelAndTypeDropdowns() {
         if (!dropdownsWrap) return;
 
         const modelPlaceholder = p.dropdown1_placeholder || "Seleccioná una opción";
@@ -395,18 +747,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const modelDropdown = document.getElementById("pp-model-dropdown");
         const modelBtn = modelDropdown?.querySelector(".dropdown-btn");
-        const modelMenu = modelDropdown?.querySelector(".dropdown-menu");
         const modelItems = modelDropdown?.querySelectorAll(".dropdown-item") || [];
 
         const typeDropdown = document.getElementById("pp-type-dropdown");
         const typeBtn = typeDropdown?.querySelector(".dropdown-btn");
-        const typeMenu = typeDropdown?.querySelector(".dropdown-menu");
         const typeItems = typeDropdown?.querySelectorAll(".dropdown-item") || [];
 
-        modelBtn?.addEventListener("click", () => {
-            modelMenu?.classList.toggle("active");
-            modelBtn.classList.toggle("active");
+        bindDropdownToggle(modelDropdown, () => {
             closeDropdown(typeDropdown);
+            return true;
+        });
+
+        bindDropdownToggle(typeDropdown, () => {
+            if (!selectedModel) return false;
+            closeDropdown(modelDropdown);
+            return true;
         });
 
         modelItems.forEach(item => {
@@ -417,12 +772,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const index = Number(item.dataset.index);
                 selectedModel = modelOptions[index] || null;
 
-                modelBtn.querySelector(".text").textContent = item.textContent.trim();
+                modelBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
 
                 selectedType = "";
                 typeItems.forEach(i => i.classList.remove("selected"));
+
                 if (typeBtn) {
-                    typeBtn.querySelector(".text").textContent = typePlaceholder;
+                    typeBtn.querySelector(".text")?.replaceChildren(document.createTextNode(typePlaceholder));
                 }
 
                 updateProductImage();
@@ -434,28 +790,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
         });
 
-        typeBtn?.addEventListener("click", () => {
-            if (!selectedModel) return;
-
-            typeMenu?.classList.toggle("active");
-            typeBtn.classList.toggle("active");
-            closeDropdown(modelDropdown);
-        });
-
         typeItems.forEach(item => {
             item.addEventListener("click", () => {
                 typeItems.forEach(i => i.classList.remove("selected"));
                 item.classList.add("selected");
 
-                const rawType = String(item.dataset.type || "").toLowerCase();
+                selectedType = normalizeType(item.dataset.type || item.textContent || "");
 
-                if (rawType.includes("bulto") || rawType.includes("x") || rawType.includes("mayor")) {
-                    selectedType = "bulto";
-                } else {
-                    selectedType = "unidad";
-                }
-
-                typeBtn.querySelector(".text").textContent = item.textContent.trim();
+                typeBtn?.querySelector(".text")?.replaceChildren(document.createTextNode(item.textContent.trim()));
 
                 updateExtraInfo();
                 updateTotal();
@@ -473,6 +815,31 @@ document.addEventListener("DOMContentLoaded", async () => {
                 closeDropdown(typeDropdown);
             }
         });
+
+        updateTypeVisibility();
+        updateExtraInfo();
+        updateTotal();
+    }
+
+    function renderDropdowns() {
+        if (!hasAnyOptions) {
+            renderNoOptionsView();
+            return;
+        }
+
+        if (hasModelOptions && hasTypeOptions) {
+            renderModelAndTypeDropdowns();
+            return;
+        }
+
+        if (hasModelOptions && !hasTypeOptions) {
+            renderOnlyModelDropdown();
+            return;
+        }
+
+        if (!hasModelOptions && hasTypeOptions) {
+            renderOnlyTypeDropdown();
+        }
     }
 
     if (cantidadVisual) cantidadVisual.textContent = cantidad;
@@ -480,7 +847,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (incBtn) {
         incBtn.onclick = () => {
             cantidad++;
-            cantidadVisual.textContent = cantidad;
+            if (cantidadVisual) cantidadVisual.textContent = cantidad;
             updateTotal();
         };
     }
@@ -488,7 +855,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (decBtn) {
         decBtn.onclick = () => {
             if (cantidad > 1) cantidad--;
-            cantidadVisual.textContent = cantidad;
+            if (cantidadVisual) cantidadVisual.textContent = cantidad;
             updateTotal();
         };
     }
@@ -512,19 +879,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!accountContainer || !user) return;
 
         accountContainer.innerHTML = `
-        <div class="account-dropdown">
-            <button class="account-trigger">Mi Cuenta</button>
-            <div class="account-menu">
-                <a href="/profile">Editar perfil</a>
-                <button id="logout-btn">Cerrar sesión</button>
+            <div class="account-dropdown">
+                <button class="account-trigger">Mi Cuenta</button>
+                <div class="account-menu">
+                    <a href="/profile">Editar perfil</a>
+                    <button id="logout-btn">Cerrar sesión</button>
+                </div>
             </div>
-        </div>
-    `;
+        `;
 
-        document.getElementById("logout-btn").onclick = async () => {
-            await auth.auth.signOut();
-            location.href = "/";
-        };
+        const logoutBtn = document.getElementById("logout-btn");
+        if (logoutBtn) {
+            logoutBtn.onclick = async () => {
+                await auth.auth.signOut();
+                location.href = "/";
+            };
+        }
     }
 
     async function checkAuth() {
@@ -552,11 +922,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     ===================================================== */
     const addToCartBtn = document.getElementById("addToCartBtn");
 
+    function mergeCartItem(cart, payload) {
+        const foundIndex = cart.findIndex(item =>
+            String(item.id) === String(payload.id) &&
+            String(item.modelo || "") === String(payload.modelo || "") &&
+            String(item.tipo || "") === String(payload.tipo || "")
+        );
+
+        if (foundIndex >= 0) {
+            cart[foundIndex].cantidad = Number(cart[foundIndex].cantidad || 0) + Number(payload.cantidad || 0);
+            return cart;
+        }
+
+        cart.push(payload);
+        return cart;
+    }
+
     addToCartBtn?.addEventListener("click", () => {
         if (!currentProduct) return;
 
-        if (!selectedModel || !selectedType) {
-            alert("Seleccioná un modelo y un tipo antes de agregar al carrito.");
+        if (hasModelOptions && !selectedModel) {
+            alert("Seleccioná un modelo antes de agregar al carrito.");
+            return;
+        }
+
+        if (hasAnyOptions && !selectedType) {
+            alert("Seleccioná un tipo antes de agregar al carrito.");
             return;
         }
 
@@ -566,17 +957,18 @@ document.addEventListener("DOMContentLoaded", async () => {
             slug: currentProduct.slug || "",
             imagen: selectedModel?.img || currentProduct.imagen || "",
             cantidad,
-            modelo: selectedModel?.label || null,
-            tipo: selectedType,
+            modelo: hasModelOptions ? (selectedModel?.label || null) : null,
+            tipo: hasAnyOptions ? selectedType : "unidad",
             precio_unitario: getCurrentUnitPrice(),
-            bulto_cant: getCurrentBultoCant()
+            bulto_cant: hasAnyOptions
+                ? getCurrentBultoCant()
+                : Number(currentProduct.bulto_cant || 0)
         };
 
-        const currentCart = JSON.parse(localStorage.getItem("pp_cart") || "[]");
-        currentCart.push(payload);
-        localStorage.setItem("pp_cart", JSON.stringify(currentCart));
-
-        window.dispatchEvent(new CustomEvent("pp-cart-updated"));
+        const cart = getCart();
+        mergeCartItem(cart, payload);
+        saveCart(cart);
+        openCart();
         alert("Producto agregado al carrito");
     });
 });

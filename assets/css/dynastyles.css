@@ -354,7 +354,7 @@ a {
 }
 
 .card:hover {
-    transform: translateY(-4px) scale(1.025);
+    transform: scale(1.025);
     border-color: var(--brand);
 }
 
@@ -1111,5 +1111,268 @@ a {
     * {
         scrollbar-width: thin;
         scrollbar-color: var(--brand) transparent;
+    }
+}
+
+/* =====================================================
+   DROP CART COMPLETO
+===================================================== */
+
+.dropcart-container {
+    position: relative;
+}
+
+.pp-cart-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.cart-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    background: #d62828;
+    color: #fff;
+}
+
+.dropcart {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    width: 380px;
+    max-width: min(380px, calc(100vw - 24px));
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
+    z-index: 9999;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition:
+        opacity .2s ease,
+        visibility .2s ease,
+        transform .2s ease;
+}
+
+.dropcart.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.dropcart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fafafa;
+}
+
+.dropcart-header strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.dropcart-close {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    color: #374151;
+    padding: 4px 6px;
+    border-radius: 8px;
+}
+
+.dropcart-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.dropcart-items {
+    max-height: 360px;
+    overflow: auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dropcart-items .empty {
+    margin: 0;
+    text-align: center;
+    color: #6b7280;
+    padding: 28px 10px;
+    font-size: 14px;
+}
+
+.dropcart-item {
+    display: grid;
+    grid-template-columns: 68px 1fr auto;
+    align-items: start;
+    gap: 12px;
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-radius: 14px;
+    background: #fff;
+}
+
+.dropcart-item-media {
+    width: 68px;
+    height: 68px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f3f4f6;
+    flex-shrink: 0;
+}
+
+.dropcart-item-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.dropcart-item-info {
+    min-width: 0;
+}
+
+.dropcart-item-title {
+    display: block;
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+    text-decoration: none;
+}
+
+.dropcart-item-title:hover {
+    text-decoration: underline;
+}
+
+.dropcart-item-meta {
+    margin: 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.dropcart-item-price {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #111827;
+}
+
+.dropcart-item-remove {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: #b91c1c;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 8px;
+}
+
+.dropcart-item-remove:hover {
+    background: rgba(185, 28, 28, 0.08);
+}
+
+.dropcart-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: #fafafa;
+    padding: 14px 16px 16px;
+}
+
+.dropcart-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: #111827;
+}
+
+.dropcart-total span {
+    font-size: 14px;
+}
+
+.dropcart-total strong {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.dropcart-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.dropcart-actions .btn-ghost,
+.dropcart-actions .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 0 14px;
+}
+
+.dropcart-actions .btn-ghost {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background: #fff;
+    color: #111827;
+}
+
+.dropcart-actions .btn-ghost:hover {
+    background: #f3f4f6;
+}
+
+.dropcart-actions .btn-primary {
+    border: 1px solid #111827;
+    background: #111827;
+    color: #fff;
+}
+
+.dropcart-actions .btn-primary:hover {
+    opacity: .92;
+}
+
+@media (max-width: 768px) {
+    .dropcart {
+        position: fixed;
+        top: auto;
+        right: 12px;
+        left: 12px;
+        bottom: 74px;
+        width: auto;
+        max-width: none;
+        border-radius: 18px;
+    }
+
+    .dropcart-items {
+        max-height: min(50vh, 420px);
     }
 }
