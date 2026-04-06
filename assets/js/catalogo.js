@@ -456,3 +456,61 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
 });
+
+/* =====================================================
+   CHECKOUT
+===================================================== */
+async function goToCheckout() {
+    const CART_KEY = "pp_cart";
+
+    let cart;
+    try {
+        cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    } catch {
+        cart = [];
+    }
+
+    if (!cart.length) {
+        alert("El carrito está vacío");
+        return;
+    }
+
+    const subtotal = cart.reduce((acc, item) => {
+        return acc + Number(item.precio_unitario || 0) * Number(item.cantidad || 0);
+    }, 0);
+
+    const total = subtotal;
+
+    const { data } = await auth.auth.getSession();
+    const user = data.session?.user || null;
+
+    let session_id = localStorage.getItem("pp_session_id");
+    if (!session_id) {
+        session_id = crypto.randomUUID();
+        localStorage.setItem("pp_session_id", session_id);
+    }
+
+    const { data: inserted, error } = await db
+        .from("carritos")
+        .insert({
+            user_id: user?.id || null,
+            session_id: user ? null : session_id,
+            items: cart,
+            subtotal,
+            total,
+            status: "activo"
+        })
+        .select()
+        .single();
+
+    if (error || !inserted) {
+        console.error(error);
+        alert("Error creando carrito");
+        return;
+    }
+
+    location.href = `/checkout?cart=${inserted.id}`;
+}
+
+// 👉 botón (crealo en HTML si no existe)
+document.getElementById("checkout-btn")?.addEventListener("click", goToCheckout);
