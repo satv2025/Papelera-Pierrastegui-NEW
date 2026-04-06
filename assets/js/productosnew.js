@@ -1023,12 +1023,18 @@ async function goToCheckout() {
             total,
             status: "activo"
         })
-        .select()
+        .select("id")
         .single();
 
     if (error || !inserted) {
         console.error(error);
         alert("Error creando carrito");
+        return;
+    }
+
+    if (!inserted?.id) {
+        console.error("Carrito sin ID:", inserted);
+        alert("Error generando carrito");
         return;
     }
 
