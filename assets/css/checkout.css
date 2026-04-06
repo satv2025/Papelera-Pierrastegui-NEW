@@ -13,10 +13,8 @@
     --radius: 6px;
     --radius-sm: 6px;
     --header-h: 92px;
-    --container: 1200px;
 }
 
-/* RESET */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -56,9 +54,6 @@ input {
     padding: 0 18px;
 }
 
-/* =========================
-   HEADER
-========================= */
 .pp-header {
     min-height: var(--header-h);
     display: grid;
@@ -166,9 +161,6 @@ input {
     filter: brightness(0) saturate(100%) invert(53%) sepia(51%) saturate(3605%) hue-rotate(359deg) brightness(100%) contrast(110%);
 }
 
-/* =========================
-   NAV
-========================= */
 .main-navbar {
     background: #f7f7f7;
     border-bottom: 3px solid var(--brand);
@@ -202,9 +194,6 @@ input {
     color: #000;
 }
 
-/* =========================
-   MAIN
-========================= */
 .checkout-main {
     flex: 1;
     padding: 28px 0 40px;
@@ -271,7 +260,7 @@ input {
 .checkout-box {
     background: #fff;
     border-radius: 10px;
-    border: 1px solid var(--border);
+    border: 1px solid rgba(0, 0, 0, .10);
     box-shadow: 0 2px 6px rgb(0 0 0 / 8%), 0 8px 20px rgba(0, 0, 0, 0.05);
     overflow: hidden;
 }
@@ -309,9 +298,6 @@ input {
     background: rgba(255, 118, 0, .05);
 }
 
-/* =========================
-   LISTA DE ITEMS
-========================= */
 .checkout-items-wrap {
     padding: 8px 20px 14px;
 }
@@ -389,9 +375,6 @@ input {
     flex-shrink: 0;
 }
 
-/* =========================
-   FORM
-========================= */
 .checkout-box--datos {
     padding: 20px;
 }
@@ -437,9 +420,6 @@ input {
     margin: 18px 0;
 }
 
-/* =========================
-   ENVÍO
-========================= */
 .envio-opciones {
     display: flex;
     flex-direction: column;
@@ -500,54 +480,59 @@ input {
     white-space: nowrap;
 }
 
-#direccion-container {
+.direccion-container {
     margin-top: 14px;
+    padding: 16px;
+    border: 1px solid rgba(255, 118, 0, .18);
+    background: linear-gradient(180deg, rgba(255, 118, 0, .04), rgba(255, 197, 47, .05));
+    border-radius: 10px;
 }
 
 .direccion-wrapper {
     position: relative;
 }
 
-#direccion-sugerencias {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    right: 0;
-    z-index: 20;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, .10);
-    border-radius: 8px;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, .12);
-    max-height: 240px;
-    overflow: auto;
-}
-
-#direccion-sugerencias:empty {
-    display: none;
-}
-
-#direccion-sugerencias div {
-    padding: 12px 14px;
-    border-bottom: 1px solid rgba(0, 0, 0, .07);
-    cursor: pointer;
-    font-size: 13px;
-    line-height: 1.35;
+.direccion-ayuda {
+    margin-top: 2px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: #555;
     font-weight: 700;
-    color: #222;
+}
+
+.shipping-info {
+    margin-top: 12px;
+    display: grid;
+    gap: 8px;
+    padding: 12px 14px;
+    border-radius: 10px;
     background: #fff;
+    border: 1px solid rgba(0, 0, 0, .08);
 }
 
-#direccion-sugerencias div:last-child {
-    border-bottom: none;
+.shipping-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    color: #333;
+    font-weight: 700;
 }
 
-#direccion-sugerencias div:hover {
-    background: rgba(255, 118, 0, .06);
+.shipping-map-wrap {
+    margin-top: 12px;
 }
 
-/* =========================
-   TOTALS
-========================= */
+.shipping-map {
+    width: 100%;
+    height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, .08);
+    background: #f5f5f5;
+}
+
 .checkout-totals {
     display: flex;
     flex-direction: column;
@@ -584,9 +569,6 @@ input {
     font-size: 20px;
 }
 
-/* =========================
-   BOTÓN PAGO
-========================= */
 .checkout-btn {
     width: 100%;
     border: none !important;
@@ -608,10 +590,6 @@ input {
     transform: translateY(-1px);
 }
 
-.checkout-btn:active {
-    transform: translateY(0);
-}
-
 .loader {
     text-align: center;
     margin-top: 14px;
@@ -619,9 +597,6 @@ input {
     color: var(--brand);
 }
 
-/* =========================
-   FOOTER
-========================= */
 .pp-footer {
     margin-top: auto;
     text-align: center;
@@ -661,21 +636,6 @@ input {
     color: #fff;
     transform: translateY(-1px);
     box-shadow: 0 6px 14px rgba(255, 118, 0, .25);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width: 1280px) {
-    .pp-header {
-        grid-template-columns: 180px minmax(0, 1fr) auto;
-        gap: 14px;
-        padding: 10px 14px;
-    }
-
-    .pp-nav-links {
-        gap: 8px;
-    }
 }
 
 @media (max-width: 992px) {
@@ -766,32 +726,12 @@ input {
         text-align: left;
         white-space: normal;
     }
-}
 
-@media (max-width: 430px) {
-    .checkout-item {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .checkout-item-info {
-        width: 100%;
-    }
-
-    .checkout-item-subtotal {
-        padding-left: 86px;
-    }
-
-    .checkout-totals {
-        padding: 14px;
-    }
-
-    .precio-total {
-        font-size: 18px;
+    .shipping-map {
+        height: 220px;
     }
 }
 
-/* SCROLLBAR */
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -809,11 +749,4 @@ input {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--brand-2);
-}
-
-@supports (-moz-appearance: none) {
-    * {
-        scrollbar-width: thin;
-        scrollbar-color: var(--brand) transparent;
-    }
 }
