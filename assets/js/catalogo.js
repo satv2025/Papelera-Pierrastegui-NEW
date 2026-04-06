@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dropcartEmpty = document.getElementById("dropcart-empty");
     const cartBadge = document.getElementById("cart-badge");
     const mobileCartBtn = document.getElementById("mobile-cart");
-    const checkoutBtn = document.getElementById("checkout-btn");
+    const checkoutBtn = document.getElementById("dropcart-checkout");
 
     let productos = [];
 

@@ -1041,4 +1041,7 @@ async function goToCheckout() {
     location.href = `/checkout?cart=${inserted.id}`;
 }
 
-document.getElementById("checkout-btn")?.addEventListener("click", goToCheckout);
+document.getElementById("dropcart-checkout")?.addEventListener("click", (e) => {
+    e.preventDefault();
+    goToCheckout();
+});
