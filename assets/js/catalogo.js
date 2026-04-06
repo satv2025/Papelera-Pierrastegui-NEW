@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         <div class="nombre">${escapeHtml(p.nombre || "")}</div>
                         <div class="desc">${escapeHtml(p.descripcion || "")}</div>
                         <div class="cat">${escapeHtml(p.categoria || "")}</div>
-                        <div class="verproducto-btn" onclick="location.href='${buildProductUrl(p)}'">Ver producto</div>
+                        <button class="verproducto-btn" onclick="location.href='${buildProductUrl(p)}'">Ver producto</button>
                     </div>
                 </div>
             `);
