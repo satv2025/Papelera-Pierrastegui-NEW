@@ -251,3 +251,90 @@
         max-width: 220px;
     }
 }
+
+/* =========================
+   DROPCART - CONTROLES COMO CHECKOUT
+   (Pegar al final para que pise lo anterior)
+   ========================= */
+
+/* Wrapper de acciones (igual vibe que .checkout-item-actions) */
+.dropcart-item-info .dropcart-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+/* Pastillita de cantidad (igual a .checkout-qty) */
+.dropcart-qty {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(0, 0, 0, .10);
+    border-radius: 999px;
+    padding: 4px 8px;
+    background: #fff;
+    margin-top: 8px;
+}
+
+/* Botones + / - (igual a .checkout-qty-btn)
+   Incluyo también ".dropcart-qty button" por si te quedó algún HTML viejo */
+.dropcart-qty-btn,
+.dropcart-qty button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(255, 118, 0, .10);
+    color: var(--brand);
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropcart-qty-btn:hover,
+.dropcart-qty button:hover {
+    background: var(--brand);
+    color: #fff;
+}
+
+/* Valor cantidad (igual a .checkout-qty-value) */
+.dropcart-qty-value {
+    min-width: 18px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 900;
+    color: var(--brand);
+}
+
+/* Botón eliminar (igual a .checkout-remove-btn)
+   Nota: aunque muestre "✕", lo deja con look de botón */
+.dropcart-item-remove {
+    border: none;
+    background: transparent;
+    color: var(--brand);
+    font-size: 13px;
+    font-weight: 900;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.dropcart-item-remove:hover {
+    background: var(--brand);
+    color: #fff;
+}
+
+/* Opcional: si querés que el ✕ se vea más “icono” y menos texto,
+   descomentá estas 2 líneas */
+/*
+.dropcart-item-remove { 
+font-size:18px;
+padding:4px 8px;
+}
+*/

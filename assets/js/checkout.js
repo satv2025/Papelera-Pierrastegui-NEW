@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!state.items.length) {
             els.checkoutItems.innerHTML = `
                 <p style="padding:16px 0;font-weight:800;color:#666;">
-                    Tu carrito está vacío.
+                    Tu pedido está vacío.
                 </p>
             `;
             return;

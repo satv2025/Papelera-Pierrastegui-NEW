@@ -77,3 +77,7 @@
     --transicion-media-pierrastegui: 0.3s ease;
     --transicion-lenta-pierrastegui: 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
+
+* {
+    font-family: var(--letra-pierrastegui) !important;
+}

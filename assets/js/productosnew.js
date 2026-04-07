@@ -191,21 +191,58 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <div class="dropcart-item-info">
                         <strong>${escapeHtml(item.nombre || "Producto")}</strong>
                         ${label ? `<small>${escapeHtml(label)}</small>` : ""}
-                        <small>Cantidad: ${Number(item.cantidad || 0)}</small>
+
+                        <div class="dropcart-qty">
+                            <button type="button" class="dropcart-qty-btn" data-action="minus" data-index="${index}" aria-label="Restar cantidad">−</button>
+                            <span class="dropcart-qty-value">${Number(item.cantidad || 0)}</span>
+                            <button type="button" class="dropcart-qty-btn" data-action="plus" data-index="${index}" aria-label="Sumar cantidad">+</button>
+                        </div>
+
                         <small>Unitario: ${money(item.precio_unitario || 0)}</small>
                         <strong>${money(lineTotal)}</strong>
                     </div>
-                    <button class="dropcart-item-remove" type="button" data-remove-index="${index}" aria-label="Eliminar">✕</button>
+                    <button class="dropcart-item-remove" type="button" data-action="remove" data-index="${index}" aria-label="Eliminar">✕</button>
                 </div>
             `;
         }).join("");
+    }
 
-        dropcartItems.querySelectorAll("[data-remove-index]").forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                removeCartIndex(Number(btn.dataset.removeIndex));
-            });
+    function changeCartQty(index, delta) {
+        const cart = getCart();
+        const item = cart[index];
+        if (!item) return;
+
+        const nuevaCantidad = Number(item.cantidad || 0) + Number(delta || 0);
+
+        if (nuevaCantidad <= 0) {
+            cart.splice(index, 1);
+        } else {
+            cart[index] = { ...item, cantidad: nuevaCantidad };
+        }
+
+        saveCart(cart);
+    }
+
+    function bindDropcartActions() {
+        if (!dropcartItems) return;
+        if (dropcartItems.dataset.bound === "1") return;
+
+        dropcartItems.dataset.bound = "1";
+
+        dropcartItems.addEventListener("click", (e) => {
+            const btn = e.target.closest("[data-action]");
+            if (!btn) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            const action = btn.dataset.action;
+            const index = Number(btn.dataset.index);
+            if (Number.isNaN(index)) return;
+
+            if (action === "plus") changeCartQty(index, 1);
+            else if (action === "minus") changeCartQty(index, -1);
+            else if (action === "remove") removeCartIndex(index);
         });
     }
 
@@ -296,6 +333,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (e.key === CART_KEY) renderCart();
     });
 
+    bindDropcartActions();
     renderCart();
 
     function getOrCreateDesktopDropdownPanel() {
