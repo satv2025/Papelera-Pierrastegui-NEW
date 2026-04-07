@@ -34,21 +34,46 @@ export default async function handler(req, res) {
         });
     } catch (error) {
         console.error("Error en /api/cotizar-envio:", error);
+
         return res.status(500).json({
-            error: error.message || "No se pudo calcular el envío"
+            error: error?.message || "No se pudo calcular el envío"
         });
+    }
+}
+
+async function fetchConTimeout(url, options = {}, timeoutMs = 7000) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+        const res = await fetch(url, {
+            ...options,
+            signal: controller.signal
+        });
+        return res;
+    } catch (error) {
+        if (error.name === "AbortError") {
+            throw new Error("La consulta tardó demasiado");
+        }
+        throw error;
+    } finally {
+        clearTimeout(timeout);
     }
 }
 
 async function geocodificarDireccion(direccionCompleta) {
     const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=ar&q=${encodeURIComponent(direccionCompleta)}`;
 
-    const res = await fetch(url, {
-        headers: {
-            "Accept": "application/json",
-            "User-Agent": "papelerapierrastegui/1.0"
-        }
-    });
+    const res = await fetchConTimeout(
+        url,
+        {
+            headers: {
+                Accept: "application/json",
+                "User-Agent": "papelerapierrastegui/1.0"
+            }
+        },
+        7000
+    );
 
     if (!res.ok) {
         throw new Error("Error consultando geocodificación");
@@ -70,11 +95,15 @@ async function geocodificarDireccion(direccionCompleta) {
 async function calcularRuta(origen, destino) {
     const url = `https://router.project-osrm.org/route/v1/driving/${origen.lon},${origen.lat};${destino.lon},${destino.lat}?overview=false&geometries=geojson&steps=false`;
 
-    const res = await fetch(url, {
-        headers: {
-            "Accept": "application/json"
-        }
-    });
+    const res = await fetchConTimeout(
+        url,
+        {
+            headers: {
+                Accept: "application/json"
+            }
+        },
+        7000
+    );
 
     if (!res.ok) {
         throw new Error("Error consultando ruta");

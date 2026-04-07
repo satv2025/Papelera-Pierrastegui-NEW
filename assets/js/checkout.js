@@ -560,10 +560,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 })
             });
 
-            const data = await res.json();
+            let data = null;
+
+            try {
+                data = await res.json();
+            } catch {
+                data = null;
+            }
 
             if (!res.ok) {
-                throw new Error(data?.error || "No se pudo calcular el envío");
+                const mensaje =
+                    typeof data?.error === "string"
+                        ? data.error
+                        : "No se pudo calcular el envío";
+
+                throw new Error(mensaje);
             }
 
             state.distanciaKm = Number(data.distanceKm || 0);
