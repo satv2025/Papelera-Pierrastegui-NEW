@@ -519,61 +519,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    async function geocodificarDireccion(direccionCompleta) {
-        const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=ar&q=${encodeURIComponent(direccionCompleta)}`;
-
-        const res = await fetch(url, {
-            headers: {
-                "Accept": "application/json"
-            }
-        });
-
-        if (!res.ok) {
-            throw new Error("Error consultando geocodificación");
-        }
-
-        const data = await res.json();
-
-        if (!Array.isArray(data) || !data.length) {
-            throw new Error("Dirección no encontrada");
-        }
-
-        return {
-            lat: Number(data[0].lat),
-            lon: Number(data[0].lon),
-            displayName: data[0].display_name || direccionCompleta
-        };
-    }
-
-    async function calcularRuta(origen, destino) {
-        const url = `https://router.project-osrm.org/route/v1/driving/${origen.lon},${origen.lat};${destino.lon},${destino.lat}?overview=false&geometries=geojson&steps=false`;
-
-        const res = await fetch(url, {
-            headers: {
-                "Accept": "application/json"
-            }
-        });
-
-        if (!res.ok) {
-            throw new Error("Error consultando ruta");
-        }
-
-        const data = await res.json();
-
-        if (!data.routes || !data.routes.length) {
-            throw new Error("No se pudo calcular la ruta");
-        }
-
-        const route = data.routes[0];
-
-        return {
-            distanceMeters: Number(route.distance || 0),
-            distanceKm: Number(route.distance || 0) / 1000,
-            durationSeconds: Number(route.duration || 0),
-            durationMinutes: Number(route.duration || 0) / 60
-        };
-    }
-
     async function cotizarEnvio() {
         if (state.metodoEntrega !== "envio") return;
         if (state.cotizando) return;
@@ -599,19 +544,31 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         try {
-            const direccionCompleta = direccionIngresada.toLowerCase().includes("argentina")
-                ? direccionIngresada
-                : `${direccionIngresada}, Argentina`;
+            const res = await fetch("/api/cotizar-envio", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    direccion: direccionIngresada,
+                    origen: {
+                        lat: ORIGEN.lat,
+                        lon: ORIGEN.lon,
+                        direccion: ORIGEN.direccion
+                    }
+                })
+            });
 
-            const destino = await geocodificarDireccion(direccionCompleta);
-            const ruta = await calcularRuta(
-                { lat: ORIGEN.lat, lon: ORIGEN.lon },
-                { lat: destino.lat, lon: destino.lon }
-            );
+            const data = await res.json();
 
-            state.distanciaKm = ruta.distanceKm;
-            state.duracionMin = ruta.durationMinutes;
-            state.costoEnvio = calcularCostoEnvioPorDistancia(ruta.distanceKm);
+            if (!res.ok) {
+                throw new Error(data?.error || "No se pudo calcular el envío");
+            }
+
+            state.distanciaKm = Number(data.distanceKm || 0);
+            state.duracionMin = Number(data.durationMinutes || 0);
+            state.costoEnvio = calcularCostoEnvioPorDistancia(state.distanciaKm);
 
             if (els.envioCostoTexto) {
                 els.envioCostoTexto.textContent = money(state.costoEnvio);
@@ -632,7 +589,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             if (els.error) {
-                els.error.textContent = "No pudimos calcular el envío con esa dirección. Probá escribiéndola más completa.";
+                els.error.textContent = err.message || "No pudimos calcular el envío con esa dirección. Probá escribiéndola más completa.";
             }
 
             renderTotals();
