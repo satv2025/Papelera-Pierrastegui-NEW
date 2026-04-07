@@ -19,18 +19,21 @@ export default async function handler(req, res) {
             : `${String(direccion).trim()}, Argentina`;
 
         const destino = await geocodificarDireccion(direccionCompleta);
-        const ruta = await calcularRuta(
-            { lat: origen.lat, lon: origen.lon },
-            { lat: destino.lat, lon: destino.lon }
+
+        const distanceKm = calcularDistanciaKm(
+            origen.lat,
+            origen.lon,
+            destino.lat,
+            destino.lon
         );
 
         return res.status(200).json({
             ok: true,
             destino: destino.displayName,
-            distanceMeters: ruta.distanceMeters,
-            distanceKm: ruta.distanceKm,
-            durationSeconds: ruta.durationSeconds,
-            durationMinutes: ruta.durationMinutes
+            distanceKm,
+            distanceMeters: distanceKm * 1000,
+            durationMinutes: 0,
+            durationSeconds: 0
         });
     } catch (error) {
         console.error("Error en /api/cotizar-envio:", error);
@@ -92,35 +95,20 @@ async function geocodificarDireccion(direccionCompleta) {
     };
 }
 
-async function calcularRuta(origen, destino) {
-    const url = `https://router.project-osrm.org/route/v1/driving/${origen.lon},${origen.lat};${destino.lon},${destino.lat}?overview=false&geometries=geojson&steps=false`;
+function calcularDistanciaKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
 
-    const res = await fetchConTimeout(
-        url,
-        {
-            headers: {
-                Accept: "application/json"
-            }
-        },
-        7000
-    );
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
-    if (!res.ok) {
-        throw new Error("Error consultando ruta");
-    }
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return Number((R * c).toFixed(2));
+}
 
-    const data = await res.json();
-
-    if (!data.routes || !data.routes.length) {
-        throw new Error("No se pudo calcular la ruta");
-    }
-
-    const route = data.routes[0];
-
-    return {
-        distanceMeters: Number(route.distance || 0),
-        distanceKm: Number(route.distance || 0) / 1000,
-        durationSeconds: Number(route.duration || 0),
-        durationMinutes: Number(route.duration || 0) / 60
-    };
+function toRad(value) {
+    return value * Math.PI / 180;
 }
