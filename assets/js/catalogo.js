@@ -420,14 +420,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         list.forEach(p => {
+
+            const mostrarSinStock = p.sin_stock || Number(p.stock || 0) === 0;
+
             grid.insertAdjacentHTML("beforeend", `
                 <div class="card" onclick="location.href='${buildProductUrl(p)}'">
-                    <img src="${escapeHtml(p.imagen || "https://via.placeholder.com/300")}" alt="${escapeHtml(p.nombre || "Producto")}">
+                    
+                    <img src="${escapeHtml(p.imagen || "https://via.placeholder.com/300")}" alt="${escapeHtml(p.nombre || "")}">
+        
                     <div class="info">
+        
+                        <div class="badges">
+                            ${p.nuevo ? `<span class="badge badge-nuevo">NUEVO</span>` : ""}
+                            ${mostrarSinStock ? `<span class="badge badge-stock">SIN STOCK</span>` : ""}
+                            ${(p.oferta && p.descuento > 0) ? `<span class="badge badge-descuento">-${p.descuento}%</span>` : ""}
+                        </div>
+        
                         <div class="nombre">${escapeHtml(p.nombre || "")}</div>
                         <div class="desc">${escapeHtml(p.descripcion || "")}</div>
                         <div class="cat">${escapeHtml(p.categoria || "")}</div>
-                        <button class="verproducto-btn" onclick="event.stopPropagation();location.href='${buildProductUrl(p)}'">Ver producto</button>
+        
+                        <button class="verproducto-btn"
+                            onclick="event.stopPropagation();location.href='${buildProductUrl(p)}'">
+                            Ver producto
+                        </button>
                     </div>
                 </div>
             `);

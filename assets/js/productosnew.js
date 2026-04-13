@@ -518,6 +518,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (desc) desc.textContent = p.descripcion || "";
     if (img) img.src = p.imagen || "";
 
+    /* ===============================
+   BADGES TEXTO ROJO
+================================= */
+
+    const badgeTexto = document.getElementById("producto-badges-texto");
+
+    if (badgeTexto) {
+
+        const textos = [];
+        const sinStock = p.sin_stock || Number(p.stock || 0) === 0;
+
+        if (p.nuevo) {
+            textos.push("Producto NUEVO");
+        }
+
+        if (sinStock) {
+            textos.push("SIN STOCK");
+        }
+
+        if (p.oferta && Number(p.descuento || 0) > 0) {
+            textos.push(`-${p.descuento}% OFF`);
+        }
+
+        badgeTexto.textContent = textos.join(" · ");
+
+        if (sinStock) {
+            badgeTexto.classList.add("sin-stock");
+        }
+    }
+
     const variantes = parseVariantes(p.variantes);
     const modelOptions = Array.isArray(variantes?.drop1) ? variantes.drop1 : [];
     const typeOptionsRaw = Array.isArray(variantes?.drop2) ? variantes.drop2 : [];
@@ -941,6 +971,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     const addToCartBtn = document.getElementById("addToCartBtn");
+
+    /* ===============================
+   BLOQUEAR SI NO HAY STOCK
+================================= */
+
+    if (addToCartBtn) {
+
+        const sinStock = p.sin_stock || Number(p.stock || 0) === 0;
+
+        if (sinStock) {
+            addToCartBtn.disabled = true;
+            addToCartBtn.textContent = "Sin stock";
+            addToCartBtn.style.opacity = "0.6";
+            addToCartBtn.style.cursor = "not-allowed";
+        }
+    }
 
     function mergeCartItem(cart, payload) {
         const foundIndex = cart.findIndex(item =>
