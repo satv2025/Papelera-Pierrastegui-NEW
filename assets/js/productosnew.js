@@ -585,13 +585,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function getCurrentUnitPrice() {
-        if (!hasAnyOptions) return Number(p.precio_unidad || 0);
-        if (hasModelOptions && !selectedModel) return 0;
-        if (!selectedType) return 0;
 
-        const modelPrice = getModelPriceByType(selectedModel, selectedType);
-        if (modelPrice > 0) return modelPrice;
-        return getFallbackPriceByType(selectedType);
+        let basePrice;
+
+        if (!hasAnyOptions) {
+            basePrice = Number(p.precio_unidad || 0);
+        } else {
+            if (hasModelOptions && !selectedModel) return 0;
+            if (!selectedType) return 0;
+
+            const modelPrice = getModelPriceByType(selectedModel, selectedType);
+            basePrice = modelPrice > 0
+                ? modelPrice
+                : getFallbackPriceByType(selectedType);
+        }
+
+        // 🔥 aplicar descuento si existe
+        if (p.oferta && Number(p.descuento || 0) > 0) {
+            return Math.round(basePrice * (1 - Number(p.descuento) / 100));
+        }
+
+        return basePrice;
     }
 
     function getCurrentBultoCant() {
@@ -697,10 +711,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function renderNoOptionsView() {
+
         if (!dropdownsWrap) return;
+
+        const precioBase = Number(p.precio_unidad || 0);
+        const tieneDescuento = p.oferta && Number(p.descuento || 0) > 0;
+        const precioFinal = tieneDescuento
+            ? Math.round(precioBase * (1 - Number(p.descuento) / 100))
+            : precioBase;
+
         dropdownsWrap.innerHTML = `
             <div class="pp-product-price-info">
-                <p><strong>Precio:</strong> ${money(p.precio_unidad || 0)}</p>
+                ${tieneDescuento
+                ? `
+                        <p>
+                            <span class="precio-original">${money(precioBase)}</span>
+                            <span class="precio-final">${money(precioFinal)}</span>
+                        </p>
+                      `
+                : `<p><strong>Precio:</strong> ${money(precioBase)}</p>`
+            }
                 ${p.bulto_cant ? `<small>Bulto de ${Number(p.bulto_cant)} unidades</small>` : ""}
             </div>
         `;

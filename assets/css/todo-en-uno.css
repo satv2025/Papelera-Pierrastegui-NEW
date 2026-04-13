@@ -1733,13 +1733,63 @@ padding:4px 8px;
 }
 */
 
-.producto-badges-texto {
-    margin: 8px 0 14px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #a10000;
+/* =========================
+   PRECIO CON DESCUENTO
+   ========================= */
+
+.pp-product-price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.producto-badges-texto.sin-stock {
-    color: #a10000;
+.precio-original {
+    text-decoration: line-through;
+    color: #888;
+    font-size: 14px;
+    font-weight: 800;
+    margin-right: 10px;
+}
+
+.precio-final {
+    font-size: 24px;
+    font-weight: 950;
+    color: #ff7600;
+}
+
+.pp-product-price-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* =========================
+   BADGES PRODUCTO (FICHA)
+   ========================= */
+
+#producto-badges-texto {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: -6px;
+    margin-bottom: 6px;
+}
+
+.badge-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff7600;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 900;
+    padding: 6px 10px;
+    border-radius: 6px;
+    letter-spacing: .3px;
+    box-shadow: 0 4px 10px rgba(255, 118, 0, .25);
+}
+
+/* SIN STOCK en rojo fuerte */
+#producto-badges-texto.sin-stock .badge-item {
+    background: #d32f2f;
 }

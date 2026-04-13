@@ -411,6 +411,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     function render(list) {
+
         if (!grid) return;
         grid.innerHTML = "";
 
@@ -421,25 +422,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         list.forEach(p => {
 
-            const mostrarSinStock = p.sin_stock || Number(p.stock || 0) === 0;
+            const sinStock = p.sin_stock || Number(p.stock || 0) === 0;
+            const tieneDescuento = p.oferta && Number(p.descuento || 0) > 0;
+
+            const precioBase = Number(p.precio_unidad || 0);
+            const precioFinal = tieneDescuento
+                ? Math.round(precioBase * (1 - (Number(p.descuento) / 100)))
+                : precioBase;
 
             grid.insertAdjacentHTML("beforeend", `
-                <div class="card" onclick="location.href='${buildProductUrl(p)}'">
+                <div class="card ${sinStock ? "card-sin-stock" : ""}"
+                     onclick="location.href='${buildProductUrl(p)}'">
                     
-                    <img src="${escapeHtml(p.imagen || "https://via.placeholder.com/300")}" alt="${escapeHtml(p.nombre || "")}">
-        
+                    <img 
+                        src="${escapeHtml(p.imagen || "https://via.placeholder.com/300")}" 
+                        alt="${escapeHtml(p.nombre || "")}"
+                    >
+    
                     <div class="info">
-        
+    
                         <div class="badges">
                             ${p.nuevo ? `<span class="badge badge-nuevo">NUEVO</span>` : ""}
-                            ${mostrarSinStock ? `<span class="badge badge-stock">SIN STOCK</span>` : ""}
-                            ${(p.oferta && p.descuento > 0) ? `<span class="badge badge-descuento">-${p.descuento}%</span>` : ""}
+                            ${sinStock ? `<span class="badge badge-stock">SIN STOCK</span>` : ""}
+                            ${tieneDescuento ? `<span class="badge badge-descuento">-${p.descuento}%</span>` : ""}
                         </div>
-        
+    
                         <div class="nombre">${escapeHtml(p.nombre || "")}</div>
                         <div class="desc">${escapeHtml(p.descripcion || "")}</div>
                         <div class="cat">${escapeHtml(p.categoria || "")}</div>
-        
+    
                         <button class="verproducto-btn"
                             onclick="event.stopPropagation();location.href='${buildProductUrl(p)}'">
                             Ver producto

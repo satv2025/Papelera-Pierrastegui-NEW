@@ -1470,29 +1470,131 @@ padding:4px 8px;
 }
 */
 
-.badges {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 8px;
-    flex-wrap: wrap;
+/* =========================
+   PRODUCT BADGES (CATÁLOGO)
+   ========================= */
+
+.card {
+    position: relative;
 }
 
+/* contenedor de badges */
+.card-badges {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 2;
+}
+
+/* badge base */
 .badge {
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 900;
     padding: 4px 8px;
     border-radius: 6px;
-    color: white;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: .3px;
 }
 
+/* tipos */
 .badge-nuevo {
-    background: #a10000;
+    background: #ff7600;
 }
 
 .badge-stock {
-    background: #a10000;
+    background: #dc2626;
 }
 
+.badge-oferta {
+    background: #16a34a;
+}
+
+.badge-custom {
+    background: #111;
+}
+
+/* overlay cuando está sin stock */
+.card.sin-stock {
+    opacity: 0.65;
+}
+
+/* =========================
+   PRECIO EN CARD
+   ========================= */
+
+.price-wrap {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.price-original {
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #888;
+    font-weight: 700;
+}
+
+.price-final {
+    font-size: 15px;
+    font-weight: 900;
+    color: #ff7600;
+}
+
+/* =========================
+   BADGES PRODUCTOS (GRID)
+   ========================= */
+
+.card {
+    position: relative;
+}
+
+/* Contenedor de badges */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+/* Estilo base badge */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 900;
+    border-radius: 6px;
+    letter-spacing: .4px;
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .12);
+}
+
+/* NUEVO */
+.badge-nuevo {
+    background: #ff7600;
+}
+
+/* SIN STOCK */
+.badge-stock {
+    background: #d32f2f;
+}
+
+/* DESCUENTO */
 .badge-descuento {
-    background: #a10000;
+    background: #2e7d32;
+}
+
+/* Opcional: efecto hover sutil */
+.card:hover .badge {
+    transform: translateY(-1px);
+    transition: transform .18s ease;
 }
