@@ -1609,7 +1609,7 @@ padding:4px 8px;
 }
 
 .satvbrand-text {
-    display: inline-block;
+    display: inline-flex;
     align-items: center;
     gap: 6px;
     cursor: pointer;
