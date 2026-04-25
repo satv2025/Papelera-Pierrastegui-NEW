@@ -169,11 +169,10 @@ input {
     gap: 6px;
     flex-wrap: wrap;
     margin: 8px 0 14px;
-    font-weight: 800;
 }
 
 .satvbrand-text {
-    display: inline-flex;
+    display: inline-block;
     align-items: center;
     gap: 6px;
     cursor: pointer;
