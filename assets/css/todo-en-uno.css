@@ -1814,10 +1814,7 @@ padding:4px 8px;
     display: inline-block;
     margin: 0;
     font-weight: 900;
-    background: linear-gradient(90deg, #f00 0 50%, #ff7e00 50% 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ff8f43;
     color: transparent;
 }
 
